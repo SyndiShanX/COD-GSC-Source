@@ -2084,7 +2084,7 @@ func_5C85(var_0, var_1, var_2) {
   level.player playSound("hack_hud_self_destruct_start");
   level.player thread scripts\engine\utility::play_loop_sound_on_entity("hack_hud_self_destruct_alarm");
   level.player notify("player_suicided_drone");
-  var_3 = _func_313(level.player.origin, (150, 150, 25), (0, 0, 0));
+  var_3 = func_313(level.player.origin, (150, 150, 25), (0, 0, 0));
   thread scripts\engine\utility::noself_delaycall(4.5, ::destroynavobstacle, var_3);
   level.player scripts\engine\utility::allow_offhand_primary_weapons(0);
   level.player scripts\engine\utility::allow_melee(0);
@@ -2194,7 +2194,7 @@ func_AFE1() {
 func_5C3B(var_0, var_1) {
   level.player notify("hack_suicide");
   level.player notify("player_suicided_drone");
-  var_2 = _func_313(level.player.origin, (150, 150, 25), (0, 0, 0));
+  var_2 = func_313(level.player.origin, (150, 150, 25), (0, 0, 0));
   thread scripts\engine\utility::noself_delaycall(4.5, ::destroynavobstacle, var_2);
   thread func_992D();
   var_3 = scripts\engine\utility::spawn_tag_origin();
@@ -2339,7 +2339,7 @@ func_6AFB() {
 func_5C77(var_0) {
   level.player notify("hack_shutdown_sequence");
   level.player notify("player_suicided_drone");
-  var_1 = _func_313(level.player.origin, (150, 150, 25), (0, 0, 0));
+  var_1 = func_313(level.player.origin, (150, 150, 25), (0, 0, 0));
   thread scripts\engine\utility::noself_delaycall(4.5, ::destroynavobstacle, var_1);
   level.player playgestureviewmodel("ges_shocknade_loop", undefined, 1);
   var_2 = scripts\engine\utility::spawn_tag_origin();

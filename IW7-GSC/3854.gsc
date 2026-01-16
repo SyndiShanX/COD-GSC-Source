@@ -13,7 +13,7 @@ func_D7F8() {
   precacheshader("ac130_hud_friendly_vehicle_diamond_s_w");
   precacheshader("reticle_center_cook");
   precacheshader("hud_offscreenobjectivepointer");
-  _func_17C();
+  func_17C();
 }
 
 func_F901() {

@@ -1928,7 +1928,7 @@ func_1EBF(var_0, var_1) {
   var_5 = self.var_EF82;
   if(var_3 != "") {
     var_5 = lib_0A1E::func_2356("Knobs", "head");
-    var_4 = _func_2EF(var_3, "facial_animation", "facial_talk", 0);
+    var_4 = func_2EF(var_3, "facial_animation", "facial_talk", 0);
   }
 
   scripts\sp\utility::func_F6FE("filler");

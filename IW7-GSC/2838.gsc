@@ -487,7 +487,7 @@ func_475D() {
   self endon("death");
   self endon("entitydeleted");
   self waittill("coverwall_expand_finish");
-  self.var_BE64 = _func_316(self);
+  self.var_BE64 = func_316(self);
 }
 
 func_B9C4() {

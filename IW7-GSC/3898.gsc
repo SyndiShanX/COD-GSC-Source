@@ -258,7 +258,7 @@ func_3721(var_0, var_1, var_2, var_3) {
       var_31 = var_28 + var_31;
       var_36 = navtrace(var_29, var_31, self, 1);
 
-      if(var_36["fraction"] >= 0.9 || _func_2AC(var_29, var_31, self)) {
+      if(var_36["fraction"] >= 0.9 || func_2AC(var_29, var_31, self)) {
         var_37 = spawnStruct();
         var_37.var_11060 = var_18;
         var_37.angleindex = var_12;
@@ -274,7 +274,7 @@ func_3721(var_0, var_1, var_2, var_3) {
     }
   } else {
     var_36 = navtrace(var_29, var_27, self, 1);
-    var_38 = var_36["fraction"] >= 0.9 || _func_2AC(var_29, var_27, self);
+    var_38 = var_36["fraction"] >= 0.9 || func_2AC(var_29, var_27, self);
 
     if(!var_38) {
       var_39 = self pathdisttogoal();

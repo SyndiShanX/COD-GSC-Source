@@ -656,7 +656,7 @@ func_2689(var_0) {
 }
 
 func_268A(var_0) {
-  var_1 = self._func_2AC;
+  var_1 = self.func_2AC;
   var_2 = rotatevectorinverted(var_1, self.angles);
   var_0 = var_2[0];
   if(var_0 < 100) {

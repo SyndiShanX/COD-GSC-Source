@@ -542,7 +542,7 @@ func_5DEC(var_0, var_1, var_2) {
   if(var_5 > 15) {
     if(isarray(var_2)) {
       if(scripts\engine\utility::player_is_in_jackal()) {
-        var_6 = level.var_D127._func_2AC * 17.6;
+        var_6 = level.var_D127.func_2AC * 17.6;
       } else {
         var_6 = level.player getvelocity();
       }

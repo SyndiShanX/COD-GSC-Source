@@ -184,7 +184,7 @@ func_200F() {
 func_4926(var_0, var_1) {
   var_2 = ["axis", "allies", "team3", "neutral", "bad_guys"];
   if(!isDefined(level.var_2006.var_5602) || level.var_2006.var_5602.size == 0) {
-    self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0));
+    self.var_C2CA = func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0));
     createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 1);
     return;
   }
@@ -195,19 +195,19 @@ func_4926(var_0, var_1) {
     }
 
     if(scripts\engine\utility::array_contains(level.var_2006.var_5602, "allies") && scripts\engine\utility::array_contains(level.var_2006.var_5602, "axis")) {
-      self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "team3", "neutral", "bad_guys");
+      self.var_C2CA = func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "team3", "neutral", "bad_guys");
       createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 0, "team3", "neutral", "bad_guys");
       return;
     }
 
     if(scripts\engine\utility::array_contains(level.var_2006.var_5602, "allies")) {
-      self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "axis", "team3", "neutral", "bad_guys");
+      self.var_C2CA = func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "axis", "team3", "neutral", "bad_guys");
       createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 0, "team3", "neutral", "bad_guys");
       return;
     }
 
     if(scripts\engine\utility::array_contains(level.var_2006.var_5602, "axis")) {
-      self.var_C2CA = _func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "allies", "team3", "neutral", "bad_guys");
+      self.var_C2CA = func_315(var_0, (self.var_85D2, self.var_85D2, var_1), (0, 0, 0), "allies", "team3", "neutral", "bad_guys");
       createnavrepulsor("antigrav" + self getentitynumber(), -1, var_0, self.var_85D2, 0, "team3", "neutral", "bad_guys");
       return;
     }

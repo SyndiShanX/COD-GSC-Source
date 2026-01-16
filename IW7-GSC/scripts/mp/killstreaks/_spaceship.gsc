@@ -651,7 +651,7 @@ func_10595(var_0) {
 }
 
 func_105CA(var_0, var_1, var_2) {
-  var_3 = _func_26D(var_0, var_1, var_2, "veh_spaceship_mp", "veh_mil_air_ca_jackal_drone_atmos_periph_mp");
+  var_3 = func_26D(var_0, var_1, var_2, "veh_spaceship_mp", "veh_mil_air_ca_jackal_drone_atmos_periph_mp");
   return func_1058D(var_3, var_0.team);
 }
 

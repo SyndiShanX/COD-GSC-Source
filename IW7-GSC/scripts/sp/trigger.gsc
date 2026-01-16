@@ -1423,7 +1423,7 @@ func_A391(var_0, var_1, var_2) {
     var_7 = vectornormalize(self.origin - level.var_D127.origin);
     var_8 = anglesToForward(level.var_D127.angles);
     var_9 = vectordot(var_7, var_8);
-    var_0A = vectornormalize(level.var_D127._func_2AC);
+    var_0A = vectornormalize(level.var_D127.func_2AC);
     var_0B = vectordot(var_7, var_0A);
     if(var_9 > 0.1 && var_0B > 0.1) {
       if(var_4) {

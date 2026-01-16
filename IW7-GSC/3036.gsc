@@ -4792,9 +4792,9 @@ func_1995(var_0) {
   var_1 = undefined;
 
   if(var_0 == "up") {
-    var_1 = _func_2EE(self.asmname, "cannon_state", "up", 0);
+    var_1 = func_2EE(self.asmname, "cannon_state", "up", 0);
   } else {
-    var_1 = _func_2EE(self.asmname, "cannon_state", "down", 0);
+    var_1 = func_2EE(self.asmname, "cannon_state", "down", 0);
   }
 
   self give_left_powers("cannon", var_1.anims, 1.0, 0.0, 1.0);

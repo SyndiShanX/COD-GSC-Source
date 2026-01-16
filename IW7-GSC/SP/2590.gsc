@@ -509,7 +509,7 @@ func_236A(var_0) {
 
   if(var_1 != "") {
     scripts\sp\utility::func_F6FE("asm");
-    var_2 = _func_2EF(var_1, "facial_animation", var_0, 0);
+    var_2 = func_2EF(var_1, "facial_animation", var_0, 0);
     if(var_0 == "facial_death") {
       if(isDefined(self.var_6A84)) {
         if(self.var_6A84 == var_0) {
@@ -530,7 +530,7 @@ func_236A(var_0) {
 
 func_236C(var_0) {
   var_1 = "soldier";
-  var_2 = _func_2EF(var_1, "facial_animation", "facial_death", 0);
+  var_2 = func_2EF(var_1, "facial_animation", "facial_death", 0);
   if(isDefined(var_2)) {
     var_0 setanimknob(var_2, 1, 0, 0);
   }
@@ -751,7 +751,7 @@ func_2305(var_0, var_1, var_2) {
 }
 
 func_2359(var_0, var_1, var_2) {
-  return _func_2EF(var_0, var_1, var_2, scripts\asm\asm::asm_getdemeanor());
+  return func_2EF(var_0, var_1, var_2, scripts\asm\asm::asm_getdemeanor());
 }
 
 func_235B(var_0, var_1) {
@@ -761,7 +761,7 @@ func_235B(var_0, var_1) {
 
 func_234B(var_0, var_1) {
   if(archetypeassetloaded(var_0)) {
-    return _func_2F1(var_0, var_1);
+    return func_2F1(var_0, var_1);
   }
 
   return 0;

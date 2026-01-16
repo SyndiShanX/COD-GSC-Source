@@ -18,27 +18,27 @@ func_006E(var_0, var_1, var_2, var_3) {
 }
 
 bt_nativesetregistrar(var_0) {
-  _func_2BA(var_0);
+  func_2BA(var_0);
 }
 
 bt_nativeregistertree(var_0, var_1, var_2, var_3) {
-  _func_2B8(var_0, var_1, var_2, var_3);
+  func_2B8(var_0, var_1, var_2, var_3);
 }
 
 bt_nativeistreeregistered(var_0) {
-  return _func_2BC(var_0);
+  return func_2BC(var_0);
 }
 
 bt_nativeregisterbehavior(var_0, var_1, var_2, var_3, var_4) {
-  _func_2B9(var_0, var_1, var_2, var_3, var_4);
+  func_2B9(var_0, var_1, var_2, var_3, var_4);
 }
 
 bt_nativeregisterbehaviortotree(var_0, var_1, var_2, var_3, var_4) {
-  _func_2B9(var_0, var_1, var_2, var_3, var_4);
+  func_2B9(var_0, var_1, var_2, var_3, var_4);
 }
 
 bt_nativefinalizeregistrar() {
-  _func_2BB();
+  func_2BB();
 }
 
 bt_nativetick() {
@@ -46,7 +46,7 @@ bt_nativetick() {
 }
 
 bt_nativeregisteraction(var_0, var_1, var_2, var_3, var_4, var_5) {
-  _func_2BD(var_0, var_1, var_2, var_3, var_4, var_5);
+  func_2BD(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
 bt_nativeexecaction(var_0, var_1, var_2, var_3) {

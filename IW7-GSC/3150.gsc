@@ -305,8 +305,8 @@ func_1EA6(var_0) {
   if(self.var_1FA8 == "jackal_enemy") {
     return;
   }
-  var_1 = _func_2EE(var_0, "cannon_state", "up", 0);
-  var_2 = _func_2EE(var_0, "cannon_state", "down", 0);
+  var_1 = func_2EE(var_0, "cannon_state", "up", 0);
+  var_2 = func_2EE(var_0, "cannon_state", "down", 0);
   wait 0.1;
 
   for(;;) {
