@@ -4,7 +4,7 @@
 ***********************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::func_9888();
+  scripts\mp\killstreaks\killstreaks::func_9888();
   level.killstreaksetups = [];
   thread scripts\mp\killstreaks\_target_marker::init();
   thread scripts\mp\killstreaks\_uav::init();
@@ -124,6 +124,6 @@ init() {
   }
 
   level.var_A6AA = scripts\mp\utility::getintproperty("scr_game_killstreakdelay", 12);
-  level thread scripts\mp\killstreaks\_killstreaks::onplayerconnect();
+  level thread scripts\mp\killstreaks\killstreaks::onplayerconnect();
   scripts\mp\killstreaks\_mapselect::func_B337();
 }

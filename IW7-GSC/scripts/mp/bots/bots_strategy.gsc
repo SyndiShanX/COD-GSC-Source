@@ -58,7 +58,7 @@ bot_get_ambush_trap_item(var_0, var_1, var_2) {
 
   foreach(var_6 in var_4) {
     var_3["purpose"] = var_6;
-    var_3["item_action"] = scripts\mp\bots\_bots_util::bot_get_grenade_for_purpose(var_6);
+    var_3["item_action"] = ::scripts\mp\bots\_bots_util::bot_get_grenade_for_purpose(var_6);
     if(isDefined(var_3["item_action"])) {
       return var_3;
     }
@@ -99,16 +99,16 @@ bot_set_ambush_trap(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6.size > 0) {
       var_5 = scripts\engine\utility::random(var_6);
-      var_0B = getnodesinradius(var_5.origin, 300, 50);
-      var_0C = [];
-      foreach(var_0E in var_0B) {
-        if(!isDefined(var_0E.bot_ambush_end)) {
-          var_0C[var_0C.size] = var_0E;
+      var_11 = getnodesinradius(var_5.origin, 300, 50);
+      var_12 = [];
+      foreach(var_14 in var_11) {
+        if(!isDefined(var_14.bot_ambush_end)) {
+          var_12[var_12.size] = var_14;
         }
       }
 
-      var_0B = var_0C;
-      var_4 = self botnodepick(var_0B, min(var_0B.size, 3), "node_trap", var_2, var_5);
+      var_11 = var_12;
+      var_4 = self botnodepick(var_11, min(var_11.size, 3), "node_trap", var_2, var_5);
     }
   }
 
@@ -128,7 +128,7 @@ bot_set_ambush_trap(var_0, var_1, var_2, var_3, var_4) {
       var_13 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
       if(var_13 == "goal") {
         thread scripts\mp\bots\_bots_util::bot_force_stance_for_time("stand", 5);
-        if(!isDefined(self.isnodeoccupied) || 0 == self botcanseeentity(self.isnodeoccupied)) {
+        if(!isDefined(self.enemy) || 0 == self botcanseeentity(self.enemy)) {
           if(isDefined(var_10)) {
             self getpreferreddompoints(var_5.origin, var_0["item_action"]);
           } else {
@@ -143,7 +143,7 @@ bot_set_ambush_trap(var_0, var_1, var_2, var_3, var_4) {
             var_14 = 6;
           }
 
-          scripts\engine\utility::waittill_any_timeout_1(var_14, "missile_fire", "grenade_fire");
+          scripts\engine\utility::waittill_any_timeout(var_14, "missile_fire", "grenade_fire");
           wait(0.05);
           self notify("ambush_trap_ent");
           if(isDefined(self.ambush_trap_ent) && var_0["purpose"] == "c4") {
@@ -293,47 +293,47 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
       self.defense_override_watch_nodes = var_3["override_entrances"];
       self.defend_entrance_index = self.name + " " + gettime();
       foreach(var_8 in self.defense_override_watch_nodes) {
-        var_8.prone_visible_from[self.defend_entrance_index] = scripts\mp\bots\_bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\_bots_util::defend_valid_center(), "prone");
+        var_8.prone_visible_from[self.defend_entrance_index] = ::scripts\mp\bots\_bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\_bots_util::defend_valid_center(), "prone");
         wait(0.05);
-        var_8.crouch_visible_from[self.defend_entrance_index] = scripts\mp\bots\_bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\_bots_util::defend_valid_center(), "crouch");
+        var_8.crouch_visible_from[self.defend_entrance_index] = ::scripts\mp\bots\_bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\_bots_util::defend_valid_center(), "crouch");
         wait(0.05);
       }
     }
   }
 
   if(!isDefined(self.bot_defend_player_guarding)) {
-    var_0A = undefined;
+    var_10 = undefined;
     if(isDefined(var_3) && isDefined(var_3["nearest_node_to_center"])) {
-      var_0A = var_3["nearest_node_to_center"];
+      var_10 = var_3["nearest_node_to_center"];
     }
 
-    if(!isDefined(var_0A) && isDefined(self.bot_defending_override_origin_node)) {
-      var_0A = self.bot_defending_override_origin_node;
+    if(!isDefined(var_10) && isDefined(self.bot_defending_override_origin_node)) {
+      var_10 = self.bot_defending_override_origin_node;
     }
 
-    if(!isDefined(var_0A) && isDefined(self.bot_defending_trigger) && isDefined(self.bot_defending_trigger.nearest_node)) {
-      var_0A = self.bot_defending_trigger.nearest_node;
+    if(!isDefined(var_10) && isDefined(self.bot_defending_trigger) && isDefined(self.bot_defending_trigger.nearest_node)) {
+      var_10 = self.bot_defending_trigger.nearest_node;
     }
 
-    if(!isDefined(var_0A)) {
-      var_0A = getclosestnodeinsight(scripts\mp\bots\_bots_util::defend_valid_center());
+    if(!isDefined(var_10)) {
+      var_10 = getclosestnodeinsight(scripts\mp\bots\_bots_util::defend_valid_center());
     }
 
-    if(!isDefined(var_0A)) {
-      var_0B = self func_8533();
-      var_0C = scripts\mp\bots\_bots_util::defend_valid_center();
-      var_0D = getnodesinradiussorted(var_0C, 256, 0, 500, "path", var_0B);
-      for(var_0E = 0; var_0E < var_0D.size; var_0E++) {
-        var_0F = vectornormalize(var_0D[var_0E].origin - var_0C);
-        var_10 = var_0C + var_0F * 15;
-        if(sighttracepassed(var_10, var_0D[var_0E].origin, 0, undefined)) {
-          var_0A = var_0D[var_0E];
+    if(!isDefined(var_10)) {
+      var_11 = self func_8533();
+      var_12 = scripts\mp\bots\_bots_util::defend_valid_center();
+      var_13 = getnodesinradiussorted(var_12, 256, 0, 500, "path", var_11);
+      for(var_14 = 0; var_14 < var_13.size; var_14++) {
+        var_15 = vectornormalize(var_13[var_14].origin - var_12);
+        var_10 = var_12 + var_15 * 15;
+        if(sighttracepassed(var_10, var_13[var_14].origin, 0, undefined)) {
+          var_10 = var_13[var_14];
           break;
         }
 
         wait(0.05);
-        if(sighttracepassed(var_10 + (0, 0, 55), var_0D[var_0E].origin + (0, 0, 55), 0, undefined)) {
-          var_0A = var_0D[var_0E];
+        if(sighttracepassed(var_10 + (0, 0, 55), var_13[var_14].origin + (0, 0, 55), 0, undefined)) {
+          var_10 = var_13[var_14];
           break;
         }
 
@@ -341,7 +341,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
       }
     }
 
-    self.node_closest_to_defend_center = var_0A;
+    self.node_closest_to_defend_center = var_10;
   }
 
   var_11 = level.bot_find_defend_node_func[var_2];
@@ -447,7 +447,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
     }
 
     var_1E = randomfloatrange(var_15, var_16);
-    var_18 = scripts\engine\utility::waittill_any_timeout_1(var_1E, "node_relinquished", "goal_changed", "script_goal_changed", "defend_force_node_recalculation", "bad_path");
+    var_18 = scripts\engine\utility::waittill_any_timeout(var_1E, "node_relinquished", "goal_changed", "script_goal_changed", "defend_force_node_recalculation", "bad_path");
     if((var_18 == "node_relinquished" || var_18 == "bad_path" || var_18 == "goal_changed" || var_18 == "script_goal_changed") && self.cur_defend_stance == "crouch" || self.cur_defend_stance == "prone") {
       self botsetstance("none");
     }
@@ -492,9 +492,9 @@ calculate_defend_stance(var_0) {
     }
 
     if(var_1 == "crouch") {
-      var_0A = bot_defend_get_precalc_entrances_for_current_area("crouch");
-      var_0B = defend_get_ally_bots_at_zone_for_stance("crouch");
-      if(var_0B.size >= var_0A.size) {
+      var_10 = bot_defend_get_precalc_entrances_for_current_area("crouch");
+      var_11 = defend_get_ally_bots_at_zone_for_stance("crouch");
+      if(var_11.size >= var_10.size) {
         var_1 = "stand";
       }
     }
@@ -534,7 +534,7 @@ setup_investigate_location(var_0, var_1) {
     var_2.origin = var_0.origin;
   }
 
-  var_2.target_getindexoftarget = var_0;
+  var_2.node = var_0;
   var_2.frames_visible = 0;
   return var_2;
 }
@@ -596,30 +596,30 @@ defense_cautious_approach() {
     return;
   }
 
-  var_0A = 5 + self botgetdifficultysetting("strategyLevel") * 2;
-  var_0B = int(min(var_0A, var_9.size));
-  var_0C = self botnodepickmultiple(var_9, 15, var_0B, "node_protect", scripts\mp\bots\_bots_util::defend_valid_center(), "ignore_occupancy");
-  for(var_0D = 0; var_0D < var_0C.size; var_0D++) {
-    var_0E = setup_investigate_location(var_0C[var_0D]);
-    self.locations_to_investigate = scripts\engine\utility::array_add(self.locations_to_investigate, var_0E);
+  var_10 = 5 + self botgetdifficultysetting("strategyLevel") * 2;
+  var_11 = int(min(var_10, var_9.size));
+  var_12 = self botnodepickmultiple(var_9, 15, var_11, "node_protect", scripts\mp\bots\_bots_util::defend_valid_center(), "ignore_occupancy");
+  for(var_13 = 0; var_13 < var_12.size; var_13++) {
+    var_14 = setup_investigate_location(var_12[var_13]);
+    self.locations_to_investigate = scripts\engine\utility::array_add(self.locations_to_investigate, var_14);
   }
 
-  var_0F = botgetmemoryevents(0, gettime() - -5536, 1, "death", 0, self);
-  foreach(var_11 in var_0F) {
+  var_15 = botgetmemoryevents(0, gettime() - -5536, 1, "death", 0, self);
+  foreach(var_11 in var_15) {
     if(distancesquared(var_11, self.bot_defending_center) < var_7) {
       var_12 = getclosestnodeinsight(var_11);
       if(isDefined(var_12)) {
-        var_0E = setup_investigate_location(var_12, var_11);
-        self.locations_to_investigate = scripts\engine\utility::array_add(self.locations_to_investigate, var_0E);
+        var_14 = setup_investigate_location(var_12, var_11);
+        self.locations_to_investigate = scripts\engine\utility::array_add(self.locations_to_investigate, var_14);
       }
     }
   }
 
   if(isDefined(self.defend_entrance_index)) {
     var_14 = scripts\mp\bots\_bots_util::bot_get_entrances_for_stance_and_index("stand", self.defend_entrance_index);
-    for(var_0D = 0; var_0D < var_14.size; var_0D++) {
-      var_0E = setup_investigate_location(var_14[var_0D]);
-      self.locations_to_investigate = scripts\engine\utility::array_add(self.locations_to_investigate, var_0E);
+    for(var_13 = 0; var_13 < var_14.size; var_13++) {
+      var_14 = setup_investigate_location(var_14[var_13]);
+      self.locations_to_investigate = scripts\engine\utility::array_add(self.locations_to_investigate, var_14);
     }
   }
 
@@ -640,15 +640,15 @@ defense_cautious_approach() {
     }
 
     var_1A = [];
-    for(var_0D = 0; var_0D < var_19.size; var_0D++) {
-      if(!scripts\engine\utility::within_fov(self.origin, self.angles, var_19[var_0D].origin, 0)) {
+    for(var_13 = 0; var_13 < var_19.size; var_13++) {
+      if(!scripts\engine\utility::within_fov(self.origin, self.angles, var_19[var_13].origin, 0)) {
         continue;
       }
 
       for(var_1B = 0; var_1B < self.locations_to_investigate.size; var_1B++) {
         var_11 = self.locations_to_investigate[var_1B];
-        if(nodesvisible(var_11.target_getindexoftarget, var_19[var_0D], 1)) {
-          var_1A = scripts\engine\utility::array_add(var_1A, var_19[var_0D]);
+        if(nodesvisible(var_11.node, var_19[var_13], 1)) {
+          var_1A = scripts\engine\utility::array_add(var_1A, var_19[var_13]);
           var_1B = self.locations_to_investigate.size;
         }
       }
@@ -661,9 +661,9 @@ defense_cautious_approach() {
     var_1C = self botnodepick(var_1A, 1 + var_1A.size * 0.15, "node_hide");
     if(isDefined(var_1C)) {
       var_1D = [];
-      for(var_0D = 0; var_0D < self.locations_to_investigate.size; var_0D++) {
-        if(nodesvisible(self.locations_to_investigate[var_0D].target_getindexoftarget, var_1C, 1)) {
-          var_1D = scripts\engine\utility::array_add(var_1D, self.locations_to_investigate[var_0D]);
+      for(var_13 = 0; var_13 < self.locations_to_investigate.size; var_13++) {
+        if(nodesvisible(self.locations_to_investigate[var_13].node, var_1C, 1)) {
+          var_1D = scripts\engine\utility::array_add(var_1D, self.locations_to_investigate[var_13]);
         }
       }
 
@@ -677,10 +677,10 @@ defense_cautious_approach() {
       }
 
       if(var_1E == "goal") {
-        for(var_0D = 0; var_0D < var_1D.size; var_0D++) {
+        for(var_13 = 0; var_13 < var_1D.size; var_13++) {
           var_1F = 0;
-          while(var_1D[var_0D].frames_visible < 18 && var_1F < 3.6) {
-            self botlookatpoint(var_1D[var_0D].origin + (0, 0, self getplayerviewheight()), 0.25, "script_search");
+          while(var_1D[var_13].frames_visible < 18 && var_1F < 3.6) {
+            self botlookatpoint(var_1D[var_13].origin + (0, 0, self getplayerviewheight()), 0.25, "script_search");
             wait(0.25);
             var_1F = var_1F + 0.25;
           }
@@ -730,7 +730,7 @@ monitor_cautious_approach_dangerous_locations() {
     if(isDefined(var_1)) {
       var_2 = self botgetfovdot();
       for(var_3 = 0; var_3 < self.locations_to_investigate.size; var_3++) {
-        if(nodesvisible(var_1, self.locations_to_investigate[var_3].target_getindexoftarget, 1)) {
+        if(nodesvisible(var_1, self.locations_to_investigate[var_3].node, 1)) {
           var_4 = scripts\engine\utility::within_fov(self.origin, self.angles, self.locations_to_investigate[var_3].origin, var_2);
           var_5 = !var_4 || self.locations_to_investigate[var_3].frames_visible < 17;
           if(var_5 && distancesquared(self.origin, self.locations_to_investigate[var_3].origin) < var_0) {
@@ -1146,8 +1146,8 @@ monitor_defend_player() {
         }
 
         if(var_0 > 0.5) {
-          var_0A = distancesquared(var_5, self.bot_defending_center);
-          if(var_0A > self.bot_defending_radius * self.bot_defending_radius) {
+          var_10 = distancesquared(var_5, self.bot_defending_center);
+          if(var_10 > self.bot_defending_radius * self.bot_defending_radius) {
             self notify("defend_force_node_recalculation");
             wait(0.25);
           }
@@ -1489,7 +1489,7 @@ bot_melee_tactical_insertion_check() {
       return 0;
     }
 
-    if(isDefined(self.isnodeoccupied) && self botcanseeentity(self.isnodeoccupied)) {
+    if(isDefined(self.enemy) && self botcanseeentity(self.enemy)) {
       return 0;
     }
 

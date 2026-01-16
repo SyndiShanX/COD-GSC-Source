@@ -58,18 +58,18 @@ func_CCBE() {
     }
 
     var_9 = [];
-    foreach(var_0B in scripts\engine\utility::getstructarray(level.var_37CF.var_336, "target")) {
-      var_9[var_9.size] = func_7A8D(var_0B, level.var_37CF);
+    foreach(var_11 in scripts\engine\utility::getstructarray(level.var_37CF.var_336, "target")) {
+      var_9[var_9.size] = func_7A8D(var_11, level.var_37CF);
     }
 
     if(isDefined(level.var_37CF.target)) {
-      var_0D = scripts\engine\utility::getstructarray(level.var_37CF.target, "targetname");
-      foreach(var_0F in var_0D) {
-        var_9[var_9.size] = func_7A8D(level.var_37CF, var_0F);
-        if(isDefined(var_0F.target)) {
-          var_10 = scripts\engine\utility::getstructarray(var_0F.target, "targetname");
+      var_13 = scripts\engine\utility::getstructarray(level.var_37CF.target, "targetname");
+      foreach(var_15 in var_13) {
+        var_9[var_9.size] = func_7A8D(level.var_37CF, var_15);
+        if(isDefined(var_15.target)) {
+          var_10 = scripts\engine\utility::getstructarray(var_15.target, "targetname");
           foreach(var_12 in var_10) {
-            var_9[var_9.size] = func_7A8D(var_0F, var_12);
+            var_9[var_9.size] = func_7A8D(var_15, var_12);
           }
         }
       }

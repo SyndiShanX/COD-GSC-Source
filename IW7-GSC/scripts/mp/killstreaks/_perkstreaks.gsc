@@ -4,50 +4,50 @@
 ***************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_fastsprintrecovery_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_fastreload_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_lightweight_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_marathon_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_stalker_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_reducedsway_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_quickswap_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_pitcher_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_bulletaccuracy_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_quickdraw_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_sprintreload_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_silentkill_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_blindeye_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_gpsjammer_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_quieter_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_incog_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_paint_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_scavenger_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_detectexplosive_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_selectivehearing_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_comexp_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_falldamage_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_regenfaster_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_sharp_focus_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_stun_resistance_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_blastshield_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_gunsmith_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_extraammo_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_extra_equipment_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_extra_deadly_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_extra_attachment_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_explosivedamage_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_gambler_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_hardline_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_twoprimaries_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_boom_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_deadeye_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_chain_reaction_ks", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("teleport", ::tryuseperkstreak);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("all_perks_bonus", ::func_128D6);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("speed_boost", ::func_12904);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("refill_grenades", ::func_128FA);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("refill_ammo", ::func_128F9);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("regen_faster", ::func_128FB);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_fastsprintrecovery_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_fastreload_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_lightweight_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_marathon_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_stalker_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_reducedsway_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_quickswap_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_pitcher_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_bulletaccuracy_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_quickdraw_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_sprintreload_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_silentkill_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_blindeye_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_gpsjammer_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_quieter_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_incog_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_paint_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_scavenger_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_detectexplosive_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_selectivehearing_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_comexp_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_falldamage_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_regenfaster_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_sharp_focus_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_stun_resistance_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_blastshield_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_gunsmith_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_extraammo_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_extra_equipment_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_extra_deadly_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_extra_attachment_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_explosivedamage_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_gambler_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_hardline_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_twoprimaries_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_boom_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_deadeye_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_chain_reaction_ks", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("teleport", ::tryuseperkstreak);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("all_perks_bonus", ::func_128D6);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("speed_boost", ::func_12904);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("refill_grenades", ::func_128FA);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("refill_ammo", ::func_128F9);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("regen_faster", ::func_128FB);
 }
 
 func_12904(var_0, var_1) {
@@ -85,7 +85,7 @@ func_5A5D(var_0) {
   thread func_139E8(var_0);
   thread func_3E15(var_0);
   if(var_0 == "specialty_hardline") {
-    scripts\mp\killstreaks\_killstreaks::func_F866();
+    scripts\mp\killstreaks\killstreaks::func_F866();
   }
 
   scripts\mp\matchdata::logkillstreakevent(var_0 + "_ks", self.origin);

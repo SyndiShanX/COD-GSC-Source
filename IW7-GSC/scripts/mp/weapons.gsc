@@ -114,8 +114,8 @@ init() {
   var_2 = spawnStruct();
   var_2.model = "weapon_motion_sensor";
   var_2.bombsquadmodel = "weapon_motion_sensor_bombsquad";
-  var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
-  var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
+  var_2.mine_beacon["enemy"] = ::scripts\engine\utility::getfx("weap_blink_enemy");
+  var_2.mine_beacon["friendly"] = ::scripts\engine\utility::getfx("weap_blink_friend");
   var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
@@ -132,8 +132,8 @@ init() {
   var_2 = spawnStruct();
   var_2.model = "weapon_mobile_radar";
   var_2.bombsquadmodel = "weapon_mobile_radar_bombsquad";
-  var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
-  var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
+  var_2.mine_beacon["enemy"] = ::scripts\engine\utility::getfx("weap_blink_enemy");
+  var_2.mine_beacon["friendly"] = ::scripts\engine\utility::getfx("weap_blink_friend");
   var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
@@ -179,8 +179,8 @@ init() {
   var_2 = spawnStruct();
   var_2.model = "weapon_sonic_sensor_wm";
   var_2.bombsquadmodel = "weapon_motion_sensor_bombsquad";
-  var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
-  var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
+  var_2.mine_beacon["enemy"] = ::scripts\engine\utility::getfx("weap_blink_enemy");
+  var_2.mine_beacon["friendly"] = ::scripts\engine\utility::getfx("weap_blink_friend");
   var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
@@ -313,7 +313,7 @@ createbombsquadmodel(var_0, var_1, var_2) {
   var_3 setModel(var_0);
   var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
   var_3 setcontents(0);
-  scripts\engine\utility::waittill_any_3("death", "trap_death");
+  scripts\engine\utility::waittill_any("death", "trap_death");
   if(isDefined(self.trigger)) {
     self.trigger delete();
   }
@@ -357,7 +357,7 @@ bombsquadvisibilityupdater(var_0) {
       func_561A(var_3);
     }
 
-    level scripts\engine\utility::waittill_any_3("joined_team", "player_spawned", "changed_kit", "update_bombsquad");
+    level scripts\engine\utility::waittill_any("joined_team", "player_spawned", "changed_kit", "update_bombsquad");
   }
 }
 
@@ -411,7 +411,7 @@ onplayerspawned() {
     self.trophyremainingammo = undefined;
     scripts\mp\gamescore::func_97D2();
     var_0 = self getcurrentweapon();
-    var_1 = self func_8519(var_0);
+    var_1 = self isalternatemode(var_0);
     var_2 = getweaponcamoname(var_0);
     thread runcamoscripts(var_0, var_2);
     thread runweaponscriptvfx(var_0, var_1);
@@ -420,14 +420,14 @@ onplayerspawned() {
 
 recordtogglescopestates() {
   self.pers["altScopeStates"] = [];
-  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && func_7DB8(self.primaryweapon) != "" && self func_8519(self.primaryweapon)) {
+  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && func_7DB8(self.primaryweapon) != "" && self isalternatemode(self.primaryweapon)) {
     var_0 = getweaponbasename(self.primaryweapon);
     var_1 = func_7DB8(self.primaryweapon);
     var_2 = var_0 + "+" + var_1;
     self.pers["altScopeStates"][var_2] = 1;
   }
 
-  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && func_7DB8(self.secondaryweapon) != "" && self func_8519(self.secondaryweapon)) {
+  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && func_7DB8(self.secondaryweapon) != "" && self isalternatemode(self.secondaryweapon)) {
     var_0 = getweaponbasename(self.secondaryweapon);
     var_1 = func_7DB8(self.secondaryweapon);
     var_2 = var_0 + "+" + var_1;
@@ -436,7 +436,7 @@ recordtogglescopestates() {
 }
 
 func_DDF6() {
-  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetent(self.primaryweapon) != "" && self func_8519(self.primaryweapon)) {
+  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetent(self.primaryweapon) != "" && self isalternatemode(self.primaryweapon)) {
     var_0 = getweaponbasename(self.primaryweapon);
     var_1 = missile_settargetent(self.primaryweapon);
     var_2 = var_0 + "+" + var_1;
@@ -446,7 +446,7 @@ func_DDF6() {
     self.pers["altScopeStates"][var_4] = 1;
   }
 
-  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetent(self.secondaryweapon) != "" && self func_8519(self.secondaryweapon)) {
+  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetent(self.secondaryweapon) != "" && self isalternatemode(self.secondaryweapon)) {
     var_0 = getweaponbasename(self.secondaryweapon);
     var_1 = missile_settargetent(self.secondaryweapon);
     var_2 = var_0 + "+" + var_1;
@@ -689,7 +689,7 @@ func_13BAB(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  var_5 = var_1 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(2, "death");
+  var_5 = var_1 scripts\engine\utility::waittill_any_timeout_no_endon_death(2, "death");
   if(var_5 != "death") {
     return;
   }
@@ -706,21 +706,21 @@ func_13BAB(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  var_0A = var_9[0]["entity"];
-  var_0B = var_9[0]["normal"];
-  var_0C = var_9[0]["position"];
-  if(isDefined(var_0A) && isplayer(var_0A)) {
+  var_10 = var_9[0]["entity"];
+  var_11 = var_9[0]["normal"];
+  var_12 = var_9[0]["position"];
+  if(isDefined(var_10) && isplayer(var_10)) {
     return;
   } else {
-    var_0D = var_2 - 2 * vectordot(var_2, var_0B) * var_0B;
-    var_0D = vectornormalize(var_0D);
-    var_0E = var_0C + var_0D * 2;
-    var_1 = scripts\mp\utility::_magicbullet(var_0, var_0E, var_0E + var_0D, self);
-    var_1.triggerportableradarping = self;
+    var_13 = var_2 - 2 * vectordot(var_2, var_11) * var_11;
+    var_13 = vectornormalize(var_13);
+    var_14 = var_12 + var_13 * 2;
+    var_1 = scripts\mp\utility::_magicbullet(var_0, var_14, var_14 + var_13, self);
+    var_1.owner = self;
     var_1.var_9E8F = 1;
   }
 
-  thread func_13BAB(var_0, var_1, var_0D, var_3 + 1, var_4);
+  thread func_13BAB(var_0, var_1, var_13, var_3 + 1, var_4);
 }
 
 func_13BA9() {
@@ -806,7 +806,7 @@ func_103B7() {
   thread func_103B6();
   self.glinton = 0;
   for(;;) {
-    if(self getweaponrankinfominxp() > 0.5 && !scripts\mp\equipment\cloak::func_9FC1()) {
+    if(self playerads() > 0.5 && !scripts\mp\equipment\cloak::func_9FC1()) {
       if(!self.glinton) {
         func_103B5();
       }
@@ -819,7 +819,7 @@ func_103B7() {
 }
 
 func_103B6() {
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "weapon_change");
+  scripts\engine\utility::waittill_any("death", "disconnect", "weapon_change");
   if(isDefined(self.glinton) && self.glinton) {
     sniperglint_remove();
     self.glinton = undefined;
@@ -931,29 +931,29 @@ glprox_modifieddamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_9 = 105;
   }
 
-  var_0A = 55;
+  var_10 = 55;
   if(level.hardcoremode) {
-    var_0A = 25;
+    var_10 = 25;
   } else if(level.tactical) {
-    var_0A = 55;
+    var_10 = 55;
   }
 
-  var_0B = undefined;
-  var_0C = undefined;
+  var_11 = undefined;
+  var_12 = undefined;
   if(isDefined(var_6)) {
-    var_0B = distancesquared(var_6, var_2 getEye());
-    var_0C = distancesquared(var_6, var_2.origin);
+    var_11 = distancesquared(var_6, var_2 getEye());
+    var_12 = distancesquared(var_6, var_2.origin);
   } else if(isDefined(var_3)) {
-    var_0B = distancesquared(var_3.origin, var_2 getEye());
-    var_0C = distancesquared(var_3.origin, var_2.origin);
+    var_11 = distancesquared(var_3.origin, var_2 getEye());
+    var_12 = distancesquared(var_3.origin, var_2.origin);
   }
 
-  if(isDefined(var_0B) && var_0B <= var_8) {
+  if(isDefined(var_11) && var_11 <= var_8) {
     var_7 = var_9;
-  } else if(isDefined(var_0C) && var_0C <= var_8) {
+  } else if(isDefined(var_12) && var_12 <= var_8) {
     var_7 = var_9;
   } else {
-    var_7 = var_0A;
+    var_7 = var_10;
   }
 
   return var_7;
@@ -1105,15 +1105,15 @@ dropweaponfordeath(var_0, var_1) {
   }
 
   self.droppeddeathweapon = 1;
-  var_7.triggerportableradarping = self;
+  var_7.owner = self;
   var_7.var_336 = "dropped_weapon";
   var_7 thread watchpickup();
   var_7 thread deletepickupafterawhile();
 }
 
 func_1175A(var_0, var_1, var_2, var_3) {
-  self.triggerportableradarping endon("disconnect");
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  self.owner endon("disconnect");
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
@@ -1132,7 +1132,7 @@ func_1175A(var_0, var_1, var_2, var_3) {
     var_4 = var_5;
   }
 
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
@@ -1145,13 +1145,13 @@ func_1175A(var_0, var_1, var_2, var_3) {
   var_8 = 2;
   var_9 = weaponfiretime(var_0) * var_8;
   while(isDefined(self) && var_1 > 0 || var_2 > 0) {
-    var_0A = (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(0, 1));
-    var_0B = var_0A * 180;
-    var_0C = var_0A * 1000;
+    var_10 = (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(0, 1));
+    var_11 = var_10 * 180;
+    var_12 = var_10 * 1000;
     self.origin = var_6 + (0, 0, 10);
-    self.angles = var_0B;
-    thread scripts\mp\utility::drawline(self.origin, self.origin + var_0C, 2, (0, 1, 0));
-    thread func_1174C(self.origin, var_0C, self.triggerportableradarping, var_0);
+    self.angles = var_11;
+    thread scripts\mp\utility::drawline(self.origin, self.origin + var_12, 2, (0, 1, 0));
+    thread func_1174C(self.origin, var_12, self.owner, var_0);
     wait(var_9);
     if(!isDefined(self)) {
       break;
@@ -1299,7 +1299,7 @@ watchpickup() {
   if(isDefined(var_2)) {
     var_4 = var_2 getitemweaponname();
     if(isDefined(var_1.tookweaponfrom[var_4])) {
-      var_2.triggerportableradarping = var_1.tookweaponfrom[var_4];
+      var_2.owner = var_1.tookweaponfrom[var_4];
       var_1.tookweaponfrom[var_4] = undefined;
     }
 
@@ -1307,7 +1307,7 @@ watchpickup() {
     var_2 thread watchpickup();
   }
 
-  var_1.tookweaponfrom[var_0] = self.triggerportableradarping;
+  var_1.tookweaponfrom[var_0] = self.owner;
 }
 
 fixupplayerweapons(var_0, var_1) {
@@ -1431,7 +1431,7 @@ watchweaponusage(var_0) {
   for(;;) {
     self waittill("weapon_fired", var_1);
     var_1 = self getcurrentweapon();
-    thread scripts\mp\perks\_weaponpassives::updateweaponpassivesonuse(self, var_1);
+    thread scripts\mp\perks\weaponpassives::updateweaponpassivesonuse(self, var_1);
     scripts\mp\gamelogic::sethasdonecombat(self, 1);
     var_2 = gettime();
     if(!isDefined(self.lastshotfiredtime)) {
@@ -1459,7 +1459,7 @@ watchweaponusage(var_0) {
     }
 
     var_4 = var_1;
-    if(scripts\mp\perks\_weaponpassives::doesshareammo(var_1)) {
+    if(scripts\mp\perks\weaponpassives::doesshareammo(var_1)) {
       var_4 = scripts\mp\utility::func_E0CF(var_1);
     }
 
@@ -1738,13 +1738,13 @@ friendlyfirecheck(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  if(var_1 == var_0 || isDefined(var_1.triggerportableradarping) && var_1.triggerportableradarping == var_0) {
+  if(var_1 == var_0 || isDefined(var_1.owner) && var_1.owner == var_0) {
     return 1;
   }
 
   var_5 = undefined;
-  if(isDefined(var_1.triggerportableradarping)) {
-    var_5 = var_1.triggerportableradarping.team;
+  if(isDefined(var_1.owner)) {
+    var_5 = var_1.owner.team;
   } else if(isDefined(var_1.team)) {
     var_5 = var_1.team;
   }
@@ -1784,7 +1784,7 @@ func_13A1F() {
   var_2 = self.plantedlethalequip.size;
   var_3 = var_1 && var_2;
   if(scripts\mp\utility::_hasperk("specialty_rugged_eqp") && var_3) {
-    thread scripts\mp\perks\_perkfunctions::feedbackruggedeqp(var_2, var_1);
+    thread scripts\mp\perks\perkfunctions::feedbackruggedeqp(var_2, var_1);
   }
 }
 
@@ -2171,11 +2171,11 @@ throwingknifeused(var_0, var_1, var_2) {
 
 recordthrowingknifetraveldist() {
   level endon("game_ended");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self.disttravelled = 0;
   var_0 = self.origin;
   for(;;) {
-    var_1 = scripts\engine\utility::waittill_any_timeout_1(0.15, "death", "missile_stuck");
+    var_1 = scripts\engine\utility::waittill_any_timeout(0.15, "death", "missile_stuck");
     if(!isDefined(self)) {
       break;
     }
@@ -2216,9 +2216,9 @@ throwingknife_detachknivesfromcorpse(var_0) {
     if(isDefined(var_4) && func_9FA9(var_4)) {
       var_3 unlink();
       var_5 = throwingknife_getdudknifeweapon(var_4);
-      var_3 = var_3.triggerportableradarping scripts\mp\utility::_launchgrenade(var_5, var_3.origin, (0, 0, 0), 100, 1, var_3);
-      if(isDefined(var_3.triggerportableradarping)) {
-        var_3 setentityowner(var_3.triggerportableradarping);
+      var_3 = var_3.owner scripts\mp\utility::_launchgrenade(var_5, var_3.origin, (0, 0, 0), 100, 1, var_3);
+      if(isDefined(var_3.owner)) {
+        var_3 setentityowner(var_3.owner);
       }
 
       thread throwingknife_triggerlinkto(var_3);
@@ -2354,7 +2354,7 @@ func_10413(var_0, var_1, var_2) {
         continue;
       }
 
-      var_7 = scripts\engine\utility::array_add_safe(level.players, var_1);
+      var_7 = scripts\engine\utility::add_to_array(level.players, var_1);
       if(!scripts\common\trace::ray_trace_passed(var_1.origin, var_6.origin + (0, 0, 32), var_7)) {
         continue;
       }
@@ -2411,8 +2411,8 @@ func_1037B() {
   self endon("end_explode");
   self waittill("explode", var_0);
   thread func_10377(var_0);
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping thread monitorsmokeactive();
+  if(isDefined(self.owner)) {
+    self.owner thread monitorsmokeactive();
   }
 }
 
@@ -2493,13 +2493,13 @@ monitorsmokeactive() {
   self endon("monitorSmokeActive()");
   scripts\mp\utility::printgameaction("smoke grenade activated", self);
   self.hasactivesmokegrenade = 1;
-  var_0 = scripts\engine\utility::waittill_any_timeout_1(9.25, "death");
+  var_0 = scripts\engine\utility::waittill_any_timeout(9.25, "death");
   self.hasactivesmokegrenade = 0;
   scripts\mp\utility::printgameaction("smoke grenade deactivated", self);
 }
 
 watchgasgrenadeexplode() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self waittill("explode", var_1);
   thread ongasgrenadeimpact(var_0, var_1);
@@ -2507,7 +2507,7 @@ watchgasgrenadeexplode() {
 
 ongasgrenadeimpact(var_0, var_1) {
   var_2 = spawn("trigger_radius", var_1, 0, 128, 160);
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   var_3 = 128;
   var_4 = spawnfx(scripts\engine\utility::getfx("gas_grenade_smoke_enemy"), var_1);
   triggerfx(var_4);
@@ -2567,9 +2567,9 @@ func_AF2B(var_0) {
     }
 
     if(isDefined(level.microturrets)) {
-      foreach(var_0C in level.microturrets) {
-        if(isDefined(var_0C) && isDefined(var_0C.team) && var_0C.team != self.team) {
-          var_1[var_1.size] = var_0C;
+      foreach(var_12 in level.microturrets) {
+        if(isDefined(var_12) && isDefined(var_12.team) && var_12.team != self.team) {
+          var_1[var_1.size] = var_12;
         }
       }
     }
@@ -2586,7 +2586,7 @@ func_AF2B(var_0) {
 
     if(isDefined(level.var_1655)) {
       foreach(var_6 in level.var_1655) {
-        if(isDefined(var_6.var_18DE) && isDefined(var_6.triggerportableradarping) && var_6.triggerportableradarping != self) {
+        if(isDefined(var_6.var_18DE) && isDefined(var_6.owner) && var_6.owner != self) {
           var_1[var_1.size] = var_6;
         }
       }
@@ -2594,16 +2594,16 @@ func_AF2B(var_0) {
 
     if(isDefined(level.supertrophy) && isDefined(level.supertrophy.trophies)) {
       foreach(var_9 in level.supertrophy.trophies) {
-        if(isDefined(var_9) && isDefined(var_9.triggerportableradarping) && var_9.triggerportableradarping != self) {
+        if(isDefined(var_9) && isDefined(var_9.owner) && var_9.owner != self) {
           var_1[var_1.size] = var_9;
         }
       }
     }
 
     if(isDefined(level.microturrets)) {
-      foreach(var_0C in level.microturrets) {
-        if(isDefined(var_0C) && isDefined(var_0C.triggerportableradarping) && var_0C.triggerportableradarping != self) {
-          var_1[var_1.size] = var_0C;
+      foreach(var_12 in level.microturrets) {
+        if(isDefined(var_12) && isDefined(var_12.owner) && var_12.owner != self) {
+          var_1[var_1.size] = var_12;
         }
       }
     }
@@ -2649,7 +2649,7 @@ watchmissileusage() {
         break;
 
       case "iw7_tacburst_mpl_epic2":
-        var_0 thread scripts\mp\perks\_weaponpassives::cryogl_watchforexplode(self);
+        var_0 thread scripts\mp\perks\weaponpassives::cryogl_watchforexplode(self);
         break;
 
       case "iw7_mp28_mpl_fasthip":
@@ -2749,7 +2749,7 @@ clustergrenadeexplode(var_0) {
   var_0.exploding = 1;
   var_0.origin = var_0.origin;
   var_1 = spawn("script_model", var_0.origin);
-  var_1 setotherent(var_0.triggerportableradarping);
+  var_1 setotherent(var_0.owner);
   var_1 setModel("prop_mp_cluster_grenade_scr");
   func_42DB(var_0, var_1);
   if(isDefined(var_0)) {
@@ -2781,18 +2781,18 @@ func_42DB(var_0, var_1) {
 
   var_8 = scripts\engine\utility::ter_op(var_4, (0, 0, 32), (0, 0, 2));
   var_9 = var_3 + var_8;
-  var_0A = randomint(90) - 45;
+  var_10 = randomint(90) - 45;
   var_2 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 1, 0);
-  for(var_0B = 0; var_0B < 4; var_0B++) {
-    var_0C = "explode" + var_0B + 1;
-    var_0 setscriptablepartstate(var_0C, "active", 0);
-    var_0D = scripts\engine\utility::ter_op(var_0B < 4, 90 * var_0B + var_0A, randomint(360));
-    var_0E = scripts\engine\utility::ter_op(var_4, 110, 90);
-    var_0F = scripts\engine\utility::ter_op(var_4, 12, 45);
-    var_10 = var_0E + randomint(var_0F * 2) - var_0F;
+  for(var_11 = 0; var_11 < 4; var_11++) {
+    var_12 = "explode" + var_11 + 1;
+    var_0 setscriptablepartstate(var_12, "active", 0);
+    var_13 = scripts\engine\utility::ter_op(var_11 < 4, 90 * var_11 + var_10, randomint(360));
+    var_14 = scripts\engine\utility::ter_op(var_4, 110, 90);
+    var_15 = scripts\engine\utility::ter_op(var_4, 12, 45);
+    var_10 = var_14 + randomint(var_15 * 2) - var_15;
     var_11 = randomint(60) + 30;
-    var_12 = cos(var_0D) * sin(var_10);
-    var_13 = sin(var_0D) * sin(var_10);
+    var_12 = cos(var_13) * sin(var_10);
+    var_13 = sin(var_13) * sin(var_10);
     var_14 = cos(var_10);
     var_15 = (var_12, var_13, var_14) * var_11;
     var_5 = var_9;
@@ -2804,28 +2804,28 @@ func_42DB(var_0, var_1) {
 
     var_1 dontinterpolate();
     var_1.origin = var_6;
-    var_1 setscriptablepartstate(var_0C, "active", 0);
+    var_1 setscriptablepartstate(var_12, "active", 0);
     wait(0.175);
   }
 }
 
 func_4107() {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   self delete();
 }
 
-func_10D85(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
+func_10D85(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(!isDefined(var_4)) {
     return;
   }
 
   if(var_6) {
-    var_0B = spawnfx(var_7, self.origin);
+    var_11 = spawnfx(var_7, self.origin);
     playsoundatpos(self.origin, var_8);
-    triggerfx(var_0B);
+    triggerfx(var_11);
     wait(2);
-    var_0B delete();
+    var_11 delete();
   } else {
     wait(var_0);
   }
@@ -2834,7 +2834,7 @@ func_10D85(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9,
     return;
   }
 
-  radiusdamage(self.origin + (0, 0, 50), var_1, var_2, var_3, var_4, "MOD_EXPLOSIVE", var_0A);
+  radiusdamage(self.origin + (0, 0, 50), var_1, var_2, var_3, var_4, "MOD_EXPLOSIVE", var_10);
   playFX(var_5, self.origin + (0, 0, 50));
   playsoundatpos(self.origin, var_9);
   self delete();
@@ -2844,8 +2844,8 @@ func_BFD3() {
   thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
   self endon("end_explode");
   self waittill("explode", var_0);
-  thread func_5925(var_0, self.triggerportableradarping, self.var_BFD5);
-  func_BFD2(var_0, self.triggerportableradarping, self.var_BFD5);
+  thread func_5925(var_0, self.owner, self.var_BFD5);
+  func_BFD2(var_0, self.owner, self.var_BFD5);
 }
 
 func_BFD2(var_0, var_1, var_2) {
@@ -2853,11 +2853,11 @@ func_BFD2(var_0, var_1, var_2) {
     playsoundatpos(var_0, "emp_grenade_explode_default");
     var_3 = getempdamageents(var_0, 512, 0, undefined);
     foreach(var_5 in var_3) {
-      if(isDefined(var_5.triggerportableradarping) && !friendlyfirecheck(var_1, var_5.triggerportableradarping)) {
+      if(isDefined(var_5.owner) && !friendlyfirecheck(var_1, var_5.owner)) {
         continue;
       }
 
-      var_5 notify("emp_damage", self.triggerportableradarping, 8);
+      var_5 notify("emp_damage", self.owner, 8);
     }
   }
 }
@@ -2896,17 +2896,17 @@ func_5925(var_0, var_1, var_2) {
       }
 
       if(var_9 <= var_3.radius_min_sq) {
-        var_0A = 1;
+        var_10 = 1;
       } else {
-        var_0A = 1 - var_9 - var_3.radius_min_sq / var_3.radius_max_sq - var_3.radius_min_sq;
+        var_10 = 1 - var_9 - var_3.radius_min_sq / var_3.radius_max_sq - var_3.radius_min_sq;
       }
 
-      var_0B = anglesToForward(var_7 getplayerangles());
-      var_0C = var_0 - var_8;
-      var_0C = vectornormalize(var_0C);
-      var_0D = 0.5 * 1 + vectordot(var_0B, var_0C);
-      var_0E = 1;
-      var_7 notify("flashbang", var_0, var_0A, var_0D, var_1, var_0E);
+      var_11 = anglesToForward(var_7 getplayerangles());
+      var_12 = var_0 - var_8;
+      var_12 = vectornormalize(var_12);
+      var_13 = 0.5 * 1 + vectordot(var_11, var_12);
+      var_14 = 1;
+      var_7 notify("flashbang", var_0, var_10, var_13, var_1, var_14);
     }
 
     wait(randomfloatrange(0.25, 0.5));
@@ -2939,11 +2939,11 @@ func_56E5(var_0, var_1) {
         continue;
       }
 
-      if(var_5.team == self.triggerportableradarping.team) {
+      if(var_5.team == self.owner.team) {
         continue;
       }
 
-      if(var_5 == self.triggerportableradarping) {
+      if(var_5 == self.owner) {
         continue;
       }
 
@@ -2983,9 +2983,9 @@ func_56E4(var_0, var_1, var_2, var_3) {
       var_9 = 1 - var_9 - var_3.radius_min_sq / var_3.radius_max_sq - var_3.radius_min_sq;
     }
 
-    var_0A = 0.65 * 1 + vectordot(var_5, var_7);
-    var_0B = 1;
-    var_0 notify("flashbang", var_4, var_9, var_0A, var_1, var_0B);
+    var_10 = 0.65 * 1 + vectordot(var_5, var_7);
+    var_11 = 1;
+    var_0 notify("flashbang", var_4, var_9, var_10, var_1, var_11);
   }
 }
 
@@ -3014,8 +3014,8 @@ c4used(var_0) {
 }
 
 watchc4implode() {
-  self.triggerportableradarping endon("disconnect");
-  var_0 = self.triggerportableradarping;
+  self.owner endon("disconnect");
+  var_0 = self.owner;
   var_1 = scripts\engine\utility::spawn_tag_origin();
   var_1 linkto(self);
   thread func_334D(var_1);
@@ -3050,9 +3050,9 @@ watchc4stuck() {
   self waittill("missile_stuck", var_0);
   self give_player_tickets(1);
   self.c4stuck = 1;
-  thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
-  thread outlineequipmentforowner(self, self.triggerportableradarping);
-  scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", self.triggerportableradarping, 1);
+  thread scripts\mp\perks\perk_equipmentping::runequipmentping();
+  thread outlineequipmentforowner(self, self.owner);
+  scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", self.owner, 1);
   explosivehandlemovers(var_0);
   makeexplosiveusable();
 }
@@ -3082,7 +3082,7 @@ func_DACD(var_0) {
     return;
   }
 
-  if(!isDefined(var_0.triggerportableradarping.team)) {
+  if(!isDefined(var_0.owner.team)) {
     var_0 delete();
     return;
   }
@@ -3096,7 +3096,7 @@ func_DACD(var_0) {
   var_0.killcament = var_4;
   var_0 explosivehandlemovers(var_1);
   var_0 makeexplosiveusable();
-  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.triggerportableradarping, 1);
+  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.owner, 1);
   onlethalequipmentplanted(var_0);
   var_0 thread ondetonateexplosive();
   var_0 thread func_3343();
@@ -3118,7 +3118,7 @@ func_DACC(var_0) {
   var_4 = self.origin[2] - var_3;
   var_2 = var_2 + (0, 0, var_4);
   var_5 = spawn("trigger_radius", var_2, 0, var_1.detectionradius, var_1.detectionheight);
-  var_5.triggerportableradarping = self;
+  var_5.owner = self;
   if(isDefined(var_0)) {
     var_5 enablelinkto();
     var_5 linkto(self);
@@ -3134,17 +3134,17 @@ func_DACC(var_0) {
     }
 
     if(getdvarint("scr_minesKillOwner") != 1) {
-      if(isDefined(self.triggerportableradarping)) {
-        if(var_6 == self.triggerportableradarping) {
+      if(isDefined(self.owner)) {
+        if(var_6 == self.owner) {
           continue;
         }
 
-        if(isDefined(var_6.triggerportableradarping) && var_6.triggerportableradarping == self.triggerportableradarping) {
+        if(isDefined(var_6.owner) && var_6.owner == self.owner) {
           continue;
         }
       }
 
-      if(!friendlyfirecheck(self.triggerportableradarping, var_6, 0)) {
+      if(!friendlyfirecheck(self.owner, var_6, 0)) {
         continue;
       }
     }
@@ -3197,8 +3197,8 @@ func_F692(var_0, var_1) {
     return;
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    scripts\mp\entityheadicons::setplayerheadicon(self.triggerportableradarping, (0, 0, var_1));
+  if(isDefined(self.owner)) {
+    scripts\mp\entityheadicons::setplayerheadicon(self.owner, (0, 0, var_1));
   }
 }
 
@@ -3209,7 +3209,7 @@ claymoreused(var_0) {
   }
 
   var_0 hide();
-  var_0 scripts\engine\utility::waittill_any_timeout_1(0.05, "missile_stuck");
+  var_0 scripts\engine\utility::waittill_any_timeout(0.05, "missile_stuck");
   if(!isDefined(self) || !isalive(self)) {
     var_0 delete();
     return;
@@ -3257,7 +3257,7 @@ claymoreused(var_0) {
   var_0 explosivehandlemovers(var_5);
   var_0 show();
   var_0 makeexplosiveusable();
-  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.triggerportableradarping, 1);
+  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.owner, 1);
   onlethalequipmentplanted(var_0, "power_claymore");
   var_0 thread ondetonateexplosive();
   var_0 thread func_3343();
@@ -3279,17 +3279,17 @@ claymoredetonation(var_0) {
   for(;;) {
     var_1 waittill("trigger", var_2);
     if(getdvarint("scr_claymoredebug") != 1) {
-      if(isDefined(self.triggerportableradarping)) {
-        if(var_2 == self.triggerportableradarping) {
+      if(isDefined(self.owner)) {
+        if(var_2 == self.owner) {
           continue;
         }
 
-        if(isDefined(var_2.triggerportableradarping) && var_2.triggerportableradarping == self.triggerportableradarping) {
+        if(isDefined(var_2.owner) && var_2.owner == self.owner) {
           continue;
         }
       }
 
-      if(!friendlyfirecheck(self.triggerportableradarping, var_2, 0)) {
+      if(!friendlyfirecheck(self.owner, var_2, 0)) {
         continue;
       }
     }
@@ -3314,8 +3314,8 @@ claymoredetonation(var_0) {
 
   self playSound("claymore_activated");
   explosivetrigger(var_2, level.claymoredetectiongraceperiod, "claymore");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer("claymore_destroyed", undefined, undefined, self.origin);
+  if(isDefined(self.owner)) {
+    self.owner thread scripts\mp\utility::leaderdialogonplayer("claymore_destroyed", undefined, undefined, self.origin);
   }
 
   self notify("detonateExplosive");
@@ -3454,26 +3454,26 @@ func_3343() {
   self.health = self.maxhealth;
   var_0 = undefined;
   var_1 = 1;
-  if(self.triggerportableradarping scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
+  if(self.owner scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
     var_1++;
   }
 
   for(;;) {
-    self waittill("damage", var_2, var_0, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self waittill("damage", var_2, var_0, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!isplayer(var_0) && !isagent(var_0)) {
       continue;
     }
 
-    if(!friendlyfirecheck(self.triggerportableradarping, var_0)) {
+    if(!friendlyfirecheck(self.owner, var_0)) {
       continue;
     }
 
-    if(func_66AA(var_0A, var_5)) {
+    if(func_66AA(var_10, var_5)) {
       continue;
     }
 
-    var_0B = scripts\engine\utility::ter_op(scripts\mp\utility::isfmjdamage(var_0A, var_5), 2, 1);
-    var_1 = var_1 - var_0B;
+    var_11 = scripts\engine\utility::ter_op(scripts\mp\utility::isfmjdamage(var_10, var_5), 2, 1);
+    var_1 = var_1 - var_11;
     if(var_1 <= 0) {
       break;
     }
@@ -3516,28 +3516,28 @@ func_3343() {
 
   if(isplayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback("c4");
-    if(var_0 != self.triggerportableradarping && var_0.team != self.triggerportableradarping.team) {
-      if(var_0A != "trophy_mp") {
-        var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
+    if(var_0 != self.owner && var_0.team != self.owner.team) {
+      if(var_10 != "trophy_mp") {
+        var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
       }
     }
   }
 
   if(level.teambased) {
-    if(isDefined(var_0) && isDefined(self.triggerportableradarping)) {
-      var_0C = var_0.pers["team"];
-      var_0D = self.triggerportableradarping.pers["team"];
-      if(isDefined(var_0C) && isDefined(var_0D) && var_0C != var_0D) {
+    if(isDefined(var_0) && isDefined(self.owner)) {
+      var_12 = var_0.pers["team"];
+      var_13 = self.owner.pers["team"];
+      if(isDefined(var_12) && isDefined(var_13) && var_12 != var_13) {
         var_0 notify("destroyed_equipment");
       }
     }
-  } else if(isDefined(self.triggerportableradarping) && isDefined(var_0) && var_0 != self.triggerportableradarping) {
+  } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 
   if(getdvarint("showArchetypes", 0) > 0) {
     if(self.weapon_name == "c4_mp") {
-      self.triggerportableradarping notify("c4_update", 0);
+      self.owner notify("c4_update", 0);
     }
   }
 
@@ -3567,7 +3567,7 @@ func_3347(var_0) {
   self waittill("activated");
   var_1 = spawn("trigger_radius", self.origin - (0, 0, 128), 0, 512, 256);
   var_1.var_53B1 = "trigger" + gettime() + randomint(1000000);
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   var_1 thread func_53B0(level.otherteam[var_0]);
   self waittill("death");
   var_1 notify("end_detection");
@@ -3581,7 +3581,7 @@ func_3347(var_0) {
 claymoredetectiontrigger(var_0) {
   var_1 = spawn("trigger_radius", self.origin - (0, 0, 128), 0, 512, 256);
   var_1.var_53B1 = "trigger" + gettime() + randomint(1000000);
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   var_1 thread func_53B0(level.otherteam[var_0]);
   self waittill("death");
   var_1 notify("end_detection");
@@ -3603,7 +3603,7 @@ func_53B0(var_0) {
 
     if(level.teambased && var_1.team != var_0) {
       continue;
-    } else if(!level.teambased && var_1 == self.triggerportableradarping.triggerportableradarping) {
+    } else if(!level.teambased && var_1 == self.owner.owner) {
       continue;
     }
 
@@ -3618,7 +3618,7 @@ func_53B0(var_0) {
 monitordisownedequipment(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
   var_1 deleteexplosive();
 }
 
@@ -3626,7 +3626,7 @@ monitordisownedgrenade(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("death");
   var_1 endon("mine_planted");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
   if(isDefined(var_1)) {
     var_1 delete();
   }
@@ -3699,16 +3699,16 @@ ontacticalequipmentplanted(var_0, var_1, var_2) {
 func_5608() {
   if(isDefined(self.plantedlethalequip) && self.plantedlethalequip.size > 0) {
     foreach(var_1 in self.plantedlethalequip) {
-      if(isDefined(var_1.trigger) && isDefined(var_1.triggerportableradarping)) {
-        var_1.trigger disableplayeruse(var_1.triggerportableradarping);
+      if(isDefined(var_1.trigger) && isDefined(var_1.owner)) {
+        var_1.trigger disableplayeruse(var_1.owner);
       }
     }
   }
 
   if(isDefined(self.plantedtacticalequip) && self.plantedtacticalequip.size > 0) {
     foreach(var_1 in self.plantedtacticalequip) {
-      if(isDefined(var_1.trigger) && isDefined(var_1.triggerportableradarping)) {
-        var_1.trigger disableplayeruse(var_1.triggerportableradarping);
+      if(isDefined(var_1.trigger) && isDefined(var_1.owner)) {
+        var_1.trigger disableplayeruse(var_1.owner);
       }
     }
   }
@@ -3718,17 +3718,17 @@ cleanupequipment(var_0, var_1, var_2, var_3) {
   if(getdvarint("showArchetypes", 0) > 0) {
     if(isDefined(self.weapon_name)) {
       if(self.weapon_name == "c4_mp") {
-        self.triggerportableradarping notify("c4_update", 0);
+        self.owner notify("c4_update", 0);
       } else if(self.weapon_name == "bouncingbetty_mp") {
-        self.triggerportableradarping notify("bouncing_betty_update", 0);
+        self.owner notify("bouncing_betty_update", 0);
       } else if(self.weapon_name == "trip_mine_mp") {
-        self.triggerportableradarping notify("trip_mine_update", 0);
+        self.owner notify("trip_mine_update", 0);
       } else if(self.weapon_name == "cryo_mine_mp") {
-        self.triggerportableradarping notify("cryo_mine_update", 0);
+        self.owner notify("cryo_mine_update", 0);
       } else if(self.weapon_name == "fear_grenade_mp") {
-        self.triggerportableradarping notify("restart_fear_grenade_cooldown", 0);
+        self.owner notify("restart_fear_grenade_cooldown", 0);
       } else if(self.weapon_name == "trophy_mp") {
-        self.triggerportableradarping notify("trophy_update", 0);
+        self.owner notify("trophy_update", 0);
       }
     }
   }
@@ -3777,7 +3777,7 @@ ondetonateexplosive() {
   level endon("game_ended");
   thread cleanupexplosivesondeath();
   self waittill("detonateExplosive");
-  self detonate(self.triggerportableradarping);
+  self detonate(self.owner);
 }
 
 cleanupexplosivesondeath() {
@@ -3792,7 +3792,7 @@ cleanupexplosivesondeath() {
 }
 
 makeexplosiveusable(var_0) {
-  self setotherent(self.triggerportableradarping);
+  self setotherent(self.owner);
   if(!isDefined(var_0)) {
     var_0 = 10;
   }
@@ -3800,7 +3800,7 @@ makeexplosiveusable(var_0) {
   var_1 = spawn("script_origin", self.origin + var_0 * anglestoup(self.angles));
   var_1 linkto(self);
   self.trigger = var_1;
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   thread makeexplosiveusableinternal();
   return var_1;
 }
@@ -3829,7 +3829,7 @@ makeexplosiveunusable() {
 }
 
 watchexplosiveusable() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_1 = self.trigger;
   self endon("death");
   var_1 endon("death");
@@ -3877,7 +3877,7 @@ watchexplosiveusable() {
 makeexplosiveusabletag(var_0, var_1) {
   self endon("death");
   self endon("makeExplosiveUnusable");
-  var_2 = self.triggerportableradarping;
+  var_2 = self.owner;
   var_3 = self.weapon_name;
   if(!isDefined(var_1)) {
     var_1 = 0;
@@ -4041,59 +4041,59 @@ getdamageableents(var_0, var_1, var_2, var_3) {
     var_8 = scripts\mp\utility::func_7921(var_6[var_7]);
     var_9 = distancesquared(var_0, var_8);
     if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_8, var_3, var_6[var_7])) {
-      var_4[var_4.size] = scripts\mp\utility::func_7920(var_6[var_7], var_8);
+      var_4[var_4.size] = ::scripts\mp\utility::func_7920(var_6[var_7], var_8);
     }
   }
 
-  var_0A = getEntArray("grenade", "classname");
-  for(var_7 = 0; var_7 < var_0A.size; var_7++) {
-    var_0B = scripts\mp\utility::func_791E(var_0A[var_7]);
-    var_9 = distancesquared(var_0, var_0B);
-    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_0B, var_3, var_0A[var_7])) {
-      var_4[var_4.size] = scripts\mp\utility::func_791D(var_0A[var_7], var_0B);
+  var_10 = getEntArray("grenade", "classname");
+  for(var_7 = 0; var_7 < var_10.size; var_7++) {
+    var_11 = scripts\mp\utility::func_791E(var_10[var_7]);
+    var_9 = distancesquared(var_0, var_11);
+    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_11, var_3, var_10[var_7])) {
+      var_4[var_4.size] = ::scripts\mp\utility::func_791D(var_10[var_7], var_11);
     }
   }
 
-  var_0C = getEntArray("destructible", "targetname");
-  for(var_7 = 0; var_7 < var_0C.size; var_7++) {
-    var_0B = var_0C[var_7].origin;
-    var_9 = distancesquared(var_0, var_0B);
-    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_0B, var_3, var_0C[var_7])) {
-      var_0D = spawnStruct();
-      var_0D.isplayer = 0;
-      var_0D.var_9D26 = 0;
-      var_0D.issplitscreen = var_0C[var_7];
-      var_0D.damagecenter = var_0B;
-      var_4[var_4.size] = var_0D;
+  var_12 = getEntArray("destructible", "targetname");
+  for(var_7 = 0; var_7 < var_12.size; var_7++) {
+    var_11 = var_12[var_7].origin;
+    var_9 = distancesquared(var_0, var_11);
+    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_11, var_3, var_12[var_7])) {
+      var_13 = spawnStruct();
+      var_13.isplayer = 0;
+      var_13.var_9D26 = 0;
+      var_13.issplitscreen = var_12[var_7];
+      var_13.damagecenter = var_11;
+      var_4[var_4.size] = var_13;
     }
   }
 
-  var_0E = getEntArray("destructable", "targetname");
-  for(var_7 = 0; var_7 < var_0E.size; var_7++) {
-    var_0B = var_0E[var_7].origin;
-    var_9 = distancesquared(var_0, var_0B);
-    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_0B, var_3, var_0E[var_7])) {
-      var_0D = spawnStruct();
-      var_0D.isplayer = 0;
-      var_0D.var_9D26 = 1;
-      var_0D.issplitscreen = var_0E[var_7];
-      var_0D.damagecenter = var_0B;
-      var_4[var_4.size] = var_0D;
+  var_14 = getEntArray("destructable", "targetname");
+  for(var_7 = 0; var_7 < var_14.size; var_7++) {
+    var_11 = var_14[var_7].origin;
+    var_9 = distancesquared(var_0, var_11);
+    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_11, var_3, var_14[var_7])) {
+      var_13 = spawnStruct();
+      var_13.isplayer = 0;
+      var_13.var_9D26 = 1;
+      var_13.issplitscreen = var_14[var_7];
+      var_13.damagecenter = var_11;
+      var_4[var_4.size] = var_13;
     }
   }
 
-  var_0F = getEntArray("misc_turret", "classname");
-  foreach(var_11 in var_0F) {
-    var_0B = var_11.origin + (0, 0, 32);
-    var_9 = distancesquared(var_0, var_0B);
-    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_0B, var_3, var_11)) {
+  var_15 = getEntArray("misc_turret", "classname");
+  foreach(var_11 in var_15) {
+    var_11 = var_11.origin + (0, 0, 32);
+    var_9 = distancesquared(var_0, var_11);
+    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_11, var_3, var_11)) {
       switch (var_11.model) {
         case "vehicle_ugv_talon_gun_mp":
         case "mp_remote_turret":
         case "mp_scramble_turret":
         case "mp_sam_turret":
         case "sentry_minigun_weak":
-          var_4[var_4.size] = scripts\mp\utility::func_7922(var_11, var_0B);
+          var_4[var_4.size] = ::scripts\mp\utility::func_7922(var_11, var_11);
           break;
       }
     }
@@ -4105,10 +4105,10 @@ getdamageableents(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_0B = var_15.origin + (0, 0, 32);
-    var_9 = distancesquared(var_0, var_0B);
-    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_0B, var_3, var_15)) {
-      var_4[var_4.size] = scripts\mp\utility::func_791F(var_15, var_0B);
+    var_11 = var_15.origin + (0, 0, 32);
+    var_9 = distancesquared(var_0, var_11);
+    if(var_9 < var_5 && !var_2 || func_13C7E(var_0, var_11, var_3, var_15)) {
+      var_4[var_4.size] = ::scripts\mp\utility::func_791F(var_15, var_11);
     }
   }
 
@@ -4266,14 +4266,14 @@ func_66B4(var_0) {
   self endon("death");
   self waittill("emp_damage", var_1, var_2, var_3, var_4, var_5);
   if(isDefined(var_4) && var_4 == "emp_grenade_mp") {
-    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_1))) {
+    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_1))) {
       var_1 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
     }
   }
 
   equipmentempstunvfx();
-  if(isDefined(self.triggerportableradarping) && isDefined(var_1) && self.triggerportableradarping != var_1) {
-    var_1 scripts\mp\killstreaks\_killstreaks::func_83A0();
+  if(isDefined(self.owner) && isDefined(var_1) && self.owner != var_1) {
+    var_1 scripts\mp\killstreaks\killstreaks::func_83A0();
   }
 
   if(isDefined(var_0) && var_0) {
@@ -4315,21 +4315,21 @@ debugcircle(var_0, var_1, var_2, var_3) {
     var_7 = var_4 * var_6;
     var_8 = cos(var_7) * var_1;
     var_9 = sin(var_7) * var_1;
-    var_0A = var_0[0] + var_8;
-    var_0B = var_0[1] + var_9;
-    var_0C = var_0[2];
-    var_5[var_5.size] = (var_0A, var_0B, var_0C);
+    var_10 = var_0[0] + var_8;
+    var_11 = var_0[1] + var_9;
+    var_12 = var_0[2];
+    var_5[var_5.size] = (var_10, var_11, var_12);
   }
 
   for(var_6 = 0; var_6 < var_5.size; var_6++) {
-    var_0D = var_5[var_6];
+    var_13 = var_5[var_6];
     if(var_6 + 1 >= var_5.size) {
-      var_0E = var_5[0];
+      var_14 = var_5[0];
     } else {
-      var_0E = var_5[var_6 + 1];
+      var_14 = var_5[var_6 + 1];
     }
 
-    thread debugline(var_0D, var_0E, var_2);
+    thread debugline(var_13, var_14, var_2);
   }
 }
 
@@ -4366,7 +4366,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
     case "blackout_grenade_mp":
       if(var_3 > 0) {
         if(var_2 != "MOD_IMPACT") {
-          scripts\mp\equipment\blackout_grenade::func_10D6F(var_0.triggerportableradarping, var_0.origin);
+          scripts\mp\equipment\blackout_grenade::func_10D6F(var_0.owner, var_0.origin);
         }
       }
       break;
@@ -4688,7 +4688,7 @@ updatemovespeedscale() {
       var_0 = var_0 + self.weaponpassivespeedonkillmod;
     }
 
-    var_0 = var_0 + scripts\mp\perks\_weaponpassives::passivecolddamagegetspeedmod(self);
+    var_0 = var_0 + scripts\mp\perks\weaponpassives::passivecolddamagegetspeedmod(self);
     if(isDefined(self.weaponpassivefastrechamberspeedmod)) {
       var_0 = var_0 + self.weaponpassivefastrechamberspeedmod;
     }
@@ -4730,9 +4730,9 @@ getplayerspeedbyweapon(var_0) {
       var_1 = 0.87;
     } else if(issubstr(var_2, "iw7_udm45_mpl")) {
       var_1 = 0.95;
-    } else if(issubstr(var_2, "iw7_rvn") && self func_8519(var_2)) {
+    } else if(issubstr(var_2, "iw7_rvn") && self isalternatemode(var_2)) {
       var_1 = 1;
-    } else if(issubstr(var_2, "iw7_longshot") && self func_8519(var_2)) {
+    } else if(issubstr(var_2, "iw7_longshot") && self isalternatemode(var_2)) {
       var_1 = 0.98;
     } else {
       var_3 = weaponinventorytype(var_2);
@@ -4776,7 +4776,7 @@ stancerecoiladjuster() {
   }
 
   for(;;) {
-    scripts\engine\utility::waittill_any_3("adjustedStance", "sprint_begin", "weapon_change");
+    scripts\engine\utility::waittill_any("adjustedStance", "sprint_begin", "weapon_change");
     wait(0.5);
     if(isDefined(self.onhelisniper) && self.onhelisniper) {
       continue;
@@ -4887,7 +4887,7 @@ spawnmine(var_0, var_1, var_2, var_3, var_4) {
   var_6 = spawn("script_model", var_0);
   var_6.angles = var_4;
   var_6 setModel(var_5.model);
-  var_6.triggerportableradarping = var_1;
+  var_6.owner = var_1;
   var_6 setotherent(var_1);
   var_6.weapon_name = var_2;
   var_6.config = var_5;
@@ -4926,7 +4926,7 @@ spawnmine(var_0, var_1, var_2, var_3, var_4) {
   var_6 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_1, 1);
   var_6 thread mineexplodeonnotify();
   var_6 thread func_66B4(1);
-  var_6 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_6 thread scripts\mp\perks\perk_equipmentping::runequipmentping();
   thread outlineequipmentforowner(var_6, var_1);
   level thread monitordisownedequipment(var_1, var_6);
   return var_6;
@@ -4941,7 +4941,7 @@ func_108E7(var_0, var_1, var_2, var_3, var_4) {
   var_6 = spawn("script_model", var_0);
   var_6.angles = var_4;
   var_6 setModel(var_5.model);
-  var_6.triggerportableradarping = var_1;
+  var_6.owner = var_1;
   var_6 setotherent(var_1);
   var_6.weapon_name = var_2;
   var_6.config = var_5;
@@ -4972,7 +4972,7 @@ func_108E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = spawn("script_model", var_0);
   var_8.angles = var_4;
   var_8 setModel(var_7.model);
-  var_8.triggerportableradarping = var_1;
+  var_8.owner = var_1;
   var_8 setotherent(var_1);
   var_8.weapon_name = var_2;
   var_8.config = var_7;
@@ -5007,7 +5007,7 @@ func_108E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 func_139F5() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self waittill("missile_stuck");
   thread func_E845(var_0, self.origin);
@@ -5015,7 +5015,7 @@ func_139F5() {
 
 func_E845(var_0, var_1) {
   var_2 = spawn("trigger_radius", var_1, 0, 128, 135);
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   var_3 = 128;
   var_4 = spawnfx(scripts\engine\utility::getfx("distortion_field_cloud"), var_1);
   triggerfx(var_4);
@@ -5038,8 +5038,8 @@ func_E845(var_0, var_1) {
 
   foreach(var_7 in level.players) {
     var_7 notify("distortion_field_ended");
-    foreach(var_0E in level.players) {
-      var_7 showtoplayer(var_0E);
+    foreach(var_14 in level.players) {
+      var_7 showtoplayer(var_14);
     }
   }
 
@@ -5052,7 +5052,7 @@ func_E845(var_0, var_1) {
 func_20C2(var_0) {
   self endon("death");
   self endon("disconnect");
-  while(isDefined(var_0) && self istouching(var_0) && !scripts\mp\killstreaks\_emp_common::isemped()) {
+  while(isDefined(var_0) && self istouching(var_0) && !scripts\mp\killstreaks\emp_common::isemped()) {
     self setblurforplayer(4, 1);
     self.var_9E44 = 1;
     thread func_B9CF();
@@ -5060,7 +5060,7 @@ func_20C2(var_0) {
       self hidefromplayer(var_2);
     }
 
-    scripts\engine\utility::waittill_any_timeout_1(1.4, "emp_damage");
+    scripts\engine\utility::waittill_any_timeout(1.4, "emp_damage");
     foreach(var_2 in level.players) {
       self showtoplayer(var_2);
     }
@@ -5079,7 +5079,7 @@ func_B9CF() {
   self endon("distortion_field_ended");
   var_0 = 0;
   while(!var_0) {
-    var_0 = scripts\mp\killstreaks\_emp_common::isemped();
+    var_0 = scripts\mp\killstreaks\emp_common::isemped();
     scripts\engine\utility::waitframe();
   }
 
@@ -5095,7 +5095,7 @@ func_10910(var_0, var_1, var_2, var_3, var_4) {
   var_6 = spawn("script_model", var_0);
   var_6.angles = var_4;
   var_6 setModel(var_5.model);
-  var_6.triggerportableradarping = var_1;
+  var_6.owner = var_1;
   var_6 setotherent(var_1);
   var_6.weapon_name = var_2;
   var_6.config = var_5;
@@ -5122,12 +5122,12 @@ func_10910(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_10412() {
-  scripts\engine\utility::waittill_any_3("death", "mine_destroyed");
-  self.triggerportableradarping notify("sonic_sensor_update");
-  foreach(var_1 in self.triggerportableradarping.plantedtacticalequip) {
+  scripts\engine\utility::waittill_any("death", "mine_destroyed");
+  self.owner notify("sonic_sensor_update");
+  foreach(var_1 in self.owner.plantedtacticalequip) {
     if(isDefined(var_1) && var_1.weapon_name == "sonic_sensor_mp") {
       var_1 deleteexplosive();
-      scripts\engine\utility::array_remove(self.triggerportableradarping.plantedtacticalequip, var_1);
+      scripts\engine\utility::array_remove(self.owner.plantedtacticalequip, var_1);
     }
   }
 }
@@ -5148,7 +5148,7 @@ func_139F0(var_0) {
   }
 
   if(!isDefined(var_0) || var_0) {
-    self getplayermodelname();
+    self clearportableradar();
   }
 
   deleteexplosive();
@@ -5213,25 +5213,25 @@ minedamagemonitor() {
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   var_0 = undefined;
-  var_1 = self.triggerportableradarping scripts\mp\utility::_hasperk("specialty_rugged_eqp");
+  var_1 = self.owner scripts\mp\utility::_hasperk("specialty_rugged_eqp");
   var_2 = scripts\engine\utility::ter_op(var_1, 2, 1);
   var_3 = scripts\engine\utility::ter_op(var_1, "hitequip", "");
   for(;;) {
-    self waittill("damage", var_4, var_0, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10);
-    var_0C = scripts\mp\utility::func_13CA1(var_0C, var_10);
+    self waittill("damage", var_4, var_0, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10);
+    var_12 = scripts\mp\utility::func_13CA1(var_12, var_10);
     if(!isplayer(var_0) && !isagent(var_0)) {
       continue;
     }
 
-    if(isDefined(var_0C) && isendstr(var_0C, "betty_mp")) {
+    if(isDefined(var_12) && isendstr(var_12, "betty_mp")) {
       continue;
     }
 
-    if(!friendlyfirecheck(self.triggerportableradarping, var_0)) {
+    if(!friendlyfirecheck(self.owner, var_0)) {
       continue;
     }
 
-    if(isballweapon(var_0C)) {
+    if(isballweapon(var_12)) {
       continue;
     }
 
@@ -5239,13 +5239,13 @@ minedamagemonitor() {
       continue;
     }
 
-    if(func_66AA(var_0C, var_7)) {
+    if(func_66AA(var_12, var_7)) {
       continue;
     }
 
-    var_11 = scripts\engine\utility::ter_op(scripts\mp\utility::isfmjdamage(var_0C, var_7) || var_4 >= 80, 2, 1);
+    var_11 = scripts\engine\utility::ter_op(scripts\mp\utility::isfmjdamage(var_12, var_7) || var_4 >= 80, 2, 1);
     var_2 = var_2 - var_11;
-    scripts\mp\powers::equipmenthit(self.triggerportableradarping, var_0, var_0C, var_7);
+    scripts\mp\powers::equipmenthit(self.owner, var_0, var_12, var_7);
     if(var_2 <= 0) {
       break;
     } else {
@@ -5258,11 +5258,11 @@ minedamagemonitor() {
     self.waschained = 1;
   }
 
-  if(isDefined(var_0B) && var_0B &level.idflags_penetration) {
+  if(isDefined(var_11) && var_11 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 
-  if(isDefined(var_0B) && var_0B &level.idflags_ricochet) {
+  if(isDefined(var_11) && var_11 &level.idflags_ricochet) {
     self.wasdamagedfrombulletricochet = 1;
   }
 
@@ -5277,18 +5277,18 @@ minedamagemonitor() {
 
   if(isplayer(var_0)) {
     var_0 scripts\mp\damagefeedback::updatedamagefeedback(var_3);
-    if(var_0 != self.triggerportableradarping && var_0.team != self.triggerportableradarping.team) {
-      var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
+    if(var_0 != self.owner && var_0.team != self.owner.team) {
+      var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
     }
   }
 
   if(level.teambased) {
-    if(isDefined(var_0) && isDefined(var_0.pers["team"]) && isDefined(self.triggerportableradarping) && isDefined(self.triggerportableradarping.pers["team"])) {
-      if(var_0.pers["team"] != self.triggerportableradarping.pers["team"]) {
+    if(isDefined(var_0) && isDefined(var_0.pers["team"]) && isDefined(self.owner) && isDefined(self.owner.pers["team"])) {
+      if(var_0.pers["team"] != self.owner.pers["team"]) {
         var_0 notify("destroyed_equipment");
       }
     }
-  } else if(isDefined(self.triggerportableradarping) && isDefined(var_0) && var_0 != self.triggerportableradarping) {
+  } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 
@@ -5310,7 +5310,7 @@ mineproximitytrigger(var_0, var_1) {
   var_3 = scripts\engine\utility::ter_op(isDefined(var_2.minedetectionradius), var_2.minedetectionradius, level.minedetectionradius);
   var_4 = scripts\engine\utility::ter_op(isDefined(var_2.minedetectionheight), var_2.minedetectionheight, level.minedetectionheight);
   var_5 = spawn("trigger_radius", self.origin, 0, var_3, var_4);
-  var_5.triggerportableradarping = self;
+  var_5.owner = self;
   thread minedeletetrigger(var_5);
   if(isDefined(var_0)) {
     var_5 enablelinkto();
@@ -5330,17 +5330,17 @@ mineproximitytrigger(var_0, var_1) {
     }
 
     if(getdvarint("scr_minesKillOwner") != 1) {
-      if(isDefined(self.triggerportableradarping)) {
-        if(var_6 == self.triggerportableradarping) {
+      if(isDefined(self.owner)) {
+        if(var_6 == self.owner) {
           continue;
         }
 
-        if(isDefined(var_6.triggerportableradarping) && var_6.triggerportableradarping == self.triggerportableradarping) {
+        if(isDefined(var_6.owner) && var_6.owner == self.owner) {
           continue;
         }
       }
 
-      if(!friendlyfirecheck(self.triggerportableradarping, var_6, 0)) {
+      if(!friendlyfirecheck(self.owner, var_6, 0)) {
         continue;
       }
     }
@@ -5369,7 +5369,7 @@ mineproximitytrigger(var_0, var_1) {
 }
 
 minedeletetrigger(var_0) {
-  scripts\engine\utility::waittill_any_3("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
+  scripts\engine\utility::waittill_any("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
   if(isDefined(var_0)) {
     var_0 delete();
   }
@@ -5427,12 +5427,12 @@ mineexplodeonnotify() {
   self endon("death");
   level endon("game_ended");
   self waittill("detonateExplosive", var_0);
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
   if(!isDefined(var_0)) {
-    var_0 = self.triggerportableradarping;
+    var_0 = self.owner;
   }
 
   var_1 = self.config;
@@ -5448,7 +5448,7 @@ mineexplodeonnotify() {
 
   self notify("explode", var_3);
   wait(0.05);
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
@@ -5470,8 +5470,8 @@ mineexplodeonnotify() {
     self radiusdamage(self.origin, var_7, var_6, var_5, var_0, "MOD_EXPLOSIVE", self.weapon_name);
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
+  if(isDefined(self.owner)) {
+    self.owner thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
   }
 
   wait(0.2);
@@ -5507,12 +5507,12 @@ func_B77D() {
   self endon("death");
   level endon("game_ended");
   self waittill("detonateExplosive", var_0);
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
   if(!isDefined(var_0)) {
-    var_0 = self.triggerportableradarping;
+    var_0 = self.owner;
   }
 
   self playSound(self.config.onexplodesfx);
@@ -5525,7 +5525,7 @@ func_B77D() {
 
   playFX(self.config.onexplodevfx, var_1);
   scripts\engine\utility::waitframe();
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
@@ -5535,10 +5535,10 @@ func_B77D() {
     self hidepart("tag_sensor");
   }
 
-  self.triggerportableradarping thread scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
+  self.owner thread scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
   var_2 = [];
   foreach(var_4 in level.characters) {
-    if(var_4.team == self.triggerportableradarping.team) {
+    if(var_4.team == self.owner.team) {
       continue;
     }
 
@@ -5556,17 +5556,17 @@ func_B77D() {
   }
 
   foreach(var_7 in var_2) {
-    thread func_B37F(var_7, self.triggerportableradarping);
-    level thread func_F236(var_7, self.triggerportableradarping);
+    thread func_B37F(var_7, self.owner);
+    level thread func_F236(var_7, self.owner);
   }
 
   if(var_2.size > 0) {
-    self.triggerportableradarping scripts\mp\missions::processchallenge("ch_motiondetected", var_2.size);
-    self.triggerportableradarping thread scripts\mp\gamelogic::threadedsetweaponstatbyname("motion_sensor", 1, "hits");
+    self.owner scripts\mp\missions::processchallenge("ch_motiondetected", var_2.size);
+    self.owner thread scripts\mp\gamelogic::threadedsetweaponstatbyname("motion_sensor", 1, "hits");
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
+  if(isDefined(self.owner)) {
+    self.owner thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
   }
 
   wait(0.2);
@@ -5588,7 +5588,7 @@ func_B37F(var_0, var_1) {
 
   var_0 thread scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
   scripts\mp\gamescore::func_11ACE(var_1, var_0, "motion_sensor_mp");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(self.config.var_B371, "death");
+  var_0 scripts\engine\utility::waittill_any_timeout(self.config.var_B371, "death");
   scripts\mp\gamescore::untrackdebuffassist(var_1, var_0, "motion_sensor_mp");
   scripts\mp\utility::outlinedisable(var_2, var_0);
 }
@@ -5632,19 +5632,19 @@ func_B8F6() {
   self endon("death");
   level endon("game_ended");
   self waittill("detonateExplosive", var_0);
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
   if(!isDefined(var_0)) {
-    var_0 = self.triggerportableradarping;
+    var_0 = self.owner;
   }
 
   self playSound(self.config.onexplodesfx);
   var_1 = self gettagorigin("tag_origin");
   playFX(self.config.onexplodevfx, var_1);
   scripts\engine\utility::waitframe();
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
@@ -5654,9 +5654,9 @@ func_B8F6() {
     var_2 func_10DC5(self);
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
-    self.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
+  if(isDefined(self.owner)) {
+    self.owner thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed", undefined, undefined, self.origin);
+    self.owner scripts\mp\damagefeedback::updatedamagefeedback("hitmotionsensor");
   }
 
   wait(0.2);
@@ -5668,11 +5668,11 @@ func_10DC5(var_0) {
   var_2 = spawn("script_model", var_1);
   var_2 setModel("weapon_mobile_radar_back");
   var_2.var_AC75 = var_0.var_AC75;
-  var_2.triggerportableradarping = var_0.triggerportableradarping;
+  var_2.owner = var_0.owner;
   var_2.config = var_0.config;
   var_2 linkto(self, "tag_shield_back", (0, 0, 0), (0, 90, 90));
   var_2 thread func_D501(self);
-  var_2 thread createbombsquadmodel(var_0.config.bombsquadmodel, "tag_origin", var_0.triggerportableradarping);
+  var_2 thread createbombsquadmodel(var_0.config.bombsquadmodel, "tag_origin", var_0.owner);
   var_2 thread minedamagemonitor();
   var_2 thread func_13B1A(self, var_0);
   var_2 thread func_13B1B(self, var_0);
@@ -5697,7 +5697,7 @@ func_D501(var_0) {
     }
 
     foreach(var_4 in level.players) {
-      if(var_4.team != self.triggerportableradarping.team) {
+      if(var_4.team != self.owner.team) {
         continue;
       }
 
@@ -5727,7 +5727,7 @@ func_13B1A(var_0, var_1) {
 
 func_13B1B(var_0, var_1) {
   self endon("death");
-  var_2 = var_1.triggerportableradarping;
+  var_2 = var_1.owner;
   var_3 = var_1.angles;
   var_4 = var_1.var_AC75;
   var_0 waittill("death");
@@ -5777,8 +5777,8 @@ minedamagedebug(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = (var_0[0], var_0[1], var_5);
   var_9 = (var_1[0], var_1[1], var_5);
   thread debugcircle(var_8, level.minedamageradius, var_6[var_7], 32);
-  var_0A = distancesquared(var_0, var_1);
-  if(var_0A > var_2) {
+  var_10 = distancesquared(var_0, var_1);
+  if(var_10 > var_2) {
     var_7 = 0;
   } else {
     var_7 = 1;
@@ -5816,12 +5816,12 @@ mineused(var_0, var_1, var_2) {
 }
 
 minethrown(var_0, var_1, var_2, var_3, var_4) {
-  self.triggerportableradarping = var_0;
+  self.owner = var_0;
   self waittill("missile_stuck", var_5);
   if(var_1 != "trip_mine_mp") {
-    if(isDefined(var_5) && isDefined(var_5.triggerportableradarping)) {
+    if(isDefined(var_5) && isDefined(var_5.owner)) {
       if(isDefined(var_4)) {
-        self.triggerportableradarping[[var_4]](self);
+        self.owner[[var_4]](self);
       }
 
       self delete();
@@ -5829,7 +5829,7 @@ minethrown(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  self.triggerportableradarping notify("bouncing_betty_update", 0);
+  self.owner notify("bouncing_betty_update", 0);
   if(!isDefined(var_0)) {
     return;
   }
@@ -5854,9 +5854,9 @@ minethrown(var_0, var_1, var_2, var_3, var_4) {
     var_9 = self.angles;
   }
 
-  var_0A = self[[var_3]](var_7, var_0, var_1, var_2, var_9);
-  var_0A makeexplosiveusable();
-  var_0A thread minedamagemonitor();
+  var_10 = self[[var_3]](var_7, var_0, var_1, var_2, var_9);
+  var_10 makeexplosiveusable();
+  var_10 thread minedamagemonitor();
   self delete();
 }
 
@@ -5932,7 +5932,7 @@ updateblinkinglight(var_0, var_1, var_2) {
   childthread onjointeamblinkinglight(var_0, var_1, var_2, var_3);
   foreach(var_6 in level.players) {
     if(isDefined(var_6)) {
-      if(self.triggerportableradarping[[var_3]](var_6)) {
+      if(self.owner[[var_3]](var_6)) {
         playfxontagforclients(var_0, self, var_2, var_6);
       } else {
         playfxontagforclients(var_1, self, var_2, var_6);
@@ -5949,7 +5949,7 @@ onjointeamblinkinglight(var_0, var_1, var_2, var_3) {
   self endon("emp_damage");
   for(;;) {
     level waittill("joined_team", var_4);
-    if(self.triggerportableradarping[[var_3]](var_4)) {
+    if(self.owner[[var_3]](var_4)) {
       playfxontagforclients(var_0, self, var_2, var_4);
       continue;
     }
@@ -6040,19 +6040,19 @@ buildattachmentmaps() {
   }
 
   var_9 = [];
-  var_0A = 1;
-  var_0B = tablelookupbyrow("mp\attachmentmap.csv", 0, var_0A);
-  while(var_0B != "") {
-    var_9[var_0B] = var_0A;
-    var_0A++;
-    var_0B = tablelookupbyrow("mp\attachmentmap.csv", 0, var_0A);
+  var_10 = 1;
+  var_11 = tablelookupbyrow("mp\attachmentmap.csv", 0, var_10);
+  while(var_11 != "") {
+    var_9[var_11] = var_10;
+    var_10++;
+    var_11 = tablelookupbyrow("mp\attachmentmap.csv", 0, var_10);
   }
 
   level.attachmentmap_basetounique = [];
   foreach(var_8 in var_6) {
-    foreach(var_10, var_0E in var_9) {
-      var_0F = tablelookup("mp\attachmentmap.csv", 0, var_8, var_0E);
-      if(var_0F == "") {
+    foreach(var_10, var_14 in var_9) {
+      var_15 = tablelookup("mp\attachmentmap.csv", 0, var_8, var_14);
+      if(var_15 == "") {
         continue;
       }
 
@@ -6060,7 +6060,7 @@ buildattachmentmaps() {
         level.attachmentmap_basetounique[var_8] = [];
       }
 
-      level.attachmentmap_basetounique[var_8][var_10] = var_0F;
+      level.attachmentmap_basetounique[var_8][var_10] = var_15;
     }
   }
 
@@ -6155,14 +6155,14 @@ func_3222() {
       }
 
       if(level.tactical) {
-        var_0A = tablelookup("mp\statstable.csv", 0, var_0, 50);
+        var_10 = tablelookup("mp\statstable.csv", 0, var_0, 50);
       } else {
-        var_0A = tablelookup("mp\statstable.csv", 0, var_1, 8);
+        var_10 = tablelookup("mp\statstable.csv", 0, var_1, 8);
       }
 
-      if(var_0A != "") {
-        var_0A = float(var_0A);
-        level.weaponmapdata[var_1].getclosestpointonnavmesh3d = var_0A;
+      if(var_10 != "") {
+        var_10 = float(var_10);
+        level.weaponmapdata[var_1].getclosestpointonnavmesh3d = var_10;
       }
     }
   }
@@ -6171,14 +6171,14 @@ func_3222() {
 func_464F() {
   level endon("game_ended");
   self endon("end_explode");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("explode", var_0);
   func_464D(var_0);
 }
 
 func_464D(var_0) {
   thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_2 = var_1 scripts\mp\utility::getotherteam(var_1.team);
   var_3 = undefined;
   var_4 = 0;
@@ -6192,13 +6192,13 @@ func_464D(var_0) {
   var_6 = getempdamageents(var_0, 256, 0, undefined);
   if(var_6.size >= 1) {
     foreach(var_8 in var_6) {
-      if(isDefined(var_8.triggerportableradarping) && !friendlyfirecheck(self.triggerportableradarping, var_8.triggerportableradarping)) {
+      if(isDefined(var_8.owner) && !friendlyfirecheck(self.owner, var_8.owner)) {
         continue;
       }
 
-      var_8 notify("emp_damage", self.triggerportableradarping, 5);
-      foreach(var_0A in var_3) {
-        if(var_8 == var_0A || var_8 == self.triggerportableradarping) {
+      var_8 notify("emp_damage", self.owner, 5);
+      foreach(var_10 in var_3) {
+        if(var_8 == var_10 || var_8 == self.owner) {
           var_8 thread func_464E();
           var_5[var_5.size] = var_8;
           break;
@@ -6206,16 +6206,16 @@ func_464D(var_0) {
       }
     }
 
-    foreach(var_0E in var_5) {
-      if(var_0E == self.triggerportableradarping) {
+    foreach(var_14 in var_5) {
+      if(var_14 == self.owner) {
         var_4 = 1;
         break;
       }
     }
 
     if(!var_4) {
-      var_0E = var_5[var_5.size - 1];
-      if(isDefined(var_0E) && var_0E != var_1) {
+      var_14 = var_5[var_5.size - 1];
+      if(isDefined(var_14) && var_14 != var_1) {
         var_10 = "primary";
         var_11 = "none";
         var_12 = getarraykeys(var_1.powers);
@@ -6225,7 +6225,7 @@ func_464D(var_0) {
           }
         }
 
-        var_16 = var_0E.var_AE7B;
+        var_16 = var_14.var_AE7B;
         if(isDefined(var_16) && var_16 != "none") {
           var_1 notify("corpse_steal");
           var_1 notify("start_copycat");
@@ -6512,39 +6512,39 @@ impale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     playFX(scripts\engine\utility::getfx("penetration_railgun_impact"), var_4);
   }
 
-  var_0A = impale_endpoint(var_4, var_5);
-  var_0B = trace_impale(var_4, var_0A);
-  var_0A = var_0B["position"] - var_5 * 12;
-  var_0C = length(var_0A - var_4);
-  var_0D = var_0C / scripts\engine\utility::ter_op(var_9, 600, 1000);
-  var_0D = max(var_0D, 0.05);
-  if(var_0B["hittype"] != "hittype_world") {
-    var_0D = 0;
+  var_10 = impale_endpoint(var_4, var_5);
+  var_11 = trace_impale(var_4, var_10);
+  var_10 = var_11["position"] - var_5 * 12;
+  var_12 = length(var_10 - var_4);
+  var_13 = var_12 / scripts\engine\utility::ter_op(var_9, 600, 1000);
+  var_13 = max(var_13, 0.05);
+  if(var_11["hittype"] != "hittype_world") {
+    var_13 = 0;
   }
 
-  var_0E = var_0D > 0.05;
+  var_14 = var_13 > 0.05;
   if(isDefined(var_1)) {
     var_1.body giverankxp();
   }
 
   wait(0.05);
-  if(var_0E) {
-    var_0F = var_5;
+  if(var_14) {
+    var_15 = var_5;
     var_10 = anglestoup(var_0.angles);
-    var_11 = vectorcross(var_0F, var_10);
-    var_12 = scripts\engine\utility::spawn_tag_origin(var_4, axistoangles(var_0F, var_11, var_10));
-    var_12 moveto(var_0A, var_0D);
+    var_11 = vectorcross(var_15, var_10);
+    var_12 = scripts\engine\utility::spawn_tag_origin(var_4, axistoangles(var_15, var_11, var_10));
+    var_12 moveto(var_10, var_13);
     var_13 = spawnragdollconstraint(var_1.body, var_6, var_7, var_8);
     var_13.origin = var_12.origin;
     var_13.angles = var_12.angles;
     var_13 linkto(var_12);
-    if(var_0D > scripts\engine\utility::ter_op(var_9, 0.075, 1)) {
+    if(var_13 > scripts\engine\utility::ter_op(var_9, 0.075, 1)) {
       thread impale_detachaftertime(var_13, scripts\engine\utility::ter_op(var_9, 0.075, 1));
     }
 
-    thread impale_cleanup(var_1, var_12, var_0D + 0.25);
+    thread impale_cleanup(var_1, var_12, var_13 + 0.25);
     if(!var_9) {
-      var_12 thread impale_effects(var_0A, var_0D);
+      var_12 thread impale_effects(var_10, var_13);
     }
   }
 }
@@ -6563,7 +6563,7 @@ impale_effects(var_0, var_1) {
 
 impale_cleanup(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
-    var_0 scripts\engine\utility::waittill_any_timeout_1(var_2, "death", "disconnect");
+    var_0 scripts\engine\utility::waittill_any_timeout(var_2, "death", "disconnect");
   }
 
   var_1 delete();
@@ -6778,8 +6778,8 @@ watchgrenadeaxepickup(var_0, var_1) {
     var_8 = isDefined(var_3) && var_3 == "tag_weapon";
     if(var_7) {
       playFX(scripts\engine\utility::getfx("shield_metal_impact"), self.origin);
-      if(isDefined(self.triggerportableradarping)) {
-        var_9 = self.triggerportableradarping;
+      if(isDefined(self.owner)) {
+        var_9 = self.owner;
         relaunchaxe(self.weapon_name, var_9, 1);
         return;
       }
@@ -6789,8 +6789,8 @@ watchgrenadeaxepickup(var_0, var_1) {
   }
 
   var_1 thread func_11825(var_1, self);
-  var_0A = 45;
-  thread watchaxetimeout(var_0A);
+  var_10 = 45;
+  thread watchaxetimeout(var_10);
   thread watchgrenadedeath();
   thread watchaxeuse(var_1, self.weapon_name);
   thread watchaxeautopickup(var_1, self.weapon_name);
@@ -6805,7 +6805,7 @@ axedetachfromcorpse(var_0) {
     }
 
     var_4 = var_3.weapon_name;
-    var_5 = var_3.triggerportableradarping;
+    var_5 = var_3.owner;
     var_6 = var_3.origin;
     if(isDefined(var_4) && isaxeweapon(var_4)) {
       var_3 relaunchaxe(var_4, var_5, 1);
@@ -6909,7 +6909,7 @@ axeinsamephaseplayerstate(var_0, var_1) {
 }
 
 playercanautopickupaxe(var_0) {
-  if(isDefined(var_0.triggerportableradarping) && self != var_0.triggerportableradarping) {
+  if(isDefined(var_0.owner) && self != var_0.owner) {
     return 0;
   }
 
@@ -6972,57 +6972,57 @@ playerpickupaxe(var_0, var_1) {
 
   var_8 = undefined;
   var_9 = 0;
-  foreach(var_0B in var_7) {
-    if(issubstr(var_0B, "alt_")) {
+  foreach(var_11 in var_7) {
+    if(issubstr(var_11, "alt_")) {
       continue;
     }
 
-    if(issubstr(var_0B, "uplinkball")) {
+    if(issubstr(var_11, "uplinkball")) {
       continue;
     }
 
-    var_0C = self getweaponammoclip(var_0B) == 0 && isaxeweapon(var_0B);
-    if(!isDefined(var_8) && weaponispreferreddrop(var_0B) || var_0C) {
-      var_8 = var_0B;
+    var_12 = self getweaponammoclip(var_11) == 0 && isaxeweapon(var_11);
+    if(!isDefined(var_8) && weaponispreferreddrop(var_11) || var_12) {
+      var_8 = var_11;
     }
 
     var_9++;
   }
 
-  var_0E = undefined;
+  var_14 = undefined;
   if(isDefined(var_8)) {
-    var_0E = var_8;
+    var_14 = var_8;
   } else if(var_9 >= 2) {
-    var_0E = var_6;
+    var_14 = var_6;
   }
 
-  var_0F = !var_4 || isDefined(var_0E) && issubstr(var_6, var_0E);
-  if(isDefined(var_0E)) {
-    var_0C = self getweaponammoclip(var_0E) == 0 && isaxeweapon(var_0E);
-    var_10 = var_0E == "iw7_fists_mp";
-    var_11 = weaponcandrop(var_0E) && !var_0C;
+  var_15 = !var_4 || isDefined(var_14) && issubstr(var_6, var_14);
+  if(isDefined(var_14)) {
+    var_12 = self getweaponammoclip(var_14) == 0 && isaxeweapon(var_14);
+    var_10 = var_14 == "iw7_fists_mp";
+    var_11 = weaponcandrop(var_14) && !var_12;
     if(var_11) {
-      var_12 = self dropitem(var_0E);
+      var_12 = self dropitem(var_14);
       if(isDefined(var_12)) {
-        if(isDefined(self.tookweaponfrom[var_0E])) {
-          var_12.triggerportableradarping = self.tookweaponfrom[var_0E];
-          self.tookweaponfrom[var_0E] = undefined;
+        if(isDefined(self.tookweaponfrom[var_14])) {
+          var_12.owner = self.tookweaponfrom[var_14];
+          self.tookweaponfrom[var_14] = undefined;
         } else {
-          var_12.triggerportableradarping = self;
+          var_12.owner = self;
         }
 
         var_12.var_336 = "dropped_weapon";
         var_12 thread watchpickup();
         var_12 thread deletepickupafterawhile();
       }
-    } else if(!var_11 && !var_10 && var_9 < 2 && !var_0C && var_9 < 2) {
-      self takeweapon(var_0E);
+    } else if(!var_11 && !var_10 && var_9 < 2 && !var_12 && var_9 < 2) {
+      self takeweapon(var_14);
     }
   }
 
   scripts\mp\utility::_giveweapon(var_5);
   self setweaponammoclip(var_5, 1);
-  if(var_0F) {
+  if(var_15) {
     scripts\mp\utility::_switchtoweapon(var_5);
   }
 

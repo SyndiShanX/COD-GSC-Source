@@ -232,15 +232,15 @@ func_11462() {
 func_1146A() {
   scripts\sp\utility::func_22CA("takedown_enemy", ::func_11466);
   var_0 = scripts\engine\utility::getstruct("takedown_struct", "targetname");
-  var_0.isnodeoccupied = scripts\sp\utility::func_107EA("takedown_enemy", 1);
-  var_0.isnodeoccupied thread scripts\sp\maps\europa\europa_intro::func_1081C();
-  level.var_EBBC.var_1A29 = var_0.isnodeoccupied scripts\engine\utility::spawn_tag_origin();
-  level.var_EBBC.var_1A29 linkto(var_0.isnodeoccupied, "tag_origin", (0, 0, 20), (0, 0, 0));
+  var_0.enemy = scripts\sp\utility::func_107EA("takedown_enemy", 1);
+  var_0.enemy thread scripts\sp\maps\europa\europa_intro::func_1081C();
+  level.var_EBBC.var_1A29 = var_0.enemy scripts\engine\utility::spawn_tag_origin();
+  level.var_EBBC.var_1A29 linkto(var_0.enemy, "tag_origin", (0, 0, 20), (0, 0, 0));
   scripts\engine\utility::flag_wait("takedown_start");
   level.var_EBBB scripts\sp\utility::func_61E7();
   level.var_EBBB.var_C9BD = undefined;
   var_0.var_7395 = level.var_EBBB;
-  var_0.var_1684 = [var_0.var_7395, var_0.isnodeoccupied];
+  var_0.var_1684 = [var_0.var_7395, var_0.enemy];
   foreach(var_2 in var_0.var_1684) {
     var_2.var_1FBD = spawnStruct();
     var_2.var_1FBD.origin = var_0.origin;
@@ -259,7 +259,7 @@ func_1146A() {
   level.var_EBBC thread func_2BD4();
   var_4 = getanimlength(scripts\sp\utility::func_7DC2("tunnel_takedown", "scar1"));
   var_0.var_7395 thread func_11467(var_0);
-  var_0.isnodeoccupied thread func_11465(var_0);
+  var_0.enemy thread func_11465(var_0);
   foreach(var_2 in var_0.var_1684) {
     var_2.var_1FBD thread scripts\sp\anim::func_1F35(var_2, "tunnel_takedown");
   }
@@ -332,34 +332,34 @@ func_1145F(var_0) {
   level.var_EBBB.var_C9BD = undefined;
   level.var_EBBB scripts\sp\utility::func_61C7();
   scripts\engine\utility::trigger_on("takedown_color_moveup", "targetname");
-  var_0.isnodeoccupied notify("takedown_aborted");
-  var_0.isnodeoccupied thread func_4DFD();
-  var_0.isnodeoccupied thread func_11460();
-  var_0.isnodeoccupied.maxsightdistsqrd = squared(8192);
-  var_0.isnodeoccupied.logstring = 1;
-  var_0.isnodeoccupied.ignoreme = 0;
-  var_0.isnodeoccupied.precacheleaderboards = 1;
-  var_0.isnodeoccupied.target_alloc = squared(512);
-  var_0.isnodeoccupied.var_30 = 1;
-  var_0.isnodeoccupied.a.var_5605 = 0;
-  var_0.isnodeoccupied.allowpain = 1;
-  var_0.isnodeoccupied.var_28CF = 0;
-  var_0.isnodeoccupied.var_10265 = undefined;
-  var_0.isnodeoccupied thread scripts\sp\maps\europa\europa_util::func_10FC2();
-  var_0.isnodeoccupied.target = "takedown_guy_abort_spot";
-  var_0.isnodeoccupied scripts\sp\utility::func_51E1("casual_gun");
-  var_0.isnodeoccupied.health = 40;
-  var_0.isnodeoccupied.objective_playermask_showto = 35;
-  var_0.isnodeoccupied thread scripts\sp\maps\europa\europa_util::func_10F49();
-  var_0.isnodeoccupied thread lib_0B77::worldpointinreticle_circle();
-  var_0.isnodeoccupied waittill("stealthlight_attack");
-  var_0.isnodeoccupied stopsounds();
+  var_0.enemy notify("takedown_aborted");
+  var_0.enemy thread func_4DFD();
+  var_0.enemy thread func_11460();
+  var_0.enemy.maxsightdistsqrd = squared(8192);
+  var_0.enemy.logstring = 1;
+  var_0.enemy.ignoreme = 0;
+  var_0.enemy.precacheleaderboards = 1;
+  var_0.enemy.target_alloc = squared(512);
+  var_0.enemy.var_30 = 1;
+  var_0.enemy.a.var_5605 = 0;
+  var_0.enemy.allowpain = 1;
+  var_0.enemy.var_28CF = 0;
+  var_0.enemy.var_10265 = undefined;
+  var_0.enemy thread scripts\sp\maps\europa\europa_util::func_10FC2();
+  var_0.enemy.target = "takedown_guy_abort_spot";
+  var_0.enemy scripts\sp\utility::func_51E1("casual_gun");
+  var_0.enemy.health = 40;
+  var_0.enemy.objective_playermask_showto = 35;
+  var_0.enemy thread scripts\sp\maps\europa\europa_util::func_10F49();
+  var_0.enemy thread lib_0B77::worldpointinreticle_circle();
+  var_0.enemy waittill("stealthlight_attack");
+  var_0.enemy stopsounds();
   wait(0.05);
-  var_0.isnodeoccupied playSound("stealth_sf0_enemyalerted");
-  var_0.isnodeoccupied notify("stop_going_to_node");
-  var_0.isnodeoccupied scripts\sp\utility::func_F39C(level.player);
-  var_0.isnodeoccupied scripts\sp\utility::func_4145();
-  var_0.isnodeoccupied give_mp_super_weapon(var_0.isnodeoccupied.origin);
+  var_0.enemy playSound("stealth_sf0_enemyalerted");
+  var_0.enemy notify("stop_going_to_node");
+  var_0.enemy scripts\sp\utility::func_F39C(level.player);
+  var_0.enemy scripts\sp\utility::func_4145();
+  var_0.enemy give_mp_super_weapon(var_0.enemy.origin);
 }
 
 func_4DFD() {
@@ -1299,7 +1299,7 @@ func_B992() {
     }
 
     foreach(var_1 in level.var_F10A.var_1633) {
-      if(isDefined(var_1.triggerportableradarping) && var_1.triggerportableradarping == level.player) {
+      if(isDefined(var_1.owner) && var_1.owner == level.player) {
         level.player scripts\sp\utility::func_65E1("threw_seeker");
         var_1 thread func_F168();
         wait(0.05);
@@ -1313,7 +1313,7 @@ func_B992() {
 
 func_F168() {
   self endon("death");
-  while(!isDefined(self.bt.var_F15D) || self.bt.var_F15D == self.triggerportableradarping) {
+  while(!isDefined(self.bt.var_F15D) || self.bt.var_F15D == self.owner) {
     wait(0.05);
   }
 
@@ -1352,9 +1352,9 @@ func_875B() {
 }
 
 func_11803() {
-  self.var_C382 = self.objective_team;
+  self.var_C382 = self.grenadeweapon;
   self.var_C380 = self.objective_state;
-  self.objective_team = "seeker";
+  self.grenadeweapon = "seeker";
   self.objective_state = 1;
   thread func_F131();
   self orientmode("face point", scripts\engine\utility::random(getaiarray("axis")).origin);
@@ -1387,18 +1387,18 @@ func_11803() {
       if(var_7 == "grenade_throw" || var_7 == "grenade throw") {
         var_8 = self gettagorigin("tag_accessory_left");
         var_9 = 400;
-        var_0A = anglesToForward(self.angles);
-        var_0B = anglestoup(self.angles);
-        var_0B = var_0B * 0.6;
-        var_0C = vectornormalize(var_0A + var_0B);
-        var_0D = var_0C * var_9;
-        var_2 = magicgrenademanual(self.objective_team, var_8, var_0D, 2);
+        var_10 = anglesToForward(self.angles);
+        var_11 = anglestoup(self.angles);
+        var_11 = var_11 * 0.6;
+        var_12 = vectornormalize(var_10 + var_11);
+        var_13 = var_12 * var_9;
+        var_2 = magicgrenademanual(self.grenadeweapon, var_8, var_13, 2);
         if(isDefined(var_2)) {
           if(self.objective_state > 0) {
             self.objective_state--;
           }
 
-          self notify("grenade_fire", var_2, self.objective_team);
+          self notify("grenade_fire", var_2, self.grenadeweapon);
         }
 
         if(isDefined(self.var_F174)) {
@@ -1416,7 +1416,7 @@ func_11803() {
     }
   }
 
-  self.objective_team = self.var_C382;
+  self.grenadeweapon = self.var_C382;
   self.objective_state = self.var_C380;
 }
 
@@ -1669,23 +1669,23 @@ func_8463() {
   scripts\sp\utility::func_2669("in_airlock");
   scripts\engine\utility::array_call(getEntArray("airlock_fan", "targetname"), ::delete);
   var_9 = getcorpsearray();
-  foreach(var_0B in var_9) {
-    if(isDefined(var_0B.origin)) {
-      if(distance2dsquared(var_0B.origin, var_1.origin) < squared(100)) {
-        var_0B delete();
+  foreach(var_11 in var_9) {
+    if(isDefined(var_11.origin)) {
+      if(distance2dsquared(var_11.origin, var_1.origin) < squared(100)) {
+        var_11 delete();
       }
     }
   }
 
-  var_0D = getent("lab_entrance_airlock_playerclip", "targetname");
-  var_0D show();
-  var_0D solid();
-  var_0E = [var_5, var_6];
+  var_13 = getent("lab_entrance_airlock_playerclip", "targetname");
+  var_13 show();
+  var_13 solid();
+  var_14 = [var_5, var_6];
   level.player func_82C0("europa_airlock_room", 3);
   var_6 scripts\engine\utility::delaythread(1, scripts\sp\utility::play_sound_on_entity, "airlock_entry_door_close");
   var_1 notify("stop_loop");
   scripts\engine\utility::flag_set("airlock_closing");
-  var_1 thread scripts\sp\anim::func_1F2C(var_0E, "lab_airlock_close");
+  var_1 thread scripts\sp\anim::func_1F2C(var_14, "lab_airlock_close");
   wait(4.9);
   var_5 scripts\sp\utility::func_61C7();
   level.player playSound("airlock_pressurize_lr");
@@ -1820,7 +1820,7 @@ func_A744() {
   foreach(var_1 in level.var_EBCA) {
     var_1.var_C380 = var_1.objective_state;
     var_1.objective_state = 0;
-    var_1.objective_team = "none";
+    var_1.grenadeweapon = "none";
     var_1.objective_state_nomessage = 0;
   }
 
@@ -1872,22 +1872,22 @@ func_A744() {
   scripts\engine\utility::flag_wait("antigrav_clear");
   foreach(var_1 in level.var_EBCA) {
     var_1.objective_state = var_1.var_C380;
-    var_1.objective_team = "frag";
+    var_1.grenadeweapon = "frag";
     var_1.objective_state_nomessage = 1;
   }
 
   scripts\sp\utility::func_15F5("after_two_kill_color_move");
-  var_0B = scripts\sp\utility::func_107EA("locker_enemy_guard");
-  if(isDefined(var_0B)) {
+  var_11 = scripts\sp\utility::func_107EA("locker_enemy_guard");
+  if(isDefined(var_11)) {
     scripts\engine\utility::array_thread(level.var_EBCA, scripts\sp\utility::func_5564);
-    var_0B thread func_110DA();
-    var_0B thread func_54C1();
-    var_0B.health = 50;
-    var_0B.var_50 = 10;
-    var_0B.var_4E46 = ::func_4E31;
-    var_0B.ignoreme = 1;
-    var_0B.objective_state = 0;
-    var_0B scripts\engine\utility::delaythread(2, scripts\sp\utility::func_F416, 0);
+    var_11 thread func_110DA();
+    var_11 thread func_54C1();
+    var_11.health = 50;
+    var_11.var_50 = 10;
+    var_11.var_4E46 = ::func_4E31;
+    var_11.ignoreme = 1;
+    var_11.objective_state = 0;
+    var_11 scripts\engine\utility::delaythread(2, scripts\sp\utility::func_F416, 0);
     return;
   }
 
@@ -2007,12 +2007,12 @@ func_2014(var_0) {
   var_8 = var_7 - var_2;
   var_9 = magicgrenademanual("antigrav", var_2, var_8 * 10, 4);
   scripts\engine\utility::flag_wait("door_kick");
-  var_0A = getnode("middle_locker_guy", "targetname");
+  var_10 = getnode("middle_locker_guy", "targetname");
   wait(0.65);
-  var_0B = magicgrenade("antigrav", var_0A.origin, var_0A.origin, 20, 0);
-  thread lib_0E21::func_2013(var_0B);
+  var_11 = magicgrenade("antigrav", var_10.origin, var_10.origin, 20, 0);
+  thread lib_0E21::func_2013(var_11);
   var_9 delete();
-  while(isDefined(var_0B)) {
+  while(isDefined(var_11)) {
     wait(0.05);
   }
 
@@ -2140,22 +2140,22 @@ func_A76F() {
   var_7 = getEntArray("labs_entrance_light_models", "targetname");
   var_7 = sortbydistance(var_7, level.player.origin);
   var_8 = [];
-  foreach(var_0A in var_7) {
-    var_0B = var_0A.script_index;
-    if(!isDefined(var_8[var_0B])) {
-      var_8[var_0B] = [];
+  foreach(var_10 in var_7) {
+    var_11 = var_10.script_index;
+    if(!isDefined(var_8[var_11])) {
+      var_8[var_11] = [];
     }
 
-    var_8[var_0B] = scripts\engine\utility::array_add(var_8[var_0B], var_0A);
+    var_8[var_11] = ::scripts\engine\utility::array_add(var_8[var_11], var_10);
   }
 
   for(var_1 = 0; var_1 < var_8.size; var_1++) {
-    foreach(var_0E in var_8[var_1]) {
-      var_0E setModel("crr_light_overhead_01_off");
-      var_0E thread scripts\sp\utility::play_sound_on_entity("lab_light_off");
-      if(isDefined(var_0E.target)) {
-        var_0A = getent(var_0E.target, "targetname");
-        var_0A setlightintensity(0);
+    foreach(var_14 in var_8[var_1]) {
+      var_14 setModel("crr_light_overhead_01_off");
+      var_14 thread scripts\sp\utility::play_sound_on_entity("lab_light_off");
+      if(isDefined(var_14.target)) {
+        var_10 = getent(var_14.target, "targetname");
+        var_10 setlightintensity(0);
       }
     }
 
@@ -2366,7 +2366,7 @@ func_1B2F() {
 
 func_F167() {
   self endon("death");
-  while(!isDefined(self.bt.var_F15D) || self.bt.var_F15D == self.triggerportableradarping) {
+  while(!isDefined(self.bt.var_F15D) || self.bt.var_F15D == self.owner) {
     wait(0.05);
   }
 
@@ -2474,7 +2474,7 @@ func_E40D() {
   var_0 = [level.var_10214, level.var_113AD];
   foreach(var_2 in var_0) {
     wait(randomfloatrange(1, 3));
-    self.objective_team = "seeker";
+    self.grenadeweapon = "seeker";
     self.objective_state = 1;
   }
 }
@@ -2612,18 +2612,18 @@ func_3385() {
 
     level notify("c6s_deployed");
     thread func_3400();
-    foreach(var_0D in level.var_EBCA) {
-      var_0D.var_C9BD = 1;
-      var_0D scripts\sp\utility::func_5514();
+    foreach(var_13 in level.var_EBCA) {
+      var_13.var_C9BD = 1;
+      var_13 scripts\sp\utility::func_5514();
     }
 
     scripts\sp\utility::func_15F5("c6_fall_back_color");
     scripts\engine\utility::trigger_off("color_move_office_hallway", "targetname");
     scripts\sp\utility::func_13754(level.var_AF02);
     scripts\engine\utility::flag_set("locker_c6s_dead");
-    foreach(var_0D in level.var_EBCA) {
-      var_0D.var_C9BD = undefined;
-      var_0D scripts\sp\utility::func_5514();
+    foreach(var_13 in level.var_EBCA) {
+      var_13.var_C9BD = undefined;
+      var_13 scripts\sp\utility::func_5514();
     }
 
     return;
@@ -2928,9 +2928,9 @@ func_A789() {
   }
 
   if(isalive(var_3)) {
-    var_0B = getnode("moving_desk_node", "targetname");
-    var_0B func_808B();
-    var_3 give_more_perk(var_0B);
+    var_11 = getnode("moving_desk_node", "targetname");
+    var_11 func_808B();
+    var_3 give_more_perk(var_11);
     var_2 disconnectpaths();
   }
 
@@ -2948,9 +2948,9 @@ func_A789() {
   scripts\engine\utility::flag_set("cutter_bot_battle_finished");
   func_1C08();
   scripts\engine\utility::flag_wait("player_in_cutter_room");
-  foreach(var_0D in level.var_EBCA) {
-    var_0D.var_C392 = var_0D.closefile;
-    var_0D.closefile = 0;
+  foreach(var_13 in level.var_EBCA) {
+    var_13.var_C392 = var_13.closefile;
+    var_13.closefile = 0;
   }
 
   scripts\engine\utility::flag_wait("wall_cut_finished");
@@ -2958,8 +2958,8 @@ func_A789() {
   setsuncolorandintensity(0.784314, 0.937255, 1, 2);
   thread func_BEFD();
   wait(1);
-  var_0F = getEntArray("extra_corridor_klaxon_light", "script_noteworthy");
-  scripts\engine\utility::array_thread(var_0F, scripts\sp\maps\europa\europa_armory::func_A6ED);
+  var_15 = getEntArray("extra_corridor_klaxon_light", "script_noteworthy");
+  scripts\engine\utility::array_thread(var_15, scripts\sp\maps\europa\europa_armory::func_A6ED);
   scripts\sp\utility::func_15F5("into_armory_color_move");
   scripts\engine\utility::flag_wait("player_exit_office_into_armory");
   scripts\sp\maps\europa\europa_util::func_EBC4();
@@ -2989,13 +2989,13 @@ func_BEFD() {
   var_2 = getstartorigin(var_1.origin, var_1.angles, % europa_armory_seeker_door_fall);
   var_3 = getstartangles(var_1.origin, var_1.angles, % europa_armory_seeker_door_fall);
   var_1.var_59B2 = scripts\sp\utility::func_10639("tag_origin_mover", var_2, var_3);
-  var_1.var_59B2.target_getindexoftarget = var_1 scripts\engine\utility::spawn_script_origin();
+  var_1.var_59B2.node = var_1 scripts\engine\utility::spawn_script_origin();
   var_1.var_5978 = var_0;
   var_1.var_5978 linkto(var_1.var_59B2, "tag_origin");
   var_1.var_1684 = [level.var_EBBB, level.var_EBBC, var_1.var_59B2];
   var_1 scripts\sp\anim::func_1F17(level.var_EBBC, "new_armory_enter");
   thread func_5994(var_1);
-  var_1.var_59B2.target_getindexoftarget scripts\engine\utility::delaycall(10, ::delete);
+  var_1.var_59B2.node scripts\engine\utility::delaycall(10, ::delete);
   var_1.var_59B2 scripts\engine\utility::delaycall(10, ::delete);
   var_1 scripts\sp\anim::func_1F2C(var_1.var_1684, "new_armory_enter");
   level.var_EBBC scripts\sp\utility::func_61C7();

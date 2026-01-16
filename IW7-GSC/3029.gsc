@@ -144,8 +144,9 @@ func_D136() {
       var_16 = level.player getnormalizedmovement();
       var_17 = scripts\sp\math::func_C097(-1, 1, var_16[0]);
       var_18 = scripts\sp\math::func_6A8E(var_13, var_14, var_17);
-    } else
+    } else {
       var_18 = var_15;
+    }
 
     var_18 = var_18 * level.var_A056.var_EBAD;
     var_19 = scripts\sp\math::func_C097(var_0, var_18, var_8);

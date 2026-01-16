@@ -83,27 +83,27 @@ dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     wait(0.1);
   }
 
-  foreach(var_0A in var_8) {
-    var_0B = 0;
-    var_0C = undefined;
-    if(var_7 && isDefined(level.vo_alias_data[var_0A].dialogueprefix)) {
-      var_0C = level.vo_alias_data[var_0A].dialogueprefix;
-      var_0D = var_0C + var_0A;
-    } else if(issubstr(var_0A, "ww_")) {
-      var_0D = var_0A;
-      var_0B = 1;
+  foreach(var_10 in var_8) {
+    var_11 = 0;
+    var_12 = undefined;
+    if(var_7 && isDefined(level.vo_alias_data[var_10].dialogueprefix)) {
+      var_12 = level.vo_alias_data[var_10].dialogueprefix;
+      var_13 = var_12 + var_10;
+    } else if(issubstr(var_10, "ww_")) {
+      var_13 = var_10;
+      var_11 = 1;
     } else {
       continue;
     }
 
-    foreach(var_0F in level.players) {
-      if((isDefined(var_0C) && var_0F.vo_prefix == var_0C) || var_0B || getdvarint("scr_solo_dialogue", 0) == 1) {
-        var_10 = scripts\cp\cp_vo::create_vo_data(var_0D, var_3, var_5, var_6);
-        var_0F scripts\cp\cp_vo::set_vo_system_playing(1);
-        var_0F scripts\cp\cp_vo::set_vo_currently_playing(var_10);
-        var_0F scripts\cp\cp_vo::play_vo(var_10);
-        var_0F scripts\cp\cp_vo::pause_between_vo(var_10);
-        var_0F scripts\cp\cp_vo::unset_vo_currently_playing();
+    foreach(var_15 in level.players) {
+      if((isDefined(var_12) && var_15.vo_prefix == var_12) || var_11 || getdvarint("scr_solo_dialogue", 0) == 1) {
+        var_10 = scripts\cp\cp_vo::create_vo_data(var_13, var_3, var_5, var_6);
+        var_15 scripts\cp\cp_vo::set_vo_system_playing(1);
+        var_15 scripts\cp\cp_vo::set_vo_currently_playing(var_10);
+        var_15 scripts\cp\cp_vo::play_vo(var_10);
+        var_15 scripts\cp\cp_vo::pause_between_vo(var_10);
+        var_15 scripts\cp\cp_vo::unset_vo_currently_playing();
         break;
       }
     }
@@ -111,8 +111,8 @@ dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     scripts\engine\utility::waitframe();
   }
 
-  foreach(var_0F in level.players) {
-    var_0F scripts\cp\cp_vo::set_vo_system_playing(0);
+  foreach(var_15 in level.players) {
+    var_15 scripts\cp\cp_vo::set_vo_system_playing(0);
   }
 
   scripts\cp\cp_vo::set_vo_system_busy(0);
@@ -299,8 +299,8 @@ play_announcer_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(var_9 issplitscreenplayer() && !var_9 issplitscreenplayerprimary()) {
       continue;
     } else {
-      var_0A = scripts\cp\cp_vo::create_vo_data(var_0, var_3, var_5, var_6);
-      var_9 thread scripts\cp\cp_vo::play_vo_system(var_0A);
+      var_10 = scripts\cp\cp_vo::create_vo_data(var_0, var_3, var_5, var_6);
+      var_9 thread scripts\cp\cp_vo::play_vo_system(var_10);
     }
   }
 

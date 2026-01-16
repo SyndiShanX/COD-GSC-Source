@@ -87,8 +87,9 @@ setplayercalloutarea(var_0, var_1) {
         var_5 setclientomnvar("ui_callout_area_id", var_2);
       }
     }
-  } else if(var_0 != "none")
+  } else if(var_0 != "none") {
     return;
+  }
 }
 
 watchplayerleavingcalloutarea(var_0, var_1) {

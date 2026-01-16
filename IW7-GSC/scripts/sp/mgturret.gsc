@@ -56,7 +56,7 @@ func_D66E() {
     }
   }
 
-  while(!isDefined(self.target_getindexoftarget)) {
+  while(!isDefined(self.node)) {
     wait(0.05);
   }
 
@@ -67,7 +67,7 @@ func_D66E() {
   }
 
   if(!isDefined(var_1)) {
-    var_1 = self.target_getindexoftarget;
+    var_1 = self.node;
   }
 
   if(!isDefined(var_1)) {
@@ -79,7 +79,7 @@ func_D66E() {
   }
 
   var_2 = func_8194();
-  var_2[self.target_getindexoftarget.origin + ""] = undefined;
+  var_2[self.node.origin + ""] = undefined;
   if(isDefined(var_2[var_1.origin + ""])) {
     return;
   }
@@ -584,15 +584,15 @@ func_B6A4(var_0, var_1) {
     var_0 notify("startfiring");
     var_8 = 15;
     var_9 = 0.08;
-    var_0A = 0.05;
+    var_10 = 0.05;
     var_2.origin = var_5[randomint(var_5.size)].origin;
-    var_0B = 0;
+    var_11 = 0;
     while(!isDefined(level.var_CFE7)) {
       var_7 = var_2.origin;
       if(distance(var_7, var_5[self.var_86EA].origin) > var_8) {
-        var_0C = vectornormalize(var_5[self.var_86EA].origin - var_7);
-        var_0C = var_0C * var_8;
-        var_7 = var_7 + var_0C;
+        var_12 = vectornormalize(var_5[self.var_86EA].origin - var_7);
+        var_12 = var_12 * var_8;
+        var_7 = var_7 + var_12;
       } else {
         self notify("next_target");
       }
@@ -602,27 +602,27 @@ func_B6A4(var_0, var_1) {
     }
 
     for(;;) {
-      for(var_0D = 0; var_0D < 1; var_0D = var_0D + var_0A) {
-        var_2.origin = var_7 * 1 - var_0D + level.player getorigin() + func_10B5A() * var_0D;
+      for(var_13 = 0; var_13 < 1; var_13 = var_13 + var_10) {
+        var_2.origin = var_7 * 1 - var_13 + level.player getorigin() + func_10B5A() * var_13;
         if(func_D279()) {
-          var_0D = 2;
+          var_13 = 2;
         }
 
         wait(var_9);
       }
 
-      var_0E = level.player getorigin();
+      var_14 = level.player getorigin();
       while(!func_D279()) {
         var_2.origin = level.player getorigin();
-        var_0F = var_2.origin - var_0E;
-        var_2.origin = var_2.origin + var_0F + func_10B5A();
-        var_0E = level.player getorigin();
+        var_15 = var_2.origin - var_14;
+        var_2.origin = var_2.origin + var_15 + func_10B5A();
+        var_14 = level.player getorigin();
         wait(0.1);
       }
 
       if(func_D279()) {
-        var_0B = gettime() + 1500 + randomfloat(4000);
-        while(func_D279() && isDefined(level.var_CFE7.target) && gettime() < var_0B) {
+        var_11 = gettime() + 1500 + randomfloat(4000);
+        while(func_D279() && isDefined(level.var_CFE7.target) && gettime() < var_11) {
           var_10 = getEntArray(level.var_CFE7.target, "targetname");
           var_10 = var_10[randomint(var_10.size)];
           var_2.origin = var_10.origin + (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
@@ -634,9 +634,9 @@ func_B6A4(var_0, var_1) {
       while(func_D279()) {
         var_7 = var_2.origin;
         if(distance(var_7, var_5[self.var_86EA].origin) > var_8) {
-          var_0C = vectornormalize(var_5[self.var_86EA].origin - var_7);
-          var_0C = var_0C * var_8;
-          var_7 = var_7 + var_0C;
+          var_12 = vectornormalize(var_5[self.var_86EA].origin - var_7);
+          var_12 = var_12 * var_8;
+          var_7 = var_7 + var_12;
         } else {
           self notify("next_target");
         }
@@ -664,8 +664,8 @@ func_B6A4(var_0, var_1) {
     var_0 give_player_session_tokens("manual_ai");
     func_BC9D(var_0);
     var_0 notify("startfiring");
-    var_0B = gettime() + 1500 + randomfloat(4000);
-    while(var_0B > gettime()) {
+    var_11 = gettime() + 1500 + randomfloat(4000);
+    while(var_11 > gettime()) {
       if(isDefined(level.var_CFE7)) {
         var_10 = getEntArray(level.var_CFE7.target, "targetname");
         var_10 = var_10[randomint(var_10.size)];
@@ -1038,17 +1038,17 @@ func_EB7D() {
         continue;
       }
 
-      var_0A = anglesToForward((0, var_9.angles[1], 0));
-      var_0B = anglesToForward((0, var_7.angles[1], 0));
-      var_0C = vectordot(var_0A, var_0B);
-      if(var_0C < 0.9) {
+      var_10 = anglesToForward((0, var_9.angles[1], 0));
+      var_11 = anglesToForward((0, var_7.angles[1], 0));
+      var_12 = vectordot(var_10, var_11);
+      if(var_12 < 0.9) {
         continue;
       }
 
       var_5 = scripts\engine\utility::array_remove(var_5, var_7);
       var_9.var_12A72 = spawn("script_origin", var_7.origin);
       var_9.var_12A72.angles = var_7.angles;
-      var_9.var_12A72.target_getindexoftarget = var_9;
+      var_9.var_12A72.node = var_9;
       var_9.var_12A72.setmatchdataid = 45;
       var_9.var_12A72.setdevdvarifuninitialized = 45;
       var_9.var_12A72.var_349 = 15;
@@ -1110,16 +1110,16 @@ func_263B() {
         continue;
       }
 
-      var_0A = anglesToForward((0, var_9.angles[1], 0));
-      var_0B = anglesToForward((0, var_7.angles[1], 0));
-      var_0C = vectordot(var_0A, var_0B);
-      if(var_0C < 0.9) {
+      var_10 = anglesToForward((0, var_9.angles[1], 0));
+      var_11 = anglesToForward((0, var_7.angles[1], 0));
+      var_12 = vectordot(var_10, var_11);
+      if(var_12 < 0.9) {
         continue;
       }
 
       var_5 = scripts\engine\utility::array_remove(var_5, var_7);
       var_9.turret = var_7;
-      var_7.target_getindexoftarget = var_9;
+      var_7.node = var_9;
       var_7.var_9F46 = 1;
     }
   }
@@ -1248,7 +1248,7 @@ func_DDE3(var_0) {
 }
 
 func_1A30(var_0, var_1) {
-  if(!isalive(self.var_4B6D) && self getpersstat(self.var_4B6D)) {
+  if(!isalive(self.var_4B6D) && self cansee(self.var_4B6D)) {
     var_1.origin = self.var_A8BB;
     return;
   }
@@ -1308,7 +1308,7 @@ func_10389(var_0) {
 }
 
 func_AB14(var_0) {
-  self func_83AF();
+  self stopuseturret();
   scripts\anim\shared::placeweaponon(self.primaryweapon, "none");
   var_1 = func_7D25(var_0);
   var_2 = getstartorigin(var_0.origin, var_0.angles, var_1);
@@ -1318,7 +1318,7 @@ func_AB14(var_0) {
 }
 
 func_CB35(var_0) {
-  self func_83AF();
+  self stopuseturret();
   self.turret func_8EAE();
 }
 
@@ -1327,7 +1327,7 @@ func_7D25(var_0) {
   var_1["saw_bipod_stand"] = level.var_B6B0["bipod_stand_setup"];
   var_1["saw_bipod_crouch"] = level.var_B6B0["bipod_crouch_setup"];
   var_1["saw_bipod_prone"] = level.var_B6B0["bipod_prone_setup"];
-  return var_1[var_0.var_39B];
+  return var_1[var_0.weaponinfo];
 }
 
 func_E826(var_0) {
@@ -1339,7 +1339,7 @@ func_E826(var_0) {
   var_2 = func_7D25(var_0);
   self.var_12A78 = "weapon_mg42_carry";
   self notify("kill_get_gun_back_on_killanimscript_thread");
-  scripts\anim\shared::placeweaponon(self.var_394, "none");
+  scripts\anim\shared::placeweaponon(self.weapon, "none");
   if(self gettargetchargepos()) {
     self.health = 1;
   }
@@ -1392,7 +1392,7 @@ func_130FD() {
     return 0;
   }
 
-  return self.turret.triggerportableradarping == self;
+  return self.turret.owner == self;
 }
 
 func_12A4E() {
@@ -1408,7 +1408,7 @@ func_12A4E() {
     return;
   }
 
-  var_2 = self.target_getindexoftarget;
+  var_2 = self.node;
   if(!isDefined(var_2) || !scripts\engine\utility::array_contains(var_1, var_2)) {
     var_3 = func_8194();
     for(var_4 = 0; var_4 < var_1.size; var_4++) {
@@ -1443,7 +1443,7 @@ func_13030(var_0) {
     var_0 give_player_session_tokens("manual_ai");
     var_0 thread func_E2E2();
     self.turret = var_0;
-    var_0.triggerportableradarping = self;
+    var_0.owner = self;
     return 1;
   }
 
@@ -1462,7 +1462,7 @@ func_7BC7(var_0) {
       continue;
     }
 
-    var_3["spot"] = scripts\engine\utility::random(var_3["spots"]);
+    var_3["spot"] = ::scripts\engine\utility::random(var_3["spots"]);
     return var_3;
   }
 }
@@ -1471,11 +1471,11 @@ func_8194() {
   var_0 = [];
   var_1 = getaiarray();
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(!isDefined(var_1[var_2].target_getindexoftarget)) {
+    if(!isDefined(var_1[var_2].node)) {
       continue;
     }
 
-    var_0[var_1[var_2].target_getindexoftarget.origin + ""] = 1;
+    var_0[var_1[var_2].node.origin + ""] = 1;
   }
 
   return var_0;
@@ -1486,7 +1486,7 @@ find_connected_turrets(var_0) {
   var_2 = [];
   var_3 = getarraykeys(var_1);
   var_4 = func_8194();
-  var_4[self.target_getindexoftarget.origin + ""] = undefined;
+  var_4[self.node.origin + ""] = undefined;
   for(var_5 = 0; var_5 < var_3.size; var_5++) {
     var_6 = var_3[var_5];
     if(var_1[var_6] == self.turret) {
@@ -1503,7 +1503,7 @@ find_connected_turrets(var_0) {
         continue;
       }
 
-      if(isDefined(var_4[var_1[var_6].target_getindexoftarget.origin + ""])) {
+      if(isDefined(var_4[var_1[var_6].node.origin + ""])) {
         continue;
       }
 
@@ -1586,8 +1586,8 @@ func_10106() {
 func_1101D() {
   self endon("stop_checking_for_flanking");
   self waittill("turret_deactivate");
-  if(isalive(self.triggerportableradarping)) {
-    self.triggerportableradarping notify("end_mg_behavior");
+  if(isalive(self.owner)) {
+    self.owner notify("end_mg_behavior");
   }
 }
 

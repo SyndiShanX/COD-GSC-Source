@@ -11,7 +11,7 @@ main() {
   self.subclass = "crew";
   self.accuracy = 0.2;
   self.health = 150;
-  self.objective_team = "frag";
+  self.grenadeweapon = "frag";
   self.objective_state = 0;
   self.secondaryweapon = "";
   self.var_101B4 = lib_0A2F::func_7BEC("pistol");
@@ -22,7 +22,7 @@ main() {
     self func_82DB(768, 1024);
   }
 
-  self.var_394 = lib_0A2F::func_7BEC("rifle");
+  self.weapon = lib_0A2F::func_7BEC("rifle");
   lib_08ED::main();
 }
 

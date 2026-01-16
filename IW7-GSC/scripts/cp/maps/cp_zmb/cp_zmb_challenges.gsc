@@ -106,7 +106,7 @@ add_to_dismember_queue(var_0) {
   var_1 = spawnStruct();
   var_1.limb = var_0;
   var_1.processed = 0;
-  level.dismember_queue = scripts\engine\utility::array_add_safe(level.dismember_queue, var_1);
+  level.dismember_queue = scripts\engine\utility::add_to_array(level.dismember_queue, var_1);
 }
 
 activate_dismember_arm() {
@@ -676,7 +676,7 @@ activate_protect_a_player() {
 
 watch_target_player(var_0, var_1) {
   level endon("challenge_deactivated");
-  var_0 scripts\engine\utility::waittill_any_3("death", "last_stand", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("death", "last_stand", "disconnect");
   if(isDefined(var_0.entityheadicons)) {
     var_0 remove_head_icon();
   }
@@ -710,7 +710,7 @@ remove_head_icon() {
   foreach(var_1 in self.protect_head_icon) {
     if(isDefined(var_1)) {
       var_1 destroy();
-      var_1 scripts\cp\zombies\zombie_afterlife_arcade::remove_from_icons_to_hide_in_afterlife(var_1.triggerportableradarping, var_1);
+      var_1 scripts\cp\zombies\zombie_afterlife_arcade::remove_from_icons_to_hide_in_afterlife(var_1.owner, var_1);
     }
   }
 }
@@ -752,7 +752,7 @@ make_protect_head_icon_on(var_0) {
 make_protect_head_icon_for(var_0, var_1) {
   var_2 = var_1 scripts\cp\utility::setheadicon(var_0, "cp_hud_song_widget", (0, 0, 72), 4, 4, undefined, undefined, undefined, 1, undefined, 0);
   var_2 scripts\cp\zombies\zombie_afterlife_arcade::add_to_icons_to_hide_in_afterlife(var_0, var_2);
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   var_1.protect_head_icon[var_1.protect_head_icon.size] = var_2;
   if(scripts\engine\utility::istrue(var_0.in_afterlife_arcade)) {
     var_2.alpha = 0;

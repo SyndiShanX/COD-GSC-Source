@@ -151,7 +151,7 @@ func_F2BE() {
     return;
   }
 
-  if(isDefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
+  if(isDefined(self.weapon) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     self.a.var_2274 = scripts\anim\utility::func_B028("shotgun_stand");
     return;
   }
@@ -179,7 +179,7 @@ func_F2B6() {
     return;
   }
 
-  if(isDefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
+  if(isDefined(self.weapon) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     self.a.var_2274 = scripts\anim\utility::func_B028("shotgun_crouch");
     return;
   }
@@ -212,22 +212,22 @@ func_FA33() {
 func_9503() {}
 
 func_F2AC() {
-  self.a.var_BCA5["move_l"] = scripts\anim\utility::func_B027("ambush", "move_l");
-  self.a.var_BCA5["move_r"] = scripts\anim\utility::func_B027("ambush", "move_r");
-  self.a.var_BCA5["move_b"] = scripts\anim\utility::func_B027("ambush", "move_b");
+  self.a.var_BCA5["move_l"] = ::scripts\anim\utility::func_B027("ambush", "move_l");
+  self.a.var_BCA5["move_r"] = ::scripts\anim\utility::func_B027("ambush", "move_r");
+  self.a.var_BCA5["move_b"] = ::scripts\anim\utility::func_B027("ambush", "move_b");
 }
 
 func_8CD8() {
-  if(self.var_394 != self.primaryweapon) {
+  if(self.weapon != self.primaryweapon) {
     return scripts\anim\utility::func_1F67("reload");
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
+  if(isDefined(self.node)) {
     if(self getwatcheddvar()) {
       var_0 = undefined;
-      if(self.target_getindexoftarget.type == "Cover Left") {
+      if(self.node.type == "Cover Left") {
         var_0 = scripts\anim\utility::func_B027("heat_reload", "reload_cover_left");
-      } else if(self.target_getindexoftarget.type == "Cover Right") {
+      } else if(self.node.type == "Cover Right") {
         var_0 = scripts\anim\utility::func_B027("heat_reload", "reload_cover_right");
       }
 

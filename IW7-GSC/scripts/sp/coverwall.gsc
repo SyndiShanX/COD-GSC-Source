@@ -151,7 +151,7 @@ func_4763(var_0, var_1, var_2, var_3) {
     playFX(level.var_7649["coverwall_expand"], var_0, anglesToForward(var_1), anglestoup(var_1));
   }
 
-  var_4.triggerportableradarping = self;
+  var_4.owner = self;
   var_3 thread func_475E(35);
   var_4 thread func_475A();
   if(1) {
@@ -223,18 +223,18 @@ func_10696(var_0) {
   var_8 = "a";
   var_0.var_473D = [];
   for(var_9 = 1; var_9 < 5; var_9++) {
-    var_0A = scripts\engine\utility::ter_op(var_8 == "a", var_5, var_5 * -1);
-    var_0B = scripts\engine\utility::ter_op(var_7 == "right", var_4, var_4 * -1);
-    var_0C = scripts\engine\utility::ter_op(var_7 == "right", var_0.angles + (0, 90, 0), var_0.angles - (0, 90, 0));
-    var_0D = var_3;
-    var_0E = "coverwall_" + var_0 getentitynumber() + "_" + var_7 + "_" + var_8;
-    var_0A = anglesToForward(var_0.angles) * var_0A;
-    var_0F = anglestoright(var_0.angles) * var_0B;
-    var_10 = var_1 + var_0A + var_0F;
-    if(var_0 func_3913(var_10, var_0C)) {
-      var_0.var_473D[var_7 + "_" + var_8] = spawncovernode(var_10, var_0C, "cover stand", 512, var_0E);
+    var_10 = scripts\engine\utility::ter_op(var_8 == "a", var_5, var_5 * -1);
+    var_11 = scripts\engine\utility::ter_op(var_7 == "right", var_4, var_4 * -1);
+    var_12 = scripts\engine\utility::ter_op(var_7 == "right", var_0.angles + (0, 90, 0), var_0.angles - (0, 90, 0));
+    var_13 = var_3;
+    var_14 = "coverwall_" + var_0 getentitynumber() + "_" + var_7 + "_" + var_8;
+    var_10 = anglesToForward(var_0.angles) * var_10;
+    var_15 = anglestoright(var_0.angles) * var_11;
+    var_10 = var_1 + var_10 + var_15;
+    if(var_0 func_3913(var_10, var_12)) {
+      var_0.var_473D[var_7 + "_" + var_8] = spawncovernode(var_10, var_12, "cover stand", 512, var_14);
     } else {
-      var_0D = var_2;
+      var_13 = var_2;
     }
 
     var_8 = scripts\engine\utility::ter_op(var_8 == "a", "b", "a");
@@ -387,7 +387,7 @@ func_C049() {
   var_3 = scripts\common\trace::create_contents(0, 1, 1, 1, 1, 1, 0);
   var_4 = [var_0, var_1];
   foreach(var_6 in var_4) {
-    var_7 = scripts\common\trace::ray_trace(var_6.start, var_6.end, self.triggerportableradarping, var_3);
+    var_7 = scripts\common\trace::ray_trace(var_6.start, var_6.end, self.owner, var_3);
     if(isDefined(var_7["fraction"])) {
       if(var_7["fraction"] == 1) {
         if(getdvarint("debug_coverwall")) {}
@@ -418,7 +418,7 @@ func_475E(var_0) {
   var_1 = self.var_BE07 scripts\engine\utility::waittill_any_return("expired", "death");
   var_2 = var_1 == "death";
   var_3 = self.var_BE07.origin;
-  var_4 = self.var_BE07.triggerportableradarping;
+  var_4 = self.var_BE07.owner;
   if(scripts\engine\utility::flag("coverwall_force_delete")) {
     scripts\engine\utility::waitframe();
   }
@@ -446,8 +446,8 @@ func_475E(var_0) {
   }
 
   if(!var_2) {
-    var_0B = self.var_BE07.angles;
-    playFX(level.var_7649["coverwall_collapse"], var_3, anglesToForward(var_0B), anglestoup(var_0B));
+    var_11 = self.var_BE07.angles;
+    playFX(level.var_7649["coverwall_collapse"], var_3, anglesToForward(var_11), anglestoup(var_11));
     playworldsound("deployable_cover_contract", var_3);
   }
 
@@ -530,12 +530,12 @@ func_475C(var_0, var_1) {
   }
 
   playworldsound("deployable_cover_explode", var_2);
-  earthquake(0.4, 0.6, var_0.triggerportableradarping.origin, 450);
+  earthquake(0.4, 0.6, var_0.owner.origin, 450);
   level.player playrumbleonentity("damage_heavy");
   var_0 notify("death");
   scripts\engine\utility::flag_wait_or_timeout("coverwall_force_delete", 0.1);
   if(!isDefined(var_1)) {
-    radiusdamage(var_3, 150, 250, 120, var_0.triggerportableradarping, "MOD_EXPLOSIVE", "coverwall");
+    radiusdamage(var_3, 150, 250, 120, var_0.owner, "MOD_EXPLOSIVE", "coverwall");
   }
 }
 

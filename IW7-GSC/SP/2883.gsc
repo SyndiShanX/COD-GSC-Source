@@ -568,7 +568,7 @@ func_CD53(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_3.var_EBEA["no_gun"])) {
-    if(!isDefined(self.var_9B89) && self.var_394 != "none") {
+    if(!isDefined(self.var_9B89) && self.weapon != "none") {
       scripts\sp\utility::func_86E4();
     }
   }
@@ -611,7 +611,7 @@ func_CD50(var_0, var_1, var_2) {
   }
 
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 
   if(isDefined(var_2)) {
@@ -651,7 +651,7 @@ func_CD50(var_0, var_1, var_2) {
   }
 
   if(isDefined(self.var_B004["no_gun"])) {
-    if(!isDefined(self.var_9B89) && self.var_394 != "none") {
+    if(!isDefined(self.var_9B89) && self.weapon != "none") {
       scripts\sp\utility::func_86E4();
     }
   }
@@ -711,7 +711,7 @@ func_E1CE(var_0, var_1) {
 
 func_1690() {
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 }
 
@@ -799,7 +799,7 @@ func_CD4F(var_0, var_1) {
   }
 
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 
   if(isDefined(var_1)) {
@@ -892,15 +892,15 @@ func_9A13() {
     }
 
     if(isDefined(var_0)) {
-      var_0B = getstartorigin(var_0.origin, var_0.angles, var_7);
-      var_0C = getstartangles(var_0.origin, var_0.angles, var_7);
-      self func_80F1(var_0B, var_0C);
+      var_11 = getstartorigin(var_0.origin, var_0.angles, var_7);
+      var_12 = getstartangles(var_0.origin, var_0.angles, var_7);
+      self func_80F1(var_11, var_12);
     }
 
     func_10C47(var_7);
     self func_82E1(var_1, var_7, 1, var_2);
-    var_0D = getanimlength(var_7);
-    wait(var_0D);
+    var_13 = getanimlength(var_7);
+    wait(var_13);
     self clearanim(var_7, var_3);
     level notify("interaction_done");
     self notify("interaction_done");
@@ -965,10 +965,10 @@ func_9A11() {
       self.var_10254 = 0;
     }
 
-    var_0A = lengthsquared(level.player.origin - self.origin);
-    var_0B = undefined;
-    var_0C = scripts\common\trace::create_contents(1, 1, 0, 1, 1, 1);
-    var_0D = undefined;
+    var_10 = lengthsquared(level.player.origin - self.origin);
+    var_11 = undefined;
+    var_12 = scripts\common\trace::create_contents(1, 1, 0, 1, 1, 1);
+    var_13 = undefined;
     for(;;) {
       if(isDefined(self.var_B004["interaction_trigger_override"])) {
         break;
@@ -976,18 +976,18 @@ func_9A11() {
 
       if(scripts\sp\interaction_manager::func_3839(self.var_B004["trigger_radius"] * 2)) {
         if(isDefined(self.var_B004["interaction_position"])) {
-          var_0A = lengthsquared(self.var_B004["interaction_position"] - self.origin);
+          var_10 = lengthsquared(self.var_B004["interaction_position"] - self.origin);
         } else {
-          var_0A = lengthsquared(level.player.origin - self.origin);
+          var_10 = lengthsquared(level.player.origin - self.origin);
         }
 
         if(isDefined(self.var_B004["interaction_trigger_override"])) {
           break;
-        } else if(self.var_B004["trigger_radius"] > 0 && var_0A < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
-          var_0E = self.origin + anglestoup(self.angles) * 66;
-          var_0B = vectornormalize(level.player getEye() - var_0E) * self.var_B004["trigger_radius"] + var_0E;
-          var_0D = scripts\common\trace::ray_trace(var_0E, var_0B, self, var_0C);
-          if(isplayer(var_0D["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
+        } else if(self.var_B004["trigger_radius"] > 0 && var_10 < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
+          var_14 = self.origin + anglestoup(self.angles) * 66;
+          var_11 = vectornormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
+          var_13 = scripts\common\trace::ray_trace(var_14, var_11, self, var_12);
+          if(isplayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             break;
           }
         }
@@ -1003,14 +1003,14 @@ func_9A11() {
     self.var_9C84 = 1;
     self notify("playing_interaction_scene");
     level notify("playing_interaction");
-    var_0F = undefined;
+    var_15 = undefined;
     if(isDefined(self.var_B004["interaction_position"])) {
-      var_0F = vectortoangles(self.var_B004["interaction_position"] - self.origin);
+      var_15 = vectortoangles(self.var_B004["interaction_position"] - self.origin);
     } else {
-      var_0F = vectortoangles(level.player.origin - self.origin);
+      var_15 = vectortoangles(level.player.origin - self.origin);
     }
 
-    var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
+    var_10 = abs(angleclamp(var_15 - self.angles[1]) - 360);
     var_11 = scripts\sp\math::func_C097(0, 360, var_10);
     if(isDefined(self.var_B004["backseam"])) {
       if(var_11 >= 0 && var_11 <= 0.5) {
@@ -1103,12 +1103,12 @@ func_9A11() {
     for(;;) {
       var_1C = distance2d(level.player.origin, self.origin);
       if((var_1C >= var_5 || scripts\sp\utility::func_65DB("scene_end")) && !isDefined(var_7)) {
-        var_0A = lengthsquared(level.player.origin - self.origin);
-        if(var_0A < squared(self.var_B004["trigger_radius"])) {
-          var_0E = self.origin + anglestoup(self.angles) * 66;
-          var_0B = vectornormalize(level.player getEye() - var_0E) * self.var_B004["trigger_radius"] + var_0E;
-          var_0D = scripts\common\trace::ray_trace(var_0E, var_0B, self, var_0C);
-          if(isplayer(var_0D["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
+        var_10 = lengthsquared(level.player.origin - self.origin);
+        if(var_10 < squared(self.var_B004["trigger_radius"])) {
+          var_14 = self.origin + anglestoup(self.angles) * 66;
+          var_11 = vectornormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
+          var_13 = scripts\common\trace::ray_trace(var_14, var_11, self, var_12);
+          if(isplayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             if(isarray(self.var_B004["diff"]) && self.var_1F25 < self.var_B004["diff"].size - 1) {
               self.var_F274 = 1;
               scripts\sp\utility::func_65DD("scene_end");
@@ -1123,12 +1123,12 @@ func_9A11() {
         if(isDefined(self.var_B004["exitangles"])) {
           var_1D = self.var_B004["exitangles_anims"]["lastexitanim"];
           if(isDefined(self.var_B004["interaction_position"])) {
-            var_0F = vectortoangles(self.var_B004["interaction_position"] - self.origin);
+            var_15 = vectortoangles(self.var_B004["interaction_position"] - self.origin);
           } else {
-            var_0F = vectortoangles(level.player.origin - self.origin);
+            var_15 = vectortoangles(level.player.origin - self.origin);
           }
 
-          var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
+          var_10 = abs(angleclamp(var_15 - self.angles[1]) - 360);
           foreach(var_1F in self.var_B004["exitangles"]) {
             if(var_10 <= var_1F) {
               var_1D = self.var_B004["exitangles_anims"][var_1F];
@@ -1232,12 +1232,12 @@ func_9A11() {
       }
 
       if(isDefined(self.var_B004["interaction_position"])) {
-        var_0F = vectortoangles(self.var_B004["interaction_position"] - self.origin);
+        var_15 = vectortoangles(self.var_B004["interaction_position"] - self.origin);
       } else {
-        var_0F = vectortoangles(level.player.origin - self.origin);
+        var_15 = vectortoangles(level.player.origin - self.origin);
       }
 
-      var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
+      var_10 = abs(angleclamp(var_15 - self.angles[1]) - 360);
       var_11 = scripts\sp\math::func_C097(0, 360, var_10);
       if(self.var_7245) {
         var_11 = 0;
@@ -1287,12 +1287,12 @@ func_9A11() {
 
         if(var_25) {
           if(isDefined(self.var_B004["interaction_position"])) {
-            var_0F = vectortoangles(self.var_B004["interaction_position"] - self.origin);
+            var_15 = vectortoangles(self.var_B004["interaction_position"] - self.origin);
           } else {
-            var_0F = vectortoangles(level.player.origin - self.origin);
+            var_15 = vectortoangles(level.player.origin - self.origin);
           }
 
-          var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
+          var_10 = abs(angleclamp(var_15 - self.angles[1]) - 360);
           var_11 = scripts\sp\math::func_C097(0, 360, var_10);
           func_10C47(self.var_B004["follow"]);
           self func_82E8(var_1, self.var_B004["follow"], 1, 0.25, 1);
@@ -1386,7 +1386,7 @@ func_9A35() {
     var_7 = lengthsquared(level.player.origin - self.origin);
     var_8 = undefined;
     var_9 = scripts\common\trace::create_contents(1, 1, 0, 1, 1, 1);
-    var_0A = undefined;
+    var_10 = undefined;
     for(;;) {
       if(isDefined(self.var_B004["interaction_trigger_override"])) {
         break;
@@ -1402,10 +1402,10 @@ func_9A35() {
         if(isDefined(self.var_B004["interaction_trigger_override"])) {
           break;
         } else if(self.var_B004["trigger_radius"] > 0 && var_7 < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
-          var_0B = self.origin + anglestoup(self.angles) * 66;
-          var_8 = vectornormalize(level.player getEye() - var_0B) * self.var_B004["trigger_radius"] + var_0B;
-          var_0A = scripts\common\trace::ray_trace(var_0B, var_8, self, var_9);
-          if(isplayer(var_0A["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
+          var_11 = self.origin + anglestoup(self.angles) * 66;
+          var_8 = vectornormalize(level.player getEye() - var_11) * self.var_B004["trigger_radius"] + var_11;
+          var_10 = scripts\common\trace::ray_trace(var_11, var_8, self, var_9);
+          if(isplayer(var_10["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             break;
           }
         }
@@ -1421,33 +1421,33 @@ func_9A35() {
     self.var_9C84 = 1;
     self notify("playing_interaction_scene");
     level notify("playing_interaction");
-    var_0C = undefined;
+    var_12 = undefined;
     if(isDefined(self.var_B004["interaction_position"])) {
-      var_0C = vectortoangles(self.var_B004["interaction_position"] - self.origin);
+      var_12 = vectortoangles(self.var_B004["interaction_position"] - self.origin);
     } else {
-      var_0C = vectortoangles(level.player.origin - self.origin);
+      var_12 = vectortoangles(level.player.origin - self.origin);
     }
 
-    var_0D = abs(angleclamp(var_0C - self.angles[1]) - 360);
-    var_0E = self.var_B004["lastanim"];
+    var_13 = abs(angleclamp(var_12 - self.angles[1]) - 360);
+    var_14 = self.var_B004["lastanim"];
     if(isDefined(self.var_B004["angles"])) {
       foreach(var_10 in self.var_B004["angles"]) {
-        if(var_0D <= var_10) {
-          var_0E = self.var_B004[var_10];
+        if(var_13 <= var_10) {
+          var_14 = self.var_B004[var_10];
           break;
         }
       }
     }
 
-    if(isarray(var_0E)) {
-      if(isarray(var_0E[0]) && self.var_1F25 < var_0E[0].size) {
+    if(isarray(var_14)) {
+      if(isarray(var_14[0]) && self.var_1F25 < var_14[0].size) {
         var_12 = self.var_1F25;
-        var_13 = var_0E[0][var_12][0];
+        var_13 = var_14[0][var_12][0];
       } else {
-        var_13 = var_0E[0];
+        var_13 = var_14[0];
       }
     } else {
-      var_13 = var_0E;
+      var_13 = var_14;
     }
 
     if(!self.var_10254) {
@@ -1459,12 +1459,12 @@ func_9A35() {
     level thread scripts\sp\interaction_manager::func_9A0E(self);
     if(isDefined(self.var_B004["scene"])) {
       if(isDefined(self.var_B004["interaction_position"])) {
-        var_0C = vectortoangles(self.var_B004["interaction_position"] - self.origin);
+        var_12 = vectortoangles(self.var_B004["interaction_position"] - self.origin);
       } else {
-        var_0C = vectortoangles(level.player.origin - self.origin);
+        var_12 = vectortoangles(level.player.origin - self.origin);
       }
 
-      var_0D = abs(angleclamp(var_0C - self.angles[1]) - 360);
+      var_13 = abs(angleclamp(var_12 - self.angles[1]) - 360);
       if(self.var_10254) {
         wait(0);
       } else {
@@ -1487,15 +1487,15 @@ func_9A35() {
 
     if(isDefined(self.var_B004["exitangles"])) {
       if(isDefined(self.var_B004["interaction_position"])) {
-        var_0C = vectortoangles(self.var_B004["interaction_position"] - self.origin);
+        var_12 = vectortoangles(self.var_B004["interaction_position"] - self.origin);
       } else {
-        var_0C = vectortoangles(level.player.origin - self.origin);
+        var_12 = vectortoangles(level.player.origin - self.origin);
       }
 
-      var_0D = abs(angleclamp(var_0C - self.angles[1]) - 360);
+      var_13 = abs(angleclamp(var_12 - self.angles[1]) - 360);
       var_15 = self.var_B004["exitangles_anims"]["lastexitanim"];
       foreach(var_17 in self.var_B004["exitangles"]) {
-        if(var_0D <= var_17) {
+        if(var_13 <= var_17) {
           var_15 = self.var_B004["exitangles_anims"][var_17];
           break;
         }
@@ -1505,8 +1505,8 @@ func_9A35() {
       self give_left_powers(var_1, var_15, 1, var_6, 1);
       wait(getanimlength(var_15));
       if(isDefined(self.var_B004["end_idle"])) {
-        if(isarray(var_0E[0])) {
-          if(self.var_1F25 >= var_0E[0].size) {
+        if(isarray(var_14[0])) {
+          if(self.var_1F25 >= var_14[0].size) {
             func_10C47(self.var_B004["end_idle"]);
             self give_left_powers(var_1, self.var_B004["end_idle"], 1, var_6, 1);
           } else {
@@ -1529,14 +1529,14 @@ func_9A35() {
     }
 
     if(!self.var_10254) {
-      if(isarray(var_0E)) {
-        if(isarray(var_0E[0]) && self.var_1F25 < var_0E[0].size) {
+      if(isarray(var_14)) {
+        if(isarray(var_14[0]) && self.var_1F25 < var_14[0].size) {
           var_12 = self.var_1F25;
-          var_19 = var_0E[0][var_12];
+          var_19 = var_14[0][var_12];
           thread func_F59A(var_19);
           thread func_CC8C(var_19);
-        } else if(var_0E.size > 1) {
-          thread func_CC8C(var_0E);
+        } else if(var_14.size > 1) {
+          thread func_CC8C(var_14);
         }
       }
     }
@@ -1548,10 +1548,10 @@ func_9A35() {
     var_1A = getanimlength(var_13);
     wait(var_1A);
     if(isDefined(self.var_B004["end_idle"])) {
-      if(isarray(var_0E)) {
-        if(isarray(var_0E[0])) {
+      if(isarray(var_14)) {
+        if(isarray(var_14[0])) {
           func_10C47();
-          if(self.var_1F25 >= var_0E[0].size - 1) {
+          if(self.var_1F25 >= var_14[0].size - 1) {
             self func_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
           } else {
             self func_82E3(var_1, var_0, % body, 1, var_6, 1);
@@ -1571,8 +1571,8 @@ func_9A35() {
     self.var_1F25 = self.var_1F25 + 1;
     level notify("interaction_done");
     self notify("interaction_done");
-    if(isarray(var_0E)) {
-      if(isarray(var_0E[0]) && self.var_1F25 < var_0E[0].size) {
+    if(isarray(var_14)) {
+      if(isarray(var_14[0]) && self.var_1F25 < var_14[0].size) {
         var_1B = self.var_F273 + self.var_F275 - getanimlength(var_13);
         var_1C = self.var_F273 + self.var_F275 + getanimlength(var_13);
         var_1D = clamp(var_1B, 0, var_1C);
@@ -1653,9 +1653,9 @@ func_9A37() {
   self.var_DD54 = spawn("trigger_radius", self.origin, 0, var_1["trigger_radius"], var_1["trigger_radius"]);
   for(;;) {
     var_9 = lengthsquared(level.player.origin - self.origin);
-    var_0A = undefined;
-    var_0B = scripts\common\trace::create_contents(1, 1, 0, 1, 1, 1);
-    var_0C = undefined;
+    var_10 = undefined;
+    var_11 = scripts\common\trace::create_contents(1, 1, 0, 1, 1, 1);
+    var_12 = undefined;
     for(;;) {
       if(!isDefined(self.var_DD49) || isDefined(self.var_DD49) && self.var_DD49 != "busy" && self.var_DD49 != "nag") {
         if(scripts\sp\interaction_manager::func_3839(var_1["trigger_radius"] * 2)) {
@@ -1668,10 +1668,10 @@ func_9A37() {
           if(isDefined(var_1["interaction_trigger_override"])) {
             break;
           } else if(var_1["trigger_radius"] > 0 && var_9 < squared(var_1["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
-            var_0D = self.origin + anglestoup(self.angles) * 66;
-            var_0A = vectornormalize(level.player getEye() - var_0D) * var_1["trigger_radius"] + var_0D;
-            var_0C = scripts\common\trace::ray_trace(var_0D, var_0A, self, var_0B);
-            if(isplayer(var_0C["entity"]) || isDefined(var_1["interaction_trigger_override"])) {
+            var_13 = self.origin + anglestoup(self.angles) * 66;
+            var_10 = vectornormalize(level.player getEye() - var_13) * var_1["trigger_radius"] + var_13;
+            var_12 = scripts\common\trace::ray_trace(var_13, var_10, self, var_11);
+            if(isplayer(var_12["entity"]) || isDefined(var_1["interaction_trigger_override"])) {
               break;
             }
           }
@@ -1684,18 +1684,18 @@ func_9A37() {
     self.var_9C84 = 1;
     self notify("playing_interaction_scene");
     level notify("playing_interaction");
-    var_0E = undefined;
+    var_14 = undefined;
     if(isDefined(var_1["interaction_position"])) {
-      var_0E = vectortoangles(var_1["interaction_position"] - self.origin);
+      var_14 = vectortoangles(var_1["interaction_position"] - self.origin);
     } else {
-      var_0E = vectortoangles(level.player.origin - self.origin);
+      var_14 = vectortoangles(level.player.origin - self.origin);
     }
 
-    var_0F = abs(angleclamp(var_0E - self.angles[1]) - 360);
+    var_15 = abs(angleclamp(var_14 - self.angles[1]) - 360);
     var_10 = "lastanim";
     if(isDefined(var_1["angles"])) {
       foreach(var_12 in var_1["angles"]) {
-        if(var_0F <= var_12) {
+        if(var_15 <= var_12) {
           var_10 = var_12;
           break;
         }
@@ -1714,19 +1714,19 @@ func_9A37() {
     self.var_9C84 = 1;
     thread scripts\sp\interaction_manager::func_9A39();
     wait(getanimlength(var_15));
-    level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"] = scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"], var_15);
-    level.var_10E1C[self.var_9A30].var_EBEA[var_10] = scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_10], var_15);
+    level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"] = ::scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"], var_15);
+    level.var_10E1C[self.var_9A30].var_EBEA[var_10] = ::scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_10], var_15);
     if(isDefined(var_1["exitangles"])) {
       if(isDefined(var_1["interaction_position"])) {
-        var_0E = vectortoangles(var_1["interaction_position"] - self.origin);
+        var_14 = vectortoangles(var_1["interaction_position"] - self.origin);
       } else {
-        var_0E = vectortoangles(level.player.origin - self.origin);
+        var_14 = vectortoangles(level.player.origin - self.origin);
       }
 
-      var_0F = abs(angleclamp(var_0E - self.angles[1]) - 360);
+      var_15 = abs(angleclamp(var_14 - self.angles[1]) - 360);
       var_16 = "lastexitanim";
       foreach(var_18 in var_1["exitangles"]) {
-        if(var_0F <= var_18) {
+        if(var_15 <= var_18) {
           var_16 = var_18;
           break;
         }
@@ -1742,7 +1742,7 @@ func_9A37() {
       func_10C47(var_1A);
       self give_left_powers(var_3, var_1A, 1, var_8, 1);
       wait(getanimlength(var_1A));
-      level.var_10E1C[self.var_9A30].var_EBEA[var_16] = scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_16], var_1A);
+      level.var_10E1C[self.var_9A30].var_EBEA[var_16] = ::scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_16], var_1A);
     }
 
     func_10C47(var_0);
@@ -1878,24 +1878,24 @@ func_CCA9() {
     var_7 = anglestoright(self.angles);
     var_8 = anglestoright(self.angles) * -1;
     var_9 = anglestoup(self.angles);
-    var_0A = clamp(vectordot(var_4, var_5), 0.005, 1);
-    var_0B = clamp(vectordot(var_4, var_7), 0.005, 1);
-    var_0C = clamp(vectordot(var_4, var_8), 0.005, 1);
-    var_0D = clamp(vectordot(var_4, var_6), 0.005, 1);
-    self func_82AC(self.var_B004["right_anim"], var_0B, 0.2);
-    self func_82AC(self.var_B004["left_anim"], var_0C, 0.2);
-    self func_82E8("single anim", self.var_B004["fwd_anim"], var_0A + 0.005, 0.2);
-    var_0E = 1;
+    var_10 = clamp(vectordot(var_4, var_5), 0.005, 1);
+    var_11 = clamp(vectordot(var_4, var_7), 0.005, 1);
+    var_12 = clamp(vectordot(var_4, var_8), 0.005, 1);
+    var_13 = clamp(vectordot(var_4, var_6), 0.005, 1);
+    self func_82AC(self.var_B004["right_anim"], var_11, 0.2);
+    self func_82AC(self.var_B004["left_anim"], var_12, 0.2);
+    self func_82E8("single anim", self.var_B004["fwd_anim"], var_10 + 0.005, 0.2);
+    var_14 = 1;
     if(scripts\engine\utility::anglebetweenvectorssigned(var_5, var_4, var_9) > 0) {
-      var_0E = 0;
+      var_14 = 0;
     }
 
-    if(var_0E) {
-      var_1 = scripts\sp\math::func_AB6F(var_1, var_0D, 0.1);
+    if(var_14) {
+      var_1 = scripts\sp\math::func_AB6F(var_1, var_13, 0.1);
       var_0 = scripts\sp\math::func_AB6F(var_0, 0.005, 0.1);
     } else {
       var_1 = scripts\sp\math::func_AB6F(var_1, 0.005, 0.1);
-      var_0 = scripts\sp\math::func_AB6F(var_0, var_0D, 0.1);
+      var_0 = scripts\sp\math::func_AB6F(var_0, var_13, 0.1);
     }
 
     self func_82AC(self.var_B004["back_right_anim"], var_1, 0.2);
@@ -1903,9 +1903,9 @@ func_CCA9() {
     scripts\engine\utility::waitframe();
   }
 
-  var_0F = 0.45;
-  func_62AB(var_0F);
-  func_CD4E(var_0F);
+  var_15 = 0.45;
+  func_62AB(var_15);
+  func_CD4E(var_15);
 }
 
 func_9842() {
@@ -2020,8 +2020,8 @@ func_101F9() {
     }
 
     var_9 = randomint(var_8.size);
-    var_0A = var_8[var_9];
-    var_1 = scripts\engine\utility::array_add(var_1, var_0A);
+    var_10 = var_8[var_9];
+    var_1 = scripts\engine\utility::array_add(var_1, var_10);
     var_8 = scripts\sp\utility::array_remove_index(var_8, var_9);
     if(isDefined(self.var_C6B7)) {
       if(var_7.size <= 0) {
@@ -2029,22 +2029,22 @@ func_101F9() {
         var_4 = [];
       }
 
-      var_0B = var_7[var_9];
-      var_4 = scripts\engine\utility::array_add(var_4, var_0B);
+      var_11 = var_7[var_9];
+      var_4 = scripts\engine\utility::array_add(var_4, var_11);
       var_7 = scripts\sp\utility::array_remove_index(var_7, var_9);
-      thread func_1403(var_0B);
+      thread func_1403(var_11);
     }
 
     self clearanim(var_3, 0.2);
     if(isDefined(self.var_C6B9)) {
-      func_13CA(self.var_C6B9, var_0A);
+      func_13CA(self.var_C6B9, var_10);
     }
 
-    func_10C47(var_0A);
-    self give_left_powers("single anim", var_0A, 1, 0.2, 1);
+    func_10C47(var_10);
+    self give_left_powers("single anim", var_10, 1, 0.2, 1);
     thread lib_0C4C::func_19BD();
-    wait(getanimlength(var_0A));
-    self clearanim(var_0A, 0.2);
+    wait(getanimlength(var_10));
+    self clearanim(var_10, 0.2);
     if(isDefined(self.var_C6B7)) {
       thread func_1402();
     }
@@ -2197,8 +2197,8 @@ func_CC88() {
     var_2 = level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"];
     var_3 = randomint(var_2.size);
     var_1 = var_2[var_3];
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"], var_3);
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"], var_1);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_male"], var_3);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_male_vo"], var_1);
   }
 
   if(!isDefined(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"])) {
@@ -2213,8 +2213,8 @@ func_CC88() {
     var_2 = level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"];
     var_3 = randomint(var_2.size);
     var_1 = var_2[var_3];
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"], var_3);
-    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"], var_1);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["vo_lines_female"], var_3);
+    level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_state_interactions"][self.var_9A30]["used_female_vo"], var_1);
   }
 
   var_4 = undefined;
@@ -2259,8 +2259,8 @@ func_CC8C(var_0) {
       var_4 = level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"];
       var_5 = randomint(var_4.size);
       var_2 = var_4[var_5];
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"], var_5);
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"], var_2);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_male"], var_5);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_male_vo"], var_2);
     }
   }
 
@@ -2278,8 +2278,8 @@ func_CC8C(var_0) {
       var_4 = level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"];
       var_5 = randomint(var_4.size);
       var_2 = var_4[var_5];
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"] = scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"], var_5);
-      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"], var_2);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"] = ::scripts\sp\utility::array_remove_index(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["vo_lines_female"], var_5);
+      level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["registered_interactions"][self.var_9A30]["used_female_vo"], var_2);
     }
   }
 
@@ -2367,16 +2367,16 @@ func_DC7D() {
     var_9 = var_5[randomint(var_5.size)];
     var_2 = scripts\engine\utility::array_add(var_2, var_9);
     var_5 = scripts\engine\utility::array_remove(var_5, var_9);
-    var_0A = undefined;
-    var_0B = undefined;
+    var_10 = undefined;
+    var_11 = undefined;
     if(isDefined(self.var_C6B9)) {
-      var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
-      var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
+      var_10 = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
+      var_11 = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
       if(!isDefined(self.var_9B89)) {
-        self func_80F1(var_0A, var_0B);
+        self func_80F1(var_10, var_11);
       } else {
-        self.origin = var_0A;
-        self.angles = var_0B;
+        self.origin = var_10;
+        self.angles = var_11;
       }
     }
 
@@ -2387,20 +2387,20 @@ func_DC7D() {
     func_10C47(var_9);
     self give_left_powers("single anim", var_9, 1, 0.2, 1);
     self.var_DC80 = 1;
-    var_0C = getanimlength(var_9);
-    wait(var_0C);
+    var_12 = getanimlength(var_9);
+    wait(var_12);
     while(self.var_9C84) {
       scripts\engine\utility::waitframe();
     }
 
     if(isDefined(self.var_C6B9)) {
-      var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_4);
-      var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_4);
+      var_10 = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_4);
+      var_11 = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_4);
       if(!isDefined(self.var_9B89)) {
-        self func_80F1(var_0A, var_0B);
+        self func_80F1(var_10, var_11);
       } else {
-        self.origin = var_0A;
-        self.angles = var_0B;
+        self.origin = var_10;
+        self.angles = var_11;
       }
     }
 
@@ -2469,18 +2469,18 @@ func_DC7E() {
     }
 
     var_9 = level.var_10E1C[self.var_9A30].var_EBEA[var_7][randomint(level.var_10E1C[self.var_9A30].var_EBEA[var_7].size)];
-    level.var_10E1C[self.var_9A30].var_EBEA[var_8] = scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA[var_8], var_9);
-    level.var_10E1C[self.var_9A30].var_EBEA[var_7] = scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_7], var_9);
-    var_0A = undefined;
-    var_0B = undefined;
+    level.var_10E1C[self.var_9A30].var_EBEA[var_8] = ::scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA[var_8], var_9);
+    level.var_10E1C[self.var_9A30].var_EBEA[var_7] = ::scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_7], var_9);
+    var_10 = undefined;
+    var_11 = undefined;
     if(isDefined(self.var_C6B9)) {
-      var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
-      var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
+      var_10 = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
+      var_11 = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_9);
       if(!isDefined(self.var_9B89)) {
-        self func_80F1(var_0A, var_0B);
+        self func_80F1(var_10, var_11);
       } else {
-        self.origin = var_0A;
-        self.angles = var_0B;
+        self.origin = var_10;
+        self.angles = var_11;
       }
     }
 
@@ -2491,20 +2491,20 @@ func_DC7E() {
     func_10C47(var_9);
     self give_left_powers("single anim", var_9, 1, 0.2, 1);
     self.var_DC80 = 1;
-    var_0C = getanimlength(var_9);
-    wait(var_0C);
+    var_12 = getanimlength(var_9);
+    wait(var_12);
     while(self.var_9C84) {
       scripts\engine\utility::waitframe();
     }
 
     if(isDefined(self.var_C6B9)) {
-      var_0A = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_3);
-      var_0B = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_3);
+      var_10 = getstartorigin(self.var_C6B9.origin, self.var_C6B9.angles, var_3);
+      var_11 = getstartangles(self.var_C6B9.origin, self.var_C6B9.angles, var_3);
       if(!isDefined(self.var_9B89)) {
-        self func_80F1(var_0A, var_0B);
+        self func_80F1(var_10, var_11);
       } else {
-        self.origin = var_0A;
-        self.angles = var_0B;
+        self.origin = var_10;
+        self.angles = var_11;
       }
     }
 
@@ -2555,8 +2555,8 @@ func_DC7F(var_0, var_1, var_2) {
     var_8 = 0;
     for(;;) {
       if(!scripts\engine\utility::flag("hold_group_vignettes")) {
-        foreach(var_0A in var_0) {
-          if(!isDefined(var_0A.var_9C83)) {
+        foreach(var_10 in var_0) {
+          if(!isDefined(var_10.var_9C83)) {
             var_8++;
           }
         }
@@ -2571,19 +2571,19 @@ func_DC7F(var_0, var_1, var_2) {
       scripts\engine\utility::waitframe();
     }
 
-    var_0C = undefined;
+    var_12 = undefined;
     if(isarray(var_2)) {
       if(var_4.size <= 0) {
         var_4 = var_2;
         var_3 = [];
       }
 
-      var_0C = var_4[randomint(var_4.size)];
+      var_12 = var_4[randomint(var_4.size)];
     } else {
-      var_0C = var_2;
+      var_12 = var_2;
     }
 
-    var_0D = 0;
+    var_13 = 0;
     if(!scripts\engine\utility::flag("hold_group_vignettes")) {
       foreach(var_6 in var_0) {
         if(!isDefined(var_6)) {
@@ -2591,9 +2591,9 @@ func_DC7F(var_0, var_1, var_2) {
           return;
         }
 
-        var_0F = var_6 scripts\sp\utility::func_7DC1(var_0C);
-        var_10 = getstartorigin(var_6.origin, var_6.angles, var_0F);
-        var_11 = getstartangles(var_6.origin, var_6.angles, var_0F);
+        var_15 = var_6 scripts\sp\utility::func_7DC1(var_12);
+        var_10 = getstartorigin(var_6.origin, var_6.angles, var_15);
+        var_11 = getstartangles(var_6.origin, var_6.angles, var_15);
         if(isai(var_6)) {
           var_6 func_80F1(var_10, var_11);
         } else {
@@ -2601,17 +2601,17 @@ func_DC7F(var_0, var_1, var_2) {
           var_6.angles = var_11;
         }
 
-        var_6 thread func_10C47(var_0F);
-        var_6 give_left_powers("single anim", var_0F, 1, 0.2);
+        var_6 thread func_10C47(var_15);
+        var_6 give_left_powers("single anim", var_15, 1, 0.2);
         var_6.var_1C4D = 0;
         var_6.var_906F = 1;
-        var_0D = getanimlength(var_0F);
+        var_13 = getanimlength(var_15);
       }
 
-      wait(var_0D);
+      wait(var_13);
       if(isarray(var_2)) {
-        var_3 = scripts\engine\utility::array_add(var_3, var_0C);
-        var_4 = scripts\engine\utility::array_remove(var_4, var_0C);
+        var_3 = scripts\engine\utility::array_add(var_3, var_12);
+        var_4 = scripts\engine\utility::array_remove(var_4, var_12);
       }
 
       foreach(var_14 in var_0) {
@@ -2620,9 +2620,9 @@ func_DC7F(var_0, var_1, var_2) {
           return;
         }
 
-        var_0F = var_14 scripts\sp\utility::func_7DC1(var_0C);
+        var_15 = var_14 scripts\sp\utility::func_7DC1(var_12);
         var_14 thread func_10C47(var_14.var_10DB2);
-        var_14 setanimknob(var_0F, 0, 0.2);
+        var_14 setanimknob(var_15, 0, 0.2);
         var_14 give_left_powers("single anim", var_14.var_10DB2, 1, 0.2, 1);
         var_14 func_82B0(var_14.var_10DB2, randomfloat(1));
         var_14.var_383A = 1;
@@ -2680,7 +2680,7 @@ func_CCCA(var_0, var_1) {
   self.var_BE79 = 0;
   self.var_43E5 = var_1;
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
   }
 
   while(self.script == "init") {

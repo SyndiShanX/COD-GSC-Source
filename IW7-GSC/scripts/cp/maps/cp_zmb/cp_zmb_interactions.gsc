@@ -568,36 +568,36 @@ zmb_wait_for_interaction_triggered(var_0) {
           continue;
         }
 
-        var_0A = scripts\cp\utility::get_attachment_from_interaction(var_0);
-        if(scripts\cp\utility::weaponhasattachment(self getcurrentweapon(), var_0A)) {
+        var_10 = scripts\cp\utility::get_attachment_from_interaction(var_0);
+        if(scripts\cp\utility::weaponhasattachment(self getcurrentweapon(), var_10)) {
           scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_ALREADY_HAVE");
           wait(0.1);
           continue;
         }
 
-        if(!scripts\cp\cp_weapon::can_use_attachment(var_0A)) {
+        if(!scripts\cp\cp_weapon::can_use_attachment(var_10)) {
           scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_PILLAGE_CANT_USE");
           wait(0.1);
           continue;
         }
       } else if(var_0.script_noteworthy == "arcade_counter_grenade") {
-        var_0B = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
-        if(self.powers[var_0B].charges >= level.powers[var_0B].maxcharges) {
+        var_11 = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
+        if(self.powers[var_11].charges >= level.powers[var_11].maxcharges) {
           scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
           wait(0.1);
           continue;
         }
       } else if(var_0.script_noteworthy == "arcade_counter_ammo") {
-        var_0C = self getcurrentweapon();
-        if(self getweaponammostock(var_0C) >= weaponmaxammo(var_0C)) {
-          var_0D = 1;
-          if(weaponmaxammo(var_0C) == weaponclipsize(var_0C)) {
-            if(self getweaponammoclip(var_0C) < weaponclipsize(var_0C)) {
-              var_0D = 0;
+        var_12 = self getcurrentweapon();
+        if(self getweaponammostock(var_12) >= weaponmaxammo(var_12)) {
+          var_13 = 1;
+          if(weaponmaxammo(var_12) == weaponclipsize(var_12)) {
+            if(self getweaponammoclip(var_12) < weaponclipsize(var_12)) {
+              var_13 = 0;
             }
           }
 
-          if(var_0D) {
+          if(var_13) {
             scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_GAME_PLAY_AMMO_MAX");
             wait(0.1);
             continue;
@@ -691,8 +691,8 @@ zmb_wait_for_interaction_triggered(var_0) {
       return;
     }
 
-    var_0E = level.interactions[var_0.script_noteworthy].spend_type;
-    thread scripts\cp\cp_interaction::take_player_money(var_2, var_0E);
+    var_14 = level.interactions[var_0.script_noteworthy].spend_type;
+    thread scripts\cp\cp_interaction::take_player_money(var_2, var_14);
     level thread[[level.interactions[var_0.script_noteworthy].activation_func]](var_0, self);
     if(scripts\cp\cp_interaction::interaction_is_souvenir(var_0)) {
       level thread scripts\cp\cp_interaction::souvenir_team_splash(var_0.script_noteworthy, self);

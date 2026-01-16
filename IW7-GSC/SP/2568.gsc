@@ -86,10 +86,10 @@ func_7EFC() {
   var_1 = 1;
   var_2 = 1;
   var_3 = 1;
-  if(isDefined(self.target_getindexoftarget) && scripts\asm\shared_utility::isatcovernode()) {
-    var_1 = self.target_getindexoftarget getrandomattachments("stand");
-    var_2 = self.target_getindexoftarget getrandomattachments("crouch");
-    var_3 = self.target_getindexoftarget getrandomattachments("prone");
+  if(isDefined(self.node) && scripts\asm\shared_utility::isatcovernode()) {
+    var_1 = self.node getrandomattachments("stand");
+    var_2 = self.node getrandomattachments("crouch");
+    var_3 = self.node getrandomattachments("prone");
   } else if(!scripts\asm\asm_bb::bb_moverequested() && isDefined(self._blackboard.shootparams) && isDefined(self._blackboard.shootparams.pos)) {
     var_4 = distancesquared(self.origin, self._blackboard.shootparams.pos);
     if(var_4 > 262144 && self getteleportlonertargetplayer("crouch") && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm()) {
@@ -138,7 +138,7 @@ func_3DE5() {
     return 0;
   }
 
-  if(!issentient(self.isnodeoccupied)) {
+  if(!issentient(self.enemy)) {
     return 0;
   }
 
@@ -147,7 +147,7 @@ func_3DE5() {
   }
 
   var_0 = isDefined(self.var_18CC) && self.var_18CC;
-  if(!var_0 && getaicount(self.team) < getaicount(self.isnodeoccupied.team)) {
+  if(!var_0 && getaicount(self.team) < getaicount(self.enemy.team)) {
     return 0;
   }
 
@@ -155,7 +155,7 @@ func_3DE5() {
 }
 
 func_2543() {
-  if(!self func_81A5(self.isnodeoccupied.origin)) {
+  if(!self func_81A5(self.enemy.origin)) {
     return 0;
   }
 
@@ -177,7 +177,7 @@ func_2543() {
     }
 
     level.var_A935[self.team] = self.origin;
-    level.var_A934[self.team] = self.isnodeoccupied.origin;
+    level.var_A934[self.team] = self.enemy.origin;
     level.var_18D5[self.team]++;
     return 1;
   }
@@ -229,7 +229,7 @@ func_2542(var_0) {
 }
 
 makescrambler() {
-  return self func_8164();
+  return self getturret();
 }
 
 func_12E93() {

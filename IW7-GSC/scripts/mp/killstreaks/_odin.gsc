@@ -4,8 +4,8 @@
 *********************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("odin_support", ::func_128F1);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("odin_assault", ::func_128F1);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("odin_support", ::func_128F1);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("odin_assault", ::func_128F1);
   level._effect["odin_clouds"] = loadfx("vfx\core\mp\killstreaks\odin\odin_parallax_clouds");
   level._effect["odin_fisheye"] = loadfx("vfx\code\screen\vfx_scrnfx_odin_fisheye.vfx");
   level._effect["odin_targeting"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_marker_odin_cyan");
@@ -21,48 +21,48 @@ init() {
   level.var_C321["odin_support"].var_1352C = "odin_targets_killed";
   level.var_C321["odin_support"].var_12B20 = 1;
   level.var_C321["odin_support"].var_12B80 = &"KILLSTREAKS_ODIN_UNAVAILABLE";
-  level.var_C321["odin_support"].var_394["airdrop"] = spawnStruct();
-  level.var_C321["odin_support"].var_394["airdrop"].projectile = "odin_projectile_airdrop_mp";
-  level.var_C321["odin_support"].var_394["airdrop"].var_E7BA = "smg_fire";
-  level.var_C321["odin_support"].var_394["airdrop"].var_1E44 = "ui_odin_airdrop_ammo";
-  level.var_C321["odin_support"].var_394["airdrop"].var_1AA0 = "airdrop_support";
-  level.var_C321["odin_support"].var_394["airdrop"].var_DF5D = 20;
-  level.var_C321["odin_support"].var_394["airdrop"].var_12B22 = -1;
-  level.var_C321["odin_support"].var_394["airdrop"].var_13521 = "odin_carepackage";
-  level.var_C321["odin_support"].var_394["airdrop"].var_D5E4 = "odin_carepack_ready";
-  level.var_C321["odin_support"].var_394["airdrop"].var_D5DD = "odin_carepack_launch";
-  level.var_C321["odin_support"].var_394["marking"] = spawnStruct();
-  level.var_C321["odin_support"].var_394["marking"].projectile = "odin_projectile_marking_mp";
-  level.var_C321["odin_support"].var_394["marking"].var_E7BA = "heavygun_fire";
-  level.var_C321["odin_support"].var_394["marking"].var_1E44 = "ui_odin_marking_ammo";
-  level.var_C321["odin_support"].var_394["marking"].var_DF5D = 4;
-  level.var_C321["odin_support"].var_394["marking"].var_12B22 = -1;
-  level.var_C321["odin_support"].var_394["marking"].var_1354C = "odin_marking";
-  level.var_C321["odin_support"].var_394["marking"].var_1354B = "odin_marked";
-  level.var_C321["odin_support"].var_394["marking"].var_1354A = "odin_m_marked";
-  level.var_C321["odin_support"].var_394["marking"].var_D5E4 = "odin_flash_ready";
-  level.var_C321["odin_support"].var_394["marking"].var_D5DD = "odin_flash_launch";
-  level.var_C321["odin_support"].var_394["smoke"] = spawnStruct();
-  level.var_C321["odin_support"].var_394["smoke"].projectile = "odin_projectile_smoke_mp";
-  level.var_C321["odin_support"].var_394["smoke"].var_E7BA = "smg_fire";
-  level.var_C321["odin_support"].var_394["smoke"].var_1E44 = "ui_odin_smoke_ammo";
-  level.var_C321["odin_support"].var_394["smoke"].var_DF5D = 7;
-  level.var_C321["odin_support"].var_394["smoke"].var_12B22 = -1;
-  level.var_C321["odin_support"].var_394["smoke"].var_13551 = "odin_smoke";
-  level.var_C321["odin_support"].var_394["smoke"].var_D5E4 = "odin_smoke_ready";
-  level.var_C321["odin_support"].var_394["smoke"].var_D5DD = "odin_smoke_launch";
-  level.var_C321["odin_support"].var_394["juggernaut"] = spawnStruct();
-  level.var_C321["odin_support"].var_394["juggernaut"].projectile = "odin_projectile_smoke_mp";
-  level.var_C321["odin_support"].var_394["juggernaut"].var_E7BA = "heavygun_fire";
-  level.var_C321["odin_support"].var_394["juggernaut"].var_1E44 = "ui_odin_juggernaut_ammo";
-  level.var_C321["odin_support"].var_394["juggernaut"].var_A4AF = "juggernaut_recon";
-  level.var_C321["odin_support"].var_394["juggernaut"].var_DF5D = level.var_C321["odin_support"].timeout;
-  level.var_C321["odin_support"].var_394["juggernaut"].var_12B22 = -1;
-  level.var_C321["odin_support"].var_394["juggernaut"].var_12B23 = -2;
-  level.var_C321["odin_support"].var_394["juggernaut"].var_12B21 = -3;
-  level.var_C321["odin_support"].var_394["juggernaut"].var_1352B = "odin_moving";
-  level.var_C321["odin_support"].var_394["juggernaut"].var_D5E4 = "null";
-  level.var_C321["odin_support"].var_394["juggernaut"].var_D5DD = "odin_jugg_launch";
+  level.var_C321["odin_support"].weapon["airdrop"] = spawnStruct();
+  level.var_C321["odin_support"].weapon["airdrop"].projectile = "odin_projectile_airdrop_mp";
+  level.var_C321["odin_support"].weapon["airdrop"].var_E7BA = "smg_fire";
+  level.var_C321["odin_support"].weapon["airdrop"].var_1E44 = "ui_odin_airdrop_ammo";
+  level.var_C321["odin_support"].weapon["airdrop"].var_1AA0 = "airdrop_support";
+  level.var_C321["odin_support"].weapon["airdrop"].var_DF5D = 20;
+  level.var_C321["odin_support"].weapon["airdrop"].var_12B22 = -1;
+  level.var_C321["odin_support"].weapon["airdrop"].var_13521 = "odin_carepackage";
+  level.var_C321["odin_support"].weapon["airdrop"].var_D5E4 = "odin_carepack_ready";
+  level.var_C321["odin_support"].weapon["airdrop"].var_D5DD = "odin_carepack_launch";
+  level.var_C321["odin_support"].weapon["marking"] = spawnStruct();
+  level.var_C321["odin_support"].weapon["marking"].projectile = "odin_projectile_marking_mp";
+  level.var_C321["odin_support"].weapon["marking"].var_E7BA = "heavygun_fire";
+  level.var_C321["odin_support"].weapon["marking"].var_1E44 = "ui_odin_marking_ammo";
+  level.var_C321["odin_support"].weapon["marking"].var_DF5D = 4;
+  level.var_C321["odin_support"].weapon["marking"].var_12B22 = -1;
+  level.var_C321["odin_support"].weapon["marking"].var_1354C = "odin_marking";
+  level.var_C321["odin_support"].weapon["marking"].var_1354B = "odin_marked";
+  level.var_C321["odin_support"].weapon["marking"].var_1354A = "odin_m_marked";
+  level.var_C321["odin_support"].weapon["marking"].var_D5E4 = "odin_flash_ready";
+  level.var_C321["odin_support"].weapon["marking"].var_D5DD = "odin_flash_launch";
+  level.var_C321["odin_support"].weapon["smoke"] = spawnStruct();
+  level.var_C321["odin_support"].weapon["smoke"].projectile = "odin_projectile_smoke_mp";
+  level.var_C321["odin_support"].weapon["smoke"].var_E7BA = "smg_fire";
+  level.var_C321["odin_support"].weapon["smoke"].var_1E44 = "ui_odin_smoke_ammo";
+  level.var_C321["odin_support"].weapon["smoke"].var_DF5D = 7;
+  level.var_C321["odin_support"].weapon["smoke"].var_12B22 = -1;
+  level.var_C321["odin_support"].weapon["smoke"].var_13551 = "odin_smoke";
+  level.var_C321["odin_support"].weapon["smoke"].var_D5E4 = "odin_smoke_ready";
+  level.var_C321["odin_support"].weapon["smoke"].var_D5DD = "odin_smoke_launch";
+  level.var_C321["odin_support"].weapon["juggernaut"] = spawnStruct();
+  level.var_C321["odin_support"].weapon["juggernaut"].projectile = "odin_projectile_smoke_mp";
+  level.var_C321["odin_support"].weapon["juggernaut"].var_E7BA = "heavygun_fire";
+  level.var_C321["odin_support"].weapon["juggernaut"].var_1E44 = "ui_odin_juggernaut_ammo";
+  level.var_C321["odin_support"].weapon["juggernaut"].var_A4AF = "juggernaut_recon";
+  level.var_C321["odin_support"].weapon["juggernaut"].var_DF5D = level.var_C321["odin_support"].timeout;
+  level.var_C321["odin_support"].weapon["juggernaut"].var_12B22 = -1;
+  level.var_C321["odin_support"].weapon["juggernaut"].var_12B23 = -2;
+  level.var_C321["odin_support"].weapon["juggernaut"].var_12B21 = -3;
+  level.var_C321["odin_support"].weapon["juggernaut"].var_1352B = "odin_moving";
+  level.var_C321["odin_support"].weapon["juggernaut"].var_D5E4 = "null";
+  level.var_C321["odin_support"].weapon["juggernaut"].var_D5DD = "odin_jugg_launch";
   level.var_C321["odin_assault"] = spawnStruct();
   level.var_C321["odin_assault"].timeout = 60;
   level.var_C321["odin_assault"].streakname = "odin_assault";
@@ -74,46 +74,46 @@ init() {
   level.var_C321["odin_assault"].var_1352C = "odin_targets_killed";
   level.var_C321["odin_assault"].var_12B20 = 2;
   level.var_C321["odin_assault"].var_12B80 = &"KILLSTREAKS_LOKI_UNAVAILABLE";
-  level.var_C321["odin_assault"].var_394["airdrop"] = spawnStruct();
-  level.var_C321["odin_assault"].var_394["airdrop"].projectile = "odin_projectile_airdrop_mp";
-  level.var_C321["odin_assault"].var_394["airdrop"].var_E7BA = "smg_fire";
-  level.var_C321["odin_assault"].var_394["airdrop"].var_1E44 = "ui_odin_airdrop_ammo";
-  level.var_C321["odin_assault"].var_394["airdrop"].var_1AA0 = "airdrop_assault";
-  level.var_C321["odin_assault"].var_394["airdrop"].var_DF5D = 20;
-  level.var_C321["odin_assault"].var_394["airdrop"].var_12B22 = -1;
-  level.var_C321["odin_assault"].var_394["airdrop"].var_13521 = "odin_carepackage";
-  level.var_C321["odin_assault"].var_394["airdrop"].var_D5E4 = "odin_carepack_ready";
-  level.var_C321["odin_assault"].var_394["airdrop"].var_D5DD = "odin_carepack_launch";
-  level.var_C321["odin_assault"].var_394["large_rod"] = spawnStruct();
-  level.var_C321["odin_assault"].var_394["large_rod"].projectile = "odin_projectile_large_rod_mp";
-  level.var_C321["odin_assault"].var_394["large_rod"].var_E7BA = "heavygun_fire";
-  level.var_C321["odin_assault"].var_394["large_rod"].var_1E44 = "ui_odin_marking_ammo";
-  level.var_C321["odin_assault"].var_394["large_rod"].var_DF5D = 4;
-  level.var_C321["odin_assault"].var_394["large_rod"].var_12B22 = -2;
-  level.var_C321["odin_assault"].var_394["large_rod"].var_D5E4 = "null";
-  level.var_C321["odin_assault"].var_394["large_rod"].var_D5DD = "ac130_105mm_fire";
-  level.var_C321["odin_assault"].var_394["large_rod"].var_C195 = "ac130_105mm_fire_npc";
-  level.var_C321["odin_assault"].var_394["small_rod"] = spawnStruct();
-  level.var_C321["odin_assault"].var_394["small_rod"].projectile = "odin_projectile_small_rod_mp";
-  level.var_C321["odin_assault"].var_394["small_rod"].var_E7BA = "smg_fire";
-  level.var_C321["odin_assault"].var_394["small_rod"].var_1E44 = "ui_odin_smoke_ammo";
-  level.var_C321["odin_assault"].var_394["small_rod"].var_DF5D = 2;
-  level.var_C321["odin_assault"].var_394["small_rod"].var_12B22 = -2;
-  level.var_C321["odin_assault"].var_394["small_rod"].var_D5E4 = "null";
-  level.var_C321["odin_assault"].var_394["small_rod"].var_D5DD = "ac130_40mm_fire";
-  level.var_C321["odin_assault"].var_394["small_rod"].var_C195 = "ac130_40mm_fire_npc";
-  level.var_C321["odin_assault"].var_394["juggernaut"] = spawnStruct();
-  level.var_C321["odin_assault"].var_394["juggernaut"].projectile = "odin_projectile_smoke_mp";
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_E7BA = "heavygun_fire";
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_1E44 = "ui_odin_juggernaut_ammo";
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_A4AF = "juggernaut";
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_DF5D = level.var_C321["odin_assault"].timeout;
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_12B22 = -1;
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_12B23 = -2;
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_12B21 = -3;
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_1352B = "odin_moving";
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_D5E4 = "null";
-  level.var_C321["odin_assault"].var_394["juggernaut"].var_D5DD = "odin_jugg_launch";
+  level.var_C321["odin_assault"].weapon["airdrop"] = spawnStruct();
+  level.var_C321["odin_assault"].weapon["airdrop"].projectile = "odin_projectile_airdrop_mp";
+  level.var_C321["odin_assault"].weapon["airdrop"].var_E7BA = "smg_fire";
+  level.var_C321["odin_assault"].weapon["airdrop"].var_1E44 = "ui_odin_airdrop_ammo";
+  level.var_C321["odin_assault"].weapon["airdrop"].var_1AA0 = "airdrop_assault";
+  level.var_C321["odin_assault"].weapon["airdrop"].var_DF5D = 20;
+  level.var_C321["odin_assault"].weapon["airdrop"].var_12B22 = -1;
+  level.var_C321["odin_assault"].weapon["airdrop"].var_13521 = "odin_carepackage";
+  level.var_C321["odin_assault"].weapon["airdrop"].var_D5E4 = "odin_carepack_ready";
+  level.var_C321["odin_assault"].weapon["airdrop"].var_D5DD = "odin_carepack_launch";
+  level.var_C321["odin_assault"].weapon["large_rod"] = spawnStruct();
+  level.var_C321["odin_assault"].weapon["large_rod"].projectile = "odin_projectile_large_rod_mp";
+  level.var_C321["odin_assault"].weapon["large_rod"].var_E7BA = "heavygun_fire";
+  level.var_C321["odin_assault"].weapon["large_rod"].var_1E44 = "ui_odin_marking_ammo";
+  level.var_C321["odin_assault"].weapon["large_rod"].var_DF5D = 4;
+  level.var_C321["odin_assault"].weapon["large_rod"].var_12B22 = -2;
+  level.var_C321["odin_assault"].weapon["large_rod"].var_D5E4 = "null";
+  level.var_C321["odin_assault"].weapon["large_rod"].var_D5DD = "ac130_105mm_fire";
+  level.var_C321["odin_assault"].weapon["large_rod"].var_C195 = "ac130_105mm_fire_npc";
+  level.var_C321["odin_assault"].weapon["small_rod"] = spawnStruct();
+  level.var_C321["odin_assault"].weapon["small_rod"].projectile = "odin_projectile_small_rod_mp";
+  level.var_C321["odin_assault"].weapon["small_rod"].var_E7BA = "smg_fire";
+  level.var_C321["odin_assault"].weapon["small_rod"].var_1E44 = "ui_odin_smoke_ammo";
+  level.var_C321["odin_assault"].weapon["small_rod"].var_DF5D = 2;
+  level.var_C321["odin_assault"].weapon["small_rod"].var_12B22 = -2;
+  level.var_C321["odin_assault"].weapon["small_rod"].var_D5E4 = "null";
+  level.var_C321["odin_assault"].weapon["small_rod"].var_D5DD = "ac130_40mm_fire";
+  level.var_C321["odin_assault"].weapon["small_rod"].var_C195 = "ac130_40mm_fire_npc";
+  level.var_C321["odin_assault"].weapon["juggernaut"] = spawnStruct();
+  level.var_C321["odin_assault"].weapon["juggernaut"].projectile = "odin_projectile_smoke_mp";
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_E7BA = "heavygun_fire";
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_1E44 = "ui_odin_juggernaut_ammo";
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_A4AF = "juggernaut";
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_DF5D = level.var_C321["odin_assault"].timeout;
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_12B22 = -1;
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_12B23 = -2;
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_12B21 = -3;
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_1352B = "odin_moving";
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_D5E4 = "null";
+  level.var_C321["odin_assault"].weapon["juggernaut"].var_D5DD = "odin_jugg_launch";
   if(!isDefined(level.heli_pilot_mesh)) {
     level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
     if(!isDefined(level.heli_pilot_mesh)) {} else {
@@ -123,7 +123,7 @@ init() {
 
   scripts\mp\agents\_agents::wait_till_agent_funcs_defined();
   level.agent_funcs["odin_juggernaut"] = level.agent_funcs["player"];
-  level.agent_funcs["odin_juggernaut"]["think"] = scripts\engine\utility::empty_init_func;
+  level.agent_funcs["odin_juggernaut"]["think"] = ::scripts\engine\utility::empty_init_func;
   level.odin_marking_flash_radius_max = 800;
   level.odin_marking_flash_radius_min = 200;
   level.var_1639 = [];
@@ -186,7 +186,7 @@ func_49F9(var_0) {
   }
 
   var_3.getclosestpointonnavmesh3d = 40;
-  var_3.triggerportableradarping = self;
+  var_3.owner = self;
   var_3.team = self.team;
   var_3.odintype = var_0;
   level.var_1639[var_0] = 1;
@@ -201,7 +201,7 @@ func_49F9(var_0) {
   var_3 thread func_C31C();
   var_3 thread func_C2DD();
   var_3 thread odin_onplayerconnect();
-  var_3.triggerportableradarping scripts\mp\matchdata::logkillstreakevent(level.var_C321[var_0].streakname, var_1);
+  var_3.owner scripts\mp\matchdata::logkillstreakevent(level.var_C321[var_0].streakname, var_1);
   return var_3;
 }
 
@@ -218,7 +218,7 @@ func_10DD2(var_0) {
   scripts\mp\utility::freezecontrolswrapper(1);
   func_C320(var_0);
   thread scripts\mp\killstreaks\_juggernaut::func_55F4();
-  var_1 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(var_0.odintype);
+  var_1 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_0.odintype);
   if(var_1 != "success") {
     if(isDefined(self.disabledweapon) && self.disabledweapon) {
       scripts\engine\utility::allow_weapon(1);
@@ -329,8 +329,8 @@ func_C318() {
   level endon("game_ended");
   self endon("gone");
   self waittill("death");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping func_C2E3(self);
+  if(isDefined(self.owner)) {
+    self.owner func_C2E3(self);
   }
 
   func_4074();
@@ -343,9 +343,9 @@ func_C318() {
 func_C31F() {
   level endon("game_ended");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
   var_0 = level.var_C321[self.odintype];
   var_1 = var_0.timeout;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_1);
@@ -356,7 +356,7 @@ func_C31B() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
   thread odin_leave();
 }
 
@@ -364,9 +364,9 @@ func_C319() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
   level waittill("objective_cam");
   thread odin_leave();
 }
@@ -374,10 +374,10 @@ func_C319() {
 func_C31D() {
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
-  level scripts\engine\utility::waittill_any_3("round_end_finished", "game_ended");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
+  level scripts\engine\utility::waittill_any("round_end_finished", "game_ended");
   thread odin_leave();
 }
 
@@ -386,8 +386,8 @@ odin_leave() {
   self notify("leaving");
   var_0 = level.var_C321[self.odintype];
   scripts\mp\utility::leaderdialog(var_0.votimedout);
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping func_C2E3(self);
+  if(isDefined(self.owner)) {
+    self.owner func_C2E3(self);
   }
 
   self notify("gone");
@@ -414,7 +414,7 @@ func_C2E3(var_0) {
     thread func_C2EB();
     self stoplocalsound("odin_negative_action");
     self stoplocalsound("odin_positive_action");
-    foreach(var_2 in level.var_C321[var_0.odintype].var_394) {
+    foreach(var_2 in level.var_C321[var_0.odintype].weapon) {
       if(isDefined(var_2.var_D5E4)) {
         self stoplocalsound(var_2.var_D5E4);
       }
@@ -442,7 +442,7 @@ func_C2EB() {
 func_C31E() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_1 = var_0 getvieworigin();
   var_2 = var_1 + anglesToForward(self gettagangles("tag_player")) * 10000;
@@ -505,9 +505,9 @@ func_B9F2(var_0) {
 func_1399C() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
-  var_1 = level.var_C321[self.odintype].var_394["airdrop"];
+  var_1 = level.var_C321[self.odintype].weapon["airdrop"];
   self.odin_airdropusetime = 0;
   var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
   if(!isai(var_0)) {
@@ -532,7 +532,7 @@ func_1399C() {
       }
 
       self.odin_airdropusetime = func_C2E6("airdrop");
-      var_1 = level.var_C321[self.odintype].var_394["airdrop"];
+      var_1 = level.var_C321[self.odintype].weapon["airdrop"];
       level thread scripts\mp\killstreaks\_airdrop::doflyby(var_0, self.targeting_marker.origin, randomfloat(360), var_1.var_1AA0);
     } else {
       var_0 scripts\mp\utility::_playlocalsound("odin_negative_action");
@@ -545,9 +545,9 @@ func_1399C() {
 func_13B49() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
-  var_1 = level.var_C321[self.odintype].var_394["smoke"];
+  var_1 = level.var_C321[self.odintype].weapon["smoke"];
   self.odin_smokeusetime = 0;
   var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
   if(!isai(var_0)) {
@@ -587,9 +587,9 @@ func_13B49() {
 func_13ACA() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
-  var_1 = level.var_C321[self.odintype].var_394["marking"];
+  var_1 = level.var_C321[self.odintype].weapon["marking"];
   self.odin_markingusetime = 0;
   var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
   if(!isai(var_0)) {
@@ -621,10 +621,10 @@ func_13ACA() {
 func_13AAF() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_0 endon("juggernaut_dead");
-  var_1 = level.var_C321[self.odintype].var_394["juggernaut"];
+  var_1 = level.var_C321[self.odintype].weapon["juggernaut"];
   self.odin_juggernautusetime = 0;
   var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
   if(!isai(var_0)) {
@@ -672,9 +672,9 @@ func_13AAF() {
 func_13AB1() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
-  var_1 = level.var_C321[self.odintype].var_394["large_rod"];
+  var_1 = level.var_C321[self.odintype].weapon["large_rod"];
   self.odin_largerodusetime = 0;
   var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
   if(!isai(var_0)) {
@@ -705,9 +705,9 @@ func_13AB1() {
 func_13B47() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
-  var_1 = level.var_C321[self.odintype].var_394["small_rod"];
+  var_1 = level.var_C321[self.odintype].weapon["small_rod"];
   self.odin_smallrodusetime = 0;
   var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
   if(!isai(var_0)) {
@@ -740,8 +740,8 @@ func_13B47() {
 
 func_C2E6(var_0) {
   self.var_9BE2 = 1;
-  var_1 = self.triggerportableradarping;
-  var_2 = level.var_C321[self.odintype].var_394[var_0];
+  var_1 = self.owner;
+  var_2 = level.var_C321[self.odintype].weapon[var_0];
   var_3 = anglesToForward(var_1 getplayerangles());
   var_4 = self.origin + var_3 * 100;
   var_1 setclientomnvar(var_2.var_1E44, var_2.var_12B22);
@@ -828,20 +828,20 @@ func_7F25(var_0) {
 func_1369E(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_1 endon("disconnect");
   var_2 = self.targeting_marker.origin;
   wait(3);
   var_3 = scripts\mp\agents\_agents::add_humanoid_agent("odin_juggernaut", var_1.team, "class1", var_0.origin, vectortoangles(var_2 - var_0.origin), var_1, 0, 0, "veteran");
   if(isDefined(var_3)) {
-    var_4 = level.var_C321[self.odintype].var_394["juggernaut"];
+    var_4 = level.var_C321[self.odintype].weapon["juggernaut"];
     var_3 thread scripts\mp\killstreaks\_juggernaut::givejuggernaut(var_4.var_A4AF);
     var_3 thread scripts\mp\killstreaks\_agent_killstreak::sendagentweaponnotify();
     var_3 scripts\mp\bots\_bots_strategy::bot_protect_point(var_0.origin, 128);
     self.var_A4A3 = var_3;
     thread func_13AAE();
     var_1 setclientomnvar(var_4.var_1E44, var_4.var_12B23);
-    var_5 = scripts\mp\utility::outlineenableforplayer(var_3, "cyan", self.triggerportableradarping, 0, 0, "killstreak");
+    var_5 = scripts\mp\utility::outlineenableforplayer(var_3, "cyan", self.owner, 0, 0, "killstreak");
     thread removeoutline(var_5, var_3);
     var_3 scripts\mp\utility::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
     return;
@@ -854,9 +854,9 @@ func_13AAE() {
   self endon("death");
   level endon("game_ended");
   self.var_A4A3 waittill("death");
-  self.triggerportableradarping notify("juggernaut_dead");
-  var_0 = level.var_C321[self.odintype].var_394["juggernaut"];
-  self.triggerportableradarping setclientomnvar(var_0.var_1E44, var_0.var_12B21);
+  self.owner notify("juggernaut_dead");
+  var_0 = level.var_C321[self.odintype].weapon["juggernaut"];
+  self.owner setclientomnvar(var_0.var_1E44, var_0.var_12B21);
   self.var_A4A3 = undefined;
 }
 
@@ -869,7 +869,7 @@ func_10129() {
 func_13B21(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_1 endon("disconnect");
   var_1 endon("odin_ride_ended");
   var_2 = var_0.var_1E44;
@@ -890,7 +890,7 @@ func_13B21(var_0) {
 
 func_58EE(var_0) {
   level endon("game_ended");
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_2 = level.odin_marking_flash_radius_max * level.odin_marking_flash_radius_max;
   var_3 = level.odin_marking_flash_radius_min * level.odin_marking_flash_radius_min;
   var_4 = 60;
@@ -906,56 +906,56 @@ func_58EE(var_0) {
       continue;
     }
 
-    var_0A = distancesquared(var_0, var_9.origin);
-    if(var_0A > var_2) {
+    var_10 = distancesquared(var_0, var_9.origin);
+    if(var_10 > var_2) {
       continue;
     }
 
-    var_0B = var_9 getstance();
-    var_0C = var_9.origin;
-    switch (var_0B) {
+    var_11 = var_9 getstance();
+    var_12 = var_9.origin;
+    switch (var_11) {
       case "stand":
-        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_4);
+        var_12 = (var_12[0], var_12[1], var_12[2] + var_4);
         break;
 
       case "crouch":
-        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_5);
+        var_12 = (var_12[0], var_12[1], var_12[2] + var_5);
         break;
 
       case "prone":
-        var_0C = (var_0C[0], var_0C[1], var_0C[2] + var_6);
+        var_12 = (var_12[0], var_12[1], var_12[2] + var_6);
         break;
     }
 
-    if(!bullettracepassed(var_0, var_0C, 0, var_9)) {
+    if(!bullettracepassed(var_0, var_12, 0, var_9)) {
       continue;
     }
 
-    if(var_0A <= var_3) {
-      var_0D = 1;
+    if(var_10 <= var_3) {
+      var_13 = 1;
     } else {
-      var_0D = 1 - var_0A - var_3 / var_2 - var_3;
+      var_13 = 1 - var_10 - var_3 / var_2 - var_3;
     }
 
-    var_0E = anglesToForward(var_9 getplayerangles());
-    var_0F = var_0 - var_0C;
-    var_0F = vectornormalize(var_0F);
-    var_10 = 0.5 * 1 + vectordot(var_0E, var_0F);
+    var_14 = anglesToForward(var_9 getplayerangles());
+    var_15 = var_0 - var_12;
+    var_15 = vectornormalize(var_15);
+    var_10 = 0.5 * 1 + vectordot(var_14, var_15);
     var_11 = 1;
-    var_9 notify("flashbang", var_0, var_0D, var_10, var_1, var_11);
+    var_9 notify("flashbang", var_0, var_13, var_10, var_1, var_11);
     var_7++;
     if(!func_6565(var_9)) {
       if(level.teambased) {
         var_12 = scripts\mp\utility::outlineenableforteam(var_9, "orange", self.team, 0, 0, "killstreak");
       } else {
-        var_12 = scripts\mp\utility::outlineenableforplayer(var_0A, "orange", self.triggerportableradarping, 0, 0, "killstreak");
+        var_12 = scripts\mp\utility::outlineenableforplayer(var_10, "orange", self.owner, 0, 0, "killstreak");
       }
 
       thread removeoutline(var_12, var_9, 3);
     }
   }
 
-  var_14 = level.var_C321[self.odintype].var_394["marking"];
+  var_14 = level.var_C321[self.odintype].weapon["marking"];
   if(var_7 == 1) {
     if(level.teambased) {
       scripts\mp\utility::leaderdialog(var_14.var_1354B, self.team);
@@ -972,18 +972,18 @@ func_58EE(var_0) {
 
   var_15 = scripts\mp\weapons::getempdamageents(var_0, 512, 0);
   foreach(var_17 in var_15) {
-    if(isDefined(var_17.triggerportableradarping) && !scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_17.triggerportableradarping)) {
+    if(isDefined(var_17.owner) && !scripts\mp\weapons::friendlyfirecheck(self.owner, var_17.owner)) {
       continue;
     }
 
-    var_17 notify("emp_damage", self.triggerportableradarping, 8);
+    var_17 notify("emp_damage", self.owner, 8);
   }
 }
 
 func_20D2(var_0) {
   if(level.teambased && var_0.team == self.team) {
     return;
-  } else if(!level.teambased && var_0 == self.triggerportableradarping) {
+  } else if(!level.teambased && var_0 == self.owner) {
     return;
   }
 
@@ -991,7 +991,7 @@ func_20D2(var_0) {
     return;
   }
 
-  var_1 = scripts\mp\utility::outlineenableforplayer(var_0, "orange", self.triggerportableradarping, 1, 0, "killstreak");
+  var_1 = scripts\mp\utility::outlineenableforplayer(var_0, "orange", self.owner, 1, 0, "killstreak");
   thread removeoutline(var_1, var_0);
 }
 
@@ -1045,9 +1045,9 @@ func_C2DD(var_0) {
     self waittill("odin_enemy_killed");
     wait(var_2);
     if(self.enemieskilledintimewindow > 1) {
-      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_1.var_1352C);
+      self.owner scripts\mp\utility::leaderdialogonplayer(var_1.var_1352C);
     } else {
-      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_1.var_1352D);
+      self.owner scripts\mp\utility::leaderdialogonplayer(var_1.var_1352D);
     }
 
     self.enemieskilledintimewindow = 0;
@@ -1082,7 +1082,7 @@ func_4074() {
 watchearlyexit(var_0) {
   level endon("game_ended");
   var_0 endon("death");
-  var_0 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  var_0 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
   var_0 waittill("killstreakExit");
   var_1 = level.var_C321[var_0.odintype];
   scripts\mp\utility::leaderdialog(var_1.votimedout);

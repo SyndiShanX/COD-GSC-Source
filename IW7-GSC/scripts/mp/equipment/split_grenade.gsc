@@ -61,21 +61,21 @@ func_C55D(var_0, var_1) {
   var_0.weapon_name = "split_grenade_mini_mp";
   var_0.var_B79B[var_0.var_B79B.size] = var_0;
   var_9 = max(0, 2) * 9 / -2;
-  for(var_0A = 0; var_0A < 3; var_0A++) {
-    var_0B = angleclamp(var_9 + var_0A * 9);
-    var_0C = rotatepointaroundvector(var_8, var_5, var_0B);
-    var_0C = var_0C * 0.55;
-    var_0D = randomfloatrange(0.75, 1);
-    var_0E = var_0.var_B79B[var_0A];
-    var_0E.exploding = 0;
-    var_0E show();
-    var_0E unlink();
-    var_0E forcehidegrenadehudwarning(0);
-    var_0E = scripts\mp\utility::_launchgrenade("split_grenade_mini_mp", var_0.origin, var_0C, 100, 1, var_0E);
-    var_0E setscriptablepartstate("trail", "active", 0);
-    thread func_13A84(var_0E, var_0D);
-    thread func_13B68(var_0E);
-    var_0E thread func_40FA(undefined, self);
+  for(var_10 = 0; var_10 < 3; var_10++) {
+    var_11 = angleclamp(var_9 + var_10 * 9);
+    var_12 = rotatepointaroundvector(var_8, var_5, var_11);
+    var_12 = var_12 * 0.55;
+    var_13 = randomfloatrange(0.75, 1);
+    var_14 = var_0.var_B79B[var_10];
+    var_14.exploding = 0;
+    var_14 show();
+    var_14 unlink();
+    var_14 forcehidegrenadehudwarning(0);
+    var_14 = scripts\mp\utility::_launchgrenade("split_grenade_mini_mp", var_0.origin, var_12, 100, 1, var_14);
+    var_14 setscriptablepartstate("trail", "active", 0);
+    thread func_13A84(var_14, var_13);
+    thread func_13B68(var_14);
+    var_14 thread func_40FA(undefined, self);
   }
 
   var_0.var_B79B[0] setscriptablepartstate("split", "active", 0);

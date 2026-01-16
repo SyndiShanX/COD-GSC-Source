@@ -46,29 +46,29 @@ func_4D4C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
     return;
   }
 
-  var_0A = "standard";
-  var_0B = "standard";
+  var_10 = "standard";
+  var_11 = "standard";
   if(isDefined(var_9)) {
     if(var_0 <= weapongetdamagemin(var_9)) {
-      var_0B = "low_damage";
+      var_11 = "low_damage";
     } else if(var_0 >= weapongetdamagemax(var_9)) {
-      var_0B = "high_damage";
+      var_11 = "high_damage";
     }
   }
 
-  var_0C = 0;
-  var_0D = 0;
+  var_12 = 0;
+  var_13 = 0;
   if(isai(self)) {
-    var_0C = !isalive(self);
-    var_0D = isheadshot(var_7);
+    var_12 = !isalive(self);
+    var_13 = isheadshot(var_7);
   }
 
-  level.player thread updatedamagefeedback(var_0A, var_0C, var_0D, var_0B, self);
+  level.player thread updatedamagefeedback(var_10, var_12, var_13, var_11, self);
 }
 
 func_9EF8() {
   if(isDefined(self.unittype) && self.unittype == "seeker") {
-    if(isDefined(self.triggerportableradarping) && self.triggerportableradarping == level.player) {
+    if(isDefined(self.owner) && self.owner == level.player) {
       return 1;
     }
   }

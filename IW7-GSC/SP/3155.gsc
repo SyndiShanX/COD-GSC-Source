@@ -89,18 +89,18 @@ func_D55F(var_0, var_1, var_2, var_3) {
   var_7 = distance(var_5, var_6);
   var_8 = scripts\sp\utility::func_BD6B(20, var_7);
   var_9 = 30;
-  var_0A = 1 / var_9 * var_8;
-  var_0B = 0;
-  var_0C = 0;
-  while(!var_0C) {
-    if(var_0B > 1) {
-      var_0B = 1;
-      var_0C = 1;
+  var_10 = 1 / var_9 * var_8;
+  var_11 = 0;
+  var_12 = 0;
+  while(!var_12) {
+    if(var_11 > 1) {
+      var_11 = 1;
+      var_12 = 1;
     }
 
-    var_0D = vectorlerp(var_5, var_6, var_0B);
-    var_0B = var_0B + var_0A;
-    self func_80F1(var_0D, self.angles, 10000);
+    var_13 = vectorlerp(var_5, var_6, var_11);
+    var_11 = var_11 + var_10;
+    self func_80F1(var_13, self.angles, 10000);
     scripts\engine\utility::waitframe();
   }
 
@@ -173,17 +173,17 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self.var_36A = 1;
   var_8 = 16;
   var_9 = (0, 0, 5);
-  var_0A = var_3 + var_9;
-  var_0B = var_5 + var_9;
-  var_0C = max(var_8, var_6 + var_8);
-  var_0D = var_0B + var_0A * 0.5;
-  var_0E = var_0D[2];
-  var_0F = var_0C + var_0A[2] - var_0E;
-  var_10 = var_0D + (0, 0, 1) * var_0F;
+  var_10 = var_3 + var_9;
+  var_11 = var_5 + var_9;
+  var_12 = max(var_8, var_6 + var_8);
+  var_13 = var_11 + var_10 * 0.5;
+  var_14 = var_13[2];
+  var_15 = var_12 + var_10[2] - var_14;
+  var_10 = var_13 + (0, 0, 1) * var_15;
   if(var_7) {
     var_11 = scripts\common\trace::create_solid_ai_contents(1);
-    var_12 = scripts\common\trace::ray_trace(var_10, var_0A, self, var_11);
-    var_13 = scripts\common\trace::ray_trace(var_10, var_0B, self, var_11);
+    var_12 = scripts\common\trace::ray_trace(var_10, var_10, self, var_11);
+    var_13 = scripts\common\trace::ray_trace(var_10, var_11, self, var_11);
     if(var_12["fraction"] < 0.95 || var_13["fraction"] < 0.95) {
       return;
     }
@@ -193,7 +193,7 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   self func_82EA(var_1, var_14, 1, var_2, 1);
   wait(getanimlength(var_14) - 0.1);
-  var_15 = distance(var_0A, var_10) + distance(var_0B, var_10);
+  var_15 = distance(var_10, var_10) + distance(var_11, var_10);
   var_16 = scripts\sp\utility::func_BD6B(25, var_15);
   var_17 = 30;
   var_18 = 1 / var_17 * var_16;
@@ -215,7 +215,7 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_1B = 1;
     }
 
-    var_1D = scripts\sp\math::func_7BC5(var_0A, var_0B, var_0F, var_1A);
+    var_1D = scripts\sp\math::func_7BC5(var_10, var_11, var_15, var_1A);
     var_1A = var_1A + var_18;
     self func_80F1(var_1D, self.angles, 10000);
     if(var_1A > 0.7 && !var_1C) {
@@ -230,7 +230,7 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   self.var_A481 delete();
-  self func_80F1(var_0B, self.angles, 10000);
+  self func_80F1(var_11, self.angles, 10000);
   func_F154(self.pausemayhem);
   var_1E = func_3EA3(var_0, var_1, "land");
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);

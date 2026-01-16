@@ -57,13 +57,13 @@ func_11276(var_0) {
 
 func_11274() {
   self notify("death");
-  supertrophy_removefromarrays(self, self.triggerportableradarping);
+  supertrophy_removefromarrays(self, self.owner);
   if(isDefined(self.objstruct)) {
     self.objstruct func_11275();
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    scripts\mp\utility::printgameaction("supertrophy destroyed", self.triggerportableradarping);
+  if(isDefined(self.owner)) {
+    scripts\mp\utility::printgameaction("supertrophy destroyed", self.owner);
   }
 
   self setCanDamage(0);
@@ -77,15 +77,15 @@ func_11274() {
 
 func_11299() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self setscriptablepartstate("effects", "activeDeployStart", 0);
   self.objstruct = func_11270();
   wait(1.25);
   self setscriptablepartstate("effects", "activeDeployEnd", 0);
-  scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.triggerportableradarping);
-  thread scripts\mp\weapons::outlinesuperequipment(self, self.triggerportableradarping);
-  thread scripts\mp\entityheadicons::setheadicon_factionimage(self.triggerportableradarping, (0, 0, 50), 0);
-  thread scripts\mp\perks\_perk_equipmentping::runequipmentping(self);
+  scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.owner);
+  thread scripts\mp\weapons::outlinesuperequipment(self, self.owner);
+  thread scripts\mp\entityheadicons::setheadicon_factionimage(self.owner, (0, 0, 50), 0);
+  thread scripts\mp\perks\perk_equipmentping::runequipmentping(self);
   thread func_1129F();
   thread func_1129E();
 }
@@ -104,12 +104,12 @@ func_11278(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_11279(var_0, var_1, var_2, var_3, var_4) {
-  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
-    var_0 thread scripts\mp\events::supershutdown(self.triggerportableradarping);
+  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
+    var_0 thread scripts\mp\events::supershutdown(self.owner);
     var_0 notify("destroyed_equipment");
   }
 
-  if(isDefined(var_0) && isplayer(var_0) && var_0 != self.triggerportableradarping) {
+  if(isDefined(var_0) && isplayer(var_0) && var_0 != self.owner) {
     var_0 scripts\mp\missions::func_D991("ch_killjoy_six_ability");
   }
 
@@ -235,8 +235,8 @@ func_11271(var_0, var_1, var_2) {
   var_3 give_player_tickets(1);
   var_3 func_8549();
   var_3 func_8594();
-  var_3.triggerportableradarping = self;
-  var_3.team = var_3.triggerportableradarping.team;
+  var_3.owner = self;
+  var_3.team = var_3.owner.team;
   var_3.super = "super_supertrophy";
   var_3.weapon_name = "super_trophy_mp";
   var_3.planted = 1;
@@ -276,12 +276,12 @@ func_1126F(var_0) {
 supertrophy_createexplosion(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1.killcament = var_0.killcament;
-  var_1.triggerportableradarping = var_0.triggerportableradarping;
+  var_1.owner = var_0.owner;
   var_1.team = var_0.team;
   var_1.super = var_0.super;
   var_1.weapon_name = var_0.weapon_name;
-  var_1 setotherent(var_1.triggerportableradarping);
-  var_1 setentityowner(var_1.triggerportableradarping);
+  var_1 setotherent(var_1.owner);
+  var_1 setentityowner(var_1.owner);
   var_1 setModel("super_trophy_mp_explode");
   var_1.timebypart = [];
   for(var_2 = 0; var_2 < 4; var_2++) {
@@ -307,7 +307,7 @@ supertrophy_explode(var_0, var_1) {
 
 func_1129F() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   if(!isDefined(level.grenades)) {
     level.grenades = [];
   }
@@ -341,12 +341,12 @@ func_1129F() {
         continue;
       }
 
-      var_6 = var_5.triggerportableradarping;
+      var_6 = var_5.owner;
       if(!isDefined(var_6) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade") {
         var_6 = getmissileowner(var_5);
       }
 
-      if(isDefined(var_6) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_6))) {
+      if(isDefined(var_6) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_6))) {
         continue;
       }
 
@@ -376,15 +376,15 @@ func_1129F() {
 }
 
 func_1128E(var_0) {
-  level thread scripts\mp\battlechatter_mp::saytoself(self.triggerportableradarping, "plr_perk_trophy_block", undefined, 0.75);
-  self.triggerportableradarping scripts\mp\killstreaks\_killstreaks::givescorefortrophyblocks();
-  self.triggerportableradarping thread scripts\mp\events::superkill("super_supertrophy");
-  self.triggerportableradarping scripts\mp\supers::combatrecordsuperkill("super_supertrophy");
+  level thread scripts\mp\battlechatter_mp::saytoself(self.owner, "plr_perk_trophy_block", undefined, 0.75);
+  self.owner scripts\mp\killstreaks\killstreaks::givescorefortrophyblocks();
+  self.owner thread scripts\mp\events::superkill("super_supertrophy");
+  self.owner scripts\mp\supers::combatrecordsuperkill("super_supertrophy");
   var_0 setCanDamage(0);
   var_0.exploding = 1;
   var_0 stopsounds();
   scripts\mp\trophy_system::func_12821(var_0);
-  scripts\mp\trophy_system::func_12817(var_0, "super_trophy_mp", self.triggerportableradarping);
+  scripts\mp\trophy_system::func_12817(var_0, "super_trophy_mp", self.owner);
   var_1 = var_0.origin;
   var_2 = var_0.angles;
   if(scripts\mp\weapons::isplantedequipment(var_0)) {
@@ -403,7 +403,7 @@ func_1128E(var_0) {
 
 func_1129E() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_0 = physics_createcontents(["physicscontents_solid", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_missileclip"]);
   for(;;) {
     var_1 = scripts\mp\utility::clearscrambler(self.origin, 256, undefined);
@@ -482,19 +482,19 @@ func_11284(var_0) {
   }
 
   if(isDefined(var_0)) {
-    if(isDefined(self) && isDefined(self.triggerportableradarping)) {
-      scripts\mp\gamescore::untrackdebuffassist(self.triggerportableradarping, var_0, "super_trophy_mp");
+    if(isDefined(self) && isDefined(self.owner)) {
+      scripts\mp\gamescore::untrackdebuffassist(self.owner, var_0, "super_trophy_mp");
     }
 
     if(var_2.empd) {
-      var_0 scripts\mp\killstreaks\_emp_common::func_E0F3();
+      var_0 scripts\mp\killstreaks\emp_common::func_E0F3();
     }
   }
 }
 
 func_11285(var_0, var_1) {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_0 endon("death");
   var_0 endon("disconnect");
   level endon("game_ended");
@@ -502,23 +502,23 @@ func_11285(var_0, var_1) {
   while(func_11295(var_0)) {
     if(!var_1.empd) {
       if(!var_0 scripts\mp\utility::_hasperk("specialty_empimmune")) {
-        var_0 scripts\mp\killstreaks\_emp_common::func_20C3();
-        scripts\mp\gamescore::func_11ACE(self.triggerportableradarping, var_0, "super_trophy_mp");
+        var_0 scripts\mp\killstreaks\emp_common::func_20C3();
+        scripts\mp\gamescore::func_11ACE(self.owner, var_0, "super_trophy_mp");
         var_1.empd = 1;
       }
     } else if(var_0 scripts\mp\utility::_hasperk("specialty_empimmune")) {
-      var_0 scripts\mp\killstreaks\_emp_common::func_E0F3();
-      scripts\mp\gamescore::untrackdebuffassist(self.triggerportableradarping, var_0, "super_trophy_mp");
+      var_0 scripts\mp\killstreaks\emp_common::func_E0F3();
+      scripts\mp\gamescore::untrackdebuffassist(self.owner, var_0, "super_trophy_mp");
       var_1.empd = 0;
     }
 
     if(gettime() >= var_2) {
       if(var_0 scripts\mp\utility::_hasperk("specialty_empimmune")) {
-        self.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
+        self.owner scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
       }
 
-      var_3 = scripts\mp\perks\_perkfunctions::applystunresistence(self.triggerportableradarping, var_0, 0.7);
-      var_0 dodamage(1, self.origin, self.triggerportableradarping, self, "MOD_EXPLOSIVE", "super_trophy_mp");
+      var_3 = scripts\mp\perks\perkfunctions::applystunresistence(self.owner, var_0, 0.7);
+      var_0 dodamage(1, self.origin, self.owner, self, "MOD_EXPLOSIVE", "super_trophy_mp");
       var_0 shellshock("super_trophy_mp", var_3);
       thread supertrophy_persempplayereffectsstun(var_0, var_3);
       var_2 = gettime() + 1000;
@@ -547,13 +547,13 @@ func_11282(var_0) {
 
 func_11283(var_0) {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_0 endon("death");
   level endon("game_ended");
   var_1 = gettime();
   while(func_11295(var_0)) {
     if(gettime() >= var_1) {
-      var_0 notify("emp_damage", self.triggerportableradarping, 2.25, self.origin, "super_trophy_mp", "MOD_EXPLOSIVE");
+      var_0 notify("emp_damage", self.owner, 2.25, self.origin, "super_trophy_mp", "MOD_EXPLOSIVE");
       var_1 = gettime() + 1000;
     }
 
@@ -563,7 +563,7 @@ func_11283(var_0) {
 
 func_11270() {
   var_0 = spawnStruct();
-  var_0.triggerportableradarping = self.triggerportableradarping;
+  var_0.owner = self.owner;
   var_0.var_12802 = self;
   var_0.id = scripts\mp\objidpoolmanager::requestminimapid(1);
   if(var_0.id == -1) {
@@ -583,11 +583,11 @@ func_11275() {
 
 supertrophy_monitorobjective() {
   self.var_12802 endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self endon("returnMinimapID");
   self notify("superTrophy_monitorObjective");
   self endon("superTrophy_monitorObjective");
-  while(isDefined(self.triggerportableradarping) && isDefined(self.var_12802)) {
+  while(isDefined(self.owner) && isDefined(self.var_12802)) {
     if(scripts\mp\utility::istrue(self.firingstate)) {
       scripts\mp\objidpoolmanager::minimap_objective_playermask_showtoall(self.id);
       if(self.firingstate == 1) {
@@ -602,7 +602,7 @@ supertrophy_monitorobjective() {
     }
 
     scripts\mp\objidpoolmanager::minimap_objective_playermask_hidefromall(self.id);
-    scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, self.triggerportableradarping getentitynumber());
+    scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, self.owner getentitynumber());
     scripts\mp\objidpoolmanager::minimap_objective_icon(self.id, "icon_minimap_super_trophy_friendly");
     foreach(var_1 in level.players) {
       if(var_1 scripts\mp\utility::_hasperk("specialty_engineer")) {
@@ -610,7 +610,7 @@ supertrophy_monitorobjective() {
         continue;
       }
 
-      if(level.teambased && var_1.team == self.triggerportableradarping.team) {
+      if(level.teambased && var_1.team == self.owner.team) {
         scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.id, var_1 getentitynumber());
       }
     }
@@ -639,7 +639,7 @@ func_11288(var_0, var_1, var_2) {
     return 0;
   }
 
-  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
     return 0;
   }
 
@@ -659,7 +659,7 @@ func_11287(var_0) {
     return 0;
   }
 
-  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0.triggerportableradarping))) {
+  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0.owner))) {
     return 0;
   }
 
@@ -760,12 +760,12 @@ supertrophy_getbesttag(var_0) {
   var_1 = level.supertrophy.var_1141B;
   var_2 = undefined;
   var_3 = undefined;
-  foreach(var_0A, var_5 in var_1) {
+  foreach(var_10, var_5 in var_1) {
     var_6 = self gettagorigin(var_5);
     var_7 = self gettagangles(var_5);
     var_8 = anglesToForward(var_7);
     var_9 = vectordot(vectornormalize(var_0 - var_6), var_8);
-    if(var_0A == 0 || var_9 > var_2) {
+    if(var_10 == 0 || var_9 > var_2) {
       var_2 = var_9;
       var_3 = var_5;
     }
@@ -829,13 +829,13 @@ supertrophy_removefromarrays(var_0, var_1) {
 
 func_1126D() {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   thread func_11274();
 }
 
 func_1126E() {
   self endon("death");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread func_11274();
 }
 

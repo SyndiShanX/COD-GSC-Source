@@ -4,7 +4,7 @@
 *****************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("mrsiartillery", ::func_12906);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("mrsiartillery", ::func_12906);
   var_0 = spawnStruct();
   var_0.var_39C = "airdrop_marker_mp";
   var_0.var_DA62 = "mrsiartillery_projectile_mp";
@@ -32,7 +32,7 @@ func_12906(var_0, var_1) {
 
 onteamchangedeath(var_0, var_1) {
   var_2 = level.var_A692[var_0];
-  var_3 = var_1.triggerportableradarping;
+  var_3 = var_1.owner;
   var_4 = var_1.origin;
   var_1 detonate();
   dostrike(var_3, var_0, var_3.origin, var_4);
@@ -44,16 +44,16 @@ dostrike(var_0, var_1, var_2, var_3) {
   var_6 = (var_5[0], var_5[1], 0);
   var_5 = vectornormalize(var_5);
   var_7 = var_3;
-  var_8 = scripts\mp\killstreaks\_killstreaks::findunobstructedfiringpoint(var_0, var_3 + (0, 0, 10), 10000);
+  var_8 = scripts\mp\killstreaks\killstreaks::findunobstructedfiringpoint(var_0, var_3 + (0, 0, 10), 10000);
   if(isDefined(var_8)) {
     iprintln("Firing Motar!");
     wait(var_4.var_9831);
     wait(randomfloatrange(var_4.var_B782, var_4.var_B49A));
     var_9 = scripts\mp\utility::_magicbullet(var_4.var_DA62, var_8, var_7, var_0);
-    for(var_0A = 1; var_0A < var_4.var_C244; var_0A++) {
+    for(var_10 = 1; var_10 < var_4.var_C244; var_10++) {
       wait(randomfloatrange(var_4.var_B782, var_4.var_B49A));
-      var_0B = func_CB2F(var_7, var_4.var_11141);
-      var_9 = scripts\mp\utility::_magicbullet(var_4.var_DA62, var_8, var_0B, var_0);
+      var_11 = func_CB2F(var_7, var_4.var_11141);
+      var_9 = scripts\mp\utility::_magicbullet(var_4.var_DA62, var_8, var_11, var_0);
     }
 
     return;

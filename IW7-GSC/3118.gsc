@@ -4,7 +4,7 @@
 *********************************************/
 
 zombiegreymayshoot(var_0) {
-  if(!isDefined(self.var_394)) {
+  if(!isDefined(self.weapon)) {
     return level.failure;
   }
 
@@ -24,7 +24,7 @@ shouldshoot() {
     return 0;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -32,9 +32,9 @@ shouldshoot() {
     return 0;
   }
 
-  if(self getpersstat(self.isnodeoccupied)) {
+  if(self cansee(self.enemy)) {
     scripts\anim\utility_common::dontgiveuponsuppressionyet();
-    self.goodshootpos = self.isnodeoccupied getshootatpos();
+    self.goodshootpos = self.enemy getshootatpos();
     return 1;
   }
 
@@ -46,7 +46,7 @@ zombiegreyshouldmelee(var_0) {
     return level.failure;
   }
 
-  if(![[self.fnismeleevalid]](self.isnodeoccupied, 1)) {
+  if(![[self.fnismeleevalid]](self.enemy, 1)) {
     return level.failure;
   }
 
@@ -55,7 +55,7 @@ zombiegreyshouldmelee(var_0) {
 
 isgreymeleeallowed(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self.isnodeoccupied;
+    var_0 = self.enemy;
   }
 
   if(isDefined(self.dontmelee)) {
@@ -502,7 +502,7 @@ canmovefrompointtopoint(var_0, var_1) {
 }
 
 zombiegreyhasweapon(var_0) {
-  if(isDefined(self.var_394)) {
+  if(isDefined(self.weapon)) {
     return level.success;
   }
 
@@ -563,7 +563,7 @@ regen_health_internal(var_0) {
   scripts\asm\zombie_grey\zombie_grey_asm::drop_max_ammo();
   var_0.health = var_0.maxhealth;
   var_0 notify("update_health_light");
-  var_1 = scripts\engine\utility::waittill_any_timeout_1(6, "stop_regen_health");
+  var_1 = scripts\engine\utility::waittill_any_timeout(6, "stop_regen_health");
   if(var_1 == "stop_regen_health") {
     process_stop_regen_health_action(var_0);
     var_0.should_shock_wave = 1;
@@ -658,12 +658,12 @@ greymeleevsplayer_init(var_0) {
     self[[self.fnmeleevsplayer_init]](var_0);
   }
 
-  thread scripts\aitypes\melee::meleedeathhandler(self.isnodeoccupied);
+  thread scripts\aitypes\melee::meleedeathhandler(self.enemy);
 }
 
 melee_init(var_0, var_1) {
   if(!isDefined(var_1)) {
-    var_1 = self.isnodeoccupied;
+    var_1 = self.enemy;
   }
 
   if(isDefined(self.melee)) {

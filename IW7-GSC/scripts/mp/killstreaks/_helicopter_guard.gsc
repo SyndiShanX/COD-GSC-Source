@@ -4,7 +4,7 @@
 ********************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("littlebird_support", ::func_128EE);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("littlebird_support", ::func_128EE);
   level.heliheight = [];
   level.heliheight["littlebird_support"] = spawnStruct();
   level.heliheight["littlebird_support"].timeout = 60;
@@ -12,7 +12,7 @@ init() {
   level.heliheight["littlebird_support"].maxhealth = 2000;
   level.heliheight["littlebird_support"].streakname = "littlebird_support";
   level.heliheight["littlebird_support"].vehicleinfo = "attack_littlebird_mp";
-  level.heliheight["littlebird_support"].var_39B = "littlebird_guard_minigun_mp";
+  level.heliheight["littlebird_support"].weaponinfo = "littlebird_guard_minigun_mp";
   level.heliheight["littlebird_support"].var_13CA9 = "vehicle_little_bird_minigun_left";
   level.heliheight["littlebird_support"].var_13CAA = "vehicle_little_bird_minigun_right";
   level.heliheight["littlebird_support"].weaponswitchendedsupportbox = "tag_flash";
@@ -75,7 +75,7 @@ func_49E1(var_0) {
   var_8.var_E1 = 0;
   var_8.getclosestpointonnavmesh3d = 100;
   var_8.followspeed = 40;
-  var_8.triggerportableradarping = self;
+  var_8.owner = self;
   var_8 setotherent(self);
   var_8.team = self.team;
   var_8 setmaxpitchroll(45, 45);
@@ -89,32 +89,32 @@ func_49E1(var_0) {
   var_8 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", self);
   var_8.targetpos = var_6;
   var_8.var_4BF7 = var_4;
-  var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].var_39B);
+  var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].weaponinfo);
   var_9 linkto(var_8, level.heliheight[var_0].weaponswitchendedsupportbox, (0, 0, 0), (0, 0, 0));
   var_9 setModel(level.heliheight[var_0].var_13CA9);
   var_9.angles = var_8.angles;
-  var_9.triggerportableradarping = var_8.triggerportableradarping;
+  var_9.owner = var_8.owner;
   var_9.team = self.team;
   var_9 getvalidattachments();
   var_9.vehicle = var_8;
   var_8.mgturretleft = var_9;
   var_8.mgturretleft setdefaultdroppitch(0);
-  var_0A = var_8.origin + anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * -100 + (0, 0, 50);
-  var_9.killcament = spawn("script_model", var_0A);
+  var_10 = var_8.origin + anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * -100 + (0, 0, 50);
+  var_9.killcament = spawn("script_model", var_10);
   var_9.killcament setscriptmoverkillcam("explosive");
   var_9.killcament linkto(var_8, "tag_origin");
-  var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].var_39B);
+  var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].weaponinfo);
   var_9 linkto(var_8, level.heliheight[var_0].weaponswitchendedtomastrike, (0, 0, 0), (0, 0, 0));
   var_9 setModel(level.heliheight[var_0].var_13CAA);
   var_9.angles = var_8.angles;
-  var_9.triggerportableradarping = var_8.triggerportableradarping;
+  var_9.owner = var_8.owner;
   var_9.team = self.team;
   var_9 getvalidattachments();
   var_9.vehicle = var_8;
   var_8.mgturretright = var_9;
   var_8.mgturretright setdefaultdroppitch(0);
-  var_0A = var_8.origin + anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * 100 + (0, 0, 50);
-  var_9.killcament = spawn("script_model", var_0A);
+  var_10 = var_8.origin + anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * 100 + (0, 0, 50);
+  var_9.killcament = spawn("script_model", var_10);
   var_9.killcament setscriptmoverkillcam("explosive");
   var_9.killcament linkto(var_8, "tag_origin");
   if(level.teambased) {
@@ -141,7 +141,7 @@ func_49E1(var_0) {
   var_8 thread func_AADE();
   var_8 thread func_AAD6();
   level.var_AD89 = var_8;
-  var_8.triggerportableradarping scripts\mp\matchdata::logkillstreakevent(level.heliheight[var_8.heliheightoffset].streakname, var_8.targetpos);
+  var_8.owner scripts\mp\matchdata::logkillstreakevent(level.heliheight[var_8.heliheightoffset].streakname, var_8.targetpos);
   return var_8;
 }
 
@@ -174,17 +174,17 @@ func_AACF() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     thread func_AAD5();
     return;
   }
 
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self endon("owner_gone");
   self vehicle_setspeed(self.followspeed, 20, 20);
   for(;;) {
-    if(isDefined(self.triggerportableradarping) && isalive(self.triggerportableradarping)) {
-      var_0 = func_AAD0(self.triggerportableradarping.origin);
+    if(isDefined(self.owner) && isalive(self.owner)) {
+      var_0 = func_AAD0(self.owner.origin);
       if(isDefined(var_0) && var_0 != self.var_4BF7) {
         self.var_4BF7 = var_0;
         func_AAD7();
@@ -200,8 +200,8 @@ func_AAD7() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("death");
+  self.owner endon("disconnect");
   self endon("owner_gone");
   self notify("lbSupport_moveToPlayer");
   self endon("lbSupport_moveToPlayer");
@@ -222,7 +222,7 @@ func_AADB() {
 func_AAE1() {
   level endon("game_ended");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self endon("owner_gone");
   var_0 = level.heliheight[self.heliheightoffset].timeout;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
@@ -233,7 +233,7 @@ func_AADD() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping waittill("killstreak_disowned");
+  self.owner waittill("killstreak_disowned");
   self notify("owner_gone");
   thread func_AAD5();
 }
@@ -242,13 +242,13 @@ func_AADC() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self endon("owner_gone");
   for(;;) {
-    self.triggerportableradarping waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D);
-    var_9 = scripts\mp\utility::func_13CA1(var_9, var_0D);
+    self.owner waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    var_9 = scripts\mp\utility::func_13CA1(var_9, var_13);
     if(isplayer(var_1)) {
-      if(var_1 != self.triggerportableradarping && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_1.team == self.team) {
+      if(var_1 != self.owner && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_1.team == self.team) {
         self setlookatent(var_1);
         if(isDefined(self.mgturretleft)) {
           self.mgturretleft settargetentity(var_1);
@@ -265,9 +265,9 @@ func_AADC() {
 func_AADE() {
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self endon("owner_gone");
-  level scripts\engine\utility::waittill_any_3("round_end_finished", "game_ended");
+  level scripts\engine\utility::waittill_any("round_end_finished", "game_ended");
   thread func_AAD5();
 }
 
@@ -307,9 +307,9 @@ func_AAD4() {
   level endon("game_ended");
   self setCanDamage(1);
   for(;;) {
-    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D);
-    var_9 = scripts\mp\utility::func_13CA1(var_9, var_0D);
-    if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_1)) {
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    var_9 = scripts\mp\utility::func_13CA1(var_9, var_13);
+    if(!scripts\mp\weapons::friendlyfirecheck(self.owner, var_1)) {
       continue;
     }
 
@@ -326,9 +326,9 @@ func_AAD4() {
     }
 
     self.wasdamaged = 1;
-    var_0E = var_0;
+    var_14 = var_0;
     if(isplayer(var_1)) {
-      if(var_1 != self.triggerportableradarping && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_1.team == self.team) {
+      if(var_1 != self.owner && distance2d(var_1.origin, self.origin) <= self.var_11587 && !var_1 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_1.team == self.team) {
         self setlookatent(var_1);
         if(isDefined(self.mgturretleft)) {
           self.mgturretleft settargetentity(var_1);
@@ -342,13 +342,13 @@ func_AAD4() {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
       if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
         if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-          var_0E = var_0E + var_0 * level.armorpiercingmod;
+          var_14 = var_14 + var_0 * level.armorpiercingmod;
         }
       }
     }
 
-    if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-      var_1.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
+    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+      var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
     }
 
     if(isDefined(var_9)) {
@@ -360,31 +360,31 @@ func_AAD4() {
         case "ac130_40mm_mp":
         case "ac130_105mm_mp":
           self.largeprojectiledamage = 1;
-          var_0E = self.maxhealth + 1;
+          var_14 = self.maxhealth + 1;
           break;
 
         case "sam_projectile_mp":
           self.largeprojectiledamage = 1;
-          var_0E = self.maxhealth * 0.25;
+          var_14 = self.maxhealth * 0.25;
           break;
 
         case "emp_grenade_mp":
-          var_0E = 0;
+          var_14 = 0;
           thread func_AACE();
           break;
 
         case "osprey_player_minigun_mp":
           self.largeprojectiledamage = 0;
-          var_0E = var_0E * 2;
+          var_14 = var_14 * 2;
           break;
       }
 
-      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_9, self);
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_9, self);
     }
 
-    self.var_E1 = self.var_E1 + var_0E;
+    self.var_E1 = self.var_E1 + var_14;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_1 notify("destroyed_helicopter");
         var_1 notify("destroyed_killstreak", var_9);
         thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_little_bird", var_1);
@@ -392,8 +392,8 @@ func_AAD4() {
         var_1 thread scripts\mp\rank::scoreeventpopup("destroyed_little_bird");
       }
 
-      if(isDefined(self.triggerportableradarping)) {
-        self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer("lbguard_destroyed");
+      if(isDefined(self.owner)) {
+        self.owner thread scripts\mp\utility::leaderdialogonplayer("lbguard_destroyed");
       }
 
       self notify("death");
@@ -406,7 +406,7 @@ func_AACE() {
   self notify("lbSupport_EMPGrenaded");
   self endon("lbSupport_EMPGrenaded");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
   self.empgrenaded = 1;
   if(isDefined(self.mgturretright)) {
@@ -626,7 +626,7 @@ func_AACC() {
 
 func_AACD() {
   self notify("stop_shooting");
-  if(isDefined(self.vehicle.triggerportableradarping)) {
-    self.vehicle setlookatent(self.vehicle.triggerportableradarping);
+  if(isDefined(self.vehicle.owner)) {
+    self.vehicle setlookatent(self.vehicle.owner);
   }
 }

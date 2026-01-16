@@ -333,7 +333,7 @@ func_3E94(var_0, var_1) {
 
     if(var_0.var_BF1B / 8 >= var_5) {
       if(level.var_D9E5["optionalunlocks"].size > 0) {
-        level.var_D9E5["optionalunlocks"] = scripts\engine\utility::array_randomize(level.var_D9E5["optionalunlocks"]);
+        level.var_D9E5["optionalunlocks"] = ::scripts\engine\utility::array_randomize(level.var_D9E5["optionalunlocks"]);
 
         foreach(var_7 in level.var_D9E5["optionalunlocks"]) {
           if(scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], var_7)) {
@@ -426,8 +426,9 @@ func_3E94(var_0, var_1) {
     var_0.var_F1B5 = var_3;
     var_0.nodes = scripts\engine\utility::array_remove(var_0.nodes, var_3);
     var_0.nodes = scripts\engine\utility::array_randomize(var_0.nodes);
-  } else
+  } else {
     var_0.var_F1B8 = "none";
+  }
 
   return var_0;
 }
@@ -460,8 +461,9 @@ func_13C06(var_0, var_1) {
     }
 
     var_6 = 2.8;
-  } else if(var_0 == "iw7_devastator")
+  } else if(var_0 == "iw7_devastator") {
     var_6 = 0.5;
+  }
   else if(var_0 == "iw7_m8") {
     var_6 = 0.2;
   } else if(var_0 == "iw7_kbs") {
@@ -472,8 +474,9 @@ func_13C06(var_0, var_1) {
     }
 
     var_6 = -1;
-  } else if(var_0 == "iw7_ripper")
+  } else if(var_0 == "iw7_ripper") {
     var_6 = -1;
+  }
   else if(var_0 == "iw7_ump45") {
     if(var_7) {
       var_2 = "silenced_smg";
@@ -507,8 +510,9 @@ func_13C06(var_0, var_1) {
   } else if(var_0 == "iw7_sdfshotty") {
     var_2 = "large_shotgun";
     var_6 = -1.2;
-  } else if(var_0 == "iw7_mauler")
+  } else if(var_0 == "iw7_mauler") {
     var_2 = "extra_large";
+  }
 
   switch (var_2) {
     case "extra_large":
@@ -629,8 +633,9 @@ func_13C06(var_0, var_1) {
         if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "locker_weapon") {
           var_3 = var_11;
           break;
-        } else
+        } else {
           var_4 = var_11;
+        }
       }
     }
 
@@ -643,8 +648,9 @@ func_13C06(var_0, var_1) {
         if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "locker_weapon") {
           var_3 = var_11;
           break;
-        } else
+        } else {
           var_4 = var_11;
+        }
       }
     }
 
@@ -846,8 +852,9 @@ func_8835() {
     self.var_87EB["fx_tag"] = var_0 scripts\engine\utility::spawn_tag_origin();
     self.var_87EB["fx_tag"].origin = self.var_87EB["fx_tag"].origin + anglesToForward(var_0.angles) * 47.9;
     self.var_87EB["fx_tag"].origin = self.var_87EB["fx_tag"].origin + anglestoup(var_0.angles) * 52;
-  } else
-    self.var_87EB["fx_tag"] = scripts\engine\utility::spawn_tag_origin();
+  } else {
+    self.var_87EB["fx_tag"] = ::scripts\engine\utility::spawn_tag_origin();
+  }
 
   if(!isDefined(var_0)) {
     self.var_87EB["fx_tag"].origin = self.origin + anglesToForward(self.angles) * -2.0;

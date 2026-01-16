@@ -252,8 +252,9 @@ func_5114(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_7++;
       scripts\engine\utility::waitframe();
     }
-  } else
+  } else {
     self moveto(var_1, var_2, var_3, var_4);
+  }
 }
 
 findclosestunobstructedpointonnavmeshradius(var_0, var_1, var_2, var_3) {

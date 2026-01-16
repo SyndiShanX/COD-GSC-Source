@@ -24,7 +24,7 @@ func_AC1A(var_0, var_1) {
 
 func_AC13() {
   self endon("LGM_player_endMonitorFire");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   if(isDefined(self)) {
     func_AC04();
   }
@@ -72,31 +72,31 @@ func_AC06(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = var_5.origin;
   var_8 = anglesToForward(var_5.angles);
   var_9 = anglestoup(var_5.angles);
-  var_0A = anglestoright(var_5.angles);
+  var_10 = anglestoright(var_5.angles);
   var_5 delete();
   playFX(level._effect["laser_guided_launcher_missile_split"], var_7, var_8, var_9);
-  var_0B = [];
-  for(var_0C = 0; var_0C < 2; var_0C++) {
-    var_0D = 20;
-    var_0E = 0;
-    if(var_0C == 0) {
-      var_0E = 20;
-    } else if(var_0C == 1) {
-      var_0E = -20;
-    } else if(var_0C == 2) {}
+  var_11 = [];
+  for(var_12 = 0; var_12 < 2; var_12++) {
+    var_13 = 20;
+    var_14 = 0;
+    if(var_12 == 0) {
+      var_14 = 20;
+    } else if(var_12 == 1) {
+      var_14 = -20;
+    } else if(var_12 == 2) {}
 
-    var_0F = rotatepointaroundvector(var_0A, var_8, var_0D);
-    var_0F = rotatepointaroundvector(var_9, var_0F, var_0E);
-    var_10 = scripts\mp\utility::_magicbullet(var_1, var_7, var_7 + var_0F * 180, self);
+    var_15 = rotatepointaroundvector(var_10, var_8, var_13);
+    var_15 = rotatepointaroundvector(var_9, var_15, var_14);
+    var_10 = scripts\mp\utility::_magicbullet(var_1, var_7, var_7 + var_15 * 180, self);
     var_10.var_9E8F = 1;
-    var_0B[var_0B.size] = var_10;
+    var_11[var_11.size] = var_10;
     scripts\engine\utility::waitframe();
   }
 
   wait(var_4);
-  var_0B = func_AC16(var_0B);
-  if(var_0B.size > 0) {
-    foreach(var_12 in var_0B) {
+  var_11 = func_AC16(var_11);
+  if(var_11.size > 0) {
+    foreach(var_12 in var_11) {
       var_6.var_B8AC[var_6.var_B8AC.size] = var_12;
       var_12 missile_settargetent(var_6);
       thread func_AC15(var_6, var_12);
@@ -107,7 +107,7 @@ func_AC06(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 func_AC15(var_0, var_1) {
-  var_1 scripts\engine\utility::waittill_any_3("death", "missile_pairedWithFlare", "LGM_missile_abandoned");
+  var_1 scripts\engine\utility::waittill_any("death", "missile_pairedWithFlare", "LGM_missile_abandoned");
   if(isDefined(var_0.var_B8AC) && var_0.var_B8AC.size > 0) {
     var_0.var_B8AC = scripts\engine\utility::array_remove(var_0.var_B8AC, var_1);
     var_0.var_B8AC = func_AC16(var_0.var_B8AC);
@@ -143,16 +143,16 @@ func_AC09(var_0, var_1) {
 
       var_4 = undefined;
       var_5 = 0;
-      var_0B = scripts\engine\utility::ter_op(gettime() > var_6, 8000, 800);
-      var_0C = anglesToForward(self getplayerangles());
-      var_0D = self getEye() + var_0C * 12;
-      var_0E = bulletTrace(var_0D, var_0D + var_0C * var_0B, 1, self, 0, 0, 0);
-      var_2 = var_0E["position"];
+      var_11 = scripts\engine\utility::ter_op(gettime() > var_6, 8000, 800);
+      var_12 = anglesToForward(self getplayerangles());
+      var_13 = self getEye() + var_12 * 12;
+      var_14 = bulletTrace(var_13, var_13 + var_12 * var_11, 1, self, 0, 0, 0);
+      var_2 = var_14["position"];
     } else {
       var_2 = var_7.origin;
-      var_0F = !isDefined(var_3) || var_7 != var_3;
+      var_15 = !isDefined(var_3) || var_7 != var_3;
       var_3 = var_7;
-      if(var_0F || !isDefined(var_4)) {
+      if(var_15 || !isDefined(var_4)) {
         var_4 = gettime() + 1500;
         level thread func_AC11(var_3, self);
       } else if(gettime() >= var_4) {
@@ -183,7 +183,7 @@ func_AC09(var_0, var_1) {
         } else {
           break;
         }
-      } else if(var_0F) {
+      } else if(var_15) {
         func_AC19(var_3, self, var_0.var_B8AC);
       }
     }
@@ -217,7 +217,7 @@ func_AC17(var_0) {
 }
 
 func_AC14(var_0, var_1) {
-  var_1 scripts\engine\utility::waittill_any_3("death", "disconnect", "LGM_player_endMonitorFire");
+  var_1 scripts\engine\utility::waittill_any("death", "disconnect", "LGM_player_endMonitorFire");
   foreach(var_3 in var_0.var_B8AC) {
     if(isvalidmissile(var_3)) {
       var_3 missile_cleartarget();
@@ -238,7 +238,7 @@ func_AC11(var_0, var_1) {
   var_2 = scripts\mp\utility::outlineenableforplayer(var_0, "orange", var_1, 1, 0, "killstreak_personal");
   level thread func_AC0F(var_1, "maaws_reticle_tracking", 1.5, "LGM_player_lockingDone");
   level thread func_AC10(var_0, var_1);
-  var_1 scripts\engine\utility::waittill_any_3("death", "disconnect", "LGM_player_endMonitorFire", "LGM_player_newMissilesFired", "LGM_player_targetLost", "LGM_player_lockedOn", "LGM_player_allMissilesDestroyed", "LGM_player_targetDied");
+  var_1 scripts\engine\utility::waittill_any("death", "disconnect", "LGM_player_endMonitorFire", "LGM_player_newMissilesFired", "LGM_player_targetLost", "LGM_player_lockedOn", "LGM_player_allMissilesDestroyed", "LGM_player_targetDied");
   if(isDefined(var_0)) {
     scripts\mp\utility::outlinedisable(var_2, var_0);
   }
@@ -252,7 +252,7 @@ func_AC11(var_0, var_1) {
 func_AC0C(var_0, var_1, var_2) {
   var_1 endon("death");
   var_0 waittill("death");
-  var_1.var_AC03[var_2] = scripts\engine\utility::array_remove(var_1.var_AC03[var_2], var_0);
+  var_1.var_AC03[var_2] = ::scripts\engine\utility::array_remove(var_1.var_AC03[var_2], var_0);
   if(var_1.var_AC03[var_2].size == 0) {
     var_1.var_AC03[var_2] = undefined;
     var_1 notify("LGM_target_lockedMissilesDestroyed");
@@ -321,15 +321,15 @@ func_AC0E(var_0, var_1, var_2, var_3) {
   }
 
   var_0.var_AC03[var_5] = var_4;
-  foreach(var_0B in var_4) {
-    level thread func_AC0C(var_0B, var_0, var_5);
+  foreach(var_11 in var_4) {
+    level thread func_AC0C(var_11, var_0, var_5);
   }
 
-  var_0D = 1;
-  while(var_0D) {
-    var_0E = var_0 scripts\engine\utility::waittill_any_return("death", "LGM_target_lockedMissilesDestroyed");
-    if(var_0E == "death") {
-      var_0D = 0;
+  var_13 = 1;
+  while(var_13) {
+    var_14 = var_0 scripts\engine\utility::waittill_any_return("death", "LGM_target_lockedMissilesDestroyed");
+    if(var_14 == "death") {
+      var_13 = 0;
       if(isDefined(var_0)) {
         var_0.var_AC03[var_5] = undefined;
       }
@@ -337,10 +337,10 @@ func_AC0E(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(var_0E == "LGM_target_lockedMissilesDestroyed") {
+    if(var_14 == "LGM_target_lockedMissilesDestroyed") {
       waittillframeend;
       if(!isDefined(var_0.var_AC03[var_5]) || var_0.var_AC03[var_5].size == 0) {
-        var_0D = 0;
+        var_13 = 0;
       }
     }
   }

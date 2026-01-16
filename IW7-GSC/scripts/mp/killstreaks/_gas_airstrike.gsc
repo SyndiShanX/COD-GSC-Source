@@ -34,7 +34,7 @@ init() {
   var_0.var_C263 = "gas_strike_mp";
   var_0.killcamoffset = (0, 0, 60);
   level.planeconfigs["gas_airstrike"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("gas_airstrike", ::onuse);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("gas_airstrike", ::onuse);
 }
 
 onuse(var_0, var_1) {
@@ -103,8 +103,8 @@ func_5D35(var_0, var_1) {
 
   wait(1);
   var_9 = bulletTrace(var_6.origin, var_6.origin + (0, 0, -1000000), 0, undefined);
-  var_0A = var_9["position"];
-  var_5 func_C4CD(var_0, var_0A, var_1);
+  var_10 = var_9["position"];
+  var_5 func_C4CD(var_0, var_10, var_1);
   var_6 delete();
   var_5 delete();
   level.var_C22F--;
@@ -123,7 +123,7 @@ spawnbomb(var_0, var_1, var_2) {
 func_C4CD(var_0, var_1, var_2) {
   var_3 = level.planeconfigs[var_2];
   var_4 = spawn("trigger_radius", var_1, 0, var_3.var_5FEF, var_3.var_5FEA);
-  var_4.triggerportableradarping = var_0;
+  var_4.owner = var_0;
   var_5 = var_3.var_5FEF;
   var_6 = spawnfx(var_3.var_5FF4, var_1);
   triggerfx(var_6);
@@ -133,8 +133,8 @@ func_C4CD(var_0, var_1, var_2) {
   var_8 linkto(var_4);
   self.killcament = var_8;
   while(var_7 > 0) {
-    foreach(var_0A in level.characters) {
-      var_0A applygaseffect(var_0, var_1, var_4, self, var_3.var_5FE8);
+    foreach(var_10 in level.characters) {
+      var_10 applygaseffect(var_0, var_1, var_4, self, var_3.var_5FE8);
     }
 
     wait(var_3.var_5FE7);
@@ -150,7 +150,7 @@ applygaseffect(var_0, var_1, var_2, var_3, var_4) {
   if(var_0 scripts\mp\utility::isenemy(self) && isalive(self) && self istouching(var_2)) {
     var_3 radiusdamage(self.origin, 1, var_4, var_4, var_0, "MOD_RIFLE_BULLET", "gas_strike_mp");
     if(!scripts\mp\utility::isusingremote()) {
-      var_5 = scripts\mp\perks\_perkfunctions::applystunresistence(var_0, self, 2);
+      var_5 = scripts\mp\perks\perkfunctions::applystunresistence(var_0, self, 2);
       self shellshock("default", var_5);
     }
   }

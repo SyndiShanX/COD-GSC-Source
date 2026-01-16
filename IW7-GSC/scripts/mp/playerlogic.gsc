@@ -424,11 +424,11 @@ tivalidationcheck() {
       continue;
     }
 
-    if(isDefined(var_2.triggerportableradarping)) {
-      scripts\mp\hud_message::showsplash("destroyed_insertion", undefined, var_2.triggerportableradarping);
+    if(isDefined(var_2.owner)) {
+      scripts\mp\hud_message::showsplash("destroyed_insertion", undefined, var_2.owner);
     }
 
-    scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
+    scripts\mp\perks\perkfunctions::deleteti(self.setspawnpoint);
     return 0;
   }
 
@@ -595,9 +595,9 @@ spawnplayer(var_0) {
       }
     }
 
-    foreach(var_0C in level.ugvs) {
-      if(distancesquared(var_0C.origin, var_1.playerspawnpos) < 1024) {
-        var_0C notify("damage", 5000, var_0C.triggerportableradarping, (0, 0, 0), (0, 0, 0), "MOD_EXPLOSIVE", "", "", "", undefined, "killstreak_jammer_mp");
+    foreach(var_12 in level.ugvs) {
+      if(distancesquared(var_12.origin, var_1.playerspawnpos) < 1024) {
+        var_12 notify("damage", 5000, var_12.owner, (0, 0, 0), (0, 0, 0), "MOD_EXPLOSIVE", "", "", "", undefined, "killstreak_jammer_mp");
       }
     }
 
@@ -612,10 +612,10 @@ spawnplayer(var_0) {
   } else if(isDefined(self.isspawningonbattlebuddy) && isDefined(self.battlebuddy)) {
     var_6 = undefined;
     var_7 = undefined;
-    var_0E = scripts\mp\battlebuddy::checkbuddyspawn();
-    if(var_0E.status == 0) {
-      var_6 = var_0E.origin;
-      var_7 = var_0E.angles;
+    var_14 = scripts\mp\battlebuddy::checkbuddyspawn();
+    if(var_14.status == 0) {
+      var_6 = var_14.origin;
+      var_7 = var_14.angles;
     } else {
       var_1 = self[[level.getspawnpoint]]();
       var_6 = var_1.origin;
@@ -649,7 +649,7 @@ spawnplayer(var_0) {
   }
 
   setspawnvariables();
-  var_0F = self.hasspawned;
+  var_15 = self.hasspawned;
   self.fauxdeath = undefined;
   if(!var_0) {
     self.killsthislife = [];
@@ -701,7 +701,7 @@ spawnplayer(var_0) {
     }
 
     addtoalivecount();
-    if(!var_0F || scripts\mp\utility::gamehasstarted() || scripts\mp\utility::gamehasstarted() && level.ingraceperiod && self.hasdonecombat) {
+    if(!var_15 || scripts\mp\utility::gamehasstarted() || scripts\mp\utility::gamehasstarted() && level.ingraceperiod && self.hasdonecombat) {
       removefromlivescount();
     }
 
@@ -817,7 +817,7 @@ spawnplayer(var_0) {
   }
 
   if(scripts\mp\utility::getintproperty("scr_showperksonspawn", 1) == 1 && game["state"] != "postgame") {
-    scripts\mp\perks\_perks::func_F7C5("ui_spawn_perk_", self.pers["loadoutPerks"]);
+    scripts\mp\perks\perks::func_F7C5("ui_spawn_perk_", self.pers["loadoutPerks"]);
     self setclientomnvar("ui_spawn_abilities_show", 1);
   }
 
@@ -962,7 +962,7 @@ spawnspectatormapcam(var_0) {
   } else if(self.versusdone) {
     var_7 = "versus_menu_done";
   } else {
-    var_7 = scripts\engine\utility::waittill_any_timeout_1(2, "versus_menu_done", "prematch_over");
+    var_7 = scripts\engine\utility::waittill_any_timeout(2, "versus_menu_done", "prematch_over");
   }
 
   if(var_7 == "timeout") {
@@ -1233,59 +1233,59 @@ spawnspectatormapcam(var_0) {
   wait(0.25);
   self visionsetfadetoblackforplayer("", 0.75);
   self playlocalsound("mp_camera_intro_whoosh");
-  var_0A = var_3;
+  var_10 = var_3;
   var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
-  var_0B = 0;
+  var_11 = 0;
   for(;;) {
-    if(isDefined(var_0A.speedadjust)) {
-      var_0C = 1 / var_0A.speedadjust;
-      var_0D = var_0C * distance(var_0A.origin, var_4.origin);
+    if(isDefined(var_10.speedadjust)) {
+      var_12 = 1 / var_10.speedadjust;
+      var_13 = var_12 * distance(var_10.origin, var_4.origin);
     } else {
-      var_0D = distance(var_0A.origin, var_4.origin);
+      var_13 = distance(var_10.origin, var_4.origin);
     }
 
-    var_0B = var_0B + var_0D;
-    var_0A.distancetotarg = var_0D;
-    var_0A = var_4;
-    if(isDefined(var_0A.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_0A.target, "targetname");
+    var_11 = var_11 + var_13;
+    var_10.distancetotarg = var_13;
+    var_10 = var_4;
+    if(isDefined(var_10.target)) {
+      var_4 = scripts\engine\utility::getstruct(var_10.target, "targetname");
       continue;
     }
 
     break;
   }
 
-  var_0A.eol = 1;
-  var_0A = var_3;
+  var_10.eol = 1;
+  var_10 = var_3;
   var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
   for(;;) {
-    var_0E = var_0A.distancetotarg / var_0B;
-    var_0F = var_0E * var_1;
+    var_14 = var_10.distancetotarg / var_11;
+    var_15 = var_14 * var_1;
     if(isDefined(var_4.eol)) {
-      var_10 = var_0F / 2;
+      var_10 = var_15 / 2;
     } else {
       var_10 = 0;
     }
 
-    if(isDefined(var_0A.fil)) {
-      var_11 = var_0F / 2;
+    if(isDefined(var_10.fil)) {
+      var_11 = var_15 / 2;
     } else {
       var_11 = 0;
     }
 
-    var_6 moveto(var_4.origin, var_0F, var_11, var_10);
-    var_6 rotateto(var_4.angles, var_0F, var_11, var_10);
+    var_6 moveto(var_4.origin, var_15, var_11, var_10);
+    var_6 rotateto(var_4.angles, var_15, var_11, var_10);
     if(isDefined(var_4.eol)) {
-      var_12 = int(var_0F / 2);
+      var_12 = int(var_15 / 2);
       wait(var_12);
       wait(var_12);
     } else {
-      wait(var_0F);
+      wait(var_15);
     }
 
-    var_0A = var_4;
-    if(isDefined(var_0A.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_0A.target, "targetname");
+    var_10 = var_4;
+    if(isDefined(var_10.target)) {
+      var_4 = scripts\engine\utility::getstruct(var_10.target, "targetname");
       continue;
     }
 
@@ -1972,8 +1972,8 @@ callback_playerconnect() {
   }
 
   if(!isDefined(self.pers["team"])) {
-    var_0A = scripts\mp\utility::gettimepassed() / 1000 + 6;
-    if(var_0A < level.prematchperiod) {
+    var_10 = scripts\mp\utility::gettimepassed() / 1000 + 6;
+    if(var_10 < level.prematchperiod) {
       spawnspectatormapcam();
       self lerpfovbypreset("default");
       self setclientomnvar("ui_mapshot_camera", 0);
@@ -2025,12 +2025,12 @@ callback_playerconnect() {
 
   self visionsetfadetoblackforplayer("", 0.5);
   connect_validateplayerteam();
-  var_0B = self.pers["team"];
+  var_11 = self.pers["team"];
   if(scripts\mp\utility::matchmakinggame() && !isDefined(self.pers["isBot"]) && !self ismlgspectator() && getdvarint("team_consistency_fix")) {
-    var_0B = self.sessionteam;
+    var_11 = self.sessionteam;
   }
 
-  scripts\mp\menus::addtoteam(var_0B, 1);
+  scripts\mp\menus::addtoteam(var_11, 1);
   if(self ismlgspectator()) {
     thread spawnspectator();
     return;
@@ -2250,7 +2250,7 @@ initplayerstats() {
     scripts\mp\persistence::statsetchild("round", "score", 0);
   }
 
-  self.destroynavrepulsor = scripts\mp\utility::getpersstat("score");
+  self.score = scripts\mp\utility::getpersstat("score");
   if(!isDefined(self.pers["suicides"])) {
     scripts\mp\utility::initpersstat("suicides");
   }
@@ -2405,7 +2405,7 @@ initplayerstats() {
   }
 
   scripts\mp\utility::initpersstat("longestStreak");
-  self.pers["lives"] = scripts\mp\utility::getgametypenumlives();
+  self.pers["lives"] = ::scripts\mp\utility::getgametypenumlives();
   scripts\mp\persistence::statsetchild("round", "killStreak", 0);
   scripts\mp\persistence::statsetchild("round", "loss", 0);
   scripts\mp\persistence::statsetchild("round", "win", 0);
@@ -2465,7 +2465,7 @@ incrementalivecount(var_0, var_1) {
     level.alive_players[var_0] = [];
   }
 
-  level.alive_players[var_0] = scripts\engine\utility::array_add(level.alive_players[var_0], self);
+  level.alive_players[var_0] = ::scripts\engine\utility::array_add(level.alive_players[var_0], self);
   if(scripts\mp\utility::istrue(var_1) && var_0 == "allies" || var_0 == "axis") {
     var_2 = level.otherteam[var_0];
     foreach(var_4 in level.players) {

@@ -44,8 +44,9 @@ func_8CDF() {
       }
 
       continue;
-    } else if(!var_2)
+    } else if(!var_2) {
       var_2 = 1;
+    }
 
     var_6 = level.var_D127;
     var_7 = [];
@@ -153,8 +154,9 @@ func_11AD9() {
     if(!scripts\engine\utility::array_contains(level.var_A056.var_7001, self)) {
       level.var_A056.var_7001 = scripts\engine\utility::array_add(level.var_A056.var_7001, self);
     }
-  } else if(scripts\engine\utility::array_contains(level.var_A056.var_7001, self))
+  } else if(scripts\engine\utility::array_contains(level.var_A056.var_7001, self)) {
     level.var_A056.var_7001 = scripts\engine\utility::array_remove(level.var_A056.var_7001, self);
+  }
 }
 
 func_F660(var_0, var_1) {
@@ -252,8 +254,9 @@ func_11ADE() {
       if(level.var_90E2.var_90E0 < 0.25) {
         level.var_90E2.var_90E0 = 0.25;
       }
-    } else if(var_2 == "fly" && var_6 == "fly")
+    } else if(var_2 == "fly" && var_6 == "fly") {
       var_8 = -4000;
+    }
     else {
       var_8 = 0;
     }

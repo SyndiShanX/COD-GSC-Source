@@ -70,10 +70,10 @@ force_panels_powered_on() {
     var_2.powered_on = 1;
   }
 
-  var_0A = scripts\engine\utility::getstruct("fridge_trap", "script_noteworthy");
-  var_0A.powered_on = 1;
-  var_0B = scripts\engine\utility::getstruct("electric_trap", "script_noteworthy");
-  var_0B.powered_on = 1;
+  var_10 = scripts\engine\utility::getstruct("fridge_trap", "script_noteworthy");
+  var_10.powered_on = 1;
+  var_11 = scripts\engine\utility::getstruct("electric_trap", "script_noteworthy");
+  var_11.powered_on = 1;
 }
 
 lasers_trap_init() {
@@ -97,21 +97,21 @@ lasers_trap_init() {
         continue;
       }
 
-      var_0A = scripts\engine\utility::get_array_of_closest(var_6.origin, var_4, [var_6], 1, 48, 0)[0];
-      if(isDefined(var_0A) && scripts\engine\utility::array_contains(level.lasertriggers, var_0A)) {
+      var_10 = scripts\engine\utility::get_array_of_closest(var_6.origin, var_4, [var_6], 1, 48, 0)[0];
+      if(isDefined(var_10) && scripts\engine\utility::array_contains(level.lasertriggers, var_10)) {
         continue;
       }
 
-      if(isDefined(var_0A) && var_0A.origin[2] < var_6.origin[2]) {
+      if(isDefined(var_10) && var_10.origin[2] < var_6.origin[2]) {
         continue;
       }
 
-      var_0A = scripts\engine\utility::get_array_of_closest(var_9.origin, var_4, [var_9], 1, 48, 0)[0];
-      if(isDefined(var_0A) && scripts\engine\utility::array_contains(level.lasertriggers, var_0A)) {
+      var_10 = scripts\engine\utility::get_array_of_closest(var_9.origin, var_4, [var_9], 1, 48, 0)[0];
+      if(isDefined(var_10) && scripts\engine\utility::array_contains(level.lasertriggers, var_10)) {
         continue;
       }
 
-      if(isDefined(var_0A) && var_0A.origin[2] < var_9.origin[2]) {
+      if(isDefined(var_10) && var_10.origin[2] < var_9.origin[2]) {
         continue;
       }
 
@@ -175,7 +175,7 @@ create_laser_beam_fx(var_0, var_1, var_2) {
       var_9 = distance(var_3.origin, var_4.origin);
       var_8 = spawn("trigger_rotatable_radius", var_3.origin, 0, 2, var_9);
       var_8.angles = vectortoangles(var_4.origin - var_3.origin) + (90, 0, 0);
-      var_8.triggerportableradarping = var_2;
+      var_8.owner = var_2;
       thread damage_enemies_in_trigger(var_4, var_3, var_8);
       level thread func_403A(var_8);
     }
@@ -223,7 +223,7 @@ laser_eye_fx() {
   var_0 = spawnfxforclient(level._effect["vfx_zb_laser_screen"], self getEye(), self);
   wait(0.1);
   triggerfx(var_0);
-  scripts\engine\utility::waittill_any_timeout_1(2, "last_stand");
+  scripts\engine\utility::waittill_any_timeout(2, "last_stand");
   var_0 delete();
 }
 
@@ -273,7 +273,7 @@ damage_enemies_in_trigger(var_0, var_1, var_2, var_3) {
       }
 
       thread kill_fx_on_death(var_0, var_1);
-      thread run_laser_death(var_4, var_2.triggerportableradarping);
+      thread run_laser_death(var_4, var_2.owner);
       scripts\engine\utility::waitframe();
     }
   }
@@ -339,10 +339,10 @@ use_lasers_trap(var_0, var_1) {
     }
   }
 
-  var_0A = scripts\engine\utility::array_combine(getEntArray("trap_lasers", "script_noteworthy"), getEntArray("trap_lasers_no_trig", "script_noteworthy"));
-  foreach(var_0C in var_0A) {
-    var_0C.triggerent = undefined;
-    var_0C power_on_lasers(var_1);
+  var_10 = scripts\engine\utility::array_combine(getEntArray("trap_lasers", "script_noteworthy"), getEntArray("trap_lasers_no_trig", "script_noteworthy"));
+  foreach(var_12 in var_10) {
+    var_12.triggerent = undefined;
+    var_12 power_on_lasers(var_1);
   }
 
   wait(23);
@@ -351,13 +351,13 @@ use_lasers_trap(var_0, var_1) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("lasertrap_deactiveated", "zmb_comment_vo");
   }
 
-  var_0E = int(90 * level.trapcooldownarray["laser_trap"]);
+  var_14 = int(90 * level.trapcooldownarray["laser_trap"]);
   foreach(var_0 in var_3) {
     level thread scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
-    level thread scripts\cp\cp_interaction::interaction_cooldown(var_0, var_0E);
+    level thread scripts\cp\cp_interaction::interaction_cooldown(var_0, var_14);
   }
 
-  wait(var_0E);
+  wait(var_14);
   foreach(var_5 in var_3) {
     var_6 = getent(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on_green");
@@ -437,8 +437,8 @@ watch_for_obtain_helmet() {
     var_7 = anglesToForward(var_6);
     var_8 = var_2 gettagorigin("tag_eye") + var_7 * 20;
     var_9 = var_8 + var_7 * 15000;
-    var_0A = scripts\common\trace::ray_trace(var_8, var_9);
-    var_0B = var_0A["position"];
+    var_10 = scripts\common\trace::ray_trace(var_8, var_9);
+    var_11 = var_10["position"];
     if(scripts\engine\utility::flag("pulled_out_helmet")) {
       if(!scripts\engine\utility::istrue(level.brute_helm_out_of_bounds)) {
         continue;
@@ -446,12 +446,12 @@ watch_for_obtain_helmet() {
 
       level.brute_helm_out_of_bounds = 0;
       level.helmet_on_brute dontinterpolate();
-      level.helmet_on_brute.origin = var_0B;
+      level.helmet_on_brute.origin = var_11;
       continue;
     }
 
     if(scripts\engine\utility::flag("set_movie_spaceland")) {
-      spawn_brute_helmet(var_0B, var_2);
+      spawn_brute_helmet(var_11, var_2);
     }
   }
 }
@@ -633,7 +633,7 @@ chill_scrnfx(var_0) {
   wait(0.1);
   triggerfx(var_1);
   self dodamage(15, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "iw7_fridgetrap_zm");
-  scripts\engine\utility::waittill_any_timeout_1(2, "last_stand");
+  scripts\engine\utility::waittill_any_timeout(2, "last_stand");
   var_1 delete();
 }
 
@@ -735,14 +735,14 @@ go_to_radio_and_dance(var_0, var_1) {
   var_3 = vectortoangles(var_2);
   self.desired_dance_angles = (0, var_3[1], 0);
   self give_mp_super_weapon(var_1.origin);
-  scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+  scripts\engine\utility::waittill_any("goal", "goal_reached");
   self.is_dancing = 1;
   var_0.dancers[var_0.dancers.size] = self;
 }
 
 release_zombie_on_radio_death(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("fridge_explode", "fridge_death");
+  var_0 scripts\engine\utility::waittill_any("fridge_explode", "fridge_death");
   if(isDefined(self.og_goalradius)) {
     self.objective_playermask_showto = self.og_goalradius;
   }
@@ -841,20 +841,20 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
   for(var_7 = var_1; var_7 < 140 + var_1; var_7 = var_7 + var_6) {
     var_8 = var_0 * var_3;
     var_9 = (cos(var_7) * var_8[0] - sin(var_7) * var_8[1], sin(var_7) * var_8[0] + cos(var_7) * var_8[1], var_8[2]);
-    var_0A = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
-    if(!scripts\cp\loot::is_in_active_volume(var_0A)) {
+    var_10 = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
+    if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
 
-    var_0B = abs(var_0A[2] - self.origin[2]);
-    if(isDefined(var_0A) && distancesquared(var_0A, self.origin) > var_4) {
+    var_11 = abs(var_10[2] - self.origin[2]);
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
     } else {
-      if(var_0B < 200) {
-        var_0C = spawnStruct();
-        var_0C.origin = var_0A;
-        var_0C.occupied = 0;
-        self.attract_positions[self.attract_positions.size] = var_0C;
+      if(var_11 < 200) {
+        var_12 = spawnStruct();
+        var_12.origin = var_10;
+        var_12.occupied = 0;
+        self.attract_positions[self.attract_positions.size] = var_12;
         continue;
       }
 
@@ -865,20 +865,20 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
   for(var_7 = var_1; var_7 < 140 + var_1; var_7 = var_7 + var_6) {
     var_8 = var_0 * var_3 + 40;
     var_9 = (cos(var_7) * var_8[0] - sin(var_7) * var_8[1], sin(var_7) * var_8[0] + cos(var_7) * var_8[1], var_8[2]);
-    var_0A = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
-    if(!scripts\cp\loot::is_in_active_volume(var_0A)) {
+    var_10 = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
+    if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
 
-    var_0B = abs(var_0A[2] - self.origin[2]);
-    if(isDefined(var_0A) && distancesquared(var_0A, self.origin) > var_4) {
+    var_11 = abs(var_10[2] - self.origin[2]);
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
     } else {
-      if(var_0B < 200) {
-        var_0C = spawnStruct();
-        var_0C.origin = var_0A;
-        var_0C.occupied = 0;
-        self.attract_positions[self.attract_positions.size] = var_0C;
+      if(var_11 < 200) {
+        var_12 = spawnStruct();
+        var_12.origin = var_10;
+        var_12.occupied = 0;
+        self.attract_positions[self.attract_positions.size] = var_12;
         continue;
       }
 
@@ -956,13 +956,13 @@ electric_trap_use(var_0, var_1) {
     var_1 thread scripts\cp\cp_vo::try_to_play_vo("elecwater_deactivated", "zmb_comment_vo");
   }
 
-  var_0A = int(90 * level.trapcooldownarray["electric_trap"]);
+  var_10 = int(90 * level.trapcooldownarray["electric_trap"]);
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_5);
-    level thread scripts\cp\cp_interaction::interaction_cooldown(var_5, var_0A);
+    level thread scripts\cp\cp_interaction::interaction_cooldown(var_5, var_10);
   }
 
-  wait(var_0A);
+  wait(var_10);
   foreach(var_5 in var_3) {
     var_6 = getent(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on_green");
@@ -1116,10 +1116,10 @@ use_rain_trap(var_0, var_1) {
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 40));
   var_8 = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_lp_01", (2561.9, 5538.54, 162.494));
   var_9 = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_lp_02", (2804.16, 5413.26, 162.494));
-  var_0A = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_splash_lp_01", (2909.23, 5501.22, 64.1279));
-  var_0B = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_splash_lp_02", (2479.75, 5430.08, 67.123));
-  foreach(var_0D in level.ambient_acid_water) {
-    var_0D hide();
+  var_10 = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_splash_lp_01", (2909.23, 5501.22, 64.1279));
+  var_11 = scripts\engine\utility::play_loopsound_in_space("zmb_acid_sprinkler_splash_lp_02", (2479.75, 5430.08, 67.123));
+  foreach(var_13 in level.ambient_acid_water) {
+    var_13 hide();
   }
 
   if(var_2) {
@@ -1139,12 +1139,12 @@ use_rain_trap(var_0, var_1) {
   var_8 delete();
   var_9 stoploopsound();
   var_9 delete();
-  var_0A stoploopsound();
-  var_0A delete();
-  var_0B stoploopsound();
-  var_0B delete();
-  foreach(var_0D in level.ambient_acid_water) {
-    var_0D show();
+  var_10 stoploopsound();
+  var_10 delete();
+  var_11 stoploopsound();
+  var_11 delete();
+  foreach(var_13 in level.ambient_acid_water) {
+    var_13 show();
   }
 
   if(isDefined(var_1) && isplayer(var_1)) {
@@ -1251,7 +1251,7 @@ rain_dmg_zombie(var_0, var_1) {
 
 listen_for_power() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", "traps_on");
+    level scripts\engine\utility::waittill_any("power_on", "traps_on");
     if(isDefined(self.target)) {
       var_0 = getent(self.target, "targetname");
       if(isDefined(var_0)) {

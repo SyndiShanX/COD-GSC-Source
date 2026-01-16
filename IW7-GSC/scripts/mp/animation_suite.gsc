@@ -77,12 +77,12 @@ gathergroups(var_0) {
       continue;
     }
 
-    var_2[var_7.script_noteworthy] = scripts\engine\utility::array_add(var_2[var_7.script_noteworthy], var_7);
+    var_2[var_7.script_noteworthy] = ::scripts\engine\utility::array_add(var_2[var_7.script_noteworthy], var_7);
   }
 
-  foreach(var_0A in var_2) {
-    var_0B = animsuite_getparentobject(var_0A);
-    animsuite_linkchildrentoparentobject(var_0B, var_0A);
+  foreach(var_10 in var_2) {
+    var_11 = animsuite_getparentobject(var_10);
+    animsuite_linkchildrentoparentobject(var_11, var_10);
   }
 
   return var_2;

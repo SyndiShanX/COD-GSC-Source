@@ -116,23 +116,23 @@ killenemiesinfov() {
   physicsexplosionsphere(var_6, var_3, 1, 2.5);
   var_7 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_8 = scripts\engine\utility::get_array_of_closest(self.origin, var_7, undefined, var_2);
-  foreach(var_0A in var_8) {
-    var_0B = 0;
-    var_0C = var_0A.origin;
-    var_0D = scripts\engine\utility::within_fov(self getEye(), self.angles, var_0C + (0, 0, 30), var_0);
-    if(var_0D) {
-      var_0E = distance2d(self.origin, var_0C);
-      if(var_0E < var_2) {
-        var_0B = 1;
+  foreach(var_10 in var_8) {
+    var_11 = 0;
+    var_12 = var_10.origin;
+    var_13 = scripts\engine\utility::within_fov(self getEye(), self.angles, var_12 + (0, 0, 30), var_0);
+    if(var_13) {
+      var_14 = distance2d(self.origin, var_12);
+      if(var_14 < var_2) {
+        var_11 = 1;
       }
     }
 
-    if(var_0B) {
+    if(var_11) {
       var_4 = anglesToForward(self.angles);
-      var_0F = vectornormalize(var_4) * -100;
-      var_0A setvelocity(vectornormalize(var_0A.origin - self.origin + var_0F) * 800 + (0, 0, 300));
-      var_1 = var_0A.maxhealth;
-      var_0A killtranspondervictim(self, var_1, var_0C, self.origin);
+      var_15 = vectornormalize(var_4) * -100;
+      var_10 setvelocity(vectornormalize(var_10.origin - self.origin + var_15) * 800 + (0, 0, 300));
+      var_1 = var_10.maxhealth;
+      var_10 killtranspondervictim(self, var_1, var_12, self.origin);
     }
   }
 }
@@ -147,7 +147,7 @@ killtranspondervictim(var_0, var_1, var_2, var_3) {
 }
 
 transponderdamage() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_0 waittill("transponder_update");
 }
@@ -236,8 +236,8 @@ watchtransponderaltdetonate(var_0) {
 }
 
 transponderactivate() {
-  self.triggerportableradarping thread timeouttransponder(self);
-  var_0 = self.triggerportableradarping;
+  self.owner thread timeouttransponder(self);
+  var_0 = self.owner;
   var_1 = undefined;
   var_2 = undefined;
   self waittill("missile_stuck", var_3);
@@ -255,7 +255,7 @@ transponderactivate() {
     return;
   }
 
-  self.triggerportableradarping notify("powers_transponder_used", 1);
+  self.owner notify("powers_transponder_used", 1);
   self notify("activated");
   self.activated = 1;
   scripts\cp\cp_weapon::explosivehandlemovers(var_3);
@@ -263,7 +263,7 @@ transponderactivate() {
 
 timeouttransponder(var_0) {
   var_0 endon("missile_stuck");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(5, "death");
+  var_0 scripts\engine\utility::waittill_any_timeout(5, "death");
   self notify("powers_transponder_used", 0);
   placementfailed(var_0);
 }
@@ -280,7 +280,7 @@ transponder_teleportplayer(var_0) {
   }
 
   iprintlnbold("Transponder lost connection");
-  self.triggerportableradarping transponderdetonateallcharges();
+  self.owner transponderdetonateallcharges();
 }
 
 activationeffects(var_0, var_1) {

@@ -101,8 +101,9 @@ func_4387() {
       if(func_FF27()) {
         self notify("death");
         return;
-      } else
+      } else {
         func_88C4();
+      }
     }
 
     wait 0.5;
@@ -141,8 +142,9 @@ damage_monitor() {
       if(var_13) {
         self.health = 53800;
       }
-    } else
+    } else {
       self.health = 53800;
+    }
 
     if(self.health < 50000) {
       self notify("death", var_1, var_4, var_9);
@@ -264,8 +266,9 @@ death_monitor() {
     var_8 = 0;
     level.var_A056.var_63A3++;
     var_9 = 1;
-  } else
+  } else {
     var_9 = 0;
+  }
 
   scripts\sp\utility::func_65E1("is_dying");
   thread func_646F();
@@ -330,8 +333,9 @@ death_monitor() {
     func_5164();
     var_6 = func_4E16(var_10, randomfloatrange(1.0, 2.0), var_18, self);
     stopFXOnTag(scripts\engine\utility::getfx("fighter_spaceship_dying"), var_10, "j_mainroot_ship");
-  } else
+  } else {
     func_5164();
+  }
 
   var_19 = var_10 gettagangles("j_mainroot_ship");
   var_20 = var_10 gettagorigin("j_mainroot_ship");
@@ -540,8 +544,9 @@ func_6170() {
     if(isDefined(self.fx.var_13D7E) && self.fx.var_13D7E) {
       var_9 = 1;
       func_0BDC::func_A167();
-    } else
+    } else {
       var_9 = 0;
+    }
 
     func_0BDC::func_6B4C("none", 1);
     func_0BDC::func_105D9();

@@ -35,7 +35,7 @@ bot_grind_extra_think() {
       var_0 = squared(500 + self.tagscarried * 250);
       if(game["teamScores"][self.team] + self.tagscarried >= level.roundscorelimit) {
         var_0 = squared(5000);
-      } else if(!isDefined(self.isnodeoccupied) && !scripts\mp\bots\_bots_util::bot_in_combat()) {
+      } else if(!isDefined(self.enemy) && !scripts\mp\bots\_bots_util::bot_in_combat()) {
         var_0 = squared(1500 + self.tagscarried * 250);
       }
 
@@ -161,7 +161,7 @@ enemy_watcher() {
       wait(0.2);
     }
 
-    if(isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && isDefined(self.isnodeoccupied.tagscarried) && self.isnodeoccupied.tagscarried >= 3 && self botcanseeentity(self.isnodeoccupied) && distance(self.origin, self.isnodeoccupied.origin) <= 500) {
+    if(isDefined(self.enemy) && isplayer(self.enemy) && isDefined(self.enemy.tagscarried) && self.enemy.tagscarried >= 3 && self botcanseeentity(self.enemy) && distance(self.origin, self.enemy.origin) <= 500) {
       self getpassivestruct("meleeChargeDist", 500);
       self botsetflag("prefer_melee", 1);
       continue;

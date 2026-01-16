@@ -146,7 +146,7 @@ func_D8CE() {
 
     var_1 = scripts\sp\utility::func_7BD7();
     if(var_1 != 0) {
-      level.player scripts\engine\utility::waittill_any_3("primary_equipment_change", "offhand_fired");
+      level.player scripts\engine\utility::waittill_any("primary_equipment_change", "offhand_fired");
       continue;
     }
 
@@ -234,7 +234,7 @@ func_F0B4() {
 
     var_1 = scripts\sp\utility::func_7C3E();
     if(var_1 != 0) {
-      level.player scripts\engine\utility::waittill_any_3("secondary_equipment_change", "offhand_fired");
+      level.player scripts\engine\utility::waittill_any("secondary_equipment_change", "offhand_fired");
       continue;
     }
 

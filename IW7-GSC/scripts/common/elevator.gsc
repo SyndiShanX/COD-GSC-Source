@@ -138,7 +138,7 @@ elevator_fsm(var_0) {
       var_8 = get_curfloor();
       thread close_inner_doors();
       thread close_outer_doors(var_8);
-      scripts\engine\utility::waittill_any_3("closed_inner_doors", "interrupted");
+      scripts\engine\utility::waittill_any("closed_inner_doors", "interrupted");
       if(self.elevator_interrupted) {
         self.estate = "[C]";
         continue;
@@ -452,20 +452,20 @@ build_elevators() {
           continue;
         }
 
-        var_0A = getent(var_9.target, "targetname");
-        var_7.e["housing"]["left_door"] = var_0A;
-        var_7.e["housing"]["left_door_opened_pos"] = var_0A.origin;
-        var_0B = getent(var_0A.target, "targetname");
-        var_7.e["housing"]["right_door"] = var_0B;
-        var_7.e["housing"]["right_door_opened_pos"] = var_0B.origin;
-        var_0C = var_0A.origin - var_0B.origin * (0.5, 0.5, 0.5) + var_0B.origin;
-        var_7.e["housing"]["door_closed_pos"] = var_0C;
-        var_0D = getent(var_0B.target, "targetname");
-        var_7.e["housing"]["door_trigger"] = var_0D;
-        var_0E = getent(var_0D.target, "targetname");
-        var_7.e["housing"]["inside_trigger"] = var_0E;
-        var_0E make_discrete_trigger();
-        var_0E.motion_trigger = spawn("trigger_radius", var_9.origin, 0, 64, 128);
+        var_10 = getent(var_9.target, "targetname");
+        var_7.e["housing"]["left_door"] = var_10;
+        var_7.e["housing"]["left_door_opened_pos"] = var_10.origin;
+        var_11 = getent(var_10.target, "targetname");
+        var_7.e["housing"]["right_door"] = var_11;
+        var_7.e["housing"]["right_door_opened_pos"] = var_11.origin;
+        var_12 = var_10.origin - var_11.origin * (0.5, 0.5, 0.5) + var_11.origin;
+        var_7.e["housing"]["door_closed_pos"] = var_12;
+        var_13 = getent(var_11.target, "targetname");
+        var_7.e["housing"]["door_trigger"] = var_13;
+        var_14 = getent(var_13.target, "targetname");
+        var_7.e["housing"]["inside_trigger"] = var_14;
+        var_14 make_discrete_trigger();
+        var_14.motion_trigger = spawn("trigger_radius", var_9.origin, 0, 64, 128);
       }
     }
 
@@ -559,13 +559,13 @@ build_call_buttons() {
     var_3 = (var_1.origin[0], var_1.origin[1], 0);
     var_4 = [];
     foreach(var_6 in level.elevators) {
-      foreach(var_0B, var_8 in var_6 get_outer_doorsets()) {
-        var_9 = (0, 0, var_6.e["floor" + var_0B + "_pos"][2]);
-        var_0A = (var_6.e["floor" + var_0B + "_pos"][0], var_6.e["floor" + var_0B + "_pos"][1], 0);
+      foreach(var_11, var_8 in var_6 get_outer_doorsets()) {
+        var_9 = (0, 0, var_6.e["floor" + var_11 + "_pos"][2]);
+        var_10 = (var_6.e["floor" + var_11 + "_pos"][0], var_6.e["floor" + var_11 + "_pos"][1], 0);
         if(abs(distance(var_2, var_9)) <= level.elevator_callbutton_link_v) {
-          if(abs(distance(var_3, var_0A)) <= level.elevator_callbutton_link_h) {
+          if(abs(distance(var_3, var_10)) <= level.elevator_callbutton_link_h) {
             var_4[var_4.size] = var_6;
-            var_1.e[var_0B] = var_4;
+            var_1.e[var_11] = var_4;
           }
         }
       }
@@ -688,9 +688,9 @@ get_housing_children() {
     var_0[var_0.size] = var_8;
   }
 
-  var_0A = get_housing_primarylight();
-  foreach(var_0C in var_0A) {
-    var_0[var_0.size] = var_0C;
+  var_10 = get_housing_primarylight();
+  foreach(var_12 in var_10) {
+    var_0[var_0.size] = var_12;
   }
 
   return var_0;
@@ -857,10 +857,10 @@ elevator_debug() {
 
     foreach(var_9 in level.elevator_callbuttons) {
       foreach(var_5 in var_9.e) {
-        var_0B = 0;
-        foreach(var_0D in var_5) {
-          var_0B++;
-          var_0E = var_9.origin + (0, 0, var_0B * -4);
+        var_11 = 0;
+        foreach(var_13 in var_5) {
+          var_11++;
+          var_14 = var_9.origin + (0, 0, var_11 * -4);
         }
       }
     }

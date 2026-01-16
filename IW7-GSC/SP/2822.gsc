@@ -90,7 +90,7 @@ func_9526(var_0) {
 }
 
 func_969F(var_0) {
-  foreach(var_0A, var_2 in level.var_EC8D[var_0]) {
+  foreach(var_10, var_2 in level.var_EC8D[var_0]) {
     foreach(var_9, var_4 in var_2) {
       foreach(var_6 in var_4) {
         var_7 = var_6["sound"];
@@ -98,9 +98,9 @@ func_969F(var_0) {
           continue;
         }
 
-        level.var_1FD4[var_0][var_0A][var_9]["soundalias"] = var_7;
+        level.var_1FD4[var_0][var_10][var_9]["soundalias"] = var_7;
         if(isDefined(var_6["created_by_animSound"])) {
-          level.var_1FD4[var_0][var_0A][var_9]["created_by_animSound"] = 1;
+          level.var_1FD4[var_0][var_10][var_9]["created_by_animSound"] = 1;
         }
       }
     }
@@ -375,9 +375,9 @@ func_23AE(var_0, var_1) {
     return;
   }
 
-  var_0D = getarraykeys(level.var_EC85);
-  var_0D = scripts\engine\utility::array_combine(var_0D, getarraykeys(level.scr_sound));
-  foreach(var_0F in var_0D) {}
+  var_13 = getarraykeys(level.var_EC85);
+  var_13 = scripts\engine\utility::array_combine(var_13, getarraykeys(level.scr_sound));
+  foreach(var_15 in var_13) {}
 }
 
 func_1EC2(var_0, var_1, var_2, var_3, var_4) {
@@ -487,22 +487,22 @@ func_1EE8(var_0, var_1, var_2, var_3) {
   thread func_6370(var_2, var_0);
   self endon(var_2);
   var_9 = "looping anim";
-  var_0A = undefined;
+  var_10 = undefined;
   if(isDefined(var_3)) {
-    var_0A = var_3;
+    var_10 = var_3;
   } else {
-    var_0A = var_8.var_1FBB;
+    var_10 = var_8.var_1FBB;
   }
 
-  var_0B = 0;
-  var_0C = 0;
+  var_11 = 0;
+  var_12 = 0;
   for(;;) {
-    for(var_0B = func_1F60(var_0A, var_1); var_0B == var_0C && var_0B != 0; var_0B = func_1F60(var_0A, var_1)) {}
+    for(var_11 = func_1F60(var_10, var_1); var_11 == var_12 && var_11 != 0; var_11 = func_1F60(var_10, var_1)) {}
 
-    var_0C = var_0B;
-    var_0D = undefined;
-    var_0E = 999999;
-    var_0F = undefined;
+    var_12 = var_11;
+    var_13 = undefined;
+    var_14 = 999999;
+    var_15 = undefined;
     var_6 = undefined;
     foreach(var_23, var_5 in var_0) {
       var_11 = var_5["entity"];
@@ -539,18 +539,18 @@ func_1EE8(var_0, var_1, var_2, var_3) {
         var_1F = var_6.var_1FBB;
       }
 
-      if(isDefined(level.var_EC88[var_1F]) && isDefined(level.var_EC88[var_1F][var_1]) && isDefined(level.var_EC88[var_1F][var_1][var_0B])) {
+      if(isDefined(level.var_EC88[var_1F]) && isDefined(level.var_EC88[var_1F][var_1]) && isDefined(level.var_EC88[var_1F][var_1][var_11])) {
         var_19 = 1;
-        var_1D = level.var_EC88[var_1F][var_1][var_0B];
+        var_1D = level.var_EC88[var_1F][var_1][var_11];
       }
 
-      if(isDefined(level.scr_sound[var_1F]) && isDefined(level.scr_sound[var_1F][var_1]) && isDefined(level.scr_sound[var_1F][var_1][var_0B])) {
+      if(isDefined(level.scr_sound[var_1F]) && isDefined(level.scr_sound[var_1F][var_1]) && isDefined(level.scr_sound[var_1F][var_1][var_11])) {
         var_1A = 1;
-        var_1E = level.scr_sound[var_1F][var_1][var_0B];
+        var_1E = level.scr_sound[var_1F][var_1][var_11];
       }
 
-      if(isDefined(level.var_EC86[var_1F]) && isDefined(level.var_EC86[var_1F][var_0B + var_1])) {
-        var_6 playSound(level.var_EC86[var_1F][var_0B + var_1]);
+      if(isDefined(level.var_EC86[var_1F]) && isDefined(level.var_EC86[var_1F][var_11 + var_1])) {
+        var_6 playSound(level.var_EC86[var_1F][var_11 + var_1]);
       }
 
       if(isDefined(level.var_EC85[var_1F]) && isDefined(level.var_EC85[var_1F][var_1]) && !isai(var_6) || !var_6 scripts\sp\utility::func_58DA()) {
@@ -574,14 +574,14 @@ func_1EE8(var_0, var_1, var_2, var_3) {
           ]();
         }
 
-        var_6 animscripted(var_9, var_13, var_14, level.var_EC85[var_1F][var_1][var_0B], undefined, var_21, var_20);
-        var_22 = getanimlength(level.var_EC85[var_1F][var_1][var_0B]);
-        if(var_22 < var_0E) {
-          var_0E = var_22;
-          var_0D = var_23;
+        var_6 animscripted(var_9, var_13, var_14, level.var_EC85[var_1F][var_1][var_11], undefined, var_21, var_20);
+        var_22 = getanimlength(level.var_EC85[var_1F][var_1][var_11]);
+        if(var_22 < var_14) {
+          var_14 = var_22;
+          var_13 = var_23;
         }
 
-        thread func_10CBF(var_6, var_9, var_1, var_1F, level.var_EC85[var_1F][var_1][var_0B]);
+        thread func_10CBF(var_6, var_9, var_1, var_1F, level.var_EC85[var_1F][var_1][var_11]);
         thread func_1FCA(var_6, var_9, var_1);
       }
 
@@ -596,7 +596,7 @@ func_1EE8(var_0, var_1, var_2, var_3) {
           var_6 scripts\sp\utility::play_sound_on_entity(var_1E);
         }
 
-        var_0F = var_23;
+        var_15 = var_23;
       }
     }
 
@@ -604,13 +604,13 @@ func_1EE8(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    if(isDefined(var_0D)) {
-      var_0[var_0D]["guy"] waittillmatch("end", var_9);
+    if(isDefined(var_13)) {
+      var_0[var_13]["guy"] waittillmatch("end", var_9);
       continue;
     }
 
-    if(isDefined(var_0F)) {
-      var_0[var_0F]["guy"] waittill(var_9);
+    if(isDefined(var_15)) {
+      var_0[var_15]["guy"] waittill(var_9);
     }
   }
 }
@@ -663,12 +663,12 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_9 = func_781C(var_2);
-  var_0A = var_9["origin"];
-  var_0B = var_9["angles"];
-  var_0C = undefined;
-  var_0D = 999999;
-  var_0E = undefined;
-  var_0F = undefined;
+  var_10 = var_9["origin"];
+  var_11 = var_9["angles"];
+  var_12 = undefined;
+  var_13 = 999999;
+  var_14 = undefined;
+  var_15 = undefined;
   var_10 = undefined;
   var_11 = undefined;
   var_12 = "single anim";
@@ -754,13 +754,13 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
           var_7 lib_0A1E::func_230A();
         }
 
-        var_7 animscripted(var_12, var_0A, var_0B, level.var_EC85[var_1C][var_1], undefined, var_20, var_1D);
+        var_7 animscripted(var_12, var_10, var_11, level.var_EC85[var_1C][var_1], undefined, var_20, var_1D);
       }
 
       var_21 = getanimlength(level.var_EC85[var_1C][var_1]);
-      if(var_21 < var_0D) {
-        var_0D = var_21;
-        var_0C = var_22;
+      if(var_21 < var_13) {
+        var_13 = var_21;
+        var_12 = var_22;
       }
 
       thread func_10CBF(var_7, var_12, var_1, var_1C, level.var_EC85[var_1C][var_1]);
@@ -774,7 +774,7 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
         }
 
         thread func_1EBD(var_7, var_1, level.var_EC88[var_1C][var_1]);
-        var_0F = var_22;
+        var_15 = var_22;
       } else if(isai(var_7) || isDefined(var_7.var_6B14) && var_7.var_6B14) {
         if(var_17) {
           var_7 scripts\anim\face::sayspecificdialogue(var_19);
@@ -786,7 +786,7 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
         var_7 thread scripts\sp\utility::play_sound_on_entity(var_19, "single dialogue");
       }
 
-      var_0E = var_22;
+      var_14 = var_22;
     }
 
     if(var_15) {
@@ -794,20 +794,20 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(isDefined(var_0C)) {
+  if(isDefined(var_12)) {
     var_23 = spawnStruct();
-    var_23 thread func_1EB0(var_0[var_0C], var_1);
-    var_23 thread func_1E9B(var_0[var_0C], var_1, var_0D, var_3);
+    var_23 thread func_1EB0(var_0[var_12], var_1);
+    var_23 thread func_1E9B(var_0[var_12], var_1, var_13, var_3);
     var_23 waittill(var_1);
-  } else if(isDefined(var_0F)) {
+  } else if(isDefined(var_15)) {
     var_23 = spawnStruct();
-    var_23 thread func_1EB0(var_0[var_0F], var_1);
-    var_23 thread func_1EBE(var_0[var_0F], var_1, var_10);
+    var_23 thread func_1EB0(var_0[var_15], var_1);
+    var_23 thread func_1EBE(var_0[var_15], var_1, var_10);
     var_23 waittill(var_1);
-  } else if(isDefined(var_0E)) {
+  } else if(isDefined(var_14)) {
     var_23 = spawnStruct();
-    var_23 thread func_1EB0(var_0[var_0E], var_1);
-    var_23 thread func_1EB1(var_0[var_0E], var_1);
+    var_23 thread func_1EB0(var_0[var_14], var_1);
+    var_23 thread func_1EB1(var_0[var_14], var_1);
     var_23 waittill(var_1);
   }
 
@@ -1012,15 +1012,15 @@ modify_moveplaybackrate_together(var_0) {
 
     var_3 = var_3 / var_0.size;
     foreach(var_5 in var_0) {
-      var_0A = var_2[var_5.unique_id] - var_3;
-      var_0B = var_0A * 0.003;
-      if(var_0B > var_1) {
-        var_0B = var_1;
-      } else if(var_0B < var_1 * -1) {
-        var_0B = var_1 * -1;
+      var_10 = var_2[var_5.unique_id] - var_3;
+      var_11 = var_10 * 0.003;
+      if(var_11 > var_1) {
+        var_11 = var_1;
+      } else if(var_11 < var_1 * -1) {
+        var_11 = var_1 * -1;
       }
 
-      var_5 scripts\asm\asm::func_237B(1 + var_0B);
+      var_5 scripts\asm\asm::func_237B(1 + var_11);
     }
 
     wait(0.05);
@@ -1070,23 +1070,23 @@ func_1F1B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = func_781C(var_2);
   var_8 = var_7["origin"];
   var_9 = var_7["angles"];
-  var_0A = spawnStruct();
-  var_0B = 0;
-  var_0C = 0;
-  foreach(var_0E in var_0) {
+  var_10 = spawnStruct();
+  var_11 = 0;
+  var_12 = 0;
+  foreach(var_14 in var_0) {
     if(isDefined(var_3)) {
-      var_0F = var_3;
+      var_15 = var_3;
     } else {
-      var_0F = var_0E.var_1FBB;
+      var_15 = var_14.var_1FBB;
     }
 
-    if(isDefined(level.var_EC85[var_0F][var_1])) {
-      if(isarray(level.var_EC85[var_0F][var_1])) {
-        var_10 = getstartorigin(var_8, var_9, level.var_EC85[var_0F][var_1][0]);
-        var_11 = getstartangles(var_8, var_9, level.var_EC85[var_0F][var_1][0]);
+    if(isDefined(level.var_EC85[var_15][var_1])) {
+      if(isarray(level.var_EC85[var_15][var_1])) {
+        var_10 = getstartorigin(var_8, var_9, level.var_EC85[var_15][var_1][0]);
+        var_11 = getstartangles(var_8, var_9, level.var_EC85[var_15][var_1][0]);
       } else {
-        var_10 = getstartorigin(var_8, var_9, level.var_EC85[var_0F][var_1]);
-        var_11 = getstartangles(var_8, var_9, level.var_EC85[var_0F][var_1]);
+        var_10 = getstartorigin(var_8, var_9, level.var_EC85[var_15][var_1]);
+        var_11 = getstartangles(var_8, var_9, level.var_EC85[var_15][var_1]);
       }
     } else {
       var_10 = var_8;
@@ -1094,36 +1094,36 @@ func_1F1B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(isDefined(var_6)) {
-      var_0E.physics_querypoint = spawn("script_origin", var_10);
-      var_0E.physics_querypoint.angles = var_11;
-      var_0E.physics_querypoint.type = var_6;
-      var_0E.physics_querypoint.var_22EF = "stand";
-      var_12 = var_0E getmovingplatformparent();
+      var_14.physics_querypoint = spawn("script_origin", var_10);
+      var_14.physics_querypoint.angles = var_11;
+      var_14.physics_querypoint.type = var_6;
+      var_14.physics_querypoint.var_22EF = "stand";
+      var_12 = var_14 getmovingplatformparent();
       if(isDefined(var_12)) {
-        var_0E.physics_querypoint linkto(var_12);
+        var_14.physics_querypoint linkto(var_12);
       }
     }
 
-    var_0C++;
-    var_0E thread func_2A51(var_0A, var_10, var_11, var_4, var_5);
+    var_12++;
+    var_14 thread func_2A51(var_10, var_10, var_11, var_4, var_5);
   }
 
-  while(var_0C) {
-    var_0A waittill("reach_notify");
-    var_0C--;
+  while(var_12) {
+    var_10 waittill("reach_notify");
+    var_12--;
   }
 
-  foreach(var_15, var_0E in var_0) {
-    if(!isalive(var_0E)) {
+  foreach(var_15, var_14 in var_0) {
+    if(!isalive(var_14)) {
       continue;
     }
 
-    var_0E.objective_playermask_showto = var_0E.var_C3EE;
-    if(isDefined(var_0E.physics_querypoint)) {
-      var_0E.physics_querypoint delete();
+    var_14.objective_playermask_showto = var_14.var_C3EE;
+    if(isDefined(var_14.physics_querypoint)) {
+      var_14.physics_querypoint delete();
     }
 
-    var_0E.spawncovernode = 0;
+    var_14.spawncovernode = 0;
   }
 }
 
@@ -1164,15 +1164,15 @@ func_1EEE(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = func_781C(var_2);
   var_7 = var_6["origin"];
   var_8 = var_6["angles"];
-  foreach(var_0A in var_0) {
-    var_0B = getstartorigin(var_7, var_8, level.var_EC85[var_0A.var_1FBB][var_1]);
-    var_0C = getstartangles(var_7, var_8, level.var_EC85[var_0A.var_1FBB][var_1]);
-    if(isai(var_0A)) {
+  foreach(var_10 in var_0) {
+    var_11 = getstartorigin(var_7, var_8, level.var_EC85[var_10.var_1FBB][var_1]);
+    var_12 = getstartangles(var_7, var_8, level.var_EC85[var_10.var_1FBB][var_1]);
+    if(isai(var_10)) {
       continue;
     }
 
-    var_0A moveto(var_0B, var_3, var_4, var_5);
-    var_0A rotateto(var_0C, var_3, var_4, var_5);
+    var_10 moveto(var_11, var_3, var_4, var_5);
+    var_10 rotateto(var_12, var_3, var_4, var_5);
   }
 }
 
@@ -1419,33 +1419,33 @@ func_1F0C(var_0, var_1, var_2, var_3, var_4) {
   var_9 = var_0.var_1FBB;
   if(isDefined(level.var_EC85[var_9][var_1])) {
     if(isarray(level.var_EC85[var_9][var_1])) {
-      var_0A = level.var_EC85[var_9][var_1][0];
+      var_10 = level.var_EC85[var_9][var_1][0];
     } else {
-      var_0A = level.var_EC85[var_0A][var_2];
+      var_10 = level.var_EC85[var_10][var_2];
     }
 
-    var_7 = getstartorigin(var_7, var_8, var_0A);
-    var_8 = getstartorigin(var_7, var_8, var_0A);
+    var_7 = getstartorigin(var_7, var_8, var_10);
+    var_8 = getstartorigin(var_7, var_8, var_10);
   }
 
-  var_0B = spawn("script_origin", var_7);
-  var_0B.angles = var_8;
+  var_11 = spawn("script_origin", var_7);
+  var_11.angles = var_8;
   if(isDefined(var_3)) {
-    var_0B.type = var_3;
+    var_11.type = var_3;
   } else {
-    var_0B.type = self.type;
+    var_11.type = self.type;
   }
 
   if(isDefined(var_4)) {
-    var_0B.var_22EF = var_4;
+    var_11.var_22EF = var_4;
   } else {
-    var_0B.var_22EF = self gethighestnodestance();
+    var_11.var_22EF = self gethighestnodestance();
   }
 
-  var_0.physics_querypoint = var_0B;
+  var_0.physics_querypoint = var_11;
   func_1F0B(var_5, var_1, var_2);
   var_0.physics_querypoint = undefined;
-  var_0B delete();
+  var_11 delete();
   while(var_0.a.movement != "stop") {
     wait(0.05);
   }

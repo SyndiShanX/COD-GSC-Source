@@ -5,19 +5,19 @@
 
 func_95C1() {
   self.perk_data = [];
-  self.perk_data["health"] = scripts\cp\perks\perkfunctions::func_96C2();
-  self.perk_data["damagemod"] = scripts\cp\perks\perkfunctions::func_96BF();
-  self.perk_data["medic"] = scripts\cp\perks\perkfunctions::func_96C8();
-  self.perk_data["rigger"] = scripts\cp\perks\perkfunctions::func_96CB();
-  self.perk_data["robotics"] = scripts\cp\perks\perkfunctions::func_96CC();
-  self.perk_data["demolition"] = scripts\cp\perks\perkfunctions::func_96C0();
-  self.perk_data["gunslinger"] = scripts\cp\perks\perkfunctions::func_96C1();
-  self.perk_data["hybrid"] = scripts\cp\perks\perkfunctions::func_96C3();
-  self.perk_data["pistol"] = scripts\cp\perks\perkfunctions::func_96CA();
-  self.perk_data["pistol"] = scripts\cp\perks\perkfunctions::func_96CA();
-  self.perk_data["pistol"] = scripts\cp\perks\perkfunctions::func_96CA();
-  self.perk_data["pistol"] = scripts\cp\perks\perkfunctions::func_96CA();
-  self.perk_data["none"] = scripts\cp\perks\perkfunctions::func_96C9();
+  self.perk_data["health"] = ::scripts\cp\perks\perkfunctions::func_96C2();
+  self.perk_data["damagemod"] = ::scripts\cp\perks\perkfunctions::func_96BF();
+  self.perk_data["medic"] = ::scripts\cp\perks\perkfunctions::func_96C8();
+  self.perk_data["rigger"] = ::scripts\cp\perks\perkfunctions::func_96CB();
+  self.perk_data["robotics"] = ::scripts\cp\perks\perkfunctions::func_96CC();
+  self.perk_data["demolition"] = ::scripts\cp\perks\perkfunctions::func_96C0();
+  self.perk_data["gunslinger"] = ::scripts\cp\perks\perkfunctions::func_96C1();
+  self.perk_data["hybrid"] = ::scripts\cp\perks\perkfunctions::func_96C3();
+  self.perk_data["pistol"] = ::scripts\cp\perks\perkfunctions::func_96CA();
+  self.perk_data["pistol"] = ::scripts\cp\perks\perkfunctions::func_96CA();
+  self.perk_data["pistol"] = ::scripts\cp\perks\perkfunctions::func_96CA();
+  self.perk_data["pistol"] = ::scripts\cp\perks\perkfunctions::func_96CA();
+  self.perk_data["none"] = ::scripts\cp\perks\perkfunctions::func_96C9();
 }
 
 perk_getmeleescalar() {

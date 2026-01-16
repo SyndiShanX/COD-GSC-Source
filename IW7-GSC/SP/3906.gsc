@@ -8,7 +8,7 @@ func_D4DA() {
     self.a.var_BF8C = 0;
   }
 
-  if((isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied)) || randomint(3) == 0) {
+  if((isDefined(self.enemy) && isplayer(self.enemy)) || randomint(3) == 0) {
     if(gettime() > self.a.var_BF8C) {
       scripts\anim\face::saygenericdialogue("meleecharge");
       self.a.var_BF8C = gettime() + 8000;
@@ -21,7 +21,7 @@ func_D4D8() {
     self.a.var_BF8B = 0;
   }
 
-  if((isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied)) || randomint(3) == 0) {
+  if((isDefined(self.enemy) && isplayer(self.enemy)) || randomint(3) == 0) {
     if(gettime() > self.a.var_BF8B) {
       scripts\anim\face::saygenericdialogue("meleeattack");
       self.a.var_BF8B = gettime() + 8000;
@@ -49,7 +49,7 @@ func_D4D7(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getmeleetarget();
   if(!isDefined(var_4)) {
     self orientmode("face current");
-  } else if(var_4 == self.isnodeoccupied) {
+  } else if(var_4 == self.enemy) {
     self orientmode("face enemy");
   } else {
     self orientmode("face point", var_4.origin);
@@ -71,7 +71,7 @@ func_D4D7(var_0, var_1, var_2, var_3) {
 func_B5CB(var_0, var_1) {
   self.var_B647 = var_0;
   self.melee.var_9904 = 1;
-  self.melee.var_394 = self.var_394;
+  self.melee.weapon = self.weapon;
   self.melee.var_13CCC = scripts\anim\utility::func_7E52();
   self.melee.var_71D3 = ::func_B5D2;
   if(var_1) {
@@ -192,15 +192,15 @@ func_D4D3(var_0, var_1, var_2) {
 }
 
 func_B585() {
-  if(self.var_394 != "none" && self.lastweapon != "none") {
+  if(self.weapon != "none" && self.lastweapon != "none") {
     return;
   }
 
-  if(!isDefined(self.melee.var_394) || self.melee.var_394 == "none") {
+  if(!isDefined(self.melee.weapon) || self.melee.weapon == "none") {
     return;
   }
 
-  scripts\sp\utility::func_72EC(self.melee.var_394, self.melee.var_13CCC);
+  scripts\sp\utility::func_72EC(self.melee.weapon, self.melee.var_13CCC);
   if(isDefined(self.melee.var_5D3E)) {
     self.melee.var_5D3E delete();
     self.melee.var_5D3E = undefined;

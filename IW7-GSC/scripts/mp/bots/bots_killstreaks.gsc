@@ -177,7 +177,7 @@ bot_think_killstreak() {
               }
             }
 
-            var_2.var_394 = scripts\mp\utility::getkillstreakweapon(var_2.streakname);
+            var_2.weapon = scripts\mp\utility::getkillstreakweapon(var_2.streakname);
             var_4 = level.killstreak_botcanuse[var_3];
             if(isDefined(var_4) && !self[[var_4]]()) {
               continue;
@@ -312,7 +312,7 @@ bot_killstreak_simple_use(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  bot_switch_to_killstreak_weapon(var_0, var_1, var_0.var_394);
+  bot_switch_to_killstreak_weapon(var_0, var_1, var_0.weapon);
   return 1;
 }
 
@@ -343,7 +343,7 @@ bot_killstreak_drop(var_0, var_1, var_2, var_3, var_4) {
     return 0;
   }
 
-  var_5 = self getweaponammoclip(var_0.var_394) + self getweaponammostock(var_0.var_394);
+  var_5 = self getweaponammoclip(var_0.weapon) + self getweaponammostock(var_0.weapon);
   if(var_5 == 0) {
     foreach(var_7 in var_1) {
       if(isDefined(var_7.streakname) && var_7.streakname == var_0.streakname) {
@@ -356,20 +356,20 @@ bot_killstreak_drop(var_0, var_1, var_2, var_3, var_4) {
 
   var_9 = undefined;
   if(var_7 == "outside") {
-    var_0A = [];
-    var_0B = scripts\mp\bots\_bots_util::bot_get_nodes_in_cone(750, 0.6, 1);
-    foreach(var_0D in var_0B) {
-      if(nodeexposedtosky(var_0D)) {
-        var_0A = scripts\engine\utility::array_add(var_0A, var_0D);
+    var_10 = [];
+    var_11 = scripts\mp\bots\_bots_util::bot_get_nodes_in_cone(750, 0.6, 1);
+    foreach(var_13 in var_11) {
+      if(nodeexposedtosky(var_13)) {
+        var_10 = scripts\engine\utility::array_add(var_10, var_13);
       }
     }
 
-    if(var_0B.size > 5 && var_0A.size > var_0B.size * 0.6) {
-      var_0F = scripts\engine\utility::get_array_of_closest(self.origin, var_0A, undefined, undefined, undefined, 150);
-      if(var_0F.size > 0) {
-        var_9 = scripts\engine\utility::random(var_0F);
+    if(var_11.size > 5 && var_10.size > var_11.size * 0.6) {
+      var_15 = scripts\engine\utility::get_array_of_closest(self.origin, var_10, undefined, undefined, undefined, 150);
+      if(var_15.size > 0) {
+        var_9 = scripts\engine\utility::random(var_15);
       } else {
-        var_9 = scripts\engine\utility::random(var_0A);
+        var_9 = scripts\engine\utility::random(var_10);
       }
     }
   } else if(var_7 == "hidden") {
@@ -377,9 +377,9 @@ bot_killstreak_drop(var_0, var_1, var_2, var_3, var_4) {
     var_11 = self getnearestnode();
     if(isDefined(var_11)) {
       var_12 = [];
-      foreach(var_0D in var_10) {
-        if(nodesvisible(var_11, var_0D, 1)) {
-          var_12 = scripts\engine\utility::array_add(var_12, var_0D);
+      foreach(var_13 in var_10) {
+        if(nodesvisible(var_11, var_13, 1)) {
+          var_12 = scripts\engine\utility::array_add(var_12, var_13);
         }
       }
 
@@ -393,7 +393,7 @@ bot_killstreak_drop(var_0, var_1, var_2, var_3, var_4) {
       self botlookatpoint(var_9.origin, 2.45, "script_forced");
     }
 
-    bot_switch_to_killstreak_weapon(var_3, var_4, var_3.var_394);
+    bot_switch_to_killstreak_weapon(var_3, var_4, var_3.weapon);
     wait(2);
     self botpressbutton("attack");
     wait(1.5);
@@ -443,41 +443,41 @@ bot_killstreak_choose_loc_enemies(var_0, var_1, var_2, var_3) {
   }
 
   self botsetflag("disable_movement", 1);
-  bot_switch_to_killstreak_weapon(var_0, var_1, var_0.var_394);
+  bot_switch_to_killstreak_weapon(var_0, var_1, var_0.weapon);
   wait(2);
   var_5 = level.zonecount;
   var_6 = -1;
   var_7 = 0;
   var_8 = [];
   var_9 = randomfloat(100) > 50;
-  for(var_0A = 0; var_0A < var_5; var_0A++) {
+  for(var_10 = 0; var_10 < var_5; var_10++) {
     if(var_9) {
-      var_0B = var_5 - 1 - var_0A;
+      var_11 = var_5 - 1 - var_10;
     } else {
-      var_0B = var_0A;
+      var_11 = var_10;
     }
 
-    if(var_0B != var_4 && botzonegetindoorpercent(var_0B) < 0.25) {
-      var_0C = botzonegetcount(var_0B, self.team, "enemy_predict");
-      if(var_0C > var_7) {
-        var_6 = var_0B;
-        var_7 = var_0C;
+    if(var_11 != var_4 && botzonegetindoorpercent(var_11) < 0.25) {
+      var_12 = botzonegetcount(var_11, self.team, "enemy_predict");
+      if(var_12 > var_7) {
+        var_6 = var_11;
+        var_7 = var_12;
       }
 
-      var_8 = scripts\engine\utility::array_add(var_8, var_0B);
+      var_8 = scripts\engine\utility::array_add(var_8, var_11);
     }
   }
 
   if(var_6 >= 0) {
-    var_0D = getzoneorigin(var_6);
+    var_13 = getzoneorigin(var_6);
   } else if(var_9.size > 0) {
-    var_0D = getzoneorigin(scripts\engine\utility::random(var_9));
+    var_13 = getzoneorigin(scripts\engine\utility::random(var_9));
   } else {
-    var_0D = getzoneorigin(randomint(level.zonecount));
+    var_13 = getzoneorigin(randomint(level.zonecount));
   }
 
-  var_0E = (randomfloatrange(-500, 500), randomfloatrange(-500, 500), 0);
-  self notify("confirm_location", var_0D + var_0E, randomintrange(0, 360));
+  var_14 = (randomfloatrange(-500, 500), randomfloatrange(-500, 500), 0);
+  self notify("confirm_location", var_13 + var_14, randomintrange(0, 360));
   wait(1);
   self botsetflag("disable_movement", 0);
 }

@@ -268,29 +268,29 @@ func_113EC() {
       continue;
     }
 
-    var_0A = isDefined(var_3) && var_3 == var_9;
-    if(!var_0A) {
-      var_0B = var_9 gettagorigin("tag_origin");
+    var_10 = isDefined(var_3) && var_3 == var_9;
+    if(!var_10) {
+      var_11 = var_9 gettagorigin("tag_origin");
       if(isai(var_9)) {
-        var_0B = var_9 getEye();
+        var_11 = var_9 getEye();
       }
 
-      var_0C = distance(var_0B, var_1);
-      if(var_0C <= var_4) {
-        var_0D = min(1, var_5 + 1 - var_5 * var_0C / var_4);
-        foreach(var_0F in var_6) {
-          var_10 = vectorlerp(var_9.origin, var_0B, var_0F);
+      var_12 = distance(var_11, var_1);
+      if(var_12 <= var_4) {
+        var_13 = min(1, var_5 + 1 - var_5 * var_12 / var_4);
+        foreach(var_15 in var_6) {
+          var_10 = vectorlerp(var_9.origin, var_11, var_15);
           var_11 = var_10 - var_1;
           var_12 = vectornormalize(var_11);
           var_13 = vectordot(var_12, var_2);
-          if(var_13 > var_0D) {
+          if(var_13 > var_13) {
             if(func_1140D()) {
-              var_0A = 1;
+              var_10 = 1;
               break;
             }
 
             if(func_650A(var_9)) {
-              var_0A = 1;
+              var_10 = 1;
               break;
             }
           }
@@ -298,7 +298,7 @@ func_113EC() {
       }
     }
 
-    if(var_0A) {
+    if(var_10) {
       var_9 func_113EB("tracking", self, 1);
       continue;
     }

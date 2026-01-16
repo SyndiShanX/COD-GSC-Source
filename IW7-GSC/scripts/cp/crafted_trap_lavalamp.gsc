@@ -9,7 +9,7 @@ init() {
   var_0.modelbase = "cp_disco_lava_lamp_bomb";
   var_0.modelplacement = "cp_disco_lava_lamp_bomb";
   var_0.modelplacementfailed = "cp_disco_lava_lamp_bomb_bad";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -131,7 +131,7 @@ create_lavalamp_trap_for_player(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.lavalamp_trap_type = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_lavalamp";
   var_2.carried_lavalamp_trap = spawn("script_model", var_2.origin);
   var_2.carried_lavalamp_trap.angles = var_1.angles;
@@ -144,14 +144,14 @@ create_lavalamp_trap_for_player(var_0, var_1) {
 }
 
 create_lavalamp_trap(var_0, var_1) {
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_3 = var_0.lavalamp_trap_type;
   var_4 = spawn("script_model", var_0.origin + (0, 0, 1));
   var_4 setModel(level.lavalamp_trap_settings[var_3].modelbase);
   var_4.var_EB9C = 3;
   var_4.angles = var_0.angles + (0, -90, 0);
   var_4.lavalamp_trap_type = var_3;
-  var_4.triggerportableradarping = var_2;
+  var_4.owner = var_2;
   var_4 setotherent(var_2);
   var_4.team = var_2.team;
   var_4.name = "crafted_lavalamp";
@@ -237,14 +237,14 @@ lavalamp_trap_setplaced(var_0) {
   }
 
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.firstplacement = undefined;
   var_1 = create_lavalamp_trap(self, var_0);
   var_1.isplaced = 1;
-  var_1 thread func_9367(self.triggerportableradarping);
+  var_1 thread func_9367(self.owner);
   self notify("placed");
   var_1 thread lavalamp_trap_setactive();
   var_2 = spawnStruct();
@@ -310,7 +310,7 @@ lavalamp_trap_setactive() {
   self setcursorhint("HINT_NOICON");
   self makeunusable();
   scripts\cp\utility::addtotraplist();
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
   self.var_2536 = spawn("trigger_radius", self.origin, 0, 96, 96);
   thread scripts\cp\utility::item_handleownerdisconnect("fireworks_disconnect");
@@ -361,7 +361,7 @@ lavalamp_trap_attackzombies() {
       continue;
     }
 
-    if(!isDefined(self.triggerportableradarping)) {
+    if(!isDefined(self.owner)) {
       break;
     }
 
@@ -378,7 +378,7 @@ lavalamp_trap_attackzombies() {
     var_0 thread scripts\cp\utility::damage_over_time(var_0, self, 3, int(var_0.health + 1000), "MOD_EXPLOSIVE", "incendiary_ammo_mp", undefined, "burning");
   }
 
-  if(isDefined(self.carriedby) && isDefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping) {
+  if(isDefined(self.carriedby) && isDefined(self.owner) && self.carriedby == self.owner) {
     return;
   }
 

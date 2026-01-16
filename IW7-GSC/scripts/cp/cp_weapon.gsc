@@ -173,18 +173,18 @@ mpbuildweaponmap() {
         level.weaponmapdata[var_4].selectableattachmentlist = [];
         level.weaponmapdata[var_4].selectableattachmentmap = [];
         for(var_9 = 0; var_9 < 20; var_9++) {
-          var_0A = tablelookup(var_2, 0, var_3, 10 + var_9);
-          if(isDefined(var_0A) && var_0A != "") {
-            var_0B = level.weaponmapdata[var_4].selectableattachmentlist.size;
-            level.weaponmapdata[var_4].selectableattachmentlist[var_0B] = var_0A;
-            level.weaponmapdata[var_4].selectableattachmentmap[var_0A] = 1;
+          var_10 = tablelookup(var_2, 0, var_3, 10 + var_9);
+          if(isDefined(var_10) && var_10 != "") {
+            var_11 = level.weaponmapdata[var_4].selectableattachmentlist.size;
+            level.weaponmapdata[var_4].selectableattachmentlist[var_11] = var_10;
+            level.weaponmapdata[var_4].selectableattachmentmap[var_10] = 1;
           }
         }
 
-        var_0C = tablelookup(var_2, 0, var_3, 8);
-        if(var_0C != "") {
-          var_0C = float(var_0C);
-          level.weaponmapdata[var_4].getclosestpointonnavmesh3d = var_0C;
+        var_12 = tablelookup(var_2, 0, var_3, 8);
+        if(var_12 != "") {
+          var_12 = float(var_12);
+          level.weaponmapdata[var_4].getclosestpointonnavmesh3d = var_12;
         }
       }
     }
@@ -450,17 +450,17 @@ watchmissileusage() {
         break;
 
       case "iw7_harpoon1_zm":
-        var_0.triggerportableradarping thread alt_acid_rain_dud_explode(var_0);
+        var_0.owner thread alt_acid_rain_dud_explode(var_0);
         break;
 
       case "iw7_harpoon4_zm":
-        var_0.triggerportableradarping thread thundergun_harpoon_dud_explode(var_0);
-        var_0.triggerportableradarping thread thundergun_harpoon(var_0.weapon_name, var_0);
+        var_0.owner thread thundergun_harpoon_dud_explode(var_0);
+        var_0.owner thread thundergun_harpoon(var_0.weapon_name, var_0);
         break;
 
       case "iw7_harpoon2_zm":
-        var_0.triggerportableradarping thread ben_franklin_harpoon_dud_explode(var_0);
-        var_0.triggerportableradarping thread ben_franklin_harpoon(var_0);
+        var_0.owner thread ben_franklin_harpoon_dud_explode(var_0);
+        var_0.owner thread ben_franklin_harpoon(var_0);
         break;
 
       default:
@@ -506,18 +506,18 @@ run_stun_logic(var_0, var_1, var_2, var_3) {
   }
 
   wait(0.25);
-  var_0A = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  var_0B = 65536;
+  var_10 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
+  var_11 = 65536;
   var_8 = "reload_zap_m";
-  foreach(var_0D in var_0A) {
-    if(var_0D.agent_type == "slasher" || var_0D.agent_type == "superslasher") {
+  foreach(var_13 in var_10) {
+    if(var_13.agent_type == "slasher" || var_13.agent_type == "superslasher") {
       continue;
     }
 
-    if(distancesquared(var_0D.origin, var_0) < var_0B) {
-      var_0E = var_0D gettagorigin("j_spineupper");
-      var_0D thread zap_over_time(1, self);
-      playFX(var_3, var_0D.origin);
+    if(distancesquared(var_13.origin, var_0) < var_11) {
+      var_14 = var_13 gettagorigin("j_spineupper");
+      var_13 thread zap_over_time(1, self);
+      playFX(var_3, var_13.origin);
     }
   }
 
@@ -756,8 +756,8 @@ waittill_missile_fire() {
       }
     }
 
-    if(!isDefined(var_0.triggerportableradarping)) {
-      var_0.triggerportableradarping = self;
+    if(!isDefined(var_0.owner)) {
+      var_0.owner = self;
     }
 
     if(!isDefined(var_0.team)) {
@@ -847,15 +847,15 @@ connect_to_nearby_harpoon_projectiles(var_0, var_1) {
       }
     }
 
-    foreach(var_0A in var_3) {
-      var_0.linked_fx[var_0A.var_64] = var_0A;
-      var_0B = distance(var_0.origin, var_0A.origin);
-      var_0C = spawn("trigger_rotatable_radius", var_0 gettagorigin("TAG_FX"), 0, 3, var_0B);
-      var_0D = vectortoangles(var_0A gettagorigin("TAG_FX") - var_0 gettagorigin("TAG_FX")) + (-90, 0, 0);
-      var_0C.angles = (90, var_0D[1], var_0D[2]);
-      var_0 thread play_vfx_between_points_trap_gun(var_0, var_0A, var_0C);
-      var_0 thread damage_enemies_in_trigger(var_0A, var_0, var_0C, var_1);
-      thread clean_up_trigger_on_death(var_0A, var_0, var_0C);
+    foreach(var_10 in var_3) {
+      var_0.linked_fx[var_10.var_64] = var_10;
+      var_11 = distance(var_0.origin, var_10.origin);
+      var_12 = spawn("trigger_rotatable_radius", var_0 gettagorigin("TAG_FX"), 0, 3, var_11);
+      var_13 = vectortoangles(var_10 gettagorigin("TAG_FX") - var_0 gettagorigin("TAG_FX")) + (-90, 0, 0);
+      var_12.angles = (90, var_13[1], var_13[2]);
+      var_0 thread play_vfx_between_points_trap_gun(var_0, var_10, var_12);
+      var_0 thread damage_enemies_in_trigger(var_10, var_0, var_12, var_1);
+      thread clean_up_trigger_on_death(var_10, var_0, var_12);
     }
 
     wait(1);
@@ -1065,7 +1065,7 @@ stancerecoiladjuster() {
   }
 
   for(;;) {
-    scripts\engine\utility::waittill_any_3("adjustedStance", "sprint_begin", "weapon_change");
+    scripts\engine\utility::waittill_any("adjustedStance", "sprint_begin", "weapon_change");
     wait(0.5);
     if(isDefined(self.onhelisniper) && self.onhelisniper) {
       continue;
@@ -1353,7 +1353,7 @@ beginc4tracking() {
   self endon("beginC4Tracking");
   self endon("death");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("grenade_fire", "weapon_change", "offhand_end");
+  scripts\engine\utility::waittill_any("grenade_fire", "weapon_change", "offhand_end");
   self.changingweapon = undefined;
 }
 
@@ -1478,7 +1478,7 @@ rat_executevisuals(var_0) {
   self endon("disconnect");
   self playlocalsound("eye_pulse_plr_lr");
   self setscriptablepartstate("rat_eye_pulse", "active");
-  scripts\engine\utility::waittill_any_timeout_1(var_0, "last_stand", "death");
+  scripts\engine\utility::waittill_any_timeout(var_0, "last_stand", "death");
   self setscriptablepartstate("rat_eye_pulse", "inactive");
 }
 
@@ -1569,7 +1569,7 @@ spawnmine(var_0, var_1, var_2, var_3) {
   var_4 = level.weaponconfigs[var_2];
   var_5 = spawn("script_model", var_0);
   var_5.angles = var_3;
-  var_5.triggerportableradarping = var_1;
+  var_5.owner = var_1;
   var_5.weapon_name = var_2;
   var_5.config = var_4;
   var_5 setModel(var_4.model);
@@ -1609,12 +1609,12 @@ mineexplodeonnotify() {
   self endon("death");
   level endon("game_ended");
   self waittill("detonateExplosive", var_0);
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
   if(!isDefined(var_0)) {
-    var_0 = self.triggerportableradarping;
+    var_0 = self.owner;
   }
 
   var_1 = self.config;
@@ -1630,7 +1630,7 @@ mineexplodeonnotify() {
 
   self notify("explode", var_3);
   wait(0.05);
-  if(!isDefined(self) || !isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
@@ -1664,8 +1664,8 @@ mineproximitytrigger(var_0) {
   }
 
   var_2 = spawn("trigger_radius", self.origin, 0, level.minedetectionradius, level.minedetectionheight);
-  var_2.triggerportableradarping = self;
-  var_2.team = var_2.triggerportableradarping.team;
+  var_2.owner = self;
+  var_2.team = var_2.owner.team;
   thread minedeletetrigger(var_2);
   if(isDefined(var_0)) {
     var_2 enablelinkto();
@@ -1692,7 +1692,7 @@ mineproximitytrigger(var_0) {
 }
 
 minedeletetrigger(var_0) {
-  scripts\engine\utility::waittill_any_3("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
+  scripts\engine\utility::waittill_any("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
   if(isDefined(var_0)) {
     var_0 delete();
   }
@@ -1729,7 +1729,7 @@ updateblinkinglight(var_0, var_1, var_2) {
   childthread onjointeamblinkinglight(var_0, var_1, var_2, var_3);
   foreach(var_6 in level.players) {
     if(isDefined(var_6)) {
-      if(self.triggerportableradarping[[var_3]](var_6)) {
+      if(self.owner[[var_3]](var_6)) {
         playfxontagforclients(var_0, self, var_2, var_6);
       } else {
         playfxontagforclients(var_1, self, var_2, var_6);
@@ -1754,7 +1754,7 @@ onjointeamblinkinglight(var_0, var_1, var_2, var_3) {
   self endon("emp_damage");
   for(;;) {
     level waittill("joined_team", var_4);
-    if(self.triggerportableradarping[[var_3]](var_4)) {
+    if(self.owner[[var_3]](var_4)) {
       playfxontagforclients(var_0, self, var_2, var_4);
       continue;
     }
@@ -1837,7 +1837,7 @@ deal_damage(var_0, var_1) {
 }
 
 watchgasgrenadeexplode() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self waittill("explode", var_1);
   thread ongasgrenadeimpact(var_0, var_1);
@@ -1845,7 +1845,7 @@ watchgasgrenadeexplode() {
 
 ongasgrenadeimpact(var_0, var_1) {
   var_2 = spawn("trigger_radius", var_1, 0, 128, 160);
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   var_3 = 128;
   var_4 = spawnfx(scripts\engine\utility::getfx("gas_grenade_smoke_enemy"), var_1);
   triggerfx(var_4);
@@ -2033,19 +2033,19 @@ throwingknifeteleport(var_0, var_1, var_2, var_3) {
 
   var_5 = sortbydistance(var_5, var_1.origin);
   var_9 = var_2 gettagorigin("TAG_EYE");
-  var_0A = var_1.origin;
-  var_0B = var_1.origin + (0, 0, var_9[2] - var_2.origin[2]);
-  var_0C = var_2.angles;
-  foreach(var_0E in var_5) {
-    var_0F = (var_0E.origin[0], var_0E.origin[1], var_0E gettagorigin("TAG_EYE")[2]);
-    if(distancesquared(var_0E.origin, var_1.origin) < 230400 && sighttracepassed(var_0B, var_0F, 0, undefined)) {
-      var_0C = vectortoangles(var_0F - var_0B);
+  var_10 = var_1.origin;
+  var_11 = var_1.origin + (0, 0, var_9[2] - var_2.origin[2]);
+  var_12 = var_2.angles;
+  foreach(var_14 in var_5) {
+    var_15 = (var_14.origin[0], var_14.origin[1], var_14 gettagorigin("TAG_EYE")[2]);
+    if(distancesquared(var_14.origin, var_1.origin) < 230400 && sighttracepassed(var_11, var_15, 0, undefined)) {
+      var_12 = vectortoangles(var_15 - var_11);
       break;
     }
   }
 
   var_2 setorigin(var_1.origin, !var_3);
-  var_2 setplayerangles(var_0C);
+  var_2 setplayerangles(var_12);
   throwingknifeteleport_fxendburst(var_2, var_1);
 }
 
@@ -2069,27 +2069,27 @@ throwingknifeteleport_fxstartburst(var_0, var_1) {
     return;
   }
 
-  var_0A = spawn("script_model", var_3);
-  var_0A.angles = var_7;
-  var_0A setModel("tag_origin");
-  var_0A hidefromplayer(var_0);
+  var_10 = spawn("script_model", var_3);
+  var_10.angles = var_7;
+  var_10 setModel("tag_origin");
+  var_10 hidefromplayer(var_0);
   scripts\engine\utility::waitframe();
-  foreach(var_0C in level.players) {
-    var_0A hidefromplayer(var_0C);
+  foreach(var_12 in level.players) {
+    var_10 hidefromplayer(var_12);
   }
 
-  playFXOnTag(scripts\engine\utility::getfx("vfx_tele_start_friendly"), var_0A, "tag_origin");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_tele_start_friendly"), var_10, "tag_origin");
   wait(3);
-  var_0A delete();
+  var_10 delete();
 }
 
 recordthrowingknifetraveldist() {
   level endon("game_ended");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self.disttravelled = 0;
   var_0 = self.origin;
   for(;;) {
-    var_1 = scripts\engine\utility::waittill_any_timeout_1(0.15, "death", "missile_stuck");
+    var_1 = scripts\engine\utility::waittill_any_timeout(0.15, "death", "missile_stuck");
     if(!isDefined(self)) {
       break;
     }
@@ -2117,7 +2117,7 @@ throwingknifec4detonate(var_0, var_1, var_2) {
 throwingknifeused_recordownerinvalid(var_0, var_1) {
   var_1 endon("missile_stuck");
   var_1 endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect");
   var_1.knifeteleownerinvalid = 1;
 }
 
@@ -2125,7 +2125,7 @@ watchconcussiongrenadeexplode() {
   thread endondeath();
   self endon("end_explode");
   self waittill("explode", var_0);
-  stunenemiesinrange(var_0, self.triggerportableradarping);
+  stunenemiesinrange(var_0, self.owner);
 }
 
 stunenemiesinrange(var_0, var_1) {
@@ -2187,16 +2187,16 @@ mineused(var_0, var_1) {
 }
 
 minethrown(var_0, var_1, var_2, var_3) {
-  self.triggerportableradarping = var_0;
+  self.owner = var_0;
   self waittill("missile_stuck", var_4);
   if(!isDefined(var_0)) {
     return;
   }
 
   if(var_1 != "trip_mine_mp") {
-    if(isDefined(var_4) && isDefined(var_4.triggerportableradarping)) {
+    if(isDefined(var_4) && isDefined(var_4.owner)) {
       if(isDefined(var_3)) {
-        self.triggerportableradarping[[var_3]](self);
+        self.owner[[var_3]](self);
       }
 
       self delete();
@@ -2241,7 +2241,7 @@ minedamagemonitor() {
       continue;
     }
 
-    if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping, var_0)) {
+    if(!scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_0)) {
       continue;
     }
 
@@ -2294,7 +2294,7 @@ claymoreused(var_0) {
   }
 
   var_0 hide();
-  var_0 scripts\engine\utility::waittill_any_timeout_1(0.05, "missile_stuck");
+  var_0 scripts\engine\utility::waittill_any_timeout(0.05, "missile_stuck");
   if(!isDefined(self) || !isalive(self)) {
     var_0 delete();
     return;
@@ -2361,17 +2361,17 @@ claymoredetonation(var_0) {
   for(;;) {
     var_1 waittill("trigger", var_2);
     if(getdvarint("scr_claymoredebug") != 1) {
-      if(isDefined(self.triggerportableradarping)) {
-        if(var_2 == self.triggerportableradarping) {
+      if(isDefined(self.owner)) {
+        if(var_2 == self.owner) {
           continue;
         }
 
-        if(isDefined(var_2.triggerportableradarping) && var_2.triggerportableradarping == self.triggerportableradarping) {
+        if(isDefined(var_2.owner) && var_2.owner == self.owner) {
           continue;
         }
       }
 
-      if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping, var_2, 0)) {
+      if(!scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_2, 0)) {
         continue;
       }
     }
@@ -2461,7 +2461,7 @@ makeexplosiveunusable() {
 }
 
 makeexplosivetargetablebyai(var_0) {
-  scripts\cp\utility::make_entity_sentient_cp(self.triggerportableradarping.team);
+  scripts\cp\utility::make_entity_sentient_cp(self.owner.team);
   if(!isDefined(var_0) || !var_0) {
     self makeentitynomeleetarget();
   }
@@ -2469,7 +2469,7 @@ makeexplosivetargetablebyai(var_0) {
 
 watchsmokeexplode() {
   level endon("smokeTimesUp");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self waittill("explode", var_1);
   var_2 = 22500;
@@ -2503,20 +2503,20 @@ watchsmokeexplode() {
       }
     }
 
-    foreach(var_0B in level.players) {
-      if(!isDefined(var_0B)) {
+    foreach(var_11 in level.players) {
+      if(!isDefined(var_11)) {
         continue;
       }
 
-      var_0C = distance2dsquared(var_1, var_0B.origin);
-      if(var_0C < 22500) {
-        var_0B.inplayersmokescreen = var_0;
-        var_0B give_zombies_perk("phased_players");
+      var_12 = distance2dsquared(var_1, var_11.origin);
+      if(var_12 < 22500) {
+        var_11.inplayersmokescreen = var_0;
+        var_11 give_zombies_perk("phased_players");
         continue;
       }
 
-      var_0B.inplayersmokescreen = undefined;
-      var_0B give_zombies_perk("players");
+      var_11.inplayersmokescreen = undefined;
+      var_11 give_zombies_perk("players");
     }
 
     wait(0.05);
@@ -2578,8 +2578,8 @@ c4used(var_0) {
 }
 
 watchc4implode() {
-  self.triggerportableradarping endon("disconnect");
-  var_0 = self.triggerportableradarping;
+  self.owner endon("disconnect");
+  var_0 = self.owner;
   var_1 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
   var_1 linkto(self);
   thread endondeath();
@@ -2749,12 +2749,12 @@ clustergrenadeused() {
   var_7 setModel("tag_origin");
   var_7 setscriptmoverkillcam("explosive");
   var_7 thread deathdelaycleanup(self, var_3 + 5);
-  var_7 thread ownerdisconnectcleanup(self.triggerportableradarping);
+  var_7 thread ownerdisconnectcleanup(self.owner);
   var_7.threwback = self.threwback;
   var_8 = var_0 scripts\cp\utility::_launchgrenade("cluster_grenade_indicator_mp", self.origin, (0, 0, 0));
   var_8 linkto(self);
   var_8 thread deathdelaycleanup(self, var_3);
-  var_8 thread ownerdisconnectcleanup(self.triggerportableradarping);
+  var_8 thread ownerdisconnectcleanup(self.owner);
   thread scripts\cp\utility::notifyafterframeend("death", "end_explode");
   self endon("end_explode");
   self waittill("explode", var_9);
@@ -2773,30 +2773,30 @@ clustergrenadeexplode(var_0, var_1, var_2, var_3) {
   }
 
   var_9 = scripts\engine\utility::ter_op(var_5, (0, 0, 32), (0, 0, 2));
-  var_0A = var_0 + var_9;
-  var_0B = randomint(90) - 45;
+  var_10 = var_0 + var_9;
+  var_11 = randomint(90) - 45;
   var_4 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0, 0);
-  for(var_0C = 0; var_0C < 4; var_0C++) {
-    var_3.shellshockondamage = scripts\engine\utility::ter_op(var_0C == 0, 1, undefined);
+  for(var_12 = 0; var_12 < 4; var_12++) {
+    var_3.shellshockondamage = scripts\engine\utility::ter_op(var_12 == 0, 1, undefined);
     var_3 radiusdamage(var_0, 256, 800, 400, var_2, "MOD_EXPLOSIVE", "cluster_grenade_zm");
-    var_0D = scripts\engine\utility::ter_op(var_0C < 4, 90 * var_0C + var_0B, randomint(360));
-    var_0E = scripts\engine\utility::ter_op(var_5, 110, 90);
-    var_0F = scripts\engine\utility::ter_op(var_5, 12, 45);
-    var_10 = var_0E + randomint(var_0F * 2) - var_0F;
+    var_13 = scripts\engine\utility::ter_op(var_12 < 4, 90 * var_12 + var_11, randomint(360));
+    var_14 = scripts\engine\utility::ter_op(var_5, 110, 90);
+    var_15 = scripts\engine\utility::ter_op(var_5, 12, 45);
+    var_10 = var_14 + randomint(var_15 * 2) - var_15;
     var_11 = randomint(60) + 30;
-    var_12 = cos(var_0D) * sin(var_10);
-    var_13 = sin(var_0D) * sin(var_10);
+    var_12 = cos(var_13) * sin(var_10);
+    var_13 = sin(var_13) * sin(var_10);
     var_14 = cos(var_10);
     var_15 = (var_12, var_13, var_14) * var_11;
-    var_6 = var_0A;
-    var_7 = var_0A + var_15;
+    var_6 = var_10;
+    var_7 = var_10 + var_15;
     var_8 = physics_raycast(var_6, var_7, var_4, undefined, 0, "physicsquery_closest");
     if(isDefined(var_8) && var_8.size > 0) {
       var_7 = var_8[0]["position"];
     }
 
     playFX(scripts\engine\utility::getfx("clusterGrenade_explode"), var_7);
-    switch (var_0C) {
+    switch (var_12) {
       case 0:
         playsoundatpos(var_7, "frag_grenade_explode");
         break;
@@ -2810,7 +2810,7 @@ clustergrenadeexplode(var_0, var_1, var_2, var_3) {
         break;
     }
 
-    wait(var_1[var_0C]);
+    wait(var_1[var_12]);
   }
 }
 
@@ -2865,16 +2865,16 @@ remove_attachment(var_0, var_1, var_2) {
       var_8 = scripts\cp\utility::getrawbaseweaponname(var_7);
       var_9 = getweaponbasename(var_7);
       var_1 takeweapon(var_7);
-      var_0A = getweaponattachments(var_7);
-      foreach(var_0C in var_0A) {
-        if(issubstr(var_0C, var_0)) {
-          var_0A = scripts\engine\utility::array_remove(var_0A, var_0C);
+      var_10 = getweaponattachments(var_7);
+      foreach(var_12 in var_10) {
+        if(issubstr(var_12, var_0)) {
+          var_10 = scripts\engine\utility::array_remove(var_10, var_12);
           break;
         }
       }
 
       if(isDefined(level.build_weapon_name_func)) {
-        var_5 = var_1[[level.build_weapon_name_func]](var_9, undefined, var_0A);
+        var_5 = var_1[[level.build_weapon_name_func]](var_9, undefined, var_10);
       }
 
       if(isDefined(var_5)) {
@@ -3007,33 +3007,33 @@ buildattachmentmaps() {
       }
     }
 
-    foreach(var_0B in var_1) {
-      var_0C = [];
-      var_0D = 1;
-      for(var_0E = tablelookupbyrow(var_0B, var_0D, 0); var_0E != ""; var_0E = tablelookupbyrow(var_0B, var_0D, 0)) {
-        var_0C[var_0C.size] = var_0E;
-        var_0D++;
+    foreach(var_11 in var_1) {
+      var_12 = [];
+      var_13 = 1;
+      for(var_14 = tablelookupbyrow(var_11, var_13, 0); var_14 != ""; var_14 = tablelookupbyrow(var_11, var_13, 0)) {
+        var_12[var_12.size] = var_14;
+        var_13++;
       }
 
-      var_0F = [];
+      var_15 = [];
       var_10 = 1;
-      for(var_11 = tablelookupbyrow(var_0B, 0, var_10); var_11 != ""; var_11 = tablelookupbyrow(var_0B, 0, var_10)) {
-        var_0F[var_11] = var_10;
+      for(var_11 = tablelookupbyrow(var_11, 0, var_10); var_11 != ""; var_11 = tablelookupbyrow(var_11, 0, var_10)) {
+        var_15[var_11] = var_10;
         var_10++;
       }
 
-      foreach(var_0E in var_0C) {
-        foreach(var_16, var_14 in var_0F) {
-          var_15 = tablelookup(var_0B, 0, var_0E, var_14);
+      foreach(var_14 in var_12) {
+        foreach(var_16, var_14 in var_15) {
+          var_15 = tablelookup(var_11, 0, var_14, var_14);
           if(var_15 == "") {
             continue;
           }
 
-          if(!isDefined(level.attachmentmap_basetounique[var_0E])) {
-            level.attachmentmap_basetounique[var_0E] = [];
+          if(!isDefined(level.attachmentmap_basetounique[var_14])) {
+            level.attachmentmap_basetounique[var_14] = [];
           }
 
-          level.attachmentmap_basetounique[var_0E][var_16] = var_15;
+          level.attachmentmap_basetounique[var_14][var_16] = var_15;
         }
       }
 
@@ -3232,8 +3232,8 @@ waittill_grenade_fire() {
         var_0.weapon_name = var_1;
       }
 
-      if(!isDefined(var_0.triggerportableradarping)) {
-        var_0.triggerportableradarping = self;
+      if(!isDefined(var_0.owner)) {
+        var_0.owner = self;
       }
 
       if(!isDefined(var_0.team)) {
@@ -3287,31 +3287,31 @@ add_attachment_to_weapon(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  var_0A = scripts\cp\utility::isaltmodeweapon(var_1);
+  var_10 = scripts\cp\utility::isaltmodeweapon(var_1);
   if(scripts\cp\utility::weaponhasattachment(var_9, "xmags")) {
     var_6 = 1;
   }
 
   if(isDefined(var_0)) {
     if(!issubstr(var_0, "pap")) {
-      var_0B = self getweaponammoclip(var_4);
-      var_0C = self getweaponammostock(var_4);
+      var_11 = self getweaponammoclip(var_4);
+      var_12 = self getweaponammostock(var_4);
       if(issubstr(var_9, "akimbo")) {
-        var_0D = self getweaponammoclip(var_4, "left");
+        var_13 = self getweaponammoclip(var_4, "left");
       } else {
-        var_0D = undefined;
+        var_13 = undefined;
       }
 
       self takeweapon(var_4);
       scripts\cp\utility::_giveweapon(var_9, undefined, undefined, 1);
       if(scripts\cp\utility::weaponhasattachment(var_9, "xmags") && !var_6) {
-        var_0B = weaponclipsize(var_9);
+        var_11 = weaponclipsize(var_9);
       }
 
-      self setweaponammoclip(var_9, var_0B);
-      self setweaponammostock(var_9, var_0C);
-      if(isDefined(var_0D)) {
-        self setweaponammoclip(var_9, var_0D, "left");
+      self setweaponammoclip(var_9, var_11);
+      self setweaponammostock(var_9, var_12);
+      if(isDefined(var_13)) {
+        self setweaponammoclip(var_9, var_13, "left");
       }
     } else {
       if(issubstr(var_9, "katana") || issubstr(var_9, "nunchucks")) {}
@@ -3323,12 +3323,12 @@ add_attachment_to_weapon(var_0, var_1, var_2, var_3) {
   }
 
   self playlocalsound("weap_raise_large_plr");
-  var_0E = self getweaponslistprimaries();
-  foreach(var_1 in var_0E) {
+  var_14 = self getweaponslistprimaries();
+  foreach(var_1 in var_14) {
     if(issubstr(var_1, var_9)) {
       if(scripts\cp\utility::isaltmodeweapon(var_1)) {
         var_10 = getweaponbasename(var_1);
-        if((isDefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed, var_10)) || var_0A) {
+        if((isDefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed, var_10)) || var_10) {
           var_9 = "alt_" + var_9;
           break;
         }
@@ -3538,12 +3538,12 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
   var_7 = scripts\cp\utility::get_weapon_variant_id(self, var_5);
   var_8 = 0;
   var_9 = 0;
-  var_0A = 0;
-  var_0B = 0;
-  var_0C = undefined;
-  var_0D = [];
-  var_0E = 7;
-  var_0F = [];
+  var_10 = 0;
+  var_11 = 0;
+  var_12 = undefined;
+  var_13 = [];
+  var_14 = 7;
+  var_15 = [];
   var_10 = 1;
   var_11 = [];
   var_12 = 1;
@@ -3640,8 +3640,8 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
       }
 
       if(is_perk_attachment(var_21)) {
-        if(var_0F.size < var_10) {
-          var_0F[var_0F.size] = var_21;
+        if(var_15.size < var_10) {
+          var_15[var_15.size] = var_21;
           var_19[var_19.size] = var_21;
         } else {
           continue;
@@ -3650,8 +3650,8 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         continue;
       }
 
-      if(var_0D.size < var_0E) {
-        var_0D[var_0D.size] = var_21;
+      if(var_13.size < var_14) {
+        var_13[var_13.size] = var_21;
         var_19[var_19.size] = var_21;
         continue;
       }
@@ -3699,7 +3699,7 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
             for(var_24 = 0; var_24 < var_19.size; var_24++) {
               var_27 = scripts\cp\utility::getattachmenttype(var_19[var_24]);
               if(var_27 == var_26) {
-                var_17[var_0F.size] = var_1;
+                var_17[var_15.size] = var_1;
                 var_19[var_24] = var_1;
                 var_8 = 1;
                 break;
@@ -3707,28 +3707,28 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
             }
           }
         } else if(is_perk_attachment(var_1)) {
-          if(var_0F.size < var_10) {
-            var_0F[var_0F.size] = var_1;
+          if(var_15.size < var_10) {
+            var_15[var_15.size] = var_1;
             var_19[var_19.size] = var_1;
           } else {
             for(var_24 = 0; var_24 < var_19.size; var_24++) {
               var_27 = scripts\cp\utility::getattachmenttype(var_19[var_24]);
               if(var_27 == var_26) {
-                var_0F[var_0F.size] = var_1;
+                var_15[var_15.size] = var_1;
                 var_19[var_24] = var_1;
                 var_8 = 1;
                 break;
               }
             }
           }
-        } else if(var_0D.size < var_0E) {
-          var_0D[var_0D.size] = var_1;
+        } else if(var_13.size < var_14) {
+          var_13[var_13.size] = var_1;
           var_19[var_19.size] = var_1;
         } else {
           for(var_24 = 0; var_24 < var_19.size; var_24++) {
             var_27 = scripts\cp\utility::getattachmenttype(var_19[var_24]);
             if(var_27 == var_26) {
-              var_0D[var_0D.size] = var_1;
+              var_13[var_13.size] = var_1;
               var_19[var_24] = var_1;
               var_8 = 1;
               break;
@@ -3743,18 +3743,18 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         var_11[var_11.size] = var_1;
         var_19[var_19.size] = var_1;
       } else if(is_pap_attachment(var_1)) {
-        var_0F[var_0F.size] = var_1;
+        var_15[var_15.size] = var_1;
         var_19[var_19.size] = var_1;
       } else if(is_arcane_attachment(var_1)) {
         var_17[var_17.size] = var_1;
         var_19[var_19.size] = var_1;
       } else {
-        var_0D[var_0D.size] = var_1;
+        var_13[var_13.size] = var_1;
         var_19[var_19.size] = var_1;
       }
     } else if(isDefined(var_1)) {
       if(is_perk_attachment(var_1)) {
-        var_0F[var_0F.size] = var_1;
+        var_15[var_15.size] = var_1;
         var_19[var_19.size] = var_1;
       } else if(is_pap_attachment(var_1)) {
         var_11[var_11.size] = var_1;
@@ -3763,7 +3763,7 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         var_17[var_17.size] = var_1;
         var_19[var_19.size] = var_1;
       } else {
-        var_0D[var_0D.size] = var_1;
+        var_13[var_13.size] = var_1;
         var_19[var_19.size] = var_1;
       }
     }
@@ -3772,9 +3772,9 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
   var_28 = scripts\cp\utility::getweaponrootname(var_6);
   var_29 = isDefined(self.weapon_build_models[scripts\cp\utility::getrawbaseweaponname(var_5)]);
   if(!isDefined(var_4) && var_29) {
-    var_0A = scripts\cp\utility::getweaponcamo(var_28);
+    var_10 = scripts\cp\utility::getweaponcamo(var_28);
   } else {
-    var_0A = var_4;
+    var_10 = var_4;
   }
 
   if(var_29) {
@@ -3782,20 +3782,20 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
     foreach(var_1E in var_19) {
       if(issubstr(var_1E, "cos_")) {
         var_2A = 1;
-        var_0C = undefined;
+        var_12 = undefined;
         break;
       }
     }
 
     if(!var_2A) {
-      var_0C = scripts\cp\utility::getweaponcosmeticattachment(var_28);
+      var_12 = scripts\cp\utility::getweaponcosmeticattachment(var_28);
     }
 
-    var_0B = scripts\cp\utility::getweaponreticle(var_28);
+    var_11 = scripts\cp\utility::getweaponreticle(var_28);
     var_2D = scripts\cp\utility::getweaponpaintjobid(var_28);
   } else {
-    var_0D = undefined;
-    var_0C = undefined;
+    var_13 = undefined;
+    var_12 = undefined;
     var_2D = undefined;
   }
 
@@ -3811,11 +3811,11 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         }
       }
 
-      var_0C = undefined;
+      var_12 = undefined;
     }
   }
 
-  var_33 = scripts\cp\utility::mpbuildweaponname(var_28, var_19, var_0A, var_0B, var_7, self getentitynumber(), self.clientid, var_2D, var_0C);
+  var_33 = scripts\cp\utility::mpbuildweaponname(var_28, var_19, var_10, var_11, var_7, self getentitynumber(), self.clientid, var_2D, var_12);
   if(isDefined(var_33)) {
     return var_33;
   }
@@ -3931,7 +3931,7 @@ setweaponlaser_monitorads() {
   self endon("weapon_change");
   for(;;) {
     if(!isDefined(self.perkweaponlaseroffforswitchstart) || self.perkweaponlaseroffforswitchstart == 0) {
-      if(self getweaponrankinfominxp() > 0.6) {
+      if(self playerads() > 0.6) {
         if(self.perkweaponlaseron == 1) {
           self.perkweaponlaseron = 0;
           disableweaponlaser();
@@ -3965,7 +3965,7 @@ setweaponlaser_onweaponswitchstart(var_0) {
 
   wait(var_0);
   self.perkweaponlaseroffforswitchstart = undefined;
-  if(self.perkweaponlaseron == 0 && self getweaponrankinfominxp() <= 0.6) {
+  if(self.perkweaponlaseron == 0 && self playerads() <= 0.6) {
     self.perkweaponlaseron = 1;
     enableweaponlaser();
   }
@@ -3994,12 +3994,12 @@ ondetonateexplosive(var_0) {
   thread cleanupexplosivesondeath();
   self waittill("detonateExplosive");
   if(isDefined(var_0)) {
-    self.triggerportableradarping notify(var_0, 1);
+    self.owner notify(var_0, 1);
   } else {
-    self.triggerportableradarping notify("powers_c4_used", 1);
+    self.owner notify("powers_c4_used", 1);
   }
 
-  self detonate(self.triggerportableradarping);
+  self detonate(self.owner);
 }
 
 cleanupexplosivesondeath() {
@@ -4016,15 +4016,15 @@ cleanupexplosivesondeath() {
 cleanupequipment(var_0, var_1, var_2, var_3) {
   if(isDefined(self.weapon_name)) {
     if(self.weapon_name == "c4_zm") {
-      self.triggerportableradarping notify("c4_update", 0);
+      self.owner notify("c4_update", 0);
     } else if(self.weapon_name == "bouncingbetty_mp") {
-      self.triggerportableradarping notify("bouncing_betty_update", 0);
+      self.owner notify("bouncing_betty_update", 0);
     } else if(self.weapon_name == "sticky_mine_mp") {
-      self.triggerportableradarping notify("sticky_mine_update", 0);
+      self.owner notify("sticky_mine_update", 0);
     } else if(self.weapon_name == "trip_mine_mp") {
-      self.triggerportableradarping notify("trip_mine_update", 0);
+      self.owner notify("trip_mine_update", 0);
     } else if(self.weapon_name == "cryo_grenade_mp") {
-      self.triggerportableradarping notify("restart_cryo_grenade_cooldown", 0);
+      self.owner notify("restart_cryo_grenade_cooldown", 0);
     }
   }
 
@@ -4060,8 +4060,8 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_4 = 0;
   }
 
-  for(var_6 = 1; var_6; var_6 = monitordamageoneshot(var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10, var_1, var_2, var_3, var_4)) {
-    self waittill("damage", var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10);
+  for(var_6 = 1; var_6; var_6 = monitordamageoneshot(var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10, var_1, var_2, var_3, var_4)) {
+    self waittill("damage", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10);
     if(var_5) {
       self playrumbleonentity("damage_light");
     }
@@ -4085,7 +4085,7 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-monitordamageoneshot(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D) {
+monitordamageoneshot(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   if(!isDefined(self)) {
     return 0;
   }
@@ -4116,11 +4116,11 @@ movingplatformdetonate(var_0) {
 }
 
 makeexplosiveusable() {
-  if(scripts\cp\utility::isreallyalive(self.triggerportableradarping)) {
-    self setotherent(self.triggerportableradarping);
+  if(scripts\cp\utility::isreallyalive(self.owner)) {
+    self setotherent(self.owner);
     self.trigger = spawn("script_origin", self.origin + getexplosiveusableoffset());
-    self.trigger.triggerportableradarping = self;
-    thread equipmentwatchuse(self.triggerportableradarping, 1);
+    self.trigger.owner = self;
+    thread equipmentwatchuse(self.owner, 1);
   }
 }
 
@@ -4264,7 +4264,7 @@ equipmentdeletevfx() {
 monitordisownedequipment(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
   var_1 deleteexplosive();
 }
 
@@ -4771,27 +4771,27 @@ harpoon_impale_additional_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   var_2 giverankxp();
   var_8 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_corpseclipshot"]);
   var_9 = var_3 + var_4 * 4096;
-  var_0A = scripts\common\trace::ray_trace_detail(var_3, var_9, undefined, var_8, undefined, 1);
-  var_9 = var_0A["position"] - var_4 * 12;
-  var_0B = length(var_9 - var_3);
-  var_0C = var_0B / 1250;
-  var_0C = clamp(var_0C, 0.05, 1);
+  var_10 = scripts\common\trace::ray_trace_detail(var_3, var_9, undefined, var_8, undefined, 1);
+  var_9 = var_10["position"] - var_4 * 12;
+  var_11 = length(var_9 - var_3);
+  var_12 = var_11 / 1250;
+  var_12 = clamp(var_12, 0.05, 1);
   wait(0.05);
-  var_0D = var_4;
-  var_0E = anglestoup(var_1.angles);
-  var_0F = vectorcross(var_0D, var_0E);
-  var_10 = scripts\engine\utility::spawn_tag_origin(var_3, axistoangles(var_0D, var_0F, var_0E));
-  var_10 moveto(var_9, var_0C);
+  var_13 = var_4;
+  var_14 = anglestoup(var_1.angles);
+  var_15 = vectorcross(var_13, var_14);
+  var_10 = scripts\engine\utility::spawn_tag_origin(var_3, axistoangles(var_13, var_15, var_14));
+  var_10 moveto(var_9, var_12);
   var_11 = spawnragdollconstraint(var_2, var_5, var_6, var_7);
   var_11.origin = var_10.origin;
   var_11.angles = var_10.angles;
   var_11 linkto(var_10);
   thread play_explosion_post_impale(var_9, var_1);
-  thread impale_cleanup(var_2, var_10, var_0C + 0.05, var_11);
+  thread impale_cleanup(var_2, var_10, var_12 + 0.05, var_11);
 }
 
 impale_cleanup(var_0, var_1, var_2, var_3) {
-  var_0 scripts\engine\utility::waittill_any_timeout_1(var_2, "death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any_timeout(var_2, "death", "disconnect");
   var_3 delete();
   var_1 delete();
 }

@@ -46,6 +46,6 @@ func_CA2A() {
 func_CA2D() {
   self endon("disconnect");
   self endon("periphVis_end");
-  scripts\engine\utility::waittill_any_3("death", "phase_shift_start");
+  scripts\engine\utility::waittill_any("death", "phase_shift_start");
   thread func_CA29(1);
 }

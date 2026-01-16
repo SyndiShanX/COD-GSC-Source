@@ -41,15 +41,15 @@ init_class_table() {
       var_6[var_8] = tablelookup(var_0, 0, var_8, var_2);
     }
 
-    var_0A = strtok(var_3, "|");
-    var_0B = strtok(var_4, "| ");
-    var_0C = strtok(var_5, "| ");
-    foreach(var_0E in var_0A) {
-      var_0E = "archetype_" + var_0E;
-      var_6["loadoutArchetype"] = var_0E;
-      foreach(var_10 in var_0B) {
-        foreach(var_12 in var_0C) {
-          var_13 = bot_loadout_set(var_0E, var_10, var_12, 1);
+    var_10 = strtok(var_3, "|");
+    var_11 = strtok(var_4, "| ");
+    var_12 = strtok(var_5, "| ");
+    foreach(var_14 in var_10) {
+      var_14 = "archetype_" + var_14;
+      var_6["loadoutArchetype"] = var_14;
+      foreach(var_10 in var_11) {
+        foreach(var_12 in var_12) {
+          var_13 = bot_loadout_set(var_14, var_10, var_12, 1);
           var_14 = spawnStruct();
           var_14.loadoutvalues = var_6;
           var_13.loadouts[var_13.loadouts.size] = var_14;
@@ -175,9 +175,9 @@ bot_loadout_choose_fallback_primary(var_0) {
   }
 
   if(isusingmatchrulesdata()) {
-    for(var_0C = 0; var_0C < 6 && !isDefined(var_1) || var_1 == "none" || var_1 == ""; var_0C++) {
-      if(scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", self.team, var_0C, "class", "inUse")) {
-        var_1 = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", self.team, var_0C, "class", "weaponSetups", 0, "weapon");
+    for(var_12 = 0; var_12 < 6 && !isDefined(var_1) || var_1 == "none" || var_1 == ""; var_12++) {
+      if(scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", self.team, var_12, "class", "inUse")) {
+        var_1 = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", self.team, var_12, "class", "weaponSetups", 0, "weapon");
         if(var_1 != "none") {
           self.bot_fallback_personality = "weapon";
           return var_1;
@@ -431,32 +431,32 @@ init_bot_weap_statstable() {
     }
 
     if(var_8 != "" && var_6 != "" && var_9 != "" && var_7 != "") {
-      var_0A = "loadoutPrimary";
+      var_10 = "loadoutPrimary";
       if(scripts\mp\utility::iscacsecondaryweapon(var_6)) {
-        var_0A = "loadoutSecondary";
+        var_10 = "loadoutSecondary";
       } else if(!scripts\mp\utility::iscacprimaryweapon(var_6)) {
         var_5++;
         continue;
       }
 
-      if(!isDefined(level.bot_weap_statstable[var_0A])) {
-        level.bot_weap_statstable[var_0A] = [];
+      if(!isDefined(level.bot_weap_statstable[var_10])) {
+        level.bot_weap_statstable[var_10] = [];
       }
 
-      var_0B = strtok(var_7, "|");
-      var_0C = strtok(var_9, "| ");
-      var_0D = strtok(var_8, "| ");
-      foreach(var_0F in var_0B) {
-        var_0F = "archetype_" + var_0F;
-        foreach(var_11 in var_0C) {
-          foreach(var_13 in var_0D) {
-            var_14 = bot_loadout_make_index(var_0F, var_11, var_13);
-            if(!isDefined(level.bot_weap_statstable[var_0A][var_14])) {
-              level.bot_weap_statstable[var_0A][var_14] = [];
+      var_11 = strtok(var_7, "|");
+      var_12 = strtok(var_9, "| ");
+      var_13 = strtok(var_8, "| ");
+      foreach(var_15 in var_11) {
+        var_15 = "archetype_" + var_15;
+        foreach(var_11 in var_12) {
+          foreach(var_13 in var_13) {
+            var_14 = bot_loadout_make_index(var_15, var_11, var_13);
+            if(!isDefined(level.bot_weap_statstable[var_10][var_14])) {
+              level.bot_weap_statstable[var_10][var_14] = [];
             }
 
-            var_15 = level.bot_weap_statstable[var_0A][var_14].size;
-            level.bot_weap_statstable[var_0A][var_14][var_15] = var_6;
+            var_15 = level.bot_weap_statstable[var_10][var_14].size;
+            level.bot_weap_statstable[var_10][var_14][var_15] = var_6;
           }
         }
       }
@@ -518,9 +518,9 @@ bot_loadout_choose_from_perktable(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     var_9 = [];
-    foreach(var_0B in level.bot_perktable) {
-      if(var_8 || scripts\engine\utility::array_contains(var_7, var_0B["type"])) {
-        var_9[var_9.size] = var_0B["name"];
+    foreach(var_11 in level.bot_perktable) {
+      if(var_8 || scripts\engine\utility::array_contains(var_7, var_11["type"])) {
+        var_9[var_9.size] = var_11["name"];
       }
     }
 
@@ -555,17 +555,17 @@ bot_validate_perk(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   for(var_9 = var_8 - 1; var_9 > 0; var_9--) {
-    var_0A = "loadoutPerk" + var_9;
-    if(var_2[var_0A] == "none" || var_2[var_0A] == "specialty_null") {
+    var_10 = "loadoutPerk" + var_9;
+    if(var_2[var_10] == "none" || var_2[var_10] == "specialty_null") {
       continue;
     }
 
-    if(var_0 == var_2[var_0A]) {
+    if(var_0 == var_2[var_10]) {
       return 0;
     }
 
     if(var_9 >= var_3 && var_9 <= var_4) {
-      var_7 = var_7 + bot_perk_cost(var_2[var_0A]);
+      var_7 = var_7 + bot_perk_cost(var_2[var_10]);
     }
   }
 
@@ -631,9 +631,9 @@ bot_loadout_choose_from_default_class(var_0, var_1, var_2, var_3, var_4, var_5) 
       }
 
       var_9 = int(getsubstr(var_8, 0, 1));
-      var_0A = int(getsubstr(var_8, 1, 2));
-      var_0B = tablelookupbyrow("mp\cacabilitytable.csv", var_9 + 1, var_0A + 3);
-      return var_0B;
+      var_10 = int(getsubstr(var_8, 1, 2));
+      var_11 = tablelookupbyrow("mp\cacabilitytable.csv", var_9 + 1, var_10 + 3);
+      return var_11;
   }
 
   return var_5;
@@ -661,14 +661,14 @@ init_bot_attachmenttable() {
       }
 
       var_8 = strtok(var_6, "| ");
-      foreach(var_0A in var_8) {
-        if(!isDefined(level.bot_attachmenttable[var_0A])) {
-          level.bot_attachmenttable[var_0A] = [];
+      foreach(var_10 in var_8) {
+        if(!isDefined(level.bot_attachmenttable[var_10])) {
+          level.bot_attachmenttable[var_10] = [];
         }
 
-        if(!scripts\engine\utility::array_contains(level.bot_attachmenttable[var_0A], var_5)) {
-          var_0B = level.bot_attachmenttable[var_0A].size;
-          level.bot_attachmenttable[var_0A][var_0B] = var_5;
+        if(!scripts\engine\utility::array_contains(level.bot_attachmenttable[var_10], var_5)) {
+          var_11 = level.bot_attachmenttable[var_10].size;
+          level.bot_attachmenttable[var_10][var_11] = var_5;
         }
       }
     }
@@ -853,12 +853,12 @@ bot_loadout_choose_from_set(var_0, var_1, var_2, var_3, var_4) {
   }
 
   foreach(var_9 in var_0) {
-    var_0A = undefined;
+    var_10 = undefined;
     if(getsubstr(var_9, 0, 9) == "template_") {
-      var_0A = var_9;
-      var_0B = level.botloadouttemplates[var_9][var_3];
-      var_9 = bot_loadout_choose_from_set(strtok(var_0B, "| "), var_1, var_2, var_3, 1);
-      if(isDefined(var_0A) && isDefined(self.chosentemplates[var_0A])) {
+      var_10 = var_9;
+      var_11 = level.botloadouttemplates[var_9][var_3];
+      var_9 = bot_loadout_choose_from_set(strtok(var_11, "| "), var_1, var_2, var_3, 1);
+      if(isDefined(var_10) && isDefined(self.chosentemplates[var_10])) {
         return var_9;
       }
     }
@@ -887,7 +887,7 @@ bot_loadout_choose_from_set(var_0, var_1, var_2, var_3, var_4) {
       var_7 = var_7 + 1;
       if(randomfloat(1) <= 1 / var_7) {
         var_5 = var_9;
-        var_6 = var_0A;
+        var_6 = var_10;
       }
     }
   }

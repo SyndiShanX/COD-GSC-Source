@@ -206,7 +206,7 @@ perkbox_usefunc(var_0, var_1) {
 restockperkafternextrelic(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("rk_fight_completed");
-  level scripts\engine\utility::waittill_any_timeout_1(180, "relic_quest_completed");
+  level scripts\engine\utility::waittill_any_timeout(180, "relic_quest_completed");
   var_0.respawn_flag = undefined;
   level.num_crates_broken = 0;
   wait(var_2);
@@ -607,7 +607,7 @@ respawngourds() {
       var_1 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_1);
     }
 
-    level scripts\engine\utility::waittill_any_timeout_1(120, "relic_quest_completed");
+    level scripts\engine\utility::waittill_any_timeout(120, "relic_quest_completed");
   }
 }
 
@@ -2300,8 +2300,8 @@ open_sesame(var_0) {
     wait(0.1);
   }
 
-  var_0B = getEntArray("chi_door", "targetname");
-  foreach(var_9 in var_0B) {
+  var_11 = getEntArray("chi_door", "targetname");
+  foreach(var_9 in var_11) {
     var_9.physics_capsulecast notify("damage", undefined, "open_sesame");
     wait(0.1);
   }
@@ -2310,8 +2310,8 @@ open_sesame(var_0) {
   level.kepler_donations = 3;
   level.triton_donations = 3;
   if(isDefined(level.team_killdoors)) {
-    foreach(var_0F in level.team_killdoors) {
-      var_0F scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
+    foreach(var_15 in level.team_killdoors) {
+      var_15 scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
     }
   }
 
@@ -2357,9 +2357,9 @@ setupplayerloadouts() {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_5, var_1[var_6]);
     }
 
-    var_0A = scripts\cp\utility::getrawbaseweaponname(var_0[var_7]);
-    if(isDefined(var_5.weapon_build_models[var_0A])) {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_5, var_5.weapon_build_models[var_0A]);
+    var_10 = scripts\cp\utility::getrawbaseweaponname(var_0[var_7]);
+    if(isDefined(var_5.weapon_build_models[var_10])) {
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_5, var_5.weapon_build_models[var_10]);
     } else {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_5, var_1[var_6]);
     }
@@ -2372,23 +2372,23 @@ setupplayerloadouts() {
     var_5.kung_fu_progression.disciplines_levels[var_2[var_8]] = 3;
     switch (var_2[var_8]) {
       case "tiger":
-        var_0B = 3;
-        var_5 setclientomnvar("ui_intel_active_index", var_0B);
+        var_11 = 3;
+        var_5 setclientomnvar("ui_intel_active_index", var_11);
         break;
 
       case "snake":
-        var_0B = 6;
-        var_5 setclientomnvar("ui_intel_active_index", var_0B);
+        var_11 = 6;
+        var_5 setclientomnvar("ui_intel_active_index", var_11);
         break;
 
       case "crane":
-        var_0B = 4;
-        var_5 setclientomnvar("ui_intel_active_index", var_0B);
+        var_11 = 4;
+        var_5 setclientomnvar("ui_intel_active_index", var_11);
         break;
 
       case "dragon":
-        var_0B = 5;
-        var_5 setclientomnvar("ui_intel_active_index", var_0B);
+        var_11 = 5;
+        var_5 setclientomnvar("ui_intel_active_index", var_11);
         break;
     }
 
@@ -2402,8 +2402,8 @@ setupplayerloadouts() {
       var_5 setclientomnvar("zm_ui_show_general", 0);
     }
 
-    foreach(var_0D in var_3) {
-      var_5 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_0D, 1);
+    foreach(var_13 in var_3) {
+      var_5 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_13, 1);
     }
   }
 

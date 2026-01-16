@@ -371,8 +371,9 @@ func_8752(var_0, var_1, var_2, var_3) {
       var_0 thread scripts\sp\utility::func_B14F();
       thread func_E054(var_0);
     }
-  } else if(var_11.var_26A3.size)
+  } else if(var_11.var_26A3.size) {
     var_7 = scripts\engine\utility::getclosest(var_0.origin, var_11.var_26A3);
+  }
   else {
     var_7 = undefined;
   }
@@ -982,8 +983,9 @@ func_8766(var_0, var_1) {
     if(isDefined(var_3.var_131E9)) {
       var_8 = func_3DCC(var_3.var_131E9);
       var_9 = var_7 gettagorigin(var_3.var_131E9);
-    } else
+    } else {
       var_9 = var_7.origin;
+    }
 
     if(isDefined(var_3.var_131E8) && !var_8) {
       _playworldsound(var_3.var_131E8, var_9);
@@ -1146,8 +1148,9 @@ func_8766(var_0, var_1) {
       if(isDefined(var_3.botgetdifficultysetting) && isDefined(var_3.botgetdifficulty)) {
         thread func_8767(var_0, var_11, var_3.botclearscriptgoal, var_3.botgetdifficultysetting, var_3.botgetdifficulty);
         var_16 = 1;
-      } else if(!var_2)
+      } else if(!var_2) {
         var_0.var_1EB4 = 1;
+      }
 
       func_1FC2(var_0, var_11, var_12);
 
@@ -1494,8 +1497,9 @@ func_1FC4(var_0, var_1, var_2) {
       level.gun.angles = var_9;
       level.gun.origin = var_8;
     }
-  } else
+  } else {
     var_0 scripts\anim\shared::func_5D1A();
+  }
 
   if(isDefined(var_0.var_71C8)) {
     var_0[[var_0.var_71C8]]();

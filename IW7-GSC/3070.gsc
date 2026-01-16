@@ -168,7 +168,7 @@ func_5675() {
     self.bt.cannotmelee = 1;
   }
 
-  var_0 = self.var_394 != "none";
+  var_0 = self.weapon != "none";
   if(isDefined(self.var_C05C)) {
     self.iscinematicplaying = 0;
     self.var_C05C = undefined;
@@ -232,8 +232,8 @@ func_566B() {
   }
 
   var_3 = scripts\asm\asm_bb::bb_getcovernode();
-  if(isDefined(var_3) && distancesquared(var_3.origin, self.origin) < 144 && isDefined(self.isnodeoccupied)) {
-    var_4 = self.isnodeoccupied.origin - self.origin;
+  if(isDefined(var_3) && distancesquared(var_3.origin, self.origin) < 144 && isDefined(self.enemy)) {
+    var_4 = self.enemy.origin - self.origin;
     var_5 = anglesToForward(var_3.angles);
     if(vectordot(var_5, var_4) < 0.5) {
       var_2[var_2.size] = var_1;
@@ -524,9 +524,9 @@ func_F202(var_0) {
       }
 
       if(var_6.size > 0) {
-        var_0A = var_6[randomint(var_6.size)];
-        var_0B = vectornormalize(self.origin - var_0A.origin);
-        var_4 = var_0A.origin + var_0B * var_3;
+        var_10 = var_6[randomint(var_6.size)];
+        var_11 = vectornormalize(self.origin - var_10.origin);
+        var_4 = var_10.origin + var_11 * var_3;
         var_4 = getclosestpointonnavmesh(var_4, self);
       }
     }
@@ -573,8 +573,8 @@ func_F209(var_0) {
   var_1 = gettime();
   if(var_1 >= self.bt.instancedata[var_0].var_BFB5) {
     var_2 = undefined;
-    if(isalive(self.isnodeoccupied)) {
-      var_2 = self.isnodeoccupied;
+    if(isalive(self.enemy)) {
+      var_2 = self.enemy;
     } else {
       if(self.team == "axis") {
         var_3 = "allies";
@@ -758,8 +758,8 @@ func_12F13(var_0) {
     return level.running;
   }
 
-  if(isalive(self.isnodeoccupied)) {
-    var_2 = self.isnodeoccupied;
+  if(isalive(self.enemy)) {
+    var_2 = self.enemy;
   } else {
     if(self.team == "axis") {
       var_3 = "allies";
@@ -966,11 +966,11 @@ func_F1F1(var_0, var_1, var_2, var_3) {
   }
 
   var_0 thread func_F1ED();
-  var_0A = spawn("script_origin", var_4);
-  var_0A playSound("c6_destruct", "sounddone");
-  var_0A playSound("generic_explodeath_c6_1");
-  var_0A waittill("sounddone");
-  var_0A delete();
+  var_10 = spawn("script_origin", var_4);
+  var_10 playSound("c6_destruct", "sounddone");
+  var_10 playSound("generic_explodeath_c6_1");
+  var_10 waittill("sounddone");
+  var_10 delete();
 }
 
 func_F1ED() {
@@ -1010,11 +1010,11 @@ func_12A76(var_0) {
 }
 
 func_12A75(var_0) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return level.failure;
   }
 
-  var_1 = distance2dsquared(self.origin, self.isnodeoccupied.origin);
+  var_1 = distance2dsquared(self.origin, self.enemy.origin);
   if(var_1 > 1296) {
     return level.failure;
   }

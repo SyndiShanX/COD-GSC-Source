@@ -113,8 +113,9 @@ statsetchild(var_0, var_1, var_2, var_3) {
   if(var_0 == "round") {
     self setrankedplayerdata("common", var_0, var_1, var_2);
     setbestscore(var_1, var_2);
-  } else
+  } else {
     self setrankedplayerdata("mp", var_0, var_1, var_2);
+  }
 }
 
 stataddchild(var_0, var_1, var_2) {

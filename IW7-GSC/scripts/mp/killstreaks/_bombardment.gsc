@@ -5,7 +5,7 @@
 
 init() {
   func_FAB1();
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("bombardment", ::func_128DC, undefined, undefined, ::triggeredbombardmentweapon, ::func_13C8B);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("bombardment", ::func_128DC, undefined, undefined, ::triggeredbombardmentweapon, ::func_13C8B);
   level.dangermaxradius["bombardment"] = 160000;
   var_0 = ["passive_fast_launch", "passive_decreased_explosions", "passive_extra_selection", "passive_increased_cost", "passive_impulse_explosion", "passive_single_explosion"];
   scripts\mp\killstreak_loot::func_DF07("bombardment", var_0);
@@ -106,28 +106,28 @@ func_6CD4(var_0, var_1, var_2, var_3) {
     var_7 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle"];
     var_8 = physics_createcontents(var_7);
     var_9 = [];
-    foreach(var_0B in level.players) {
-      if(!scripts\mp\utility::isreallyalive(var_0B)) {
+    foreach(var_11 in level.players) {
+      if(!scripts\mp\utility::isreallyalive(var_11)) {
         continue;
       }
 
-      if(level.teambased && var_0B.team == self.team) {
+      if(level.teambased && var_11.team == self.team) {
         continue;
       }
 
-      if(!level.teambased && var_0B == self) {
+      if(!level.teambased && var_11 == self) {
         continue;
       }
 
-      if(var_0B isinphase()) {
+      if(var_11 isinphase()) {
         continue;
       }
 
-      var_0C = var_0B.origin + (0, 0, var_5);
-      var_0D = scripts\common\trace::ray_trace(var_0C, var_0B.origin - (0, 0, 10000), level.characters, var_8);
-      var_0E = var_0D["position"];
+      var_12 = var_11.origin + (0, 0, var_5);
+      var_13 = scripts\common\trace::ray_trace(var_12, var_11.origin - (0, 0, 10000), level.characters, var_8);
+      var_14 = var_13["position"];
       var_9[var_9.size] = spawnStruct();
-      var_9[var_9.size - 1].location = var_0E;
+      var_9[var_9.size - 1].location = var_14;
     }
 
     var_6 = createkillcaments(var_9, var_5, var_3);
@@ -209,7 +209,7 @@ createkillcaments(var_0, var_1, var_2) {
 func_139B2() {
   self endon("bombardment_finished");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3("disconnect", "joined_team");
+  scripts\engine\utility::waittill_any("disconnect", "joined_team");
   if(scripts\mp\utility::istrue(level.var_2C48)) {
     level.var_2C48 = undefined;
   }
@@ -226,13 +226,13 @@ func_5114(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7 = 0;
     var_8 = [];
     for(var_9 = 0; var_9 < var_6; var_9++) {
-      var_0A = randomint(100);
-      var_0B = randomint(360);
-      var_0C = var_1[0] + var_0A * cos(var_0B);
-      var_0D = var_1[1] + var_0A * sin(var_0B);
-      var_0E = var_1[2];
-      var_0F = (var_0C, var_0D, var_0E);
-      var_8[var_8.size] = var_0F;
+      var_10 = randomint(100);
+      var_11 = randomint(360);
+      var_12 = var_1[0] + var_10 * cos(var_11);
+      var_13 = var_1[1] + var_10 * sin(var_11);
+      var_14 = var_1[2];
+      var_15 = (var_12, var_13, var_14);
+      var_8[var_8.size] = var_15;
     }
 
     while(var_7 < var_6) {
@@ -253,14 +253,14 @@ findclosestunobstructedpointonnavmeshradius(var_0, var_1, var_2, var_3) {
   var_6 = func_7DBB(var_0, var_1, var_2, var_3);
   foreach(var_8 in var_6) {
     var_9 = getclosestpointonnavmesh(var_8);
-    var_0A = var_9 + (0, 0, 20);
-    var_0B = var_0A + (0, 0, 10000);
-    var_0C = scripts\common\trace::create_contents(0, 1, 1, 1, 1, 1, 0);
-    var_0D = scripts\common\trace::ray_trace(var_0A, var_0B, level.characters, var_0C);
-    if(isDefined(var_0D["hittype"]) && var_0D["hittype"] == "hittype_none") {
-      var_0E = distance2dsquared(var_0, var_9);
-      if(!isDefined(var_5) || var_0E < var_5) {
-        var_5 = var_0E;
+    var_10 = var_9 + (0, 0, 20);
+    var_11 = var_10 + (0, 0, 10000);
+    var_12 = scripts\common\trace::create_contents(0, 1, 1, 1, 1, 1, 0);
+    var_13 = scripts\common\trace::ray_trace(var_10, var_11, level.characters, var_12);
+    if(isDefined(var_13["hittype"]) && var_13["hittype"] == "hittype_none") {
+      var_14 = distance2dsquared(var_0, var_9);
+      if(!isDefined(var_5) || var_14 < var_5) {
+        var_5 = var_14;
         var_4 = var_9;
       }
     }
@@ -280,13 +280,13 @@ func_7DBB(var_0, var_1, var_2, var_3) {
     var_7 = randomint(var_2);
     var_8 = randomint(360);
     var_9 = var_0[0] + var_7 * cos(var_8);
-    var_0A = var_0[1] + var_7 * sin(var_8);
-    var_0B = var_0[2];
-    var_0C = (var_9, var_0A, var_0B);
-    var_0D = var_0C + (0, 0, var_1);
-    var_0E = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle"];
-    var_0F = physics_createcontents(var_0E);
-    var_10 = scripts\common\trace::ray_trace(var_0D, var_0C - (0, 0, 10000), level.characters, var_0F);
+    var_10 = var_0[1] + var_7 * sin(var_8);
+    var_11 = var_0[2];
+    var_12 = (var_9, var_10, var_11);
+    var_13 = var_12 + (0, 0, var_1);
+    var_14 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle"];
+    var_15 = physics_createcontents(var_14);
+    var_10 = scripts\common\trace::ray_trace(var_13, var_12 - (0, 0, 10000), level.characters, var_15);
     var_4[var_4.size] = var_10["position"];
   }
 
@@ -308,13 +308,13 @@ func_6D7D(var_0, var_1, var_2, var_3, var_4) {
       var_9 = randomfloatrange(0.1, 0.3);
     }
 
-    var_0A = spawnStruct();
-    var_0A.origin = var_8;
-    var_0A.streakname = var_2;
-    var_0A.fgetarg = 350;
-    var_0A.team = self.team;
-    level.artillerydangercenters[level.artillerydangercenters.size] = var_0A;
-    level thread func_6D84(self, var_7, var_8, self.angles, var_0A, var_3, 0, var_4);
+    var_10 = spawnStruct();
+    var_10.origin = var_8;
+    var_10.streakname = var_2;
+    var_10.fgetarg = 350;
+    var_10.team = self.team;
+    level.artillerydangercenters[level.artillerydangercenters.size] = var_10;
+    level thread func_6D84(self, var_7, var_8, self.angles, var_10, var_3, 0, var_4);
     wait(var_9);
   }
 }
@@ -364,7 +364,7 @@ func_511A(var_0, var_1, var_2) {
 triggeredbombardmentweapon(var_0) {
   if(scripts\mp\killstreaks\_utility::func_A69F(var_0, "passive_impulse_explosion")) {
     var_0.var_EF88 = "gesture_script_weapon";
-    var_0.var_394 = "ks_gesture_generic_mp";
+    var_0.weapon = "ks_gesture_generic_mp";
     var_0.var_6D6B = "offhand_fired";
   }
 

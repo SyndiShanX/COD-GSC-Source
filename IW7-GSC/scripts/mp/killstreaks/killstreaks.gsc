@@ -106,7 +106,7 @@ func_B9CB() {
       continue;
     }
 
-    scripts\engine\utility::waittill_any_3("disconnect", "joined_team", "joined_spectators");
+    scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
     self notify("killstreak_disowned");
   }
 }
@@ -332,8 +332,8 @@ func_A6BA() {
       continue;
     }
 
-    if(isDefined(var_2.var_394)) {
-      var_3 = func_392B(var_2.var_394, var_2);
+    if(isDefined(var_2.weapon)) {
+      var_3 = func_392B(var_2.weapon, var_2);
       if(isDefined(var_3)) {
         var_4 = undefined;
         if(var_3 == "KILLSTREAKS_UNAVAILABLE_FOR_N") {
@@ -363,11 +363,11 @@ func_A6BA() {
     }
 
     if(var_2.var_EF88 == "no_fire_weapon") {
-      thread func_127C7(var_2.var_394, var_2, 1);
+      thread func_127C7(var_2.weapon, var_2, 1);
     } else if(var_2.var_EF88 == "gesture_script_weapon") {
-      self giveandfireoffhand(var_2.var_394);
-    } else if(isDefined(var_2.var_394) && var_2.var_394 != "none") {
-      thread func_127C7(var_2.var_394, var_2);
+      self giveandfireoffhand(var_2.weapon);
+    } else if(isDefined(var_2.weapon) && var_2.weapon != "none") {
+      thread func_127C7(var_2.weapon, var_2);
     } else {
       var_1 = getclosestenemysqdist();
       thread func_A69A(var_2);
@@ -597,7 +597,7 @@ func_128A4(var_0, var_1, var_2) {
     return;
   }
 
-  if(var_3.var_394 != var_0) {
+  if(var_3.weapon != var_0) {
     return;
   }
 
@@ -655,8 +655,8 @@ func_A69A(var_0, var_1) {
       self[[var_2.var_9B12]](var_0);
     }
 
-    if(isDefined(var_0.var_394) && var_0.var_394 != "none") {
-      self notify("killstreak_finished_with_weapon_" + var_0.var_394);
+    if(isDefined(var_0.weapon) && var_0.weapon != "none") {
+      self notify("killstreak_finished_with_weapon_" + var_0.weapon);
     }
 
     return 0;
@@ -748,12 +748,12 @@ func_4A1C(var_0, var_1, var_2) {
   var_3.streakname = var_0;
   var_3.var_9E0B = 0;
   var_3.var_FFC4 = 0;
-  var_3.triggerportableradarping = var_1;
+  var_3.owner = var_1;
   var_3.var_A5B0 = func_81ED(self);
   var_3.lifeid = self.pers["deaths"];
   var_3.isgimme = 0;
   var_3.var_9F6E = 0;
-  var_3.var_394 = scripts\mp\utility::getkillstreakweapon(var_0);
+  var_3.weapon = scripts\mp\utility::getkillstreakweapon(var_0);
   var_3.var_6D6B = func_7F41(var_0);
   var_3.streakshouldchain = getkillstreaksetupinfo(var_0);
   var_3.var_EF88 = scripts\mp\utility::func_7F4F(var_0);
@@ -1467,9 +1467,9 @@ findunobstructedfiringpointaroundy(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(var_7 = var_3; var_7 <= var_4; var_7 = var_7 + var_5) {
     var_8 = rotatevector((1, 0, 0), (var_7 - 90, 0, 0));
     var_9 = var_2 * rotatevector(var_8, (0, var_6[1], 0));
-    var_0A = var_1 + var_9;
-    if(_findunobstructedfiringpointhelper(var_0, var_0A, var_1)) {
-      return var_0A;
+    var_10 = var_1 + var_9;
+    if(_findunobstructedfiringpointhelper(var_0, var_10, var_1)) {
+      return var_10;
     }
   }
 
@@ -1509,16 +1509,16 @@ func_532A(var_0, var_1, var_2, var_3) {
   var_7 = (0, 0, 0);
   var_8 = "";
   var_9 = "";
-  var_0A = "";
-  var_0B = undefined;
+  var_10 = "";
+  var_11 = undefined;
   if(!isDefined(var_3)) {
     return;
   }
 
   if(level.teambased) {
-    foreach(var_0D in var_3) {
-      if(scripts\mp\utility::func_9FE7(var_0, var_1, var_0D)) {
-        var_0D notify("damage", var_5, var_0, var_6, var_7, var_4, var_8, var_9, var_0A, var_0B, var_2);
+    foreach(var_13 in var_3) {
+      if(scripts\mp\utility::func_9FE7(var_0, var_1, var_13)) {
+        var_13 notify("damage", var_5, var_0, var_6, var_7, var_4, var_8, var_9, var_10, var_11, var_2);
         wait(0.05);
       }
     }
@@ -1526,17 +1526,17 @@ func_532A(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  foreach(var_0D in var_4) {
-    if(scripts\mp\utility::func_9FD8(var_0, var_1, var_0D)) {
-      var_0D notify("damage", var_5, var_0, var_6, var_7, var_4, var_8, var_9, var_0A, var_0B, var_2);
+  foreach(var_13 in var_4) {
+    if(scripts\mp\utility::func_9FD8(var_0, var_1, var_13)) {
+      var_13 notify("damage", var_5, var_0, var_6, var_7, var_4, var_8, var_9, var_10, var_11, var_2);
       wait(0.05);
     }
   }
 }
 
 killstreakhit(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_1) && isplayer(var_0) && isDefined(var_2.triggerportableradarping) && isDefined(var_2.triggerportableradarping.team)) {
-    if(scripts\mp\utility::playersareenemies(var_0, var_2.triggerportableradarping)) {
+  if(isDefined(var_1) && isplayer(var_0) && isDefined(var_2.owner) && isDefined(var_2.owner.team)) {
+    if(scripts\mp\utility::playersareenemies(var_0, var_2.owner)) {
       if(scripts\mp\utility::iskillstreakweapon(var_1)) {
         return;
       }
@@ -1624,7 +1624,7 @@ initridekillstreak_internal(var_0) {
   if(isDefined(var_0) && func_9E6F(var_0)) {
     var_1 = "timeout";
   } else {
-    var_1 = scripts\engine\utility::waittill_any_timeout_1(1, "disconnect", "death", "weapon_switch_started");
+    var_1 = scripts\engine\utility::waittill_any_timeout(1, "disconnect", "death", "weapon_switch_started");
   }
 
   scripts\mp\hostmigration::waittillhostmigrationdone();
@@ -1656,14 +1656,14 @@ initridekillstreak_internal(var_0) {
     if(var_0 == "orbital_deployment" || var_0 == "drone_hive") {
       self visionsetfadetoblackforplayer("black_bw", 0);
       thread scripts\mp\utility::set_visionset_for_watching_players("black_bw", 0, 1, undefined, 1);
-      var_2 = scripts\engine\utility::waittill_any_timeout_1(0, "disconnect", "death");
+      var_2 = scripts\engine\utility::waittill_any_timeout(0, "disconnect", "death");
     } else {
       self visionsetfadetoblackforplayer("black_bw", 0.75);
       thread scripts\mp\utility::set_visionset_for_watching_players("black_bw", 0.75, 1, undefined, 1);
-      var_2 = scripts\engine\utility::waittill_any_timeout_1(0.8, "disconnect", "death");
+      var_2 = scripts\engine\utility::waittill_any_timeout(0.8, "disconnect", "death");
     }
   } else {
-    var_2 = scripts\engine\utility::waittill_any_timeout_1(1, "disconnect", "death");
+    var_2 = scripts\engine\utility::waittill_any_timeout(1, "disconnect", "death");
   }
 
   self notify("black_out_done");
@@ -1745,11 +1745,11 @@ allowridekillstreakplayerexit(var_0) {
     self endon(var_0);
   }
 
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   level endon("game_ended");
   var_1 endon("disconnect");
   var_1 endon("end_remote");
@@ -1804,7 +1804,7 @@ func_D507(var_0, var_1) {
   scripts\mp\utility::setusingremote(var_0.streakname);
   scripts\mp\utility::freezecontrolswrapper(1);
   thread func_12B9C();
-  var_4 = scripts\engine\utility::waittill_any_timeout_1(1, "death");
+  var_4 = scripts\engine\utility::waittill_any_timeout(1, "death");
   self notify("ks_freeze_end");
   if(!isDefined(var_4) || var_4 != "timeout") {
     self setclientomnvar("ui_remote_control_sequence", 0);

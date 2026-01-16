@@ -10,9 +10,9 @@ init() {
   var_0.modelbase = "equipment_tank_nitrogen_zmb";
   var_0.modelplacement = "equipment_tank_nitrogen_zmb";
   var_0.modelplacementfailed = "equipment_tank_nitrogen_zmb";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.var_9F43 = 0;
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -189,7 +189,7 @@ waitrestoreperks() {
 func_4A2A(var_0) {
   var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 40), "sentry_minigun_mp");
   var_1.angles = var_0.angles;
-  var_1.triggerportableradarping = var_0;
+  var_1.owner = var_0;
   var_1.name = "crafted_trap_balloon";
   var_1.carried_trap = spawn("script_model", var_1.origin);
   var_1.carried_trap.angles = var_0.angles;
@@ -272,7 +272,7 @@ func_126AA(var_0, var_1) {
   self.carriedby = undefined;
   var_2.repulsor = createnavrepulsor("mower_repulsor", 0, var_2.origin, 8, 1);
   var_1.iscarrying = 0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_trap_balloon";
   var_2 thread func_126A6(var_0);
   self notify("placed");
@@ -282,8 +282,8 @@ func_126AA(var_0, var_1) {
 
 func_126A7() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   if(isDefined(self.repulsor)) {
@@ -310,12 +310,12 @@ func_126A8(var_0, var_1, var_2) {
 
 func_126A6(var_0) {
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_47B3["crafted_trap_balloon"].pow);
+  self sethintstring(level.var_47B3["crafted_trap_balloon"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
-  thread func_126A0(self.triggerportableradarping);
+  thread func_126A0(self.owner);
   thread scripts\cp\utility::item_handleownerdisconnect("electrap_handleOwner");
   thread scripts\cp\utility::item_timeout(var_0, level.var_47B3["crafted_trap_balloon"].timeout);
   thread func_126A1();
@@ -382,7 +382,7 @@ go_to_balloons(var_0) {
   self ghostskulls_complete_status(var_0.origin);
   self ghostskulls_total_waves(60);
   var_1 = var_0.detonate_height[2];
-  scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+  scripts\engine\utility::waittill_any("goal", "goal_reached");
   thread balloon_death(var_1);
 }
 

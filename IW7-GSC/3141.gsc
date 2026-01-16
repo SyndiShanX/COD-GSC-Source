@@ -42,8 +42,8 @@ func_BEA0(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
-    var_9 = anglesToForward(self.target_getindexoftarget.angles);
+  if(isDefined(self.node)) {
+    var_9 = anglesToForward(self.node.angles);
     if(vectordot(var_9, var_4) <= 0.857) {
       self._blackboard.var_5279 = var_9;
       return 1;
@@ -150,17 +150,17 @@ func_3EA7(var_0, var_1, var_2) {
     return undefined;
   }
 
-  var_0A = "turn_" + var_9;
+  var_10 = "turn_" + var_9;
   if(var_9 == 2) {
     if(var_8 == 0) {
-      var_0A = var_0A + "r";
+      var_10 = var_10 + "r";
     } else {
-      var_0A = var_0A + "l";
+      var_10 = var_10 + "l";
     }
   }
 
-  var_0B = lib_0A1E::func_2356(var_1, var_0A);
-  return var_0B;
+  var_11 = lib_0A1E::func_2356(var_1, var_10);
+  return var_11;
 }
 
 func_CEC3(var_0, var_1, var_2, var_3) {
@@ -181,8 +181,8 @@ func_7DD5() {
     return self.physics_querypoint.origin;
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
-    return self.target_getindexoftarget.origin;
+  if(isDefined(self.node)) {
+    return self.node.origin;
   }
 
   return self.objective_playermask_hidefromall;
@@ -193,8 +193,8 @@ func_7DD4() {
     return self.physics_querypoint.angles;
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
-    return self.target_getindexoftarget.angles;
+  if(isDefined(self.node)) {
+    return self.node.angles;
   }
 
   return self.angles;
@@ -232,12 +232,12 @@ func_1008C(var_0, var_1, var_2, var_3) {
       return 0;
     }
 
-    var_0A = self.objective_playermask_showto;
-    if(isDefined(self.target_getindexoftarget) || isDefined(self.physics_querypoint)) {
-      var_0A = 0;
+    var_10 = self.objective_playermask_showto;
+    if(isDefined(self.node) || isDefined(self.physics_querypoint)) {
+      var_10 = 0;
     }
 
-    self.asm.var_11068 = func_3722(var_2, var_4, var_0A, 0);
+    self.asm.var_11068 = func_3722(var_2, var_4, var_10, 0);
   } else {
     self.asm.var_11068 = lib_0C5D::func_3721(var_0, var_1, var_2, "Exposed", 1);
   }
@@ -268,33 +268,33 @@ func_3722(var_0, var_1, var_2, var_3) {
     return undefined;
   }
 
-  var_0A = getmovedelta(var_9[var_6]);
-  var_0B = getangledelta3d(var_9[var_6]);
-  var_0C = rotatevector(var_0A, self.angles);
-  var_0D = var_0C + self.origin;
-  var_0E = 0;
-  var_0F = distancesquared(var_0D, var_1);
-  if(var_0F > var_2 * var_2) {
-    var_10 = distancesquared(var_0D + var_0C, var_1);
-    if(var_10 < var_0F) {
+  var_10 = getmovedelta(var_9[var_6]);
+  var_11 = getangledelta3d(var_9[var_6]);
+  var_12 = rotatevector(var_10, self.angles);
+  var_13 = var_12 + self.origin;
+  var_14 = 0;
+  var_15 = distancesquared(var_13, var_1);
+  if(var_15 > var_2 * var_2) {
+    var_10 = distancesquared(var_13 + var_12, var_1);
+    if(var_10 < var_15) {
       return undefined;
     }
 
-    var_0E = 1;
+    var_14 = 1;
   }
 
-  var_11 = getclosestpointonnavmesh(var_0D, self);
+  var_11 = getclosestpointonnavmesh(var_13, self);
   var_12 = self func_84AC();
   if(!navisstraightlinereachable(var_12, var_11, self)) {
     return undefined;
   }
 
-  if(var_0E) {
-    var_0C = rotatevector(var_0A, var_4 - var_0B);
-    var_13 = var_1 - var_0C;
-  } else if(distance2dsquared(var_12, var_0E) > 4) {
-    var_0D = rotatevector(var_0B, var_5 - var_0C);
-    var_13 = var_12 - var_0D;
+  if(var_14) {
+    var_12 = rotatevector(var_10, var_4 - var_11);
+    var_13 = var_1 - var_12;
+  } else if(distance2dsquared(var_12, var_14) > 4) {
+    var_13 = rotatevector(var_11, var_5 - var_12);
+    var_13 = var_12 - var_13;
   } else {
     var_13 = self.origin;
   }
@@ -303,9 +303,9 @@ func_3722(var_0, var_1, var_2, var_3) {
   var_14.getgrenadedamageradius = var_9[var_6];
   var_14.var_3F = var_6;
   var_14.areanynavvolumesloaded = var_13;
-  var_14.var_3E = var_0B[1];
+  var_14.var_3E = var_11[1];
   var_14.log = var_4;
-  var_14.stricmp = var_0A;
+  var_14.stricmp = var_10;
   return var_14;
 }
 
@@ -335,17 +335,17 @@ func_CEAD(var_0, var_1, var_2, var_3) {
     var_5 = lib_0A1E::asm_getallanimsforstate(var_5, var_6);
     var_9 = getmovedelta(var_8);
     var_8 = getangledelta(var_5);
-    var_0A = func_7DD5();
+    var_10 = func_7DD5();
     var_6 = self.angles;
-    var_0B = rotatevector(var_9, var_6);
-    var_7 = var_0A - var_0B;
+    var_11 = rotatevector(var_9, var_6);
+    var_7 = var_10 - var_11;
   }
 
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   self func_82EA(var_1, var_5, 1, var_2, 1);
-  var_0C = var_6[1] - var_8;
+  var_12 = var_6[1] - var_8;
   if(isDefined(self.asm.var_11068)) {
-    self func_8396(var_7, var_0C);
+    self func_8396(var_7, var_12);
   } else {
     self orientmode("face angle", self.angles[1]);
   }
@@ -382,19 +382,19 @@ func_1008B(var_0, var_1, var_2, var_3) {
 
   var_9 = 1;
   if(var_9) {
-    var_0A = gettime() - self.asm.footsteps.time;
-    if(var_0A > 850 || var_0A < 700) {
+    var_10 = gettime() - self.asm.footsteps.time;
+    if(var_10 > 850 || var_10 < 700) {
       return 0;
     }
 
-    var_0B = self.objective_playermask_showto;
-    if(isDefined(self.target_getindexoftarget) || isDefined(self.physics_querypoint)) {
-      var_0B = 0;
+    var_11 = self.objective_playermask_showto;
+    if(isDefined(self.node) || isDefined(self.physics_querypoint)) {
+      var_11 = 0;
     }
 
-    self.asm.var_11068 = func_3722(var_2, var_4, var_0B, 1);
+    self.asm.var_11068 = func_3722(var_2, var_4, var_11, 1);
   } else {
-    if(var_0A < var_7) {
+    if(var_10 < var_7) {
       return 0;
     }
 
@@ -514,8 +514,8 @@ func_100BE(var_0, var_1, var_2, var_3) {
       return 0;
     }
 
-    var_0A = var_7 getlinkedparent();
-    if(isDefined(var_0A) && var_0A == self) {
+    var_10 = var_7 getlinkedparent();
+    if(isDefined(var_10) && var_10 == self) {
       return 0;
     }
 
@@ -523,13 +523,13 @@ func_100BE(var_0, var_1, var_2, var_3) {
       return 0;
     }
   } else {
-    var_0B = anglesToForward(self.angles);
-    if(vectordot(var_4, var_0B) > -0.707) {
+    var_11 = anglesToForward(self.angles);
+    if(vectordot(var_4, var_11) > -0.707) {
       return 0;
     }
 
-    var_0C = lengthsquared(var_5);
-    if(var_0C > 65536) {
+    var_12 = lengthsquared(var_5);
+    if(var_12 > 65536) {
       return 0;
     }
 
@@ -645,16 +645,16 @@ func_CEAC(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_0A = var_5 - self.origin;
-  var_0B = -1 * var_0A;
-  var_0C = vectortoyaw(var_0B);
+  var_10 = var_5 - self.origin;
+  var_11 = -1 * var_10;
+  var_12 = vectortoyaw(var_11);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   self func_82EA(var_1, var_7, 1, var_2, 1);
   if(!var_4) {
     self func_8396(var_8, self.angles[1]);
   } else {
-    var_0D = self.origin + rotatevector(var_9, self.angles);
-    if(!self maymovefrompointtopoint(self.origin, var_0D)) {
+    var_13 = self.origin + rotatevector(var_9, self.angles);
+    if(!self maymovefrompointtopoint(self.origin, var_13)) {
       self func_8396(var_8, self.angles[1]);
     } else {
       self orientmode("face current");

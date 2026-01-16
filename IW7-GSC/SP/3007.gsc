@@ -55,8 +55,8 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   level.var_5D9A[var_0] = var_5;
   var_9 = undefined;
-  var_0A = getEntArray(var_0, "targetname");
-  var_0B = var_0A[0];
+  var_10 = getEntArray(var_0, "targetname");
+  var_11 = var_10[0];
   if(isDefined(var_3)) {
     var_5.var_1CCB = var_3;
   }
@@ -65,14 +65,14 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_5.var_1D34 = var_4;
   }
 
-  if(isDefined(var_0B.script_noteworthy) && var_0B.script_noteworthy == var_5.var_1325F) {
-    var_0B.script_noteworthy = undefined;
+  if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == var_5.var_1325F) {
+    var_11.script_noteworthy = undefined;
   }
 
-  var_0B.var_C1 = 1;
-  var_9 = scripts\sp\vehicle_code::func_1444(var_0B);
-  var_5.var_1087A = var_0B.origin;
-  var_5.var_10875 = var_0B.angles;
+  var_11.var_C1 = 1;
+  var_9 = scripts\sp\vehicle_code::func_1444(var_11);
+  var_5.var_1087A = var_11.origin;
+  var_5.var_10875 = var_11.angles;
   var_9.var_4D94.partnerheli = [];
   var_9.var_4D94.var_10871 = var_0;
   var_9.var_4D94.var_127C9 = [];
@@ -112,127 +112,127 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 scripts\sp\utility::func_65E0("damage_system_active");
   var_9 scripts\sp\utility::func_65E0("player_dropship_ready");
   var_9 scripts\sp\utility::func_65E0("player_dropship_seats_ready");
-  foreach(var_10, var_0D in scripts\engine\utility::getstructarray(var_5.var_1325F, "script_noteworthy")) {
-    var_0E = var_0D scripts\engine\utility::spawn_tag_origin();
-    if(isDefined(var_0D.script_index)) {
-      var_0E.script_index = var_0D.script_index;
+  foreach(var_10, var_13 in scripts\engine\utility::getstructarray(var_5.var_1325F, "script_noteworthy")) {
+    var_14 = var_13 scripts\engine\utility::spawn_tag_origin();
+    if(isDefined(var_13.script_index)) {
+      var_14.script_index = var_13.script_index;
     }
 
-    if(isDefined(var_0D.var_EE52)) {
-      var_0E.var_EE52 = var_0D.var_EE52;
+    if(isDefined(var_13.var_EE52)) {
+      var_14.var_EE52 = var_13.var_EE52;
     }
 
-    if(isDefined(var_0D.target)) {
-      var_0E.target = var_0D.target;
+    if(isDefined(var_13.target)) {
+      var_14.target = var_13.target;
     }
 
-    if(isDefined(var_0D.var_336)) {
-      var_0E.var_336 = var_0D.var_336;
-      if(issubstr(var_0E.var_336, "dropship_origin")) {
-        if(issubstr(var_0E.var_336, "light")) {
-          var_9.var_4D94.var_AD3E = var_0E;
-        } else if(issubstr(var_0E.var_336, "reflection")) {
-          var_9.var_4D94.var_AD3F = var_0E;
+    if(isDefined(var_13.var_336)) {
+      var_14.var_336 = var_13.var_336;
+      if(issubstr(var_14.var_336, "dropship_origin")) {
+        if(issubstr(var_14.var_336, "light")) {
+          var_9.var_4D94.var_AD3E = var_14;
+        } else if(issubstr(var_14.var_336, "reflection")) {
+          var_9.var_4D94.var_AD3F = var_14;
         } else {
-          var_9.var_4D94.linkpoint = var_0E;
+          var_9.var_4D94.linkpoint = var_14;
         }
 
         continue;
-      } else if(issubstr(var_0E.var_336, var_5.var_1325C)) {
-        var_9.var_4D94.var_AD3D = var_0E;
+      } else if(issubstr(var_14.var_336, var_5.var_1325C)) {
+        var_9.var_4D94.var_AD3D = var_14;
         continue;
-      } else if(issubstr(var_0E.var_336, "starts")) {
-        var_0E.var_981A = var_0E.angles;
-        if(isDefined(var_0E.var_EE52)) {
-          var_9.var_4D94.var_10DED[var_0E.var_EE52] = var_0E;
-        } else if(isDefined(var_0E.script_index)) {
-          var_9.var_4D94.var_10DED[var_0E.script_index] = var_0E;
+      } else if(issubstr(var_14.var_336, "starts")) {
+        var_14.var_981A = var_14.angles;
+        if(isDefined(var_14.var_EE52)) {
+          var_9.var_4D94.var_10DED[var_14.var_EE52] = var_14;
+        } else if(isDefined(var_14.script_index)) {
+          var_9.var_4D94.var_10DED[var_14.script_index] = var_14;
         }
-      } else if(issubstr(var_0E.var_336, "ammo_cache_interact")) {
-        var_9.var_4D94.var_1E3D = scripts\engine\utility::array_add(var_9.var_4D94.var_1E3D, var_0E);
-      } else if(issubstr(var_0E.var_336, "weapon_light")) {
-        var_0F = spawnStruct();
-        var_0F.var_C264 = var_0E;
-        var_0F.physics_setgravitydynentscalar = "tag_origin";
-        var_0F.name = "dropship_weapon_light";
-        var_9.var_4D94.fx["weapon_lights"] = scripts\engine\utility::array_add(var_9.var_4D94.fx["weapon_lights"], var_0F);
-      } else if(issubstr(var_0E.var_336, "fx_damage")) {
-        var_0F = spawnStruct();
-        var_0F.var_C264 = var_0E;
-        var_0F.physics_setgravitydynentscalar = "tag_origin";
-        if(!isDefined(var_9.var_4D94.fx["damage"][var_0E.var_EE52])) {
-          var_9.var_4D94.fx["damage"][var_0E.var_EE52] = [];
+      } else if(issubstr(var_14.var_336, "ammo_cache_interact")) {
+        var_9.var_4D94.var_1E3D = scripts\engine\utility::array_add(var_9.var_4D94.var_1E3D, var_14);
+      } else if(issubstr(var_14.var_336, "weapon_light")) {
+        var_15 = spawnStruct();
+        var_15.var_C264 = var_14;
+        var_15.physics_setgravitydynentscalar = "tag_origin";
+        var_15.name = "dropship_weapon_light";
+        var_9.var_4D94.fx["weapon_lights"] = ::scripts\engine\utility::array_add(var_9.var_4D94.fx["weapon_lights"], var_15);
+      } else if(issubstr(var_14.var_336, "fx_damage")) {
+        var_15 = spawnStruct();
+        var_15.var_C264 = var_14;
+        var_15.physics_setgravitydynentscalar = "tag_origin";
+        if(!isDefined(var_9.var_4D94.fx["damage"][var_14.var_EE52])) {
+          var_9.var_4D94.fx["damage"][var_14.var_EE52] = [];
         }
 
-        var_9.var_4D94.fx["damage"][var_0E.var_EE52] = scripts\engine\utility::array_add(var_9.var_4D94.fx["damage"][var_0E.var_EE52], var_0F);
+        var_9.var_4D94.fx["damage"][var_14.var_EE52] = ::scripts\engine\utility::array_add(var_9.var_4D94.fx["damage"][var_14.var_EE52], var_15);
       } else {
-        var_9.var_4D94.var_C743 = scripts\engine\utility::array_add(var_9.var_4D94.var_C743, var_0E);
+        var_9.var_4D94.var_C743 = scripts\engine\utility::array_add(var_9.var_4D94.var_C743, var_14);
       }
     } else {
-      var_9.var_4D94.var_C743 = scripts\engine\utility::array_add(var_9.var_4D94.var_C743, var_0E);
+      var_9.var_4D94.var_C743 = scripts\engine\utility::array_add(var_9.var_4D94.var_C743, var_14);
     }
 
-    var_9.var_4D94.partnerheli = scripts\engine\utility::array_add(var_9.var_4D94.partnerheli, var_0E);
+    var_9.var_4D94.partnerheli = scripts\engine\utility::array_add(var_9.var_4D94.partnerheli, var_14);
   }
 
-  foreach(var_0D in getEntArray(var_5.var_1325F, "script_noteworthy")) {
-    if(issubstr(var_0D.classname, "info_player_start")) {
+  foreach(var_13 in getEntArray(var_5.var_1325F, "script_noteworthy")) {
+    if(issubstr(var_13.classname, "info_player_start")) {
       continue;
     }
 
-    if(issubstr(var_0D.classname, "trigger")) {
-      if(!isDefined(var_0D.var_AD47) || var_0D.var_AD47 == 0) {
-        var_0D enablelinkto();
-        var_0D func_8314();
-        var_0D.var_AD47 = 1;
+    if(issubstr(var_13.classname, "trigger")) {
+      if(!isDefined(var_13.var_AD47) || var_13.var_AD47 == 0) {
+        var_13 enablelinkto();
+        var_13 func_8314();
+        var_13.var_AD47 = 1;
       }
 
-      if(issubstr(var_0D.classname, "flag")) {
-        if(isDefined(var_0D.var_ED9A) && !scripts\engine\utility::flag_exist(var_0D.var_ED9A)) {
-          scripts\engine\utility::flag_init(var_0D.var_ED9A);
+      if(issubstr(var_13.classname, "flag")) {
+        if(isDefined(var_13.var_ED9A) && !scripts\engine\utility::flag_exist(var_13.var_ED9A)) {
+          scripts\engine\utility::flag_init(var_13.var_ED9A);
         }
       }
 
-      if(isDefined(var_0D.var_336) && var_0D.var_336 == "player_trig") {
-        var_9.var_4D94.var_D30A = var_0D;
+      if(isDefined(var_13.var_336) && var_13.var_336 == "player_trig") {
+        var_9.var_4D94.var_D30A = var_13;
       }
 
-      var_9.var_4D94.var_127C9 = scripts\engine\utility::array_add(var_9.var_4D94.var_127C9, var_0D);
-    } else if(issubstr(var_0D.classname, "light")) {
-      if(var_0D.classname != "info_null") {
-        var_9 func_F9C8(var_0D, var_5);
+      var_9.var_4D94.var_127C9 = scripts\engine\utility::array_add(var_9.var_4D94.var_127C9, var_13);
+    } else if(issubstr(var_13.classname, "light")) {
+      if(var_13.classname != "info_null") {
+        var_9 func_F9C8(var_13, var_5);
       }
-    } else if(issubstr(var_0D.classname, "reflection")) {
-      var_9.var_4D94.var_DE56[var_9.var_4D94.var_DE56.size] = var_0D;
-    } else if(issubstr(var_0D.classname, "weapon")) {
-      var_0D show();
-      var_9.var_4D94.var_13CC3 = scripts\engine\utility::array_add(var_9.var_4D94.var_13CC3, var_0D);
-    } else if(isDefined(var_0D.script_parameters) && issubstr(var_0D.script_parameters, "extra_collision")) {
-      var_0D solid();
-      var_9.var_4D94.var_6A4B = scripts\engine\utility::array_add(var_9.var_4D94.var_6A4B, var_0D);
-      var_9.var_4D94.var_1BE9 = scripts\engine\utility::array_add(var_9.var_4D94.var_1BE9, var_0D);
-    } else if(isDefined(var_0D.var_336)) {
-      if(var_0D.var_336 == "delete_on_firstframeend") {
+    } else if(issubstr(var_13.classname, "reflection")) {
+      var_9.var_4D94.var_DE56[var_9.var_4D94.var_DE56.size] = var_13;
+    } else if(issubstr(var_13.classname, "weapon")) {
+      var_13 show();
+      var_9.var_4D94.var_13CC3 = scripts\engine\utility::array_add(var_9.var_4D94.var_13CC3, var_13);
+    } else if(isDefined(var_13.script_parameters) && issubstr(var_13.script_parameters, "extra_collision")) {
+      var_13 solid();
+      var_9.var_4D94.var_6A4B = scripts\engine\utility::array_add(var_9.var_4D94.var_6A4B, var_13);
+      var_9.var_4D94.var_1BE9 = scripts\engine\utility::array_add(var_9.var_4D94.var_1BE9, var_13);
+    } else if(isDefined(var_13.var_336)) {
+      if(var_13.var_336 == "delete_on_firstframeend") {
         continue;
       }
 
-      if(issubstr(var_0D.var_336, "col_door")) {
-        var_0D solid();
-        switch (var_0D.var_336) {
+      if(issubstr(var_13.var_336, "col_door")) {
+        var_13 solid();
+        switch (var_13.var_336) {
           case "col_door_left":
-            var_9.var_4D94.var_5A13.var_4348 = var_0D;
+            var_9.var_4D94.var_5A13.var_4348 = var_13;
             var_9.var_4D94.var_5A13.var_4348 linkto(var_9, var_9.var_4D94.var_5A13.physics_setgravitydynentscalar);
             var_9.var_4D94.var_5A13.var_4284 = 1;
             break;
 
           case "col_door_right":
-            var_9.var_4D94.var_5A27.var_4348 = var_0D;
+            var_9.var_4D94.var_5A27.var_4348 = var_13;
             var_9.var_4D94.var_5A27.var_4348 linkto(var_9, var_9.var_4D94.var_5A27.physics_setgravitydynentscalar);
             var_9.var_4D94.var_5A27.var_4284 = 1;
             break;
 
           case "col_door_back":
-            var_9.var_4D94.var_5A01.var_4348 = var_0D;
+            var_9.var_4D94.var_5A01.var_4348 = var_13;
             var_9.var_4D94.var_5A01.var_4348 linkto(var_9, var_9.var_4D94.var_5A01.physics_setgravitydynentscalar);
             var_9.var_4D94.var_5A01.var_4284 = 1;
             break;
@@ -241,45 +241,45 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
             break;
         }
 
-        var_9.var_4D94.var_1BE9 = scripts\engine\utility::array_add(var_9.var_4D94.var_1BE9, var_0D);
-      } else if(issubstr(var_0D.var_336, var_5.var_1325C) && var_0D.classname == "script_brushmodel") {
-        if(isDefined(var_0D.var_EE52) && issubstr(var_0D.var_EE52, "col_seat")) {
-          var_12 = strtok(var_0D.var_EE52, "_");
+        var_9.var_4D94.var_1BE9 = scripts\engine\utility::array_add(var_9.var_4D94.var_1BE9, var_13);
+      } else if(issubstr(var_13.var_336, var_5.var_1325C) && var_13.classname == "script_brushmodel") {
+        if(isDefined(var_13.var_EE52) && issubstr(var_13.var_EE52, "col_seat")) {
+          var_12 = strtok(var_13.var_EE52, "_");
           var_13 = var_12[2] + "_" + var_12[3];
           var_14 = scripts\engine\utility::spawn_tag_origin(var_9 gettagorigin("tag_seat_" + var_13), var_9 gettagangles("tag_seat_" + var_13));
-          var_14.var_4348 = var_0D;
-          var_0D linkto(var_14);
+          var_14.var_4348 = var_13;
+          var_13 linkto(var_14);
           var_9.var_4D94.var_F08C[var_13] = var_14;
-          var_0D connectpaths();
-          var_0D notsolid();
+          var_13 connectpaths();
+          var_13 notsolid();
         } else {
-          var_9.var_4D94.var_4348 = var_0D;
+          var_9.var_4D94.var_4348 = var_13;
           var_9.var_4D94.var_4348 solid();
         }
 
-        var_9.var_4D94.var_1BE9 = scripts\engine\utility::array_add(var_9.var_4D94.var_1BE9, var_0D);
-      } else if(issubstr(var_0D.var_336, "player_turret")) {
-        var_15 = var_0D;
+        var_9.var_4D94.var_1BE9 = scripts\engine\utility::array_add(var_9.var_4D94.var_1BE9, var_13);
+      } else if(issubstr(var_13.var_336, "player_turret")) {
+        var_15 = var_13;
         if(isDefined(var_15.script_parameters)) {
           var_15.name = var_15.script_parameters;
         } else {
           var_15.name = var_15.var_336;
         }
 
-        foreach(var_0E in getEntArray(var_15.target, "targetname")) {
-          if(var_0E.var_EE52 == "pos_home") {
-            var_15.var_D69D = var_0E;
-          } else if(var_0E.var_EE52 == "pos_front") {
-            var_15.var_D69C = var_0E;
-          } else if(var_0E.var_EE52 == "pos_right") {
-            var_15.var_D6A3 = var_0E;
-          } else if(var_0E.var_EE52 == "pos_left") {
-            var_15.var_D69F = var_0E;
-          } else if(var_0E.var_EE52 == "pos_dismount") {
-            var_15.var_D69B = var_0E;
+        foreach(var_14 in getEntArray(var_15.target, "targetname")) {
+          if(var_14.var_EE52 == "pos_home") {
+            var_15.var_D69D = var_14;
+          } else if(var_14.var_EE52 == "pos_front") {
+            var_15.var_D69C = var_14;
+          } else if(var_14.var_EE52 == "pos_right") {
+            var_15.var_D6A3 = var_14;
+          } else if(var_14.var_EE52 == "pos_left") {
+            var_15.var_D69F = var_14;
+          } else if(var_14.var_EE52 == "pos_dismount") {
+            var_15.var_D69B = var_14;
           }
 
-          var_0E setModel("tag_origin");
+          var_14 setModel("tag_origin");
         }
 
         var_15.var_32D9 = var_15.var_D69B;
@@ -299,27 +299,27 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
 
         var_9.var_4D94.turrets[var_15.name] = var_15;
-        var_0D = var_15.var_BCDA;
-      } else if(issubstr(var_0D.var_336, "vol_dropship_damage")) {
-        var_9.var_4D94.var_4D6C.var_4348 = var_0D;
-        var_0D makeentitysentient("allies");
-        var_0D setCanDamage(1);
-        var_0D setCanRadiusDamage(1);
+        var_13 = var_15.var_BCDA;
+      } else if(issubstr(var_13.var_336, "vol_dropship_damage")) {
+        var_9.var_4D94.var_4D6C.var_4348 = var_13;
+        var_13 makeentitysentient("allies");
+        var_13 setCanDamage(1);
+        var_13 setCanRadiusDamage(1);
         if(!threatbiasgroupexists("player_dropship")) {
           createthreatbiasgroup("player_dropship");
         }
 
-        var_0D give_zombies_perk("player_dropship");
+        var_13 give_zombies_perk("player_dropship");
       } else {
-        var_9.var_4D94.var_C744 = scripts\engine\utility::array_add(var_9.var_4D94.var_C744, var_0D);
+        var_9.var_4D94.var_C744 = scripts\engine\utility::array_add(var_9.var_4D94.var_C744, var_13);
       }
     } else {
-      var_0D show();
-      var_9.var_4D94.var_C744 = scripts\engine\utility::array_add(var_9.var_4D94.var_C744, var_0D);
+      var_13 show();
+      var_9.var_4D94.var_C744 = scripts\engine\utility::array_add(var_9.var_4D94.var_C744, var_13);
     }
 
-    if(!isDefined(var_0D.var_336) || !issubstr(var_0D.var_336, "no_link")) {
-      var_9.var_4D94.partnerheli = scripts\engine\utility::array_add(var_9.var_4D94.partnerheli, var_0D);
+    if(!isDefined(var_13.var_336) || !issubstr(var_13.var_336, "no_link")) {
+      var_9.var_4D94.partnerheli = scripts\engine\utility::array_add(var_9.var_4D94.partnerheli, var_13);
     }
   }
 
@@ -328,23 +328,23 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_9.var_981A = var_9.var_4D94.linkpoint.angles;
-  foreach(var_0D in var_9.var_4D94.partnerheli) {
-    if(isDefined(var_9.var_4D94.var_AD3E) && issubstr(var_0D.classname, "light")) {
-      var_0D linkto(var_9.var_4D94.var_AD3E);
+  foreach(var_13 in var_9.var_4D94.partnerheli) {
+    if(isDefined(var_9.var_4D94.var_AD3E) && issubstr(var_13.classname, "light")) {
+      var_13 linkto(var_9.var_4D94.var_AD3E);
       continue;
     }
 
-    if(isDefined(var_9.var_4D94.var_AD3F) && issubstr(var_0D.classname, "reflection")) {
-      var_0D linkto(var_9.var_4D94.var_AD3F);
+    if(isDefined(var_9.var_4D94.var_AD3F) && issubstr(var_13.classname, "reflection")) {
+      var_13 linkto(var_9.var_4D94.var_AD3F);
       continue;
     }
 
-    if(isDefined(var_9.var_4D94.var_AD3D) && issubstr(var_0D.classname, "script_brushmodel") && isDefined(var_0D.var_336) && var_0D.var_336 == var_5.var_1325C) {
-      var_0D linkto(var_9.var_4D94.var_AD3D);
+    if(isDefined(var_9.var_4D94.var_AD3D) && issubstr(var_13.classname, "script_brushmodel") && isDefined(var_13.var_336) && var_13.var_336 == var_5.var_1325C) {
+      var_13 linkto(var_9.var_4D94.var_AD3D);
       continue;
     }
 
-    var_0D linkto(var_9.var_4D94.linkpoint);
+    var_13 linkto(var_9.var_4D94.linkpoint);
   }
 
   var_1B = undefined;
@@ -439,7 +439,7 @@ func_F9C8(var_0, var_1) {
       self.var_4D94.lights[var_4][var_5] = [];
     }
 
-    self.var_4D94.lights[var_4][var_5] = scripts\engine\utility::array_add(self.var_4D94.lights[var_4][var_5], var_0);
+    self.var_4D94.lights[var_4][var_5] = ::scripts\engine\utility::array_add(self.var_4D94.lights[var_4][var_5], var_0);
   }
 }
 
@@ -480,7 +480,7 @@ func_106B9(var_0, var_1) {
   }
 
   var_2 = "tag_seat_" + var_0;
-  self.var_4D94.var_F08B[var_0] = scripts\sp\utility::func_10639("dropship_seat");
+  self.var_4D94.var_F08B[var_0] = ::scripts\sp\utility::func_10639("dropship_seat");
   self.var_4D94.var_F08B[var_0] linkto(self, var_2, (0, 0, 0), (0, 0, 0));
   self.var_4D94.var_F08B[var_0].var_1FBB = "dropship_seat_" + var_0;
   self.var_4D94.var_F08B[var_0] glinton(#animtree);
@@ -1280,7 +1280,7 @@ func_5E04(var_0, var_1, var_2) {
 
 func_11D1(var_0) {
   var_0 endon("death");
-  scripts\engine\utility::waittill_any_3("dropship_new_behavior", "newpath", "death");
+  scripts\engine\utility::waittill_any("dropship_new_behavior", "newpath", "death");
   var_0 delete();
 }
 
@@ -1450,7 +1450,7 @@ func_1231(var_0, var_1, var_2, var_3) {
 
 func_11D2(var_0) {
   var_0 endon("death");
-  scripts\engine\utility::waittill_any_3("stop_lookat", "death");
+  scripts\engine\utility::waittill_any("stop_lookat", "death");
   var_0 delete();
 }
 
@@ -1950,7 +1950,7 @@ func_1223() {
 
 func_11BD() {
   var_0 = 100;
-  self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+  self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 func_11C5() {
@@ -2242,7 +2242,7 @@ func_CCE5(var_0, var_1, var_2) {
       return;
     }
 
-    if(var_0A) {
+    if(var_10) {
       self.var_C264 childthread scripts\engine\utility::play_loop_sound_on_entity(var_6);
       if(var_8 > 0) {
         self.var_C264 scripts\sp\utility::func_50E4(var_8, scripts\engine\utility::stop_loop_sound_on_entity, var_6);
@@ -2310,10 +2310,10 @@ func_10FDB(var_0, var_1) {
   }
 
   if(isarray(var_0)) {
-    foreach(var_0A in var_0) {
-      stopFXOnTag(scripts\engine\utility::getfx(var_0A), self.var_C264, self.physics_setgravitydynentscalar);
-      if(isDefined(self.var_4B78) && isDefined(scripts\engine\utility::array_find(self.var_4B78, var_0A))) {
-        self.var_4B78 = scripts\engine\utility::array_remove(self.var_4B78, var_0A);
+    foreach(var_10 in var_0) {
+      stopFXOnTag(scripts\engine\utility::getfx(var_10), self.var_C264, self.physics_setgravitydynentscalar);
+      if(isDefined(self.var_4B78) && isDefined(scripts\engine\utility::array_find(self.var_4B78, var_10))) {
+        self.var_4B78 = scripts\engine\utility::array_remove(self.var_4B78, var_10);
       }
 
       scripts\engine\utility::waitframe();
@@ -2338,12 +2338,12 @@ func_1244(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   }
 
   if(isarray(var_0)) {
-    foreach(var_0B in var_0) {
-      if(!isDefined(var_0B)) {
+    foreach(var_11 in var_0) {
+      if(!isDefined(var_11)) {
         continue;
       }
 
-      childthread func_1244(var_0B, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+      childthread func_1244(var_11, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     }
 
     return;

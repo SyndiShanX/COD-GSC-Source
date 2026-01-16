@@ -56,8 +56,8 @@ func_3FD4(var_0, var_1, var_2, var_3) {
     childthread scripts\asm\shared_utility::setuseanimgoalweight(var_1, var_2);
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
-    self._blackboard.var_AA3D = self.target_getindexoftarget;
+  if(isDefined(self.node)) {
+    self._blackboard.var_AA3D = self.node;
   }
 
   lib_0A1E::func_235F(var_0, var_1, var_2, 1);

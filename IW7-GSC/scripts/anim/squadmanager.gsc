@@ -24,7 +24,7 @@ func_4A1B(var_0, var_1) {
   var_2.var_101E8 = 0;
   var_2.origin = undefined;
   var_2.missionfailed = undefined;
-  var_2.isnodeoccupied = undefined;
+  var_2.enemy = undefined;
   var_2.var_9E40 = 0;
   var_2.var_B65C = 0;
   var_2.var_B661 = [];
@@ -425,8 +425,8 @@ func_12E77() {
 
   for(var_0 = 0; var_0 < self.var_B661.size; var_0++) {
     if(isDefined(self.var_B661[var_0])) {
-      if(isDefined(self.var_B661[var_0].isnodeoccupied) && isDefined(self.var_B661[var_0].isnodeoccupied.var_10AC8) && self.var_B661[var_0].var_440E > 0) {
-        self.var_10AE9[self.var_B661[var_0].isnodeoccupied.var_10AC8.var_10AEE].var_9E42 = 1;
+      if(isDefined(self.var_B661[var_0].enemy) && isDefined(self.var_B661[var_0].enemy.var_10AC8) && self.var_B661[var_0].var_440E > 0) {
+        self.var_10AE9[self.var_B661[var_0].enemy.var_10AC8.var_10AEE].var_9E42 = 1;
       }
     }
   }
@@ -439,9 +439,9 @@ func_12E59() {
   var_3 = undefined;
   var_4 = 0;
   func_12E77();
-  var_5 = !isDefined(self.isnodeoccupied);
+  var_5 = !isDefined(self.enemy);
   if(!var_5) {
-    self.missionfailed = vectornormalize(self.isnodeoccupied.origin - self.origin);
+    self.missionfailed = vectornormalize(self.enemy.origin - self.origin);
   }
 
   foreach(var_7 in self.var_B661) {
@@ -455,14 +455,14 @@ func_12E59() {
       var_1 = var_1 + anglesToForward(var_7.angles);
     }
 
-    if(isDefined(var_7.isnodeoccupied) && isDefined(var_7.isnodeoccupied.var_10AC8)) {
+    if(isDefined(var_7.enemy) && isDefined(var_7.enemy.var_10AC8)) {
       if(!isDefined(var_3)) {
-        var_3 = var_7.isnodeoccupied.var_10AC8;
+        var_3 = var_7.enemy.var_10AC8;
         continue;
       }
 
-      if(var_7.isnodeoccupied.var_10AC8.var_B65C > var_3.var_B65C) {
-        var_3 = var_7.isnodeoccupied.var_10AC8;
+      if(var_7.enemy.var_10AC8.var_B65C > var_3.var_B65C) {
+        var_3 = var_7.enemy.var_10AC8;
       }
     }
   }
@@ -480,7 +480,7 @@ func_12E59() {
   }
 
   self.var_9E40 = var_4;
-  self.isnodeoccupied = var_3;
+  self.enemy = var_3;
 }
 
 func_12F25() {
@@ -572,7 +572,7 @@ func_1B0F(var_0) {
     return;
   }
 
-  if(isDefined(self.setignoremegroup)) {
+  if(isDefined(self.lastenemysightpos)) {
     if(self.var_440E < 0) {
       self.var_440E = var_0;
     } else {

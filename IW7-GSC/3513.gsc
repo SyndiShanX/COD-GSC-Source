@@ -901,8 +901,9 @@ func_560D(var_0, var_1) {
     self.var_DCFC setclientomnvar("ui_remote_c8_countdown", 0);
     self.var_DCFC setclientomnvar("ui_remote_c8_health", 0);
     self setclientomnvar("ui_out_of_bounds_countdown", 0);
-  } else if(var_0 == "MANUAL")
+  } else if(var_0 == "MANUAL") {
     thread func_10D87();
+  }
 
   self.var_DCFC rc8_disable_movement(1);
   self.var_DCFC rc8_disable_rotation(1);
@@ -919,8 +920,9 @@ func_560D(var_0, var_1) {
   if(scripts\mp\utility\game::istrue(var_1)) {
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
     self.var_DCFC.var_FC99 = undefined;
-  } else
+  } else {
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.2);
+  }
 
   self notify("finished_disable");
 }
@@ -1040,8 +1042,9 @@ func_13AD7(var_0) {
         continue;
       }
       var_1 = self;
-    } else
+    } else {
       var_1 = self.var_DCFC;
+    }
 
     var_3 = self.var_4BE1;
     var_4 = 0;
@@ -1285,8 +1288,9 @@ func_13ACD(var_0) {
         var_2 func_84DC(var_15, 700);
         var_2 playSound("rc8_melee_hit");
         wait 0.05;
-      } else
+      } else {
         var_1 = 100;
+      }
 
       var_2 getrandomarmkillstreak(var_1, var_2.origin, self, var_0, "MOD_EXPLOSIVE", var_7);
       scripts\mp\shellshock::_earthquake(0.1, 0.08, var_8, 100);

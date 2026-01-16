@@ -15,7 +15,7 @@ func_2AD0() {
   var_0 = spawnStruct();
   var_0.var_1581 = [];
   var_0.var_1581[0] = lib_0C2B::func_98E5;
-  var_0.var_1581[1] = scripts\aitypes\zombie_dlc3\behaviors::checkscripteddlc;
+  var_0.var_1581[1] = ::scripts\aitypes\zombie_dlc3\behaviors::checkscripteddlc;
   var_0.var_1581[2] = lib_0C2B::func_10004;
   var_0.var_1581[3] = lib_0C2B::func_6627;
   var_0.var_1581[4] = lib_0C2B::func_6628;
@@ -25,8 +25,8 @@ func_2AD0() {
   var_0.var_1581[8] = lib_0C2B::func_102D4;
   var_0.var_1581[9] = lib_0C2B::func_3E4F;
   var_0.var_1581[10] = lib_0C2B::func_3E29;
-  var_0.var_1581[11] = scripts\aitypes\zombie_dlc3\behaviors::chaseenemydlc;
-  var_0.var_1581[12] = scripts\aitypes\zombie_dlc3\behaviors::seekenemydlc;
+  var_0.var_1581[11] = ::scripts\aitypes\zombie_dlc3\behaviors::chaseenemydlc;
+  var_0.var_1581[12] = ::scripts\aitypes\zombie_dlc3\behaviors::seekenemydlc;
   var_0.var_1581[13] = lib_0C2B::notargetfound;
   level.var_119E["zombie_dlc3"] = var_0;
 }

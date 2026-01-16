@@ -36,7 +36,7 @@ func_D41C() {
   var_0 linkto(self, "j_shoulder_ri", (0, 0, 0), (0, 0, 0));
   var_0 setModel("vehicle_drone_backup_buddy_gun");
   var_0.angles = self.angles;
-  var_0.triggerportableradarping = self;
+  var_0.owner = self;
   var_0.team = self.team;
   var_0 getvalidattachments();
   var_0 makeunusable();
@@ -68,7 +68,7 @@ func_D41C() {
 watchforplayerdeath(var_0) {
   self notify("cannon_deleted");
   self endon("cannon_deleted");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   var_0 delete();
   if(isDefined(self)) {
     self setclientomnvar("ui_shoulder_cannon_ammo", 0);
@@ -91,7 +91,7 @@ func_1000A(var_0) {
   self notify("shoulderCannon_stunned");
   self endon("shoulderCannon_stunned");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
   self.stunned = 1;
   self notify("turretstatechange");
@@ -198,7 +198,7 @@ balldrone_burstfirestart(var_0) {
   var_3 = level._effect["shoulder_cannon_charge"];
   var_4 = weaponfiretime("ball_drone_gun_mp");
   var_5 = 0.01;
-  self.triggerportableradarping waittill("begin_firing");
+  self.owner waittill("begin_firing");
   while(self.var_1E2D > 0) {
     if(self.var_1E2D <= 20) {
       var_6 = self.var_1E2D;
@@ -218,7 +218,7 @@ balldrone_burstfirestart(var_0) {
         self shootturret();
         var_0.var_38D8 = spawnfxforclient(var_2, var_0 getEye(), var_0);
         triggerfx(var_0.var_38D8);
-        self.triggerportableradarping playrumbleonentity("shoulder_turret_fire");
+        self.owner playrumbleonentity("shoulder_turret_fire");
         wait(var_4);
         self.var_1E2D--;
         if(self.var_1E2D < 0) {
@@ -273,7 +273,7 @@ func_27D8() {
     self setlookatent(self.idletarget);
   }
 
-  self.triggerportableradarping setclientomnvar("ui_shoulder_cannon_state", 0);
+  self.owner setclientomnvar("ui_shoulder_cannon_state", 0);
 }
 
 canbetargeted(var_0) {
@@ -292,7 +292,7 @@ canbetargeted(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 == self.triggerportableradarping) {
+  if(isplayer(var_0) && var_0 == self.owner) {
     return 0;
   }
 

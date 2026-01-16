@@ -4,7 +4,7 @@
 ******************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("team_ammo_refill", ::func_12908);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("team_ammo_refill", ::func_12908);
 }
 
 func_12908(var_0) {

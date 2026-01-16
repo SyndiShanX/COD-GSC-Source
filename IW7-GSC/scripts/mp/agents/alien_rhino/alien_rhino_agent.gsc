@@ -20,9 +20,9 @@ func_FAB0() {
   level.agent_definition["alien_rhino"]["setup_func"] = ::setupagent;
   level.agent_definition["alien_rhino"]["setup_model_func"] = ::func_FACE;
   level.agent_funcs["alien_rhino"]["on_damaged"] = ::func_C4E0;
-  level.agent_funcs["alien_rhino"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["alien_rhino"]["gametype_on_killed"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
-  level.agent_funcs["alien_rhino"]["on_damaged_finished"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["alien_rhino"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["alien_rhino"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
+  level.agent_funcs["alien_rhino"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
   level.agent_funcs["alien_rhino"]["on_killed"] = ::onrhinokilled;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
@@ -146,8 +146,8 @@ setupagent() {
   self.var_B601 = 90;
   self.var_504E = 55;
   self.var_129AF = 55;
-  self.var_368 = -60;
-  self.isbot = 60;
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
   self.ground_pound_damage = 50;
   self.footstepdetectdist = 2500;
   self.footstepdetectdistwalk = 2500;
@@ -193,18 +193,18 @@ accumulatedamage(var_0, var_1) {
   self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + var_0;
 }
 
-func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(self.is_mammoth) && self.is_mammoth) {
     var_2 = var_2 / 4;
   }
 
-  var_0C = weaponclass(var_5);
-  if(var_0C == "smg" || var_0C == "spread") {
+  var_12 = weaponclass(var_5);
+  if(var_12 == "smg" || var_12 == "spread") {
     var_2 = var_2 / 2;
   }
 
   accumulatedamage(var_2, var_7);
-  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 should_spawn_mammoth() {
@@ -222,9 +222,9 @@ onrhinokilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_9 = 1000;
   }
 
-  foreach(var_0B in level.players) {
-    if(var_0B scripts\cp\utility::is_valid_player()) {
-      var_0B scripts\cp\cp_persistence::give_player_currency(var_9);
+  foreach(var_11 in level.players) {
+    if(var_11 scripts\cp\utility::is_valid_player()) {
+      var_11 scripts\cp\cp_persistence::give_player_currency(var_9);
     }
   }
 

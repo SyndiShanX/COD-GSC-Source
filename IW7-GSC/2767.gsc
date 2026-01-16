@@ -60,8 +60,9 @@ func_8168() {
     var_2["axis"] = var_1;
     var_2["allies"] = var_0;
     return var_2;
-  } else
+  } else {
     return undefined;
+  }
 }
 
 func_BBF2(var_0) {
@@ -118,8 +119,9 @@ func_FAC7(var_0, var_1, var_2) {
     var_13 = anglestoright(var_9.angles);
     var_10 = 300 * var_11 + var_6 * var_12 + 3200 * var_13;
     var_2 = var_9.origin + var_10;
-  } else
+  } else {
     var_10 = var_9 - var_2;
+  }
 
   if(!isDefined(var_1)) {
     var_1 = "veh_mil_air_ca_dropship_mp";

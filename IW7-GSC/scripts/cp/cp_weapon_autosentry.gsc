@@ -22,12 +22,12 @@ init() {
   level.sentrysettings["crafted_autosentry"].overheattime = 15;
   level.sentrysettings["crafted_autosentry"].cooldowntime = 0.2;
   level.sentrysettings["crafted_autosentry"].fxtime = 0.3;
-  level.sentrysettings["crafted_autosentry"].var_39B = "alien_sentry_minigun_4_mp";
+  level.sentrysettings["crafted_autosentry"].weaponinfo = "alien_sentry_minigun_4_mp";
   level.sentrysettings["crafted_autosentry"].modelbase = "weapon_sentry_chaingun";
   level.sentrysettings["crafted_autosentry"].modelplacement = "weapon_sentry_chaingun";
   level.sentrysettings["crafted_autosentry"].modelplacementfailed = "weapon_sentry_chaingun_obj_red";
   level.sentrysettings["crafted_autosentry"].modeldestroyed = "weapon_sentry_chaingun_destroyed";
-  level.sentrysettings["crafted_autosentry"].pow = &"COOP_CRAFTABLES_PICKUP";
+  level.sentrysettings["crafted_autosentry"].hintstring = &"COOP_CRAFTABLES_PICKUP";
   level.sentrysettings["crafted_autosentry"].playerphysicstrace = 1;
   level.sentrysettings["crafted_autosentry"].vodestroyed = "sentry_destroyed";
   level.sentrysettings["crafted_autosentry"].var_9F43 = 0;
@@ -147,7 +147,7 @@ setcarryingsentry(var_0, var_1) {
 }
 
 createsentryforplayer(var_0, var_1) {
-  var_2 = spawnturret("misc_turret", var_1.origin, level.sentrysettings[var_0].var_39B);
+  var_2 = spawnturret("misc_turret", var_1.origin, level.sentrysettings[var_0].weaponinfo);
   var_2.angles = var_1.angles;
   var_2.name = "crafted_autosentry";
   var_2 sentry_initsentry(var_0, var_1);
@@ -256,9 +256,9 @@ sentry_handleuse() {
 
 sentry_setowner(var_0) {
   var_0.var_4BAE = self;
-  self.triggerportableradarping = var_0;
-  self setsentryowner(self.triggerportableradarping);
-  self.team = self.triggerportableradarping.team;
+  self.owner = var_0;
+  self setsentryowner(self.owner);
+  self.team = self.owner.team;
   self setturretteam(self.team);
   thread scripts\cp\utility::item_handleownerdisconnect("sentry_handleOwner");
 }
@@ -273,13 +273,13 @@ sentry_setplaced() {
   sentry_makesolid();
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
     if(level.sentrysettings[self.sentrytype].var_9F43) {
-      scripts\cp\utility::make_entity_sentient_cp(self.triggerportableradarping.team);
+      scripts\cp\utility::make_entity_sentient_cp(self.owner.team);
     }
 
-    self.triggerportableradarping notify("new_sentry", self);
+    self.owner notify("new_sentry", self);
   }
 
   sentry_setactive();
@@ -290,8 +290,8 @@ sentry_setplaced() {
 
 sentry_setcancelled() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self delete();
@@ -358,7 +358,7 @@ func_3834(var_0) {
 sentry_setactive() {
   self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.sentrysettings[self.sentrytype].pow);
+  self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
   self makeusable();
   self setusefov(120);
   self setuserange(96);
@@ -388,7 +388,7 @@ sentry_makenotsolid() {
 }
 
 func_1862(var_0, var_1) {
-  level.turrets = scripts\engine\utility::array_add_safe(level.turrets, self);
+  level.turrets = scripts\engine\utility::add_to_array(level.turrets, self);
   if(level.turrets.size > 4) {
     if(isDefined(level.turrets[0])) {
       level.turrets[0] notify("death");
@@ -446,7 +446,7 @@ sentry_burstfirestart() {
   self endon("stop_shooting");
   level endon("game_ended");
   sentry_spinup();
-  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
+  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
   var_1 = level.sentrysettings[self.sentrytype].burstmin;
   var_2 = level.sentrysettings[self.sentrytype].burstmax;
   var_3 = level.sentrysettings[self.sentrytype].pausemin;
@@ -474,7 +474,7 @@ turret_shotmonitor(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   var_0 endon("player_dismount");
-  var_1 = weaponfiretime(level.sentrysettings[var_0.sentrytype].var_39B);
+  var_1 = weaponfiretime(level.sentrysettings[var_0.sentrytype].weaponinfo);
   for(;;) {
     var_0 waittill("turret_fire");
     var_0 func_8165() notify("turret_fire");
@@ -485,7 +485,7 @@ turret_shotmonitor(var_0) {
 
 sentry_heatmonitor() {
   self endon("death");
-  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
+  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
   var_1 = 0;
   var_2 = 0;
   var_3 = level.sentrysettings[self.sentrytype].overheattime;

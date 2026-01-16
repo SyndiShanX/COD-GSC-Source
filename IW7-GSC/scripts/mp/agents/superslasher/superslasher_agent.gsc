@@ -144,23 +144,23 @@ onsuperslasherkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
   self.death_anim_no_ragdoll = 1;
   self.nocorpse = 1;
   if(isDefined(self.attackents)) {
-    foreach(var_0A in self.attackents) {
-      var_0A delete();
+    foreach(var_10 in self.attackents) {
+      var_10 delete();
     }
   }
 
   if(isDefined(self.shields)) {
-    foreach(var_0D in self.shields) {
-      var_0D delete();
+    foreach(var_13 in self.shields) {
+      var_13 delete();
     }
   }
 
   scripts\asm\superslasher\superslasher_actions::stopwireattack();
   thread superslasherdeathscriptmodelsequence(self);
-  var_0F = self.asmname;
-  var_10 = self.var_164D[var_0F].var_4BC0;
-  var_11 = level.asm[var_0F].states[var_10];
-  scripts\asm\asm::func_2388(var_0F, var_10, var_11, undefined);
+  var_15 = self.asmname;
+  var_10 = self.var_164D[var_15].var_4BC0;
+  var_11 = level.asm[var_15].states[var_10];
+  scripts\asm\asm::func_2388(var_15, var_10, var_11, undefined);
   scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
@@ -199,7 +199,7 @@ super_slasher_death_vfx_sequence(var_0) {
   var_1 delete();
 }
 
-onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(var_1) && var_1 == self) {
     return;
   }
@@ -250,9 +250,9 @@ onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     var_2 = var_2 / level.players.size;
   }
 
-  scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
-onsuperslasherdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+onsuperslasherdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 }

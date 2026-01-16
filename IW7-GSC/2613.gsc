@@ -55,6 +55,7 @@ func_48BE(var_0) {
 
     var_2[var_2.size] = var_1;
     level.var_4EE9 = var_2;
-  } else
+  } else {
     level.var_4EE9[level.var_4EE9.size] = var_1;
+  }
 }

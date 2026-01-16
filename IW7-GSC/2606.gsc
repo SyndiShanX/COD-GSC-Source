@@ -122,8 +122,9 @@ get_random_character(var_0, var_1, var_2) {
     var_3 = randomint(var_0);
     self.pers["modelIndex"] = var_3;
     return var_3;
-  } else if(var_4.size <= 2)
+  } else if(var_4.size <= 2) {
     return randomint(var_0);
+  }
 
   var_5 = "auto";
 

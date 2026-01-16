@@ -259,29 +259,29 @@ func_8DFA(var_0, var_1, var_2) {
 
   var_8 = var_3 * 0.05;
   var_9 = var_4 * 0.05;
-  var_0A = 1;
+  var_10 = 1;
   if(var_2 == level.var_8DF1[var_0]) {
     return;
   } else if(var_2 < level.var_8DF1[var_0]) {
-    var_0A = 0;
+    var_10 = 0;
   }
 
-  var_0B = 0;
-  while(var_0B < var_1) {
-    if(var_0A) {
+  var_11 = 0;
+  while(var_11 < var_1) {
+    if(var_10) {
       level.var_8DF1[var_0] = level.var_8DF1[var_0] + var_6;
     } else {
       level.var_8DF1[var_0] = level.var_8DF1[var_0] - var_6;
     }
 
-    var_0C = func_8DFC(var_0, level.var_8DF1[var_0]);
-    setomnvar(var_7, var_0C);
+    var_12 = func_8DFC(var_0, level.var_8DF1[var_0]);
+    setomnvar(var_7, var_12);
     wait(0.05);
-    var_0B = var_0B + 0.05;
+    var_11 = var_11 + 0.05;
   }
 
-  var_0C = func_8DFC(var_0, level.var_8DF1[var_0]);
-  setomnvar(var_7, var_0C);
+  var_12 = func_8DFC(var_0, level.var_8DF1[var_0]);
+  setomnvar(var_7, var_12);
 }
 
 func_8E00(var_0) {

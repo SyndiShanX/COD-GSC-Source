@@ -73,8 +73,9 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 
           var_2 = 0;
         }
-      } else
+      } else {
         var_2 = 0;
+      }
     } else if(var_19) {
       if(var_4 != "MOD_EXPLOSIVE" && var_12 scripts\cp\utility::is_consumable_active("burned_out")) {
         if(!scripts\engine\utility::is_true(var_1.is_burning)) {
@@ -106,10 +107,12 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
         } else {
           var_1.last_damage_time_on_player[self.vo_prefix] = gettime();
         }
-      } else
+      } else {
         var_1.last_damage_time_on_player[self.vo_prefix] = gettime();
-    } else if(var_20)
+      }
+    } else if(var_20) {
       var_2 = func_791A(var_0, var_1, var_2, var_3, var_4, var_5);
+    }
 
     if(var_14) {
       var_24 = self getstance();
@@ -143,8 +146,9 @@ callback_zombieplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       if(var_2 > self.health * 0.15) {
         var_2 = int(self.health * 0.15);
       }
-    } else
+    } else {
       var_2 = 0;
+    }
   }
 
   var_28 = 0.0;
@@ -275,8 +279,9 @@ get_explosive_damage_on_player(var_0, var_1, var_2, var_3, var_4, var_5) {
         var_7 = var_2 / 1800;
         var_2 = var_7 * 100;
         break;
-      } else
+      } else {
         var_2 = 0;
+      }
 
       break;
     case "iw7_armageddonmeteor_mp":

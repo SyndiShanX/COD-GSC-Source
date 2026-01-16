@@ -138,7 +138,7 @@ func_4ED3() {
   self endon("stop_drawing_enemy_pos");
   for(;;) {
     wait(0.05);
-    if(isalive(self.isnodeoccupied)) {}
+    if(isalive(self.enemy)) {}
 
     if(!scripts\anim\utility::func_8BED()) {
       continue;
@@ -157,7 +157,7 @@ func_4ED4() {
       continue;
     }
 
-    if(isDefined(var_1.setignoremegroup)) {}
+    if(isDefined(var_1.lastenemysightpos)) {}
 
     if(isDefined(var_1.goodshootpos)) {
       if(var_1 gettargetchargepos()) {
@@ -167,19 +167,19 @@ func_4ED4() {
       }
 
       var_4 = var_1.origin + (0, 0, 54);
-      if(isDefined(var_1.target_getindexoftarget)) {
-        if(var_1.target_getindexoftarget.type == "Cover Left") {
+      if(isDefined(var_1.node)) {
+        if(var_1.node.type == "Cover Left") {
           var_5 = 1;
-          var_4 = anglestoright(var_1.target_getindexoftarget.angles);
+          var_4 = anglestoright(var_1.node.angles);
           var_4 = var_4 * -32;
           var_4 = (var_4[0], var_4[1], 64);
-          var_4 = var_1.target_getindexoftarget.origin + var_4;
-        } else if(var_1.target_getindexoftarget.type == "Cover Right") {
+          var_4 = var_1.node.origin + var_4;
+        } else if(var_1.node.type == "Cover Right") {
           var_5 = 1;
-          var_4 = anglestoright(var_1.target_getindexoftarget.angles);
+          var_4 = anglestoright(var_1.node.angles);
           var_4 = var_4 * 32;
           var_4 = (var_4[0], var_4[1], 64);
-          var_4 = var_1.target_getindexoftarget.origin + var_4;
+          var_4 = var_1.node.origin + var_4;
         }
       }
 
@@ -195,9 +195,9 @@ func_4ED4() {
     return;
   }
 
-  if(isalive(var_1.isnodeoccupied)) {}
+  if(isalive(var_1.enemy)) {}
 
-  if(isDefined(var_1.setignoremegroup)) {}
+  if(isDefined(var_1.lastenemysightpos)) {}
 
   if(isalive(var_1.func_8450)) {}
 
@@ -226,17 +226,17 @@ func_5B6D(var_0, var_1, var_2, var_3) {
   var_7 = var_5 * var_4 * 0.8;
   var_8 = anglestoright(var_1);
   var_9 = var_8 * var_4 * -0.2;
-  var_0A = var_8 * var_4 * 0.2;
-  var_0B = anglestoup(var_1);
+  var_10 = var_8 * var_4 * 0.2;
+  var_11 = anglestoup(var_1);
   var_8 = var_8 * var_4;
-  var_0B = var_0B * var_4;
-  var_0C = (0.9, 0.2, 0.2);
-  var_0D = (0.2, 0.9, 0.2);
-  var_0E = (0.2, 0.2, 0.9);
+  var_11 = var_11 * var_4;
+  var_12 = (0.9, 0.2, 0.2);
+  var_13 = (0.2, 0.9, 0.2);
+  var_14 = (0.2, 0.2, 0.9);
   if(isDefined(var_2)) {
-    var_0C = var_2;
-    var_0D = var_2;
-    var_0E = var_2;
+    var_12 = var_2;
+    var_13 = var_2;
+    var_14 = var_2;
   }
 
   if(!isDefined(var_3)) {
@@ -605,12 +605,12 @@ func_37A5() {
       var_7 = var_4[var_1];
       var_8 = var_7.var_C712;
       var_9 = var_7.origin;
-      var_0A = vectortoangles((var_9[0], var_9[1], var_9[2]) - (var_8[0], var_8[1], var_8[2]));
-      var_0B = (0, var_0A[1], 0);
-      var_0C = anglesToForward(var_0B);
-      var_0A = vectornormalize(var_9 - level.player.origin);
-      var_0D = vectordot(var_0C, var_0A);
-      if(var_0D < 0.85) {
+      var_10 = vectortoangles((var_9[0], var_9[1], var_9[2]) - (var_8[0], var_8[1], var_8[2]));
+      var_11 = (0, var_10[1], 0);
+      var_12 = anglesToForward(var_11);
+      var_10 = vectornormalize(var_9 - level.player.origin);
+      var_13 = vectordot(var_12, var_10);
+      if(var_13 < 0.85) {
         continue;
       }
 
@@ -623,19 +623,19 @@ func_37A5() {
       continue;
     }
 
-    var_0E = distance(level.player.origin, var_6[0].origin);
-    var_0F = var_6[0];
+    var_14 = distance(level.player.origin, var_6[0].origin);
+    var_15 = var_6[0];
     for(var_1 = 1; var_1 < var_6.size; var_1++) {
       var_10 = distance(level.player.origin, var_6[var_1].origin);
-      if(var_10 > var_0E) {
+      if(var_10 > var_14) {
         continue;
       }
 
-      var_0F = var_6[var_1];
-      var_0E = var_10;
+      var_15 = var_6[var_1];
+      var_14 = var_10;
     }
 
-    func_F7FD(var_0F);
+    func_F7FD(var_15);
     wait(3);
   }
 }
@@ -720,30 +720,30 @@ func_12ED1() {
         var_8 = var_6 - var_5;
         var_5 = (var_5[0], var_5[1], var_5[2] + var_1);
         var_9 = spawn("script_origin", var_3.origin);
-        var_0A = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
-        var_0B = (var_0A[1], 0 - var_0A[0], 0);
-        var_0C = vectordot(var_0A, var_8);
-        if(var_0C < 0) {
-          var_0C = 0 - var_0C;
+        var_10 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
+        var_11 = (var_10[1], 0 - var_10[0], 0);
+        var_12 = vectordot(var_10, var_8);
+        if(var_12 < 0) {
+          var_12 = 0 - var_12;
         }
 
-        var_0D = vectordot(var_0B, var_8);
-        if(var_0D < 0) {
-          var_0D = 0 - var_0D;
+        var_13 = vectordot(var_11, var_8);
+        if(var_13 < 0) {
+          var_13 = 0 - var_13;
         }
 
         if(var_0 > 0) {
-          var_0E = var_0D / var_0C;
-          if(var_0E < var_0) {
-            var_0F = var_0 / var_0E;
-            var_0D = var_0D * var_0F;
-            var_10 = vecscale(var_0B, vectordot(var_0B, var_6 - var_5) * var_0F - 1);
+          var_14 = var_13 / var_12;
+          if(var_14 < var_0) {
+            var_15 = var_0 / var_14;
+            var_13 = var_13 * var_15;
+            var_10 = vecscale(var_11, vectordot(var_11, var_6 - var_5) * var_15 - 1);
             var_7 = var_7 - var_10;
             var_6 = var_6 + var_10;
           } else {
-            var_0F = var_10 / var_2;
-            var_0D = var_0D * var_10;
-            var_10 = vecscale(var_0B, vectordot(var_0B, var_7 - var_6) * var_10 - 1);
+            var_15 = var_10 / var_2;
+            var_13 = var_13 * var_10;
+            var_10 = vecscale(var_11, vectordot(var_11, var_7 - var_6) * var_10 - 1);
             var_7 = var_7 - var_10;
             var_6 = var_6 + var_10;
           }
@@ -751,12 +751,12 @@ func_12ED1() {
 
         if(level.console) {
           var_11 = 1.777778;
-          var_12 = 2 * atan(var_0D * 0.8 / var_1);
-          var_13 = 2 * atan(var_0C * var_11 * 0.8 / var_1);
+          var_12 = 2 * atan(var_13 * 0.8 / var_1);
+          var_13 = 2 * atan(var_12 * var_11 * 0.8 / var_1);
         } else {
           var_11 = 1.333333;
           var_12 = 2 * atan(var_12 * 1.05 / var_3);
-          var_13 = 2 * atan(var_0D * var_12 * 1.05 / var_2);
+          var_13 = 2 * atan(var_13 * var_12 * 1.05 / var_2);
         }
 
         if(var_12 > var_13) {
@@ -843,12 +843,12 @@ func_5B7E(var_0, var_1, var_2) {
   var_7 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   var_8 = var_2 - var_1;
   var_9 = vecscale(var_7, vectordot(var_8, var_7));
-  var_0A = vecscale(var_7, abs(vectordot(var_8, var_7)));
-  var_0B = var_1;
-  var_0C = var_1 + var_9;
-  var_0D = var_2;
-  var_0E = var_2 - var_9;
-  var_0F = vecscale(var_1 + var_2, 0.5) + vecscale(var_0A, 0.51);
+  var_10 = vecscale(var_7, abs(vectordot(var_8, var_7)));
+  var_11 = var_1;
+  var_12 = var_1 + var_9;
+  var_13 = var_2;
+  var_14 = var_2 - var_9;
+  var_15 = vecscale(var_1 + var_2, 0.5) + vecscale(var_10, 0.51);
   var_10 = var_4 * 0.003;
   var_11 = func_7E1F();
   for(;;) {
@@ -901,24 +901,24 @@ draw_colornodes(var_0, var_1) {
 
 func_7CE8() {
   if(self.team == "allies") {
-    if(!isDefined(self.target_getindexoftarget.var_ED33)) {
+    if(!isDefined(self.node.var_ED33)) {
       return;
     }
 
-    return self.target_getindexoftarget.var_ED33;
+    return self.node.var_ED33;
   }
 
   if(self.team == "axis") {
-    if(!isDefined(self.target_getindexoftarget.var_ED34)) {
+    if(!isDefined(self.node.var_ED34)) {
       return;
     }
 
-    return self.target_getindexoftarget.var_ED34;
+    return self.node.var_ED34;
   }
 }
 
 func_12879() {
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return;
   }
 
@@ -1039,16 +1039,16 @@ draw_closest_wall_points() {
       continue;
     }
 
-    for(var_0A = 0; var_0A < var_1[var_2[var_4]]; var_0A++) {
-      var_0B = newhudelem();
-      var_0B.x = var_6 + 25 * var_0A;
-      var_0B.y = var_7;
-      var_0B setshader("white", 16, 16);
-      var_0B.alignx = "left";
-      var_0B.aligny = "bottom";
-      var_0B.alpha = 1;
-      var_0B.color = var_3[var_2[var_4]];
-      level.var_4EBF[level.var_4EBF.size] = var_0B;
+    for(var_10 = 0; var_10 < var_1[var_2[var_4]]; var_10++) {
+      var_11 = newhudelem();
+      var_11.x = var_6 + 25 * var_10;
+      var_11.y = var_7;
+      var_11 setshader("white", 16, 16);
+      var_11.alignx = "left";
+      var_11.aligny = "bottom";
+      var_11.alpha = 1;
+      var_11.color = var_3[var_2[var_4]];
+      level.var_4EBF[level.var_4EBF.size] = var_11;
     }
 
     var_7 = var_7 + var_9;
@@ -1207,8 +1207,8 @@ func_13C26() {
 
   var_8 = getspawnerarray();
   var_9 = [];
-  foreach(var_0B in var_8) {
-    var_9[var_0B.var_9F] = 1;
+  foreach(var_11 in var_8) {
+    var_9[var_11.var_9F] = 1;
   }
 
   foreach(var_6 in var_9) {}
@@ -1249,11 +1249,11 @@ func_B514() {
         var_9 = [var_0[1], var_0[0]];
       }
 
-      var_0A = var_9[0];
-      var_0B = (var_0A[0], var_0A[1], var_9[1][2]);
-      var_4 = distance(var_0A, var_0B);
-      var_5 = vectornormalize(var_0B - var_0A);
-      var_0C = var_0A + var_5 * var_4 * 0.6;
+      var_10 = var_9[0];
+      var_11 = (var_10[0], var_10[1], var_9[1][2]);
+      var_4 = distance(var_10, var_11);
+      var_5 = vectornormalize(var_11 - var_10);
+      var_12 = var_10 + var_5 * var_4 * 0.6;
     }
 
     wait(0.05);
@@ -1324,10 +1324,10 @@ func_5B5D(var_0, var_1, var_2, var_3, var_4) {
   var_7 = anglesToForward(var_5);
   var_8 = var_7 * var_6;
   var_9 = 5;
-  var_0A = var_7 * var_6 - var_9;
-  var_0B = anglestoright(var_5);
-  var_0C = var_0B * var_9 * -1;
-  var_0D = var_0B * var_9;
+  var_10 = var_7 * var_6 - var_9;
+  var_11 = anglestoright(var_5);
+  var_12 = var_11 * var_9 * -1;
+  var_13 = var_11 * var_9;
 }
 
 func_5B24(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -1352,14 +1352,14 @@ func_5B24(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = anglestoup(var_2);
   var_9 = var_0 + var_6 * var_3 * 0.5;
   var_9 = var_9 + var_7 * var_3 * 0.5;
-  var_0A = [];
-  var_0A[var_0A.size] = var_9;
-  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_6 * var_3 * -1;
-  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_7 * var_3 * -1;
-  var_0A[var_0A.size] = var_0A[var_0A.size - 1] + var_6 * var_3;
-  var_0B = var_3 * var_8;
-  for(var_0C = 0; var_0C < var_0A.size; var_0C++) {
-    if(var_0C == var_0A.size - 1) {
+  var_10 = [];
+  var_10[var_10.size] = var_9;
+  var_10[var_10.size] = var_10[var_10.size - 1] + var_6 * var_3 * -1;
+  var_10[var_10.size] = var_10[var_10.size - 1] + var_7 * var_3 * -1;
+  var_10[var_10.size] = var_10[var_10.size - 1] + var_6 * var_3;
+  var_11 = var_3 * var_8;
+  for(var_12 = 0; var_12 < var_10.size; var_12++) {
+    if(var_12 == var_10.size - 1) {
       continue;
     }
   }

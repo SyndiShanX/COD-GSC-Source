@@ -13,7 +13,7 @@ sasquatch_init(var_0, var_1, var_2, var_3) {
 }
 
 sasquatch_playidleanim(var_0, var_1, var_2, var_3) {
-  var_4 = isDefined(self.isnodeoccupied);
+  var_4 = isDefined(self.enemy);
   if(var_4) {
     self orientmode("face enemy");
   } else {
@@ -79,24 +79,24 @@ sasquatch_domeleedamage() {
       continue;
     }
 
-    var_0A = var_9.origin - self.origin;
-    var_0B = lengthsquared(var_0A);
-    if(var_0B > var_1) {
+    var_10 = var_9.origin - self.origin;
+    var_11 = lengthsquared(var_10);
+    if(var_11 > var_1) {
       continue;
     }
 
-    if(abs(var_0A[2]) > var_2) {
+    if(abs(var_10[2]) > var_2) {
       continue;
     }
 
-    var_0C = (var_0A[0], var_0A[1], 0);
-    var_0A = vectornormalize(var_0C);
-    var_0D = vectordot(var_0A, var_6);
-    if(var_0B < var_4) {
-      if(var_0D < var_5) {
+    var_12 = (var_10[0], var_10[1], 0);
+    var_10 = vectornormalize(var_12);
+    var_13 = vectordot(var_10, var_6);
+    if(var_11 < var_4) {
+      if(var_13 < var_5) {
         continue;
       }
-    } else if(var_0D < var_3) {
+    } else if(var_13 < var_3) {
       continue;
     }
 

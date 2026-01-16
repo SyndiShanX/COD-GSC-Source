@@ -87,7 +87,7 @@ func_9832(var_0) {
   self.a.var_1A3E = undefined;
   self.a.var_EF87 = gettime();
   self.a.var_2411 = 0;
-  if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Conceal Prone" || self.target_getindexoftarget.type == "Conceal Crouch" || self.target_getindexoftarget.type == "Conceal Stand") {
+  if(isDefined(self.node) && self.node.type == "Conceal Prone" || self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand") {
     self.a.var_2411 = 1;
   }
 
@@ -131,7 +131,7 @@ func_9E40(var_0) {
     return 1;
   }
 
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     return 1;
   }
 
@@ -139,7 +139,7 @@ func_9E40(var_0) {
 }
 
 func_12EB9() {
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     self.a.combatendtime = gettime() + level.combatidlepreventoverlappingplayer + randomint(level.combatmemorytimeconst);
   }
 }
@@ -249,11 +249,11 @@ func_10136(var_0) {
   self notify("got known enemy2");
   self endon("got known enemy2");
   self endon("death");
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return;
   }
 
-  if(self.isnodeoccupied.team == "allies") {
+  if(self.enemy.team == "allies") {
     var_1 = (0.4, 0.7, 1);
   } else {
     var_1 = (1, 0.7, 0.4);
@@ -261,14 +261,14 @@ func_10136(var_0) {
 
   for(;;) {
     wait(0.05);
-    if(!isDefined(self.setignoremegroup)) {
+    if(!isDefined(self.lastenemysightpos)) {
       continue;
     }
   }
 }
 
 func_8BED() {
-  if(isDefined(self.target_getindexoftarget)) {
+  if(isDefined(self.node)) {
     return scripts\anim\utility_common::canseeenemyfromexposed() || scripts\anim\utility_common::cansuppressenemyfromexposed();
   }
 
@@ -323,7 +323,7 @@ func_4F4E(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_3 thread func_4F57();
   var_3 endon("timeout");
-  if(self.isnodeoccupied.team == "allies") {
+  if(self.enemy.team == "allies") {
     var_4 = (0.4, 0.7, 1);
   } else {
     var_4 = (1, 0.7, 0.4);
@@ -423,7 +423,7 @@ func_11816() {
   var_2 = anglesToForward(var_0.angles);
   var_2 = var_2 * 15;
   var_0 movegravity((0, 50, 150), 100);
-  var_3 = "weapon_" + self.var_394;
+  var_3 = "weapon_" + self.weapon;
   var_4 = spawn(var_3, var_0.origin);
   var_4.angles = self gettagangles("tag_weapon_right");
   var_4 linkto(var_0);
@@ -499,7 +499,7 @@ func_CA77() {
 }
 
 func_9ED4() {
-  if(self.testbrushedgesforgrapple <= self.suppressionthreshold * 0.25) {
+  if(self.suppressionmeter <= self.suppressionthreshold * 0.25) {
     return 0;
   }
 
@@ -558,11 +558,11 @@ func_3928() {
     return 1;
   }
 
-  return isplayer(self.isnodeoccupied);
+  return isplayer(self.enemy);
 }
 
 func_13110() {
-  return weaponisboltaction(self.var_394);
+  return weaponisboltaction(self.weapon);
 }
 
 func_DCA3(var_0) {
@@ -700,7 +700,7 @@ func_3875() {
     return 0;
   }
 
-  if(weaponclass(self.var_394) == "mg") {
+  if(weaponclass(self.weapon) == "mg") {
     return 0;
   }
 
@@ -745,91 +745,91 @@ func_1F67(var_0) {
   return self.a.var_2274[var_0][var_1];
 }
 
-func_2274(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D) {
-  var_0E = [];
+func_2274(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
+  var_14 = [];
   if(isDefined(var_0)) {
-    var_0E[0] = var_0;
+    var_14[0] = var_0;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_1)) {
-    var_0E[1] = var_1;
+    var_14[1] = var_1;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_2)) {
-    var_0E[2] = var_2;
+    var_14[2] = var_2;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_3)) {
-    var_0E[3] = var_3;
+    var_14[3] = var_3;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_4)) {
-    var_0E[4] = var_4;
+    var_14[4] = var_4;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_5)) {
-    var_0E[5] = var_5;
+    var_14[5] = var_5;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_6)) {
-    var_0E[6] = var_6;
+    var_14[6] = var_6;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_7)) {
-    var_0E[7] = var_7;
+    var_14[7] = var_7;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_8)) {
-    var_0E[8] = var_8;
+    var_14[8] = var_8;
   } else {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(var_9)) {
-    var_0E[9] = var_9;
+    var_14[9] = var_9;
   } else {
-    return var_0E;
+    return var_14;
   }
 
-  if(isDefined(var_0A)) {
-    var_0E[10] = var_0A;
+  if(isDefined(var_10)) {
+    var_14[10] = var_10;
   } else {
-    return var_0E;
+    return var_14;
   }
 
-  if(isDefined(var_0B)) {
-    var_0E[11] = var_0B;
+  if(isDefined(var_11)) {
+    var_14[11] = var_11;
   } else {
-    return var_0E;
+    return var_14;
   }
 
-  if(isDefined(var_0C)) {
-    var_0E[12] = var_0C;
+  if(isDefined(var_12)) {
+    var_14[12] = var_12;
   } else {
-    return var_0E;
+    return var_14;
   }
 
-  if(isDefined(var_0D)) {
-    var_0E[13] = var_0D;
+  if(isDefined(var_13)) {
+    var_14[13] = var_13;
   }
 
-  return var_0E;
+  return var_14;
 }
 
 getaiprimaryweapon() {
@@ -845,25 +845,25 @@ getaisidearmweapon() {
 }
 
 func_7DA1() {
-  return self.var_394;
+  return self.weapon;
 }
 
 func_7DA2() {
-  if(self.var_394 == self.primaryweapon) {
+  if(self.weapon == self.primaryweapon) {
     return "primary";
   }
 
-  if(self.var_394 == self.secondaryweapon) {
+  if(self.weapon == self.secondaryweapon) {
     return "secondary";
   }
 
-  if(self.var_394 == self.var_101B4) {
+  if(self.weapon == self.var_101B4) {
     return "sidearm";
   }
 }
 
 func_1A18(var_0) {
-  if(isDefined(self.var_39B[var_0])) {
+  if(isDefined(self.weaponinfo[var_0])) {
     return 1;
   }
 

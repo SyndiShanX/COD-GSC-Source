@@ -59,11 +59,11 @@ func_B61B(var_0, var_1, var_2, var_3) {
   self.ignoreme = 1;
   lib_0F3D::func_B60F();
   scripts\asm\asm::asm_fireephemeralevent("melee_attack", "begin");
-  if(isDefined(self.var_394)) {
-    self.meleegrabweapon = self.var_394;
+  if(isDefined(self.weapon)) {
+    self.meleegrabweapon = self.weapon;
   }
 
-  scripts\anim\shared::placeweaponon(self.var_394, "none");
+  scripts\anim\shared::placeweaponon(self.weapon, "none");
   scripts\aitypes\melee::func_B5B4(self.unittype);
   thread func_D3F9();
   self playSound("c6_grapple_grab_enter");
@@ -148,7 +148,7 @@ func_B615(var_0) {
   } else {
     var_0.var_E0 = 0;
     var_0.ignoreme = 0;
-    var_0 scripts\anim\shared::placeweaponon(var_0.var_394, "right");
+    var_0 scripts\anim\shared::placeweaponon(var_0.weapon, "right");
     var_0 func_B5FA();
   }
 
@@ -218,33 +218,33 @@ func_B61E(var_0, var_1, var_2, var_3) {
 
   var_8 = squared(2000);
   var_9 = [];
-  foreach(var_0B in var_5) {
-    var_0C = distancesquared(level.player.origin, var_0B.origin);
-    if(var_0C > var_8) {
+  foreach(var_11 in var_5) {
+    var_12 = distancesquared(level.player.origin, var_11.origin);
+    if(var_12 > var_8) {
       continue;
     }
 
-    if(var_0B func_81A6() || var_0B scripts\sp\utility::isactorwallrunning()) {
+    if(var_11 func_81A6() || var_11 scripts\sp\utility::isactorwallrunning()) {
       continue;
     }
 
-    if(isDefined(var_0B.melee)) {
+    if(isDefined(var_11.melee)) {
       continue;
     }
 
-    if(var_0B islinked()) {
+    if(var_11 islinked()) {
       continue;
     }
 
-    if(scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_0B.origin, 0.173648)) {
+    if(scripts\engine\utility::within_fov(level.player.origin, level.player.angles, var_11.origin, 0.173648)) {
       continue;
     }
 
-    if(var_5.size > 1 && isDefined(level.player.gs.var_B639.var_A9E8) && level.player.gs.var_B639.var_A9E8 == var_0B) {
+    if(var_5.size > 1 && isDefined(level.player.gs.var_B639.var_A9E8) && level.player.gs.var_B639.var_A9E8 == var_11) {
       continue;
     }
 
-    var_9[var_9.size] = var_0B;
+    var_9[var_9.size] = var_11;
   }
 
   if(var_9.size > 0) {
@@ -278,7 +278,7 @@ func_7BCF() {
 }
 
 func_B61D(var_0, var_1, var_2, var_3) {
-  scripts\anim\shared::placeweaponon(self.var_394, "right");
+  scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
 func_B60D(var_0, var_1, var_2, var_3) {
@@ -309,33 +309,33 @@ func_B61F(var_0, var_1, var_2, var_3) {
   var_7 = "chokePlayer_save";
   var_8 = var_5[var_7];
   var_9 = level.player.melee.var_E505;
-  var_0A = level.player.gs.var_B639.var_EB7B;
-  var_0A.asm.var_EB67 = var_4[var_0A.npcid + "_save"];
-  var_0A.allowpain = 0;
-  var_0A.ignoreme = 1;
-  var_0A setCanDamage(0);
+  var_10 = level.player.gs.var_B639.var_EB7B;
+  var_10.asm.var_EB67 = var_4[var_10.npcid + "_save"];
+  var_10.allowpain = 0;
+  var_10.ignoreme = 1;
+  var_10 setCanDamage(0);
   thread lib_0F3D::func_50E8(0.5);
   thread lib_0F3D::func_510F(0.5, 65, 0.4);
   var_9 func_82E4(var_6, var_8, var_9.var_E6E5, 1, 0.2, 1);
   var_9 thread scripts\sp\anim::func_10CBF(var_9, var_6);
   var_9 thread scripts\anim\shared::donotetracks(var_6, ::func_B617);
-  var_0B = self gettagorigin("tag_sync");
-  var_0C = self gettagangles("tag_sync");
-  var_0A dontinterpolate();
-  var_0A func_80F1(var_0B, var_0C);
-  var_0A.var_B650 = spawn("script_model", var_0B);
-  var_0A.var_B650 setModel("tag_origin");
-  var_0A.var_B650.angles = var_0C;
-  var_0A.var_B650 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  var_11 = self gettagorigin("tag_sync");
+  var_12 = self gettagangles("tag_sync");
+  var_10 dontinterpolate();
+  var_10 func_80F1(var_11, var_12);
+  var_10.var_B650 = spawn("script_model", var_11);
+  var_10.var_B650 setModel("tag_origin");
+  var_10.var_B650.angles = var_12;
+  var_10.var_B650 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   level.player thread func_B062();
-  var_0A linktoblendtotag(var_0A.var_B650, "tag_origin", 1, 0);
-  var_0A lib_0A1E::func_2307(::func_EB7C, ::saviorcleanup);
-  var_0D = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+  var_10 linktoblendtotag(var_10.var_B650, "tag_origin", 1, 0);
+  var_10 lib_0A1E::func_2307(::func_EB7C, ::saviorcleanup);
+  var_13 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  self func_82E7(var_1, var_0D, 1, var_2, 1);
+  self func_82E7(var_1, var_13, 1, var_2, 1);
   thread scripts\sp\anim::func_10CBF(self, var_1);
-  var_0E = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
-  if(var_0E == "end") {
+  var_14 = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
+  if(var_14 == "end") {
     thread scripts\asm\asm::func_2310(var_0, var_1, 0);
   }
 }
@@ -367,14 +367,14 @@ func_B61C(var_0, var_1, var_2, var_3) {
     var_5 = var_9[var_7];
   }
 
-  var_0A = "meleeCounter";
-  var_0B = var_4[var_7];
-  var_0C = level.player.melee.var_E505;
+  var_10 = "meleeCounter";
+  var_11 = var_4[var_7];
+  var_12 = level.player.melee.var_E505;
   thread lib_0F3D::func_50E8(0.5);
   thread lib_0F3D::func_510F(0.5, 65, 0.4);
-  var_0C func_82E4(var_0A, var_0B, var_0C.var_E6E5, 1, 0.2, 1);
-  var_0C thread scripts\sp\anim::func_10CBF(var_0C, var_0A);
-  var_0C thread scripts\anim\shared::donotetracks(var_0A, ::func_B617);
+  var_12 func_82E4(var_10, var_11, var_12.var_E6E5, 1, 0.2, 1);
+  var_12 thread scripts\sp\anim::func_10CBF(var_12, var_10);
+  var_12 thread scripts\anim\shared::donotetracks(var_10, ::func_B617);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   if(isDefined(var_5)) {
     thread func_3675(var_1, var_5, var_2);
@@ -382,7 +382,7 @@ func_B61C(var_0, var_1, var_2, var_3) {
 
   self func_82E7(var_1, var_8, 1, var_2, 1);
   thread scripts\sp\anim::func_10CBF(self, var_1);
-  var_0D = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
+  var_13 = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
 }
 
 func_3675(var_0, var_1, var_2) {
@@ -709,7 +709,7 @@ func_4884(var_0) {
     }
 
     var_0.var_E0 = 0;
-    var_0 scripts\anim\shared::placeweaponon(var_0.var_394, "right");
+    var_0 scripts\anim\shared::placeweaponon(var_0.weapon, "right");
     var_0 func_B5FA();
   }
 

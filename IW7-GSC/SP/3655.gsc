@@ -40,35 +40,35 @@ func_4D8A() {
     if(self func_843B()) {
       var_1 = var_5 * -1;
       var_9 = 0.1;
-      var_0A = 0.1;
-      var_0B = 0.125;
-      var_0C = 0.4;
-      var_0D = 0.025;
-      var_0E = 3000;
+      var_10 = 0.1;
+      var_11 = 0.125;
+      var_12 = 0.4;
+      var_13 = 0.025;
+      var_14 = 3000;
       var_8 = 1;
     } else if(self gettimeremainingpercentage()) {
       var_1 = var_5;
       var_9 = 0.1;
-      var_0A = 0.1;
-      var_0B = 0.125;
-      var_0C = 0.4;
-      var_0D = 0.025;
-      var_0E = 3000;
+      var_10 = 0.1;
+      var_11 = 0.125;
+      var_12 = 0.4;
+      var_13 = 0.025;
+      var_14 = 3000;
       var_8 = 1;
     } else if(var_1[0] > 0.7) {
       var_9 = 0.1;
-      var_0A = 0.1;
-      var_0B = 0.1;
-      var_0C = 0.4;
-      var_0D = 0.025;
-      var_0E = 1;
+      var_10 = 0.1;
+      var_11 = 0.1;
+      var_12 = 0.4;
+      var_13 = 0.025;
+      var_14 = 1;
     } else {
       var_9 = 0.1;
-      var_0A = 0.1;
-      var_0B = 0.1;
-      var_0C = 0.6;
-      var_0D = 0.2;
-      var_0E = 20000;
+      var_10 = 0.1;
+      var_11 = 0.1;
+      var_12 = 0.6;
+      var_13 = 0.2;
+      var_14 = 20000;
     }
 
     if(var_8 == 1) {
@@ -76,33 +76,33 @@ func_4D8A() {
     } else {
       var_6 = 125;
       if(var_2["fraction"] > 0.3) {
-        var_0F = self getplayerangles() - vectortoangles(var_1);
-        var_0F = (min(0, var_0F[0]), var_0F[1], var_0F[2]);
-        var_7 = anglesToForward(var_0F) * var_4 * min(1, length(var_1));
+        var_15 = self getplayerangles() - vectortoangles(var_1);
+        var_15 = (min(0, var_15[0]), var_15[1], var_15[2]);
+        var_7 = anglesToForward(var_15) * var_4 * min(1, length(var_1));
         if(isDefined(self.var_5AD4)) {
           var_7 = var_7 * 1.2;
         }
 
         var_6 = 150;
       } else {
-        var_0F = self.angles - vectortoangles(var_2);
-        var_7 = anglesToForward(var_0F) * var_4 * min(1, length(var_1));
+        var_15 = self.angles - vectortoangles(var_2);
+        var_7 = anglesToForward(var_15) * var_4 * min(1, length(var_1));
         var_7 = var_7 - (0, 0, var_7[2]);
       }
 
       var_3 moveslide((0, 0, 15), 15, var_7 * 0.25 + (0, 0, var_6));
     }
 
-    earthquake(var_0A, var_9 * 0.5, self.origin, 512);
+    earthquake(var_10, var_9 * 0.5, self.origin, 512);
     self setstance("stand");
     if(func_9C57()) {
       self playerlinkto(var_3, "tag_origin", 1);
       earthquake(0.2, 0.3, self.origin, 256);
     } else {
-      earthquake(var_0B, var_0C, self.origin, 2048);
+      earthquake(var_11, var_12, self.origin, 2048);
       level notify("player_SwimWaterCurrent_lerp_savedDvar");
       var_7 = vectornormalize(var_7);
-      setsaveddvar("player_SwimWaterCurrent", var_7 * var_0E);
+      setsaveddvar("player_SwimWaterCurrent", var_7 * var_14);
       if(var_8 != 1) {
         thread func_118C4(var_0, var_7);
       }
@@ -119,18 +119,18 @@ func_4D8A() {
       thread scripts\sp\utility::play_sound_on_entity("land");
       self func_80A6();
     } else {
-      scripts\engine\utility::delaythread(var_0D, ::func_AB9C, "player_SwimWaterCurrent", (0, 0, 0), 0.5);
+      scripts\engine\utility::delaythread(var_13, ::func_AB9C, "player_SwimWaterCurrent", (0, 0, 0), 0.5);
     }
 
     var_3 delete();
     self allowads(1);
-    thread scripts\sp\utility::func_D2CD(100, var_0D);
+    thread scripts\sp\utility::func_D2CD(100, var_13);
     thread lib_0E48::func_C144();
     if(func_9C57()) {
       self waittill("landed_on_ground");
     }
 
-    wait(var_0D);
+    wait(var_13);
     self.var_4D93 = undefined;
   }
 }

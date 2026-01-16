@@ -41,8 +41,8 @@ func_3EB3(var_0, var_1, var_2) {
     return var_4;
   }
 
-  if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Stand") {
-    var_5 = self.target_getindexoftarget func_8169();
+  if(isDefined(self.node) && self.node.type == "Cover Stand") {
+    var_5 = self.node func_8169();
     var_6 = 1;
     for(var_7 = 0; var_7 < var_5.size; var_7++) {
       if(var_5[var_7] == "over") {
@@ -60,8 +60,8 @@ func_3EB3(var_0, var_1, var_2) {
 
 func_3EA1(var_0, var_1, var_2) {
   var_2 = "";
-  if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Stand") {
-    var_3 = self.target_getindexoftarget func_8169();
+  if(isDefined(self.node) && self.node.type == "Cover Stand") {
+    var_3 = self.node func_8169();
     var_4 = 1;
     for(var_5 = 0; var_5 < var_3.size; var_5++) {
       if(var_3[var_5] == "over") {
@@ -78,7 +78,7 @@ func_3EA1(var_0, var_1, var_2) {
 }
 
 func_3EAB(var_0, var_1, var_2) {
-  var_3 = weaponclass(self.var_394);
+  var_3 = weaponclass(self.weapon);
   var_4 = undefined;
   if(!isDefined(var_2)) {
     var_4 = lib_0A1E::func_235D(var_1);
@@ -165,31 +165,31 @@ func_2360(var_0, var_1, var_2, var_3, var_4) {
   var_7 = var_5;
   var_8 = var_3;
   var_9 = lib_0A1E::func_2355();
-  var_0A = scripts\asm\asm::asm_lookupanimfromalias(var_1, "one_hand_run");
+  var_10 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "one_hand_run");
   for(;;) {
-    var_0B = 3;
-    var_0C = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
-    var_0D = var_0C;
-    if(isarray(var_0D) && var_0D.size == 4) {
+    var_11 = 3;
+    var_12 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
+    var_13 = var_12;
+    if(isarray(var_13) && var_13.size == 4) {
       if((isDefined(self.asm.movementgunposeoverride) && self.asm.movementgunposeoverride == "run_gun_down") || isDefined(var_9) && var_9) {
-        var_0D = var_0C[3];
+        var_13 = var_12[3];
         self.asm.var_13CAF = 1;
         self.asm.movementgunposeoverride = undefined;
-      } else if((scripts\engine\utility::cointoss() && var_0A != var_0C[2]) || var_0A == var_0C[0]) {
-        if(var_0A == var_0C[3]) {
-          var_0D = var_0C[0];
-          var_0B = 1;
+      } else if((scripts\engine\utility::cointoss() && var_10 != var_12[2]) || var_10 == var_12[0]) {
+        if(var_10 == var_12[3]) {
+          var_13 = var_12[0];
+          var_11 = 1;
           self.asm.var_13CAF = 0;
         } else {
-          var_0D = var_0C[1];
+          var_13 = var_12[1];
           self.asm.var_13CAF = 0;
         }
-      } else if(var_0A == var_0C[1]) {
-        var_0D = var_0C[2];
-        var_0B = 1;
+      } else if(var_10 == var_12[1]) {
+        var_13 = var_12[2];
+        var_11 = 1;
         self.asm.var_13CAF = 1;
       } else {
-        var_0D = var_0C[3];
+        var_13 = var_12[3];
         self.asm.var_13CAF = 1;
       }
     }
@@ -199,15 +199,15 @@ func_2360(var_0, var_1, var_2, var_3, var_4) {
       self func_84F1(var_3);
     }
 
-    if(var_0D != var_7 || var_3 != var_8) {
-      self give_left_powers(var_1, var_0D, 1, var_2, var_3);
+    if(var_13 != var_7 || var_3 != var_8) {
+      self give_left_powers(var_1, var_13, 1, var_2, var_3);
       var_8 = var_3;
     }
 
-    lib_0A1E::func_2369(var_0, var_1, var_0D);
-    var_7 = var_0D;
-    var_0A = var_0D;
-    for(var_0E = 0; var_0E < var_0B; var_0E++) {
+    lib_0A1E::func_2369(var_0, var_1, var_13);
+    var_7 = var_13;
+    var_10 = var_13;
+    for(var_14 = 0; var_14 < var_11; var_14++) {
       wait(0.05);
       lib_0A1E::func_231F(var_0, var_1, undefined, scripts\asm\asm::func_2341(var_0, var_1));
     }
@@ -232,8 +232,8 @@ func_13D08(var_0, var_1) {
   var_7 = getnotetracktimes(var_4, "footstep_right_small");
   var_8 = getnotetracktimes(var_4, "footstep_left_large");
   var_9 = getnotetracktimes(var_4, "footstep_left_large");
-  var_0A = self.asm.footsteps.foot;
-  if(var_0A == "right") {
+  var_10 = self.asm.footsteps.foot;
+  if(var_10 == "right") {
     if(var_7.size > 0) {
       var_2 = func_3711(var_7, var_6, var_5);
     } else if(var_9.size > 0) {
@@ -246,7 +246,7 @@ func_13D08(var_0, var_1) {
   }
 
   if(var_2.size == 0) {
-    var_0B = var_4 + " is missing footstep notetracks!Footmatching failed.";
+    var_11 = var_4 + " is missing footstep notetracks!Footmatching failed.";
     return;
   }
 
@@ -263,7 +263,7 @@ func_13D08(var_0, var_1) {
   }
 
   if(var_3 < var_5) {
-    if(var_0A == "right") {
+    if(var_10 == "right") {
       self.asm.footsteps.foot = "left";
       return;
     }
@@ -426,8 +426,8 @@ func_7DD6() {
     return self.physics_querypoint;
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
-    return self.target_getindexoftarget;
+  if(isDefined(self.node)) {
+    return self.node;
   }
 
   if(isDefined(self.weaponmaxdist) && isDefined(self.vehicle_getspawnerarray) && distance2dsquared(self.weaponmaxdist.origin, self.vehicle_getspawnerarray) < 36) {

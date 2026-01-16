@@ -58,29 +58,29 @@ func_glass_handler() {
   var_7 = var_0.size;
   var_8 = var_0.size;
   var_9 = 5;
-  var_0A = 0;
+  var_10 = 0;
   while(var_7 != 0) {
-    var_0B = var_0A + var_9 - 1;
-    if(var_0B > var_8) {
-      var_0B = var_8;
+    var_11 = var_10 + var_9 - 1;
+    if(var_11 > var_8) {
+      var_11 = var_8;
     }
 
-    if(var_0A == var_8) {
-      var_0A = 0;
+    if(var_10 == var_8) {
+      var_10 = 0;
     }
 
-    while(var_0A < var_0B) {
-      var_0C = var_0[var_0A];
-      var_4 = var_1[var_0C];
+    while(var_10 < var_11) {
+      var_12 = var_0[var_10];
+      var_4 = var_1[var_12];
       if(isDefined(var_4)) {
-        if(isglassdestroyed(var_0C)) {
+        if(isglassdestroyed(var_12)) {
           var_4 delete();
           var_7--;
-          var_1[var_0C] = undefined;
+          var_1[var_12] = undefined;
         }
       }
 
-      var_0A++;
+      var_10++;
     }
 
     wait(0.05);

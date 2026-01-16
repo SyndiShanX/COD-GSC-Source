@@ -87,10 +87,10 @@ func_1037C(var_0, var_1) {
 
 func_E48C(var_0) {
   self endon("disconnect");
-  thread scripts\mp\killstreaks\_emp_common::func_5AA9();
+  thread scripts\mp\killstreaks\emp_common::func_5AA9();
   var_1 = scripts\mp\utility::outlineenableforplayer(self, "orange", var_0, 0, 0, "level_script");
   var_2 = var_0 scripts\mp\powerloot::func_7FC1("power_smokeWall", 1.15);
-  scripts\engine\utility::waittill_any_timeout_1(var_2, "death");
+  scripts\engine\utility::waittill_any_timeout(var_2, "death");
   if(isDefined(var_0)) {
     scripts\mp\utility::outlinedisable(var_1, self);
   }

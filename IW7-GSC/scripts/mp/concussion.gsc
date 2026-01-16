@@ -14,7 +14,7 @@ func_13A20() {
   thread func_A639(var_0);
   thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
   self endon("end_explode");
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   self waittill("explode", var_2);
   thread func_0118(var_2, 512, var_1, var_0);
 }
@@ -26,7 +26,7 @@ func_0118(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_7 = scripts\engine\utility::ter_op(isDefined(var_6.triggerportableradarping), var_6.triggerportableradarping, var_6);
+    var_7 = scripts\engine\utility::ter_op(isDefined(var_6.owner), var_6.owner, var_6);
     if(!scripts\mp\weapons::friendlyfirecheck(var_2, var_7) && var_7 != var_2) {
       continue;
     }
@@ -62,7 +62,7 @@ func_20BF(var_0, var_1) {
   }
 
   var_5 = var_2 + var_3 * var_4;
-  var_5 = scripts\mp\perks\_perkfunctions::applystunresistence(var_1, self, var_5);
+  var_5 = scripts\mp\perks\perkfunctions::applystunresistence(var_1, self, var_5);
   thread scripts\mp\gamescore::func_11ACF(var_1, self, "concussion_grenade_mp", var_5);
   var_1 notify("stun_hit");
   self notify("concussed", var_1);
@@ -73,7 +73,7 @@ func_20BF(var_0, var_1) {
 }
 
 func_20C3(var_0, var_1) {
-  if(!scripts\mp\killstreaks\_emp_common::func_FFC5()) {
+  if(!scripts\mp\killstreaks\emp_common::func_FFC5()) {
     if(var_1 != self) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
     }
@@ -86,7 +86,7 @@ func_20C3(var_0, var_1) {
     var_2 = 1;
   }
 
-  scripts\mp\killstreaks\_emp_common::func_20C7(var_2);
+  scripts\mp\killstreaks\emp_common::func_20C7(var_2);
   thread scripts\mp\gamescore::func_11ACF(var_1, self, "emp_grenade_mp", var_2);
 }
 

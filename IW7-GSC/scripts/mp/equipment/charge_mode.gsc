@@ -110,8 +110,8 @@ func_3CFB() {
     var_7 = anglesToForward(self.angles);
     var_8 = var_2 - self.origin;
     var_9 = vectornormalize(var_8 - var_6 * vectordot(var_6, var_8));
-    var_0A = vectordot(var_1, var_9);
-    if(var_0A < 85) {
+    var_10 = vectordot(var_1, var_9);
+    if(var_10 < 85) {
       continue;
     }
 
@@ -415,7 +415,7 @@ func_3D06(var_0) {
       continue;
     }
 
-    var_2 = scripts\engine\utility::ter_op(isDefined(var_1.triggerportableradarping), var_1.triggerportableradarping, var_1);
+    var_2 = scripts\engine\utility::ter_op(isDefined(var_1.owner), var_1.owner, var_1);
     if(!level.friendlyfire && var_2 != self && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_2, self))) {
       continue;
     }
@@ -513,7 +513,7 @@ chargemode_queueforepicimpact(var_0) {
 
 func_3D05(var_0) {
   var_0 endon("death");
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "chargeMode_end", "chargeMode_unset");
+  scripts\engine\utility::waittill_any("death", "disconnect", "chargeMode_end", "chargeMode_unset");
   var_0 delete();
 }
 
@@ -533,7 +533,7 @@ chargemode_monitortriggerinteractionmanual(var_0) {
         continue;
       }
 
-      var_8 = scripts\engine\utility::ter_op(isDefined(var_7.triggerportableradarping), var_7.triggerportableradarping, var_7);
+      var_8 = scripts\engine\utility::ter_op(isDefined(var_7.owner), var_7.owner, var_7);
       if(!level.friendlyfire && var_8 != self && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_8, self))) {
         continue;
       }
@@ -543,13 +543,13 @@ chargemode_monitortriggerinteractionmanual(var_0) {
         continue;
       }
 
-      var_0A = var_7.origin - var_4;
-      if(lengthsquared(var_0A) > var_2) {
+      var_10 = var_7.origin - var_4;
+      if(lengthsquared(var_10) > var_2) {
         continue;
       }
 
-      var_0B = physics_raycast(var_4, var_7.origin, var_3, [var_7], 0, "physicsquery_closest", 1);
-      if(isDefined(var_0B) && var_0B.size > 0) {
+      var_11 = physics_raycast(var_4, var_7.origin, var_3, [var_7], 0, "physicsquery_closest", 1);
+      if(isDefined(var_11) && var_11.size > 0) {
         continue;
       }
 

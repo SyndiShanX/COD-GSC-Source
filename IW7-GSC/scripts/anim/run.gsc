@@ -166,30 +166,30 @@ func_E873(var_0) {
 
   func_98C6();
   var_9 = abs(self.var_E879);
-  var_0A = scripts\anim\utility::func_B028("run_n_gun");
+  var_10 = scripts\anim\utility::func_B028("run_n_gun");
   if(var_9 > var_5) {
-    var_0B = var_9 - var_5 / var_5;
-    var_0B = clamp(var_0B, 0, 1);
-    self clearanim(var_0A["F"], 0.2);
-    self func_82AC(var_0A["L"], 1 - var_0B * var_2, 0.2);
-    self func_82AC(var_0A["R"], 1 - var_0B * var_3, 0.2);
-    self func_82AC(var_0A["LB"], var_0B * var_2, 0.2);
-    self func_82AC(var_0A["RB"], var_0B * var_3, 0.2);
+    var_11 = var_9 - var_5 / var_5;
+    var_11 = clamp(var_11, 0, 1);
+    self clearanim(var_10["F"], 0.2);
+    self func_82AC(var_10["L"], 1 - var_11 * var_2, 0.2);
+    self func_82AC(var_10["R"], 1 - var_11 * var_3, 0.2);
+    self func_82AC(var_10["LB"], var_11 * var_2, 0.2);
+    self func_82AC(var_10["RB"], var_11 * var_3, 0.2);
   } else {
-    var_0B = clamp(var_0A / var_6, 0, 1);
-    self func_82AC(var_0A["F"], 1 - var_0B, 0.2);
-    self func_82AC(var_0A["L"], var_0B * var_2, 0.2);
-    self func_82AC(var_0A["R"], var_0B * var_3, 0.2);
+    var_11 = clamp(var_10 / var_6, 0, 1);
+    self func_82AC(var_10["F"], 1 - var_11, 0.2);
+    self func_82AC(var_10["L"], var_11 * var_2, 0.2);
+    self func_82AC(var_10["R"], var_11 * var_3, 0.2);
     if(var_5 < 1) {
-      self clearanim(var_0A["LB"], 0.2);
-      self clearanim(var_0A["RB"], 0.2);
+      self clearanim(var_10["LB"], 0.2);
+      self clearanim(var_10["RB"], 0.2);
     }
   }
 
   self give_left_powers("runanim", % run_n_gun, 1, 0.3, 0.8);
   func_E80F(undefined);
   self.a.var_1C8D = gettime() + 500;
-  if(var_0 && isplayer(self.isnodeoccupied)) {
+  if(var_0 && isplayer(self.enemy)) {
     self func_83CE();
   }
 
@@ -201,7 +201,7 @@ func_E874() {
   var_0 = scripts\anim\utility::func_B027("run_n_gun", "move_back");
   self give_left_powers("runanim", var_0, 1, 0.3, 0.8);
   func_E80F(var_0);
-  if(isplayer(self.isnodeoccupied)) {
+  if(isplayer(self.enemy)) {
     self func_83CE();
   }
 
@@ -282,8 +282,8 @@ func_10086() {
     return 1;
   }
 
-  if(isDefined(self.objective_position) && isDefined(self.isnodeoccupied) && self.objective_additionalcurrent == 1) {
-    return distancesquared(self.origin, self.isnodeoccupied.origin) > 90000;
+  if(isDefined(self.objective_position) && isDefined(self.enemy) && self.objective_additionalcurrent == 1) {
+    return distancesquared(self.origin, self.enemy.origin) > 90000;
   }
 
   return 0;
@@ -309,11 +309,11 @@ func_10087() {
     }
   }
 
-  if(!isDefined(self.isnodeoccupied) || !issentient(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy) || !issentient(self.enemy)) {
     return 0;
   }
 
-  if(randomint(100) < 25 && self lastknowntime(self.isnodeoccupied) + 2000 > var_0) {
+  if(randomint(100) < 25 && self lastknowntime(self.enemy) + 2000 > var_0) {
     self.var_4D85 = var_0 + 2000 + randomint(1000);
     return 1;
   }
@@ -348,7 +348,7 @@ func_10B79() {
     func_E80F(var_3);
     func_F843(0);
     var_1 = 1;
-  } else if(isDefined(self.isnodeoccupied) && scripts\anim\move::func_B4EC()) {
+  } else if(isDefined(self.enemy) && scripts\anim\move::func_B4EC()) {
     func_F843(1);
     if(!self.livestreamingenable) {
       thread func_6A6B();
@@ -500,7 +500,7 @@ func_E89B() {
 
 func_1A3C() {
   var_0 = self getspawnpointdist();
-  var_1 = vectortoangles(self.isnodeoccupied getshootatpos() - self getmuzzlepos());
+  var_1 = vectortoangles(self.enemy getshootatpos() - self getmuzzlepos());
   if(scripts\engine\utility::absangleclamp180(var_0[1] - var_1[1]) > 15) {
     return 0;
   }
@@ -530,14 +530,14 @@ canshoottarget() {
 }
 
 canshootinvehicle() {
-  return scripts\anim\move::func_B4EC() && isDefined(self.isnodeoccupied) && canshoottargetfrompos() || canshoottarget();
+  return scripts\anim\move::func_B4EC() && isDefined(self.enemy) && canshoottargetfrompos() || canshoottarget();
 }
 
 detach(var_0) {
   var_1 = self.origin;
   var_2 = self.angles[1] + self getspawnpoint_searchandrescue();
   var_1 = var_1 + (cos(var_2), sin(var_2), 0) * length(self.var_381) * var_0;
-  var_3 = self.angles[1] - vectortoyaw(self.isnodeoccupied.origin - var_1);
+  var_3 = self.angles[1] - vectortoyaw(self.enemy.origin - var_1);
   var_3 = angleclamp180(var_3);
   return var_3;
 }
@@ -679,7 +679,7 @@ func_4AA0() {
 
 func_10B78() {
   var_0 = isDefined(self.a.var_1C8D) && self.a.var_1C8D > gettime();
-  var_0 = var_0 || isDefined(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) < 65536;
+  var_0 = var_0 || isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536;
   if(var_0) {
     if(!scripts\anim\utility_common::needtoreload(0)) {
       return 0;
@@ -834,7 +834,7 @@ func_12F08(var_0, var_1, var_2, var_3) {
 
 func_10B77() {
   var_0 = isDefined(self.var_138DF) && self.var_138DF;
-  var_1 = scripts\anim\utility_common::isshotgun(self.var_394);
+  var_1 = scripts\anim\utility_common::isshotgun(self.weapon);
   if(var_0 == var_1) {
     return 0;
   }
@@ -847,7 +847,7 @@ func_10B77() {
     return 0;
   }
 
-  if(self.var_394 == self.primaryweapon) {
+  if(self.weapon == self.primaryweapon) {
     if(!var_0) {
       return 0;
     }
@@ -907,7 +907,7 @@ func_13B40(var_0, var_1, var_2, var_3, var_4) {
   self endon("movemode");
   self endon("switchEnded");
   self waittillmatch(var_1, var_0);
-  scripts\anim\shared::placeweaponon(self.var_394, var_2);
+  scripts\anim\shared::placeweaponon(self.weapon, var_2);
   thread func_FF01(var_3);
   self waittillmatch(var_4, var_0);
   self notify("complete_weapon_switch");
@@ -915,10 +915,10 @@ func_13B40(var_0, var_1, var_2, var_3, var_4) {
 
 func_FF01(var_0) {
   self endon("death");
-  scripts\engine\utility::waittill_any_3("killanimscript", "movemode", "switchEnded", "complete_weapon_switch");
-  self.lastweapon = self.var_394;
+  scripts\engine\utility::waittill_any("killanimscript", "movemode", "switchEnded", "complete_weapon_switch");
+  self.lastweapon = self.weapon;
   scripts\anim\shared::placeweaponon(var_0, "right");
-  self.bulletsinclip = weaponclipsize(self.var_394);
+  self.bulletsinclip = weaponclipsize(self.weapon);
 }
 
 func_E80F(var_0) {

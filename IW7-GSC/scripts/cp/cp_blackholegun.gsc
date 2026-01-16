@@ -24,18 +24,18 @@ missilespawned(var_0, var_1) {
   if(var_7) {
     var_8 = var_6[0]["position"];
     var_9 = distance(var_8, var_3);
-    var_0A = vectornormalize(var_3 - var_8);
-    var_0B = var_8 + var_0A * 80;
+    var_10 = vectornormalize(var_3 - var_8);
+    var_11 = var_8 + var_10 * 80;
   } else {
     var_9 = 1920;
-    var_0A = anglesToForward(var_3.angles);
-    var_0B = var_6;
+    var_10 = anglesToForward(var_3.angles);
+    var_11 = var_6;
     var_8 = undefined;
   }
 
-  var_0C = distance(var_0B, var_3);
-  if(var_0C < 90) {
-    var_0D = 1;
+  var_12 = distance(var_11, var_3);
+  if(var_12 < 90) {
+    var_13 = 1;
     wait(0.3);
     if(isDefined(var_1)) {
       var_1 delete();
@@ -45,19 +45,19 @@ missilespawned(var_0, var_1) {
     return;
   }
 
-  var_0E = max(var_0C / 980, 1.05);
-  var_0F = spawn("script_model", var_3);
-  var_0F setModel("prop_mp_super_blackholegun_projectile");
-  var_0F setotherent(self);
-  var_0F moveto(var_0B, var_0E, 0.1, 0.95);
-  var_0F.triggerportableradarping = var_1.triggerportableradarping;
-  var_0F setscriptmoverkillcam("rocket");
-  var_10 = var_0F.triggerportableradarping scripts\cp\utility::_launchgrenade("blackholegun_indicator_zm", self.origin, (0, 0, 0));
+  var_14 = max(var_12 / 980, 1.05);
+  var_15 = spawn("script_model", var_3);
+  var_15 setModel("prop_mp_super_blackholegun_projectile");
+  var_15 setotherent(self);
+  var_15 moveto(var_11, var_14, 0.1, 0.95);
+  var_15.owner = var_1.owner;
+  var_15 setscriptmoverkillcam("rocket");
+  var_10 = var_15.owner scripts\cp\utility::_launchgrenade("blackholegun_indicator_zm", self.origin, (0, 0, 0));
   var_10.weapon_name = "blackholegun_indicator_zm";
-  var_10 linkto(var_0F);
-  var_0F thread monitorprojectilearrive(var_0E, self, var_10, var_2);
-  var_1.triggerportableradarping thread scripts\cp\powers\coop_blackholegrenade::grabclosestzombies(var_0F, 1);
-  var_0F setscriptablepartstate("projectile", "on", 0);
+  var_10 linkto(var_15);
+  var_15 thread monitorprojectilearrive(var_14, self, var_10, var_2);
+  var_1.owner thread scripts\cp\powers\coop_blackholegrenade::grabclosestzombies(var_15, 1);
+  var_15 setscriptablepartstate("projectile", "on", 0);
   waittillframeend;
   var_1 delete();
 }
@@ -88,7 +88,7 @@ projectilearrived(var_0, var_1) {
   thread watchforincidentalplayerdamage(var_5);
   thread singularityquake();
   wait(3);
-  thread singularityexplode(self.triggerportableradarping, var_5, var_6, var_0);
+  thread singularityexplode(self.owner, var_5, var_6, var_0);
 }
 
 ownerdisconnectcleanup(var_0) {
@@ -98,7 +98,7 @@ ownerdisconnectcleanup(var_0) {
 }
 
 makeblackholeimpulsefield(var_0) {
-  var_1 = spawnimpulsefield(self.triggerportableradarping, "bhgunfield_mp", self.origin);
+  var_1 = spawnimpulsefield(self.owner, "bhgunfield_mp", self.origin);
   var_1 linkto(self);
   return var_1;
 }
@@ -117,14 +117,14 @@ trydodamage(var_0, var_1, var_2, var_3) {
   var_4 = physics_raycast(self.origin, var_1, var_3, self, 0, "physicsquery_closest");
   var_5 = !isDefined(var_4) && var_4.size > 0;
   if(var_5) {
-    var_0 dodamage(var_2, self.origin, self.triggerportableradarping, self, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
+    var_0 dodamage(var_2, self.origin, self.owner, self, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
   }
 }
 
 watchforincidentalplayerdamage(var_0) {
   self endon("death");
   self endon("blackhole_die");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_1 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0);
   var_2 = 5898.24;
   for(;;) {
@@ -141,7 +141,7 @@ watchforincidentalplayerdamage(var_0) {
         continue;
       }
 
-      if(!level.friendlyfire && var_4 != self.triggerportableradarping && var_4.team != self.triggerportableradarping.team) {
+      if(!level.friendlyfire && var_4 != self.owner && var_4.team != self.owner.team) {
         continue;
       }
 
@@ -159,7 +159,7 @@ watchforincidentalplayerdamage(var_0) {
 watchfordirectplayerdamage(var_0, var_1) {
   self endon("death");
   self endon("blackhole_projectile_arrive");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   wait(0.1);
   var_2 = spawn("trigger_radius", self.origin - (0, 0, 32), 0, 24, 64);
   var_2 enablelinkto();
@@ -167,7 +167,7 @@ watchfordirectplayerdamage(var_0, var_1) {
   var_2 thread cleanuptrigger(self);
   for(;;) {
     var_2 waittill("trigger", var_3);
-    if(var_3 == self.triggerportableradarping) {
+    if(var_3 == self.owner) {
       continue;
     }
 
@@ -184,12 +184,12 @@ watchfordirectplayerdamage(var_0, var_1) {
     }
 
     var_4 = var_3;
-    if(!level.friendlyfire && var_4 != self.triggerportableradarping && var_4.team != self.triggerportableradarping.team) {
+    if(!level.friendlyfire && var_4 != self.owner && var_4.team != self.owner.team) {
       continue;
     }
 
     self notify("blackhole_projectile_impact");
-    var_3 dodamage(var_3.maxhealth, self.origin, self.triggerportableradarping, self, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
+    var_3 dodamage(var_3.maxhealth, self.origin, self.owner, self, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
     self moveto(self.origin, 0.05, 0, 0);
     thread projectilearrived(var_0, var_1);
     break;
@@ -198,7 +198,7 @@ watchfordirectplayerdamage(var_0, var_1) {
 
 singularityexplode(var_0, var_1, var_2, var_3) {
   self setscriptablepartstate("singularity", "explosion", 0);
-  self radiusdamage(self.origin, 150, 2000, 500, self.triggerportableradarping, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
+  self radiusdamage(self.origin, 150, 2000, 500, self.owner, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
   self notify("singularity_explode");
   self notify("blackhole_die");
   thread cleanupsingularity(var_1, var_2, var_3);
@@ -240,7 +240,7 @@ blackholephysicsvolumeactivate() {
 }
 
 cleanuptrigger(var_0) {
-  var_0 scripts\engine\utility::waittill_any_3("death", "blackhole_projectile_arrive", "blackhole_projectile_impact");
+  var_0 scripts\engine\utility::waittill_any("death", "blackhole_projectile_arrive", "blackhole_projectile_impact");
   self delete();
 }
 

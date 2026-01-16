@@ -178,9 +178,9 @@ func_1355(var_0) {
   }
 
   if(isDefined(level.var_FDFA)) {
-    var_0A = strtok(level.var_FDFA, "_");
-    if(var_0A.size > 0) {
-      if(var_0A[0] == "sa" || var_0A[0] == "ja") {
+    var_10 = strtok(level.var_FDFA, "_");
+    if(var_10.size > 0) {
+      if(var_10[0] == "sa" || var_10[0] == "ja") {
         var_6 = func_12A9(level.var_FDFA);
         var_9 = level.var_B8D2.var_ABFA[var_6].var_2AD3;
       }
@@ -198,8 +198,8 @@ func_1355(var_0) {
     }
 
     if(!level.player islinked()) {
-      var_0B = level.player scripts\engine\utility::spawn_tag_origin();
-      level.player playerlinktoabsolute(var_0B);
+      var_11 = level.player scripts\engine\utility::spawn_tag_origin();
+      level.player playerlinktoabsolute(var_11);
     }
 
     level.player freezecontrols(1);
@@ -220,14 +220,14 @@ func_1355(var_0) {
   level.player func_84C7("opsmapMissionStateData", level.script, "complete");
   level.player func_84C7("lastCompletedMission", level.script);
   level.player func_84C7("currentLoadout", "levelCreated", var_6);
-  var_0C = func_7F6D(var_6);
-  level.player func_84C7("missionStateData", var_0C, "incomplete");
-  level.player func_84C7("opsmapMissionStateData", var_0C, "incomplete");
+  var_12 = func_7F6D(var_6);
+  level.player func_84C7("missionStateData", var_12, "incomplete");
+  level.player func_84C7("opsmapMissionStateData", var_12, "incomplete");
   if(getdvarint("fastload", 1) != 0) {
     if(waspreloadzonesstarted()) {
-      for(var_0D = 0; !ispreloadzonescomplete(); var_0D--) {
-        if(var_0D == 0) {
-          var_0D = 60;
+      for(var_13 = 0; !ispreloadzonescomplete(); var_13--) {
+        if(var_13 == 0) {
+          var_13 = 60;
         }
 
         scripts\engine\utility::waitframe();
@@ -239,18 +239,18 @@ func_1355(var_0) {
         wait(0.05);
       }
 
-      var_0D = 0;
-      for(var_0E = 200; !scripts\engine\utility::flag("weapons_preloaded"); var_0E--) {
-        if(var_0D == 0) {
-          var_0D = 60;
+      var_13 = 0;
+      for(var_14 = 200; !scripts\engine\utility::flag("weapons_preloaded"); var_14--) {
+        if(var_13 == 0) {
+          var_13 = 60;
         }
 
-        if(var_0E == 0) {
+        if(var_14 == 0) {
           break;
         }
 
         scripts\engine\utility::waitframe();
-        var_0D--;
+        var_13--;
       }
     }
   }
@@ -432,22 +432,22 @@ func_1356(var_0, var_1, var_2) {
   }
 
   if(getdvarint("fastload", 1) != 0) {
-    var_0A = func_7F6D(var_4);
-    if(var_0A == "phspace" && getdvarint("e3", 0) == 1) {
-      preloadzones([var_0A, "phspace_shared_tr", "phspace_ground_tr", "phspace_ground_lite_tr"]);
+    var_10 = func_7F6D(var_4);
+    if(var_10 == "phspace" && getdvarint("e3", 0) == 1) {
+      preloadzones([var_10, "phspace_shared_tr", "phspace_ground_tr", "phspace_ground_lite_tr"]);
     } else {
       switch (var_0) {
         case "full":
           if(isDefined(var_7)) {
-            var_0B = scripts\engine\utility::array_add(var_7, var_0A);
-            preloadzones(var_0B);
+            var_11 = scripts\engine\utility::array_add(var_7, var_10);
+            preloadzones(var_11);
           } else {
-            preloadzones(var_0A);
+            preloadzones(var_10);
           }
           break;
 
         case "root":
-          preloadzones(var_0A);
+          preloadzones(var_10);
           break;
 
         case "transients":
@@ -463,7 +463,7 @@ func_1356(var_0, var_1, var_2) {
     }
 
     if(var_1) {
-      level thread func_1463(var_0A, var_1);
+      level thread func_1463(var_10, var_1);
       scripts\engine\utility::flag_wait("weapons_preloaded");
     }
   }
@@ -523,31 +523,31 @@ func_1463(var_0, var_1) {
   }
 
   if(scripts\engine\utility::string_starts_with(var_0, "ja_")) {
-    var_0A = 1;
+    var_10 = 1;
   } else {
-    var_0A = 0;
+    var_10 = 0;
   }
 
-  var_0B = lib_0A2F::func_DA17();
-  var_0C = getaiarray();
-  var_0D = [];
-  foreach(var_0F in var_0C) {
-    var_10 = var_0F.var_394;
+  var_11 = lib_0A2F::func_DA17();
+  var_12 = getaiarray();
+  var_13 = [];
+  foreach(var_15 in var_12) {
+    var_10 = var_15.weapon;
     var_10 = getweaponbasename(var_10);
-    if(var_10 != "none" && scripts\engine\utility::array_contains(var_0B, var_10)) {
-      var_0D = scripts\engine\utility::array_add(var_0D, var_10);
+    if(var_10 != "none" && scripts\engine\utility::array_contains(var_11, var_10)) {
+      var_13 = scripts\engine\utility::array_add(var_13, var_10);
     }
   }
 
-  var_0D = scripts\engine\utility::array_remove_duplicates(var_0D);
+  var_13 = scripts\engine\utility::array_remove_duplicates(var_13);
   var_12 = lib_0A2F::func_7F7B(level.template_script);
   var_13 = level.var_D9E5["loaded_weapons"];
   var_13 = scripts\engine\utility::array_combine(var_13, var_12);
-  var_13 = scripts\engine\utility::array_combine(var_13, var_0D);
+  var_13 = scripts\engine\utility::array_combine(var_13, var_13);
   var_13 = scripts\engine\utility::array_remove_duplicates(var_13);
   var_14 = lib_0A2F::func_7BDE(var_0);
   var_15 = lib_0A2F::func_7F7B(var_0);
-  var_16 = lib_0A2F::func_DA18(var_14, var_9, 1, var_15, var_0A);
+  var_16 = lib_0A2F::func_DA18(var_14, var_9, 1, var_15, var_10);
   var_17 = scripts\engine\utility::array_remove_array(var_13, var_16);
   foreach(var_19 in var_13) {
     if(!lib_0A2F::func_9B49(var_19)) {
@@ -555,8 +555,8 @@ func_1463(var_0, var_1) {
     }
   }
 
-  var_0B = scripts\engine\utility::array_remove_array(var_0B, var_16);
-  foreach(var_19 in var_0B) {
+  var_11 = scripts\engine\utility::array_remove_array(var_11, var_16);
+  foreach(var_19 in var_11) {
     level.player func_84C7("weaponsLoaded", var_19, 0);
   }
 
@@ -572,7 +572,7 @@ func_1463(var_0, var_1) {
         if(var_17.size > 0) {
           var_20 = undefined;
           for(var_21 = 0; var_21 < var_17.size; var_21++) {
-            if(!scripts\engine\utility::array_contains(var_0D, var_17[var_21])) {
+            if(!scripts\engine\utility::array_contains(var_13, var_17[var_21])) {
               if(issubstr(scripts\engine\utility::get_template_script_MAYBE(), "crib")) {
                 if(!scripts\engine\utility::array_contains(var_2, var_17[var_21])) {
                   var_20 = var_17[var_21];
@@ -598,14 +598,14 @@ func_1463(var_0, var_1) {
           var_22 = scripts\engine\utility::weaponclass(var_20);
           foreach(var_24 in level.var_D9E5["loaded_weapon_types"][var_22]) {
             if(var_24.weapon_name == var_20) {
-              level.var_D9E5["loaded_weapon_types"][var_22] = scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapon_types"][var_22], var_24);
+              level.var_D9E5["loaded_weapon_types"][var_22] = ::scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapon_types"][var_22], var_24);
             }
           }
 
           var_13 = scripts\engine\utility::array_remove(var_13, var_20);
           thread scripts\sp\utility::func_1264E("weapon_" + var_20 + "_tr");
           var_1E = scripts\engine\utility::array_add(var_1E, "weapon_" + var_20 + "_tr");
-          level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_20);
+          level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_20);
           var_17 = scripts\engine\utility::array_remove(var_17, var_20);
           continue;
         }
@@ -637,12 +637,12 @@ func_1463(var_0, var_1) {
     var_22 = scripts\engine\utility::weaponclass(var_29);
     foreach(var_24 in level.var_D9E5["loaded_weapon_types"][var_22]) {
       if(var_24.weapon_name == var_29) {
-        level.var_D9E5["loaded_weapon_types"][var_22] = scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapon_types"][var_22], var_24);
+        level.var_D9E5["loaded_weapon_types"][var_22] = ::scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapon_types"][var_22], var_24);
       }
     }
 
     level.player func_84C7("weaponsLoaded", var_29, 0);
-    level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_29);
+    level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_remove(level.var_D9E5["loaded_weapons"], var_29);
   }
 
   level.player func_84C7("lastWeaponPreload", var_0);
@@ -665,9 +665,9 @@ func_1463(var_0, var_1) {
         }
 
         if(!scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], var_19)) {
-          level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_19);
+          level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_19);
           if(isDefined(var_24)) {
-            level.var_D9E5["loaded_weapon_types"][var_22] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapon_types"][var_22], var_24);
+            level.var_D9E5["loaded_weapon_types"][var_22] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapon_types"][var_22], var_24);
           }
         }
       }
@@ -846,16 +846,16 @@ func_81D4() {
   var_7 = 0.15;
   var_8 = getweaponammostock();
   var_9 = 0.1;
-  var_0A = getvieworigin();
-  var_0B = 0.05;
-  var_0C = 0;
-  var_0C = var_0C + var_1 * var_0;
-  var_0C = var_0C + var_3 * var_2;
-  var_0C = var_0C + var_5 * var_4;
-  var_0C = var_0C + var_7 * var_6;
-  var_0C = var_0C + var_0B * var_0A;
-  var_0C = var_0C + var_9 * var_8;
-  return var_0C;
+  var_10 = getvieworigin();
+  var_11 = 0.05;
+  var_12 = 0;
+  var_12 = var_12 + var_1 * var_0;
+  var_12 = var_12 + var_3 * var_2;
+  var_12 = var_12 + var_5 * var_4;
+  var_12 = var_12 + var_7 * var_6;
+  var_12 = var_12 + var_11 * var_10;
+  var_12 = var_12 + var_9 * var_8;
+  return var_12;
 }
 
 func_816C(var_0) {
@@ -1045,20 +1045,20 @@ func_49EF() {
   return var_0;
 }
 
-func_17E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
-  var_0B = level.var_B8D2.var_ABFA.size;
-  level.var_B8D2.var_ABFA[var_0B] = spawnStruct();
-  level.var_B8D2.var_ABFA[var_0B].name = var_0;
-  level.var_B8D2.var_ABFA[var_0B].var_ABFC = var_1;
-  level.var_B8D2.var_ABFA[var_0B].var_A580 = var_2;
-  level.var_B8D2.var_ABFA[var_0B].var_1563 = var_3;
-  level.var_B8D2.var_ABFA[var_0B].var_4486 = var_4;
-  level.var_B8D2.var_ABFA[var_0B].var_2AD3 = var_5;
-  level.var_B8D2.var_ABFA[var_0B].var_F88F = var_6;
-  level.var_B8D2.var_ABFA[var_0B].var_41F7 = var_7;
-  level.var_B8D2.var_ABFA[var_0B].var_E2B2 = var_8;
-  level.var_B8D2.var_ABFA[var_0B].var_D845 = var_9;
-  level.var_B8D2.var_ABFA[var_0B].var_D846 = var_0A;
+func_17E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = level.var_B8D2.var_ABFA.size;
+  level.var_B8D2.var_ABFA[var_11] = spawnStruct();
+  level.var_B8D2.var_ABFA[var_11].name = var_0;
+  level.var_B8D2.var_ABFA[var_11].var_ABFC = var_1;
+  level.var_B8D2.var_ABFA[var_11].var_A580 = var_2;
+  level.var_B8D2.var_ABFA[var_11].var_1563 = var_3;
+  level.var_B8D2.var_ABFA[var_11].var_4486 = var_4;
+  level.var_B8D2.var_ABFA[var_11].var_2AD3 = var_5;
+  level.var_B8D2.var_ABFA[var_11].var_F88F = var_6;
+  level.var_B8D2.var_ABFA[var_11].var_41F7 = var_7;
+  level.var_B8D2.var_ABFA[var_11].var_E2B2 = var_8;
+  level.var_B8D2.var_ABFA[var_11].var_D845 = var_9;
+  level.var_B8D2.var_ABFA[var_11].var_D846 = var_10;
 }
 
 func_1814(var_0) {

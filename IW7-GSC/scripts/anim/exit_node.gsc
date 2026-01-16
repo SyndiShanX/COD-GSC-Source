@@ -52,25 +52,25 @@ func_10DCA() {
 
   var_8 = (-1 * self.setocclusionpreset[0], -1 * self.setocclusionpreset[1], 0);
   var_9 = getmaxdamage(var_4);
-  var_0A = var_9.var_B490;
-  var_0B = var_9.var_68CA;
-  var_0C = spawnStruct();
-  func_371A(var_0C, var_2, 0, var_1, var_8, var_0A, var_0B);
-  func_1043F(var_0C, var_0A);
-  var_0D = -1;
-  var_0E = 3;
+  var_10 = var_9.var_B490;
+  var_11 = var_9.var_68CA;
+  var_12 = spawnStruct();
+  func_371A(var_12, var_2, 0, var_1, var_8, var_10, var_11);
+  func_1043F(var_12, var_10);
+  var_13 = -1;
+  var_14 = 3;
   if(var_7) {
-    var_0E = 1;
+    var_14 = 1;
   }
 
-  for(var_0F = 1; var_0F <= var_0E; var_0F++) {
-    var_0D = var_0C.var_12654[var_0F];
-    if(func_3E2C(var_0, var_1, var_2, var_7, var_0D)) {
+  for(var_15 = 1; var_15 <= var_14; var_15++) {
+    var_13 = var_12.var_12654[var_15];
+    if(func_3E2C(var_0, var_1, var_2, var_7, var_13)) {
       break;
     }
   }
 
-  if(var_0F > var_0E) {
+  if(var_15 > var_14) {
     return;
   }
 
@@ -79,7 +79,7 @@ func_10DCA() {
     return;
   }
 
-  func_5926(var_2, var_0D);
+  func_5926(var_2, var_13);
 }
 
 func_53C7(var_0) {
@@ -170,8 +170,8 @@ func_3E56(var_0, var_1) {
     }
   }
 
-  if(!isDefined(self.heat) && isDefined(self.isnodeoccupied) && vectordot(self.setocclusionpreset, self.isnodeoccupied.origin - self.origin) < 0) {
-    if(scripts\anim\utility_common::canseeenemyfromexposed() && distancesquared(self.origin, self.isnodeoccupied.origin) < 90000) {
+  if(!isDefined(self.heat) && isDefined(self.enemy) && vectordot(self.setocclusionpreset, self.enemy.origin - self.origin) < 0) {
+    if(scripts\anim\utility_common::canseeenemyfromexposed() && distancesquared(self.origin, self.enemy.origin) < 90000) {
       return 0;
     }
   }
@@ -228,16 +228,16 @@ func_371A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_9 = 180;
   }
 
-  for(var_0A = 1; var_0A <= var_5; var_0A++) {
-    var_0.var_12654[var_0A] = var_0A;
-    if(var_0A == 5 || var_0A == var_6 || !isDefined(var_7[var_0A])) {
-      var_0.transitions[var_0A] = -1.0003;
+  for(var_10 = 1; var_10 <= var_5; var_10++) {
+    var_0.var_12654[var_10] = var_10;
+    if(var_10 == 5 || var_10 == var_6 || !isDefined(var_7[var_10])) {
+      var_0.transitions[var_10] = -1.0003;
       continue;
     }
 
-    var_0B = (0, var_3 + var_8 * var_7[var_0A] + var_9, 0);
-    var_0C = vectornormalize(anglesToForward(var_0B));
-    var_0.transitions[var_0A] = vectordot(var_4, var_0C);
+    var_11 = (0, var_3 + var_8 * var_7[var_10] + var_9, 0);
+    var_12 = vectornormalize(anglesToForward(var_11));
+    var_0.transitions[var_10] = vectordot(var_4, var_12);
   }
 }
 
@@ -263,14 +263,14 @@ func_3E2C(var_0, var_1, var_2, var_3, var_4) {
   var_7 = anglestoright(var_5);
   var_8 = scripts\anim\utility::func_B031("cover_exit_dist", var_2, var_4);
   var_9 = var_6 * var_8[0];
-  var_0A = var_7 * var_8[1];
-  var_0B = var_0 + var_9 - var_0A;
-  self.var_471C = var_0B;
-  if(!var_3 && !self func_8068(var_0B)) {
+  var_10 = var_7 * var_8[1];
+  var_11 = var_0 + var_9 - var_10;
+  self.var_471C = var_11;
+  if(!var_3 && !self func_8068(var_11)) {
     return 0;
   }
 
-  if(!self maymovefrompointtopoint(self.origin, var_0B)) {
+  if(!self maymovefrompointtopoint(self.origin, var_11)) {
     return 0;
   }
 
@@ -278,12 +278,12 @@ func_3E2C(var_0, var_1, var_2, var_3, var_4) {
     return 1;
   }
 
-  var_0C = scripts\anim\utility::func_B031("cover_exit_postdist", var_2, var_4);
-  var_9 = var_6 * var_0C[0];
-  var_0A = var_7 * var_0C[1];
-  var_0D = var_0B + var_9 - var_0A;
-  self.var_471C = var_0D;
-  return self maymovefrompointtopoint(var_0B, var_0D);
+  var_12 = scripts\anim\utility::func_B031("cover_exit_postdist", var_2, var_4);
+  var_9 = var_6 * var_12[0];
+  var_10 = var_7 * var_12[1];
+  var_13 = var_11 + var_9 - var_10;
+  self.var_471C = var_13;
+  return self maymovefrompointtopoint(var_11, var_13);
 }
 
 func_5926(var_0, var_1) {
@@ -338,8 +338,8 @@ func_7EA3() {
     var_1 = 4096;
   }
 
-  if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_1) {
-    var_0 = self.target_getindexoftarget;
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
+    var_0 = self.node;
   } else if(isDefined(self.weaponmaxdist) && distancesquared(self.origin, self.weaponmaxdist.origin) < var_1) {
     var_0 = self.weaponmaxdist;
   }

@@ -38,7 +38,7 @@ func_C799() {
 func_5604(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(10, "death", "joined_team");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(10, "death", "joined_team");
   scripts\mp\utility::outlinedisable(var_0, var_1);
 }
 
@@ -87,7 +87,7 @@ func_2652() {
       } else {
         var_7 = spawn("script_model", var_6.origin);
         var_7 setModel("tag_origin");
-        var_7.triggerportableradarping = var_6;
+        var_7.owner = var_6;
         var_6.var_12AF1 = var_7;
         var_6.var_12AF2 = var_7 scripts\mp\entityheadicons::setheadicon(self, "headicon_enemy", (0, 0, 48), 2, 2, 1, 0.01, 0, 1, 1, 0);
         var_6.var_12AF2 setwaypointedgestyle_rotatingicon();
@@ -126,7 +126,7 @@ func_B37E() {
   } else {
     var_3 = spawn("script_model", self.origin);
     var_3 setModel("tag_origin");
-    var_3.triggerportableradarping = self;
+    var_3.owner = self;
     self.var_12AF1 = var_3;
     self.var_12AF2 = var_3 scripts\mp\entityheadicons::setheadicon(scripts\mp\utility::getotherteam(self.team), "headicon_enemy", (0, 0, 48), 14, 14, 1, 0.01, 0, 1, 1, 0);
     self.var_12AF2.alpha = 0.95;
@@ -178,7 +178,7 @@ func_13A11() {
   level endon("game_ended");
   for(;;) {
     level waittill("emp_update");
-    if(scripts\mp\killstreaks\_emp_common::isemped()) {
+    if(scripts\mp\killstreaks\emp_common::isemped()) {
       self notify("endComLink");
     }
   }

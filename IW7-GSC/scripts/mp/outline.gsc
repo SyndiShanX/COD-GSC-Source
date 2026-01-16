@@ -33,22 +33,22 @@ outlineenableinternal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9 = outlinegenerateuniqueid();
   var_0.outlines[var_9] = var_8;
   outlineaddtogloballist(var_0);
-  var_0A = [];
-  foreach(var_0C in var_8.playersvisibleto) {
-    if(!canoutlineforplayer(var_0C)) {
-      var_8.playersvisibletopending[var_8.playersvisibletopending.size] = var_0C;
+  var_10 = [];
+  foreach(var_12 in var_8.playersvisibleto) {
+    if(!canoutlineforplayer(var_12)) {
+      var_8.playersvisibletopending[var_8.playersvisibletopending.size] = var_12;
       level.outlineidspending[var_9] = var_0;
       continue;
     }
 
-    var_0D = outlinegethighestinfoforplayer(var_0, var_0C);
-    if(!isDefined(var_0D) || var_0D == var_8 || var_0D.priority == var_8.priority) {
-      var_0A[var_0A.size] = var_0C;
+    var_13 = outlinegethighestinfoforplayer(var_0, var_12);
+    if(!isDefined(var_13) || var_13 == var_8 || var_13.priority == var_8.priority) {
+      var_10[var_10.size] = var_12;
     }
   }
 
-  if(var_0A.size > 0) {
-    var_0 _hudoutlineenableforclients(var_0A, var_8.colorindex, var_8.var_525C, var_8.var_6C10);
+  if(var_10.size > 0) {
+    var_0 _hudoutlineenableforclients(var_10, var_8.colorindex, var_8.var_525C, var_8.var_6C10);
   }
 
   return var_9;

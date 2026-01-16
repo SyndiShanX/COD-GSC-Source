@@ -9,7 +9,7 @@ func_79F5(var_0) {
   }
 
   if(level.var_10E6D.group.groups[var_0].size) {
-    level.var_10E6D.group.groups[var_0] = scripts\sp\utility::func_22B9(level.var_10E6D.group.groups[var_0]);
+    level.var_10E6D.group.groups[var_0] = ::scripts\sp\utility::func_22B9(level.var_10E6D.group.groups[var_0]);
   }
 
   return level.var_10E6D.group.groups[var_0];
@@ -433,7 +433,7 @@ func_4F6C(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(isDefined(var_8.isnodeoccupied) || isDefined(var_8.loadstartpointtransients)) {
+    if(isDefined(var_8.enemy) || isDefined(var_8.loadstartpointtransients)) {
       continue;
     }
 
@@ -495,7 +495,7 @@ func_9D11(var_0) {
       }
     }
   } else {
-    return self getpersstat(var_0);
+    return self cansee(var_0);
   }
 
   return 0;
@@ -555,7 +555,7 @@ func_413E() {
   }
 
   self notify("stop_loop");
-  self.var_10E6D.var_4C70.target_getindexoftarget notify("stop_loop");
+  self.var_10E6D.var_4C70.node notify("stop_loop");
   self.var_10E6D.var_4C70 = undefined;
   self.var_10E6D.var_92CC = undefined;
   self.target_alloc = squared(512);
@@ -563,7 +563,7 @@ func_413E() {
 
 func_F321(var_0, var_1, var_2, var_3) {
   self.var_10E6D.var_4C70 = spawnStruct();
-  self.var_10E6D.var_4C70.target_getindexoftarget = var_0;
+  self.var_10E6D.var_4C70.node = var_0;
   self.var_10E6D.var_4C70.var_1FAF = var_1;
   self.var_10E6D.var_4C70.physics_setgravitydynentscalar = var_2;
   self.var_10E6D.var_4C70.func = var_3;
@@ -588,7 +588,7 @@ func_CCD3(var_0) {
     [[var_1]]();
   }
 
-  var_2 = self.var_10E6D.var_4C70.target_getindexoftarget;
+  var_2 = self.var_10E6D.var_4C70.node;
   var_3 = self.var_10E6D.var_4C70.physics_setgravitydynentscalar;
   if(!isarray(self.var_10E6D.var_4C70.var_1FAF)) {
     var_4 = self.var_10E6D.var_4C70.var_1FAF;
@@ -620,11 +620,11 @@ func_CCD4(var_0, var_1, var_2) {
     var_4 = var_3[0];
   }
 
-  self.var_10E6D.var_4C70.target_getindexoftarget notify("stop_loop");
+  self.var_10E6D.var_4C70.node notify("stop_loop");
   if(!isDefined(var_1)) {
-    self.var_10E6D.var_4C70.target_getindexoftarget scripts\sp\anim::func_1EC7(self, var_4);
+    self.var_10E6D.var_4C70.node scripts\sp\anim::func_1EC7(self, var_4);
   } else {
-    self.var_10E6D.var_4C70.target_getindexoftarget scripts\sp\anim::func_1EC8(self, "gravity", var_4, var_2);
+    self.var_10E6D.var_4C70.node scripts\sp\anim::func_1EC8(self, "gravity", var_4, var_2);
   }
 
   self.var_10E6D.var_92CC = undefined;
@@ -1120,7 +1120,7 @@ func_558C() {
   }
 
   foreach(var_5 in level.players) {
-    var_5.setturretnode = 8192;
+    var_5.maxvisibledist = 8192;
     if(var_5 scripts\sp\utility::func_65DF("stealth_enabled")) {
       var_5 scripts\sp\utility::func_65DD("stealth_enabled");
     }
@@ -1145,7 +1145,7 @@ func_623F() {
 
 func_623D(var_0) {
   if(!var_0) {
-    self.setturretnode = 8192;
+    self.maxvisibledist = 8192;
     if(scripts\sp\utility::func_65DF("stealth_enabled") && scripts\sp\utility::func_65DB("stealth_enabled") && self.team == "axis") {
       var_1 = spawnStruct();
       var_1.origin = level.player.origin;
@@ -1216,23 +1216,23 @@ func_CD58(var_0, var_1) {
   var_7 = undefined;
   var_8 = undefined;
   var_9 = undefined;
-  var_0A = undefined;
-  var_0B = isDefined(self.var_1FBB) && isDefined(level.var_EC85[self.var_1FBB]) && isDefined(level.var_EC85[self.var_1FBB][var_1]);
-  if(!var_0B || distance2dsquared(var_3.origin, var_5) > 0.1) {
+  var_10 = undefined;
+  var_11 = isDefined(self.var_1FBB) && isDefined(level.var_EC85[self.var_1FBB]) && isDefined(level.var_EC85[self.var_1FBB][var_1]);
+  if(!var_11 || distance2dsquared(var_3.origin, var_5) > 0.1) {
     scripts\sp\utility::func_F3DC(var_5);
     self.objective_playermask_showto = 8;
     var_6 = scripts\engine\utility::waittill_any_return("goal", "bad_path");
-    var_0B = 0;
+    var_11 = 0;
   } else {
     var_7 = getstartorigin(var_3.origin, var_3.angles, level.var_EC85[self.var_1FBB][var_1]);
     var_8 = getclosestpointonnavmesh(var_7, self);
     if(distance2dsquared(var_7, var_8) > 0.1) {
-      var_0B = 0;
+      var_11 = 0;
     } else {
       var_9 = var_7 + rotatevector(getmovedelta(level.var_EC85[self.var_1FBB][var_1], 0, 1), var_3.angles);
-      var_0A = getclosestpointonnavmesh(var_9, self);
-      if(distance2dsquared(var_9, var_0A) > 0.1) {
-        var_0B = 0;
+      var_10 = getclosestpointonnavmesh(var_9, self);
+      if(distance2dsquared(var_9, var_10) > 0.1) {
+        var_11 = 0;
       } else {
         if(distance2dsquared(var_0, self.origin) < squared(100)) {
           self.var_10E6D.var_C994 = 1;
@@ -1243,11 +1243,11 @@ func_CD58(var_0, var_1) {
     }
   }
 
-  if(var_6 == "goal" && var_0B) {
+  if(var_6 == "goal" && var_11) {
     var_3 scripts\sp\anim::func_1F35(self, var_1);
-    var_0C = getclosestpointonnavmesh(self.origin, self);
-    if(distance2dsquared(self.origin, var_0C) > 0.0001) {
-      self func_80F1(var_0C, self.angles);
+    var_12 = getclosestpointonnavmesh(self.origin, self);
+    if(distance2dsquared(self.origin, var_12) > 0.0001) {
+      self func_80F1(var_12, self.angles);
     }
 
     scripts\sp\utility::func_F3DC(self.origin);

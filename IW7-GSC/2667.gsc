@@ -171,8 +171,9 @@ mpbuildweaponmap() {
             } else {
               level.weaponmapdata[var_4].attachdefaults = strtok(var_8, " ");
             }
-          } else
+          } else {
             level.weaponmapdata[var_4].attachdefaults = strtok(var_8, " ");
+          }
         }
 
         level.weaponmapdata[var_4].selectableattachmentlist = [];
@@ -1139,8 +1140,9 @@ glprox_trygetweaponname(var_0) {
     if(scripts\cp\utility::isaltmodeweapon(var_0)) {
       var_1 = getweaponattachments(var_0);
       var_0 = var_1[0];
-    } else
+    } else {
       var_0 = getweaponbasename(var_0);
+    }
   }
 
   return var_0;
@@ -1238,8 +1240,9 @@ stancerecoilupdate(var_0) {
 
     setrecoilscale();
     return;
-  } else if(var_2 > 0)
+  } else if(var_2 > 0) {
     setrecoilscale(0, var_2);
+  }
   else {
     setrecoilscale();
   }
@@ -1262,8 +1265,9 @@ setrecoilscale(var_0, var_1) {
     }
 
     var_2 = 100 - var_1;
-  } else
+  } else {
     var_2 = 100 - self.recoilscale;
+  }
 
   if(var_2 < 0) {
     var_2 = 0;
@@ -1643,8 +1647,9 @@ placeequipmentfailed(var_0, var_1, var_2, var_3) {
       } else {
         var_4 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"), var_2, self);
       }
-    } else
+    } else {
       var_4 = spawnfx(scripts\engine\utility::getfx("placeEquipmentFailed"), var_2);
+    }
 
     triggerfx(var_4);
     thread placeequipmentfailedcleanup(var_4);
@@ -1994,8 +1999,9 @@ getdamagefromzombietype(var_0) {
     } else {
       return int(min(1000, var_0.maxhealth * 0.1));
     }
-  } else
+  } else {
     return 150;
+  }
 }
 
 applygaseffect(var_0, var_1, var_2, var_3, var_4) {
@@ -2028,8 +2034,9 @@ throwingknifeused(var_0, var_1, var_2) {
     if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(var_3, var_1)) {
       var_1 delete();
       return;
-    } else if(var_2 == "throwingknifec4_mp")
+    } else if(var_2 == "throwingknifec4_mp") {
       throwingknifec4detonate(var_1, var_3, var_0);
+    }
   }
 
   if(isDefined(var_1.giveknifeback)) {
@@ -2273,8 +2280,9 @@ fx_stun_damage(var_0, var_1) {
       var_0.allowpain = 1;
       var_0.stun_hit_time = gettime() + 1000;
       var_0.stunned = 1;
-    } else
+    } else {
       return;
+    }
   } else {
     if(var_0 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
       var_0.scripted_mode = 1;
@@ -3761,8 +3769,9 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         if(var_17.size < var_18) {
           var_17[var_17.size] = var_33;
           var_25[var_25.size] = var_33;
-        } else
+        } else {
           continue;
+        }
 
         continue;
       }
@@ -3771,8 +3780,9 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         if(var_23.size < var_24) {
           var_23[var_23.size] = var_33;
           var_25[var_25.size] = var_33;
-        } else
+        } else {
           continue;
+        }
 
         continue;
       }
@@ -3781,8 +3791,9 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         if(var_19.size < var_20) {
           var_19[var_19.size] = var_33;
           var_25[var_25.size] = var_33;
-        } else
+        } else {
           continue;
+        }
 
         continue;
       }
@@ -3791,8 +3802,9 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         if(var_21.size < var_22) {
           var_21[var_21.size] = var_33;
           var_25[var_25.size] = var_33;
-        } else
+        } else {
           continue;
+        }
 
         continue;
       }
@@ -3801,8 +3813,9 @@ return_weapon_name_with_like_attachments(var_0, var_1, var_2, var_3, var_4) {
         if(var_15.size < var_16) {
           var_15[var_15.size] = var_33;
           var_25[var_25.size] = var_33;
-        } else
+        } else {
           continue;
+        }
 
         continue;
       }
@@ -4388,8 +4401,9 @@ updatetriggerposition() {
       if(isDefined(self.bombsquadmodel)) {
         self.bombsquadmodel.origin = self.origin;
       }
-    } else
+    } else {
       return;
+    }
 
     wait 0.05;
   }
@@ -4599,8 +4613,9 @@ can_upgrade(var_0, var_1) {
       } else {
         return 0;
       }
-    } else if(isDefined(self.pap[var_2]) && self.pap[var_2].lvl == 2)
+    } else if(isDefined(self.pap[var_2]) && self.pap[var_2].lvl == 2) {
       return 0;
+    }
   }
 
   if(scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
@@ -4769,8 +4784,9 @@ watchplayermelee() {
           thread scripts\cp\cp_vo::try_to_play_vo("melee_punch", "zmb_comment_vo", "high", 1, 0, 0, 1, 60);
           thread kung_fu_vo_wait();
         }
-      } else
+      } else {
         thread scripts\cp\cp_vo::try_to_play_vo("melee_miss", "zmb_comment_vo", "high", 1, 0, 0, 1, 20);
+      }
 
       continue;
     }

@@ -34,7 +34,7 @@ func_13B19(var_0) {
   wait(1);
   var_0 setscriptablepartstate("effects", "explode_01", 0);
   var_1 thread scripts\mp\shellshock::func_DAF3();
-  var_0 radiusdamage(var_1.origin, 256, 100, 50, var_1.triggerportableradarping, "MOD_EXPLOSIVE", var_1.weapon_name);
+  var_0 radiusdamage(var_1.origin, 256, 100, 50, var_1.owner, "MOD_EXPLOSIVE", var_1.weapon_name);
   var_2 = var_1.ticks;
   for(var_3 = 0; var_3 < var_2; var_3++) {
     wait(0.5);
@@ -57,7 +57,7 @@ func_13B19(var_0) {
     }
 
     var_1 thread scripts\mp\shellshock::func_DAF3();
-    var_0 radiusdamage(var_1.origin, 256, 40, 20, var_1.triggerportableradarping, "MOD_EXPLOSIVE", var_1.weapon_name);
+    var_0 radiusdamage(var_1.origin, 256, 40, 20, var_1.owner, "MOD_EXPLOSIVE", var_1.weapon_name);
   }
 
   wait(1);
@@ -70,8 +70,8 @@ func_10856(var_0) {
   var_1.angles = var_0.angles;
   var_1 linkto(var_0);
   var_1.objective_position = var_0;
-  var_1.triggerportableradarping = var_0.triggerportableradarping;
-  var_1 setotherent(var_0.triggerportableradarping);
+  var_1.owner = var_0.owner;
+  var_1 setotherent(var_0.owner);
   var_1 thread func_40F3(var_0);
   var_0 hide();
   return var_1;
@@ -82,8 +82,8 @@ func_13A3B() {
 }
 
 func_612B(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
-    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
+  if(isDefined(self.owner) && var_0 != self.owner) {
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
     var_0 notify("destroyed_equipment");
   }
 

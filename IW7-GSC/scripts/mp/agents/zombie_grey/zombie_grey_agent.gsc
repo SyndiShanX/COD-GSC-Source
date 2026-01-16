@@ -24,7 +24,7 @@ func_FAB0() {
   level.agent_definition["zombie_grey"]["setup_func"] = ::setupagent;
   level.agent_funcs["zombie_grey"]["on_killed"] = ::func_C5D1;
   level.agent_funcs["zombie_grey"]["on_damaged"] = ::func_C5CF;
-  level.agent_funcs["zombie_grey"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.agent_funcs["zombie_grey"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.agent_funcs["zombie_grey"]["gametype_on_damage_finished"] = ::func_C5D0;
 }
 
@@ -270,8 +270,8 @@ func_41D9() {
 
 func_C5D1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   scripts\mp\mp_agent::default_on_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
-  foreach(var_0A in level.players) {
-    var_0A scripts\cp\cp_persistence::give_player_xp(1000, 1);
+  foreach(var_10 in level.players) {
+    var_10 scripts\cp\cp_persistence::give_player_xp(1000, 1);
   }
 
   if(isDefined(level.grey_on_killed_func)) {
@@ -396,8 +396,8 @@ func_CD95(var_0, var_1) {
   var_2 delete();
 }
 
-func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = 3.5;
+func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = 3.5;
   if(isDefined(var_1) && var_1 == self) {
     return;
   }
@@ -410,14 +410,14 @@ func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       self notify("stop_regen_health");
       return;
     } else {
-      var_0D = gettime();
+      var_13 = gettime();
       if(isplayer(var_1)) {
         if(!scripts\engine\utility::istrue(self.actually_doing_regen)) {
           scripts\cp\cp_agent_utils::process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, self);
         }
 
-        if(func_FF8A(self, var_1, var_0D)) {
-          var_1.var_D8A2 = var_0D;
+        if(func_FF8A(self, var_1, var_13)) {
+          var_1.var_D8A2 = var_13;
           if(randomint(100) > 80) {
             var_1 thread scripts\cp\cp_vo::try_to_play_vo("nag_ufo_fusefail", "zmb_comment_vo", "low", 3, 0, 0, 1);
           }
@@ -428,12 +428,12 @@ func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     }
   }
 
-  if(isDefined(var_0C) && var_0C == "j_chest_light") {
+  if(isDefined(var_12) && var_12 == "j_chest_light") {
     var_9 = "head";
-    var_3 = int(var_3 * var_0D);
+    var_3 = int(var_3 * var_13);
   } else if(isDefined(var_9) && var_9 == "head" || var_9 == "helmet" || var_9 == "neck") {
     var_9 = "soft";
-    var_3 = int(var_3 / var_0D);
+    var_3 = int(var_3 / var_13);
   }
 
   if(isDefined(var_6) && var_6 == "zmb_imsprojectile_mp" || var_6 == "zmb_fireworksprojectile_mp") {
@@ -441,7 +441,7 @@ func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   var_4 = var_4 | level.idflags_no_knockback;
-  scripts\cp\agents\gametype_zombie::onzombiedamaged(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+  scripts\cp\agents\gametype_zombie::onzombiedamaged(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   if(isDefined(var_3)) {
     if(isplayer(var_2)) {
       if(!isDefined(self.sum_of_recent_damage)) {
@@ -457,8 +457,8 @@ func_C5CF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 }
 
-func_C5D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  scripts\cp\agents\gametype_zombie::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+func_C5D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  scripts\cp\agents\gametype_zombie::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   scripts\aitypes\zombie_grey\behaviors::try_update_mobile_shield(self, var_1);
   scripts\aitypes\zombie_grey\behaviors::try_regen_health(self);
 }
@@ -516,6 +516,6 @@ func_8CAC(var_0) {
       var_0 setscriptablepartstate("health_light", "green");
     }
 
-    var_0 scripts\engine\utility::waittill_any_3("damage", "update_health_light");
+    var_0 scripts\engine\utility::waittill_any("damage", "update_health_light");
   }
 }

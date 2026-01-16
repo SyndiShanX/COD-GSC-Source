@@ -39,7 +39,7 @@ func_13995() {
   scripts\sp\utility::func_9187("sonic", 190, ::func_10409);
   for(;;) {
     var_0 = self getcurrentweapon();
-    if(!isDefined(var_0) || self getweaponrankinfominxp() < 0.5) {
+    if(!isDefined(var_0) || self playerads() < 0.5) {
       wait(0.05);
       continue;
     }
@@ -68,7 +68,7 @@ watchgrenadeusage() {
   for(;;) {
     self waittill("grenade_pullback", var_0);
     self.throwinggrenade = 1;
-    scripts\engine\utility::waittill_any_3("grenade_fire", "weapon_switch_started");
+    scripts\engine\utility::waittill_any("grenade_fire", "weapon_switch_started");
     self.throwinggrenade = 0;
   }
 }
@@ -140,24 +140,24 @@ func_DBDB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   setsaveddvar("r_mbenable", 1);
   setsaveddvar("r_mbRadialOverridePosition", var_0);
   setsaveddvar("r_mbRadialOverridePositionActive", 1);
-  var_0A = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 270);
+  var_10 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 270);
   var_1 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, 0.135848);
-  var_0B = var_1 / 4;
+  var_11 = var_1 / 4;
   var_4 = scripts\engine\utility::ter_op(isDefined(var_4), var_4, -0.107266);
   var_5 = scripts\engine\utility::ter_op(isDefined(var_5), var_5, 0.05);
   var_6 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, 0.5);
-  var_0C = distance2d(level.player.origin, var_0);
-  var_0D = scripts\sp\math::func_C097(var_8, var_0A, var_0C);
-  var_0E = scripts\sp\math::func_6A8E(var_1, var_0B, var_0D);
-  var_0E = clamp(var_0E, 0, 1);
+  var_12 = distance2d(level.player.origin, var_0);
+  var_13 = scripts\sp\math::func_C097(var_8, var_10, var_12);
+  var_14 = scripts\sp\math::func_6A8E(var_1, var_11, var_13);
+  var_14 = clamp(var_14, 0, 1);
   if(!isDefined(var_7)) {
     if(!scripts\common\trace::ray_trace_passed(var_0 + (0, 0, 12), level.player getEye())) {
-      var_0E = var_0E * 0.5;
-      var_0E = clamp(var_0E, 0, 1);
+      var_14 = var_14 * 0.5;
+      var_14 = clamp(var_14, 0, 1);
     }
   }
 
-  setsaveddvar("r_mbradialoverridestrength", var_0E);
+  setsaveddvar("r_mbradialoverridestrength", var_14);
   setsaveddvar("r_mbradialoverrideradius", var_4);
   wait(var_5);
   thread scripts\sp\utility::func_AB9A("r_mbradialoverridestrength", var_9["r_mbradialoverridestrength"], var_6);
@@ -324,25 +324,25 @@ func_734D(var_0, var_1, var_2, var_3) {
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", 0.2);
   var_8 = var_4.size;
   var_9 = var_5.size;
-  var_0A = var_6.size;
-  var_0B = var_4;
-  var_0B = scripts\engine\utility::array_combine(var_0B, var_5);
-  var_0B = scripts\engine\utility::array_combine(var_0B, var_6);
-  var_0C = 0;
-  var_0D = [];
-  var_0E = 8;
-  for(var_7 = 0; var_7 < var_0E; var_7++) {
-    if(isDefined(var_0B[var_7])) {
-      var_0F = scripts\engine\utility::spawn_tag_origin();
-      var_0F.origin = var_0B[var_7].origin;
-      var_0D[var_0D.size] = var_0F;
-      setomnvar("ui_fragreticles_" + var_7 + "_target_ent", var_0F);
+  var_10 = var_6.size;
+  var_11 = var_4;
+  var_11 = scripts\engine\utility::array_combine(var_11, var_5);
+  var_11 = scripts\engine\utility::array_combine(var_11, var_6);
+  var_12 = 0;
+  var_13 = [];
+  var_14 = 8;
+  for(var_7 = 0; var_7 < var_14; var_7++) {
+    if(isDefined(var_11[var_7])) {
+      var_15 = scripts\engine\utility::spawn_tag_origin();
+      var_15.origin = var_11[var_7].origin;
+      var_13[var_13.size] = var_15;
+      setomnvar("ui_fragreticles_" + var_7 + "_target_ent", var_15);
       if(var_7 < var_8) {
         setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 1);
       } else if(var_7 < var_8 + var_9) {
-        if(!isalive(var_0B[var_7])) {
+        if(!isalive(var_11[var_7])) {
           setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 2);
-          var_0F linkto(var_0B[var_7].ent, func_129D(var_0B[var_7].ent), (0, 0, 0), (0, 0, 0));
+          var_15 linkto(var_11[var_7].ent, func_129D(var_11[var_7].ent), (0, 0, 0), (0, 0, 0));
         }
       } else {
         setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 3);
@@ -356,13 +356,13 @@ func_734D(var_0, var_1, var_2, var_3) {
   }
 
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", 4);
-  for(var_7 = 0; var_7 < var_0E; var_7++) {
+  for(var_7 = 0; var_7 < var_14; var_7++) {
     setomnvar("ui_fragreticles_" + var_7 + "_target_ent", undefined);
     setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 0);
   }
 
-  for(var_7 = 0; var_7 < var_0D.size; var_7++) {
-    var_0D[var_7] delete();
+  for(var_7 = 0; var_7 < var_13.size; var_7++) {
+    var_13[var_7] delete();
   }
 }
 
@@ -399,7 +399,7 @@ func_7352(var_0, var_1) {
 
 func_7353() {
   scripts\sp\utility::func_9196(0, 0, 0);
-  scripts\engine\utility::waittill_any_3("frag_outline_display_done", "death");
+  scripts\engine\utility::waittill_any("frag_outline_display_done", "death");
   scripts\sp\utility::func_9193();
 }
 
@@ -522,28 +522,28 @@ getdamageableents(var_0, var_1, var_2, var_3) {
 
   var_9 = getEntArray("grenade", "classname");
   for(var_5 = 0; var_5 < var_9.size; var_5++) {
-    var_0A = var_9[var_5].origin;
-    var_7 = distance(var_0, var_0A);
-    if(var_7 < var_1 && !var_2 || func_13C7E(var_0, var_0A, var_3, var_9[var_5])) {
+    var_10 = var_9[var_5].origin;
+    var_7 = distance(var_0, var_10);
+    if(var_7 < var_1 && !var_2 || func_13C7E(var_0, var_10, var_3, var_9[var_5])) {
       var_8 = spawnStruct();
       var_8.isplayer = 0;
       var_8.var_9D26 = 0;
       var_8.issplitscreen = var_9[var_5];
-      var_8.damagecenter = var_0A;
+      var_8.damagecenter = var_10;
       var_4[var_4.size] = var_8;
     }
   }
 
-  var_0B = getEntArray("destructable", "targetname");
-  for(var_5 = 0; var_5 < var_0B.size; var_5++) {
-    var_0A = var_0B[var_5].origin;
-    var_7 = distance(var_0, var_0A);
-    if(var_7 < var_1 && !var_2 || func_13C7E(var_0, var_0A, var_3, var_0B[var_5])) {
+  var_11 = getEntArray("destructable", "targetname");
+  for(var_5 = 0; var_5 < var_11.size; var_5++) {
+    var_10 = var_11[var_5].origin;
+    var_7 = distance(var_0, var_10);
+    if(var_7 < var_1 && !var_2 || func_13C7E(var_0, var_10, var_3, var_11[var_5])) {
       var_8 = spawnStruct();
       var_8.isplayer = 0;
       var_8.var_9D26 = 1;
-      var_8.issplitscreen = var_0B[var_5];
-      var_8.damagecenter = var_0A;
+      var_8.issplitscreen = var_11[var_5];
+      var_8.damagecenter = var_10;
       var_4[var_4.size] = var_8;
     }
   }
@@ -614,7 +614,7 @@ func_13B17() {
   for(;;) {
     self waittill("missile_fire", var_0, var_1);
     if(getweaponbasename(var_1) == "iw7_chargeshot") {
-      var_0.triggerportableradarping = self;
+      var_0.owner = self;
       var_0 thread func_3D28();
     }
   }
@@ -625,8 +625,8 @@ func_3D27() {
   var_0 = 50;
   var_1 = self.origin;
   for(;;) {
-    var_2 = scripts\engine\utility::get_enemy_team(self.triggerportableradarping.team);
-    var_3 = scripts\common\trace::sphere_trace_get_all_results(var_1, self.origin, var_0, self.triggerportableradarping, scripts\common\trace::create_character_contents());
+    var_2 = scripts\engine\utility::get_enemy_team(self.owner.team);
+    var_3 = scripts\common\trace::sphere_trace_get_all_results(var_1, self.origin, var_0, self.owner, scripts\common\trace::create_character_contents());
     foreach(var_5 in var_3) {
       if(isDefined(var_5["entity"]) && isai(var_5["entity"])) {
         var_5["entity"] thread lib_0E25::func_5772(self, var_0);
@@ -641,11 +641,11 @@ func_3D27() {
 func_3D28() {
   self endon("death");
   var_0 = 32;
-  var_1 = scripts\engine\utility::get_enemy_team(self.triggerportableradarping.team);
+  var_1 = scripts\engine\utility::get_enemy_team(self.owner.team);
   wait(0.15);
   var_2 = self.origin;
   for(;;) {
-    var_3 = scripts\common\trace::sphere_trace_get_all_results(var_2, self.origin, var_0, self.triggerportableradarping, scripts\common\trace::create_character_contents());
+    var_3 = scripts\common\trace::sphere_trace_get_all_results(var_2, self.origin, var_0, self.owner, scripts\common\trace::create_character_contents());
     foreach(var_5 in var_3) {
       if(!isDefined(var_5["entity"]) || !isai(var_5["entity"])) {
         continue;

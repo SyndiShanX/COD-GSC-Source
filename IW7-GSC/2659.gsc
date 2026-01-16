@@ -182,8 +182,9 @@ try_take_player_currency(var_0) {
   if(player_has_enough_currency(var_0)) {
     take_player_currency(var_0);
     return 1;
-  } else
+  } else {
     return 0;
+  }
 }
 
 is_unlocked(var_0) {
@@ -778,8 +779,9 @@ get_weapon_passive_xp_scale(var_0) {
   if(isDefined(var_0.weapon_passive_xp_multiplier) && scripts\engine\utility::is_true(var_0.kill_with_extra_xp_passive)) {
     var_0.kill_with_extra_xp_passive = 0;
     return var_0.weapon_passive_xp_multiplier;
-  } else
+  } else {
     return 1;
+  }
 }
 
 give_player_xp(var_0, var_1) {

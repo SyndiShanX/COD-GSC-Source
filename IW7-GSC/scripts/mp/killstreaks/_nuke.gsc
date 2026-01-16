@@ -13,7 +13,7 @@ init() {
   level._effect["mons_laser_flash"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_initial_flash.vfx");
   level._effect["mons_laser_smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_dust_wave.vfx");
   level._effect["mons_screen_ash"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_cam_att_ashfall.vfx");
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("nuke", ::func_128F0);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("nuke", ::func_128F0);
   setdvarifuninitialized("scr_nukeTimer", 10);
   setdvarifuninitialized("scr_nukeCancelMode", 0);
   level.var_C1CD = getdvarint("scr_nukeTimer");
@@ -79,17 +79,17 @@ func_108E6() {
   var_7 = getmonsflightpath(var_0, var_2, var_3, undefined, var_4, var_5, var_6);
   var_8 = var_0 * (1, 1, 0);
   var_9 = var_8 + (0, 0, var_4);
-  var_0A = var_7["startPoint"];
-  var_0B = vectortoangles(var_9 - var_0A);
-  var_0C = spawn("script_model", var_0A);
-  var_0C setModel("veh_mil_air_ca_olympus_mons_mp");
-  var_0C.angles = var_0B;
-  var_0C.team = self.team;
-  var_0C.triggerportableradarping = self;
-  var_0C.var_C96C = var_9;
-  var_0C setCanDamage(0);
-  var_0C setscriptablepartstate("body", "hide", 0);
-  return var_0C;
+  var_10 = var_7["startPoint"];
+  var_11 = vectortoangles(var_9 - var_10);
+  var_12 = spawn("script_model", var_10);
+  var_12 setModel("veh_mil_air_ca_olympus_mons_mp");
+  var_12.angles = var_11;
+  var_12.team = self.team;
+  var_12.owner = self;
+  var_12.var_C96C = var_9;
+  var_12 setCanDamage(0);
+  var_12 setscriptablepartstate("body", "hide", 0);
+  return var_12;
 }
 
 getmonsflightpath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -105,15 +105,15 @@ getmonsflightpath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   var_9 = var_9 + (0, 0, var_4);
-  var_0A = length(var_8 - var_9);
-  var_0B = var_0A / var_5;
-  var_0A = abs(var_0A / 2 + var_6);
-  var_0C = var_0A / var_5;
-  var_0D["startPoint"] = var_8;
-  var_0D["endPoint"] = var_9;
-  var_0D["bombTime"] = var_0C;
-  var_0D["flyTime"] = var_0B;
-  return var_0D;
+  var_10 = length(var_8 - var_9);
+  var_11 = var_10 / var_5;
+  var_10 = abs(var_10 / 2 + var_6);
+  var_12 = var_10 / var_5;
+  var_13["startPoint"] = var_8;
+  var_13["endPoint"] = var_9;
+  var_13["bombTime"] = var_12;
+  var_13["flyTime"] = var_11;
+  return var_13;
 }
 
 func_1395B(var_0) {
@@ -291,7 +291,7 @@ getpathend() {
 
 func_3884(var_0) {
   level waittill("game_ended");
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect");
   func_C1B5();
   level.nukeincoming = undefined;
   level notify("nuke_cancelled");
@@ -431,7 +431,7 @@ func_C1B3(var_0, var_1) {
     }
   } else {
     var_2 = isDefined(level.var_C1C5.player) && var_0 == level.var_C1C5.player;
-    var_3 = isDefined(level.var_C1C5.player) && isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping == level.var_C1C5.player;
+    var_3 = isDefined(level.var_C1C5.player) && isDefined(var_0.owner) && var_0.owner == level.var_C1C5.player;
     if(var_2 || var_3) {
       return 0;
     }
@@ -513,7 +513,7 @@ func_F7BC(var_0) {
 func_52C5(var_0) {
   var_1 = "nuke_mp";
   var_2 = level.var_1655;
-  var_3 = scripts\mp\perks\_perkfunctions::func_7D96();
+  var_3 = scripts\mp\perks\perkfunctions::func_7D96();
   var_4 = undefined;
   if(isDefined(var_2) && isDefined(var_3)) {
     var_4 = scripts\engine\utility::array_combine_unique(var_2, var_3);

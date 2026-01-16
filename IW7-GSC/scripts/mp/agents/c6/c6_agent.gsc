@@ -74,7 +74,7 @@ func_899D() {
   for(;;) {
     self waittill("enemy");
     for(;;) {
-      if(isDefined(self.isnodeoccupied)) {
+      if(isDefined(self.enemy)) {
         self.var_6571 = gettime() + 1000;
       } else if(isDefined(self.var_6571)) {
         if(gettime() > self.var_6571) {
@@ -91,9 +91,9 @@ func_899D() {
 func_11570() {
   var_0 = 70;
   var_1 = 15;
-  if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_0 = self.isnodeoccupied.var_18F4;
-    var_1 = self.isnodeoccupied.var_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
   var_2 = var_0 * randomfloatrange(0.25, 0.35);
@@ -102,48 +102,48 @@ func_11570() {
   var_5 = randomfloatrange(var_4, var_3);
   var_6 = anglestoright(self.angles);
   var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
-  var_8 = self.isnodeoccupied.origin + var_7;
+  var_8 = self.enemy.origin + var_7;
   return var_8;
 }
 
 func_1157B() {
   var_0 = 70;
   var_1 = 15;
-  if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_0 = self.isnodeoccupied.var_18F4;
-    var_1 = self.isnodeoccupied.var_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
   var_2 = var_0 * randomfloatrange(0.65, 0.75);
   var_3 = var_1 * 0.75;
   var_4 = anglestoright(self.angles);
   var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
-  var_6 = self.isnodeoccupied.origin + var_5;
+  var_6 = self.enemy.origin + var_5;
   return var_6;
 }
 
 func_1156F() {
   var_0 = 70;
   var_1 = 15;
-  if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_0 = self.isnodeoccupied.var_18F4;
-    var_1 = self.isnodeoccupied.var_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
   var_2 = var_0 * randomfloatrange(0.65, 0.75);
   var_3 = var_1 * -0.75;
   var_4 = anglestoright(self.angles);
   var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
-  var_6 = self.isnodeoccupied.origin + var_5;
+  var_6 = self.enemy.origin + var_5;
   return var_6;
 }
 
 func_11559() {
   var_0 = 70;
   var_1 = 15;
-  if(isDefined(self.isnodeoccupied.var_18F4)) {
-    var_0 = self.isnodeoccupied.var_18F4;
-    var_1 = self.isnodeoccupied.var_18F9;
+  if(isDefined(self.enemy.var_18F4)) {
+    var_0 = self.enemy.var_18F4;
+    var_1 = self.enemy.var_18F9;
   }
 
   var_2 = var_0 * randomfloatrange(0.65, 0.75);
@@ -152,12 +152,12 @@ func_11559() {
   var_5 = randomfloatrange(var_4, var_3);
   var_6 = anglestoright(self.angles);
   var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
-  var_8 = self.isnodeoccupied.origin + var_7;
+  var_8 = self.enemy.origin + var_7;
   return var_8;
 }
 
 func_11562() {
-  var_0 = self.isnodeoccupied gettagorigin("j_head");
+  var_0 = self.enemy gettagorigin("j_head");
   return var_0;
 }
 

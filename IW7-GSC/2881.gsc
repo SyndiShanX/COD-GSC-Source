@@ -62,8 +62,9 @@ poll_for_found() {
     if(func_3DAD()) {
       func_E041();
     }
-  } else
+  } else {
     return;
+  }
 
   while(!func_3DAD()) {
     wait 0.05;

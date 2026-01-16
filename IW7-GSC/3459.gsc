@@ -12,7 +12,7 @@ setup_callbacks() {
   level.agent_funcs["squadmate"] = level.agent_funcs["player"];
   level.agent_funcs["squadmate"]["think"] = ::squadmate_agent_think;
   level.agent_funcs["squadmate"]["on_killed"] = ::on_agent_squadmate_killed;
-  level.agent_funcs["squadmate"]["on_damaged"] = scripts\mp\agents\agents::on_agent_player_damaged;
+  level.agent_funcs["squadmate"]["on_damaged"] = ::scripts\mp\agents\agents::on_agent_player_damaged;
   level.agent_funcs["squadmate"]["gametype_update"] = ::no_gametype_update;
 }
 
@@ -69,8 +69,9 @@ usesquadmate(var_0) {
     var_4 setModel("mp_fullbody_synaptic_1");
     var_4 detach(var_4.headmodel);
     var_4.headmodel = undefined;
-  } else
+  } else {
     var_4 scripts\mp\perks\perkfunctions::setlightarmor();
+  }
 
   var_4 scripts\mp\utility\game::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
   return 1;

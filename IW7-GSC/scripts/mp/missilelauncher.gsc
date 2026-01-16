@@ -103,7 +103,7 @@ func_10FAD() {
   func_98D5();
   for(;;) {
     wait(0.05);
-    if(self getweaponrankinfominxp() < 0.95) {
+    if(self playerads() < 0.95) {
       resetmissilelauncherlocking();
       continue;
     }
@@ -239,8 +239,8 @@ func_17D0(var_0) {
   }
 
   var_1 = var_0;
-  if(isDefined(var_0.triggerportableradarping) && !scripts\mp\utility::func_9EF0(var_0)) {
-    var_1 = var_0.triggerportableradarping;
+  if(isDefined(var_0.owner) && !scripts\mp\utility::func_9EF0(var_0)) {
+    var_1 = var_0.owner;
   }
 
   var_1 setclientomnvar("ui_killstreak_missile_warn", 1);
@@ -252,8 +252,8 @@ func_E12E(var_0) {
   }
 
   var_1 = var_0;
-  if(isDefined(var_0.triggerportableradarping) && !scripts\mp\utility::func_9EF0(var_0)) {
-    var_1 = var_0.triggerportableradarping;
+  if(isDefined(var_0.owner) && !scripts\mp\utility::func_9EF0(var_0)) {
+    var_1 = var_0.owner;
   }
 
   var_1 setclientomnvar("ui_killstreak_missile_warn", 0);
@@ -346,11 +346,11 @@ stingtargstruct_getinreticle() {
         var_7 = self.inreticlesortedids[var_2];
         var_8 = self.inreticlesortedids[var_6];
         var_9 = self.inreticledistssqr[var_7];
-        var_0A = self.inreticledistssqr[var_8];
-        if(var_0A < var_9) {
-          var_0B = var_7;
+        var_10 = self.inreticledistssqr[var_8];
+        if(var_10 < var_9) {
+          var_11 = var_7;
           self.inreticlesortedids[var_2] = var_8;
-          self.inreticlesortedids[var_6] = var_0B;
+          self.inreticlesortedids[var_6] = var_11;
         }
       }
     }
@@ -393,8 +393,8 @@ stingtargstruct_getinlos() {
     return;
   }
 
-  var_0A = self.target getpointinbounds(-1, 0, 0);
-  var_8 = scripts\common\trace::ray_trace(var_0, var_0A, var_2, var_1, 0);
+  var_10 = self.target getpointinbounds(-1, 0, 0);
+  var_8 = scripts\common\trace::ray_trace(var_0, var_10, var_2, var_1, 0);
   if(var_8["fraction"] == 1) {
     self.inlosid = 0;
     return;

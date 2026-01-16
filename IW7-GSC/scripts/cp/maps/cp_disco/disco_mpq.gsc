@@ -189,20 +189,20 @@ p2t1_1_destroy_cages() {
   wait(10);
   var_3 rat_cage_kung_fu_zombies();
   var_9 = spawnfx(level._effect["locker_key"], var_3.origin + (0, 0, 32), anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_0A = scripts\engine\utility::spawn_tag_origin(var_3.origin + (0, 0, 32), var_3.angles);
+  var_10 = scripts\engine\utility::spawn_tag_origin(var_3.origin + (0, 0, 32), var_3.angles);
   wait(0.2);
   triggerfx(var_9);
-  var_0A makeusable(1);
-  var_0A setusefov(60);
-  var_0A setuserange(50);
-  var_0A waittill("trigger", var_0B);
-  if(isDefined(var_0B) && isplayer(var_0B)) {
-    var_0B thread scripts\cp\cp_vo::try_to_play_vo("pam_collect_lockerkey", "disco_comment_vo");
-    var_0B thread scripts\cp\cp_vo::add_to_nag_vo("missing_item_misc", "disco_comment_vo", 240, 120, 4, 1);
+  var_10 makeusable(1);
+  var_10 setusefov(60);
+  var_10 setuserange(50);
+  var_10 waittill("trigger", var_11);
+  if(isDefined(var_11) && isplayer(var_11)) {
+    var_11 thread scripts\cp\cp_vo::try_to_play_vo("pam_collect_lockerkey", "disco_comment_vo");
+    var_11 thread scripts\cp\cp_vo::add_to_nag_vo("missing_item_misc", "disco_comment_vo", 240, 120, 4, 1);
   }
 
   level scripts\cp\utility::set_quest_icon(14);
-  var_0A delete();
+  var_10 delete();
   var_9 delete();
   scripts\engine\utility::flag_set("skq_p2t1_2");
 }
@@ -399,14 +399,14 @@ build_path_network(var_0, var_1, var_2) {
     var_5 = sortbydistance(var_5, var_3[var_3.size - 1]);
     var_8 = [];
     var_9 = undefined;
-    foreach(var_0B in var_5) {
-      if(var_4 && var_0B == var_5[0] || var_0B == var_6) {
+    foreach(var_11 in var_5) {
+      if(var_4 && var_11 == var_5[0] || var_11 == var_6) {
         continue;
       }
 
-      var_8 = var_2 findpath(var_3[var_3.size - 1], var_0B.origin, 1, 1);
-      if(distance2dsquared(var_0B.origin, var_8[var_8.size - 1]) <= 4096) {
-        var_9 = var_0B;
+      var_8 = var_2 findpath(var_3[var_3.size - 1], var_11.origin, 1, 1);
+      if(distance2dsquared(var_11.origin, var_8[var_8.size - 1]) <= 4096) {
+        var_9 = var_11;
         break;
       }
     }
@@ -423,8 +423,8 @@ build_path_network(var_0, var_1, var_2) {
 
     var_8 = [];
     var_8[var_8.size] = var_9.origin;
-    var_0D = scripts\engine\utility::getstruct(var_9.target, "targetname");
-    var_8[var_8.size] = var_0D.origin;
+    var_13 = scripts\engine\utility::getstruct(var_9.target, "targetname");
+    var_8[var_8.size] = var_13.origin;
     var_3 = scripts\engine\utility::array_combine(var_3, var_8);
     wait(0.05);
   }
@@ -443,33 +443,33 @@ rat_follow_path(var_0, var_1) {
       var_7 = floor(var_5 / var_6);
       for(var_8 = 0; var_8 < var_7; var_8++) {
         var_9 = vectortoangles(var_4 - self.origin);
-        var_0A = self.origin + anglesToForward(var_9) * var_6;
-        var_0A = scripts\engine\utility::drop_to_ground(var_0A, 50, -100);
-        var_5 = distance(self.origin, var_0A);
-        var_0B = var_5 / var_2;
-        if(var_0B <= 0.05) {
-          var_0B = 0.05;
+        var_10 = self.origin + anglesToForward(var_9) * var_6;
+        var_10 = scripts\engine\utility::drop_to_ground(var_10, 50, -100);
+        var_5 = distance(self.origin, var_10);
+        var_11 = var_5 / var_2;
+        if(var_11 <= 0.05) {
+          var_11 = 0.05;
         }
 
         var_9 = (var_9[0], var_9[1] + 90, var_9[2]);
         self rotateto(var_9, 0.05);
-        self moveto(var_0A, var_0B);
-        wait(var_0B);
+        self moveto(var_10, var_11);
+        wait(var_11);
       }
     }
 
     var_5 = distance(self.origin, var_4);
-    var_0C = self.origin - var_4;
-    var_0D = vectortoangles(var_0C);
-    var_0B = var_5 / var_2;
-    if(var_0B <= 0) {
-      var_0B = 0.1;
+    var_12 = self.origin - var_4;
+    var_13 = vectortoangles(var_12);
+    var_11 = var_5 / var_2;
+    if(var_11 <= 0) {
+      var_11 = 0.1;
     }
 
-    var_0D = (var_0D[0], var_0D[1] - 90, var_0D[2]);
-    self rotateto(var_0D, 0.1);
-    self moveto(var_4, var_0B);
-    wait(var_0B);
+    var_13 = (var_13[0], var_13[1] - 90, var_13[2]);
+    self rotateto(var_13, 0.1);
+    self moveto(var_4, var_11);
+    wait(var_11);
   }
 
   self stoploopsound("rat_scurry_follow_lp");
@@ -959,7 +959,7 @@ toggle_symbols_for_players() {
       var_1 thread determine_symbol_visibility();
     }
 
-    level scripts\engine\utility::waittill_any_3("rat_king_eye_activated", "rat_king_eye_deactivated", "connected");
+    level scripts\engine\utility::waittill_any("rat_king_eye_activated", "rat_king_eye_deactivated", "connected");
   }
 }
 
@@ -1075,8 +1075,8 @@ p2t2_3_poster_puzzle() {
   }
 
   var_9 = scripts\engine\utility::getstructarray("phonebooth", "script_noteworthy");
-  foreach(var_0B in var_9) {
-    var_0B.quest_state = 0;
+  foreach(var_11 in var_9) {
+    var_11.quest_state = 0;
   }
 
   scripts\cp\maps\cp_disco\phonebooth::update_all_phonebooth_scriptable_states();
@@ -1086,12 +1086,12 @@ p2t2_3_poster_puzzle() {
   level thread scripts\cp\cp_vo::remove_from_nag_vo("missing_item_misc");
   var_1.poster setModel("cp_disco_poster_nightmare_summer_torn");
   var_1.poster show();
-  var_0D = scripts\engine\utility::getstruct("nade_toss_point", "targetname");
-  var_0E = spawn("script_model", var_0D.origin);
-  var_0E setModel("zmb_rat");
-  var_0E setCanDamage(1);
-  var_0E waittill("damage", var_0F, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18);
-  var_0E delete();
+  var_13 = scripts\engine\utility::getstruct("nade_toss_point", "targetname");
+  var_14 = spawn("script_model", var_13.origin);
+  var_14 setModel("zmb_rat");
+  var_14 setCanDamage(1);
+  var_14 waittill("damage", var_15, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18);
+  var_14 delete();
   scripts\engine\utility::flag_set("skq_p2t2_4");
 }
 
@@ -1121,17 +1121,17 @@ watch_for_spotlight_power(var_0) {
   }
 
   var_6 = scripts\engine\utility::getstruct("spotlight_x_marker", "targetname");
-  var_0A = undefined;
+  var_10 = undefined;
   if(isDefined(var_6)) {
     playsoundatpos((-1096, 3287, 1222), "place_flyer_on_spotlight");
-    var_0A = spawnfx(level._effect["spotlight_x"], var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
+    var_10 = spawnfx(level._effect["spotlight_x"], var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
     wait(0.1);
-    triggerfx(var_0A);
+    triggerfx(var_10);
   }
 
   scripts\engine\utility::flag_wait("skq_p2t2_4");
-  if(isDefined(var_0A)) {
-    var_0A delete();
+  if(isDefined(var_10)) {
+    var_10 delete();
   }
 
   var_0.setminimap setModel(var_1);
@@ -1238,12 +1238,12 @@ p2t2_5_rat_king_puzzle() {
 solve_word_logic(var_0) {
   level endon("game_ended");
   var_1 = [];
-  var_1[0] = scripts\engine\utility::getstruct("letter_puzzle_solve_struct", "targetname");
+  var_1[0] = ::scripts\engine\utility::getstruct("letter_puzzle_solve_struct", "targetname");
   level.bchartoggle = 0;
   level.cur_puzzle_letter = undefined;
   level.rooftopcypherglyphs = [];
   while(isDefined(var_1[var_1.size - 1].target)) {
-    var_1[var_1.size] = scripts\engine\utility::getstruct(var_1[var_1.size - 1].target, "targetname");
+    var_1[var_1.size] = ::scripts\engine\utility::getstruct(var_1[var_1.size - 1].target, "targetname");
     wait(0.05);
   }
 
@@ -1266,32 +1266,32 @@ solve_word_logic(var_0) {
       wait_for_wave_change(1);
     }
 
-    var_0B = 0;
+    var_11 = 0;
     var_2 = 0;
-    var_0C = undefined;
-    var_0D = [];
+    var_12 = undefined;
+    var_13 = [];
     var_3 = [];
-    var_0E = var_5[var_6];
+    var_14 = var_5[var_6];
     if(!var_7 && randomint(101) == 100) {
       var_7 = 1;
-      var_0E = "savagemadethis";
+      var_14 = "savagemadethis";
     }
 
     for(;;) {
-      var_0F = getsubstr(var_0E, var_0B, var_0B + 1);
-      if(!isDefined(var_0F) || var_0F == "") {
+      var_15 = getsubstr(var_14, var_11, var_11 + 1);
+      if(!isDefined(var_15) || var_15 == "") {
         var_2 = 1;
         break;
       } else {
-        if(var_0B != 0) {
-          level.cur_puzzle_letter = var_0F;
+        if(var_11 != 0) {
+          level.cur_puzzle_letter = var_15;
           level.bchartoggle = 1;
-          level waittill("puzzle_letter_shot", var_0C);
-          if(var_0C != var_0F) {
-            playsoundatpos(var_1[var_0B].origin, "mpq_fail_buzzer");
+          level waittill("puzzle_letter_shot", var_12);
+          if(var_12 != var_15) {
+            playsoundatpos(var_1[var_11].origin, "mpq_fail_buzzer");
             var_4++;
             var_6++;
-            foreach(var_11 in var_0D) {
+            foreach(var_11 in var_13) {
               var_11 delete();
             }
 
@@ -1300,16 +1300,16 @@ solve_word_logic(var_0) {
           }
         }
 
-        var_0D[var_0B] = spawnfx(level._effect["magnet_alphabet_" + var_0F], var_1[var_0B].origin, anglesToForward(var_1[var_0B].angles), anglestoup(var_1[var_0B].angles));
+        var_13[var_11] = spawnfx(level._effect["magnet_alphabet_" + var_15], var_1[var_11].origin, anglesToForward(var_1[var_11].angles), anglestoup(var_1[var_11].angles));
         wait(0.1);
-        triggerfx(var_0D[var_0B]);
+        triggerfx(var_13[var_11]);
       }
 
-      var_0B++;
+      var_11++;
     }
 
     if(var_2) {
-      level thread delaydeleteletters(var_0D);
+      level thread delaydeleteletters(var_13);
     }
   }
 
@@ -1374,9 +1374,9 @@ setup_cipher_glyphs() {
         var_6 = var_4;
         var_4.current_letter = var_8;
       } else {
-        for(var_0B = var_9; var_0B < 26; var_0B++) {
-          if(var_2[var_0B] != var_8) {
-            var_4.current_letter = var_2[var_0B];
+        for(var_11 = var_9; var_11 < 26; var_11++) {
+          if(var_2[var_11] != var_8) {
+            var_4.current_letter = var_2[var_11];
             var_9++;
             break;
           } else {
@@ -1385,14 +1385,14 @@ setup_cipher_glyphs() {
         }
       }
 
-      var_0C = spawnfx(level._effect["cipher_alphabet_" + var_4.current_letter], var_4.origin + anglesToForward(var_4.angles + (0, 90, 0)) * -1, anglesToForward(var_4.angles), anglestoup(var_4.angles));
-      var_7[var_7.size] = var_0C;
+      var_12 = spawnfx(level._effect["cipher_alphabet_" + var_4.current_letter], var_4.origin + anglesToForward(var_4.angles + (0, 90, 0)) * -1, anglesToForward(var_4.angles), anglestoup(var_4.angles));
+      var_7[var_7.size] = var_12;
     }
 
     level.rooftopcypherglyphs = var_7;
     wait(0.1);
-    foreach(var_0C in var_7) {
-      triggerfx(var_0C);
+    foreach(var_12 in var_7) {
+      triggerfx(var_12);
     }
 
     var_4 = undefined;
@@ -1411,8 +1411,8 @@ setup_cipher_glyphs() {
     var_0 = sortbydistance(var_0, var_4);
     var_12 = var_0[0].current_letter;
     level notify("puzzle_letter_shot", var_12);
-    foreach(var_0C in var_7) {
-      var_0C delete();
+    foreach(var_12 in var_7) {
+      var_12 delete();
     }
   }
 }
@@ -1754,14 +1754,14 @@ p2t3_0_missing_reel() {
 
   scripts\cp\utility::play_bink_video("MissingReel", 8, 1);
   clear_existing_enemies();
-  var_0A = 0;
+  var_10 = 0;
   foreach(var_3 in level.players) {
     if(var_3 scripts\cp\utility::isteleportenabled()) {
       var_3 scripts\cp\utility::allow_player_teleport(0);
     }
 
-    thread missing_reel_pickup_players(var_5[var_0A], var_3);
-    var_0A++;
+    thread missing_reel_pickup_players(var_5[var_10], var_3);
+    var_10++;
   }
 
   thread missing_reel_fire_fx(var_7);
@@ -1857,10 +1857,10 @@ spawn_missing_reel_wave(var_0) {
         }
 
         var_9 = scripts\engine\utility::drop_to_ground(var_8.origin, 30, -100);
-        var_0A = spawnStruct();
-        var_0A.origin = var_9;
-        var_0B = var_0A scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie", 1);
-        var_1[var_1.size] = var_0B;
+        var_10 = spawnStruct();
+        var_10.origin = var_9;
+        var_11 = var_10 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie", 1);
+        var_1[var_1.size] = var_11;
         scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(1);
         var_2++;
         var_6--;
@@ -1869,15 +1869,15 @@ spawn_missing_reel_wave(var_0) {
   }
 
   for(;;) {
-    var_0E = 1;
-    foreach(var_0B in var_1) {
-      if(isDefined(var_0B) && isalive(var_0B)) {
-        var_0E = 0;
+    var_14 = 1;
+    foreach(var_11 in var_1) {
+      if(isDefined(var_11) && isalive(var_11)) {
+        var_14 = 0;
         break;
       }
     }
 
-    if(var_0E) {
+    if(var_14) {
       break;
     }
 
@@ -2367,15 +2367,15 @@ mpq_spawn_special_wave(var_0, var_1, var_2, var_3, var_4) {
     playFX(level._effect[var_3], self.origin);
   }
 
-  var_0A = getrandomnavpoints(self.origin, 1024, var_1);
+  var_10 = getrandomnavpoints(self.origin, 1024, var_1);
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(var_1);
   wait(2);
-  var_0B = skeleton_spawner(var_0A, var_0, var_4);
+  var_11 = skeleton_spawner(var_10, var_0, var_4);
   if(isDefined(var_4)) {
-    return var_0B;
+    return var_11;
   }
 
-  wait_for_skeleton_death_or_timeout(var_0B, 300);
+  wait_for_skeleton_death_or_timeout(var_11, 300);
   self.finished_final_part = 1;
   if(var_5) {
     level.spawndelayoverride = undefined;
@@ -2512,7 +2512,7 @@ skeleton_arrival_cowbell(var_0) {
   var_1 = (0, 0, -11);
   var_2 = spawnfx(level._effect["superslasher_summon_zombie_portal"], var_0 + var_1, (0, 0, 1), (1, 0, 0));
   triggerfx(var_2);
-  scripts\engine\utility::waittill_any_3("death", "intro_vignette_done");
+  scripts\engine\utility::waittill_any("death", "intro_vignette_done");
   var_2 delete();
 }
 

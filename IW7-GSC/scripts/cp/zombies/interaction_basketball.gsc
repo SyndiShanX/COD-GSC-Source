@@ -98,7 +98,7 @@ setup_basketball_game() {
 
 move_hoop(var_0, var_1) {
   if(scripts\engine\utility::istrue(var_1)) {
-    level scripts\engine\utility::waittill_any_3("power_on", var_0.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
   }
 
   wait(randomintrange(1, 4));
@@ -107,7 +107,7 @@ move_hoop(var_0, var_1) {
   for(;;) {
     if(scripts\engine\utility::istrue(var_1) && var_0.powered_on == 0) {
       self moveto(var_2, 2);
-      level scripts\engine\utility::waittill_any_3("power_on", var_0.power_area + " power_on");
+      level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
     }
 
     self moveto(var_3[0].origin, 4);
@@ -243,7 +243,7 @@ func_28BA(var_0, var_1, var_2) {
   wait(1);
   var_0 setclientomnvar("zombie_bball_game_" + var_2 + "_score", 0);
   var_0 setclientomnvar("zombie_arcade_game_ticket_earned", 0);
-  var_0 scripts\engine\utility::waittill_any_3("bball_timer_expired");
+  var_0 scripts\engine\utility::waittill_any("bball_timer_expired");
   var_1.basketball_game_music scripts\engine\utility::delaycall(1, ::stoploopsound);
   var_1.basketball_game_music scripts\engine\utility::delaycall(1, ::playsound, "mus_arcade_basketball_game_end");
   var_0 setclientomnvar("zombie_arcade_game_time", -1);

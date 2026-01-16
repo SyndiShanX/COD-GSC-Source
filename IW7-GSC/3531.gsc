@@ -163,8 +163,8 @@ func_F673() {
   var_2 = self energy_getrestorerate(var_0);
   var_3 = self energy_getresttimems(var_0);
   self energy_setmax(var_0, 140);
-  self goalflag(var_0, 600);
-  self goal_type(var_0, 500);
+  self energy_setrestorerate(var_0, 600);
+  self energy_setresttimems(var_0, 500);
   thread func_E2DE(var_1, var_2, var_3);
 }
 
@@ -174,11 +174,11 @@ func_E2DE(var_0, var_1, var_2) {
   self waittill("restore_old_values");
   var_3 = 0;
   self energy_setmax(var_3, var_0);
-  self goalflag(var_3, 1000);
-  self goal_type(var_3, 0);
+  self energy_setrestorerate(var_3, 1000);
+  self energy_setresttimems(var_3, 0);
   wait 0.5;
-  self goalflag(var_3, var_1);
-  self goal_type(var_3, var_2);
+  self energy_setrestorerate(var_3, var_1);
+  self energy_setresttimems(var_3, var_2);
 }
 
 func_13285() {

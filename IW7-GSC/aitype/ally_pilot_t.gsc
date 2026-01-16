@@ -11,7 +11,7 @@ main() {
   self.subclass = "regular";
   self.accuracy = 0.2;
   self.health = 150;
-  self.objective_team = lib_0A2F::func_7BEB();
+  self.grenadeweapon = lib_0A2F::func_7BEB();
   self.objective_state = 1;
   self.secondaryweapon = "iw7_fhr+reflexsmg+silencersmg";
   self.var_101B4 = "";
@@ -22,7 +22,7 @@ main() {
     self func_82DB(768, 1024);
   }
 
-  self.var_394 = "iw7_fhr+reflexsmg+silencersmg";
+  self.weapon = "iw7_fhr+reflexsmg+silencersmg";
   lib_082F::main();
 }
 

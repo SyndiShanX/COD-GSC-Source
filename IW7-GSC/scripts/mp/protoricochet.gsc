@@ -28,7 +28,7 @@ func_E4E9(var_0) {
   var_3 setModel(level.var_E4DF[var_0.weapon_name].model);
   var_3.angles = var_0.angles;
   var_3.team = self.team;
-  var_3.triggerportableradarping = self;
+  var_3.owner = self;
   var_3.objective_position = var_0;
   var_4 = (var_2[0], var_2[1], var_2[2] + 12);
   var_3.fx = spawnfx(scripts\engine\utility::getfx(level.var_E4DF[var_0.weapon_name].fx), var_4);
@@ -77,7 +77,7 @@ func_E4E4(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_E4E2(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 
@@ -89,18 +89,18 @@ func_E4E5(var_0) {
   self endon("death");
   thread func_E4E7();
   for(;;) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-    var_0B = func_E4E1(var_4, var_3);
-    if(isDefined(var_0B)) {
-      var_0C = var_4 + var_0B * 5000;
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    var_11 = func_E4E1(var_4, var_3);
+    if(isDefined(var_11)) {
+      var_12 = var_4 + var_11 * 5000;
       if(getdvarint("scr_ric_debug", 0) == 1) {}
 
       if(getdvarint("scr_ric_debug", 0) != 1) {
-        scripts\mp\utility::_magicbullet(var_0A, var_4, var_0C, var_0);
+        scripts\mp\utility::_magicbullet(var_10, var_4, var_12, var_0);
       }
 
-      var_0D = scripts\engine\utility::getfx("proto_ricochet_shot_temp");
-      playFX(var_0D, var_4, var_0B * -1, (0, 0, 1));
+      var_13 = scripts\engine\utility::getfx("proto_ricochet_shot_temp");
+      playFX(var_13, var_4, var_11 * -1, (0, 0, 1));
     }
   }
 }
@@ -121,14 +121,14 @@ func_E4E1(var_0, var_1) {
 
     var_8 = (var_7.origin[0], var_7.origin[1], var_7.origin[2] + 36);
     var_9 = var_8 - var_0;
-    var_0A = distance(var_7.origin, var_0);
-    var_9 = var_9 * 1 / var_0A;
-    var_0B = vectordot(var_9, var_1);
-    if(abs(var_0B) < 0.707) {
-      if(var_0A < 500) {
-        if(var_0A < var_5) {
+    var_10 = distance(var_7.origin, var_0);
+    var_9 = var_9 * 1 / var_10;
+    var_11 = vectordot(var_9, var_1);
+    if(abs(var_11) < 0.707) {
+      if(var_10 < 500) {
+        if(var_10 < var_5) {
           var_4 = var_8;
-          var_5 = var_0A;
+          var_5 = var_10;
         }
       }
     }
@@ -137,14 +137,14 @@ func_E4E1(var_0, var_1) {
   if(isDefined(var_4)) {
     var_9 = var_4 - var_0;
     var_9 = var_9 * 1 / var_5;
-    var_0D = randomfloatrange(-180, 180);
-    var_0E = vectorcross((0, 0, 1), var_9);
-    var_0F = vectorcross(var_9, var_0E);
-    var_10 = sin(var_0D);
-    var_11 = cos(var_0D);
+    var_13 = randomfloatrange(-180, 180);
+    var_14 = vectorcross((0, 0, 1), var_9);
+    var_15 = vectorcross(var_9, var_14);
+    var_10 = sin(var_13);
+    var_11 = cos(var_13);
     var_12 = randomfloatrange(var_3 * -1, var_3);
     var_12 = tan(var_12);
-    var_13 = var_0E * var_11 + var_0F * var_10 * var_12 + var_9;
+    var_13 = var_14 * var_11 + var_15 * var_10 * var_12 + var_9;
     return var_13;
   }
 }

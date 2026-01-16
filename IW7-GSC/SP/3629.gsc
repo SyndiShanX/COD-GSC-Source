@@ -239,60 +239,60 @@ func_112BA(var_0) {
   var_7 = anglestoup(var_4);
   var_8 = anglesToForward(var_4);
   var_9 = 24;
-  var_0A = 24;
-  var_0B = var_5;
-  var_0C = scripts\common\trace::ray_trace(var_5, var_5 + var_6 * var_0A + var_9, undefined, scripts\common\trace::create_solid_ai_contents(1));
-  if(var_0C["fraction"] != 1) {
-    var_0C = scripts\common\trace::ray_trace(var_5, var_5 + var_7 * var_0A + var_9, undefined, scripts\common\trace::create_solid_ai_contents(1));
-    if(var_0C["fraction"] != 1) {
-      var_0B = var_5 + var_7 * var_0A * var_0C["fraction"];
+  var_10 = 24;
+  var_11 = var_5;
+  var_12 = scripts\common\trace::ray_trace(var_5, var_5 + var_6 * var_10 + var_9, undefined, scripts\common\trace::create_solid_ai_contents(1));
+  if(var_12["fraction"] != 1) {
+    var_12 = scripts\common\trace::ray_trace(var_5, var_5 + var_7 * var_10 + var_9, undefined, scripts\common\trace::create_solid_ai_contents(1));
+    if(var_12["fraction"] != 1) {
+      var_11 = var_5 + var_7 * var_10 * var_12["fraction"];
     } else {
-      var_0B = var_5 + var_7 * var_0A;
+      var_11 = var_5 + var_7 * var_10;
     }
   } else {
-    var_0B = var_5 + var_6 * var_0A;
+    var_11 = var_5 + var_6 * var_10;
   }
 
-  var_2.origin = var_0B;
+  var_2.origin = var_11;
   var_2.angles = var_4;
-  var_0D = var_2 scripts\sp\utility::func_10808();
-  var_0D glinton(#animtree);
-  var_0D makeentitysentient("allies");
-  var_0D getvalidpointtopointmovelocation(1);
-  var_0D give_zombies_perk("equipment");
-  var_0D setCanDamage(1);
-  var_0D scripts\sp\vehicle::playgestureviewmodel();
-  var_0D func_839E();
-  var_0D.var_6DA5 = 0;
-  var_0D.var_C181 = 0;
-  level.player.var_112AB = var_0D;
-  var_0D.var_50 = 0.5;
-  var_0D.var_B00E = spawn("script_origin", (0, 0, 0));
-  var_0D setlookatent(var_0D.var_B00E);
-  var_0D.var_D630 = undefined;
-  scripts\engine\utility::array_thread(var_0, ::func_112B7, var_0D);
-  var_0D notify("stop_kicking_up_dust");
-  var_0D.var_2654 = 0;
-  var_0D.ammocount = 20;
-  var_0D makeunusable();
-  var_0D thread func_5C1F();
-  var_0D thread func_5C4B(1, 1);
-  if(!isDefined(var_0D.var_B435)) {
-    var_0D.var_B435 = 100;
+  var_13 = var_2 scripts\sp\utility::func_10808();
+  var_13 glinton(#animtree);
+  var_13 makeentitysentient("allies");
+  var_13 getvalidpointtopointmovelocation(1);
+  var_13 give_zombies_perk("equipment");
+  var_13 setCanDamage(1);
+  var_13 scripts\sp\vehicle::playgestureviewmodel();
+  var_13 func_839E();
+  var_13.var_6DA5 = 0;
+  var_13.var_C181 = 0;
+  level.player.var_112AB = var_13;
+  var_13.var_50 = 0.5;
+  var_13.var_B00E = spawn("script_origin", (0, 0, 0));
+  var_13 setlookatent(var_13.var_B00E);
+  var_13.var_D630 = undefined;
+  scripts\engine\utility::array_thread(var_0, ::func_112B7, var_13);
+  var_13 notify("stop_kicking_up_dust");
+  var_13.var_2654 = 0;
+  var_13.ammocount = 20;
+  var_13 makeunusable();
+  var_13 thread func_5C1F();
+  var_13 thread func_5C4B(1, 1);
+  if(!isDefined(var_13.var_B435)) {
+    var_13.var_B435 = 100;
   }
 
-  var_0D.var_1280E = 0;
-  var_0D thread func_112BC();
-  var_0D thread func_5C30();
-  var_0D thread func_5C55();
-  var_0D thread func_5C59();
-  var_0D thread func_5C5C();
-  var_0D thread func_5C3F();
-  var_0D thread func_5BED();
-  var_0D thread func_5C37();
-  var_0D thread func_5BF0();
-  var_0D setanimknob( % equip_pocket_drone_hover_loop);
-  return var_0D;
+  var_13.var_1280E = 0;
+  var_13 thread func_112BC();
+  var_13 thread func_5C30();
+  var_13 thread func_5C55();
+  var_13 thread func_5C59();
+  var_13 thread func_5C5C();
+  var_13 thread func_5C3F();
+  var_13 thread func_5BED();
+  var_13 thread func_5C37();
+  var_13 thread func_5BF0();
+  var_13 setanimknob( % equip_pocket_drone_hover_loop);
+  return var_13;
 }
 
 func_11719(var_0) {
@@ -495,32 +495,32 @@ func_5C0C(var_0) {
   var_7 = self vehicle_getvelocity();
   var_8 = var_7 * var_6;
   var_9 = 2.5;
-  var_0A = spawn("script_model", self.origin + var_8);
-  var_0A setModel(var_0);
-  var_0A hide();
-  var_0A.angles = self gettagangles("j_body");
+  var_10 = spawn("script_model", self.origin + var_8);
+  var_10 setModel(var_0);
+  var_10 hide();
+  var_10.angles = self gettagangles("j_body");
   wait(0.05);
-  var_0A show();
-  var_0A physicslaunchserver(var_0A.origin, var_7 * var_9);
+  var_10 show();
+  var_10 physicslaunchserver(var_10.origin, var_7 * var_9);
   if(isDefined(self.var_B00E)) {
     self.var_B00E delete();
   }
 
   self delete();
-  var_0B = 0.1;
-  var_0C = 64;
-  var_0D = var_0B * var_5 / var_0C;
-  wait(var_0D);
-  var_0A playSound("support_drone_engine_mvmt_death_impact_hit");
-  playFX(level._effect["drone_death_hit_ground"], var_0A.origin, anglesToForward(var_0A.angles), anglestoup(var_0A.angles));
+  var_11 = 0.1;
+  var_12 = 64;
+  var_13 = var_11 * var_5 / var_12;
+  wait(var_13);
+  var_10 playSound("support_drone_engine_mvmt_death_impact_hit");
+  playFX(level._effect["drone_death_hit_ground"], var_10.origin, anglesToForward(var_10.angles), anglestoup(var_10.angles));
   level.player.var_5CA6 = scripts\engine\utility::array_removeundefined(level.player.var_5CA6);
   if(level.player.var_5CA6.size >= 5) {
     level.player.var_5CA6[0] delete();
     level.player.var_5CA6 = scripts\engine\utility::array_removeundefined(level.player.var_5CA6);
   }
 
-  level.player.var_5CA6[level.player.var_5CA6.size] = var_0A;
-  var_0A thread func_5BE7();
+  level.player.var_5CA6[level.player.var_5CA6.size] = var_10;
+  var_10 thread func_5BE7();
 }
 
 func_5BE7() {
@@ -628,36 +628,36 @@ func_5C54() {
 
   var_8 = 115 * var_6 + self.physics_getcharactercollisioncapsule[0];
   var_9 = 45 * var_7 + self.physics_getcharactercollisioncapsule[1];
-  var_0A = var_4 + var_0 * var_8 + var_1 * var_9;
-  var_5 = scripts\common\trace::ray_trace(var_4, var_0A, undefined, scripts\common\trace::create_solid_ai_contents(1));
+  var_10 = var_4 + var_0 * var_8 + var_1 * var_9;
+  var_5 = scripts\common\trace::ray_trace(var_4, var_10, undefined, scripts\common\trace::create_solid_ai_contents(1));
   if(var_5["fraction"] != 1) {
-    var_0B = vectornormalize(var_0A - var_4);
-    var_0C = distance(var_0A, var_4);
-    var_0A = var_4 + var_0B * var_5["fraction"] * var_0C - 10;
+    var_11 = vectornormalize(var_10 - var_4);
+    var_12 = distance(var_10, var_4);
+    var_10 = var_4 + var_11 * var_5["fraction"] * var_12 - 10;
   }
 
   if(getdvarint("support_drone_debug")) {
-    thread scripts\engine\utility::draw_line_for_time(var_4, var_0A, 0, 1, 1, 0.1);
+    thread scripts\engine\utility::draw_line_for_time(var_4, var_10, 0, 1, 1, 0.1);
   }
 
-  var_0D = var_0A;
+  var_13 = var_10;
   if(getdvarint("support_drone_debug")) {
-    thread scripts\engine\utility::draw_line_for_time(var_0D, var_0D + (0, 0, 16), 0, 0, 1, 0.1);
+    thread scripts\engine\utility::draw_line_for_time(var_13, var_13 + (0, 0, 16), 0, 0, 1, 0.1);
   }
 
-  var_0E = scripts\common\trace::ray_trace_passed(self.origin, var_0D, undefined, scripts\common\trace::create_solid_ai_contents(1));
-  if(var_0E) {
+  var_14 = scripts\common\trace::ray_trace_passed(self.origin, var_13, undefined, scripts\common\trace::create_solid_ai_contents(1));
+  if(var_14) {
     self.var_6FFF = 1;
   } else if(getdvarint("support_drone_debug")) {
-    thread scripts\engine\utility::draw_line_for_time(self.origin, var_0D, 1, 0, 0, 0.1);
+    thread scripts\engine\utility::draw_line_for_time(self.origin, var_13, 1, 0, 0, 0.1);
   }
 
-  var_0F = scripts\engine\utility::drop_to_ground(var_0D, 0);
-  var_10 = getclosestpointonnavmesh(var_0F);
+  var_15 = scripts\engine\utility::drop_to_ground(var_13, 0);
+  var_10 = getclosestpointonnavmesh(var_15);
   var_11 = 1;
-  if(distance(var_0F, var_10) > 8) {
+  if(distance(var_15, var_10) > 8) {
     if(getdvarint("support_drone_debug")) {
-      thread scripts\engine\utility::draw_line_for_time(var_0F, var_0F + (0, 0, 16), 1, 0, 0, 0.25);
+      thread scripts\engine\utility::draw_line_for_time(var_15, var_15 + (0, 0, 16), 1, 0, 0, 0.25);
       thread scripts\engine\utility::draw_line_for_time(var_10, var_10 + (0, 0, 16), 0, 1, 0, 0.25);
     }
 
@@ -666,9 +666,9 @@ func_5C54() {
     }
   }
 
-  var_12 = var_0D;
+  var_12 = var_13;
   if(!var_11) {
-    if(distance(var_2, var_10) > distance(var_2, var_0F)) {
+    if(distance(var_2, var_10) > distance(var_2, var_15)) {
       var_12 = var_4;
     } else {
       var_12 = (var_10[0], var_10[1], var_4[2]);
@@ -726,30 +726,30 @@ func_5C53(var_0) {
   }
 
   var_9 = averagepoint(var_3);
-  var_0A = averagepoint(var_4);
-  var_0B = (0, 0, 0);
-  if(var_0A == var_2) {
-    var_0B = level.player.angles;
+  var_10 = averagepoint(var_4);
+  var_11 = (0, 0, 0);
+  if(var_10 == var_2) {
+    var_11 = level.player.angles;
   } else {
-    var_0B = vectortoangles(vectornormalize(var_0A - var_2));
+    var_11 = vectortoangles(vectornormalize(var_10 - var_2));
   }
 
-  var_0C = vectornormalize(var_0A - var_2);
-  var_0D = distance(var_9, var_2);
-  if(var_0D > 700) {
-    var_9 = var_2 + var_0C * 700;
+  var_12 = vectornormalize(var_10 - var_2);
+  var_13 = distance(var_9, var_2);
+  if(var_13 > 700) {
+    var_9 = var_2 + var_12 * 700;
   }
 
-  var_0E = anglestoright(var_0B);
-  var_0F = 90;
+  var_14 = anglestoright(var_11);
+  var_15 = 90;
   if(self.var_D384 == 0) {
-    var_9 = var_9 + var_0E * var_0F / 2;
+    var_9 = var_9 + var_14 * var_15 / 2;
   } else if(self.var_D384 == 1) {
-    var_9 = var_9 - var_0E * var_0F / 2;
+    var_9 = var_9 - var_14 * var_15 / 2;
   } else if(self.var_D384 == 2) {
-    var_9 = var_9 + var_0E * var_0F * 1.5;
+    var_9 = var_9 + var_14 * var_15 * 1.5;
   } else if(self.var_D384 >= 3) {
-    var_9 = var_9 - var_0E * var_0F * 1.5;
+    var_9 = var_9 - var_14 * var_15 * 1.5;
   }
 
   if(isDefined(self.var_1155E) && isalive(self.var_1155E)) {
@@ -821,7 +821,7 @@ func_5C61(var_0) {
       thread scripts\engine\utility::draw_line_for_time(self.origin, var_0, 0, 1, 0, 0.25);
     }
 
-    scripts\engine\utility::waittill_any_3("near_goal", "goal");
+    scripts\engine\utility::waittill_any("near_goal", "goal");
     return;
   }
 
@@ -846,7 +846,7 @@ func_5C61(var_0) {
     if(getdvarint("support_drone_debug")) {}
 
     self setvehgoalpos(var_6, 1);
-    scripts\engine\utility::waittill_any_3("near_goal", "goal");
+    scripts\engine\utility::waittill_any("near_goal", "goal");
   }
 }
 
@@ -1002,7 +1002,7 @@ func_5BED() {
 func_5C05() {
   self setanimknob( % equip_pocket_drone_damaged_loop);
   scripts\sp\utility::func_75C4("drone_damaged_loop", "tag_origin");
-  scripts\engine\utility::waittill_any_3("death", "death_anim");
+  scripts\engine\utility::waittill_any("death", "death_anim");
   if(isDefined(self)) {
     scripts\sp\utility::func_75F8("drone_damaged_loop", "tag_origin");
   }
@@ -1032,7 +1032,7 @@ func_5BD8() {
 }
 
 func_5BE5() {
-  scripts\engine\utility::waittill_any_3("death_anim", "death", "entitydeleted");
+  scripts\engine\utility::waittill_any("death_anim", "death", "entitydeleted");
   func_F378(self.var_9180, "off");
 }
 
@@ -1206,8 +1206,8 @@ func_5C98(var_0) {
       continue;
     }
 
-    var_0A = var_5 - var_0.origin;
-    self.var_5CDB settargetentity(var_0, var_0A);
+    var_10 = var_5 - var_0.origin;
+    self.var_5CDB settargetentity(var_0, var_10);
     self thread[[self.var_5CAF]]();
     wait(1.2);
     thread func_5C89();
@@ -1235,7 +1235,7 @@ func_5C01(var_0) {
   self endon("death_anim");
   self endon("death");
   self endon("new_target_enemy");
-  var_0 scripts\engine\utility::waittill_any_3("death", "entitydeleted", "death_anim");
+  var_0 scripts\engine\utility::waittill_any("death", "entitydeleted", "death_anim");
   self notify("target_enemy_died");
   self.var_1155E = undefined;
   scripts\sp\utility::func_65E8("target_killed_wait");
@@ -1387,7 +1387,7 @@ func_5C10() {
 func_5C59() {
   thread scripts\engine\utility::play_loop_sound_on_entity("support_drone_engine");
   thread scripts\engine\utility::play_loop_sound_on_entity("support_drone_close_lyr");
-  scripts\engine\utility::waittill_any_3("death", "death_anim");
+  scripts\engine\utility::waittill_any("death", "death_anim");
   if(isDefined(self)) {
     func_5C58("support_drone_engine", "support_drone_close_lyr");
   }
@@ -1403,7 +1403,7 @@ func_5C5C() {
   scripts\sp\utility::func_75C4("drone_thruster", "j_fan_front_ri");
   scripts\sp\utility::func_75C4("drone_thruster", "j_fan_rear_le");
   scripts\sp\utility::func_75C4("drone_thruster", "j_fan_rear_ri");
-  scripts\engine\utility::waittill_any_3("death", "death_anim");
+  scripts\engine\utility::waittill_any("death", "death_anim");
   if(isDefined(self)) {
     func_5C5B();
   }

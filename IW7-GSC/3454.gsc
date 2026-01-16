@@ -54,8 +54,9 @@ onuse(var_0, var_1) {
   if(isDefined(level.a10strafeactive)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
-  } else if(scripts\mp\utility\game::isusingremote() || scripts\mp\utility\game::iskillstreakdenied())
+  } else if(scripts\mp\utility\game::isusingremote() || scripts\mp\utility\game::iskillstreakdenied()) {
     return 0;
+  }
   else if(getcsplinecount() < 2) {
     return 0;
   } else {

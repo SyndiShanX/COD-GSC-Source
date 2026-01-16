@@ -148,8 +148,9 @@ func_3E29(var_0) {
     if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("base")) {
       return anim.failure;
     }
-  } else if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("normal"))
+  } else if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("normal")) {
     return anim.failure;
+  }
 
   if(isDefined(self.var_B603)) {
     var_2 = gettime() - self.var_A9B8;
@@ -382,8 +383,9 @@ notargetfound(var_0) {
         self clearpath();
       }
     }
-  } else
+  } else {
     self clearpath();
+  }
 
   return anim.success;
 }

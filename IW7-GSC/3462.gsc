@@ -226,8 +226,9 @@ airstrikedamageentsthread(var_0) {
         if(var_1.isplayer) {
           wait 0.05;
         }
-      } else
+      } else {
         level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
+      }
     }
 
     level.airstrikedamagedentsindex++;

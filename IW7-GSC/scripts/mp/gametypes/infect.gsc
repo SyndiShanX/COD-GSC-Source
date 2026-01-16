@@ -566,7 +566,7 @@ setfirstinfected(var_0) {
   self.isinitialinfected = 1;
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
   if(isDefined(self.setspawnpoint)) {
-    scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
+    scripts\mp\perks\perkfunctions::deleteti(self.setspawnpoint);
   }
 
   var_1 = spawn("script_model", self.origin);
@@ -634,7 +634,7 @@ setinitialtonormalinfected(var_0, var_1) {
 
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis"];
   if(isDefined(self.setspawnpoint)) {
-    scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
+    scripts\mp\perks\perkfunctions::deleteti(self.setspawnpoint);
   }
 
   var_2 = spawn("script_model", self.origin);
@@ -654,23 +654,23 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     return;
   }
 
-  var_0A = 0;
-  var_0B = 0;
+  var_10 = 0;
+  var_11 = 0;
   if(self.team == "axis") {
     self setscriptablepartstate("infected", "neutral", 0);
   }
 
   if(self.team == "allies" && isDefined(var_1)) {
     if(isplayer(var_1) && var_1 != self) {
-      var_0A = 1;
+      var_10 = 1;
     } else if(level.infect_allowsuicide && var_1 == self || !isplayer(var_1)) {
-      var_0A = 1;
-      var_0B = 1;
+      var_10 = 1;
+      var_11 = 1;
     }
   }
 
   if(isplayer(var_1) && var_1.team == "allies" && var_1 != self) {
-    var_1 thread scripts\mp\perks\_weaponpassives::func_8974(var_1, self);
+    var_1 thread scripts\mp\perks\weaponpassives::func_8974(var_1, self);
     var_1 scripts\mp\utility::incperstat("killsAsSurvivor", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "killsAsSurvivor", var_1.pers["killsAsSurvivor"]);
   } else if(isplayer(var_1) && var_1.team == "axis" && var_1 != self) {
@@ -681,18 +681,18 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     }
   }
 
-  if(var_0A) {
-    thread delayedprocesskill(var_1, var_0B);
-    if(var_0B) {
-      foreach(var_0D in level.players) {
-        if(isDefined(var_0D.isinitialinfected)) {
-          var_0D thread setinitialtonormalinfected();
+  if(var_10) {
+    thread delayedprocesskill(var_1, var_11);
+    if(var_11) {
+      foreach(var_13 in level.players) {
+        if(isDefined(var_13.isinitialinfected)) {
+          var_13 thread setinitialtonormalinfected();
         }
       }
     } else if(isDefined(var_1.isinitialinfected)) {
-      foreach(var_0D in level.players) {
-        if(isDefined(var_0D.isinitialinfected)) {
-          var_0D thread setinitialtonormalinfected(1);
+      foreach(var_13 in level.players) {
+        if(isDefined(var_13.isinitialinfected)) {
+          var_13 thread setinitialtonormalinfected(1);
         }
       }
     } else if(level.infectstreakbonus > 0) {
@@ -823,10 +823,10 @@ finalsurvivoruav(var_0) {
   level endon("infect_lateJoiner");
   level thread enduavonlatejoiner(var_0);
   var_1 = 0;
-  level.createprintchannel["axis"] = "normal_radar";
+  level.radarmode["axis"] = "normal_radar";
   foreach(var_3 in level.players) {
     if(var_3.team == "axis") {
-      var_3.createprintchannel = "normal_radar";
+      var_3.radarmode = "normal_radar";
     }
   }
 
@@ -1007,7 +1007,7 @@ setspecialloadouts() {
   level.infect_allyrigs[level.infect_allyrigs.size] = "archetype_sniper";
   level.infect_allyrigs[level.infect_allyrigs.size] = "archetype_assassin";
   if(scripts\mp\utility::isusingdefaultclass("allies", 0)) {
-    level.infect_loadouts["allies"] = scripts\mp\utility::getmatchrulesspecialclass("allies", 0);
+    level.infect_loadouts["allies"] = ::scripts\mp\utility::getmatchrulesspecialclass("allies", 0);
   } else {
     level.infect_loadouts["allies"]["loadoutPrimary"] = level.survivorprimaryweapon;
     level.infect_loadouts["allies"]["loadoutPrimaryAttachment"] = level.attachmentsurvivorprimary;
@@ -1036,7 +1036,7 @@ setspecialloadouts() {
   }
 
   if(scripts\mp\utility::isusingdefaultclass("axis", 1)) {
-    level.infect_loadouts["axis_initial"] = scripts\mp\utility::getmatchrulesspecialclass("axis", 1);
+    level.infect_loadouts["axis_initial"] = ::scripts\mp\utility::getmatchrulesspecialclass("axis", 1);
     level.infect_loadouts["axis_initial"]["loadoutStreakType"] = "assault";
     level.infect_loadouts["axis_initial"]["loadoutKillstreak1"] = "none";
     level.infect_loadouts["axis_initial"]["loadoutKillstreak2"] = "none";
@@ -1070,7 +1070,7 @@ setspecialloadouts() {
   }
 
   if(scripts\mp\utility::isusingdefaultclass("axis", 0)) {
-    level.infect_loadouts["axis"] = scripts\mp\utility::getmatchrulesspecialclass("axis", 0);
+    level.infect_loadouts["axis"] = ::scripts\mp\utility::getmatchrulesspecialclass("axis", 0);
     level.infect_loadouts["axis"]["loadoutStreakType"] = "assault";
     level.infect_loadouts["axis"]["loadoutKillstreak1"] = "none";
     level.infect_loadouts["axis"]["loadoutKillstreak2"] = "none";

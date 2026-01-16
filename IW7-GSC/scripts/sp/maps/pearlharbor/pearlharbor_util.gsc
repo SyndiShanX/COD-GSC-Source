@@ -186,7 +186,7 @@ func_48BF(var_0) {
     if(isDefined(level.allies[var_2]) && isalive(level.allies[var_2])) {
       continue;
     }
-    level.allies[var_2] = scripts\sp\utility::func_107EA(var_2, 1);
+    level.allies[var_2] = ::scripts\sp\utility::func_107EA(var_2, 1);
     level.allies[var_2].grenadeammo = 0;
     level.allies[var_2] scripts\sp\utility::func_B14F();
     level.allies[var_2] func_8250(0);
@@ -1114,8 +1114,9 @@ func_19C5(var_0) {
         var_5 = func_7822(var_1);
         var_5 notify("ai_move_think_stop_loop");
         self givescorefortrophyblocks();
-      } else
+      } else {
         func_8426(var_1);
+      }
     }
 
     if(!isDefined(var_1.target)) {
@@ -1542,8 +1543,9 @@ func_035A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         }
 
         _bullettracer(var_13, var_12, self.weaponinfo);
-      } else
+      } else {
         self shootturret("tag_flash");
+      }
 
       wait(var_5);
     }
@@ -1669,8 +1671,9 @@ func_E45E(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     var_5 = var_3 / var_1;
     var_4 = var_1 - var_1 * randomfloat(var_5);
-  } else
+  } else {
     var_4 = var_1 * randomfloat(1.0);
+  }
 
   var_6 = randomfloat(360.0);
   var_7 = sin(var_6);

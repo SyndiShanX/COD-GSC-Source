@@ -4,7 +4,7 @@
 *********************************************/
 
 func_C97C(var_0) {
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     return;
   }
 
@@ -37,14 +37,14 @@ func_C97C(var_0) {
   func_AD3A();
   func_F4C7();
   var_1["ent"][1] = ::func_7CD9;
-  var_1["ent"][0] = scripts\sp\utility::func_7A8F;
+  var_1["ent"][0] = ::scripts\sp\utility::func_7A8F;
   var_1["node"][1] = ::func_7CDB;
   var_1["node"][0] = ::func_7A92;
   var_1["struct"][1] = ::func_7CE0;
-  var_1["struct"][0] = scripts\sp\utility::func_7A97;
-  var_2["ent"] = scripts\sp\utility::func_F3D3;
-  var_2["node"] = scripts\sp\utility::func_F3D9;
-  var_2["struct"] = scripts\sp\utility::func_F3D3;
+  var_1["struct"][0] = ::scripts\sp\utility::func_7A97;
+  var_2["ent"] = ::scripts\sp\utility::func_F3D3;
+  var_2["node"] = ::scripts\sp\utility::func_F3D9;
+  var_2["struct"] = ::scripts\sp\utility::func_F3D3;
   if(isDefined(var_0)) {
     self.target = var_0;
   }
@@ -83,19 +83,19 @@ func_C97C(var_0) {
 
   var_9 = [];
   var_9["pause"] = "patrol_idle_";
-  var_9["turn180"] = scripts\engine\utility::ter_op(isDefined(self.var_C97E), self.var_C97E, "patrol_turn180");
+  var_9["turn180"] = ::scripts\engine\utility::ter_op(isDefined(self.var_C97E), self.var_C97E, "patrol_turn180");
   var_9["smoke"] = "patrol_idle_smoke";
   var_9["stretch"] = "patrol_idle_stretch";
   var_9["checkphone"] = "patrol_idle_checkphone";
   var_9["phone"] = "patrol_idle_phone";
-  var_0A = var_7;
+  var_10 = var_7;
   for(;;) {
-    while(isDefined(var_0A.var_C97F)) {
+    while(isDefined(var_10.var_C97F)) {
       wait(0.05);
     }
 
     var_7.var_C97F = undefined;
-    var_7 = var_0A;
+    var_7 = var_10;
     self notify("release_node");
     var_7.var_C97F = 1;
     self.var_A8F4 = var_7;
@@ -120,8 +120,8 @@ func_C97C(var_0) {
       scripts\engine\utility::flag_clear(var_7.var_ED9B);
     }
 
-    var_0B = var_7[[var_1[var_8][var_3]]]();
-    if(!var_0B.size) {
+    var_11 = var_7[[var_1[var_8][var_3]]]();
+    if(!var_11.size) {
       if(isDefined(var_7.var_ED88)) {
         self orientmode("face angle", var_7.angles[1]);
       }
@@ -133,20 +133,20 @@ func_C97C(var_0) {
       }
     }
 
-    var_0C = scripts\anim\reactions::func_DD51;
-    var_0D = var_7.script_animation;
-    var_0E = 1;
-    var_0F = 0;
+    var_12 = scripts\anim\reactions::func_DD51;
+    var_13 = var_7.script_animation;
+    var_14 = 1;
+    var_15 = 0;
     if(isDefined(var_7.script_parameters)) {
       var_10 = strtok(var_7.script_parameters, " ");
       for(var_11 = 0; var_11 < var_10.size; var_11++) {
         switch (var_10[var_11]) {
           case "keep_running":
-            var_0E = 0;
+            var_14 = 0;
             break;
 
           case "use_node":
-            var_0F = 1;
+            var_15 = 1;
             break;
 
           case "animset":
@@ -168,9 +168,9 @@ func_C97C(var_0) {
       self.moveplaybackrate = var_7.var_EE2C;
     }
 
-    if((var_7 func_8BA5() && var_7 func_ED4E()) || isDefined(var_0D) || isDefined(var_7.var_EDA0) && !scripts\engine\utility::flag(var_7.var_EDA0)) {
-      if(!isDefined(self.var_C98F) && var_0E) {
-        func_C981(var_0D, var_0C, var_7);
+    if((var_7 func_8BA5() && var_7 func_ED4E()) || isDefined(var_13) || isDefined(var_7.var_EDA0) && !scripts\engine\utility::flag(var_7.var_EDA0)) {
+      if(!isDefined(self.var_C98F) && var_14) {
+        func_C981(var_13, var_12, var_7);
       }
 
       if(isDefined(var_7.var_EDA0) && !scripts\engine\utility::flag(var_7.var_EDA0)) {
@@ -178,57 +178,57 @@ func_C97C(var_0) {
       }
 
       var_7 scripts\sp\utility::script_delay();
-      if(isDefined(var_0D)) {
+      if(isDefined(var_13)) {
         if(isDefined(var_7.var_ED88)) {
           self orientmode("face angle", var_7.angles[1]);
         }
 
         self.var_C99C = 1;
-        var_12 = var_9[var_0D];
+        var_12 = var_9[var_13];
         if(!isDefined(var_12)) {
           if(isDefined(level.var_C99E)) {
-            var_12 = level.var_C99E[var_0D];
+            var_12 = level.var_C99E[var_13];
           }
         }
 
         if(isDefined(var_12)) {
-          if(var_0D == "pause") {
-            if(isDefined(self.var_C99D) && isDefined(self.var_C99D[var_0D])) {
-              var_12 = self.var_C99D[var_0D][randomint(self.var_C99D[var_0D].size)];
+          if(var_13 == "pause") {
+            if(isDefined(self.var_C99D) && isDefined(self.var_C99D[var_13])) {
+              var_12 = self.var_C99D[var_13][randomint(self.var_C99D[var_13].size)];
             } else {
               var_12 = var_12 + randomintrange(1, 6);
             }
           }
 
-          if(var_0F) {
+          if(var_15) {
             var_7 scripts\sp\anim::func_1ECE(self, var_12);
-            var_7 scripts\sp\anim::func_1EC8(self, "gravity", var_12, undefined, var_0C);
+            var_7 scripts\sp\anim::func_1EC8(self, "gravity", var_12, undefined, var_12);
           } else {
-            scripts\sp\anim::func_1EC8(self, "gravity", var_12, undefined, var_0C);
+            scripts\sp\anim::func_1EC8(self, "gravity", var_12, undefined, var_12);
           }
         }
 
         self.var_C99C = undefined;
       }
 
-      if(var_0B.size && !isDefined(var_0D) || var_0D != "turn180" && var_0E && !isDefined(self.var_1025F) || !self.var_1025F) {
-        func_C980(var_0D, var_0C);
+      if(var_11.size && !isDefined(var_13) || var_13 != "turn180" && var_14 && !isDefined(self.var_1025F) || !self.var_1025F) {
+        func_C980(var_13, var_12);
       }
     }
 
-    if(!var_0B.size) {
-      if(isDefined(self.var_C982) && !isDefined(var_0D)) {
-        func_C981("path_end_idle", var_0C, var_7);
+    if(!var_11.size) {
+      if(isDefined(self.var_C982) && !isDefined(var_13)) {
+        func_C981("path_end_idle", var_12, var_7);
         for(;;) {
           var_13 = self.var_C982[randomint(self.var_C982.size)];
-          scripts\sp\anim::func_1EC8(self, "gravity", var_13, undefined, var_0C);
+          scripts\sp\anim::func_1EC8(self, "gravity", var_13, undefined, var_12);
         }
       }
 
       break;
     }
 
-    var_0A = scripts\engine\utility::random(var_0B);
+    var_10 = scripts\engine\utility::random(var_11);
   }
 }
 
@@ -499,7 +499,7 @@ func_AD3A() {
 
 func_CA83() {
   scripts\sp\utility::func_106ED(self);
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     return;
   }
 
@@ -640,7 +640,7 @@ func_CA85(var_0, var_1) {
 }
 
 func_CA86(var_0) {
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     return;
   }
 
@@ -682,7 +682,7 @@ func_CA86(var_0) {
 }
 
 func_CA87(var_0, var_1) {
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     return;
   }
 

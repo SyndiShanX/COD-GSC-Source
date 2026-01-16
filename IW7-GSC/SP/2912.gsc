@@ -72,8 +72,8 @@ func_DED1(var_0, var_1, var_2, var_3, var_4) {
     var_5.var_74D6 = var_3;
   }
 
-  level.player.var_E6.var_E9 = scripts\engine\utility::array_add_safe(level.player.var_E6.var_E9, var_5);
-  level.player.var_E6.var_47[var_5.type] = scripts\engine\utility::array_add_safe(level.player.var_E6.var_47[var_5.type], var_5.var_7789);
+  level.player.var_E6.var_E9 = scripts\engine\utility::add_to_array(level.player.var_E6.var_E9, var_5);
+  level.player.var_E6.var_47[var_5.type] = ::scripts\engine\utility::add_to_array(level.player.var_E6.var_47[var_5.type], var_5.var_7789);
   return var_5;
 }
 
@@ -138,11 +138,11 @@ main() {
   }
 
   if(!var_9 && isDefined(var_3) && !isDefined(level.player.var_5818) || !level.player.var_5818) {
-    var_0A = level.player.origin - level.player getEye() + (0, 0, 35);
-    var_0B = spawn("script_model", level.player.origin + (0, 0, var_0A[2]));
-    var_0B.angles = (-10, level.player.angles[2], 30);
-    var_0B linkto(var_3);
-    level.player playerlinkto(var_0B);
+    var_10 = level.player.origin - level.player getEye() + (0, 0, 35);
+    var_11 = spawn("script_model", level.player.origin + (0, 0, var_10[2]));
+    var_11.angles = (-10, level.player.angles[2], 30);
+    var_11 linkto(var_3);
+    level.player playerlinkto(var_11);
   }
 
   if(!scripts\sp\utility::func_93A6()) {
@@ -622,22 +622,22 @@ func_1033D() {
   var_5 = scripts\engine\utility::array_remove(var_5, var_7);
   var_8 = 250;
   var_9 = 350;
-  var_0A = 275;
-  var_0B = 350;
-  var_0C = 0.9;
-  var_0D = 1;
-  var_0E = randomintrange(var_8, var_9);
-  var_0F = randomintrange(var_0A, var_0B);
+  var_10 = 275;
+  var_11 = 350;
+  var_12 = 0.9;
+  var_13 = 1;
+  var_14 = randomintrange(var_8, var_9);
+  var_15 = randomintrange(var_10, var_11);
   wait(0.7);
-  level.player.var_E6.var_91AF["blood_splat1"] setshader("vfx_ui_player_blood_splat1", var_0E, var_0F);
-  level.player.var_E6.var_91AF["blood_splat1"].alpha = randomfloatrange(var_0C, var_0D);
+  level.player.var_E6.var_91AF["blood_splat1"] setshader("vfx_ui_player_blood_splat1", var_14, var_15);
+  level.player.var_E6.var_91AF["blood_splat1"].alpha = randomfloatrange(var_12, var_13);
   level.player.var_E6.var_91AF["blood_splat2"].x = var_2[0];
   level.player.var_E6.var_91AF["blood_splat2"].y = var_5[0];
   wait(0.5);
-  var_0E = randomintrange(var_8, var_9);
-  var_0F = randomintrange(var_0A, var_0B);
-  level.player.var_E6.var_91AF["blood_splat2"] setshader("vfx_ui_player_blood_splat2", var_0E, var_0F);
-  level.player.var_E6.var_91AF["blood_splat2"].alpha = randomfloatrange(var_0C, var_0D);
+  var_14 = randomintrange(var_8, var_9);
+  var_15 = randomintrange(var_10, var_11);
+  level.player.var_E6.var_91AF["blood_splat2"] setshader("vfx_ui_player_blood_splat2", var_14, var_15);
+  level.player.var_E6.var_91AF["blood_splat2"].alpha = randomfloatrange(var_12, var_13);
 }
 
 func_A851() {

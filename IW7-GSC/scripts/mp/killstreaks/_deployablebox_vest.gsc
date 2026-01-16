@@ -6,10 +6,10 @@
 init() {
   var_0 = spawnStruct();
   var_0.id = "deployable_vest";
-  var_0.var_39B = "deployable_vest_marker_mp";
+  var_0.weaponinfo = "deployable_vest_marker_mp";
   var_0.modelbase = "prop_ballistic_vest_iw6";
   var_0.modelbombsquad = "prop_ballistic_vest_iw6_bombsquad";
-  var_0.pow = &"KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_LIGHT_ARMOR_PICKUP";
   var_0.var_3A41 = &"KILLSTREAKS_BOX_GETTING_VEST";
   var_0.var_67E5 = "deployable_vest_taken";
   var_0.streakname = "deployable_vest";
@@ -33,7 +33,7 @@ init() {
   var_0.maxuses = 4;
   var_0.canuseotherboxes = 0;
   level.boxsettings["deployable_vest"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("deployable_vest", ::func_128E1);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("deployable_vest", ::func_128E1);
   level.deployable_box["deployable_vest"] = [];
 }
 
@@ -49,7 +49,7 @@ func_128E1(var_0, var_1) {
 
 func_3937(var_0) {
   return !scripts\mp\lightarmor::haslightarmor(self) && !scripts\mp\utility::isjuggernaut();
-  if(isDefined(var_0) && var_0.triggerportableradarping == self && !isDefined(var_0.var_1A64)) {
+  if(isDefined(var_0) && var_0.owner == self && !isDefined(var_0.var_1A64)) {
     return 0;
   }
 
@@ -57,7 +57,7 @@ func_3937(var_0) {
 }
 
 onusedeployable(var_0) {
-  scripts\mp\perks\_perkfunctions::setlightarmor();
+  scripts\mp\perks\perkfunctions::setlightarmor();
 }
 
 get_adjusted_armor(var_0, var_1) {

@@ -960,8 +960,8 @@ set_up_controlling_struct(var_0) {
 
   var_7 = getEntArray(var_0.target, "targetname");
   foreach(var_9 in var_7) {
-    var_0A = var_9.script_noteworthy;
-    if(var_0A == "damage_monitor") {
+    var_10 = var_9.script_noteworthy;
+    if(var_10 == "damage_monitor") {
       var_9 thread damage_watcher(var_0, var_9);
       var_0.damage_monitor = var_9;
     }
@@ -983,11 +983,11 @@ damage_watcher(var_0, var_1) {
   var_1 setCanDamage(1);
   var_1.health = 99999999;
   for(;;) {
-    var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     var_1.health = 99999999;
     if(should_detect_damage(var_0)) {
-      var_0C = get_tile_hit_id(var_0, var_5);
-      var_0 notify("damage_marker_hit", var_0C);
+      var_12 = get_tile_hit_id(var_0, var_5);
+      var_0 notify("damage_marker_hit", var_12);
     }
   }
 }

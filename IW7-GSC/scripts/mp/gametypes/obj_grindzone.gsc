@@ -54,14 +54,14 @@ setupobjective(var_0) {
   var_7 = var_2[0].origin + (0, 0, -32);
   var_8 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
   var_9 = [];
-  var_0A = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
-  var_4.baseeffectpos = var_0A["position"];
-  var_0B = vectortoangles(var_0A["normal"]);
-  var_4.baseeffectforward = anglesToForward(var_0B);
-  var_0C = spawn("script_model", var_4.baseeffectpos);
-  var_0C setModel("grind_flag_scriptable");
-  var_0C.angles = generateaxisanglesfromforwardvector(var_4.baseeffectforward, var_0C.angles);
-  var_4.physics_capsulecast = var_0C;
+  var_10 = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
+  var_4.baseeffectpos = var_10["position"];
+  var_11 = vectortoangles(var_10["normal"]);
+  var_4.baseeffectforward = anglesToForward(var_11);
+  var_12 = spawn("script_model", var_4.baseeffectpos);
+  var_12 setModel("grind_flag_scriptable");
+  var_12.angles = generateaxisanglesfromforwardvector(var_4.baseeffectforward, var_12.angles);
+  var_4.physics_capsulecast = var_12;
   var_4 scripts\engine\utility::delaythread(1, ::setneutral);
   return var_4;
 }

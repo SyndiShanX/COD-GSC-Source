@@ -1,7 +1,7 @@
-/*********************************************
+/**************************************************
  * Decompiled by Bog and Edited by SyndiShanX
- * Script: 3399.gsc
-*********************************************/
+ * Script: scripts\cp\zombies\zombie_ark_quest.gsc
+**************************************************/
 
 init_ark_quest() {
   level.ark_quest_pieces = [];
@@ -142,9 +142,9 @@ wait_for_ark_placed(var_0, var_1) {
       var_6 takeweapon(var_7);
       var_8 = getweaponattachments(var_7);
       var_9 = scripts\cp\utility::getcurrentcamoname(var_7);
-      var_0A = var_6 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_7, "arcane_base", var_8, undefined, var_9);
-      var_0A = var_6 scripts\cp\utility::_giveweapon(var_0A, undefined, undefined, 1);
-      var_6 switchtoweapon(var_0A);
+      var_10 = var_6 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_7, "arcane_base", var_8, undefined, var_9);
+      var_10 = var_6 scripts\cp\utility::_giveweapon(var_10, undefined, undefined, 1);
+      var_6 switchtoweapon(var_10);
       switch (var_3) {
         case "blue":
           var_1.model playSound("arc_machine_place_blue_ark");
@@ -163,30 +163,30 @@ wait_for_ark_placed(var_0, var_1) {
           break;
       }
 
-      var_0B = var_1.origin + (0, 0, 8);
-      var_0C = spawnfx(level._effect["neil_repair_sparks"], var_0B);
+      var_11 = var_1.origin + (0, 0, 8);
+      var_12 = spawnfx(level._effect["neil_repair_sparks"], var_11);
       wait(0.1);
-      triggerfx(var_0C);
+      triggerfx(var_12);
       wait(0.1);
-      var_0C delete();
-      var_0D = spawn("script_model", var_0B);
-      var_0D setModel("tag_origin_ground_essence");
+      var_12 delete();
+      var_13 = spawn("script_model", var_11);
+      var_13 setModel("tag_origin_ground_essence");
       scripts\engine\utility::waitframe();
-      var_0D setscriptablepartstate("miniufo", var_3);
+      var_13 setscriptablepartstate("miniufo", var_3);
       break;
     } else {
       continue;
     }
   }
 
-  var_0E = getomnvarvalue(var_3);
-  if(isDefined(var_0E)) {
-    level scripts\cp\utility::set_quest_icon(var_0E);
+  var_14 = getomnvarvalue(var_3);
+  if(isDefined(var_14)) {
+    level scripts\cp\utility::set_quest_icon(var_14);
   }
 
   var_1.model makeunusable();
-  var_0F = var_3 + "_ark_quest";
-  scripts\engine\utility::flag_set(var_0F);
+  var_15 = var_3 + "_ark_quest";
+  scripts\engine\utility::flag_set(var_15);
 }
 
 getomnvarvalue(var_0) {
@@ -339,7 +339,7 @@ watchforattachmentremoved(var_0) {
       break;
     }
 
-    var_0 scripts\engine\utility::waittill_any_3("weapon_purchased", "mule_munchies_sold");
+    var_0 scripts\engine\utility::waittill_any("weapon_purchased", "mule_munchies_sold");
     var_1 = 0;
     var_2 = var_0 getweaponslistall();
     foreach(var_4 in var_2) {

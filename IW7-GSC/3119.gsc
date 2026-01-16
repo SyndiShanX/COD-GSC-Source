@@ -273,10 +273,10 @@ func_CEBA(var_0, var_1, var_2, var_3) {
   foreach(var_7 in var_5) {
     var_8 = self func_850C(var_7, "upper");
     var_9 = self func_850C(var_7, "lower");
-    var_0A = max(var_8, var_9);
+    var_10 = max(var_8, var_9);
     if(var_8 > 0 && var_9 > 0) {
-      self func_850B(int(var_0A), var_7, "upper");
-      self func_850B(int(var_0A), var_7, "lower");
+      self func_850B(int(var_10), var_7, "upper");
+      self func_850B(int(var_10), var_7, "lower");
     }
   }
 

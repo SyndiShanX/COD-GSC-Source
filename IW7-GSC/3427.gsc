@@ -119,8 +119,9 @@ special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
         if(isDefined(var_16)) {
           self.nocorpse = 1;
           self.near_medusa = var_16;
-        } else
+        } else {
           self.near_medusa = undefined;
+        }
       }
 
       if(isDefined(level.crystal_check_func)) {
@@ -132,10 +133,12 @@ special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
           if(var_17) {
             self.nocorpse = 1;
             self.near_crystal = 1;
-          } else
+          } else {
             self.near_crystal = undefined;
-        } else
+          }
+        } else {
           self.near_crystal = undefined;
+        }
       }
     }
   }
@@ -222,8 +225,9 @@ dischord_death_logic(var_0, var_1, var_2, var_3, var_4) {
   if(var_6) {
     thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 2);
     wait 2;
-  } else
+  } else {
     thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 0.1);
+  }
 
   playLoopSound(self.origin, "zombie_dischord_zmb_spin_explo");
   self.full_gib = 1;
@@ -544,8 +548,9 @@ run_fire_pool(var_0, var_1, var_2, var_3) {
 
       wait 0.1;
       continue;
-    } else if(isalive(var_5))
+    } else if(isalive(var_5)) {
       level thread scripts\cp\utility::damage_over_time(var_5, var_2, 5, var_5.health + 1000, undefined, "iw7_facemelterdummy_zm", 0, "burning");
+    }
 
     wait 0.1;
   }
@@ -1062,8 +1067,9 @@ checkenemiesinfov(var_0, var_1, var_2) {
         if(var_14 < var_1) {
           var_11 = 1;
         }
-      } else
+      } else {
         var_11 = 1;
+      }
     }
 
     if(var_11 && var_4.size < var_2) {

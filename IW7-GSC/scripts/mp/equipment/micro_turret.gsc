@@ -57,7 +57,7 @@ func_B711(var_0, var_1, var_2) {
   var_3 = spawnturret("misc_turret", var_0, "micro_turret_gun_mp");
   var_3 setModel("micro_turret_wm");
   var_3.angles = var_1;
-  var_3.triggerportableradarping = self;
+  var_3.owner = self;
   var_3.team = self.team;
   var_3.weapon_name = "micro_turret_mp";
   var_3 playSound("mp_super_miniturret_plant");
@@ -92,7 +92,7 @@ func_B711(var_0, var_1, var_2) {
   }
 
   var_3.stunned = 0;
-  var_3 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_3 thread scripts\mp\perks\perk_equipmentping::runequipmentping();
   thread scripts\mp\weapons::outlinesuperequipment(var_3, self);
   var_3 thread func_B6EA();
   thread func_B71D();
@@ -135,7 +135,7 @@ func_B70B() {
   func_B70F();
   self.planted = 1;
   if(!issentient(self)) {
-    scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.triggerportableradarping);
+    scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.owner);
   }
 }
 
@@ -150,11 +150,11 @@ func_B70C() {
 }
 
 func_B70F() {
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_1 = var_0.team;
   if(level.teambased && !scripts\mp\utility::istrue(self.var_115D1)) {
     scripts\mp\entityheadicons::setteamheadicon(var_1, (0, 0, 50));
@@ -186,7 +186,7 @@ func_B71C() {
   for(;;) {
     self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
     var_5 = 119;
-    if(self.triggerportableradarping scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
+    if(self.owner scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
       var_5 = 209;
     }
 
@@ -264,19 +264,19 @@ func_B717() {
     var_6 = scripts\engine\utility::array_combine(level.characters, var_1, level.spidergrenade.activeagents, level.spidergrenade.proxies);
     var_7 = [];
     var_8 = [];
-    foreach(var_0A in var_6) {
-      if(!func_B71A(var_0A)) {
+    foreach(var_10 in var_6) {
+      if(!func_B71A(var_10)) {
         continue;
       }
 
-      var_0B = var_0A.origin - self gettagorigin("tag_dummy");
-      var_0C = vectornormalize(var_0B);
-      var_0D = vectordot(var_0B, var_0C);
-      var_0E = scripts\engine\utility::anglebetweenvectorsunit(var_0, var_0C);
-      var_0F = 1 - var_0D / 800;
-      var_10 = 1 - var_0E / 180;
-      var_11 = var_0F * 0.5 + var_10 * 0.8;
-      var_7[var_7.size] = var_0A;
+      var_11 = var_10.origin - self gettagorigin("tag_dummy");
+      var_12 = vectornormalize(var_11);
+      var_13 = vectordot(var_11, var_12);
+      var_14 = scripts\engine\utility::anglebetweenvectorsunit(var_0, var_12);
+      var_15 = 1 - var_13 / 800;
+      var_10 = 1 - var_14 / 180;
+      var_11 = var_15 * 0.5 + var_10 * 0.8;
+      var_7[var_7.size] = var_10;
       var_8[var_8.size] = var_11;
     }
 
@@ -444,13 +444,13 @@ func_B6FE(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_B6FF(var_0, var_1, var_2, var_3) {
-  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
     if(var_0 scripts\mp\missions::func_66B8("specialty_blindeye")) {
       var_0 scripts\mp\missions::func_D991("ch_perk_kills_blindeye");
     }
 
     var_0 scripts\mp\missions::func_D991("ch_killjoy_six_ability");
-    var_0 thread scripts\mp\events::supershutdown(self.triggerportableradarping);
+    var_0 thread scripts\mp\events::supershutdown(self.owner);
     var_0 notify("destroyed_equipment");
   }
 
@@ -460,12 +460,12 @@ func_B6FF(var_0, var_1, var_2, var_3) {
 func_B700() {
   self notify("death");
   self.var_1A4A delete();
-  microturret_removefromarrays(self, self.triggerportableradarping);
+  microturret_removefromarrays(self, self.owner);
   func_B70C();
   self setscriptablepartstate("effects", "activeDestroyed");
   wait(3);
   scripts\mp\weapons::equipmentdeletevfx(self.origin, self.angles);
-  scripts\mp\utility::printgameaction("microturret destroyed", self.triggerportableradarping);
+  scripts\mp\utility::printgameaction("microturret destroyed", self.owner);
   self delete();
 }
 
@@ -535,7 +535,7 @@ func_5236(var_0) {
 
 func_B71E() {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   thread func_B6F6();
 }
 
@@ -544,7 +544,7 @@ func_B71D() {
   self endon("microTurret_destroyAll");
   self notify("microTurret_watchForGameEnd");
   self endon("microTurret_watchForGameEnd");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread func_B6F5();
 }
 
@@ -679,17 +679,17 @@ func_B71A(var_0) {
     }
 
     if(scripts\mp\utility::func_9F22(var_0)) {
-      var_1 = var_0.triggerportableradarping;
+      var_1 = var_0.owner;
     }
 
     if(scripts\mp\utility::func_9F72(var_0)) {
-      var_1 = var_0.triggerportableradarping;
+      var_1 = var_0.owner;
     }
   } else {
-    var_1 = var_0.triggerportableradarping;
+    var_1 = var_0.owner;
   }
 
-  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_1))) {
+  if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_1))) {
     return 0;
   }
 

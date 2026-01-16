@@ -38,7 +38,7 @@ holywater_projectile_watcher() {
 
     scripts\engine\utility::flag_clear("flag_player_holding_holyWater");
     level notify("holyWater_thrown");
-    var_0.triggerportableradarping = self;
+    var_0.owner = self;
     var_0 thread holywater_projectile_instance();
   }
 }

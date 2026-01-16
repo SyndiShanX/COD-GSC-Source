@@ -136,16 +136,16 @@ randomdrops() {
       var_7 = var_5;
       var_8 = scripts\common\trace::create_contents(0, 1, 1, 1, 0, 1, 0);
       var_9 = [];
-      var_0A = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
-      var_4.droporigin = var_0A["position"];
-      var_0B = getdropzonecratetype();
+      var_10 = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
+      var_4.droporigin = var_10["position"];
+      var_11 = getdropzonecratetype();
       level scripts\mp\killstreaks\_airdrop::func_581F(var_0, var_4, randomfloat(360), "dronedrop_grnd");
-      var_0C = level.droptime;
+      var_12 = level.droptime;
     } else {
-      var_0C = 0.5;
+      var_12 = 0.5;
     }
 
-    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0C);
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_12);
   }
 }
 

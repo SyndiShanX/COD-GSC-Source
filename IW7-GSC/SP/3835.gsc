@@ -471,8 +471,8 @@ func_FD72(var_0) {
 
 func_FD71() {
   foreach(var_2, var_1 in level.var_FD6E.var_1912) {
-    level.var_FD6E.var_1912[var_2] = scripts\engine\utility::array_removeundefined(level.var_FD6E.var_1912[var_2]);
-    level.var_FD6E.var_1912[var_2] = scripts\sp\utility::func_22B9(level.var_FD6E.var_1912[var_2]);
+    level.var_FD6E.var_1912[var_2] = ::scripts\engine\utility::array_removeundefined(level.var_FD6E.var_1912[var_2]);
+    level.var_FD6E.var_1912[var_2] = ::scripts\sp\utility::func_22B9(level.var_FD6E.var_1912[var_2]);
   }
 }
 
@@ -482,7 +482,7 @@ func_FD6F(var_0) {
   }
 
   self.var_ECE7 = var_0;
-  level.var_FD6E.var_1912[var_0] = scripts\engine\utility::array_add_safe(level.var_FD6E.var_1912[var_0], self);
+  level.var_FD6E.var_1912[var_0] = ::scripts\engine\utility::add_to_array(level.var_FD6E.var_1912[var_0], self);
 }
 
 func_FDBB(var_0) {
@@ -1013,7 +1013,7 @@ func_EB8D(var_0, var_1) {
       self.var_13C4D delete();
     }
 
-    scripts\sp\utility::func_CC06(self.var_394, "back");
+    scripts\sp\utility::func_CC06(self.weapon, "back");
   }
 }
 
@@ -1294,7 +1294,7 @@ func_AE45(var_0, var_1) {
     return;
   }
 
-  level func_3DDE(self.var_394);
+  level func_3DDE(self.weapon);
   scripts\sp\utility::func_86E2();
 }
 
@@ -1305,7 +1305,7 @@ func_3DDE(var_0, var_1) {
     scripts\sp\utility::func_13705();
     scripts\sp\utility::func_12641(var_2);
     if(!scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], var_0)) {
-      level.var_D9E5["loaded_weapons"] = scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_0);
+      level.var_D9E5["loaded_weapons"] = ::scripts\engine\utility::array_add(level.var_D9E5["loaded_weapons"], var_0);
       level.player func_84C7("weaponsLoaded", var_0, 1);
     }
   }

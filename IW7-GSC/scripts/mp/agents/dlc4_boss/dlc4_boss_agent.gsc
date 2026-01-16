@@ -130,15 +130,15 @@ setupagent() {
   self.var_B601 = 45;
   self.var_504E = 55;
   self.var_129AF = 55;
-  self.var_368 = -60;
-  self.isbot = 60;
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
   self.precacheleaderboards = 1;
   self gib_fx_override("noclip");
 }
 
-func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = scripts\asm\dlc4\dlc4_asm::gettunedata();
-  if(var_5 == var_0C.entangler_weapon_name) {
+func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  if(var_5 == var_12.entangler_weapon_name) {
     var_2 = 0;
   }
 
@@ -146,21 +146,21 @@ func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_2 = 0;
   }
 
-  [[level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0A, var_0B);
+  [[level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11);
 }
 
-ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   if(var_2 == 0) {
     return;
   }
 
   self.health = 999999;
-  var_0D = 0;
-  if(self.showblood || var_0D) {
-    self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+  var_13 = 0;
+  if(self.showblood || var_13) {
+    self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   }
 
-  if(self.var_FCA5 && !var_0D) {
+  if(self.var_FCA5 && !var_13) {
     if(isDefined(var_6) && isDefined(var_7)) {
       playFX(level._effect["boss_shield_hit"], var_6, var_7 * -150);
     }
@@ -174,7 +174,7 @@ ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
     var_1 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
   }
 
-  var_0E = scripts\asm\dlc4\dlc4_asm::gettunedata();
+  var_14 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   if(level.fbd.bossstate == "FRENZIED") {
     self.frenziedhealth = self.frenziedhealth - min(var_2, self.damagecap);
     self.damagecap = max(self.damagecap - var_2, 0);

@@ -372,8 +372,9 @@ func_12A2A() {
     self.team = var_0.team;
     self setturretteam(var_0.team);
     scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 65));
-  } else
+  } else {
     scripts\mp\entityheadicons::setplayerheadicon(self.owner, (0, 0, 65));
+  }
 
   self.ownertrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 32, 64);
   self.ownertrigger getrankxp();
@@ -945,8 +946,9 @@ func_12A50() {
         var_2 = 0;
         var_1++;
       }
-    } else if(self.damagetaken >= self.maxhealth * (var_0 * var_1))
+    } else if(self.damagetaken >= self.maxhealth * (var_0 * var_1)) {
       var_1++;
+    }
 
     wait 0.05;
   }

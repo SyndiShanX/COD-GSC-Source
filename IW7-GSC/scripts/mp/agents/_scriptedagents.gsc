@@ -129,8 +129,8 @@ func_1384C(var_0, var_1, var_2, var_3, var_4) {
   for(var_7 = 0; !var_7; var_7 = func_1384A(var_8, var_1, var_2, var_3, var_4, var_6, var_5)) {
     self waittill(var_0, var_8);
     if(isarray(var_8)) {
-      foreach(var_0A in var_8) {
-        if(func_1384A(var_0A, var_1, var_2, var_3, var_4, var_6, var_5)) {
+      foreach(var_10 in var_8) {
+        if(func_1384A(var_10, var_1, var_2, var_3, var_4, var_6, var_5)) {
           var_7 = 1;
         }
       }
@@ -169,8 +169,8 @@ playanimnwithnotetracksfortime_helper(var_0, var_1, var_2, var_3) {
       var_8 = [var_8];
     }
 
-    foreach(var_0A in var_8) {
-      if(func_1384A(var_0A, "end", var_0, var_1, var_3, var_6, var_7)) {
+    foreach(var_10 in var_8) {
+      if(func_1384A(var_10, "end", var_0, var_1, var_3, var_6, var_7)) {
         var_4 = 1;
       }
     }
@@ -191,8 +191,8 @@ func_7DC9(var_0, var_1, var_2) {
   var_8 = 1;
   if(isDefined(var_2) && var_2) {
     var_9 = (var_1[0], var_1[1], 0);
-    var_0A = vectornormalize(var_9);
-    if(vectordot(var_0A, var_0) < 0) {
+    var_10 = vectornormalize(var_9);
+    if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;
     } else if(var_5 > 0) {
       var_7 = var_3 / var_5;
@@ -205,10 +205,10 @@ func_7DC9(var_0, var_1, var_2) {
     var_8 = var_4 / var_6;
   }
 
-  var_0B = spawnStruct();
-  var_0B.var_13E2B = var_7;
-  var_0B.var_3A6 = var_8;
-  return var_0B;
+  var_11 = spawnStruct();
+  var_11.var_13E2B = var_7;
+  var_11.var_3A6 = var_8;
+  return var_11;
 }
 
 func_5D51(var_0, var_1) {
@@ -391,8 +391,8 @@ func_5AC1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   } else {
     var_8 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
     var_9 = var_9.origin;
-    var_0A = getnotetracktimes(var_3, "highest_point");
-    var_9 = var_0A[0];
+    var_10 = getnotetracktimes(var_3, "highest_point");
+    var_9 = var_10[0];
   }
 
   func_5AC2(var_0, var_1, var_3, var_2, var_4, var_5, var_8, var_9, var_7);
@@ -400,14 +400,14 @@ func_5AC1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
 func_5AC2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = abs(self.origin[2] - var_6[2]);
-  var_0A = getnotetracktimes(var_3, var_4);
-  var_0B = var_0A[0];
-  var_0C = var_0B;
-  var_0D = getnotetracktimes(var_3, var_5);
-  var_0E = var_0D[0];
-  var_7 = var_0E;
-  var_0F = "flex_height_up_top";
-  var_10 = getnotetracktimes(var_3, var_0F);
+  var_10 = getnotetracktimes(var_3, var_4);
+  var_11 = var_10[0];
+  var_12 = var_11;
+  var_13 = getnotetracktimes(var_3, var_5);
+  var_14 = var_13[0];
+  var_7 = var_14;
+  var_15 = "flex_height_up_top";
+  var_10 = getnotetracktimes(var_3, var_15);
   var_11 = "flex_height_down_top";
   var_12 = getnotetracktimes(var_3, var_11);
   var_13 = "flex_height_down_bottom";
@@ -418,7 +418,7 @@ func_5AC2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   if(var_4 == "flex_height_down_start") {
     if(var_12.size > 0) {
-      var_0C = var_10[0];
+      var_12 = var_10[0];
     }
 
     if(var_14.size > 0) {
@@ -426,9 +426,9 @@ func_5AC2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  var_15 = getmovedelta(var_3, var_0C, var_7);
+  var_15 = getmovedelta(var_3, var_12, var_7);
   var_16 = abs(var_15[2]);
-  var_18 = getmovedelta(var_3, var_0B, var_0E);
+  var_18 = getmovedelta(var_3, var_11, var_14);
   var_19 = abs(var_18[2]);
   if(var_19 < 1) {
     var_1A = 1;
@@ -442,9 +442,9 @@ func_5AC2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   self scragentsetanimscale(1, var_1A);
-  if(var_0B != 0) {
+  if(var_11 != 0) {
     var_1C = self getscoreinfocategory(var_3);
-    if(var_1C < var_0B) {
+    if(var_1C < var_11) {
       func_CED2(var_0, var_1, 1, var_2, var_4, var_8);
     }
   }

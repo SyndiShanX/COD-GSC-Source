@@ -398,7 +398,7 @@ wait_for_quest_completed(var_0, var_1) {
   var_0.script_noteworthy = var_2;
   var_0.clip = weaponclipsize(var_2);
   var_0.stock = weaponmaxammo(var_2);
-  var_0.var_394 = var_2;
+  var_0.weapon = var_2;
   var_1 thread scripts\cp\maps\cp_rave\cp_rave::watch_for_weapon_removed(var_0, var_1);
   var_0 thread watch_player_ammo_count(var_0, var_1, var_2);
 }
@@ -504,8 +504,8 @@ add_back_to_interaction_system(var_0, var_1, var_2) {
   }
 
   var_9 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
-  foreach(var_0B in var_9) {
-    scripts\cp\cp_interaction::add_to_current_interaction_list(var_0B);
+  foreach(var_11 in var_9) {
+    scripts\cp\cp_interaction::add_to_current_interaction_list(var_11);
   }
 }
 
@@ -839,7 +839,7 @@ update_rave_mode_for_player(var_0) {
 
 unsetravetriggeraftertime(var_0, var_1, var_2, var_3, var_4) {
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(scripts\engine\utility::ter_op(scripts\engine\utility::istrue(level.only_one_player) || scripts\cp\utility::isplayingsolo(), 60, 2), "picked_up");
+  var_0 scripts\engine\utility::waittill_any_timeout(scripts\engine\utility::ter_op(scripts\engine\utility::istrue(level.only_one_player) || scripts\cp\utility::isplayingsolo(), 60, 2), "picked_up");
   var_0.ravetriggered = 0;
   foreach(var_6 in level.players) {
     var_6 thread update_rave_mode_for_player(var_6);
@@ -986,7 +986,7 @@ exit_rave_after_time() {
   self endon("disconnect");
   self endon("last_stand");
   for(;;) {
-    var_0 = scripts\engine\utility::waittill_any_timeout_1(self.current_rave_mode_timer, "update_rave_mode_timer");
+    var_0 = scripts\engine\utility::waittill_any_timeout(self.current_rave_mode_timer, "update_rave_mode_timer");
     if(var_0 == "timeout") {
       scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(self);
     }
@@ -1304,23 +1304,23 @@ cp_rave_wait_for_interaction_triggered(var_0) {
           continue;
         }
       } else if(var_0.script_noteworthy == "arcade_counter_grenade") {
-        var_0A = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
-        if(self.powers[var_0A].charges >= level.powers[var_0A].maxcharges) {
+        var_10 = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
+        if(self.powers[var_10].charges >= level.powers[var_10].maxcharges) {
           scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_INTERACTIONS_EQUIPMENT_FULL");
           wait(0.1);
           continue;
         }
       } else if(var_0.script_noteworthy == "arcade_counter_ammo") {
-        var_0B = self getcurrentweapon();
-        if(self getweaponammostock(var_0B) >= weaponmaxammo(var_0B)) {
-          var_0C = 1;
-          if(weaponmaxammo(var_0B) == weaponclipsize(var_0B)) {
-            if(self getweaponammoclip(var_0B) < weaponclipsize(var_0B)) {
-              var_0C = 0;
+        var_11 = self getcurrentweapon();
+        if(self getweaponammostock(var_11) >= weaponmaxammo(var_11)) {
+          var_12 = 1;
+          if(weaponmaxammo(var_11) == weaponclipsize(var_11)) {
+            if(self getweaponammoclip(var_11) < weaponclipsize(var_11)) {
+              var_12 = 0;
             }
           }
 
-          if(var_0C) {
+          if(var_12) {
             scripts\cp\cp_interaction::interaction_show_fail_reason(var_0, &"COOP_GAME_PLAY_AMMO_MAX");
             wait(0.1);
             continue;
@@ -1408,8 +1408,8 @@ cp_rave_wait_for_interaction_triggered(var_0) {
       return;
     }
 
-    var_0D = level.interactions[var_0.script_noteworthy].spend_type;
-    thread scripts\cp\cp_interaction::take_player_money(var_2, var_0D);
+    var_13 = level.interactions[var_0.script_noteworthy].spend_type;
+    thread scripts\cp\cp_interaction::take_player_money(var_2, var_13);
     level thread[[level.interactions[var_0.script_noteworthy].activation_func]](var_0, self);
     if(scripts\cp\cp_interaction::interaction_is_souvenir(var_0)) {
       level thread scripts\cp\cp_interaction::souvenir_team_splash(var_0.script_noteworthy, self);
@@ -1565,7 +1565,7 @@ lair_door_player_monitor() {
         break;
     }
 
-    level scripts\engine\utility::waittill_any_timeout_1(1, "connected");
+    level scripts\engine\utility::waittill_any_timeout(1, "connected");
   }
 }
 
@@ -1737,7 +1737,7 @@ wait_for_saw_removed(var_0, var_1) {
       break;
     }
 
-    var_1 scripts\engine\utility::waittill_any_3("weapon_purchased", "mule_munchies_sold");
+    var_1 scripts\engine\utility::waittill_any("weapon_purchased", "mule_munchies_sold");
     var_2 = 0;
     var_3 = var_1 getweaponslistall();
     foreach(var_5 in var_3) {

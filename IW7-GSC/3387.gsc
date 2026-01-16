@@ -29,9 +29,9 @@ func_E5D9() {
   var_7 = undefined;
   var_8 = scripts\engine\utility::istrue(self.requires_power) && isDefined(self.power_area);
   var_9 = "power_on";
-  foreach(var_0B in var_6) {
-    if(var_0B.classname == "light_spot") {
-      var_7 = var_0B;
+  foreach(var_11 in var_6) {
+    if(var_11.classname == "light_spot") {
+      var_7 = var_11;
     }
   }
 
@@ -42,7 +42,7 @@ func_E5D9() {
     }
 
     if(var_9 != "power_off") {
-      for(var_0D = 0; var_0D < 3; var_0D++) {
+      for(var_13 = 0; var_13 < 3; var_13++) {
         var_7 setlightintensity(100);
         wait(randomfloatrange(0.5, 1));
         var_7 setlightintensity(0);

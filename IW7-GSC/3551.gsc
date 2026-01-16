@@ -38,7 +38,7 @@ func_13A14() {
   self endon("death");
   self endon("disconnect");
   self endon("cloak_end");
-  scripts\engine\utility::waittill_any_3("grenade_throw", "weapon_fired", "melee_fired");
+  scripts\engine\utility::waittill_any("grenade_throw", "weapon_fired", "melee_fired");
   scripts\mp\supers::func_DE3B(9999);
 }
 

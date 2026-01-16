@@ -1074,8 +1074,9 @@ playerhealthregen() {
         if(var_6 >= 1) {
           func_DE3C();
         }
-      } else
+      } else {
         var_6 = 1;
+      }
 
       if(var_6 > 1.0) {
         var_6 = 1.0;
@@ -1121,8 +1122,9 @@ playerhealthregen() {
     if(var_3) {
       var_4 = self.gs.invultime_onshield;
       var_3 = 0;
-    } else if(var_2)
+    } else if(var_2) {
       var_4 = self.gs.invultime_postshield;
+    }
     else {
       var_4 = self.gs.invultime_preshield;
     }
@@ -1202,8 +1204,9 @@ grenadeawareness() {
       } else {
         self.grenadeawareness = 0.5;
       }
-    } else if(randomint(100) < 33)
+    } else if(randomint(100) < 33) {
       self.grenadeawareness = 0;
+    }
     else {
       self.grenadeawareness = 0.2;
     }
@@ -2178,8 +2181,9 @@ func_262C(var_0) {
     }
 
     func_CF80(var_0) {
-      if([[level.var_4C6B]](var_0))
+      if([[level.var_4C6B]](var_0)) {
         return 1;
+      }
 
       if(isplayer(var_0)) {
         return 1;
@@ -2406,7 +2410,7 @@ func_262C(var_0) {
           return;
         }
         level.player waittill("weapon_change", var_6);
-        var_7 = level.player func_8519(var_6, 1);
+        var_7 = level.player isalternatemode(var_6, 1);
         var_8 = getweaponbasename(var_6);
         var_9 = "";
 
@@ -2418,8 +2422,9 @@ func_262C(var_0) {
                 level.var_13062 = 1;
                 var_5++;
               }
-            } else
+            } else {
               var_9 = "alt_m8";
+            }
 
             break;
           case "iw7_fmg":
@@ -2429,8 +2434,9 @@ func_262C(var_0) {
                 level.var_1305F = 1;
                 var_5++;
               }
-            } else
+            } else {
               var_9 = "alt_fmg";
+            }
 
             break;
           case "iw7_erad":
@@ -2440,8 +2446,9 @@ func_262C(var_0) {
                 level.var_1305E = 1;
                 var_5++;
               }
-            } else
+            } else {
               var_9 = "alt_erad";
+            }
 
             break;
           case "iw7_ripper":
@@ -2451,8 +2458,9 @@ func_262C(var_0) {
                 level.var_13069 = 1;
                 var_5++;
               }
-            } else
+            } else {
               var_9 = "alt_ripper";
+            }
 
             break;
           default:

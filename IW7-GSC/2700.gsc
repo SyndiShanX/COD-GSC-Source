@@ -129,8 +129,9 @@ func_136AE() {
     if(var_0 < 2000) {
       var_0 = 2000;
     }
-  } else
+  } else {
     var_0 = 4000;
+  }
 
   var_1 = checkbuddyspawn();
 

@@ -437,8 +437,9 @@ func_9192() {
     var_1 = length2d(level.player.origin - level.player.var_20F8.origin);
     var_2 = clamp(var_1 / 1000, 1, 2);
     var_0["r_hudoutlineWidth"] = var_2;
-  } else
+  } else {
     var_0["r_hudoutlineWidth"] = 1;
+  }
 
   var_0["r_hudoutlineFillColor0"] = "0.9 0.9 0.9 0.5";
   var_0["r_hudoutlineFillColor1"] = "0.3 0.3 0.3 0.5";

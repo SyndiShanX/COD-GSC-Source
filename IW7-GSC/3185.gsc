@@ -23,10 +23,12 @@ func_3F00(var_0, var_1, var_2, var_3) {
       } else {
         var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "backward");
       }
-    } else
+    } else {
       var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "forward");
-  } else if(self.damageyaw > 45 && self.damageyaw <= 135)
+    }
+  } else if(self.damageyaw > 45 && self.damageyaw <= 135) {
     var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "right");
+  }
   else if(self.damageyaw > -45 && self.damageyaw <= 45) {
     if(scripts\engine\utility::is_true(var_3) && !isDefined(self.slappymelee)) {
       if(randomint(100) > 50) {
@@ -34,10 +36,12 @@ func_3F00(var_0, var_1, var_2, var_3) {
       } else {
         var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "backward");
       }
-    } else
+    } else {
       var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "backward");
-  } else
+    }
+  } else {
     var_4 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "left");
+  }
 
   return var_4;
 }

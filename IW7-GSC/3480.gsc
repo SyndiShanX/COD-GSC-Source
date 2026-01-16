@@ -32,8 +32,9 @@ func_618B(var_0, var_1) {
   } else if(level.teambased) {
     var_3 = level.otherteam[var_2];
     thread func_6165(var_3);
-  } else
+  } else {
     thread func_6164(self);
+  }
 
   scripts\mp\matchdata::logkillstreakevent("emp", self.origin);
   self notify("used_emp");

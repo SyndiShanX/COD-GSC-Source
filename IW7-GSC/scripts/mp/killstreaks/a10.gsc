@@ -46,7 +46,7 @@ init() {
   var_0.sfxengine_1p = "veh_a10_plr_engine_lp";
   var_0.sfxengine_3p = "veh_a10_dist_loop";
   level.planeconfigs["a10_strafe"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("a10_strafe", ::onuse);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("a10_strafe", ::onuse);
   buildallflightpathsdefault();
 }
 
@@ -81,7 +81,7 @@ dostrike(var_0, var_1) {
       switchaircraft(var_4, var_1);
       var_4 = spawnaircraft(var_1, var_0, level.a10splinesin[var_2]);
       if(isDefined(var_4)) {
-        thread scripts\mp\killstreaks\_killstreaks::clearrideintro(1, 0.75);
+        thread scripts\mp\killstreaks\killstreaks::clearrideintro(1, 0.75);
         var_4 dooneflyby();
         var_4 thread endflyby(var_1);
         endstrafesequence(var_1);
@@ -99,7 +99,7 @@ startstrafesequence(var_0, var_1) {
 
   self.restoreangles = self.angles;
   scripts\mp\utility::freezecontrolswrapper(1);
-  var_2 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("a10_strafe");
+  var_2 = scripts\mp\killstreaks\killstreaks::initridekillstreak("a10_strafe");
   if(var_2 != "success") {
     if(var_2 != "disconnect") {
       scripts\mp\utility::clearusingremote();
@@ -174,14 +174,14 @@ attachturret(var_0) {
   var_3 linkto(self, var_1.turretattachpoint, (0, 0, 0), (0, 0, 0));
   var_3 setModel("vehicle_ugv_talon_gun_mp");
   var_3.angles = self.angles;
-  var_3.triggerportableradarping = self.triggerportableradarping;
+  var_3.owner = self.owner;
   var_3 getvalidattachments();
   var_3 setturretmodechangewait(0);
   var_3 give_player_session_tokens("sentry_offline");
   var_3 makeunusable();
   var_3 setCanDamage(0);
-  var_3 setsentryowner(self.triggerportableradarping);
-  self.triggerportableradarping remotecontrolturret(var_3);
+  var_3 setsentryowner(self.owner);
+  self.owner remotecontrolturret(var_3);
   self.turret = var_3;
 }
 
@@ -221,13 +221,13 @@ endflyby(var_0) {
     return;
   }
 
-  self.triggerportableradarping remotecontrolvehicleoff(self);
+  self.owner remotecontrolvehicleoff(self);
   if(isDefined(self.turret)) {
-    self.triggerportableradarping geysers_and_boatride(self.turret);
+    self.owner geysers_and_boatride(self.turret);
   }
 
   self notify("end_remote");
-  self.triggerportableradarping thermalvisionfofoverlayoff();
+  self.owner thermalvisionfofoverlayoff();
   var_1 = level.planeconfigs[var_0];
   self stoploopsound(var_1.sfxcannonfireloop_1p);
   scripts\mp\killstreaks\_plane::stoptrackingplane(self);
@@ -249,7 +249,7 @@ createplaneasheli(var_0, var_1, var_2) {
   }
 
   var_7 makevehiclesolidcapsule(18, -9, 18);
-  var_7.triggerportableradarping = self;
+  var_7.owner = self;
   var_7.team = self.team;
   var_7.lifeid = var_1;
   var_7 thread scripts\mp\killstreaks\_plane::playplanefx();
@@ -261,7 +261,7 @@ handledeath() {
   self endon("delete");
   self waittill("death");
   level.a10strafeactive = undefined;
-  self.triggerportableradarping.using_remote_a10 = undefined;
+  self.owner.using_remote_a10 = undefined;
   self delete();
 }
 
@@ -343,7 +343,7 @@ missilegetbesttarget() {
 }
 
 missileisgoodtarget(var_0) {
-  return isalive(var_0) && var_0.team != self.triggerportableradarping.team && !ismissiletargeted(var_0) && isplayer(var_0) && !var_0 scripts\mp\utility::_hasperk("specialty_blindeye") && missiletargetangle(var_0) > 0.25;
+  return isalive(var_0) && var_0.team != self.owner.team && !ismissiletargeted(var_0) && isplayer(var_0) && !var_0 scripts\mp\utility::_hasperk("specialty_blindeye") && missiletargetangle(var_0) > 0.25;
 }
 
 missiletargetangle(var_0) {
@@ -358,7 +358,7 @@ missileacquiretargets() {
   level endon("game_ended");
   self endon("a10_missiles_fired");
   var_0 = level.planeconfigs[self.streakname];
-  self.triggerportableradarping setclientomnvar("ui_a10_rocket_lock", 1);
+  self.owner setclientomnvar("ui_a10_rocket_lock", 1);
   thread missilewaitfortriggerrelease();
   var_1 = undefined;
   while(self.targetlist.size < self.numrocketsleft) {
@@ -375,7 +375,7 @@ missileacquiretargets() {
     wait(0.1);
   }
 
-  self.triggerportableradarping setclientomnvar("ui_a10_rocket_lock", 0);
+  self.owner setclientomnvar("ui_a10_rocket_lock", 0);
   self notify("a10_missiles_fired");
 }
 
@@ -384,14 +384,14 @@ missilewaitfortriggerrelease() {
   self endon("death");
   level endon("game_ended");
   self endon("a10_missiles_fired");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 notifyonplayercommand("rocket_fire_released", "-speed_throw");
   var_0 notifyonplayercommand("rocket_fire_released", "-ads_akimbo_accessible");
   if(!level.console) {
     var_0 notifyonplayercommand("rocket_fire_released", "-toggleads_throw");
   }
 
-  self.triggerportableradarping waittill("rocket_fire_released");
+  self.owner waittill("rocket_fire_released");
   var_0 setclientomnvar("ui_a10_rocket_lock", 0);
   self notify("a10_missiles_fired");
 }
@@ -399,10 +399,10 @@ missilewaitfortriggerrelease() {
 missilelocktarget(var_0) {
   var_1 = level.planeconfigs[self.streakname];
   var_2 = [];
-  var_2["icon"] = var_0 scripts\mp\entityheadicons::setheadicon(self.triggerportableradarping, var_1.lockonicon, (0, 0, -70), 10, 10, 0, 0.05, 1, 0, 0, 0);
+  var_2["icon"] = var_0 scripts\mp\entityheadicons::setheadicon(self.owner, var_1.lockonicon, (0, 0, -70), 10, 10, 0, 0.05, 1, 0, 0, 0);
   var_2["target"] = var_0;
   self.targetlist[var_0 getentitynumber()] = var_2;
-  self.triggerportableradarping playlocalsound("recondrone_lockon");
+  self.owner playlocalsound("recondrone_lockon");
 }
 
 ismissiletargeted(var_0) {
@@ -436,9 +436,9 @@ onfirehomingmissile(var_0, var_1, var_2) {
   var_4 = "tag_missile_" + var_3 + 1;
   var_5 = self gettagorigin(var_4);
   if(isDefined(var_5)) {
-    var_6 = self.triggerportableradarping;
+    var_6 = self.owner;
     var_7 = level.planeconfigs[var_0];
-    var_8 = scripts\mp\utility::_magicbullet(var_7.rocketmodelname, var_5, var_5 + 100 * anglesToForward(self.angles), self.triggerportableradarping);
+    var_8 = scripts\mp\utility::_magicbullet(var_7.rocketmodelname, var_5, var_5 + 100 * anglesToForward(self.angles), self.owner);
     var_8 thread a10_missile_set_target(var_1, var_2);
     earthquake(0.25, 0.05, self.origin, 512);
     self.numrocketsleft--;
@@ -455,9 +455,9 @@ onfirerocket(var_0) {
   var_1 = "tag_missile_" + self.numrocketsleft;
   var_2 = self gettagorigin(var_1);
   if(isDefined(var_2)) {
-    var_3 = self.triggerportableradarping;
+    var_3 = self.owner;
     var_4 = level.planeconfigs[var_0];
-    var_5 = scripts\mp\utility::_magicbullet(var_4.rocketmodelname, var_2, var_2 + 100 * anglesToForward(self.angles), self.triggerportableradarping);
+    var_5 = scripts\mp\utility::_magicbullet(var_4.rocketmodelname, var_2, var_2 + 100 * anglesToForward(self.angles), self.owner);
     earthquake(0.25, 0.05, self.origin, 512);
     self.numrocketsleft--;
     var_5 playsoundonmovingent(var_4.sfxmissilefire_1p[self.numrocketsleft]);
@@ -511,7 +511,7 @@ monitorweaponfire(var_0, var_1) {
 }
 
 updatecannonshake(var_0) {
-  self.triggerportableradarping endon("a10_cannon_stop");
+  self.owner endon("a10_cannon_stop");
   self endon("death");
   level endon("game_ended");
   var_1 = level.planeconfigs[var_0];
@@ -566,7 +566,7 @@ watchroundend(var_0, var_1) {
   self endon("disconnect");
   self endon("joined_team");
   self endon("joined_spectators");
-  level scripts\engine\utility::waittill_any_3("round_end_finished", "game_ended");
+  level scripts\engine\utility::waittill_any("round_end_finished", "game_ended");
   var_0 thread endflyby(var_1);
   endstrafesequence(var_1);
   a10_explode();
@@ -608,7 +608,7 @@ watchearlyexit(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   var_0 endon("a10_end_strafe");
-  var_0 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  var_0 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
   var_0 waittill("killstreakExit");
   self notify("end_remote");
   var_0 thread endflyby(var_0.streakname);

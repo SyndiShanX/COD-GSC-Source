@@ -412,9 +412,9 @@ func_12DAD(var_0) {
     if(!func_9B7E(var_6) && !isDefined(func_7878(var_6))) {
       var_7 = func_787A(var_6, "attackers");
       if(var_7.size > 0) {
-        var_0D = scripts\engine\utility::get_array_of_closest(var_6.bottarget.origin, var_7);
-        var_0D[0].var_9C6A = 1;
-        var_0D[0] scripts\mp\bots\_bots_strategy::bot_defend_stop();
+        var_13 = scripts\engine\utility::get_array_of_closest(var_6.bottarget.origin, var_7);
+        var_13[0].var_9C6A = 1;
+        var_13[0] scripts\mp\bots\_bots_strategy::bot_defend_stop();
       }
     }
   }
@@ -446,10 +446,10 @@ func_12DAE(var_0) {
     var_8 = func_787A(var_7, "defenders");
     if(var_8.size > var_7.bots_defending_wanted) {
       var_8 = scripts\engine\utility::array_randomize(var_8);
-      foreach(var_0A in var_8) {
-        if(!var_0A.var_9BB6) {
-          var_0A.current_bombzone = undefined;
-          var_0A scripts\mp\bots\_bots_strategy::bot_defend_stop();
+      foreach(var_10 in var_8) {
+        if(!var_10.var_9BB6) {
+          var_10.current_bombzone = undefined;
+          var_10 scripts\mp\bots\_bots_strategy::bot_defend_stop();
           break;
         }
       }
@@ -458,17 +458,17 @@ func_12DAE(var_0) {
 
   foreach(var_7 in var_0) {
     if(func_9B7E(var_7)) {
-      var_0E = func_7877(var_7);
-      if(!isDefined(var_0E) || gettime() > level.var_BF6A) {
+      var_14 = func_7877(var_7);
+      if(!isDefined(var_14) || gettime() > level.var_BF6A) {
         var_8 = func_787A(var_7, "defenders");
         if(var_8.size > 0) {
-          var_0F = scripts\engine\utility::get_array_of_closest(var_7.bottarget.origin, var_8);
-          if(!isDefined(var_0E) || var_0F[0] != var_0E) {
-            var_0F[0].var_9BB6 = 1;
-            var_0F[0] scripts\mp\bots\_bots_strategy::bot_defend_stop();
-            if(isDefined(var_0E)) {
-              var_0E.var_9BB6 = 0;
-              var_0E notify("no_longer_bomb_defuser");
+          var_15 = scripts\engine\utility::get_array_of_closest(var_7.bottarget.origin, var_8);
+          if(!isDefined(var_14) || var_15[0] != var_14) {
+            var_15[0].var_9BB6 = 1;
+            var_15[0] scripts\mp\bots\_bots_strategy::bot_defend_stop();
+            if(isDefined(var_14)) {
+              var_14.var_9BB6 = 0;
+              var_14 notify("no_longer_bomb_defuser");
             }
           }
         }

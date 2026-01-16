@@ -284,8 +284,9 @@ func_89A2(var_0, var_1, var_2) {
     if(var_3 <= 0) {
       var_1 thread func_10D9E(var_2, var_0, "passive_fire_damage", "player_plasma_friendly", "player_plasma_enemy", "j_mainroot", "player_plasma_screen_stand");
       var_1 thread startdamageovertime(var_2, var_0, 2, 0.5, 2, "passive_fire_damage");
-    } else
+    } else {
       setpassivevalue("passive_fire_damage", 2);
+    }
   }
 }
 
@@ -1106,8 +1107,9 @@ func_89CC(var_0, var_1, var_2) {
     var_0 scripts\mp\killstreaks\killstreaks::awardkillstreak("nuke", var_0);
     var_0.pers["passive_nuke_key"] = 0;
     var_0 scripts\mp\missions::func_D991("ch_darkops_nuke");
-  } else if(var_0.pers["passive_nuke_key"] == 24)
+  } else if(var_0.pers["passive_nuke_key"] == 24) {
     var_0 thread scripts\mp\hud_message::showsplash("nuke_kill_single");
+  }
   else if(var_0.pers["passive_nuke_key"] == 2) {
     var_0 thread func_C1C8();
   } else if(var_0.pers["passive_nuke_key"] >= 20) {
@@ -1594,8 +1596,9 @@ setslideblastshield() {
         checkpassivemessage("passive_slide_blastshield", "_start");
         scripts\mp\utility\game::giveperk("specialty_blastshield");
       }
-    } else if(!isDefined(var_0))
+    } else if(!isDefined(var_0)) {
       var_0 = gettime() + 250.0;
+    }
     else if(gettime() >= var_0) {
       if(scripts\mp\utility\game::istrue(getpassivevalue("passive_slide_blastshield"))) {
         setpassivevalue("passive_slide_blastshield", undefined);
@@ -1876,8 +1879,9 @@ func_89DB(var_0, var_1) {
     var_0 thread scripts\mp\hud_message::showkillstreaksplash("refresh");
     var_0 scripts\mp\powers::func_1813(1);
     var_0.pers["passive_refresh_key"] = 0;
-  } else if(var_0.pers["passive_refresh_key"] == 4)
+  } else if(var_0.pers["passive_refresh_key"] == 4) {
     var_0 thread scripts\mp\hud_message::showsplash("refresh_kill_single");
+  }
   else if(var_0.pers["passive_refresh_key"] == 3) {
     var_0 thread func_DE77();
   }
@@ -2256,8 +2260,9 @@ func_8974(var_0, var_1) {
     var_0.var_204A = 1;
     var_0 thread scripts\mp\hud_message::showsplash("specialty_scavenger");
     var_0 scripts\mp\utility\game::giveperk("specialty_scavenger");
-  } else
+  } else {
     var_0.var_204A++;
+  }
 
   if(var_0.var_204A == 3) {
     var_0 thread scripts\mp\hud_message::showsplash("specialty_quickdraw");
@@ -2370,7 +2375,7 @@ watchmodeswitchkillweaponsdrop(var_0) {
 
     for(var_5 = 0; var_5 < var_2.size; var_5++) {
       var_6 = var_2[var_5];
-      var_3[var_5] = scripts\mp\utility\game::getweaponrootname(var_6);
+      var_3[var_5] = ::scripts\mp\utility\game::getweaponrootname(var_6);
       var_4[var_5] = getweaponvariantindex(var_6);
     }
 
@@ -2423,7 +2428,7 @@ updatemodeswitchweaponkills(var_0, var_1, var_2) {
   if(!isDefined(var_7)) {
     return;
   }
-  var_8 = var_0 func_8519(var_2);
+  var_8 = var_0 isalternatemode(var_2);
 
   if(!isDefined(var_7.killinaltmode) || var_7.killinaltmode == var_8) {
     var_7.numkills++;
@@ -2458,7 +2463,7 @@ getmodeswitchkillweaponkey(var_0) {
 }
 
 handlemeleeconeexplodeonkillpassive(var_0, var_1, var_2, var_3) {
-  if(!var_0 func_8519(var_2)) {
+  if(!var_0 isalternatemode(var_2)) {
     return;
   }
   if(var_3 != "MOD_MELEE") {

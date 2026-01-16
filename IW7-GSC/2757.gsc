@@ -227,8 +227,9 @@ func_A448() {
       if(func_11579(var_21[0])) {
         self func_8406(1);
         continue;
-      } else
+      } else {
         self func_8406(0);
+      }
 
       if(isDefined(self.var_A443)) {
         var_22 = averagepoint(self.var_A443);

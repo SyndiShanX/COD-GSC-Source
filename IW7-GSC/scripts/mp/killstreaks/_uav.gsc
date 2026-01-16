@@ -7,10 +7,10 @@ init() {
   level.radarviewtime = 23;
   level.advradarviewtime = 28;
   level.uavblocktime = 23;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("uav", ::func_1290B);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("counter_uav", ::func_1290B);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("directional_uav", ::func_1290B);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("uav_3dping", ::func_128B2);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("uav", ::func_1290B);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("counter_uav", ::func_1290B);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("directional_uav", ::func_1290B);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("uav_3dping", ::func_128B2);
   var_0 = ["passive_increased_duration", "passive_decreased_duration", "passive_decreased_health", "passive_increased_armor", "passive_increased_cost", "passive_extra_assist", "passive_stealth_vehicle", "passive_vision_sweep", "passive_disable_hud", "passive_emp_blast", "passive_duration_health", "passive_armor_speed", "passive_stealth_speed"];
   scripts\mp\killstreak_loot::func_DF07("uav", var_0);
   scripts\mp\killstreak_loot::func_DF07("counter_uav", var_0);
@@ -118,15 +118,15 @@ init() {
   var_2 = getuavstrengthlevelneutral();
   if(level.multiteambased) {
     for(var_3 = 0; var_3 < level.teamnamelist.size; var_3++) {
-      level.createprintchannel[level.teamnamelist[var_3]] = "normal_radar";
+      level.radarmode[level.teamnamelist[var_3]] = "normal_radar";
       level.activeuavs[level.teamnamelist[var_3]] = 0;
       level.var_164F[level.teamnamelist[var_3]] = 0;
       level.activeadvanceduavs[level.teamnamelist[var_3]] = 0;
       level.uavmodels[level.teamnamelist[var_3]] = [];
     }
   } else if(level.teambased) {
-    level.createprintchannel["allies"] = "normal_radar";
-    level.createprintchannel["axis"] = "normal_radar";
+    level.radarmode["allies"] = "normal_radar";
+    level.radarmode["axis"] = "normal_radar";
     level.activeuavs["allies"] = 0;
     level.activeuavs["axis"] = 0;
     level.var_164F["allies"] = 0;
@@ -136,7 +136,7 @@ init() {
     level.uavmodels["allies"] = [];
     level.uavmodels["axis"] = [];
   } else {
-    level.createprintchannel = [];
+    level.radarmode = [];
     level.activeuavs = [];
     level.var_164F = [];
     level.activeadvanceduavs = [];
@@ -155,7 +155,7 @@ onplayerconnect() {
     level.activeuavs[var_1.guid] = 0;
     level.activeuavs[var_1.guid + "_radarStrength"] = var_0;
     level.var_164F[var_1.guid] = 0;
-    level.createprintchannel[var_1.guid] = "normal_radar";
+    level.radarmode[var_1.guid] = "normal_radar";
     var_1.drawsoundshape = var_0;
     var_1 thread monitorplayerupdate();
   }
@@ -216,11 +216,11 @@ func_130F4(var_0, var_1) {
       break;
 
     case "directional_uav":
-      self.cylinder = 1;
+      self.radarshowenemydirection = 1;
       if(level.teambased) {
         foreach(var_5 in level.players) {
           if(var_5.pers["team"] == var_2) {
-            var_5.cylinder = 1;
+            var_5.radarshowenemydirection = 1;
           }
         }
       }
@@ -258,10 +258,10 @@ launchuav(var_0, var_1, var_2) {
   var_7 = level.uavsettings[var_1].timeout;
   var_8 = level.uavsettings[var_1].maxhealth;
   var_9 = level.uavsettings[var_1].teamsplash;
-  var_0A = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
-  if(var_0A != "") {
-    var_6 = var_6 + "_" + var_0A;
-    var_9 = var_9 + "_" + var_0A;
+  var_10 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
+  if(var_10 != "") {
+    var_6 = var_6 + "_" + var_10;
+    var_9 = var_9 + "_" + var_10;
   }
 
   level thread scripts\mp\utility::teamplayercardsplash(var_9, var_0);
@@ -296,7 +296,7 @@ launchuav(var_0, var_1, var_2) {
 
   var_5 setModel(var_6);
   var_5.team = var_3;
-  var_5.triggerportableradarping = var_0;
+  var_5.owner = var_0;
   var_5.var_11938 = 0;
   var_5.uavtype = var_1;
   var_5.health = level.uavsettings[var_1].health;
@@ -316,21 +316,21 @@ launchuav(var_0, var_1, var_2) {
     var_5 setscriptablepartstate("stealth", "active", 0);
   }
 
-  var_0B = randomintrange(5250, 5500);
+  var_11 = randomintrange(5250, 5500);
   if(isDefined(level.spawnpoints)) {
-    var_0C = level.spawnpoints;
+    var_12 = level.spawnpoints;
   } else {
-    var_0C = level.var_10DF1;
+    var_12 = level.var_10DF1;
   }
 
-  var_0D = var_0C[0];
-  foreach(var_0F in var_0C) {
-    if(var_0F.origin[2] < var_0D.origin[2]) {
-      var_0D = var_0F;
+  var_13 = var_12[0];
+  foreach(var_15 in var_12) {
+    if(var_15.origin[2] < var_13.origin[2]) {
+      var_13 = var_15;
     }
   }
 
-  var_11 = var_0D.origin[2];
+  var_11 = var_13.origin[2];
   var_12 = var_4.origin[2];
   if(var_11 < 0) {
     var_12 = var_12 + var_11 * -1;
@@ -338,16 +338,16 @@ launchuav(var_0, var_1, var_2) {
   }
 
   var_13 = var_12 - var_11;
-  if(var_13 + var_0B > 8100) {
-    var_0B = var_0B - var_13 + var_0B - 8100;
+  if(var_13 + var_11 > 8100) {
+    var_11 = var_11 - var_13 + var_11 - 8100;
   }
 
   var_14 = randomint(360);
   var_15 = randomint(1000) + 4000;
   var_16 = cos(var_14) * var_15;
   var_17 = sin(var_14) * var_15;
-  var_18 = vectornormalize((var_16, var_17, var_0B));
-  var_18 = var_18 * var_0B;
+  var_18 = vectornormalize((var_16, var_17, var_11));
+  var_18 = var_18 * var_11;
   var_5 linkto(var_4, "tag_origin", var_18, (0, var_14 - 90, 0));
   var_5 thread func_12F50();
   var_5[[level.uavsettings[var_1].var_17C8]]();
@@ -404,11 +404,11 @@ launchuav(var_0, var_1, var_2) {
   }
 
   if(var_1 == "directional_uav") {
-    var_0.cylinder = 0;
+    var_0.radarshowenemydirection = 0;
     if(level.teambased) {
       foreach(var_1E in level.players) {
         if(var_1E.pers["team"] == var_3) {
-          var_1E.cylinder = 0;
+          var_1E.radarshowenemydirection = 0;
         }
       }
     }
@@ -420,7 +420,7 @@ launchuav(var_0, var_1, var_2) {
 
 monitorowner() {
   self endon("death");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("disconnect", "joined_team");
+  self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team");
   self hide();
   var_0 = anglestoright(self.angles) * 200;
   playFX(level.uavsettings[self.uavtype].fxid_explode, self.origin, var_0);
@@ -455,7 +455,7 @@ func_12F50() {
         continue;
       }
 
-      if(isDefined(self.triggerportableradarping) && var_1 == self.triggerportableradarping) {
+      if(isDefined(self.owner) && var_1 == self.owner) {
         continue;
       }
 
@@ -469,8 +469,8 @@ damagetracker() {
   self setCanDamage(1);
   self.var_E1 = 0;
   for(;;) {
-    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D);
-    var_9 = scripts\mp\utility::func_13CA1(var_9, var_0D);
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
+    var_9 = scripts\mp\utility::func_13CA1(var_9, var_13);
     if(!isplayer(var_1)) {
       if(!isDefined(self)) {
         return;
@@ -492,32 +492,32 @@ damagetracker() {
     }
 
     self.wasdamaged = 1;
-    var_0E = var_0;
+    var_14 = var_0;
     if(isplayer(var_1)) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
       if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
         if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-          var_0E = var_0E + var_0 * level.armorpiercingmod;
+          var_14 = var_14 + var_0 * level.armorpiercingmod;
         }
       }
     }
 
-    var_0F = 1;
+    var_15 = 1;
     var_10 = 1;
     var_11 = 1;
     if(self.uavtype == "directional_uav") {
-      var_0F = 5;
+      var_15 = 5;
       var_10 = 6;
       var_11 = 7;
       if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo, "passive_duration_health")) {
-        var_0F--;
+        var_15--;
         var_10--;
         var_11--;
       }
     }
 
     if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo, "passive_armor_speed")) {
-      var_0F++;
+      var_15++;
       var_10++;
       var_11++;
     }
@@ -529,14 +529,14 @@ damagetracker() {
         }
       }
 
-      var_0E = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_1, var_9, var_4, var_0E, self.maxhealth, var_0F, var_10, var_11);
-      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_9, self, var_4);
+      var_14 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_1, var_9, var_4, var_14, self.maxhealth, var_15, var_10, var_11);
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_9, self, var_4);
       scripts\mp\damage::logattackerkillstreak(self, var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     }
 
-    self.var_E1 = self.var_E1 + var_0E;
+    self.var_E1 = self.var_E1 + var_14;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_12 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
         var_13 = level.uavsettings[self.uavtype].calloutdestroyed;
         if(var_12 != "") {
@@ -664,10 +664,10 @@ _getradarstrength(var_0) {
     }
   }
 
-  var_0E = getuavstrengthmin();
-  var_0F = getuavstrengthmax();
+  var_14 = getuavstrengthmin();
+  var_15 = getuavstrengthmax();
   if(var_3) {
-    var_1 = var_0F - getuavstrengthlevelneutral();
+    var_1 = var_15 - getuavstrengthlevelneutral();
   }
 
   if(var_0 == "axis") {
@@ -677,17 +677,17 @@ _getradarstrength(var_0) {
   }
 
   if(var_2 > 0) {
-    var_10 = var_0E;
+    var_10 = var_14;
   } else if(var_4 > 0) {
     var_10 = var_10;
   } else {
     var_10 = int(clamp(var_2 + getuavstrengthlevelneutral(), getuavstrengthlevelneutral(), getuavstrengthlevelshowenemyfastsweep()));
   }
 
-  if(var_10 <= var_0E) {
-    var_10 = var_0E;
-  } else if(var_10 >= var_0F) {
-    var_10 = var_0F;
+  if(var_10 <= var_14) {
+    var_10 = var_14;
+  } else if(var_10 >= var_15) {
+    var_10 = var_15;
   }
 
   return var_10;
@@ -715,50 +715,50 @@ func_12F3F(var_0, var_1) {
     var_8 = level.alliesactiveuavs;
   }
 
-  foreach(var_0A in level.players) {
-    var_0B = var_7;
-    if(var_0A.team != var_0) {
+  foreach(var_10 in level.players) {
+    var_11 = var_7;
+    if(var_10.team != var_0) {
       continue;
     }
 
-    if(var_0A scripts\mp\utility::_hasperk("specialty_empimmune") && var_7 <= var_5) {
-      if(scripts\mp\utility::istrue(var_0A.cylinder)) {
-        var_0B = var_3;
+    if(var_10 scripts\mp\utility::_hasperk("specialty_empimmune") && var_7 <= var_5) {
+      if(scripts\mp\utility::istrue(var_10.radarshowenemydirection)) {
+        var_11 = var_3;
       }
 
-      if(var_0B != var_3) {
-        var_0B = int(clamp(var_8 + var_5, var_5, var_6));
+      if(var_11 != var_3) {
+        var_11 = int(clamp(var_8 + var_5, var_5, var_6));
       }
     }
 
-    if(var_0B <= var_2) {
-      var_0B = var_2;
-    } else if(var_0B >= var_3) {
-      var_0B = var_3;
+    if(var_11 <= var_2) {
+      var_11 = var_2;
+    } else if(var_11 >= var_3) {
+      var_11 = var_3;
     }
 
-    var_0A.drawsoundshape = var_0B;
-    if(var_0B >= var_5) {
-      var_0A.randomint = 0;
+    var_10.drawsoundshape = var_11;
+    if(var_11 >= var_5) {
+      var_10.isradarblocked = 0;
     } else {
-      var_0A.randomint = 1;
+      var_10.isradarblocked = 1;
     }
 
-    if(var_0B <= var_5) {
-      var_0A.playcinematicforall = 0;
-      var_0A.cylinder = 0;
-      if(isDefined(var_0A.createprintchannel) && var_0A.createprintchannel == "constant_radar") {
-        var_0A.createprintchannel = "normal_radar";
+    if(var_11 <= var_5) {
+      var_10.hasradar = 0;
+      var_10.radarshowenemydirection = 0;
+      if(isDefined(var_10.radarmode) && var_10.radarmode == "constant_radar") {
+        var_10.radarmode = "normal_radar";
       }
 
-      var_0A setclientomnvar("ui_show_hardcore_minimap", 0);
+      var_10 setclientomnvar("ui_show_hardcore_minimap", 0);
       continue;
     }
 
-    var_0A setradarmode(var_0B, var_6, var_4);
-    var_0A.cylinder = var_0B >= var_4;
-    var_0A.playcinematicforall = 1;
-    var_0A setclientomnvar("ui_show_hardcore_minimap", 1);
+    var_10 setradarmode(var_11, var_6, var_4);
+    var_10.radarshowenemydirection = var_11 >= var_4;
+    var_10.hasradar = 1;
+    var_10 setclientomnvar("ui_show_hardcore_minimap", 1);
   }
 }
 
@@ -789,16 +789,16 @@ func_12EF2() {
 
     var_5.drawsoundshape = var_6;
     if(var_6 >= getuavstrengthlevelneutral()) {
-      var_5.randomint = 0;
+      var_5.isradarblocked = 0;
     } else {
-      var_5.randomint = 1;
+      var_5.isradarblocked = 1;
     }
 
     if(var_6 <= getuavstrengthlevelneutral()) {
-      var_5.playcinematicforall = 0;
-      var_5.cylinder = 0;
-      if(isDefined(var_5.createprintchannel) && var_5.createprintchannel == "constant_radar") {
-        var_5.createprintchannel = "normal_radar";
+      var_5.hasradar = 0;
+      var_5.radarshowenemydirection = 0;
+      if(isDefined(var_5.radarmode) && var_5.radarmode == "constant_radar") {
+        var_5.radarmode = "normal_radar";
       }
 
       var_5 setclientomnvar("ui_show_hardcore_minimap", 0);
@@ -806,17 +806,17 @@ func_12EF2() {
     }
 
     var_5 setradarmode(var_6, var_3, var_2);
-    var_5.cylinder = var_6 >= var_2;
-    var_5.playcinematicforall = 1;
+    var_5.radarshowenemydirection = var_6 >= var_2;
+    var_5.hasradar = 1;
     var_5 setclientomnvar("ui_show_hardcore_minimap", 1);
   }
 }
 
 setradarmode(var_0, var_1, var_2) {
   if(var_0 >= var_1) {
-    self.createprintchannel = "fast_radar";
+    self.radarmode = "fast_radar";
   } else {
-    self.createprintchannel = "normal_radar";
+    self.radarmode = "normal_radar";
   }
 
   if(var_0 >= var_2) {
@@ -830,13 +830,13 @@ setradarmode(var_0, var_1, var_2) {
     foreach(var_5 in var_3) {
       if(isDefined(var_5) && var_5.uavtype == "directional_uav") {
         if(!level.teambased) {
-          if(var_5.triggerportableradarping != self) {
+          if(var_5.owner != self) {
             continue;
           }
         }
 
         if(scripts\mp\killstreaks\_utility::func_A69F(var_5.streakinfo, "passive_vision_sweep")) {
-          self.createprintchannel = "constant_radar";
+          self.radarmode = "constant_radar";
           break;
         }
       }
@@ -848,9 +848,9 @@ func_2BBC() {
   self endon("disconnect");
   self notify("blockPlayerUAV");
   self endon("blockPlayerUAV");
-  self.randomint = 1;
+  self.isradarblocked = 1;
   wait(level.uavblocktime);
-  self.randomint = 0;
+  self.isradarblocked = 0;
 }
 
 func_12F40(var_0) {
@@ -860,9 +860,9 @@ func_12F40(var_0) {
       continue;
     }
 
-    var_3.createprintchannel = level.createprintchannel[var_3.team];
+    var_3.radarmode = level.radarmode[var_3.team];
     if(var_3.team == var_0) {
-      var_3.cylinder = var_1;
+      var_3.radarshowenemydirection = var_1;
     }
   }
 }
@@ -873,14 +873,14 @@ useplayeruav(var_0, var_1) {
   self notify("usePlayerUAV");
   self endon("usePlayerUAV");
   if(var_0) {
-    self.createprintchannel = "fast_radar";
+    self.radarmode = "fast_radar";
   } else {
-    self.createprintchannel = "normal_radar";
+    self.radarmode = "normal_radar";
   }
 
-  self.playcinematicforall = 1;
+  self.hasradar = 1;
   wait(var_1);
-  self.playcinematicforall = 0;
+  self.hasradar = 0;
 }
 
 func_F87B(var_0, var_1) {
@@ -942,7 +942,7 @@ func_1867() {
     return;
   }
 
-  level.uavmodels[self.triggerportableradarping.guid + "_" + gettime()] = self;
+  level.uavmodels[self.owner.guid + "_" + gettime()] = self;
 }
 
 func_E182() {
@@ -983,15 +983,15 @@ func_179A() {
     return;
   }
 
-  level.activeuavs[self.triggerportableradarping.guid]++;
-  level.activeuavs[self.triggerportableradarping.guid + "_radarStrength"]++;
+  level.activeuavs[self.owner.guid]++;
+  level.activeuavs[self.owner.guid + "_radarStrength"]++;
   if(self.uavtype == "directional_uav") {
-    level.activeuavs[self.triggerportableradarping.guid + "_radarStrength"] = level.activeuavs[self.triggerportableradarping.guid + "_radarStrength"] + 2;
-    if(!isDefined(level.activeadvanceduavs[self.triggerportableradarping.guid])) {
-      level.activeadvanceduavs[self.triggerportableradarping.guid] = 0;
+    level.activeuavs[self.owner.guid + "_radarStrength"] = level.activeuavs[self.owner.guid + "_radarStrength"] + 2;
+    if(!isDefined(level.activeadvanceduavs[self.owner.guid])) {
+      level.activeadvanceduavs[self.owner.guid] = 0;
     }
 
-    level.activeadvanceduavs[self.triggerportableradarping.guid]++;
+    level.activeadvanceduavs[self.owner.guid]++;
   }
 }
 
@@ -1001,7 +1001,7 @@ func_1799() {
     return;
   }
 
-  level.var_164F[self.triggerportableradarping.guid]++;
+  level.var_164F[self.owner.guid]++;
 }
 
 func_E0C1() {
@@ -1015,12 +1015,12 @@ func_E0C1() {
     return;
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    level.activeuavs[self.triggerportableradarping.guid]--;
-    level.activeuavs[self.triggerportableradarping.guid + "_radarStrength"]--;
+  if(isDefined(self.owner)) {
+    level.activeuavs[self.owner.guid]--;
+    level.activeuavs[self.owner.guid + "_radarStrength"]--;
     if(self.uavtype == "directional_uav") {
-      level.activeuavs[self.triggerportableradarping.guid + "_radarStrength"] = level.activeuavs[self.triggerportableradarping.guid + "_radarStrength"] - 2;
-      level.activeadvanceduavs[self.triggerportableradarping.guid]--;
+      level.activeuavs[self.owner.guid + "_radarStrength"] = level.activeuavs[self.owner.guid + "_radarStrength"] - 2;
+      level.activeadvanceduavs[self.owner.guid]--;
       return;
     }
   }
@@ -1032,8 +1032,8 @@ func_E0BF() {
     return;
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    level.var_164F[self.triggerportableradarping.guid]--;
+  if(isDefined(self.owner)) {
+    level.var_164F[self.owner.guid]--;
   }
 }
 
@@ -1139,7 +1139,7 @@ func_13AA0(var_0, var_1, var_2, var_3) {
 
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_2, "leave");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(var_2, "leave");
   if(isDefined(var_1)) {
     scripts\mp\utility::outlinedisable(var_0, var_1);
   }
@@ -1171,7 +1171,7 @@ func_81E8(var_0, var_1) {
 }
 
 func_CA50() {
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self endon("uav_deleteObjective");
   switch (self.uavtype) {
     case "uav":
@@ -1203,7 +1203,7 @@ func_CA50() {
       }
 
       if(self.var_6569 != -1) {
-        if(var_2 scripts\mp\utility::_hasperk("specialty_engineer") && scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_2, self.triggerportableradarping))) {
+        if(var_2 scripts\mp\utility::_hasperk("specialty_engineer") && scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_2, self.owner))) {
           scripts\mp\objidpoolmanager::minimap_objective_playermask_showto(self.var_6569, var_2 getentitynumber());
           continue;
         }
@@ -1223,7 +1223,7 @@ startsystemshutdown() {
       continue;
     }
 
-    if(!scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_1)) {
+    if(!scripts\mp\utility::playersareenemies(self.owner, var_1)) {
       continue;
     }
 
@@ -1261,7 +1261,7 @@ shutdownenemysystem(var_0) {
 applyshutdownonspawn() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_1 = var_0.team;
   for(;;) {
     level waittill("player_spawned", var_2);
@@ -1290,7 +1290,7 @@ startemppulse() {
       continue;
     }
 
-    if(!scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_1)) {
+    if(!scripts\mp\utility::playersareenemies(self.owner, var_1)) {
       continue;
     }
 
@@ -1299,7 +1299,7 @@ startemppulse() {
     }
 
     var_2 = 1;
-    if(var_1 scripts\mp\killstreaks\_emp_common::isemped()) {
+    if(var_1 scripts\mp\killstreaks\emp_common::isemped()) {
       var_2 = 0;
     }
 
@@ -1313,7 +1313,7 @@ startemppulse() {
     var_1 thread applyuavshellshock(var_3, var_2);
   }
 
-  func_52C5(scripts\mp\utility::getotherteam(self.team), self.triggerportableradarping);
+  func_52C5(scripts\mp\utility::getotherteam(self.team), self.owner);
 }
 
 applyuavshellshock(var_0, var_1) {
@@ -1330,7 +1330,7 @@ applyuavshellshock(var_0, var_1) {
   self playLoopSound("emp_nade_lp");
   var_2 = gettime() + 500;
   while(gettime() <= var_2) {
-    if(var_1 && scripts\mp\killstreaks\_emp_common::isemped()) {
+    if(var_1 && scripts\mp\killstreaks\emp_common::isemped()) {
       var_1 = 0;
     }
 
@@ -1358,7 +1358,7 @@ applyuavshellshockvisionset() {
 func_52C5(var_0, var_1) {
   var_2 = "nuke_mp";
   var_3 = level.var_1655;
-  var_4 = scripts\mp\perks\_perkfunctions::func_7D96();
+  var_4 = scripts\mp\perks\perkfunctions::func_7D96();
   var_5 = undefined;
   if(isDefined(var_3) && isDefined(var_4)) {
     var_5 = scripts\engine\utility::array_combine_unique(var_3, var_4);

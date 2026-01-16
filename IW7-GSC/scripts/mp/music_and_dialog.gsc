@@ -614,28 +614,28 @@ ongameended() {
     return;
   }
 
-  foreach(var_0D in level.players) {
-    var_0D setplayermusicstate("");
-    if(var_0D issplitscreenplayer() && !var_0D issplitscreenplayerprimary()) {
+  foreach(var_13 in level.players) {
+    var_13 setplayermusicstate("");
+    if(var_13 issplitscreenplayer() && !var_13 issplitscreenplayerprimary()) {
       continue;
     }
 
-    if(!isDefined(var_0D.pers["team"])) {
+    if(!isDefined(var_13.pers["team"])) {
       continue;
     }
 
-    if(var_0D.pers["team"] != "allies" && var_0D.pers["team"] != "axis") {
-      var_0D playlocalsound(game["music"]["nuke_music"]);
+    if(var_13.pers["team"] != "allies" && var_13.pers["team"] != "axis") {
+      var_13 playlocalsound(game["music"]["nuke_music"]);
       continue;
     }
 
-    if(isDefined(var_0C) && isplayer(var_0C) && var_0D == var_0C) {
-      var_0D setplayermusicstate(game["music"]["victory_" + var_0D.pers["team"]]);
+    if(isDefined(var_12) && isplayer(var_12) && var_13 == var_12) {
+      var_13 setplayermusicstate(game["music"]["victory_" + var_13.pers["team"]]);
       continue;
     }
 
     if(!level.splitscreen) {
-      var_0D setplayermusicstate(game["music"]["defeat_" + var_0D.pers["team"]]);
+      var_13 setplayermusicstate(game["music"]["defeat_" + var_13.pers["team"]]);
     }
   }
 }
@@ -782,21 +782,21 @@ func_BDEF() {
         } else {
           var_8 = scripts\mp\gamescore::gethighestscoringplayer();
           var_9 = scripts\mp\gamescore::getlosingplayers();
-          var_0A[0] = var_8;
+          var_10[0] = var_8;
           if(ismusicenabled()) {
             var_8 playlocalsound(game["music"]["winning_" + var_8.pers["team"]]);
             var_8 setplayermusicstate("");
-            foreach(var_0C in level.players) {
-              if(var_0C == var_8) {
+            foreach(var_12 in level.players) {
+              if(var_12 == var_8) {
                 continue;
               }
 
-              if(var_0C ismlgspectator()) {
+              if(var_12 ismlgspectator()) {
                 continue;
               }
 
-              var_0C playlocalsound(game["music"]["losing_" + var_0C.pers["team"]]);
-              var_0C setplayermusicstate("");
+              var_12 playlocalsound(game["music"]["losing_" + var_12.pers["team"]]);
+              var_12 setplayermusicstate("");
             }
           }
 

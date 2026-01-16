@@ -12,7 +12,7 @@ init() {
   var_0.modelplacement = "revocator";
   var_0.modelplacementfailed = "revocator_bad";
   var_0.placedmodel = "revocator";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -161,7 +161,7 @@ waitrestoreperks() {
 func_4A08(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_0.angles;
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   var_2.name = "crafted_revocator";
   var_2.carriedrevocator = spawn("script_model", var_2.origin);
   var_2.carriedrevocator.angles = var_0.angles;
@@ -215,7 +215,7 @@ func_E4B9(var_0, var_1) {
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
   var_1.iscarrying = 0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.var_130D2 = self.var_130D2;
   var_2.name = "crafted_revocator";
   var_2 thread func_E4B5(var_0);
@@ -227,8 +227,8 @@ func_E4B9(var_0, var_1) {
 
 func_E4B6() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.carriedrevocator delete();
@@ -253,12 +253,12 @@ func_E4B7(var_0, var_1) {
 func_E4B5(var_0) {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_47B1["crafted_revocator"].pow);
+  self sethintstring(level.var_47B1["crafted_revocator"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
-  thread func_E4B1(self.triggerportableradarping);
+  thread func_E4B1(self.owner);
   thread scripts\cp\utility::item_handleownerdisconnect("elecrevocator_handleOwner");
   thread scripts\cp\utility::item_timeout(var_0, level.var_47B1["crafted_revocator"].timeout);
   thread func_E4B2();
@@ -322,7 +322,7 @@ func_E4BA() {
         if(scripts\engine\utility::istrue(var_4.is_suicide_bomber) || scripts\engine\utility::istrue(var_4.is_dancing) || scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active")) {
           var_4 dodamage(var_4.health + 50, self.origin);
         } else {
-          var_4 turn_zombie(self.triggerportableradarping);
+          var_4 turn_zombie(self.owner);
         }
 
         self.var_130D2--;

@@ -75,8 +75,9 @@ door_setup() {
         var_3 hide();
         var_3 func_829D(0);
         var_0.var_19E5[var_0.var_19E5.size] = var_3;
-      } else
+      } else {
         var_0.doors[var_0.doors.size] = var_3;
+      }
 
       continue;
     }

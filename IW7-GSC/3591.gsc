@@ -66,21 +66,21 @@ func_11666() {
   var_7 = 0.35;
   var_8 = scripts\common\trace::create_contents(1, 1, 1, 0, 0, 1);
   var_9 = scripts\common\trace::capsule_trace(var_2, var_4, 16, 32, (0, 0, 0), var_6, var_8);
-  var_0A = 1;
+  var_10 = 1;
   if(var_9["fraction"] != 1) {
-    var_0A = var_9["fraction"] - 0.05;
-    if(var_0A < 0.05) {
+    var_10 = var_9["fraction"] - 0.05;
+    if(var_10 < 0.05) {
       return 0;
     }
 
-    var_4 = var_2 + var_3 * var_0 * var_0A;
+    var_4 = var_2 + var_3 * var_0 * var_10;
     var_7 = var_9["fraction"] * 0.35;
   }
 
   if(!canspawn(var_4)) {
-    for(var_0B = 0; var_0B < 10; var_0B++) {
-      var_0A = var_0A / 1.15;
-      var_4 = var_2 + var_3 * var_0 * var_0A;
+    for(var_11 = 0; var_11 < 10; var_11++) {
+      var_10 = var_10 / 1.15;
+      var_4 = var_2 + var_3 * var_0 * var_10;
       if(canspawn(var_4)) {
         break;
       }
@@ -194,14 +194,14 @@ func_DD93(var_0, var_1, var_2, var_3) {
     var_1 moveto(var_0, var_3, var_9, 0);
     wait(var_3);
   } else {
-    var_0A = func_8089(var_4);
-    var_1 moveto(var_0A + var_2, var_3, var_9, 0);
+    var_10 = func_8089(var_4);
+    var_1 moveto(var_10 + var_2, var_3, var_9, 0);
     wait(var_3 / 4);
-    var_0A = func_8089(var_4);
-    var_1 moveto(var_0A + var_2, var_3, 0, 0);
+    var_10 = func_8089(var_4);
+    var_1 moveto(var_10 + var_2, var_3, 0, 0);
     wait(var_3 / 4);
-    var_0A = func_8089(var_4);
-    var_1 moveto(var_0A + var_2, var_3, 0, 0);
+    var_10 = func_8089(var_4);
+    var_1 moveto(var_10 + var_2, var_3, 0, 0);
     wait(var_3 / 2);
   }
 
@@ -233,7 +233,7 @@ func_D504() {
 }
 
 func_DD91(var_0, var_1) {
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect", "stop_reap");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect", "stop_reap");
   scripts\engine\utility::waitframe();
   if(isDefined(var_1)) {
     var_1 delete();
@@ -298,17 +298,17 @@ closestenemies(var_0) {
     var_2[var_2.size] = var_7;
   }
 
-  var_0B = scripts\mp\utility::quicksort(var_2);
-  var_0C = [];
-  for(var_0D = 0; var_0D < var_0B.size; var_0D++) {
-    foreach(var_0F in var_0) {
-      if(isDefined(var_0F.var_5AC7) && var_0F.var_5AC7 == var_0B[var_0D]) {
-        var_0C[var_0C.size] = var_0F;
+  var_11 = scripts\mp\utility::quicksort(var_2);
+  var_12 = [];
+  for(var_13 = 0; var_13 < var_11.size; var_13++) {
+    foreach(var_15 in var_0) {
+      if(isDefined(var_15.var_5AC7) && var_15.var_5AC7 == var_11[var_13]) {
+        var_12[var_12.size] = var_15;
       }
     }
   }
 
-  return var_0C;
+  return var_12;
 }
 
 func_11668() {
@@ -343,13 +343,13 @@ func_11668() {
       continue;
     }
 
-    var_0A = self getEye();
-    var_0B = var_4 getEye();
-    var_0C = [];
-    var_0C[0] = self;
-    var_0C[1] = var_4;
-    var_0D = scripts\common\trace::ray_trace_passed(var_0A, var_0B, var_0C);
-    if(!var_0D) {
+    var_10 = self getEye();
+    var_11 = var_4 getEye();
+    var_12 = [];
+    var_12[0] = self;
+    var_12[1] = var_4;
+    var_13 = scripts\common\trace::ray_trace_passed(var_10, var_11, var_12);
+    if(!var_13) {
       continue;
     }
 

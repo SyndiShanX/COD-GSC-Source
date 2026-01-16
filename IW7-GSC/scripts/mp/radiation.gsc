@@ -31,7 +31,7 @@ playerleavearea(var_0) {
 }
 
 soundwatcher(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "leftTrigger");
+  scripts\engine\utility::waittill_any("death", "leftTrigger");
   self stoploopsound();
 }
 
@@ -131,16 +131,16 @@ func_2B48() {
 
       var_8 = var_1 - var_0;
       var_9 = var_0 + var_8 * 1 - var_6;
-      var_0A = var_3 - var_2;
-      var_0B = var_2 + var_0A * var_6;
-      var_0C = var_6 * 0.5;
+      var_10 = var_3 - var_2;
+      var_11 = var_2 + var_10 * var_6;
+      var_12 = var_6 * 0.5;
       if(var_6 == 1) {
         break;
       }
 
-      var_0D = var_9 / 2;
-      self.radiationoverlay func_6AB7(var_0D, var_0B);
-      self.radiationoverlay fadeoutblackout(var_0D, var_0C);
+      var_13 = var_9 / 2;
+      self.radiationoverlay func_6AB7(var_13, var_11);
+      self.radiationoverlay fadeoutblackout(var_13, var_12);
       wait(var_6 * 0.5);
     }
 

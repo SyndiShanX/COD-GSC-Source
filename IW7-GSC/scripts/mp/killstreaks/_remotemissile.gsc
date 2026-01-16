@@ -8,13 +8,13 @@ init() {
   level.var_B895 = 7000;
   level.var_B896 = 1500;
   level.rockets = [];
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("predator_missile", ::tryusepredatormissile);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("predator_missile", ::tryusepredatormissile);
   level.remotekillstreaks["explode"] = loadfx("vfx\core\expl\aerial_explosion");
 }
 
 tryusepredatormissile(var_0, var_1) {
   scripts\mp\utility::setusingremote("remotemissile");
-  var_2 = scripts\mp\killstreaks\_killstreaks::initridekillstreak();
+  var_2 = scripts\mp\killstreaks\killstreaks::initridekillstreak();
   if(var_2 != "success") {
     if(var_2 != "disconnect") {
       scripts\mp\utility::clearusingremote();
@@ -52,9 +52,9 @@ func_7E01(var_0) {
     var_8 = undefined;
     foreach(var_3 in var_0) {
       var_3.var_1314F[var_3.var_1314F.size] = var_6;
-      var_0A = distance2d(var_3.var_1155F.origin, var_6.origin);
-      if(var_0A <= var_7) {
-        var_7 = var_0A;
+      var_10 = distance2d(var_3.var_1155F.origin, var_6.origin);
+      if(var_10 <= var_7) {
+        var_7 = var_10;
         var_8 = var_3;
       }
     }
@@ -62,7 +62,7 @@ func_7E01(var_0) {
     var_8.var_10909 = var_8.var_10909 + 2;
   }
 
-  var_0D = var_0[0];
+  var_13 = var_0[0];
   foreach(var_3 in var_0) {
     foreach(var_10, var_6 in var_3.var_1314F) {
       var_3.var_10909 = var_3.var_10909 + 1;
@@ -70,20 +70,20 @@ func_7E01(var_0) {
         var_3.var_10909 = var_3.var_10909 + 3;
       }
 
-      if(var_3.var_10909 > var_0D.var_10909) {
-        var_0D = var_3;
+      if(var_3.var_10909 > var_13.var_10909) {
+        var_13 = var_3;
         continue;
       }
 
-      if(var_3.var_10909 == var_0D.var_10909) {
+      if(var_3.var_10909 == var_13.var_10909) {
         if(scripts\engine\utility::cointoss()) {
-          var_0D = var_3;
+          var_13 = var_3;
         }
       }
     }
   }
 
-  return var_0D;
+  return var_13;
 }
 
 _fire(var_0, var_1) {
@@ -105,28 +105,28 @@ _fire(var_0, var_1) {
     var_8 = var_6.var_1155F.origin;
     var_9 = vectornormalize(var_7 - var_8);
     var_7 = var_9 * 14000 + var_8;
-    var_0A = scripts\mp\utility::_magicbullet("remotemissile_projectile_mp", var_7, var_8, var_1);
+    var_10 = scripts\mp\utility::_magicbullet("remotemissile_projectile_mp", var_7, var_8, var_1);
   } else {
-    var_0B = (0, 0, level.var_B897);
-    var_0C = level.var_B895;
-    var_0D = level.var_B896;
-    var_0E = anglesToForward(var_1.angles);
-    var_7 = var_1.origin + var_0B + var_0E * var_0C * -1;
-    var_8 = var_1.origin + var_0E * var_0D;
-    var_0A = scripts\mp\utility::_magicbullet("remotemissile_projectile_mp", var_7, var_8, var_1);
+    var_11 = (0, 0, level.var_B897);
+    var_12 = level.var_B895;
+    var_13 = level.var_B896;
+    var_14 = anglesToForward(var_1.angles);
+    var_7 = var_1.origin + var_11 + var_14 * var_12 * -1;
+    var_8 = var_1.origin + var_14 * var_13;
+    var_10 = scripts\mp\utility::_magicbullet("remotemissile_projectile_mp", var_7, var_8, var_1);
   }
 
-  if(!isDefined(var_0A)) {
+  if(!isDefined(var_10)) {
     var_1 scripts\mp\utility::clearusingremote();
     return;
   }
 
-  var_0A.team = var_1.team;
-  var_0A thread handledamage();
-  var_0A.lifeid = var_0;
-  var_0A.type = "remote";
+  var_10.team = var_1.team;
+  var_10 thread handledamage();
+  var_10.lifeid = var_0;
+  var_10.type = "remote";
   level.remotemissileinprogress = 1;
-  missileeyes(var_1, var_0A);
+  missileeyes(var_1, var_10);
 }
 
 handledamage() {
@@ -189,7 +189,7 @@ delayedfofoverlay() {
 player_cleanuponteamchange(var_0) {
   var_0 endon("death");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+  scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   if(self.team != "spectator") {
     self thermalvisionfofoverlayoff();
     self controlsunlink();

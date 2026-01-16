@@ -14,9 +14,9 @@ init() {
   var_0.modelbase = "cp_rave_equipment_lawnmower_01";
   var_0.modelplacement = "tag_origin";
   var_0.modelplacementfailed = "tag_origin";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.var_9F43 = 0;
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"CP_RAVE_MOWER_PLACEMENT";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"CP_RAVE_PLACE_CANCELABLE";
@@ -218,7 +218,7 @@ waitrestoreperks() {
 func_4A2A(var_0) {
   var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 40), "sentry_minigun_mp");
   var_1.angles = var_0.angles;
-  var_1.triggerportableradarping = var_0;
+  var_1.owner = var_0;
   var_1.name = "crafted_trap_mower";
   var_1.carried_trap = spawn("script_model", var_1.origin);
   var_1.carried_trap.angles = var_0.angles;
@@ -297,7 +297,7 @@ func_126AA(var_0, var_1) {
   self.carriedby = undefined;
   var_2.repulsor = createnavrepulsor("mower_repulsor", 0, var_2.origin, 32, 1);
   var_1.iscarrying = 0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_trap_mower";
   var_2 thread delayfx();
   if(isDefined(self.carried_trap.timeused)) {
@@ -317,8 +317,8 @@ func_126AA(var_0, var_1) {
 
 func_126A7() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   if(isDefined(self.repulsor)) {
@@ -476,12 +476,12 @@ adswatcher(var_0, var_1, var_2) {
 
 func_126A6(var_0) {
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_47B3["crafted_trap_mower"].pow);
+  self sethintstring(level.var_47B3["crafted_trap_mower"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
-  thread func_126A0(self.triggerportableradarping);
+  thread func_126A0(self.owner);
   thread scripts\cp\utility::item_handleownerdisconnect("electrap_handleOwner");
   thread scripts\cp\utility::item_timeout(var_0, level.var_47B3["crafted_trap_mower"].timeout);
   thread func_126A1();
@@ -514,7 +514,7 @@ trap_grind_enemies() {
   var_0 = anglestoup(self.angles) * -1;
   self.dmg_trigger = spawn("trigger_radius", self.origin + var_0 * 35, 0, 35, 45);
   self.dmg_trigger.angles = var_0;
-  self.dmg_trigger thread kill_zombies(self.triggerportableradarping, self);
+  self.dmg_trigger thread kill_zombies(self.owner, self);
 }
 
 kill_zombies(var_0, var_1) {

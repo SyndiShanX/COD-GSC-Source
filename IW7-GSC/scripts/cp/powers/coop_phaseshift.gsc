@@ -109,7 +109,7 @@ func_1090A(var_0) {
   var_1 = spawnfxforclient(scripts\engine\utility::getfx("vfx_phaseshift_fp_scrn"), (0, 0, 0), self);
   var_1 setfxkilldefondelete();
   triggerfx(var_1);
-  scripts\engine\utility::waittill_any_timeout_1(var_0, "death", "phase_shift_completed");
+  scripts\engine\utility::waittill_any_timeout(var_0, "death", "phase_shift_completed");
   var_1 delete();
 }
 
@@ -137,14 +137,14 @@ func_410A() {
 func_13A57() {
   self endon("disconnect");
   self endon("phase_shift_completed");
-  scripts\engine\utility::waittill_any_3("death", "remove_phase_shift");
+  scripts\engine\utility::waittill_any("death", "remove_phase_shift");
   func_410A();
 }
 
 func_108EE(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_model", var_1.origin);
   var_5 setModel("tag_origin");
-  var_5.triggerportableradarping = var_1;
+  var_5.owner = var_1;
   var_5.var_CACB = var_2;
   var_5.var_762C = var_0;
   wait(0.1);
@@ -183,7 +183,7 @@ func_12EEA(var_0) {
   var_1 = 0;
   var_2 = 0.15;
   for(;;) {
-    if(!isDefined(self) || !isDefined(self.triggerportableradarping) || !scripts\cp\utility::isreallyalive(self.triggerportableradarping) || !isDefined(self.var_CACB) || !scripts\cp\utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_1 > var_0) {
+    if(!isDefined(self) || !isDefined(self.owner) || !scripts\cp\utility::isreallyalive(self.owner) || !isDefined(self.var_CACB) || !scripts\cp\utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_1 > var_0) {
       self.origin = self.origin + (0, 0, 10000);
       wait(0.2);
       self delete();
@@ -191,9 +191,9 @@ func_12EEA(var_0) {
     }
 
     var_1 = var_1 + var_2;
-    if(self.var_CACB == self.triggerportableradarping) {
+    if(self.var_CACB == self.owner) {
       foreach(var_4 in level.players) {
-        if(!areentitiesinphase(var_4, self.triggerportableradarping)) {
+        if(!areentitiesinphase(var_4, self.owner)) {
           self showtoplayer(var_4);
           continue;
         }
@@ -202,16 +202,16 @@ func_12EEA(var_0) {
       }
     } else {
       foreach(var_4 in level.players) {
-        if(!areentitiesinphase(var_4, self.triggerportableradarping)) {
-          self showtoplayer(self.triggerportableradarping);
+        if(!areentitiesinphase(var_4, self.owner)) {
+          self showtoplayer(self.owner);
           continue;
         }
 
-        self hidefromplayer(self.triggerportableradarping);
+        self hidefromplayer(self.owner);
       }
     }
 
-    self moveto(self.triggerportableradarping.origin, var_2);
+    self moveto(self.owner.origin, var_2);
     wait(var_2);
   }
 }

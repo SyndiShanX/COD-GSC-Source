@@ -91,8 +91,9 @@ tryuseac130(var_0, var_1) {
   if(isDefined(var_2) && var_2) {
     level.ac130.planemodel.crashed = undefined;
     level.ac130inuse = 1;
-  } else
+  } else {
     scripts\mp\utility\game::clearusingremote();
+  }
 
   return isDefined(var_2) && var_2;
 }
@@ -898,8 +899,9 @@ shotfired() {
     if(issubstr(tolower(var_0), "105")) {
       earthquake(0.4, 1.0, var_1, 3500);
       self setclientomnvar("ui_ac130_darken", 1);
-    } else if(issubstr(tolower(var_0), "40"))
+    } else if(issubstr(tolower(var_0), "40")) {
       earthquake(0.2, 0.5, var_1, 2000);
+    }
 
     if(scripts\mp\utility\game::getintproperty("ac130_ragdoll_deaths", 0)) {
       thread shotfiredphysicssphere(var_1, var_0);
@@ -1182,8 +1184,9 @@ context_sensative_dialog_play_random_group_sound(var_0, var_1, var_2) {
 
       var_3 = randomint(level.scr_sound[var_0][var_1].size);
     }
-  } else
+  } else {
     var_3 = var_4;
+  }
 
   if(context_sensative_dialog_timedout(var_0, var_1, var_3)) {
     return;
@@ -1383,8 +1386,9 @@ deployflares(var_0) {
     self.flareslive[self.flareslive.size] = var_1;
     var_1 thread deleteaftertime(5.0);
     return var_1;
-  } else
+  } else {
     thread playflarefx(5);
+  }
 }
 
 flares_getnumleft(var_0) {

@@ -95,7 +95,7 @@ func_12E87(var_0, var_1, var_2) {
   }
 
   if(game["defcon"] == 3 && isDefined(var_1)) {
-    var_1 scripts\mp\killstreaks\_killstreaks::givekillstreak("airdrop_mega");
+    var_1 scripts\mp\killstreaks\killstreaks::givekillstreak("airdrop_mega");
     var_1 thread scripts\mp\hud_message::showsplash("caused_defcon", var_2);
   }
 

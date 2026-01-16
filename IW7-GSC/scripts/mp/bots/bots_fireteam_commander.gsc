@@ -52,7 +52,7 @@ commander_aggregate_score_on_game_end() {
     }
 
     level.fireteam_commander["axis"].pers["score"] = var_0;
-    level.fireteam_commander["axis"].destroynavrepulsor = var_0;
+    level.fireteam_commander["axis"].score = var_0;
     level.fireteam_commander["axis"] scripts\mp\persistence::statadd("score", var_0);
     level.fireteam_commander["axis"] scripts\mp\persistence::statsetchild("round", "score", var_0);
   }
@@ -66,7 +66,7 @@ commander_aggregate_score_on_game_end() {
     }
 
     level.fireteam_commander["allies"].pers["score"] = var_0;
-    level.fireteam_commander["allies"].destroynavrepulsor = var_0;
+    level.fireteam_commander["allies"].score = var_0;
     level.fireteam_commander["allies"] scripts\mp\persistence::statadd("score", var_0);
     level.fireteam_commander["allies"] scripts\mp\persistence::statsetchild("round", "score", var_0);
   }
@@ -74,7 +74,7 @@ commander_aggregate_score_on_game_end() {
 
 commander_create_dom_obj(var_0) {
   if(!isDefined(self.fireteam_dom_point_obj[var_0])) {
-    self.fireteam_dom_point_obj[var_0] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.fireteam_dom_point_obj[var_0] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
     var_1 = (0, 0, 0);
     foreach(var_3 in level.domflags) {
       if(var_3.label == "_" + var_0) {
@@ -277,8 +277,8 @@ commander_order_ack() {
 
     if(isDefined(var_2)) {
       var_9 = var_2.pers["voicePrefix"];
-      var_0A = var_9 + level.bcsounds["callout_response_generic"];
-      var_2 thread scripts\mp\battlechatter_mp::dosound(var_0A, 1, 1);
+      var_10 = var_9 + level.bcsounds["callout_response_generic"];
+      var_2 thread scripts\mp\battlechatter_mp::dosound(var_10, 1, 1);
       return;
     }
   }
@@ -346,7 +346,7 @@ hud_monitorplayerownership() {
   self endon("disconnect");
   self.ownershipstring = [];
   for(var_0 = 0; var_0 < 16; var_0++) {
-    self.ownershipstring[var_0] = scripts\mp\hud_util::createfontstring("default", 1);
+    self.ownershipstring[var_0] = ::scripts\mp\hud_util::createfontstring("default", 1);
     self.ownershipstring[var_0].color = (1, 1, 1);
     self.ownershipstring[var_0].x = 0;
     self.ownershipstring[var_0].y = 30 + var_0 * 12;
@@ -368,24 +368,24 @@ hud_monitorplayerownership() {
     foreach(var_7 in level.players) {
       var_8 = 0;
       if(isDefined(var_7) && var_7.team == self.team) {
-        if(isDefined(var_7.triggerportableradarping)) {
+        if(isDefined(var_7.owner)) {
           if(scripts\engine\utility::array_contains(var_2, var_7)) {
             self.ownershipstring[var_1].color = (1, 0, 0);
           } else {
             var_2 = scripts\engine\utility::array_add(var_2, var_7);
           }
 
-          if(var_7 != var_7.triggerportableradarping && scripts\engine\utility::array_contains(var_2, var_7.triggerportableradarping)) {
+          if(var_7 != var_7.owner && scripts\engine\utility::array_contains(var_2, var_7.owner)) {
             self.ownershipstring[var_1].color = (1, 0, 0);
           } else {
-            var_2 = scripts\engine\utility::array_add(var_2, var_7.triggerportableradarping);
+            var_2 = scripts\engine\utility::array_add(var_2, var_7.owner);
           }
 
           if(var_7 == self) {
             self.ownershipstring[var_1].color = (1, 0, 0);
-          } else if(var_7.triggerportableradarping == var_7) {
+          } else if(var_7.owner == var_7) {
             self.ownershipstring[var_1].color = (1, 0, 0);
-          } else if(var_7.triggerportableradarping == self) {
+          } else if(var_7.owner == self) {
             self.ownershipstring[var_1].color = (0, 1, 0);
           } else {
             self.ownershipstring[var_1].color = (1, 1, 1);

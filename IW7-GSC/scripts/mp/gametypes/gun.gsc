@@ -186,15 +186,15 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   }
 
   if(var_3 == "MOD_FALLING" || isDefined(var_1) && isplayer(var_1)) {
-    var_0A = scripts\mp\weapons::isriotshield(var_4);
-    var_0B = scripts\mp\weapons::isknifeonly(var_4) || scripts\mp\weapons::isaxeweapon(var_4);
+    var_10 = scripts\mp\weapons::isriotshield(var_4);
+    var_11 = scripts\mp\weapons::isknifeonly(var_4) || scripts\mp\weapons::isaxeweapon(var_4);
     if(!isDefined(self.ladderdeathsthisweapon)) {
       self.ladderdeathsthisweapon = 1;
     } else {
       self.ladderdeathsthisweapon++;
     }
 
-    if(var_3 == "MOD_FALLING" || var_1 == self || var_3 == "MOD_MELEE" && var_0B || self.ladderdeathsthisweapon == level.setbackstreak) {
+    if(var_3 == "MOD_FALLING" || var_1 == self || var_3 == "MOD_MELEE" && var_11 || self.ladderdeathsthisweapon == level.setbackstreak) {
       self.ladderdeathsthisweapon = 0;
       self playlocalsound("mp_war_objective_lost");
       self notify("update_loadweapons");
@@ -230,10 +230,10 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
       }
     }
 
-    if((var_1 != self && var_3 == "MOD_PISTOL_BULLET") || var_3 == "MOD_RIFLE_BULLET" || var_3 == "MOD_HEAD_SHOT" || var_3 == "MOD_PROJECTILE" || var_3 == "MOD_PROJECTILE_SPLASH" || var_3 == "MOD_IMPACT" || var_3 == "MOD_GRENADE" || var_3 == "MOD_GRENADE_SPLASH" || var_3 == "MOD_EXPLOSIVE" || var_3 == "MOD_MELEE" && !var_0B) {
-      var_0C = getweaponbasename(var_4);
-      var_0D = getweaponbasename(var_1.primaryweapon);
-      if(var_0C != var_0D && !var_1 isvalidthrowingknifekill(var_4)) {
+    if((var_1 != self && var_3 == "MOD_PISTOL_BULLET") || var_3 == "MOD_RIFLE_BULLET" || var_3 == "MOD_HEAD_SHOT" || var_3 == "MOD_PROJECTILE" || var_3 == "MOD_PROJECTILE_SPLASH" || var_3 == "MOD_IMPACT" || var_3 == "MOD_GRENADE" || var_3 == "MOD_GRENADE_SPLASH" || var_3 == "MOD_EXPLOSIVE" || var_3 == "MOD_MELEE" && !var_11) {
+      var_12 = getweaponbasename(var_4);
+      var_13 = getweaponbasename(var_1.primaryweapon);
+      if(var_12 != var_13 && !var_1 isvalidthrowingknifekill(var_4)) {
         return;
       }
 
@@ -263,8 +263,8 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
       }
 
       if(var_1.gungamegunindex < level.gun_guns.size) {
-        var_0E = scripts\mp\rank::getscoreinfovalue("gained_gun_rank");
-        var_1 thread scripts\mp\rank::scorepointspopup(var_0E);
+        var_14 = scripts\mp\rank::getscoreinfovalue("gained_gun_rank");
+        var_1 thread scripts\mp\rank::scorepointspopup(var_14);
         var_1 thread scripts\mp\rank::scoreeventpopup("gained_gun_rank");
         var_1 playlocalsound("mp_war_objective_taken");
         var_1 thread givenextgun(0);
@@ -624,7 +624,7 @@ getrandomweaponfromcategory(var_0) {
         var_2 = var_3["weapon"];
         for(var_8 = 0; var_8 < level.weaponcategories[var_0].size; var_8++) {
           if(level.weaponcategories[var_0][var_8]["weapon"] == var_2) {
-            level.weaponcategories[var_0] = scripts\mp\utility::array_remove_index(level.weaponcategories[var_0], var_8);
+            level.weaponcategories[var_0] = ::scripts\mp\utility::array_remove_index(level.weaponcategories[var_0], var_8);
             break;
           }
         }
@@ -700,17 +700,17 @@ modifyweapon(var_0, var_1, var_2) {
   if(var_1 > 0) {
     var_9 = scripts\mp\utility::getweaponattachmentarrayfromstats(var_0);
     if(var_9.size > 0) {
-      var_0A = getvalidattachments(var_9, var_5, var_0, var_8, var_6);
-      var_0B = var_0A.size;
-      for(var_0C = 0; var_0C < var_1; var_0C++) {
-        var_0D = "";
-        while(var_0D == "" && var_0B > 0) {
-          var_0B--;
-          var_0E = randomint(var_0A.size);
-          if(attachmentcheck(var_0A[var_0E], var_3)) {
-            var_0D = var_0A[var_0E];
-            var_3[var_3.size] = var_0D;
-            if(scripts\mp\utility::getattachmenttype(var_0D) == "rail") {
+      var_10 = getvalidattachments(var_9, var_5, var_0, var_8, var_6);
+      var_11 = var_10.size;
+      for(var_12 = 0; var_12 < var_1; var_12++) {
+        var_13 = "";
+        while(var_13 == "" && var_11 > 0) {
+          var_11--;
+          var_14 = randomint(var_10.size);
+          if(attachmentcheck(var_10[var_14], var_3)) {
+            var_13 = var_10[var_14];
+            var_3[var_3.size] = var_13;
+            if(scripts\mp\utility::getattachmenttype(var_13) == "rail") {
               var_4 = 1;
             }
           }
@@ -719,10 +719,10 @@ modifyweapon(var_0, var_1, var_2) {
     }
   }
 
-  var_0F = "none";
+  var_15 = "none";
   var_10 = "none";
   if(scripts\mp\utility::istrue(var_5) && var_7) {
-    var_11 = scripts\mp\class::buildweaponname(var_0, var_3, var_0F, var_10, int(var_6));
+    var_11 = scripts\mp\class::buildweaponname(var_0, var_3, var_15, var_10, int(var_6));
   } else {
     var_11 = scripts\mp\class::buildweaponname(var_1, var_4, var_10, var_11);
   }
@@ -750,26 +750,26 @@ getvalidattachments(var_0, var_1, var_2, var_3, var_4) {
     var_7 = tablelookup(var_3, 0, int(var_4), 18);
     var_7 = strtok(var_7, "+");
     for(var_8 = 0; var_8 < var_6.size; var_8++) {
-      var_6[var_8] = scripts\mp\utility::attachmentmap_tobase(var_6[var_8]);
+      var_6[var_8] = ::scripts\mp\utility::attachmentmap_tobase(var_6[var_8]);
     }
   }
 
-  foreach(var_0A in var_0) {
-    var_0B = scripts\mp\utility::getattachmenttype(var_0A);
-    if(var_7.size > 0 && scripts\engine\utility::array_contains(var_7, var_0B)) {
+  foreach(var_10 in var_0) {
+    var_11 = scripts\mp\utility::getattachmenttype(var_10);
+    if(var_7.size > 0 && scripts\engine\utility::array_contains(var_7, var_11)) {
       continue;
     }
 
-    if(var_6.size > 0 && scripts\engine\utility::array_contains(var_6, var_0A)) {
+    if(var_6.size > 0 && scripts\engine\utility::array_contains(var_6, var_10)) {
       continue;
     }
 
-    switch (var_0A) {
+    switch (var_10) {
       case "silencer":
         break;
 
       default:
-        var_5[var_5.size] = var_0A;
+        var_5[var_5.size] = var_10;
         break;
     }
   }

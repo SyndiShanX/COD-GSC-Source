@@ -408,16 +408,16 @@ open_soul_jar_sequence(var_0) {
   playFX(level._effect["soul_key_place"], var_8, var_4 * -1, var_5, var_0);
   wait(9.2);
   var_9 = make_lost_reel(var_0);
-  var_0A = make_lost_reel(var_0);
+  var_10 = make_lost_reel(var_0);
   wait(1);
   var_1 = getent("pap_machine", "targetname");
-  var_0B = var_1 gettagorigin("j_top_wheel");
-  var_0C = var_1 gettagorigin("j_bottom_wheel");
-  var_9 moveto(var_0B, 0.8, 0.8);
-  var_0A moveto(var_0C, 0.8, 0.8);
+  var_11 = var_1 gettagorigin("j_top_wheel");
+  var_12 = var_1 gettagorigin("j_bottom_wheel");
+  var_9 moveto(var_11, 0.8, 0.8);
+  var_10 moveto(var_12, 0.8, 0.8);
   wait(0.8);
   var_9 delete();
-  var_0A delete();
+  var_10 delete();
   try_play_lost_reel_vfx_on_machine();
 }
 
@@ -697,9 +697,9 @@ talisman_damage_monitor(var_0) {
   var_0 setCanDamage(1);
   var_0.health = 999999;
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
-    if(isplayer(var_2) && isDefined(var_0A) && var_0A == "iw7_cpknifethrow_mp") {
+    if(isplayer(var_2) && isDefined(var_10) && var_10 == "iw7_cpknifethrow_mp") {
       break;
     }
   }
@@ -721,20 +721,20 @@ disco_talisman_damage_monitor(var_0) {
   var_0 setCanDamage(1);
   var_0.health = 999999;
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
     if(isplayer(var_2)) {
-      var_0B = var_2;
-      if(directors_cut_activated_for(var_0B) && !scripts\engine\utility::istrue(var_0B.got_disco_talisman)) {
-        var_0 hidefromplayer(var_0B);
-        var_0B.got_disco_talisman = 1;
-        playFX(level._effect["crafting_pickup"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles), var_0B);
-        var_0B setplayerdata("cp", "dcq", "cp_disco", 1);
-        var_0B scripts\cp\cp_damage::updatedamagefeedback("hitaliensoft");
-        var_0B scripts\cp\cp_merits::processmerit("mt_dc_3");
+      var_11 = var_2;
+      if(directors_cut_activated_for(var_11) && !scripts\engine\utility::istrue(var_11.got_disco_talisman)) {
+        var_0 hidefromplayer(var_11);
+        var_11.got_disco_talisman = 1;
+        playFX(level._effect["crafting_pickup"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles), var_11);
+        var_11 setplayerdata("cp", "dcq", "cp_disco", 1);
+        var_11 scripts\cp\cp_damage::updatedamagefeedback("hitaliensoft");
+        var_11 scripts\cp\cp_merits::processmerit("mt_dc_3");
         if(scripts\engine\utility::istrue(level.onlinegame)) {
-          var_0B setplayerdata("cp", "hasSongsUnlocked", "any_song", 1);
-          var_0B setplayerdata("cp", "hasSongsUnlocked", "song_9", 1);
+          var_11 setplayerdata("cp", "hasSongsUnlocked", "any_song", 1);
+          var_11 setplayerdata("cp", "hasSongsUnlocked", "song_9", 1);
         }
       }
     }
@@ -858,7 +858,7 @@ cp_final_directors_cut_easter_egg() {
   }
 
   for(;;) {
-    level scripts\engine\utility::waittill_any_3("event_wave_starting", "regular_wave_starting");
+    level scripts\engine\utility::waittill_any("event_wave_starting", "regular_wave_starting");
     if(isDefined(level.wave_num) && level.wave_num > 1) {
       foreach(var_5 in level.abandoned_shooting_gallery_interactions) {
         scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
@@ -940,7 +940,7 @@ flying_talisman_damage_monitor(var_0, var_1) {
   var_0 setCanDamage(1);
   var_0.health = 999999;
   for(;;) {
-    var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     var_0.health = 999999;
     if(isplayer(var_3) && var_3 == var_1 && directors_cut_activated_for(var_1)) {
       playFX(level._effect["sb_quest_item_pickup"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles), var_1);

@@ -32,11 +32,11 @@ func_C0E1(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
   }
 
-  foreach(var_12, var_0B in var_9) {
-    foreach(var_0D in level.var_EC8D[var_7][var_12]) {
-      foreach(var_0F in var_0D) {
-        if(isDefined(var_0F["dialog"])) {
-          var_8.var_53F2[var_0F["dialog"]] = 1;
+  foreach(var_12, var_11 in var_9) {
+    foreach(var_13 in level.var_EC8D[var_7][var_12]) {
+      foreach(var_15 in var_13) {
+        if(isDefined(var_15["dialog"])) {
+          var_8.var_53F2[var_15["dialog"]] = 1;
         }
       }
     }
@@ -84,10 +84,10 @@ func_C0CC(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return 1;
   }
 
-  foreach(var_0C, var_8 in var_4) {
-    if(isDefined(level.var_EC8D[var_3][var_0C][var_2])) {
-      foreach(var_0A in level.var_EC8D[var_3][var_0C][var_2]) {
-        func_1ED8(var_0A, var_0, var_6, var_5);
+  foreach(var_12, var_8 in var_4) {
+    if(isDefined(level.var_EC8D[var_3][var_12][var_2])) {
+      foreach(var_10 in level.var_EC8D[var_3][var_12][var_2]) {
+        func_1ED8(var_10, var_0, var_6, var_5);
       }
     }
   }
@@ -193,10 +193,10 @@ func_C0DB(var_0) {
         return 1;
       }
     } else if(var_6.size == 11) {
-      var_0A = (float(var_6[2]), float(var_6[3]), float(var_6[4]));
-      var_0B = (float(var_6[5]), float(var_6[6]), float(var_6[7]));
-      var_0C = (float(var_6[8]), float(var_6[9]), float(var_6[10]));
-      playFX(level._effect[var_6[1]], var_0A, var_0B, var_0C);
+      var_10 = (float(var_6[2]), float(var_6[3]), float(var_6[4]));
+      var_11 = (float(var_6[5]), float(var_6[6]), float(var_6[7]));
+      var_12 = (float(var_6[8]), float(var_6[9]), float(var_6[10]));
+      playFX(level._effect[var_6[1]], var_10, var_11, var_12);
     }
   }
 
@@ -225,17 +225,17 @@ func_C0DB(var_0) {
   }
 
   if(var_4 == "fov_") {
-    var_0D = strtok(var_2, "_");
-    var_0E = var_0D[1];
-    var_0F = 65;
+    var_13 = strtok(var_2, "_");
+    var_14 = var_13[1];
+    var_15 = 65;
     var_10 = undefined;
-    if(var_0E == "start") {
-      var_0F = float(var_0D[2]);
-      var_10 = float(var_0D[3]);
-      level.player func_81DE(var_0F, var_10);
+    if(var_14 == "start") {
+      var_15 = float(var_13[2]);
+      var_10 = float(var_13[3]);
+      level.player func_81DE(var_15, var_10);
     } else {
-      var_10 = float(var_0D[2]);
-      level.player func_81DE(var_0F, var_10);
+      var_10 = float(var_13[2]);
+      level.player func_81DE(var_15, var_10);
     }
 
     return 1;
@@ -540,7 +540,7 @@ func_86DE() {
 
   self.var_86DB delete();
   self.iscinematicplaying = 1;
-  scripts\anim\shared::placeweaponon(self.var_394, "left");
+  scripts\anim\shared::placeweaponon(self.weapon, "left");
 }
 
 func_86DF() {
@@ -550,7 +550,7 @@ func_86DF() {
 
   self.var_86DB delete();
   self.iscinematicplaying = 1;
-  scripts\anim\shared::placeweaponon(self.var_394, "right");
+  scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
 func_86D5(var_0) {
@@ -565,10 +565,10 @@ func_86D5(var_0) {
     var_3 = var_0["suspend"];
   }
 
-  var_4 = spawn("weapon_" + self.var_394, var_1, var_3);
+  var_4 = spawn("weapon_" + self.weapon, var_1, var_3);
   var_4.angles = var_2;
   self.var_86DB = var_4;
-  scripts\anim\shared::placeweaponon(self.var_394, "none");
+  scripts\anim\shared::placeweaponon(self.weapon, "none");
   self.iscinematicplaying = 0;
 }
 

@@ -1111,7 +1111,7 @@ func_3C00(var_0) {
   var_2 = 0;
   var_3 = 0;
   foreach(var_5 in level.var_1655) {
-    if(var_5.triggerportableradarping == var_1) {
+    if(var_5.owner == var_1) {
       if(var_5.streakname == "sentry_shock") {
         var_2++;
         if(var_2 == 2) {
@@ -1439,18 +1439,18 @@ func_3BFF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   if(scripts\mp\utility::iskillstreakweapon(var_5)) {
-    var_0A = func_7F48(var_5);
+    var_10 = func_7F48(var_5);
     if(!isDefined(var_1.var_A6A5)) {
       var_1.var_A6A5 = [];
     }
 
     if(isDefined(var_0) && isDefined(var_0.var_1653)) {
       if(!isDefined(var_1.var_A6A5[var_0.var_1653])) {
-        var_0B = spawnStruct();
-        var_0B.var_A6A7 = var_0A;
-        var_0B.setculldist = 1;
-        var_0B.var_C2A4 = scripts\engine\utility::ter_op(func_9E4B(var_0.origin), 1, 0);
-        var_1.var_A6A5[var_0.var_1653] = var_0B;
+        var_11 = spawnStruct();
+        var_11.var_A6A7 = var_10;
+        var_11.setculldist = 1;
+        var_11.var_C2A4 = scripts\engine\utility::ter_op(func_9E4B(var_0.origin), 1, 0);
+        var_1.var_A6A5[var_0.var_1653] = var_11;
       } else {
         var_1.var_A6A5[var_0.var_1653].setculldist++;
         if(func_9E4B(var_0.origin)) {
@@ -1459,7 +1459,7 @@ func_3BFF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       }
     }
 
-    switch (var_0A) {
+    switch (var_10) {
       case "sentry_shock":
         if(func_9EBC(var_1.var_A6A5[var_0.var_1653].var_C2A4, 3)) {
           var_1 func_D991("ch_sentry_defender");
@@ -1636,14 +1636,14 @@ func_3BFE(var_0, var_1) {
 
   var_7 = [];
   foreach(var_9 in var_0.var_24FD) {
-    var_0A = scripts\mp\perks\_perks::func_805C(var_9);
-    if(isDefined(var_0A)) {
-      if(!isDefined(var_7[var_0A])) {
-        var_7[var_0A] = 1;
+    var_10 = scripts\mp\perks\perks::func_805C(var_9);
+    if(isDefined(var_10)) {
+      if(!isDefined(var_7[var_10])) {
+        var_7[var_10] = 1;
         continue;
       }
 
-      var_7[var_0A]++;
+      var_7[var_10]++;
     }
   }
 
@@ -1669,9 +1669,9 @@ func_3BFE(var_0, var_1) {
   }
 
   if(isDefined(var_3.var_A6AE)) {
-    foreach(var_0D in var_3.var_A6AE) {
-      if(var_0D.triggerportableradarping == var_2) {
-        switch (var_0D.var_A6A7) {
+    foreach(var_13 in var_3.var_A6AE) {
+      if(var_13.owner == var_2) {
+        switch (var_13.var_A6A7) {
           case "remote_c8":
             var_2 func_D991("ch_rc8_defense");
             break;
@@ -1684,7 +1684,7 @@ func_3BFE(var_0, var_1) {
 func_D98B() {
   if(isDefined(level.var_1655)) {
     foreach(var_1 in level.var_1655) {
-      if(var_1.triggerportableradarping == self) {
+      if(var_1.owner == self) {
         switch (var_1.streakname) {
           case "uav":
             func_D991("ch_scorestreak_kills_uav");
@@ -2011,15 +2011,15 @@ func_D9C8(var_0, var_1, var_2, var_3) {
   if(!scripts\mp\utility::istrue(var_2.var_D99C)) {
     var_8 = 0;
     var_9 = 0;
-    var_0A = 0;
-    foreach(var_0D, var_0C in var_0.var_24F3) {
-      var_8 = var_8 || scripts\mp\utility::iscacprimaryweapon(var_0D);
-      var_9 = var_9 || scripts\mp\utility::iscacsecondaryweapon(var_0D);
-      var_7 = scripts\mp\utility::getequipmenttype(var_0D);
-      var_0A = var_0A || isDefined(var_7) && var_7 == "lethal";
+    var_10 = 0;
+    foreach(var_13, var_12 in var_0.var_24F3) {
+      var_8 = var_8 || scripts\mp\utility::iscacprimaryweapon(var_13);
+      var_9 = var_9 || scripts\mp\utility::iscacsecondaryweapon(var_13);
+      var_7 = scripts\mp\utility::getequipmenttype(var_13);
+      var_10 = var_10 || isDefined(var_7) && var_7 == "lethal";
     }
 
-    if(var_8 && var_9 && var_0A) {
+    if(var_8 && var_9 && var_10) {
       var_2 func_D991("ch_3_kill_types");
       var_2.var_D99C = 1;
     }
@@ -2945,7 +2945,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   if(isDefined(var_0)) {
     var_9.var_94B4 = var_0.isstuck;
-    var_9.var_94B5 = var_0.triggerportableradarping;
+    var_9.var_94B5 = var_0.owner;
     var_9.var_94B6 = var_0.power;
     var_9.var_94B3 = var_0.damagedby;
     var_9.var_94B7 = var_0.waschained;
@@ -2963,14 +2963,14 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9.var_13379 = func_66B8("specialty_quieter");
   var_9.var_1337A = var_9.victim scripts\mp\supers::getcurrentsuperref();
   var_9.var_1337C = var_9.victim scripts\mp\supers::issuperinuse();
-  var_0A = var_9.victim scripts\mp\supers::getcurrentsuper();
-  if(isDefined(var_0A)) {
-    var_9.var_13381 = var_0A.var_A986;
+  var_10 = var_9.victim scripts\mp\supers::getcurrentsuper();
+  if(isDefined(var_10)) {
+    var_9.var_13381 = var_10.var_A986;
   }
 
-  var_0B = scripts\mp\domeshield::func_7E80(self);
-  if(isDefined(var_0B)) {
-    var_9.var_13377 = var_0B.triggerportableradarping;
+  var_11 = scripts\mp\domeshield::func_7E80(self);
+  if(isDefined(var_11)) {
+    var_9.var_13377 = var_11.owner;
   }
 
   func_1369C(var_9);
@@ -2985,7 +2985,7 @@ killstreakdamaged(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(self.var_1653)) {
     if(!isDefined(var_2.var_A6AE[self.var_1653])) {
       var_5 = spawnStruct();
-      var_5.triggerportableradarping = self.triggerportableradarping;
+      var_5.owner = self.owner;
       var_5.var_A6A7 = var_0;
       var_5.var_4D71 = var_4;
       var_2.var_A6AE[self.var_1653] = var_5;
@@ -3028,22 +3028,22 @@ killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) 
       }
     }
 
-    var_0A = var_7;
-    var_0B = scripts\mp\utility::iskillstreakweapon(var_0A);
-    var_0C = 0;
-    var_0D = 0;
-    var_0E = 0;
-    var_0F = scripts\mp\utility::issuperweapon(var_0A);
+    var_10 = var_7;
+    var_11 = scripts\mp\utility::iskillstreakweapon(var_10);
+    var_12 = 0;
+    var_13 = 0;
+    var_14 = 0;
+    var_15 = scripts\mp\utility::issuperweapon(var_10);
     var_10 = scripts\engine\utility::isbulletdamage(var_6);
-    if(var_0B) {
-      switch (func_7F48(var_0A)) {
+    if(var_11) {
+      switch (func_7F48(var_10)) {
         case "jackal":
         case "bombardment":
         case "precision_airstrike":
         case "thor":
         case "minijackal":
         case "drone_hive":
-          var_0C = 1;
+          var_12 = 1;
           break;
       }
     }
@@ -3051,19 +3051,19 @@ killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) 
     switch (var_0) {
       case "precision_airstrike":
       case "drone_hive":
-        var_0D = 1;
+        var_13 = 1;
         break;
 
       case "directional_uav":
       case "counter_uav":
       case "uav":
         var_4 func_D991("ch_destroy_uav");
-        var_0D = 1;
+        var_13 = 1;
         break;
 
       case "minijackal":
         var_4 func_D991("ch_destroy_apex");
-        var_0D = 1;
+        var_13 = 1;
         break;
 
       case "thor":
@@ -3071,11 +3071,11 @@ killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) 
           var_4 func_D991("ch_thor_bullet_kill");
         }
 
-        var_0D = 1;
+        var_13 = 1;
         break;
 
       case "bombardment":
-        var_0D = 1;
+        var_13 = 1;
         break;
 
       case "jackal":
@@ -3083,48 +3083,48 @@ killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) 
           var_4 func_D991("ch_armada_warden_bullet_kill");
         }
 
-        var_0D = 1;
+        var_13 = 1;
         break;
 
       case "dronedrop":
         var_4 func_D991("ch_destroy_dronepackage");
-        var_0D = 1;
+        var_13 = 1;
         break;
 
       case "sentry_shock":
         var_4 func_D991("ch_destroy_sentry");
-        var_0E = 1;
+        var_14 = 1;
         break;
 
       case "ball_drone_backup":
         var_4 func_D991("ch_destroy_vulture");
-        var_0E = 1;
+        var_14 = 1;
         break;
 
       case "remote_c8":
         var_4 func_D991("ch_kill_rc8");
-        var_0E = 1;
+        var_14 = 1;
         break;
 
       case "venom":
         var_4 func_D991("ch_destroy_scarab");
-        var_0E = 1;
+        var_14 = 1;
         break;
     }
 
-    if(var_0D) {
+    if(var_13) {
       var_4 func_D991("ch_destroy_aerial");
     }
 
-    if(var_0C && var_0D) {
+    if(var_12 && var_13) {
       var_4 func_D991("ch_scorestreak_air_to_air");
     }
 
-    if(var_0C && var_0E) {
+    if(var_12 && var_14) {
       var_4 func_D991("ch_scorestreak_air_to_ground");
     }
 
-    if(var_0F) {
+    if(var_15) {
       var_4 func_D991("ch_super_scorestreak_kill");
     }
 
@@ -3170,11 +3170,11 @@ setweaponammostock(var_0, var_1) {
           continue;
         }
 
-        if(isDefined(self.triggerportableradarping) && self.triggerportableradarping == var_3) {
+        if(isDefined(self.owner) && self.owner == var_3) {
           continue;
         }
 
-        if(isDefined(self.triggerportableradarping.team) && scripts\mp\utility::func_9E05(self.triggerportableradarping.team, var_3)) {
+        if(isDefined(self.owner.team) && scripts\mp\utility::func_9E05(self.owner.team, var_3)) {
           continue;
         }
 
@@ -3206,7 +3206,7 @@ func_D366(var_0) {
   var_1.victim = var_0;
   var_2 = var_0.attackerdata[self.guid];
   if(isDefined(var_2)) {
-    var_1.sweapon = var_2.var_394;
+    var_1.sweapon = var_2.weapon;
   }
 
   func_5914("playerAssist", var_1);
@@ -3227,7 +3227,7 @@ func_A691(var_0) {
   wait(0.05);
   scripts\mp\utility::func_13842();
   var_1 = spawnStruct();
-  var_1.player = self.triggerportableradarping;
+  var_1.player = self.owner;
   var_1.var_A6A7 = var_0;
   func_5914("playerKillstreakActive", var_1);
 }
@@ -3325,7 +3325,7 @@ func_BA1F() {
   self endon("disconnect");
   for(;;) {
     self.var_A687 = 0;
-    scripts\engine\utility::waittill_any_3("sprint_end", "death");
+    scripts\engine\utility::waittill_any("sprint_end", "death");
   }
 }
 
@@ -3373,7 +3373,7 @@ func_BA17() {
   var_1 = gettime();
   for(;;) {
     var_2 = self.origin;
-    var_3 = scripts\engine\utility::waittill_any_timeout_1(0.1, "sprint_end", "death");
+    var_3 = scripts\engine\utility::waittill_any_timeout(0.1, "sprint_end", "death");
     var_4 = distance(self.origin, var_2);
     var_0 = var_0 + var_4;
     if(var_3 != "timeout" || !self issprinting()) {
@@ -3859,10 +3859,10 @@ func_31D8(var_0, var_1) {
       var_3 = var_3 + var_8;
     }
 
-    var_0A = func_3C18(var_0, var_4);
-    level.var_3C2C[var_4]["displayParam"] = var_0A;
-    var_0B = func_3C1C(var_0, var_4);
-    level.var_3C2C[var_4]["paramScale"] = var_0B;
+    var_10 = func_3C18(var_0, var_4);
+    level.var_3C2C[var_4]["displayParam"] = var_10;
+    var_11 = func_3C1C(var_0, var_4);
+    level.var_3C2C[var_4]["paramScale"] = var_11;
     if(isDefined(var_5)) {
       if(!isDefined(level.var_3C2D[var_5])) {
         level.var_3C2D[var_5] = [];
@@ -4112,7 +4112,7 @@ processfinalkillchallenges(var_0, var_1) {
     var_0 processchallenge("ch_stickman");
   }
 
-  if(isDefined(var_1.attackerdata[var_0.guid]) && isDefined(var_1.attackerdata[var_0.guid].smeansofdeath) && isDefined(var_1.attackerdata[var_0.guid].var_394) && issubstr(var_1.attackerdata[var_0.guid].smeansofdeath, "MOD_MELEE") && scripts\mp\weapons::isriotshield(var_1.attackerdata[var_0.guid].var_394)) {
+  if(isDefined(var_1.attackerdata[var_0.guid]) && isDefined(var_1.attackerdata[var_0.guid].smeansofdeath) && isDefined(var_1.attackerdata[var_0.guid].weapon) && issubstr(var_1.attackerdata[var_0.guid].smeansofdeath, "MOD_MELEE") && scripts\mp\weapons::isriotshield(var_1.attackerdata[var_0.guid].weapon)) {
     var_0 processchallenge("ch_owned");
   }
 
@@ -4325,7 +4325,7 @@ func_D9C5(var_0, var_1) {
 
 func_D9D5(var_0, var_1, var_2) {
   func_D991("ch_iw7_chargeshot");
-  func_D991("ch_iw7_chargeshot_kill_streak_points", scripts\mp\killstreaks\_killstreaks::getstreakcost(var_1));
+  func_D991("ch_iw7_chargeshot_kill_streak_points", scripts\mp\killstreaks\killstreaks::getstreakcost(var_1));
   if(isDefined(self.var_A9A8) && gettime() - self.var_A9A8 < 10000) {
     func_D991("ch_iw7_chargeshot_streak_double");
   }
@@ -4344,7 +4344,7 @@ func_D9C7(var_0, var_1) {
 
 func_D9D7(var_0, var_1, var_2) {
   func_D991("ch_iw7_lockon");
-  func_D991("ch_iw7_lockon_kill_streak_points", scripts\mp\killstreaks\_killstreaks::getstreakcost(var_1));
+  func_D991("ch_iw7_lockon_kill_streak_points", scripts\mp\killstreaks\killstreaks::getstreakcost(var_1));
   var_3 = undefined;
   var_4 = 0;
   foreach(var_6 in self.var_AF2C) {
@@ -4523,7 +4523,7 @@ func_3E5F() {
 
 func_3DE3(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
-    if(isDefined(level.var_C321) && isDefined(level.var_C321["odin_assault"]) && var_2 == level.var_C321["odin_assault"].var_394["large_rod"].projectile || var_2 == level.var_C321["odin_assault"].var_394["small_rod"].projectile) {
+    if(isDefined(level.var_C321) && isDefined(level.var_C321["odin_assault"]) && var_2 == level.var_C321["odin_assault"].weapon["large_rod"].projectile || var_2 == level.var_C321["odin_assault"].weapon["small_rod"].projectile) {
       var_0 processchallenge("ch_shooting_star");
       return 1;
     } else if(var_2 == "aamissile_projectile_mp") {
@@ -4707,7 +4707,7 @@ func_D3A8(var_0, var_1) {
     return;
   }
 
-  var_2 = scripts\engine\utility::ter_op(isplayer(var_1), var_1, var_1.triggerportableradarping);
+  var_2 = scripts\engine\utility::ter_op(isplayer(var_1), var_1, var_1.owner);
   if(!isDefined(var_2) || !isplayer(var_2)) {
     return;
   }
@@ -4723,7 +4723,7 @@ minedestroyed(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_0.weapon_name) && var_0.weapon_name == "c4_mp") {
-    if(var_0.triggerportableradarping != var_1 && !scripts\mp\utility::istrue(var_0.planted) && scripts\engine\utility::isbulletdamage(var_2)) {
+    if(var_0.owner != var_1 && !scripts\mp\utility::istrue(var_0.planted) && scripts\engine\utility::isbulletdamage(var_2)) {
       var_1 func_D991("ch_c4_air_kill");
     }
   }
@@ -4778,7 +4778,7 @@ func_BA29() {
 }
 
 func_66B8(var_0) {
-  if(!scripts\mp\utility::_hasperk(var_0) || !scripts\mp\perks\_perks::func_9EDF(var_0)) {
+  if(!scripts\mp\utility::_hasperk(var_0) || !scripts\mp\perks\perks::func_9EDF(var_0)) {
     return 0;
   }
 

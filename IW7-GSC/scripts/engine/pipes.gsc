@@ -113,8 +113,8 @@ pipe_logic(var_0, var_1, var_2, var_3) {
   var_8 = var_1 - var_7;
   var_9 = bulletTrace(var_7, var_7 + 1.5 * var_8, 0, var_3, 0);
   if(isDefined(var_9["normal"]) && isDefined(var_9["entity"]) && var_9["entity"] == self) {
-    var_0A = var_9["normal"];
-    thread pipefx(var_1, var_0A, var_3);
+    var_10 = var_9["normal"];
+    thread pipefx(var_1, var_10, var_3);
     return 1;
   }
 
@@ -129,24 +129,24 @@ pipefx(var_0, var_1, var_2) {
   var_7 = "mtl_steam_pipe_hit";
   var_8 = "mtl_steam_pipe_hiss_loop";
   var_9 = "mtl_steam_pipe_hiss_loop_end";
-  var_0A = spawn("script_origin", var_0);
-  var_0A hide();
-  var_0A playSound(var_7);
-  var_0A playLoopSound(var_8);
-  self.pipe_fx_array[self.pipe_fx_array.size] = var_0A;
+  var_10 = spawn("script_origin", var_0);
+  var_10 hide();
+  var_10 playSound(var_7);
+  var_10 playLoopSound(var_8);
+  self.pipe_fx_array[self.pipe_fx_array.size] = var_10;
   if(scripts\engine\utility::issp() || self.script_noteworthy != "steam") {
-    thread pipe_damage(var_0, var_1, var_2, var_0A);
+    thread pipe_damage(var_0, var_1, var_2, var_10);
   }
 
   if(self.script_noteworthy == "oil_leak") {
-    var_0B = spawn("script_model", var_0);
-    var_0B setModel("tag_origin");
-    var_0B.angles = vectortoangles(var_1);
-    playFXOnTag(level._pipes._effect[self.script_noteworthy], var_0B, "tag_origin");
+    var_11 = spawn("script_model", var_0);
+    var_11 setModel("tag_origin");
+    var_11.angles = vectortoangles(var_1);
+    playFXOnTag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
     level._pipes.num_pipe_fx++;
-    var_0B rotatepitch(90, var_3, 1, 1);
+    var_11 rotatepitch(90, var_3, 1, 1);
     wait(var_3);
-    stopFXOnTag(level._pipes._effect[self.script_noteworthy], var_0B, "tag_origin");
+    stopFXOnTag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
     var_5--;
   } else {
     playFX(level._pipes._effect[self.script_noteworthy], var_0, var_1);
@@ -157,14 +157,14 @@ pipefx(var_0, var_1, var_2) {
 
   while(level._pipes.num_pipe_fx <= 12 && var_5 > 0) {
     if(self.script_noteworthy == "oil_leak") {
-      var_0B = spawn("script_model", var_0);
-      var_0B setModel("tag_origin");
-      var_0B.angles = vectortoangles(var_1);
-      playFXOnTag(level._pipes._effect[self.script_noteworthy], var_0B, "tag_origin");
+      var_11 = spawn("script_model", var_0);
+      var_11 setModel("tag_origin");
+      var_11.angles = vectortoangles(var_1);
+      playFXOnTag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
       level._pipes.num_pipe_fx++;
-      var_0B rotatepitch(90, var_3, 1, 1);
+      var_11 rotatepitch(90, var_3, 1, 1);
       wait(var_3);
-      stopFXOnTag(level._pipes._effect[self.script_noteworthy], var_0B, "tag_origin");
+      stopFXOnTag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
       continue;
     }
 
@@ -173,10 +173,10 @@ pipefx(var_0, var_1, var_2) {
     var_5--;
   }
 
-  var_0A playSound(var_9);
+  var_10 playSound(var_9);
   wait(0.5);
-  var_0A stoploopsound(var_8);
-  var_0A delete();
+  var_10 stoploopsound(var_8);
+  var_10 delete();
   self.pipe_fx_array = scripts\engine\utility::array_removeundefined(self.pipe_fx_array);
   level._pipes.num_pipe_fx--;
 }

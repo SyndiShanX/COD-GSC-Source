@@ -64,36 +64,36 @@ func_8162(var_0, var_1) {
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "1" + var_4)) {
-    var_2[7] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "1" + var_4);
+    var_2[7] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "1" + var_4);
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "2" + var_4)) {
-    var_2[0] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "2" + var_4);
+    var_2[0] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "2" + var_4);
     var_2[8] = var_2[0];
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "3" + var_4)) {
-    var_2[1] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "3" + var_4);
+    var_2[1] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "3" + var_4);
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "4" + var_4)) {
-    var_2[6] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "4" + var_4);
+    var_2[6] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "4" + var_4);
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "6" + var_4)) {
-    var_2[2] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "6" + var_4);
+    var_2[2] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "6" + var_4);
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "7" + var_4)) {
-    var_2[5] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "7" + var_4);
+    var_2[5] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "7" + var_4);
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "8" + var_4)) {
-    var_2[4] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "8" + var_4);
+    var_2[4] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "8" + var_4);
   }
 
   if(scripts\asm\asm::asm_hasalias(var_0, var_3 + "9" + var_4)) {
-    var_2[3] = scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "9" + var_4);
+    var_2[3] = ::scripts\asm\asm::asm_lookupanimfromalias(var_0, var_3 + "9" + var_4);
   }
 
   return var_2;
@@ -137,50 +137,50 @@ func_53CA(var_0, var_1, var_2) {
 
   var_9 = angleclamp180(var_7[1] - var_8[1]);
   if(length2dsquared(self.var_381) > 16) {
-    var_0A = vectortoangles(self.var_381);
-    if(abs(angleclamp180(var_0A[1] - var_7[1])) < 45) {
+    var_10 = vectortoangles(self.var_381);
+    if(abs(angleclamp180(var_10[1] - var_7[1])) < 45) {
       return;
     }
   }
 
-  var_0B = getthreatbiasgroup();
-  if(distancesquared(var_4, self.origin) < var_0B * var_0B) {
+  var_11 = getthreatbiasgroup();
+  if(distancesquared(var_4, self.origin) < var_11 * var_11) {
     return;
   }
 
   if(isDefined(self.asm.var_4C86.var_697F)) {
-    var_0C = func_8162(self.asm.var_4C86.var_697F, var_1);
+    var_12 = func_8162(self.asm.var_4C86.var_697F, var_1);
   } else {
-    var_0C = func_8162(var_1, var_2);
+    var_12 = func_8162(var_1, var_2);
   }
 
-  var_0D = getangleindices(var_9);
-  var_0E = self func_84AC();
-  var_0F = undefined;
+  var_13 = getangleindices(var_9);
+  var_14 = self func_84AC();
+  var_15 = undefined;
   var_10 = 0;
-  for(var_10 = 0; var_10 < var_0D.size; var_10++) {
-    var_11 = var_0D[var_10];
-    if(!isDefined(var_0C[var_11])) {
+  for(var_10 = 0; var_10 < var_13.size; var_10++) {
+    var_11 = var_13[var_10];
+    if(!isDefined(var_12[var_11])) {
       continue;
     }
 
-    var_0F = var_0C[var_11];
+    var_15 = var_12[var_11];
     var_12 = 1;
-    var_13 = getnotetracktimes(var_0F, "code_move");
+    var_13 = getnotetracktimes(var_15, "code_move");
     if(var_13.size > 0) {
       var_12 = var_13[0];
     }
 
-    var_14 = getmovedelta(var_0F, 0, var_12);
-    var_15 = rotatevector(var_14, self.angles) + var_0E;
-    var_16 = getnotetracktimes(var_0F, "corner");
+    var_14 = getmovedelta(var_15, 0, var_12);
+    var_15 = rotatevector(var_14, self.angles) + var_14;
+    var_16 = getnotetracktimes(var_15, "corner");
     if(var_16.size == 0) {
-      var_16 = getnotetracktimes(var_0F, "exit_align");
+      var_16 = getnotetracktimes(var_15, "exit_align");
     }
 
     if(var_16.size > 0) {
-      var_17 = getmovedelta(var_0F, 0, var_16[0]);
-      var_18 = rotatevector(var_17, self.angles) + var_0E;
+      var_17 = getmovedelta(var_15, 0, var_16[0]);
+      var_18 = rotatevector(var_17, self.angles) + var_14;
       var_19 = self maymovefrompointtopoint(var_18, var_15, 1, 1);
       if(var_19) {
         break;
@@ -189,16 +189,16 @@ func_53CA(var_0, var_1, var_2) {
       continue;
     }
 
-    if(self maymovefrompointtopoint(var_0E, var_15, 1, 1)) {
+    if(self maymovefrompointtopoint(var_14, var_15, 1, 1)) {
       break;
     }
   }
 
-  if(var_10 == var_0D.size) {
+  if(var_10 == var_13.size) {
     return undefined;
   }
 
-  return var_0F;
+  return var_15;
 }
 
 func_D53A(var_0, var_1, var_2, var_3, var_4) {
@@ -219,7 +219,7 @@ func_D53A(var_0, var_1, var_2, var_3, var_4) {
     var_9 = var_8[0];
   }
 
-  var_0A = getangledelta3d(var_2, 0, var_9);
+  var_10 = getangledelta3d(var_2, 0, var_9);
   self animmode("zonly_physics", 0);
   childthread scripts\asm\shared_utility::setuseanimgoalweight(var_1, var_3);
   thread lib_0F3D::func_444B(var_1);
@@ -325,27 +325,27 @@ func_FFF8(var_0, var_1, var_2, var_3) {
 
   var_8 = var_5.params[1];
   var_9 = var_5.params[2];
-  var_0A = 0;
-  var_0B = undefined;
+  var_10 = 0;
+  var_11 = undefined;
   if(!isarray(var_3)) {
-    var_0C = var_3;
+    var_12 = var_3;
   } else {
-    var_0C = var_4[0];
+    var_12 = var_4[0];
     if(var_3.size > 1 && var_3[1] == 1) {
-      var_0A = 1;
+      var_10 = 1;
     }
 
     if(var_3.size > 2) {
-      var_0B = scripts\asm\asm_bb::func_2928(var_3[2]);
+      var_11 = scripts\asm\asm_bb::func_2928(var_3[2]);
     }
   }
 
-  var_0D = func_371C(var_1, var_0C, var_8, var_9, var_0A, var_0B);
-  if(!isDefined(var_0D)) {
+  var_13 = func_371C(var_1, var_12, var_8, var_9, var_10, var_11);
+  if(!isDefined(var_13)) {
     return 0;
   }
 
-  self.a.var_FC61 = var_0D;
+  self.a.var_FC61 = var_13;
   return 1;
 }
 
@@ -380,50 +380,50 @@ func_371C(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_9 = self func_8546(self.asm.archetype, var_1, scripts\asm\asm::asm_getdemeanor(), var_2, var_3, var_6, var_8, var_7, var_5);
-  var_0A = var_9[0];
-  var_0B = var_9[1];
-  if(isDefined(self.asm.var_13CAF) && self.asm.var_13CAF && isDefined(var_0B)) {
-    var_0C = var_0B;
-    if(var_0B == 0 || var_0B == 8) {
-      var_0C = 2;
+  var_10 = var_9[0];
+  var_11 = var_9[1];
+  if(isDefined(self.asm.var_13CAF) && self.asm.var_13CAF && isDefined(var_11)) {
+    var_12 = var_11;
+    if(var_11 == 0 || var_11 == 8) {
+      var_12 = 2;
     }
 
-    if(var_0B == 1) {
-      var_0C = 3;
+    if(var_11 == 1) {
+      var_12 = 3;
     }
 
-    if(var_0B == 2) {
-      var_0C = 6;
+    if(var_11 == 2) {
+      var_12 = 6;
     }
 
-    if(var_0B == 3) {
-      var_0C = 9;
+    if(var_11 == 3) {
+      var_12 = 9;
     }
 
-    if(var_0B == 4) {
-      var_0C = 8;
+    if(var_11 == 4) {
+      var_12 = 8;
     }
 
-    if(var_0B == 5) {
-      var_0C = 7;
+    if(var_11 == 5) {
+      var_12 = 7;
     }
 
-    if(var_0B == 6) {
-      var_0C = 4;
+    if(var_11 == 6) {
+      var_12 = 4;
     }
 
-    if(var_0B == 7) {
-      var_0C = 1;
+    if(var_11 == 7) {
+      var_12 = 1;
     }
 
-    var_0D = var_7 + var_0C + "_2h";
-    if(lib_0A1E::func_2305(self.asm.archetype, var_1, var_0D)) {
-      var_0A = lib_0A1E::func_2359(self.asm.archetype, var_1, var_0D);
+    var_13 = var_7 + var_12 + "_2h";
+    if(lib_0A1E::func_2305(self.asm.archetype, var_1, var_13)) {
+      var_10 = lib_0A1E::func_2359(self.asm.archetype, var_1, var_13);
     }
   }
 
-  self.a.var_FC62 = var_0B;
-  return var_0A;
+  self.a.var_FC62 = var_11;
+  return var_10;
 }
 
 func_3EF5(var_0, var_1, var_2, var_3) {
@@ -487,8 +487,8 @@ func_D50D(var_0, var_1, var_2, var_3) {
 }
 
 func_E875() {
-  if(isalive(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied)) {
-    return self.isnodeoccupied;
+  if(isalive(self.enemy) && self cansee(self.enemy)) {
+    return self.enemy;
   }
 }
 
@@ -547,14 +547,14 @@ canshoottarget() {
 }
 
 canshootinvehicle() {
-  return scripts\anim\move::func_B4EC() && isDefined(self.isnodeoccupied) && canshoottargetfrompos() || canshoottarget();
+  return scripts\anim\move::func_B4EC() && isDefined(self.enemy) && canshoottargetfrompos() || canshoottarget();
 }
 
 detach(var_0) {
   var_1 = self.origin;
   var_2 = self.angles[1] + self getspawnpoint_searchandrescue();
   var_1 = var_1 + (cos(var_2), sin(var_2), 0) * length(self.var_381) * var_0;
-  var_3 = self.angles[1] - vectortoyaw(self.isnodeoccupied.origin - var_1);
+  var_3 = self.angles[1] - vectortoyaw(self.enemy.origin - var_1);
   var_3 = angleclamp180(var_3);
   return var_3;
 }
@@ -567,45 +567,45 @@ func_E877(var_0, var_1, var_2, var_3) {
   var_7 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "LB");
   var_8 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "RB");
   var_9 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "run_n_gun");
-  var_0A = self.var_B4C3;
-  var_0B = self.var_E878;
-  var_0C = self.var_E876;
+  var_10 = self.var_B4C3;
+  var_11 = self.var_E878;
+  var_12 = self.var_E876;
   for(;;) {
-    var_0D = func_E875();
-    if(isDefined(var_0D)) {
-      var_0E = detach(0.2);
-      var_0F = var_0E < 0;
+    var_13 = func_E875();
+    if(isDefined(var_13)) {
+      var_14 = detach(0.2);
+      var_15 = var_14 < 0;
     } else {
-      var_0E = 0;
-      var_0F = self.var_E879 < 0;
+      var_14 = 0;
+      var_15 = self.var_E879 < 0;
     }
 
-    var_10 = 1 - var_0F;
-    var_11 = var_0E / var_0A;
+    var_10 = 1 - var_15;
+    var_11 = var_14 / var_10;
     var_12 = var_11 - self.var_E879;
-    if(abs(var_12) < var_0B * 0.7) {
+    if(abs(var_12) < var_11 * 0.7) {
       self.var_E879 = var_11;
     } else if(var_12 > 0) {
-      self.var_E879 = self.var_E879 + var_0C;
+      self.var_E879 = self.var_E879 + var_12;
     } else {
-      self.var_E879 = self.var_E879 - var_0C;
+      self.var_E879 = self.var_E879 - var_12;
     }
 
     var_13 = abs(self.var_E879);
-    if(var_13 > var_0B) {
-      var_14 = var_13 - var_0B / var_0B;
+    if(var_13 > var_11) {
+      var_14 = var_13 - var_11 / var_11;
       var_14 = clamp(var_14, 0, 1);
       self clearanim(var_4, 0.2);
-      self func_82AC(var_5, 1 - var_14 * var_0F, 0.2);
+      self func_82AC(var_5, 1 - var_14 * var_15, 0.2);
       self func_82AC(var_6, 1 - var_14 * var_10, 0.2);
-      self func_82AC(var_7, var_14 * var_0F, 0.2);
+      self func_82AC(var_7, var_14 * var_15, 0.2);
       self func_82AC(var_8, var_14 * var_10, 0.2);
     } else {
-      var_14 = clamp(var_13 / var_0B, 0, 1);
+      var_14 = clamp(var_13 / var_11, 0, 1);
       self func_82AC(var_4, 1 - var_14, 0.2);
-      self func_82AC(var_5, var_14 * var_0F, 0.2);
+      self func_82AC(var_5, var_14 * var_15, 0.2);
       self func_82AC(var_6, var_14 * var_10, 0.2);
-      if(var_0B < 1) {
+      if(var_11 < 1) {
         self clearanim(var_7, 0.2);
         self clearanim(var_8, 0.2);
       }
@@ -613,7 +613,7 @@ func_E877(var_0, var_1, var_2, var_3) {
 
     self setanimknob(var_9, 1, 0.3, 0.8);
     self.a.var_1C8D = gettime() + 500;
-    if(isDefined(var_0D) && isplayer(var_0D)) {
+    if(isDefined(var_13) && isplayer(var_13)) {
       self func_83CE();
     }
 
@@ -629,7 +629,7 @@ func_D50E(var_0, var_1, var_2, var_3) {
 func_E874(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   for(;;) {
-    if(isplayer(self.isnodeoccupied)) {
+    if(isplayer(self.enemy)) {
       self func_83CE();
     }
 
@@ -687,24 +687,24 @@ giveachievement(var_0) {
 
 func_3F03(var_0, var_1, var_2) {
   var_3 = [];
-  var_3[0] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "0");
-  var_3[1] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "1");
-  var_3[2] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "2");
-  var_3[3] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "3");
-  var_3[4] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "4");
-  var_3[5] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "5");
-  var_3[6] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "6");
-  var_3[7] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "7");
-  var_3[8] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "8");
+  var_3[0] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "0");
+  var_3[1] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "1");
+  var_3[2] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "2");
+  var_3[3] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "3");
+  var_3[4] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "4");
+  var_3[5] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "5");
+  var_3[6] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "6");
+  var_3[7] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "7");
+  var_3[8] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "8");
   return var_3;
 }
 
 func_3F0C(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_4 = [];
-  var_4[0] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "0");
-  var_4[1] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "1");
-  var_4[2] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "2");
+  var_4[0] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "0");
+  var_4[1] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "1");
+  var_4[2] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "2");
   var_3.var_47 = var_4;
   var_3.var_7332 = scripts\asm\asm::asm_lookupanimfromalias(var_1, "forward");
   return var_3;
@@ -736,32 +736,32 @@ func_BD2C(var_0, var_1, var_2, var_3) {
   var_8 = 0;
   var_9 = 20;
   for(;;) {
-    var_0A = scripts\asm\asm::func_232B(var_1, "cover_approach");
-    var_0B = self pathdisttogoal();
-    if(var_0A && var_0B < 150) {
-      var_0C = func_1E80();
-      var_0D = 1;
-      while(var_0D <= var_9) {
-        var_0E = var_0D / var_9;
-        var_0F = var_0E * var_0E * 3 - 2 * var_0E;
-        var_10 = var_0C;
-        var_11 = var_10 * var_0F;
+    var_10 = scripts\asm\asm::func_232B(var_1, "cover_approach");
+    var_11 = self pathdisttogoal();
+    if(var_10 && var_11 < 150) {
+      var_12 = func_1E80();
+      var_13 = 1;
+      while(var_13 <= var_9) {
+        var_14 = var_13 / var_9;
+        var_15 = var_14 * var_14 * 3 - 2 * var_14;
+        var_10 = var_12;
+        var_11 = var_10 * var_15;
         var_12 = var_10 - var_11;
         var_13 = mountvehicle(var_12);
         for(var_14 = 0; var_14 < var_13.size; var_14++) {
           self give_attacker_kill_rewards(var_6[var_14], var_13[var_14], 0.2, 1, 1);
         }
 
-        var_0D++;
+        var_13++;
         wait(0.05);
         waittillframeend;
       }
 
-      while(var_0A) {
+      while(var_10) {
         var_13 = mountvehicle(0);
-        for(var_0D = 0; var_0D < var_13.size; var_0D++) {
-          if(isDefined(var_6[var_0D])) {
-            self give_attacker_kill_rewards(var_6[var_0D], var_13[var_0D], 0.2, 1, 1);
+        for(var_13 = 0; var_13 < var_13.size; var_13++) {
+          if(isDefined(var_6[var_13])) {
+            self give_attacker_kill_rewards(var_6[var_13], var_13[var_13], 0.2, 1, 1);
           }
         }
 
@@ -772,8 +772,8 @@ func_BD2C(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_0C = func_1E80();
-    var_15 = var_8 - var_0C;
+    var_12 = func_1E80();
+    var_15 = var_8 - var_12;
     if(var_15 < 0) {
       var_15 = var_15 * -1;
     }
@@ -781,50 +781,50 @@ func_BD2C(var_0, var_1, var_2, var_3) {
     if(var_15 >= 60) {
       var_16 = var_8;
       var_17 = var_8;
-      var_0D = 1;
-      while(var_0D <= var_9) {
-        var_0C = func_1E80();
-        var_18 = var_16 - var_0C;
+      var_13 = 1;
+      while(var_13 <= var_9) {
+        var_12 = func_1E80();
+        var_18 = var_16 - var_12;
         if(var_18 < 0) {
           var_18 = var_18 * -1;
         }
 
         if(var_18 >= 60) {
-          if(var_0D == 1) {
-            var_0D = 1;
+          if(var_13 == 1) {
+            var_13 = 1;
           } else {
-            var_0D = var_0D - 1;
+            var_13 = var_13 - 1;
           }
 
           var_19 = var_16 - var_8;
-          var_0E = var_0D / var_9;
-          var_0F = var_0E * var_0E * 3 - 2 * var_0E;
-          var_1A = var_19 * var_0F;
+          var_14 = var_13 / var_9;
+          var_15 = var_14 * var_14 * 3 - 2 * var_14;
+          var_1A = var_19 * var_15;
           var_17 = var_1A + var_8;
-          var_0D = 1;
+          var_13 = 1;
           var_8 = var_17;
         }
 
-        var_0E = var_0D / var_9;
-        var_0F = var_0E * var_0E * 3 - 2 * var_0E;
-        var_10 = var_0C - var_17;
-        var_11 = var_10 * var_0F;
+        var_14 = var_13 / var_9;
+        var_15 = var_14 * var_14 * 3 - 2 * var_14;
+        var_10 = var_12 - var_17;
+        var_11 = var_10 * var_15;
         var_12 = var_11 + var_8;
         var_13 = mountvehicle(var_12);
         for(var_14 = 0; var_14 < var_13.size; var_14++) {
           self give_attacker_kill_rewards(var_6[var_14], var_13[var_14], 0.2, 1, 1);
         }
 
-        var_0D++;
-        var_16 = var_0C;
+        var_13++;
+        var_16 = var_12;
         wait(0.05);
         waittillframeend;
       }
     } else {
-      var_13 = mountvehicle(var_0C);
-      for(var_0D = 0; var_0D < var_13.size; var_0D++) {
-        if(isDefined(var_6[var_0D])) {
-          self give_attacker_kill_rewards(var_6[var_0D], var_13[var_0D], 0.2, 1, 1);
+      var_13 = mountvehicle(var_12);
+      for(var_13 = 0; var_13 < var_13.size; var_13++) {
+        if(isDefined(var_6[var_13])) {
+          self give_attacker_kill_rewards(var_6[var_13], var_13[var_13], 0.2, 1, 1);
         }
       }
 
@@ -832,7 +832,7 @@ func_BD2C(var_0, var_1, var_2, var_3) {
       waittillframeend;
     }
 
-    var_8 = var_0C;
+    var_8 = var_12;
   }
 }
 

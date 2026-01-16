@@ -157,33 +157,33 @@ func_7FB1(var_0, var_1) {
 
     var_9 = var_6;
   } else {
-    var_0A = angleclamp180(vectortoyaw(var_6)) + 180;
-    var_9 = var_0A / func_7FA8();
+    var_10 = angleclamp180(vectortoyaw(var_6)) + 180;
+    var_9 = var_10 / func_7FA8();
     var_6 = int(var_9 + 0.5);
   }
 
-  var_0B = undefined;
-  var_0C = -1;
-  var_0D = 3;
-  var_0E = 2;
+  var_11 = undefined;
+  var_12 = -1;
+  var_13 = 3;
+  var_14 = 2;
   if(var_9 > var_6) {
-    var_0C = var_0C * -1;
-    var_0D = var_0D * -1;
-    var_0E = var_0E * -1;
+    var_12 = var_12 * -1;
+    var_13 = var_13 * -1;
+    var_14 = var_14 * -1;
   }
 
-  var_0F = allowmelee();
-  for(var_10 = 0; var_10 < var_0F / 2 + 1; var_10++) {
-    for(var_11 = var_0C; var_11 != var_0D; var_11 = var_11 + var_0E) {
+  var_15 = allowmelee();
+  for(var_10 = 0; var_10 < var_15 / 2 + 1; var_10++) {
+    for(var_11 = var_12; var_11 != var_13; var_11 = var_11 + var_14) {
       var_12 = var_6 + var_10 * var_11;
-      if(var_12 >= var_0F) {
-        var_12 = var_12 - var_0F;
+      if(var_12 >= var_15) {
+        var_12 = var_12 - var_15;
       } else if(var_12 < 0) {
-        var_12 = var_12 + var_0F;
+        var_12 = var_12 + var_15;
       }
 
       var_8 = var_2[var_12];
-      if(!isDefined(var_0B) && gettime() - var_8.var_11931 >= self.var_B641) {
+      if(!isDefined(var_11) && gettime() - var_8.var_11931 >= self.var_B641) {
         if(isDefined(level.var_12892) && isDefined(level.var_12892[self.agent_type])) {
           [
             [level.var_12892[self.agent_type]]
@@ -193,7 +193,7 @@ func_7FB1(var_0, var_1) {
         }
       }
 
-      if(!isDefined(var_0B) && isDefined(var_8.origin)) {
+      if(!isDefined(var_11) && isDefined(var_8.origin)) {
         var_13 = getclosestpointonnavmesh(var_0.origin, self);
         var_14 = navtrace(var_8.origin, var_13, self, 1);
         if(var_14["fraction"] < 0.95) {
@@ -218,7 +218,7 @@ func_7FB1(var_0, var_1) {
 
           self.var_F0D4 = var_8;
           var_8.var_3FF6 = self;
-          var_0B = var_8.origin;
+          var_11 = var_8.origin;
           thread func_BA13(var_8);
         }
       }
@@ -229,7 +229,7 @@ func_7FB1(var_0, var_1) {
     }
   }
 
-  return var_0B;
+  return var_11;
 }
 
 func_BA13(var_0) {
@@ -237,7 +237,7 @@ func_BA13(var_0) {
   self notify("monitorSectorClaim");
   self endon("monitorSectorClaim");
   self endon("lostSectorClaim");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   var_0.var_3FF6 = undefined;
 }
 

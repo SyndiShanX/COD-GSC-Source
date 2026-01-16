@@ -224,34 +224,34 @@ script_mover_parse_targets() {
       continue;
     }
 
-    var_0A = strtok(var_9.script_noteworthy, "_");
-    if(var_0A.size != 3 || var_0A[1] != "on") {
+    var_10 = strtok(var_9.script_noteworthy, "_");
+    if(var_10.size != 3 || var_10[1] != "on") {
       continue;
     }
 
-    switch (var_0A[0]) {
+    switch (var_10[0]) {
       case "delete":
-        thread script_mover_call_func_on_notify(var_9, ::delete, var_0A[2]);
+        thread script_mover_call_func_on_notify(var_9, ::delete, var_10[2]);
         break;
 
       case "hide":
-        thread script_mover_call_func_on_notify(var_9, ::hide, var_0A[2]);
+        thread script_mover_call_func_on_notify(var_9, ::hide, var_10[2]);
         break;
 
       case "show":
         var_9 hide();
-        thread script_mover_call_func_on_notify(var_9, ::show, var_0A[2]);
+        thread script_mover_call_func_on_notify(var_9, ::show, var_10[2]);
         break;
 
       case "triggerHide":
       case "triggerhide":
-        thread script_mover_func_on_notify(var_9, scripts\engine\utility::trigger_off, var_0A[2]);
+        thread script_mover_func_on_notify(var_9, scripts\engine\utility::trigger_off, var_10[2]);
         break;
 
       case "triggerShow":
       case "triggershow":
         var_9 scripts\engine\utility::trigger_off();
-        thread script_mover_func_on_notify(var_9, scripts\engine\utility::trigger_on, var_0A[2]);
+        thread script_mover_func_on_notify(var_9, scripts\engine\utility::trigger_on, var_10[2]);
         break;
 
       default:
@@ -326,8 +326,8 @@ script_mover_move_to_target(var_0) {
       }
 
       var_2 moveto(var_8["origin"], var_3, var_4, var_5);
-      foreach(var_0B in var_1.level_notify) {
-        thread script_mover_run_notify(var_0B.origin, var_0B.script_parameters, self.origin, var_1.origin);
+      foreach(var_11 in var_1.level_notify) {
+        thread script_mover_run_notify(var_11.origin, var_11.script_parameters, self.origin, var_1.origin);
       }
 
       var_6 = 1;
@@ -338,8 +338,8 @@ script_mover_move_to_target(var_0) {
       var_7 = 1;
     }
 
-    foreach(var_0E in var_2.movers) {
-      var_0E notify("trigger");
+    foreach(var_14 in var_2.movers) {
+      var_14 notify("trigger");
     }
 
     var_0 notify("depart");
@@ -366,8 +366,8 @@ script_mover_move_to_target(var_0) {
       }
     }
 
-    foreach(var_0E in var_1.movers) {
-      var_0E notify("trigger");
+    foreach(var_14 in var_1.movers) {
+      var_14 notify("trigger");
     }
 
     if(isDefined(var_2.params["wait_till"])) {
@@ -603,17 +603,17 @@ func_418E() {
 
 unresolved_collision_owner_damage(var_0) {
   var_1 = self;
-  if(!isDefined(var_1.triggerportableradarping)) {
+  if(!isDefined(var_1.owner)) {
     var_0 mover_suicide();
     return;
   }
 
   var_2 = 0;
   if(level.teambased) {
-    if(isDefined(var_1.triggerportableradarping.team) && var_1.triggerportableradarping.team != var_0.team) {
+    if(isDefined(var_1.owner.team) && var_1.owner.team != var_0.team) {
       var_2 = 1;
     }
-  } else if(var_0 != var_1.triggerportableradarping) {
+  } else if(var_0 != var_1.owner) {
     var_2 = 1;
   }
 
@@ -627,7 +627,7 @@ unresolved_collision_owner_damage(var_0) {
     var_3 = var_1.unresolved_collision_damage;
   }
 
-  var_0 dodamage(var_3, var_1.origin, var_1.triggerportableradarping, var_1, "MOD_CRUSH");
+  var_0 dodamage(var_3, var_1.origin, var_1.owner, var_1, "MOD_CRUSH");
 }
 
 unresolved_collision_nearest_node(var_0, var_1) {
@@ -804,7 +804,7 @@ script_mover_unlink_from_use_object(var_0) {
 
 func_EC11(var_0) {
   self endon("removeMoverLinkDummy");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   self.var_EF85 delete();
   self.var_EF85 = undefined;
 }

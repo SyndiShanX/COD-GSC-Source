@@ -153,34 +153,34 @@ func_8CF0() {
     var_3[var_9] = var_5 + var_8;
   }
 
-  var_0B = level.player getweaponslistprimaries();
+  var_11 = level.player getweaponslistprimaries();
   for(var_9 = 0; var_9 < 3; var_9++) {
-    var_0C = undefined;
-    if(isDefined(var_0B[var_9])) {
-      var_0D = strtok(var_0B[var_9], "+");
-      var_0C = var_0D[0];
+    var_12 = undefined;
+    if(isDefined(var_11[var_9])) {
+      var_13 = strtok(var_11[var_9], "+");
+      var_12 = var_13[0];
     }
 
-    var_0E = 0.3;
-    var_0F = 60;
+    var_14 = 0.3;
+    var_15 = 60;
     var_10 = "hud_ar57";
-    if(isDefined(var_0C) && isDefined(var_0[var_0C])) {
-      var_10 = var_0[var_0C];
+    if(isDefined(var_12) && isDefined(var_0[var_12])) {
+      var_10 = var_0[var_12];
     }
 
-    var_11 = level.player scripts\sp\hud_util::createicon(var_10, var_0F, int(var_0F / 2));
+    var_11 = level.player scripts\sp\hud_util::createicon(var_10, var_15, int(var_15 / 2));
     var_11 scripts\sp\hud_util::setpoint("CENTER", "CENTER", var_2[var_9], var_3[var_9]);
-    var_11.alpha = var_0E;
+    var_11.alpha = var_14;
     if(var_9 == 2) {
       var_11.var_8D0A = 1;
       var_12 = level.player scripts\sp\hud_util::func_4997("white", "black", 70, 5);
       var_12 scripts\sp\hud_util::setpoint("CENTER", "CENTER", var_2[var_9], var_3[var_9] + 15);
-      var_12 func_9071(var_0E);
+      var_12 func_9071(var_14);
       var_12 scripts\sp\hud_util::updatebar(1);
       var_11.var_9070 = var_12;
     }
 
-    if(!isDefined(var_0C)) {
+    if(!isDefined(var_12)) {
       var_11.alpha = 0;
       if(isDefined(var_11.var_9070)) {
         var_11.var_9070 func_9071(0.3);
@@ -191,8 +191,8 @@ func_8CF0() {
       continue;
     }
 
-    var_11.var_13CFB = var_0C;
-    var_1[var_0C] = var_11;
+    var_11.var_13CFB = var_12;
+    var_1[var_12] = var_11;
   }
 
   thread func_8CF3();
@@ -220,7 +220,7 @@ func_8CF3() {
 
     func_8CF2(var_1);
     var_0 = var_1;
-    level.player scripts\engine\utility::waittill_any_3("weapon_change", "pickup");
+    level.player scripts\engine\utility::waittill_any("weapon_change", "pickup");
   }
 }
 

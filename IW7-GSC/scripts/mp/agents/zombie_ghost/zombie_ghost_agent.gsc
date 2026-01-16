@@ -177,8 +177,8 @@ func_AEB0() {
   level._effect["ghost_explosion_death_green"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_ghost_imp.vfx");
 }
 
-func_C536(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = gettime();
+func_C536(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = gettime();
   if(isplayer(var_1)) {
     if(isDefined(var_5) && var_5 == "iw7_entangler_zm") {
       if(!isDefined(self.var_65FC)) {
@@ -186,7 +186,7 @@ func_C536(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       } else if(var_1 == self.var_65FC) {
         func_D974(var_1, self);
       } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted) {
-        func_8263(var_1, var_0C);
+        func_8263(var_1, var_12);
       }
     } else if(!isDefined(level.fbd) || !isDefined(level.fbd.fightstarted) || !level.fbd.fightstarted) {
       var_1 iprintlnbold("This weapon is not effective againt the ghost");

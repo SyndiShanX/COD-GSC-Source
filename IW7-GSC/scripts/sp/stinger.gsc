@@ -178,23 +178,23 @@ stinger_get_closest_to_player_view(var_0, var_1, var_2, var_3) {
   var_6 = var_1 getplayerangles();
   var_7 = anglesToForward(var_6);
   var_8 = -1;
-  foreach(var_0A in var_0) {
-    var_0B = vectortoangles(var_0A.origin - var_4);
-    var_0C = anglesToForward(var_0B);
-    var_0D = vectordot(var_7, var_0C);
-    var_0E = distancesquared(var_4, var_0A.origin);
-    var_0F = 1 - scripts\sp\math::func_C097(squared(250), squared(5000), var_0E);
-    var_0D = var_0D * var_0F;
-    if(var_0D < var_8) {
+  foreach(var_10 in var_0) {
+    var_11 = vectortoangles(var_10.origin - var_4);
+    var_12 = anglesToForward(var_11);
+    var_13 = vectordot(var_7, var_12);
+    var_14 = distancesquared(var_4, var_10.origin);
+    var_15 = 1 - scripts\sp\math::func_C097(squared(250), squared(5000), var_14);
+    var_13 = var_13 * var_15;
+    if(var_13 < var_8) {
       continue;
     }
 
-    if(var_0D < var_3) {
+    if(var_13 < var_3) {
       continue;
     }
 
-    var_8 = var_0D;
-    var_5 = var_0A;
+    var_8 = var_13;
+    var_5 = var_10;
   }
 
   return var_5;
@@ -255,9 +255,9 @@ func_7E04() {
     func_1833(var_4);
   }
 
-  foreach(var_0F in var_6) {
-    if(func_9922(var_0F)) {
-      return iprintln(var_0F);
+  foreach(var_15 in var_6) {
+    if(func_9922(var_15)) {
+      return iprintln(var_15);
     }
   }
 
@@ -399,7 +399,7 @@ func_D42E() {
     return 0;
   }
 
-  if(self getweaponrankinfominxp() == 1) {
+  if(self playerads() == 1) {
     return 1;
   }
 

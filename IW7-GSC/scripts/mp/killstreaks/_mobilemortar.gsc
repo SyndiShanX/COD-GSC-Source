@@ -88,7 +88,7 @@ init() {
   level.var_8638["mp_meteora"][1]["angles"] = (0, 179.879, 0);
   level.var_8638["mp_meteora"][2]["origin"] = (938.851, -1376.99, -60.0877);
   level.var_8638["mp_meteora"][2]["angles"] = (0, 110.545, 0);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("mobile_mortar", ::func_128EF);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("mobile_mortar", ::func_128EF);
 }
 
 func_128EF(var_0, var_1) {
@@ -175,7 +175,7 @@ func_1012E() {
   var_0 settext(&"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
   self.locationobjectives = [];
   for(var_1 = 0; var_1 < 3; var_1++) {
-    self.locationobjectives[var_1] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.locationobjectives[var_1] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
     if(self.locationobjectives[var_1] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_1], "invisible", (0, 0, 0));
       scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_1], level.var_8638[level.script][var_1]["origin"]);
@@ -185,7 +185,7 @@ func_1012E() {
     }
   }
 
-  scripts\engine\utility::waittill_any_3("cancel_location", "picked_location", "stop_location_selection");
+  scripts\engine\utility::waittill_any("cancel_location", "picked_location", "stop_location_selection");
   var_0 scripts\mp\hud_util::destroyelem();
   for(var_1 = 0; var_1 < 3; var_1++) {
     scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_1]);
@@ -206,7 +206,7 @@ func_49F1(var_0, var_1) {
   var_5 setCanDamage(1);
   var_5.maxhealth = level.var_8D73 * 2;
   var_5.health = var_5.maxhealth;
-  var_5.triggerportableradarping = var_0;
+  var_5.owner = var_0;
   var_5.var_D40F = [];
   var_5.var_AA24 = var_5.origin;
   if(level.teambased) {
@@ -304,7 +304,7 @@ func_BD1E(var_0) {
 func_6CC6() {
   var_0 = undefined;
   foreach(var_2 in level.players) {
-    if(var_2 == self.triggerportableradarping) {
+    if(var_2 == self.owner) {
       continue;
     }
 
@@ -312,7 +312,7 @@ func_6CC6() {
       continue;
     }
 
-    if(level.teambased && var_2.team == self.triggerportableradarping.team) {
+    if(level.teambased && var_2.team == self.owner.team) {
       continue;
     }
 
@@ -367,7 +367,7 @@ func_6CC2() {
       continue;
     }
 
-    if(distancesquared(self.triggerportableradarping.origin * (1, 1, 0), var_2) < 250000) {
+    if(distancesquared(self.owner.origin * (1, 1, 0), var_2) < 250000) {
       continue;
     }
 
@@ -378,7 +378,7 @@ func_6CC2() {
     var_3 = 0;
     if(level.teambased) {
       foreach(var_5 in level.players) {
-        if(var_5.team == self.triggerportableradarping.team && distancesquared(var_5.origin * (1, 1, 0), var_2) < 250000) {
+        if(var_5.team == self.owner.team && distancesquared(var_5.origin * (1, 1, 0), var_2) < 250000) {
           var_3 = 1;
           break;
         }
@@ -435,7 +435,7 @@ func_BB64() {
 
 firemortar(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_3 = var_0.triggerportableradarping;
+  var_3 = var_0.owner;
   var_4 = scripts\mp\utility::_magicbullet("javelin_mp", var_0.origin + (0, 0, 150), var_1, var_3);
   var_5 = scripts\mp\objidpoolmanager::requestminimapid(1);
   if(var_5 != -1) {

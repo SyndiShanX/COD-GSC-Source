@@ -11,7 +11,7 @@ func_1082D(var_0, var_1, var_2) {
   var_3.var_11568 = 1;
   var_3.team = var_0.team;
   var_3.pers["team"] = var_3.team;
-  var_3.triggerportableradarping = var_0;
+  var_3.owner = var_0;
   var_3 setCanDamage(1);
   var_3.var_10B68 = 12;
   var_3 thread deletepentsonrespawn();
@@ -95,7 +95,7 @@ func_10DF8(var_0) {
   var_6 linkto(self, "tag_engine_left", (0, 0, -20), (0, 0, 0));
   var_6 setModel("sentry_minigun");
   var_6.angles = self.angles;
-  var_6.triggerportableradarping = self.triggerportableradarping;
+  var_6.owner = self.owner;
   var_6 getvalidattachments();
   self.mgturret = var_6;
   self.mgturret setdefaultdroppitch(0);
@@ -107,10 +107,10 @@ func_10DF8(var_0) {
   thread func_136B0();
   thread func_136B8();
   self.var_118F3 = gettime();
-  var_0A = spawn("script_origin", self gettagorigin("tag_flash"));
-  var_0A linkto(self, "tag_origin", var_9, (0, 0, 0));
-  var_0A hide();
-  self.var_BEF5 = var_0A;
+  var_10 = spawn("script_origin", self gettagorigin("tag_flash"));
+  var_10 linkto(self, "tag_origin", var_9, (0, 0, 0));
+  var_10 hide();
+  self.var_BEF5 = var_10;
   thread func_114E1();
   thread func_5329();
   thread func_114DF();
@@ -120,15 +120,15 @@ func_10DF8(var_0) {
 
 func_136B0() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping waittill("joined_team");
+  self.owner endon("disconnect");
+  self.owner waittill("joined_team");
   self.health = 0;
   self notify("death");
 }
 
 func_136B8() {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   self.health = 0;
   self notify("death");
 }
@@ -300,13 +300,13 @@ func_114E9(var_0, var_1) {
   }
 }
 
-func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  if((var_1 == self || var_1 == self.mgturret || isDefined(var_1.pers) && var_1.pers["team"] == self.team) && var_1 != self.triggerportableradarping || var_4 == "MOD_MELEE") {
+func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  if((var_1 == self || var_1 == self.mgturret || isDefined(var_1.pers) && var_1.pers["team"] == self.team) && var_1 != self.owner || var_4 == "MOD_MELEE") {
     return;
   }
 
-  var_0C = modifydamage(var_4, var_2, var_1);
-  self vehicle_finishdamage(var_0, var_1, var_0C, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  var_12 = modifydamage(var_4, var_2, var_1);
+  self vehicle_finishdamage(var_0, var_1, var_12, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 func_114D9() {
@@ -327,8 +327,8 @@ func_114D9() {
     } else if(isplayer(var_6)) {
       var_6 scripts\mp\damagefeedback::updatedamagefeedback("hitHelicopter");
       if(var_6 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0A = var_5 * level.armorpiercingmod;
-        self.health = self.health - int(var_0A);
+        var_10 = var_5 * level.armorpiercingmod;
+        self.health = self.health - int(var_10);
       }
     }
 
@@ -468,7 +468,7 @@ func_13A78() {
 }
 
 func_3E2E() {
-  if(!isDefined(self.triggerportableradarping) || !isDefined(self.triggerportableradarping.pers["team"]) || self.triggerportableradarping.pers["team"] != self.team) {
+  if(!isDefined(self.owner) || !isDefined(self.owner.pers["team"]) || self.owner.pers["team"] != self.team) {
     self notify("abandoned");
     return 0;
   }
@@ -695,9 +695,9 @@ getbesttarget(var_0) {
       return var_7;
     }
 
-    var_0A = var_7 getweaponslistitems();
-    foreach(var_0C in var_0A) {
-      if(issubstr(var_0C, "at4") || issubstr(var_0C, "jav") || issubstr(var_0C, "c4")) {
+    var_10 = var_7 getweaponslistitems();
+    foreach(var_12 in var_10) {
+      if(issubstr(var_12, "at4") || issubstr(var_12, "jav") || issubstr(var_12, "c4")) {
         var_8 = var_8 - 40;
       }
     }
@@ -772,7 +772,7 @@ func_9FF1(var_0) {
 istarget(var_0) {
   self endon("death");
   var_1 = distancesquared(var_0.origin, self.origin);
-  if(!level.teambased && isDefined(self.triggerportableradarping) && var_0 == self.triggerportableradarping) {
+  if(!level.teambased && isDefined(self.owner) && var_0 == self.owner) {
     return 0;
   }
 
@@ -792,7 +792,7 @@ istarget(var_0) {
     return 0;
   }
 
-  if(var_0 == self.triggerportableradarping) {
+  if(var_0 == self.owner) {
     return 0;
   }
 
@@ -838,7 +838,7 @@ func_9EA1(var_0) {
     return 0;
   }
 
-  if(var_0 == self.triggerportableradarping) {
+  if(var_0 == self.owner) {
     return 0;
   }
 
@@ -1111,9 +1111,9 @@ getnodenearenemies() {
     }
   }
 
-  var_0A = var_7.origin;
-  var_0B = sortbydistance(level.func_848E, var_0A);
-  return var_0B[0];
+  var_10 = var_7.origin;
+  var_11 = sortbydistance(level.func_848E, var_10);
+  return var_11[0];
 }
 
 func_FAD8() {
@@ -1158,39 +1158,39 @@ func_FAD8() {
   }
 
   foreach(var_4 in var_0) {
-    var_0B = 0;
-    foreach(var_0D in var_1) {
-      if(var_0D == var_4) {
+    var_11 = 0;
+    foreach(var_13 in var_1) {
+      if(var_13 == var_4) {
         continue;
       }
 
-      if(var_0D.target == var_4.var_336) {
+      if(var_13.target == var_4.var_336) {
         continue;
       }
 
-      if(isDefined(var_4.target) && var_4.target == var_0D.var_336) {
+      if(isDefined(var_4.target) && var_4.target == var_13.var_336) {
         continue;
       }
 
-      if(distance2d(var_4.origin, var_0D.origin) > 80) {
+      if(distance2d(var_4.origin, var_13.origin) > 80) {
         continue;
       }
 
-      var_0D thread func_8982(var_4, "reverse");
-      var_0D.var_D886 = var_4;
+      var_13 thread func_8982(var_4, "reverse");
+      var_13.var_D886 = var_4;
       if(!isDefined(var_4.var_2F45)) {
         var_4.var_2F45 = [];
       }
 
-      var_4.var_2F45[var_4.var_2F45.size] = var_0D;
-      var_0B = 1;
+      var_4.var_2F45[var_4.var_2F45.size] = var_13;
+      var_11 = 1;
     }
 
-    if(var_0B) {
+    if(var_11) {
       var_4 thread func_897F("forward");
     }
 
-    var_0F = 0;
+    var_15 = 0;
     foreach(var_11 in var_2) {
       if(var_11 == var_4) {
         continue;
@@ -1220,14 +1220,14 @@ func_FAD8() {
       }
 
       var_4.var_2F45[var_4.var_2F45.size] = var_11;
-      var_0F = 1;
+      var_15 = 1;
     }
 
-    if(var_0F) {
+    if(var_15) {
       var_4 thread func_897F("reverse");
     }
 
-    if(var_0F || var_0B) {
+    if(var_15 || var_11) {
       var_3[var_3.size] = var_4;
     }
   }
@@ -1322,7 +1322,7 @@ func_897F(var_0) {
   for(;;) {
     self waittill("trigger", var_1, var_2);
     var_3 = level.func_848E[self.func_848D];
-    var_1.target_getindexoftarget = self;
+    var_1.node = self;
     var_4 = undefined;
     if(isDefined(var_1.endnode) && var_1.endnode != var_3) {
       var_4 = func_7FE9(var_1.endnode, var_1.var_376);
@@ -1365,7 +1365,7 @@ func_C059() {
   self.var_E492 = func_80EF().func_848D;
   for(;;) {
     self waittill("trigger", var_0, var_1);
-    var_0.target_getindexoftarget = self;
+    var_0.node = self;
     var_0.var_7334 = self.var_7334;
     var_0.var_E492 = self.var_E492;
     if(!isDefined(self.target) || self.var_336 == "branchnode") {
@@ -1449,7 +1449,7 @@ func_98A6(var_0) {
     var_4.var_AD36 = [];
     var_4.var_AD17 = [];
     var_4.var_AD41 = [];
-    var_4.target_getindexoftarget = var_3;
+    var_4.node = var_3;
     var_4.origin = var_3.origin;
     var_4.func_848D = var_1.size;
     var_3.func_848D = var_1.size;
@@ -1461,7 +1461,7 @@ func_98A6(var_0) {
     var_7 = var_3.func_848D;
     var_8 = getvehiclenode(var_3.target, "targetname");
     var_9 = distance(var_3.origin, var_8.origin);
-    var_0A = var_8;
+    var_10 = var_8;
     while(!isDefined(var_8.func_848D)) {
       var_9 = var_9 + distance(var_8.origin, var_8.var_D886.origin);
       if(isDefined(var_8.target)) {
@@ -1472,33 +1472,33 @@ func_98A6(var_0) {
       var_8 = var_8.var_BF2E;
     }
 
-    var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "forward", var_0A);
+    var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "forward", var_10);
     var_8 = var_3.var_D886;
     var_9 = distance(var_3.origin, var_8.origin);
-    var_0A = var_8;
+    var_10 = var_8;
     while(!isDefined(var_8.func_848D)) {
       var_9 = var_9 + distance(var_8.origin, var_8.var_D886.origin);
       var_8 = var_8.var_D886;
     }
 
-    var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "reverse", var_0A);
-    foreach(var_0C in var_3.var_2F45) {
-      var_8 = var_0C;
+    var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "reverse", var_10);
+    foreach(var_12 in var_3.var_2F45) {
+      var_8 = var_12;
       var_9 = distance(var_3.origin, var_8.origin);
-      var_0A = var_8;
+      var_10 = var_8;
       if(var_8.var_336 == "branchnode") {
         while(!isDefined(var_8.func_848D)) {
           if(isDefined(var_8.target)) {
-            var_0D = getvehiclenode(var_8.target, "targetname");
+            var_13 = getvehiclenode(var_8.target, "targetname");
           } else {
-            var_0D = var_8.var_BF2E;
+            var_13 = var_8.var_BF2E;
           }
 
-          var_9 = var_9 + distance(var_8.origin, var_0D.origin);
-          var_8 = var_0D;
+          var_9 = var_9 + distance(var_8.origin, var_13.origin);
+          var_8 = var_13;
         }
 
-        var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "forward", var_0A);
+        var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "forward", var_10);
         continue;
       }
 
@@ -1507,7 +1507,7 @@ func_98A6(var_0) {
         var_8 = var_8.var_D886;
       }
 
-      var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "reverse", var_0A);
+      var_1[var_7] func_17EC(var_1[var_8.func_848D], var_9, "reverse", var_10);
     }
   }
 
@@ -1583,17 +1583,17 @@ func_7732(var_0, var_1, var_2, var_3) {
     }
 
     func_184C(var_6);
-    var_0A = level.var_C62D[0];
-    foreach(var_0C in level.var_C62D) {
-      if(var_0C.var_6A62 > var_0A.var_6A62) {
+    var_10 = level.var_C62D[0];
+    foreach(var_12 in level.var_C62D) {
+      if(var_12.var_6A62 > var_10.var_6A62) {
         continue;
       }
 
-      var_0A = var_0C;
+      var_10 = var_12;
     }
 
-    func_184C(var_0A);
-    var_6 = var_0A;
+    func_184C(var_10);
+    var_6 = var_10;
   }
 
   var_6 = var_0;
@@ -1630,7 +1630,7 @@ func_184C(var_0) {
 }
 
 func_7F0A(var_0, var_1) {
-  return distance(var_0.target_getindexoftarget.origin, var_1.target_getindexoftarget.origin);
+  return distance(var_0.node.origin, var_1.node.origin);
 }
 
 func_7EED(var_0, var_1) {
@@ -1642,13 +1642,13 @@ drawpath(var_0) {
     var_2 = var_0[var_1 - 1];
     var_3 = var_0[var_1];
     if(var_2.var_AD17[var_3.func_848D] == "reverse") {
-      level thread func_5B7C(var_2.target_getindexoftarget.origin, var_3.target_getindexoftarget.origin, (1, 0, 0));
+      level thread func_5B7C(var_2.node.origin, var_3.node.origin, (1, 0, 0));
     } else {
-      level thread func_5B7C(var_2.target_getindexoftarget.origin, var_3.target_getindexoftarget.origin, (0, 1, 0));
+      level thread func_5B7C(var_2.node.origin, var_3.node.origin, (0, 1, 0));
     }
 
     var_4 = var_2.var_AD41[var_3.func_848D];
-    level thread func_5B7C(var_2.target_getindexoftarget.origin + (0, 0, 4), var_4.origin + (0, 0, 4), (0, 0, 1));
+    level thread func_5B7C(var_2.node.origin + (0, 0, 4), var_4.origin + (0, 0, 4), (0, 0, 1));
     if(var_2.var_AD17[var_3.func_848D] == "reverse") {
       while(!isDefined(var_4.func_848D)) {
         var_5 = var_4;

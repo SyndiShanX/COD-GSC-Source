@@ -141,7 +141,7 @@ func_14F7() {
 
 func_14FA() {
   self endon("aaGun_end");
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "game_ended");
+  scripts\engine\utility::waittill_any("death", "disconnect", "game_ended");
   thread func_14F7();
 }
 

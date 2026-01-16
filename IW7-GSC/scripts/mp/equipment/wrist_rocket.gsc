@@ -34,7 +34,7 @@ wristrocketused(var_0) {
 
 wristrocket_watchfuse(var_0) {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self notify("wristRocket_watchFuse");
   self endon("wristRocket_watchFuse");
   wait(var_0);
@@ -43,11 +43,11 @@ wristrocket_watchfuse(var_0) {
 
 wristrocket_watchstuck() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self playLoopSound("wrist_rocket_fire_tail");
   self waittill("missile_stuck", var_0);
   if(isplayer(var_0)) {
-    self.triggerportableradarping scripts\mp\weapons::grenadestuckto(self, var_0);
+    self.owner scripts\mp\weapons::grenadestuckto(self, var_0);
   }
 
   self stoploopsound();
@@ -71,7 +71,7 @@ wristrocket_delete() {
 
 wristrocket_createrocket(var_0) {
   var_1 = scripts\mp\utility::_magicbullet("wristrocket_proj_mp", var_0.origin, var_0.origin + anglesToForward(self getgunangles()), self);
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   var_1.team = self.team;
   var_1.weapon_name = "wristrocket_proj_mp";
   var_1.power = "power_wristrocket";

@@ -193,7 +193,7 @@ func_5836(var_0, var_1, var_2, var_3) {
 func_5835() {
   var_0 = level.var_5832["ads"]["goal"]["weight"];
   if(var_0 < 1) {
-    if(self adsbuttonpressed() && self getweaponrankinfominxp() > 0) {
+    if(self adsbuttonpressed() && self playerads() > 0) {
       var_0 = min(1, var_0 + 0.7);
     } else {
       var_0 = 0;
@@ -280,7 +280,7 @@ func_5839() {
 }
 
 func_5845() {
-  var_0 = self getweaponrankinfominxp();
+  var_0 = self playerads();
   if(var_0 <= 0) {
     func_583C();
     return;
@@ -300,47 +300,47 @@ func_5845() {
   var_7 = getdvarfloat("ads_dof_farEndScale", 3);
   var_8 = getdvarfloat("ads_dof_nearBlur", 4);
   var_9 = getdvarfloat("ads_dof_farBlur", 2.5);
-  var_0A = self getEye();
-  var_0B = self getplayerangles();
+  var_10 = self getEye();
+  var_11 = self getplayerangles();
   if(isDefined(self.var_5847)) {
-    var_0C = combineangles(self.var_5847.angles, var_0B);
+    var_12 = combineangles(self.var_5847.angles, var_11);
   } else {
-    var_0C = var_0C;
+    var_12 = var_12;
   }
 
-  var_0D = vectornormalize(anglesToForward(var_0C));
-  var_0E = bulletTrace(var_0A, var_0A + var_0D * var_1, 1, self, 1, 0, 0, 0, 0);
-  var_0F = getaiarray("axis");
+  var_13 = vectornormalize(anglesToForward(var_12));
+  var_14 = bulletTrace(var_10, var_10 + var_13 * var_1, 1, self, 1, 0, 0, 0, 0);
+  var_15 = getaiarray("axis");
   var_10 = self getcurrentweapon();
   if(isDefined(level.var_1094B[var_10])) {
-    [[level.var_1094B[var_10]]](var_0E, var_0F, var_0A, var_0D, var_0);
+    [[level.var_1094B[var_10]]](var_14, var_15, var_10, var_13, var_0);
     return;
   }
 
-  if(var_0E["fraction"] == 1) {
+  if(var_14["fraction"] == 1) {
     var_1 = 8192;
     var_11 = 1024;
     var_12 = var_1 * var_6 * 2;
   } else {
-    var_3 = distance(var_0C, var_10["position"]);
+    var_3 = distance(var_12, var_10["position"]);
     var_11 = var_3 * var_6;
     var_12 = var_2 * var_7;
   }
 
-  foreach(var_14 in var_0F) {
+  foreach(var_14 in var_15) {
     var_15 = var_14 func_819D();
     var_16 = var_14 getstruct(var_3);
     if(!var_15 && !var_16) {
       continue;
     }
 
-    var_17 = vectornormalize(var_14.origin - var_0A);
-    var_18 = vectordot(var_0D, var_17);
+    var_17 = vectornormalize(var_14.origin - var_10);
+    var_18 = vectordot(var_13, var_17);
     if(var_18 < 0.923) {
       continue;
     }
 
-    var_19 = distance(var_0A, var_14.origin);
+    var_19 = distance(var_10, var_14.origin);
     if(var_19 - 30 < var_11) {
       var_11 = var_19 - 30;
     }
@@ -384,22 +384,22 @@ func_A43D(var_0, var_1, var_2, var_3, var_4) {
   var_7 = 2400;
   for(var_8 = 0; var_8 < var_1.size; var_8++) {
     var_9 = vectornormalize(var_1[var_8].origin - var_2);
-    var_0A = vectordot(var_3, var_9);
-    if(var_0A < 0.923) {
+    var_10 = vectordot(var_3, var_9);
+    if(var_10 < 0.923) {
       continue;
     }
 
-    var_0B = distance(var_2, var_1[var_8].origin);
-    if(var_0B < 2500) {
-      var_0B = 2500;
+    var_11 = distance(var_2, var_1[var_8].origin);
+    if(var_11 < 2500) {
+      var_11 = 2500;
     }
 
-    if(var_0B - 30 < var_5) {
-      var_5 = var_0B - 30;
+    if(var_11 - 30 < var_5) {
+      var_5 = var_11 - 30;
     }
 
-    if(var_0B + 30 > var_6) {
-      var_6 = var_0B + 30;
+    if(var_11 + 30 > var_6) {
+      var_6 = var_11 + 30;
     }
   }
 
@@ -418,31 +418,31 @@ func_A43D(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_0C = distance(var_2, var_0["position"]);
-  if(var_0C < 2500) {
-    var_0C = 2500;
+  var_12 = distance(var_2, var_0["position"]);
+  if(var_12 < 2500) {
+    var_12 = 2500;
   }
 
-  if(var_5 > var_0C) {
-    var_5 = var_0C - 30;
+  if(var_5 > var_12) {
+    var_5 = var_12 - 30;
   }
 
   if(var_5 < 1) {
     var_5 = 1;
   }
 
-  if(var_6 < var_0C) {
-    var_6 = var_0C;
+  if(var_6 < var_12) {
+    var_6 = var_12;
   }
 
   if(var_7 >= var_5) {
     var_7 = var_5 - 1;
   }
 
-  var_0D = var_6 * 4;
-  var_0E = 4;
-  var_0F = 1.8;
-  func_583E(var_7, var_5, var_0E, var_6, var_0D, var_0F, var_4);
+  var_13 = var_6 * 4;
+  var_14 = 4;
+  var_15 = 1.8;
+  func_583E(var_7, var_5, var_14, var_6, var_13, var_15, var_4);
 }
 
 func_584E() {

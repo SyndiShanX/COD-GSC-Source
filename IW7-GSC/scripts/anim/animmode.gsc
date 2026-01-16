@@ -62,27 +62,27 @@ main() {
   self func_82EA(var_9, var_3, 1, var_8, 1);
   self.var_141C thread scripts\sp\anim::func_10CBF(self, var_9, var_1, self.var_1180, var_3);
   self.var_141C thread scripts\sp\anim::func_1FCA(self, var_9, var_1);
-  var_0A = self.var_141C;
+  var_10 = self.var_141C;
   self.var_141C = undefined;
   self.var_117F = undefined;
   self endon("killanimscript");
-  var_0B = "end";
+  var_11 = "end";
   if(!var_0) {
     if(animhasnotetrack(var_3, "finish")) {
-      var_0B = "finish";
+      var_11 = "finish";
     } else if(animhasnotetrack(var_3, "stop anim")) {
-      var_0B = "stop anim";
+      var_11 = "stop anim";
     }
   }
 
   for(;;) {
-    self waittillmatch(var_0B, var_9);
+    self waittillmatch(var_11, var_9);
     if(var_0) {
       var_3 = level.var_EC85[self.var_1180][var_1][randomint(var_2)];
       self func_82E6(var_9, var_3, 1, 0.2, 1);
-      if(isDefined(var_0A)) {
-        var_0A thread scripts\sp\anim::func_10CBF(self, var_9, var_1, self.var_1180, var_3);
-        var_0A thread scripts\sp\anim::func_1FCA(self, var_9, var_1);
+      if(isDefined(var_10)) {
+        var_10 thread scripts\sp\anim::func_10CBF(self, var_9, var_1, self.var_1180, var_3);
+        var_10 thread scripts\sp\anim::func_1FCA(self, var_9, var_1);
       }
 
       continue;
@@ -91,7 +91,7 @@ main() {
     break;
   }
 
-  if(var_0B != "end") {
+  if(var_11 != "end") {
     self orientmode("face motion");
   }
 

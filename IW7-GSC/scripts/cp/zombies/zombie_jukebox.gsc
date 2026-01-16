@@ -110,23 +110,23 @@ jukebox_start(var_0, var_1, var_2) {
       }
     }
 
-    var_0A = int(tablelookup(var_4, 1, var_8, 0));
+    var_10 = int(tablelookup(var_4, 1, var_8, 0));
     var_6 playLoopSound(var_8);
     level.songs_played++;
-    var_0B = lookupsoundlength(var_8) / 1000;
+    var_11 = lookupsoundlength(var_8) / 1000;
     if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-      setomnvar("song_playing", var_0A);
+      setomnvar("song_playing", var_10);
     }
 
-    level.song_last_played = var_0A;
+    level.song_last_played = var_10;
     var_6 thread earlyendon(var_6);
-    level scripts\engine\utility::waittill_any_timeout_1(var_0B, "skip_song");
+    level scripts\engine\utility::waittill_any_timeout(var_11, "skip_song");
     var_6 stoploopsound();
     if(level.songs_played % 4 == 0) {
       if(var_9 != "") {
         var_6 playSound(var_9);
-        var_0C = lookupsoundlength(var_9) / 1000;
-        level scripts\engine\utility::waittill_any_timeout_1(var_0C);
+        var_12 = lookupsoundlength(var_9) / 1000;
+        level scripts\engine\utility::waittill_any_timeout(var_12);
       }
     }
 
@@ -137,7 +137,7 @@ jukebox_start(var_0, var_1, var_2) {
 
 earlyendon(var_0) {
   level endon("game_ended");
-  level scripts\engine\utility::waittill_any_3("add_hidden_song_to_playlist", "add_hidden_song_2_to_playlist", "force_new_song");
+  level scripts\engine\utility::waittill_any("add_hidden_song_to_playlist", "add_hidden_song_2_to_playlist", "force_new_song");
   var_0 stoploopsound();
   wait(2);
   if(isDefined(var_0)) {
@@ -180,12 +180,12 @@ force_song(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.current_dj_song = var_1;
   var_8 thread earlyendon(var_8);
   var_9 = lookupsoundlength(var_1) / 1000;
-  scripts\engine\utility::waittill_any_timeout_1(var_9, "skip_song");
+  scripts\engine\utility::waittill_any_timeout(var_9, "skip_song");
   var_8 stoploopsound();
   if(getdvar("ui_mapname") != "cp_disco") {
     level thread scripts\cp\cp_vo::try_to_play_vo("dj_sign_off", "zmb_dj_vo", "high", 20, 1, 0, 1);
-    var_0A = lookupsoundlength("dj_sign_off") / 1000;
-    wait(var_0A);
+    var_10 = lookupsoundlength("dj_sign_off") / 1000;
+    wait(var_10);
   }
 
   if(scripts\engine\utility::istrue(var_6)) {
@@ -244,7 +244,7 @@ get_song_struct(var_0, var_1, var_2) {
           level.jukebox_playing[var_5] = 1;
           var_2 thread earlyendon(var_2);
           var_8 = lookupsoundlength(var_5) / 1000;
-          scripts\engine\utility::waittill_any_timeout_1(var_8, "skip_song");
+          scripts\engine\utility::waittill_any_timeout(var_8, "skip_song");
           level.jukebox_playing[var_5] = 0;
           var_2 stoploopsound();
         }

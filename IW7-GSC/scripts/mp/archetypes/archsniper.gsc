@@ -78,7 +78,7 @@ func_37D4() {
   }
 
   for(;;) {
-    if((self issprinting() || self iswallrunning()) && !self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped() && !self ismantling() && !self usebuttonpressed() && !self adsbuttonpressed() && !isDefined(self.var_9FF6) && !isDefined(self.var_6F43)) {
+    if((self issprinting() || self iswallrunning()) && !self ismeleeing() && !scripts\mp\killstreaks\emp_common::isemped() && !self ismantling() && !self usebuttonpressed() && !self adsbuttonpressed() && !isDefined(self.var_9FF6) && !isDefined(self.var_6F43)) {
       func_37DA();
     } else {
       wait(1.5);
@@ -86,7 +86,7 @@ func_37D4() {
     }
 
     wait(0.1);
-    scripts\engine\utility::waittill_any_3("camo_off", "emp_damage");
+    scripts\engine\utility::waittill_any("camo_off", "emp_damage");
     wait(0.05);
     func_37D9();
     wait(self.var_37E5);
@@ -107,7 +107,7 @@ func_37D5() {
   }
 
   for(;;) {
-    if(!self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped()) {
+    if(!self ismeleeing() && !scripts\mp\killstreaks\emp_common::isemped()) {
       func_37DA();
     } else {
       wait(1.5);
@@ -115,7 +115,7 @@ func_37D5() {
     }
 
     wait(0.1);
-    scripts\engine\utility::waittill_any_3("camo_off", "emp_damage");
+    scripts\engine\utility::waittill_any("camo_off", "emp_damage");
     wait(0.05);
     func_37D9();
     wait(self.var_37E5);
@@ -273,10 +273,10 @@ func_E8AC() {
   level endon("game_ended");
   self.var_138CE = undefined;
   for(;;) {
-    if(self iswallrunning() && self getweaponrankinfominxp() > 0.3) {
+    if(self iswallrunning() && self playerads() > 0.3) {
       var_0 = self goal_position(0);
       var_1 = self energy_getmax(0);
-      self goal_radius(0, var_1);
+      self energy_setenergy(0, var_1);
       self.var_138CE = var_0;
       func_68D7();
       thread func_13BA3();
@@ -295,8 +295,8 @@ func_13BA3() {
   level endon("game_ended");
   self endon("walllock_ended");
   wait(0.05);
-  while(self getweaponrankinfominxp() > 0.3 && self goal_position(0) > 0) {
-    self goal_radius(0, self goal_position(0) - 3);
+  while(self playerads() > 0.3 && self goal_position(0) > 0) {
+    self energy_setenergy(0, self goal_position(0) - 3);
     wait(0.05);
   }
 
@@ -350,7 +350,7 @@ func_639B() {
   self setstance("stand");
   self playlocalsound("ghost_wall_detach");
   if(isDefined(self.var_138CE)) {
-    self goal_radius(0, self.var_138CE);
+    self energy_setenergy(0, self.var_138CE);
   }
 
   self.var_138CE = undefined;
@@ -380,7 +380,7 @@ func_49EE(var_0, var_1) {
 
   scripts\mp\objidpoolmanager::minimap_objective_add(var_2, "active", self.origin, "cb_compassping_sniper_enemy", "icon_large");
   scripts\mp\objidpoolmanager::minimap_objective_team(var_2, var_1);
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "stop_minimap_decoys", "walllock_ended");
+  scripts\engine\utility::waittill_any("death", "disconnect", "stop_minimap_decoys", "walllock_ended");
   scripts\mp\objidpoolmanager::returnminimapid(var_2);
 }
 
@@ -456,7 +456,7 @@ func_1608() {
   thread func_13A49();
   thread func_BCB9(self.var_AD33);
   self.var_5039 = self energy_getrestorerate(0);
-  self goalflag(0, 0);
+  self energy_setrestorerate(0, 0);
   wait(5);
   func_10358();
 }
@@ -496,7 +496,7 @@ func_10358() {
   self.var_6F43 = undefined;
   self.var_5FF1 hide();
   stopFXOnTag(level._effect["heavyThrustFr"], self.var_5FF1, "tag_origin");
-  self goalflag(0, self.var_5039);
+  self energy_setrestorerate(0, self.var_5039);
   self unlink();
   self notify("unlinked");
 }
@@ -597,19 +597,19 @@ func_EA27(var_0) {
 
     var_8 = var_0 - self.origin;
     var_9 = vectortoangles(var_8);
-    var_0A = anglesToForward(var_9);
+    var_10 = anglesToForward(var_9);
     var_5 = distance(self.origin, var_0);
     var_5 = var_5 - 32;
-    var_0B = self.origin + var_0A * var_5;
+    var_11 = self.origin + var_10 * var_5;
   } else {
-    var_0B = var_1;
+    var_11 = var_1;
   }
 
   if(isDefined(var_5) && var_5 < 16) {
     return self.origin;
   }
 
-  return var_0B;
+  return var_11;
 }
 
 func_8D14(var_0) {
@@ -688,7 +688,7 @@ marktarget_execute(var_0) {
 func_13AA0(var_0, var_1, var_2) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_2, "leave");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(var_2, "leave");
   if(isDefined(var_1)) {
     scripts\mp\utility::outlinedisable(var_0, var_1);
   }
@@ -697,7 +697,7 @@ func_13AA0(var_0, var_1, var_2) {
 runequipmentping(var_0) {
   self endon("death");
   self endon("disconnect");
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_2 = level.uavsettings["uav_3dping"];
   if(var_1 scripts\mp\utility::_hasperk("specialty_equipment_ping")) {
     for(;;) {
@@ -758,7 +758,7 @@ markdangerzoneonminimap(var_0, var_1) {
 }
 
 watchfordeath(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   scripts\mp\objidpoolmanager::returnminimapid(var_0);
 }
 

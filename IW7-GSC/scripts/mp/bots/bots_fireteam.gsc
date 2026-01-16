@@ -146,16 +146,16 @@ bot_fireteam_cac_getstreak(var_0, var_1, var_2) {
 bot_fireteam_buddy_think() {
   var_0 = 250;
   var_1 = var_0 * var_0;
-  if(!scripts\mp\bots\_bots_util::bot_is_guarding_player(self.triggerportableradarping)) {
-    scripts\mp\bots\_bots_strategy::bot_guard_player(self.triggerportableradarping, var_0);
+  if(!scripts\mp\bots\_bots_util::bot_is_guarding_player(self.owner)) {
+    scripts\mp\bots\_bots_strategy::bot_guard_player(self.owner, var_0);
   }
 
-  if(distancesquared(self.origin, self.triggerportableradarping.origin) > var_1) {
+  if(distancesquared(self.origin, self.owner.origin) > var_1) {
     self botsetflag("force_sprint", 1);
     return;
   }
 
-  if(self.triggerportableradarping issprinting()) {
+  if(self.owner issprinting()) {
     self botsetflag("force_sprint", 1);
     return;
   }
@@ -170,47 +170,47 @@ bot_fireteam_buddy_search() {
   self endon("buddy_search_start");
   for(;;) {
     if(isalive(self) && !isDefined(self.bot_fireteam_follower)) {
-      if(isDefined(self.triggerportableradarping)) {
+      if(isDefined(self.owner)) {
         if(self.sessionstate == "playing") {
-          if(!self.triggerportableradarping.connected) {
-            self.triggerportableradarping.bot_fireteam_follower = undefined;
-            self.triggerportableradarping = undefined;
+          if(!self.owner.connected) {
+            self.owner.bot_fireteam_follower = undefined;
+            self.owner = undefined;
           } else if(isDefined(level.fireteam_commander[self.team])) {
             if(isDefined(level.fireteam_commander[self.team].commanding_bot) && level.fireteam_commander[self.team].commanding_bot == self) {
-              self.triggerportableradarping.bot_fireteam_follower = undefined;
-              self.triggerportableradarping.triggerportableradarping = level.fireteam_commander[self.team];
-              self.triggerportableradarping.personality_update_function = ::bot_fireteam_buddy_think;
-              self.triggerportableradarping = undefined;
-            } else if(isDefined(level.fireteam_commander[self.team].commanding_bot) && level.fireteam_commander[self.team].commanding_bot == self.triggerportableradarping) {
-              self.triggerportableradarping.bot_fireteam_follower = undefined;
-              self.triggerportableradarping = level.fireteam_commander[self.team];
-              self.triggerportableradarping.bot_fireteam_follower = self;
-            } else if(self.triggerportableradarping == level.fireteam_commander[self.team] && !isDefined(self.triggerportableradarping.commanding_bot)) {
-              self.triggerportableradarping.bot_fireteam_follower = undefined;
-              if(isDefined(self.triggerportableradarping.last_commanded_bot)) {
-                self.triggerportableradarping = self.triggerportableradarping.last_commanded_bot;
-                self.triggerportableradarping.bot_fireteam_follower = self;
+              self.owner.bot_fireteam_follower = undefined;
+              self.owner.owner = level.fireteam_commander[self.team];
+              self.owner.personality_update_function = ::bot_fireteam_buddy_think;
+              self.owner = undefined;
+            } else if(isDefined(level.fireteam_commander[self.team].commanding_bot) && level.fireteam_commander[self.team].commanding_bot == self.owner) {
+              self.owner.bot_fireteam_follower = undefined;
+              self.owner = level.fireteam_commander[self.team];
+              self.owner.bot_fireteam_follower = self;
+            } else if(self.owner == level.fireteam_commander[self.team] && !isDefined(self.owner.commanding_bot)) {
+              self.owner.bot_fireteam_follower = undefined;
+              if(isDefined(self.owner.last_commanded_bot)) {
+                self.owner = self.owner.last_commanded_bot;
+                self.owner.bot_fireteam_follower = self;
               } else {
-                self.triggerportableradarping = undefined;
+                self.owner = undefined;
               }
             }
           }
         } else if(isDefined(level.fireteam_commander[self.team])) {
           if(isDefined(level.fireteam_commander[self.team].commanding_bot) && level.fireteam_commander[self.team].commanding_bot == self) {
-            self.triggerportableradarping.bot_fireteam_follower = undefined;
-            self.triggerportableradarping.triggerportableradarping = level.fireteam_commander[self.team];
-            self.triggerportableradarping.personality_update_function = ::bot_fireteam_buddy_think;
-            self.triggerportableradarping = undefined;
+            self.owner.bot_fireteam_follower = undefined;
+            self.owner.owner = level.fireteam_commander[self.team];
+            self.owner.personality_update_function = ::bot_fireteam_buddy_think;
+            self.owner = undefined;
           }
         }
       }
 
       if(self.sessionstate == "playing") {
-        if(!isDefined(self.triggerportableradarping)) {
+        if(!isDefined(self.owner)) {
           var_0 = [];
           foreach(var_2 in level.players) {
             if(var_2 != self && var_2.team == self.team) {
-              if(isalive(var_2) && var_2.sessionstate == "playing" && !isDefined(var_2.bot_fireteam_follower) && !isDefined(var_2.triggerportableradarping)) {
+              if(isalive(var_2) && var_2.sessionstate == "playing" && !isDefined(var_2.bot_fireteam_follower) && !isDefined(var_2.owner)) {
                 var_0[var_0.size] = var_2;
               }
             }
@@ -219,14 +219,14 @@ bot_fireteam_buddy_search() {
           if(var_0.size > 0) {
             var_4 = scripts\engine\utility::getclosest(self.origin, var_0);
             if(isDefined(var_4)) {
-              self.triggerportableradarping = var_4;
-              self.triggerportableradarping.bot_fireteam_follower = self;
+              self.owner = var_4;
+              self.owner.bot_fireteam_follower = self;
             }
           }
         }
       }
 
-      if(isDefined(self.triggerportableradarping)) {
+      if(isDefined(self.owner)) {
         self.personality_update_function = ::bot_fireteam_buddy_think;
       } else {
         scripts\mp\bots\_bots_personality::bot_assign_personality_functions();
@@ -271,7 +271,7 @@ fireteam_tdm_hunt_end(var_0) {
   level notify("hunting_party_end_" + var_0);
   level.fireteam_hunt_leader[var_0] = undefined;
   level.fireteam_hunt_target_zone[var_0] = undefined;
-  level.bot_random_path_function[var_0] = scripts\mp\bots\_bots_personality::bot_random_path_default;
+  level.bot_random_path_function[var_0] = ::scripts\mp\bots\_bots_personality::bot_random_path_default;
 }
 
 fireteam_tdm_hunt_most_dangerous_zone(var_0, var_1) {
@@ -371,9 +371,9 @@ fireteam_tdm_find_hunt_zone(var_0) {
               var_7 = 0;
               var_8 = -1;
               for(var_9 = 0; var_9 < level.zonecount; var_9++) {
-                var_0A = distance2d(getzoneorigin(var_9), level.fireteam_hunt_leader[var_0].origin);
-                if(var_0A > var_7) {
-                  var_7 = var_0A;
+                var_10 = distance2d(getzoneorigin(var_9), level.fireteam_hunt_leader[var_0].origin);
+                if(var_10 > var_7) {
+                  var_7 = var_10;
                   var_8 = var_9;
                 }
               }
@@ -383,11 +383,11 @@ fireteam_tdm_find_hunt_zone(var_0) {
 
             if(isDefined(var_6)) {
               if(!isDefined(level.fireteam_hunt_target_zone[var_0]) || level.fireteam_hunt_target_zone[var_0] != var_6) {
-                foreach(var_0C in level.players) {
-                  if(isbot(var_0C) && var_0C.team == var_0) {
-                    var_0C botclearscriptgoal();
-                    var_0C.fireteam_hunt_goalpos = undefined;
-                    var_0C thread bot_fireteam_hunt_zone_find_node();
+                foreach(var_12 in level.players) {
+                  if(isbot(var_12) && var_12.team == var_0) {
+                    var_12 botclearscriptgoal();
+                    var_12.fireteam_hunt_goalpos = undefined;
+                    var_12 thread bot_fireteam_hunt_zone_find_node();
                   }
                 }
               }

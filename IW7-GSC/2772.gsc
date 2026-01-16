@@ -524,8 +524,9 @@ script_mover_set_usable(var_0, var_1) {
     var_0 makeusable();
     var_0 setcursorhint("HINT_NOICON");
     var_0 sethintstring(level.script_mover_hintstrings[self.params["hintstring"]]);
-  } else
+  } else {
     var_0 makeunusable();
+  }
 }
 
 script_mover_save_default_move_parameters() {
@@ -599,8 +600,9 @@ player_unresolved_collision_watch() {
         } else {
           var_0 unresolved_collision_nearest_node(self, undefined, var_0);
         }
-      } else
+      } else {
         unresolved_collision_nearest_node(self);
+      }
 
       self.var_12BE5 = 0;
     }
@@ -630,8 +632,9 @@ unresolved_collision_owner_damage(var_0) {
     if(isDefined(var_1.owner.team) && var_1.owner.team != var_0.team) {
       var_2 = 1;
     }
-  } else if(var_0 != var_1.owner)
+  } else if(var_0 != var_1.owner) {
     var_2 = 1;
+  }
 
   if(!var_2) {
     var_0 mover_suicide();
@@ -861,8 +864,9 @@ process_moving_platform_death(var_0, var_1) {
   if(isDefined(var_0.deathoverridecallback)) {
     var_0.lasttouchedplatform = var_1;
     self thread[[var_0.deathoverridecallback]](var_0);
-  } else
+  } else {
     self delete();
+  }
 }
 
 handle_moving_platform_touch(var_0) {

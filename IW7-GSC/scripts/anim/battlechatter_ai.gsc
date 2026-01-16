@@ -534,21 +534,21 @@ isthrowinggrenade(var_0, var_1) {
   var_5 = sortbydistance(var_5, level.player.origin);
   var_8 = [];
   var_9 = [];
-  var_0A = 0;
-  foreach(var_0C in var_5) {
-    if(isDefined(var_0C) && func_117E8(var_0C)) {
-      var_0D = var_0C scripts\anim\battlechatter::getlocation();
-      if(isDefined(var_0D) && !scripts\anim\battlechatter::location_called_out_recently(var_0D)) {
-        var_8[var_8.size] = var_0C;
+  var_10 = 0;
+  foreach(var_12 in var_5) {
+    if(isDefined(var_12) && func_117E8(var_12)) {
+      var_13 = var_12 scripts\anim\battlechatter::getlocation();
+      if(isDefined(var_13) && !scripts\anim\battlechatter::location_called_out_recently(var_13)) {
+        var_8[var_8.size] = var_12;
       } else {
-        var_9[var_9.size] = var_0C;
+        var_9[var_9.size] = var_12;
       }
     }
 
-    var_0A++;
-    if(var_0A >= var_4) {
+    var_10++;
+    if(var_10 >= var_4) {
       wait(0.05);
-      var_0A = 0;
+      var_10 = 0;
     }
   }
 
@@ -633,7 +633,7 @@ func_10AFB() {
           var_2 = [];
         }
 
-        foreach(var_0C, var_6 in var_1) {
+        foreach(var_12, var_6 in var_1) {
           if(scripts\engine\utility::player_is_in_jackal()) {
             if(var_6 == level.player) {
               var_6 = level.var_D127;
@@ -643,7 +643,7 @@ func_10AFB() {
           }
 
           if(!isDefined(var_6)) {
-            if(var_0C == 0) {
+            if(var_12 == 0) {
               var_1 = [];
             }
 
@@ -684,9 +684,9 @@ func_10AFB() {
           var_2[var_2.size] = var_6;
           var_8 = [];
           var_7 = undefined;
-          foreach(var_0A in var_1) {
-            if(var_0A != var_6) {
-              var_8[var_8.size] = var_0A;
+          foreach(var_10 in var_1) {
+            if(var_10 != var_6) {
+              var_8[var_8.size] = var_10;
             }
           }
 
@@ -730,7 +730,7 @@ func_29A2(var_0) {
     if(scripts\sp\utility::func_CFAC(var_0)) {
       return 1;
     }
-  } else if(self getpersstat(var_0)) {
+  } else if(self cansee(var_0)) {
     return 1;
   }
 
@@ -1044,11 +1044,11 @@ func_67D2(var_0) {
     return;
   }
 
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return;
   }
 
-  if(distancesquared(self.origin, self.target_getindexoftarget.origin) < 23040) {
+  if(distancesquared(self.origin, self.node.origin) < 23040) {
     return;
   }
 
@@ -1227,7 +1227,7 @@ func_67D1() {
     return 0;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -1241,7 +1241,7 @@ func_67D0() {
     return;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {}
+  if(!isDefined(self.enemy)) {}
 }
 
 func_67D5() {

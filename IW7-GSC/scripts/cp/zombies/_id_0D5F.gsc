@@ -82,12 +82,12 @@ isexplosivedangeroustoplayer(var_0) {
   }
 
   var_1 = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    if(var_0 == self.triggerportableradarping) {
+  if(isDefined(self.owner)) {
+    if(var_0 == self.owner) {
       return 1;
     }
 
-    var_1 = self.triggerportableradarping.team;
+    var_1 = self.owner.team;
   }
 
   if(isDefined(var_1)) {

@@ -131,29 +131,29 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   }
 
   if(!isplayer(var_1)) {
-    if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-      var_1 = var_1.triggerportableradarping;
+    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+      var_1 = var_1.owner;
     } else {
       return;
     }
   }
 
   var_9 = scripts\cp\utility::getweaponclass(var_4);
-  var_0A = scripts\engine\utility::istrue(var_1.inlaststand);
-  var_0B = scripts\engine\utility::isbulletdamage(var_3);
-  var_0C = var_1 getstance();
-  var_0D = self.species;
-  var_0E = var_0C == "crouch";
-  var_0F = var_0C == "prone" && !var_0A;
+  var_10 = scripts\engine\utility::istrue(var_1.inlaststand);
+  var_11 = scripts\engine\utility::isbulletdamage(var_3);
+  var_12 = var_1 getstance();
+  var_13 = self.species;
+  var_14 = var_12 == "crouch";
+  var_15 = var_12 == "prone" && !var_10;
   var_10 = isexplosivedamagemod(var_3);
   var_11 = var_3 == "MOD_MELEE";
-  var_12 = (scripts\engine\utility::istrue(self.is_burning) || scripts\engine\utility::istrue(self.is_chem_burning)) && !var_0B || var_4 == "incendiary_ammo_mp";
+  var_12 = (scripts\engine\utility::istrue(self.is_burning) || scripts\engine\utility::istrue(self.is_chem_burning)) && !var_11 || var_4 == "incendiary_ammo_mp";
   var_13 = scripts\engine\utility::istrue(self.dismember_crawl);
   var_14 = scripts\engine\utility::istrue(self.shockmelee);
   var_15 = var_1 issprintsliding();
   var_16 = scripts\engine\utility::istrue(self.faf_burned_out);
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_17 = var_1 scripts\cp\utility::is_trap(var_0, var_4) && var_0.triggerportableradarping == var_1;
+  if(isDefined(var_0.owner)) {
+    var_17 = var_1 scripts\cp\utility::is_trap(var_0, var_4) && var_0.owner == var_1;
   } else {
     var_17 = var_2 scripts\cp\utility::is_trap(var_1, var_5);
   }
@@ -199,8 +199,8 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   }
 
   var_21 = issubstr(var_4, "longshot");
-  var_22 = var_1 scripts\cp\utility::coop_getweaponclass(var_4) == "weapon_sniper" && var_0B;
-  var_23 = var_0B && scripts\cp\utility::isheadshot(var_4, var_6, var_3, var_1) && !var_1D;
+  var_22 = var_1 scripts\cp\utility::coop_getweaponclass(var_4) == "weapon_sniper" && var_11;
+  var_23 = var_11 && scripts\cp\utility::isheadshot(var_4, var_6, var_3, var_1) && !var_1D;
   var_24 = issubstr(var_4, "m8");
   if(!var_11) {
     switch (var_9) {
@@ -249,7 +249,7 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     }
   }
 
-  switch (var_0D) {
+  switch (var_13) {
     case "zombie":
       if(self.agent_type != "alien_rhino" && self.agent_type != "alien_phantom" && self.agent_type != "alien_goon") {
         var_1 processmerit("mt_zombie_kills");
@@ -484,20 +484,20 @@ processmerit(var_0, var_1, var_2) {
     var_9 = var_8 + var_2;
   }
 
-  var_0A = 0;
+  var_10 = 0;
   if(var_9 >= var_8) {
-    var_0B = 1;
-    var_0A = var_9 - var_8;
+    var_11 = 1;
+    var_10 = var_9 - var_8;
     var_9 = var_8;
   } else {
-    var_0B = 0;
+    var_11 = 0;
   }
 
   if(var_7 < var_9) {
     scripts\cp\cp_hud_util::mt_setprogress(var_0, var_9);
   }
 
-  if(var_0B) {
+  if(var_11) {
     thread giverankxpafterwait(var_0, var_3);
     storecompletedmerit(var_0);
     givemeritscore(level.meritinfo[var_0]["score"][var_3]);
@@ -681,14 +681,14 @@ buildmerittableinfo(var_0, var_1) {
     for(var_7 = 0; var_7 < 5; var_7++) {
       var_8 = merit_targetval(var_0, var_4, var_7);
       var_9 = merit_rewardval(var_0, var_4, var_7);
-      var_0A = merit_scoreval(var_0, var_4, var_7);
+      var_10 = merit_scoreval(var_0, var_4, var_7);
       if(var_8 == 0) {
         break;
       }
 
       level.meritinfo[var_4]["targetval"][var_7] = var_8;
       level.meritinfo[var_4]["reward"][var_7] = var_9;
-      level.meritinfo[var_4]["score"][var_7] = var_0A;
+      level.meritinfo[var_4]["score"][var_7] = var_10;
       var_3 = var_3 + var_9;
     }
 
@@ -738,7 +738,7 @@ monitoradstime() {
   self endon("disconnect");
   self.adstime = 0;
   for(;;) {
-    if(self getweaponrankinfominxp() == 1) {
+    if(self playerads() == 1) {
       self.adstime = self.adstime + 0.05;
     } else {
       self.adstime = 0;

@@ -273,8 +273,9 @@ func_1992(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   } else if(_isaircraft(self)) {
     var_4 = rotatevectorinverted(self.spaceship_vel, self.angles);
     var_4 = var_4[0];
-  } else
+  } else {
     var_4 = 0;
+  }
 
   if(isDefined(self.var_EF5E)) {
     var_10 = self.var_EF5E;
@@ -298,8 +299,9 @@ func_1992(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
     var_11.loop_sound = "jackal_missile_loop_for_ply";
     var_11.var_69E9 = "jackal_missile_explosion_plr";
-  } else if(isDefined(self.var_EF5F))
+  } else if(isDefined(self.var_EF5F)) {
     var_11.var_AA99 = self.var_EF5F;
+  }
   else {
     var_11.var_AA99 = "jackal_missile_launch_space_npc";
   }
@@ -316,8 +318,9 @@ func_1992(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_15 = vectornormalize(var_1.origin - var_11.origin);
     var_14.origin = var_11.origin + var_15 * 30000;
     var_1 = var_14;
-  } else
+  } else {
     var_13 = 0;
+  }
 
   var_11.var_50D5 = var_3;
   var_11.var_01CF = 6;
@@ -365,8 +368,9 @@ func_6D2A(var_0, var_1) {
     var_3 = scripts\engine\utility::spawn_tag_origin();
     var_3.var_5F27 = 1;
     var_3.origin = self gettagorigin(var_0) + anglesToForward(self gettagangles(var_0)) * 30000;
-  } else
+  } else {
     var_2 = 0;
+  }
 
   var_4 = scripts\engine\utility::spawn_tag_origin(self gettagorigin(var_0), self gettagangles(var_0));
   var_4 thread func_A332(var_1, var_2, self);
@@ -400,8 +404,9 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     if(self.var_AA99 != "null") {
       self playSound(self.var_AA99);
     }
-  } else
+  } else {
     self playSound("jackal_missile_launch_space_npc");
+  }
 
   if(!isDefined(self.loop_sound)) {
     var_16 = "jackal_missile_lp_space";
@@ -577,8 +582,9 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       } else {
         var_43 = scripts\sp\math::func_C097(0, var_10, var_18 - var_17);
       }
-    } else
+    } else {
       var_43 = 1;
+    }
 
     if(var_1) {
       var_44 = 1;
@@ -594,8 +600,9 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       self.var_C727.var_6E9C.var_12B86 = scripts\engine\utility::array_remove(self.var_C727.var_6E9C.var_12B86, self.var_6E8B);
       var_0 = self.var_6E8B;
       self.var_6E9B = 1;
-    } else
+    } else {
       self.var_6E9B = 0;
+    }
 
     if(isDefined(self.var_114F9) && var_0 != self.var_114F9) {
       var_0 = self.var_114F9;
@@ -653,8 +660,9 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       } else {
         var_61 = [self, var_2];
       }
-    } else if(isDefined(self.var_438D))
+    } else if(isDefined(self.var_438D)) {
       var_61 = [self, self.var_438D];
+    }
     else {
       var_61 = [self];
     }
@@ -726,8 +734,9 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       if(var_28 > self.var_B464) {
         var_28 = self.var_B464;
       }
-    } else if(var_28 > var_4)
+    } else if(var_28 > var_4) {
       var_28 = var_4;
+    }
 
     var_18 = var_18 + 0.05;
 
@@ -768,8 +777,9 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       if(scripts\sp\utility::func_D123() && var_2 == level.var_D127) {
         player_jackal_scripted_missile_self_damage(var_42["position"]);
       }
-    } else
+    } else {
       var_2 = undefined;
+    }
 
     if(!var_11) {
       if(isDefined(var_2) && isDefined(var_2.var_B8AE)) {
@@ -990,8 +1000,9 @@ func_4C7B(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(var_6[1])) {
       thread scripts\engine\utility::play_sound_in_space(var_6[1], var_7.origin);
     }
-  } else
+  } else {
     thread scripts\engine\utility::play_sound_in_space(var_3, var_7.origin);
+  }
 
   thread scripts\sp\utility::func_5187(var_7);
   wait(var_6[2]);

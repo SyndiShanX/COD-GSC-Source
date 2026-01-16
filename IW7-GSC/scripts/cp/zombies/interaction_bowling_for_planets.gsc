@@ -288,10 +288,10 @@ func_11805(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_2 setModel("cp_game_ball");
   var_8 = 950;
   var_9 = 600;
-  var_0A = self.var_278B - self.var_27BB;
-  if(var_0A < 1000) {
-    var_0B = var_0A / 1000;
-    var_9 = var_9 * var_0B;
+  var_10 = self.var_278B - self.var_27BB;
+  if(var_10 < 1000) {
+    var_11 = var_10 / 1000;
+    var_9 = var_9 * var_11;
   }
 
   var_9 = var_8 + var_9;

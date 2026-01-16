@@ -11,7 +11,7 @@ set_agent_team(var_0, var_1) {
   self.team = var_0;
   self.var_20 = var_0;
   self.pers["team"] = var_0;
-  self.triggerportableradarping = var_1;
+  self.owner = var_1;
   self setotherent(var_1);
   self setentityowner(var_1);
 }
@@ -73,7 +73,7 @@ initplayerscriptvariables(var_0) {
     self.recentshieldxp = 0;
     self.agent_gameparticipant = 1;
     scripts\mp\playerlogic::setupsavedactionslots();
-    thread scripts\mp\perks\_perks::onplayerspawned();
+    thread scripts\mp\perks\perks::onplayerspawned();
     if(scripts\mp\utility::isgameparticipant(self)) {
       self.objectivescaler = 1;
       scripts\mp\gameobjects::init_player_gameobjects();
@@ -128,7 +128,7 @@ deactivateagentdelayed() {
   wait(0.05);
   self.isactive = 0;
   self.hasdied = 0;
-  self.triggerportableradarping = undefined;
+  self.owner = undefined;
   self.connecttime = undefined;
   self.waitingtodeactivate = undefined;
   foreach(var_1 in level.characters) {
@@ -187,7 +187,7 @@ getnumownedactiveagentsbytype(var_0, var_1) {
 
   foreach(var_4 in level.agentarray) {
     if(isDefined(var_4.isactive) && var_4.isactive) {
-      if(isDefined(var_4.triggerportableradarping) && var_4.triggerportableradarping == var_0) {
+      if(isDefined(var_4.owner) && var_4.owner == var_0) {
         if((var_1 == "all" && var_4.agent_type != "alien") || var_4.agent_type == var_1) {
           var_2++;
         }
@@ -236,7 +236,7 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
   var_7 = anglesToForward(self.angles);
   var_8 = -10;
   var_9 = scripts\mp\spawnlogic::getplayertraceheight(self);
-  var_0A = (0, 0, var_9);
+  var_10 = (0, 0, var_9);
   if(!isDefined(var_0)) {
     var_0 = 0;
   }
@@ -245,34 +245,34 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
     var_1 = 0;
   }
 
-  var_0B = [];
-  var_0C = [];
-  foreach(var_0E in var_2) {
-    if(!var_0E getrandomattachments("stand") || isDefined(var_0E.no_agent_spawn)) {
+  var_11 = [];
+  var_12 = [];
+  foreach(var_14 in var_2) {
+    if(!var_14 getrandomattachments("stand") || isDefined(var_14.no_agent_spawn)) {
       continue;
     }
 
-    var_0F = vectornormalize(var_0E.origin - self.origin);
-    var_10 = vectordot(var_7, var_0F);
-    for(var_11 = 0; var_11 < var_0C.size; var_11++) {
-      if(var_10 > var_0C[var_11]) {
-        for(var_12 = var_0C.size; var_12 > var_11; var_12--) {
-          var_0C[var_12] = var_0C[var_12 - 1];
-          var_0B[var_12] = var_0B[var_12 - 1];
+    var_15 = vectornormalize(var_14.origin - self.origin);
+    var_10 = vectordot(var_7, var_15);
+    for(var_11 = 0; var_11 < var_12.size; var_11++) {
+      if(var_10 > var_12[var_11]) {
+        for(var_12 = var_12.size; var_12 > var_11; var_12--) {
+          var_12[var_12] = var_12[var_12 - 1];
+          var_11[var_12] = var_11[var_12 - 1];
         }
 
         break;
       }
     }
 
-    var_0B[var_11] = var_0E;
-    var_0C[var_11] = var_10;
+    var_11[var_11] = var_14;
+    var_12[var_11] = var_10;
   }
 
-  for(var_11 = 0; var_11 < var_0B.size; var_11++) {
-    var_0E = var_0B[var_11];
-    var_14 = self.origin + var_0A;
-    var_15 = var_0E.origin + var_0A;
+  for(var_11 = 0; var_11 < var_11.size; var_11++) {
+    var_14 = var_11[var_11];
+    var_14 = self.origin + var_10;
+    var_15 = var_14.origin + var_10;
     if(var_11 > 0) {
       wait(0.05);
     }
@@ -286,8 +286,8 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
         wait(0.05);
       }
 
-      var_16 = playerphysicstrace(var_0E.origin + var_0A, var_0E.origin);
-      if(distancesquared(var_16, var_0E.origin) > 1) {
+      var_16 = playerphysicstrace(var_14.origin + var_10, var_14.origin);
+      if(distancesquared(var_16, var_14.origin) > 1) {
         continue;
       }
     }
@@ -303,7 +303,7 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
       }
     }
 
-    return var_0E;
+    return var_14;
   }
 }
 

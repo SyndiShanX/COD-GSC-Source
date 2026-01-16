@@ -434,7 +434,7 @@ func_8836() {
 func_8825() {
   self endon("death");
   self endon("stop_hacking_end_think");
-  scripts\engine\utility::waittill_any_3("hack_unequipped", "hackingdevice_end", "hack_disabled");
+  scripts\engine\utility::waittill_any("hack_unequipped", "hackingdevice_end", "hack_disabled");
   hacking_end();
 }
 
@@ -984,7 +984,7 @@ func_11AA0() {
     var_0 = ["hack_unequipped", "hack_disabled", "hack_button_released", "hack_close_pressed", "robot_hacked", "hack_toggled_off"];
     scripts\engine\utility::waittill_any_in_array_return(var_0);
   } else {
-    scripts\engine\utility::waittill_any_3("hack_unequipped", "hack_disabled", "hack_button_released", "secondary_equipment_released", "hack_close_pressed", "robot_hacked");
+    scripts\engine\utility::waittill_any("hack_unequipped", "hack_disabled", "hack_button_released", "secondary_equipment_released", "hack_close_pressed", "robot_hacked");
   }
 
   foreach(var_2 in self.var_87F8) {
@@ -1140,7 +1140,7 @@ func_3DC6(var_0) {
     return 1;
   }
 
-  if(!isDefined(var_0.var_394) || var_0.var_394 == "" || var_0.var_394 == "none") {
+  if(!isDefined(var_0.weapon) || var_0.weapon == "" || var_0.weapon == "none") {
     return 0;
   }
 
@@ -1177,34 +1177,34 @@ check_robot_in_sights(var_0, var_1) {
     var_7 = 30;
     var_8 = var_4;
     var_9 = 1.1;
-    var_0A = 1.25;
+    var_10 = 1.25;
   } else {
     var_5 = 75;
     var_6 = 15;
     var_7 = var_8;
     var_8 = 500;
     var_9 = 1.25;
-    var_0A = 3;
+    var_10 = 3;
   }
 
   if(var_3 <= squared(var_7)) {
-    var_0B = var_5;
-    var_0C = var_9;
-  } else if(var_5 >= squared(var_0A)) {
-    var_0B = var_8;
-    var_0C = var_0B;
+    var_11 = var_5;
+    var_12 = var_9;
+  } else if(var_5 >= squared(var_10)) {
+    var_11 = var_8;
+    var_12 = var_11;
   } else {
-    var_0D = sqrt(var_5);
-    var_0E = var_0D - var_7 / var_8 - var_7;
-    var_0B = var_0E * var_6 - var_5 + var_5;
-    var_0C = var_0E * var_0A - var_9 + var_9;
+    var_13 = sqrt(var_5);
+    var_14 = var_13 - var_7 / var_8 - var_7;
+    var_11 = var_14 * var_6 - var_5 + var_5;
+    var_12 = var_14 * var_10 - var_9 + var_9;
   }
 
   if(var_1) {
-    var_0B = var_0B * var_0C;
+    var_11 = var_11 * var_12;
   }
 
-  return level.player worldpointinreticle_circle(var_2, 65, var_0B);
+  return level.player worldpointinreticle_circle(var_2, 65, var_11);
 }
 
 func_10D4E(var_0) {
@@ -1464,7 +1464,7 @@ func_2A46(var_0) {
     level.player.var_C37C = level.player getcurrentweapon();
     for(var_2 = 0; var_2 < var_3.size; var_2++) {
       level.player.var_C39E[var_2] = spawnStruct();
-      level.player.var_C39E[var_2].var_394 = var_3[var_2];
+      level.player.var_C39E[var_2].weapon = var_3[var_2];
       level.player.var_C39E[var_2].var_1E40 = level.player getweaponammoclip(var_3[var_2]);
       level.player.var_C39E[var_2].var_1E4D = level.player getweaponammostock(var_3[var_2]);
       level.player takeweapon(var_3[var_2]);
@@ -1554,22 +1554,22 @@ func_2A46(var_0) {
 
     level.player scripts\sp\utility::func_2B76(level.player.var_87FE, 0.5);
     level.player thread func_5C86(level.var_880A, var_0);
-    var_0B = level.player scripts\engine\utility::waittill_any_return("drone_timeout", "hack_player_took_damage", "hack_drone_took_damage", "player_suicided_drone", "hack_drone_took_damage_trigger_hurt");
+    var_11 = level.player scripts\engine\utility::waittill_any_return("drone_timeout", "hack_player_took_damage", "hack_drone_took_damage", "player_suicided_drone", "hack_drone_took_damage_trigger_hurt");
     level.player scripts\sp\utility::func_65DD("is_controlling_robot");
     level.player.var_883D = "selfdestruct";
-    var_0C = 0;
+    var_12 = 0;
     if(var_0 == "C8") {
-      var_0C = 1;
+      var_12 = 1;
     }
 
-    if(var_0B == "hack_drone_took_damage_trigger_hurt") {
-      thread func_5C3B(level.var_880A, var_0C);
+    if(var_11 == "hack_drone_took_damage_trigger_hurt") {
+      thread func_5C3B(level.var_880A, var_12);
     } else if(isDefined(level.player.var_8849) && level.player.var_8849) {
       thread func_5C77(level.var_880A);
-    } else if(var_0B == "player_suicided_drone") {
-      thread func_5C85(level.var_880A, 1, var_0C);
+    } else if(var_11 == "player_suicided_drone") {
+      thread func_5C85(level.var_880A, 1, var_12);
     } else {
-      thread func_5C85(level.var_880A, 0, var_0C);
+      thread func_5C85(level.var_880A, 0, var_12);
       level.player waittill("suicide_control_done");
     }
 
@@ -1733,7 +1733,7 @@ func_12C5() {
     return;
   }
 
-  var_0 = strtok(self.var_394, "+");
+  var_0 = strtok(self.weapon, "+");
   var_1 = var_0[0];
   var_2 = scripts\sp\utility::array_remove_index(var_0, 0);
   var_2[var_2.size] = "hacked";
@@ -1914,7 +1914,7 @@ func_19CA() {
 }
 
 func_19D5(var_0, var_1) {
-  scripts\engine\utility::waittill_any_3("death", "player_hack_faded_out");
+  scripts\engine\utility::waittill_any("death", "player_hack_faded_out");
   scripts\sp\utility::func_9193(var_1);
   if(var_0 != -1) {
     func_E5B8(var_0);
@@ -2112,8 +2112,8 @@ func_5C85(var_0, var_1, var_2) {
     level.player thread scripts\sp\utility::func_C12D("hack_done_control_target", var_9);
   } else {
     var_4 playSound("c6_hack_self_destruct_initiate_plr");
-    var_0A = int(gettime() + 3000);
-    setomnvar("ui_hack_control_selfdestruct_timer", var_0A);
+    var_10 = int(gettime() + 3000);
+    setomnvar("ui_hack_control_selfdestruct_timer", var_10);
     setomnvar("ui_hack_control_selfdestruct_show_timer", 1);
     if(!isDefined(level.player.var_8803) || level.player.var_8803 == 0) {
       scripts\engine\utility::delaythread(0.25, ::func_AFE2);
@@ -2121,12 +2121,12 @@ func_5C85(var_0, var_1, var_2) {
 
     thread func_AFE1();
     thread func_AFE3();
-    var_0B = level.player scripts\engine\utility::waittill_any_return("long_suicide_done", "player_suicided_drone", "hack_drone_took_damage_trigger_hurt");
+    var_11 = level.player scripts\engine\utility::waittill_any_return("long_suicide_done", "player_suicided_drone", "hack_drone_took_damage_trigger_hurt");
     setomnvar("ui_hack_control_selfdestruct_timer", 0);
     setomnvar("ui_hack_control_selfdestruct_show_timer", 0);
     level.player notify("suicide_control_done");
     thread func_992D();
-    if(var_0B != "hack_drone_took_damage_trigger_hurt") {
+    if(var_11 != "hack_drone_took_damage_trigger_hurt") {
       wait(var_9);
     }
 
@@ -2136,8 +2136,8 @@ func_5C85(var_0, var_1, var_2) {
   level.player notify("stop soundhack_hud_self_destruct_alarm");
   stopFXOnTag(level._effect["hack_pov_suicide_loop"], var_4, "tag_origin");
   playFXOnTag(level._effect["hack_pov_explode"], var_4, "tag_origin");
-  var_0C = level.player.origin;
-  thread func_5C84(var_0C);
+  var_12 = level.player.origin;
+  thread func_5C84(var_12);
   if(!var_2) {
     level.player playgestureviewmodel("ges_player_death_drop1", undefined, 1);
   } else {
@@ -2159,7 +2159,7 @@ func_5C85(var_0, var_1, var_2) {
   level.player stoprumble("damage_heavy");
   if(isDefined(var_0) && isai(var_0) && isalive(var_0)) {
     var_0.var_6D = 16;
-    var_0 func_8481(var_0C);
+    var_0 func_8481(var_12);
     var_0 func_81D0();
   }
 }
@@ -2514,9 +2514,9 @@ func_2A47(var_0) {
     level.player scripts\engine\utility::delaycall(0.3, ::func_80A6);
     for(var_7 = 0; var_7 < level.player.var_C39E.size; var_7++) {
       var_8 = level.player.var_C39E[var_7];
-      level.player giveweapon(var_8.var_394);
-      level.player setweaponammoclip(var_8.var_394, var_8.var_1E40);
-      level.player setweaponammostock(var_8.var_394, var_8.var_1E4D);
+      level.player giveweapon(var_8.weapon);
+      level.player setweaponammoclip(var_8.weapon, var_8.var_1E40);
+      level.player setweaponammostock(var_8.weapon, var_8.var_1E4D);
     }
 
     level.player switchtoweapon(level.player.var_C37C);
@@ -2728,7 +2728,7 @@ hack_toggled_off_think() {
   self endon("stop_hack_disabled_think");
   self notify("hack_toggled_off_think");
   self endon("hack_toggled_off_think");
-  scripts\engine\utility::waittill_any_3("secondary_equipment_pressed", "hack_weap_switch", "hack_input_on_locked_robot");
+  scripts\engine\utility::waittill_any("secondary_equipment_pressed", "hack_weap_switch", "hack_input_on_locked_robot");
   level.player scripts\sp\utility::func_65E1("hack_toggled_off");
   level.player notify("hack_toggled_off");
 }

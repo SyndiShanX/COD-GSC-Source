@@ -375,8 +375,9 @@ func_9379() {
       var_0 func_9383(var_0.bombsquadmodel, 1);
       level notify("update_bombsquad");
     }
-  } else
+  } else {
     var_0 = createims(self);
+  }
 
   var_0 func_184F();
   var_0.isplaced = 1;

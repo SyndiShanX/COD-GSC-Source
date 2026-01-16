@@ -191,8 +191,9 @@ func_3110(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       self.var_8DDE = self.var_8DDE + var_2;
       var_2 = 1;
     }
-  } else
+  } else {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -328,10 +329,12 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       }
 
       var_2 = 0;
-    } else
+    } else {
       var_2 = 0;
-  } else
+    }
+  } else {
     var_2 = 0;
+  }
 
   scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 }
@@ -559,8 +562,9 @@ func_3116() {
         } else {
           var_0 = 0;
         }
-      } else
+      } else {
         var_0 = 0;
+      }
 
       if(var_0 > 5) {
         self notify("no_path_to_targets");

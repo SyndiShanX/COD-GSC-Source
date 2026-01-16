@@ -537,15 +537,15 @@ func_5F8E(var_0, var_1, var_2, var_3, var_4) {
   for(;;) {
     wait(0.05);
     var_9 = level.players[0];
-    foreach(var_0B in level.players) {
-      if(distancesquared(var_9.origin, self.origin) > distancesquared(var_0B.origin, self.origin)) {
-        var_9 = var_0B;
+    foreach(var_11 in level.players) {
+      if(distancesquared(var_9.origin, self.origin) > distancesquared(var_11.origin, self.origin)) {
+        var_9 = var_11;
       }
     }
 
-    var_0D = anglesToForward(self.angles);
-    var_0E = vectornormalize(var_9.origin - self.origin);
-    var_0F = vectordot(var_0D, var_0E);
+    var_13 = anglesToForward(self.angles);
+    var_14 = vectornormalize(var_9.origin - self.origin);
+    var_15 = vectordot(var_13, var_14);
     var_10 = distancesquared(self.origin, var_9.origin);
     var_11 = var_10;
     if(isDefined(var_4)) {
@@ -568,11 +568,11 @@ func_5F8E(var_0, var_1, var_2, var_3, var_4) {
       self.moveplaybackrate = 1;
     }
 
-    if(var_10 < var_6 || var_0F > -0.25 || var_13) {
+    if(var_10 < var_6 || var_15 > -0.25 || var_13) {
       func_5F8C("sprint");
       wait(0.5);
       continue;
-    } else if(var_10 < var_5 || var_0F > -0.25) {
+    } else if(var_10 < var_5 || var_15 > -0.25) {
       func_5F8C("run");
       wait(0.5);
       continue;
@@ -812,7 +812,7 @@ func_267A() {
     self waittill("autosave_player_nade");
     scripts\engine\utility::flag_set("autosave_tactical_player_nade");
     thread func_267C();
-    scripts\engine\utility::waittill_any_timeout_1(10, "autosave_grenade_thrown");
+    scripts\engine\utility::waittill_any_timeout(10, "autosave_grenade_thrown");
     self notify("autosave_grenade_throw_timeout");
     func_267D();
   }
@@ -854,7 +854,7 @@ func_267F() {
 
   var_0 = getaiarray("axis");
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.isnodeoccupied) && isplayer(var_2.isnodeoccupied)) {
+    if(isDefined(var_2.enemy) && isplayer(var_2.enemy)) {
       return;
     }
   }
@@ -927,8 +927,8 @@ func_5AAD(var_0, var_1, var_2) {
   for(;;) {
     var_8 = var_3 getnormalizedmovement();
     var_9 = anglesToForward(var_3.angles);
-    var_0A = anglestoright(var_3.angles);
-    var_8 = (var_8[1] * var_0A[0] + var_8[0] * var_9[0], var_8[1] * var_0A[1] + var_8[0] * var_9[1], 0);
+    var_10 = anglestoright(var_3.angles);
+    var_8 = (var_8[1] * var_10[0] + var_8[0] * var_9[0], var_8[1] * var_10[1] + var_8[0] * var_9[1], 0);
     var_0.slidevelocity = var_0.slidevelocity + var_8 * var_1;
     var_3.var_7601.origin = var_0.origin + anglesToForward(var_0.var_77BA.angles) * 400;
     wait(0.05);
@@ -1372,14 +1372,14 @@ dyndof_distance() {
   }
 
   var_9 = 0;
-  var_0A = var_5[var_9];
-  for(var_0B = 1; var_0B < var_5.size; var_0B++) {
-    if(var_5[var_0B]["fraction"] < var_0A["fraction"]) {
-      var_0A = var_5[var_0B];
+  var_10 = var_5[var_9];
+  for(var_11 = 1; var_11 < var_5.size; var_11++) {
+    if(var_5[var_11]["fraction"] < var_10["fraction"]) {
+      var_10 = var_5[var_11];
     }
   }
 
-  return level.dyndof.maxfocusdist * var_0A["fraction"];
+  return level.dyndof.maxfocusdist * var_10["fraction"];
 }
 
 dyndof_trace_internal(var_0) {

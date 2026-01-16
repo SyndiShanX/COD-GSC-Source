@@ -36,8 +36,8 @@ func_89DC(var_0, var_1) {
   self endon("powers_cleanUp");
   for(;;) {
     self waittill("damage");
-    if(isDefined(self.isnodeoccupied)) {
-      if(!self getteamsize() && self.isnodeoccupied.health < self.health) {
+    if(isDefined(self.enemy)) {
+      if(!self getteamsize() && self.enemy.health < self.health) {
         continue;
       }
     }

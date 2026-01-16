@@ -251,8 +251,9 @@ followenemy_tick(var_0) {
 
       return anim.running;
     }
-  } else
+  } else {
     scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
+  }
 
   return anim.success;
 }

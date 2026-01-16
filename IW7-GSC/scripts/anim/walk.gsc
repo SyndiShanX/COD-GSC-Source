@@ -84,7 +84,7 @@ func_5AEB(var_0) {
   }
 
   if(self.a.pose == "stand") {
-    if(isDefined(self.isnodeoccupied)) {
+    if(isDefined(self.enemy)) {
       scripts\anim\cqb::func_479B();
       self func_82E3("walkanim", scripts\anim\cqb::func_53C3(), % walk_and_run_loops, 1, 1, var_1, 1);
     } else {

@@ -5,9 +5,9 @@
 
 func_109B8() {
   level.var_109BE = [];
-  level.var_109BE = scripts\engine\utility::array_add_safe(level.var_109BE, "specialty_fastreload");
-  level.var_109BE = scripts\engine\utility::array_add_safe(level.var_109BE, "specialty_quickdraw");
-  level.var_109BE = scripts\engine\utility::array_add_safe(level.var_109BE, "specialty_quickswap");
+  level.var_109BE = scripts\engine\utility::add_to_array(level.var_109BE, "specialty_fastreload");
+  level.var_109BE = scripts\engine\utility::add_to_array(level.var_109BE, "specialty_quickdraw");
+  level.var_109BE = scripts\engine\utility::add_to_array(level.var_109BE, "specialty_quickswap");
 }
 
 func_109C1(var_0) {
@@ -21,7 +21,7 @@ func_109C1(var_0) {
   var_3 = spawn("script_model", var_0.origin);
   var_3.angles = var_0.angles;
   var_3.team = self.team;
-  var_3.triggerportableradarping = self;
+  var_3.owner = self;
   var_3 setModel("prop_mp_speed_strip_temp");
   var_3 thread func_109B4(self);
   var_3 thread func_109C3();
@@ -54,8 +54,8 @@ func_109B4(var_0) {
 }
 
 func_109B7(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
-    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
+  if(isDefined(self.owner) && var_0 != self.owner) {
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
     var_0 notify("destroyed_equipment");
   }
 
@@ -211,7 +211,7 @@ func_13B50(var_0) {
 
 func_13B4F() {
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3("speed_strip_end", "death", "disconnect");
+  scripts\engine\utility::waittill_any("speed_strip_end", "death", "disconnect");
   if(isDefined(self)) {
     func_41E0();
   }

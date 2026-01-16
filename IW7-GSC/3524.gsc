@@ -24,8 +24,9 @@ stopsounds() {
         var_1 refillammo(1);
       }
     }
-  } else
+  } else {
     refillammo(1);
+  }
 
   level thread scripts\mp\utility\game::teamplayercardsplash("used_team_ammo_refill", self);
   return 1;

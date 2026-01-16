@@ -86,7 +86,7 @@ func_C7A7(var_0, var_1, var_2) {
 func_13AA0(var_0, var_1, var_2) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_2, "leave");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(var_2, "leave");
   if(isDefined(var_1)) {
     scripts\mp\utility::outlinedisable(var_0, var_1);
     if(!isai(var_1)) {

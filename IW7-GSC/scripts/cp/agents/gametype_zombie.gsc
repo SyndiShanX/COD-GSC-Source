@@ -463,7 +463,7 @@ streamweaponsonzonechange(var_0) {
   var_0 endon("disconnect");
   var_0 endon("kill_weapon_stream");
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(10, "player_spawned");
+  var_0 scripts\engine\utility::waittill_any_timeout(10, "player_spawned");
   scripts\engine\utility::flag_wait("wall_buy_setup_done");
   var_1 = [];
   var_2 = scripts\engine\utility::getstructarray("interaction", "targetname");
@@ -478,16 +478,16 @@ streamweaponsonzonechange(var_0) {
     var_7 = 0;
     var_8 = 0;
     var_9 = [self.last_stand_pistol];
-    var_0A = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 10, 5000, 0);
-    while(var_7 <= var_6 && var_8 < var_0A.size) {
-      var_0B = scripts\cp\utility::getrawbaseweaponname(var_0A[var_8].script_noteworthy);
-      if(isDefined(var_0.weapon_build_models[var_0B])) {
-        var_0C = var_0.weapon_build_models[var_0B];
+    var_10 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 10, 5000, 0);
+    while(var_7 <= var_6 && var_8 < var_10.size) {
+      var_11 = scripts\cp\utility::getrawbaseweaponname(var_10[var_8].script_noteworthy);
+      if(isDefined(var_0.weapon_build_models[var_11])) {
+        var_12 = var_0.weapon_build_models[var_11];
       } else {
-        var_0C = var_0A[var_8].script_noteworthy;
+        var_12 = var_10[var_8].script_noteworthy;
       }
 
-      var_9[var_9.size] = var_0C;
+      var_9[var_9.size] = var_12;
       var_9 = scripts\engine\utility::array_remove_duplicates(var_9);
       var_7 = var_9.size;
       var_8++;
@@ -856,19 +856,19 @@ revive_from_spectator_weapon_setup(var_0) {
   var_7 = "super_default_zm";
   var_8 = weaponclipsize("super_default_zm");
   var_9 = weaponmaxammo("super_default_zm");
-  var_0A = [];
-  var_0B = [];
-  var_0C = [];
-  var_0A[var_0A.size] = var_1;
-  var_0B[var_1] = var_2;
-  var_0C[var_1] = var_3;
-  var_0A[var_0A.size] = var_4;
-  var_0B[var_4] = var_5;
-  var_0C[var_4] = var_6;
-  var_0A[var_0A.size] = var_7;
-  var_0B[var_7] = var_8;
-  var_0C[var_7] = var_9;
-  var_0 scripts\cp\utility::add_to_weapons_status(var_0A, var_0B, var_0C, var_4);
+  var_10 = [];
+  var_11 = [];
+  var_12 = [];
+  var_10[var_10.size] = var_1;
+  var_11[var_1] = var_2;
+  var_12[var_1] = var_3;
+  var_10[var_10.size] = var_4;
+  var_11[var_4] = var_5;
+  var_12[var_4] = var_6;
+  var_10[var_10.size] = var_7;
+  var_11[var_7] = var_8;
+  var_12[var_7] = var_9;
+  var_0 scripts\cp\utility::add_to_weapons_status(var_10, var_11, var_12, var_4);
   var_0.pre_laststand_weapon = var_4;
   var_0.pre_laststand_weapon_stock = var_6;
   var_0.pre_laststand_weapon_ammo_clip = var_5;
@@ -985,8 +985,8 @@ get_respawn_loc_near_team_center(var_0, var_1) {
   }
 
   var_9 = (var_2 / var_5, var_3 / var_5, var_4 / var_5);
-  var_0A = sortbydistance(level.active_player_respawn_locs, var_9);
-  return var_0A[0];
+  var_10 = sortbydistance(level.active_player_respawn_locs, var_9);
+  return var_10[0];
 }
 
 get_respawn_loc_rated(var_0, var_1) {
@@ -997,25 +997,25 @@ get_respawn_loc_rated(var_0, var_1) {
   var_6 = undefined;
   foreach(var_8 in var_1) {
     var_9 = 0;
-    foreach(var_0B in var_0) {
-      if(var_0B == self) {
+    foreach(var_11 in var_0) {
+      if(var_11 == self) {
         continue;
       }
 
-      if(!isalive(var_0B)) {
+      if(!isalive(var_11)) {
         continue;
       }
 
-      if(scripts\engine\utility::istrue(var_0B.inlaststand)) {
-        var_9 = var_9 - distancesquared(var_0B.origin, var_8.origin) * var_4 * 2;
+      if(scripts\engine\utility::istrue(var_11.inlaststand)) {
+        var_9 = var_9 - distancesquared(var_11.origin, var_8.origin) * var_4 * 2;
         continue;
       }
 
-      var_9 = var_9 - distancesquared(var_0B.origin, var_8.origin) * var_4;
+      var_9 = var_9 - distancesquared(var_11.origin, var_8.origin) * var_4;
     }
 
-    foreach(var_0E in level.spawned_enemies) {
-      var_9 = var_9 + distancesquared(var_0E.origin, var_8.origin);
+    foreach(var_14 in level.spawned_enemies) {
+      var_9 = var_9 + distancesquared(var_14.origin, var_8.origin);
     }
 
     var_9 = var_9 / 1000000;
@@ -1222,7 +1222,7 @@ watchglproxy() {
   var_0 = undefined;
   self notifyonplayercommand("fired", "+attack");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("weapon_switch_started", "weapon_change", "weaponchange");
+    scripts\engine\utility::waittill_any("weapon_switch_started", "weapon_change", "weaponchange");
     self notify("stop_regen_on_weapons");
     wait(0.1);
     var_1 = self getweaponslistall();
@@ -1536,7 +1536,7 @@ kick_for_inactivity(var_0) {
         break;
       }
 
-      var_5 = scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_4, "inputReceived", "currency_earned");
+      var_5 = scripts\engine\utility::waittill_any_timeout_no_endon_death(var_4, "inputReceived", "currency_earned");
       if(gettime() - var_1 < 30000) {
         continue;
       }
@@ -1591,7 +1591,7 @@ check_for_movement() {
 
 add_to_kick_queue(var_0) {
   if(!scripts\engine\utility::exist_in_array_MAYBE(level.kick_player_queue, var_0)) {
-    level.kick_player_queue = scripts\engine\utility::array_add_safe(level.kick_player_queue, var_0);
+    level.kick_player_queue = scripts\engine\utility::add_to_array(level.kick_player_queue, var_0);
   }
 }
 

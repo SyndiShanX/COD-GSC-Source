@@ -86,7 +86,7 @@ func_11ED3(var_0, var_1, var_2, var_3) {
 }
 
 func_124B8(var_0, var_1, var_2, var_3) {
-  return isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Left";
+  return isDefined(self.node) && self.node.type == "Cover Left";
 }
 
 func_11D87(var_0, var_1, var_2, var_3) {

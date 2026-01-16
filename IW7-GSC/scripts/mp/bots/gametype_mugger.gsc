@@ -68,7 +68,7 @@ enemy_watcher() {
       wait(0.2);
     }
 
-    if(isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && isDefined(self.isnodeoccupied.tags_carried) && self.isnodeoccupied.tags_carried >= 3 && self botcanseeentity(self.isnodeoccupied) && distance(self.origin, self.isnodeoccupied.origin) <= 500) {
+    if(isDefined(self.enemy) && isplayer(self.enemy) && isDefined(self.enemy.tags_carried) && self.enemy.tags_carried >= 3 && self botcanseeentity(self.enemy) && distance(self.origin, self.enemy.origin) <= 500) {
       self getpassivestruct("meleeChargeDist", 500);
       self botsetflag("prefer_melee", 1);
       self botsetflag("throw_knife_melee", level.mugger_throwing_knife_mug_frac > 0);
@@ -167,7 +167,7 @@ tag_watcher() {
       continue;
     }
 
-    if(isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && self botcanseeentity(self.isnodeoccupied)) {
+    if(isDefined(self.enemy) && isplayer(self.enemy) && self botcanseeentity(self.enemy)) {
       continue;
     }
 
@@ -329,20 +329,20 @@ bot_mugger_loadout_modify(var_0) {
     }
   }
 
-  foreach(var_0B in var_8) {
+  foreach(var_11 in var_8) {
     if(var_1 >= randomfloat(1)) {
-      if(!scripts\engine\utility::array_contains(var_5, var_0B)) {
-        var_0C = -1;
+      if(!scripts\engine\utility::array_contains(var_5, var_11)) {
+        var_12 = -1;
         if(var_7.size) {
-          var_0C = var_7[0];
-          var_7 = scripts\engine\utility::array_remove(var_7, var_0C);
+          var_12 = var_7[0];
+          var_7 = scripts\engine\utility::array_remove(var_7, var_12);
         } else if(var_6.size) {
-          var_0C = scripts\engine\utility::random(var_6);
-          var_6 = scripts\engine\utility::array_remove(var_6, var_0C);
+          var_12 = scripts\engine\utility::random(var_6);
+          var_6 = scripts\engine\utility::array_remove(var_6, var_12);
         }
 
-        if(var_0C != -1) {
-          var_0["loadoutPerk" + var_0C] = var_0B;
+        if(var_12 != -1) {
+          var_0["loadoutPerk" + var_12] = var_11;
         }
       }
     }

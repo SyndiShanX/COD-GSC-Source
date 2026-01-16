@@ -137,13 +137,13 @@ func_F921() {
 
       if(isDefined(var_6.var_6B71)) {
         var_8 = [];
-        foreach(var_0A in var_6.var_6B71) {
-          var_0A.var_7595 = "vfx_vr_blockdrop_extra_small";
-          var_8[var_0A.var_EE8C] = var_0A;
-          var_0A.var_8D0D = 512;
-          var_0A.var_D6A0 = var_0A.origin + (0, 0, var_0A.var_8D0D) - var_6.var_CBFA.origin;
-          var_0A.var_42 = var_0A.angles - var_6.var_CBFA.angles;
-          var_0A linkto(var_6.var_CBFA, "", var_0A.var_D6A0, var_0A.var_42);
+        foreach(var_10 in var_6.var_6B71) {
+          var_10.var_7595 = "vfx_vr_blockdrop_extra_small";
+          var_8[var_10.var_EE8C] = var_10;
+          var_10.var_8D0D = 512;
+          var_10.var_D6A0 = var_10.origin + (0, 0, var_10.var_8D0D) - var_6.var_CBFA.origin;
+          var_10.var_42 = var_10.angles - var_6.var_CBFA.angles;
+          var_10 linkto(var_6.var_CBFA, "", var_10.var_D6A0, var_10.var_42);
         }
 
         var_6.var_6B71 = var_8;
@@ -209,21 +209,21 @@ func_FA3C() {
           var_7.var_6E86 = getent("vr_cap" + var_7.script_index, "targetname");
         } else {
           var_8 = getEntArray("vr_cap" + var_7.script_index, "targetname");
-          foreach(var_0A in var_8) {
-            if(var_0A.script_parameters == "flap") {
-              var_7.var_6E86 = var_0A;
+          foreach(var_10 in var_8) {
+            if(var_10.script_parameters == "flap") {
+              var_7.var_6E86 = var_10;
             }
           }
 
-          foreach(var_0A in var_8) {
-            if(var_0A.script_parameters == "blue_lights") {
-              var_7.var_6E86.var_6128 = var_0A;
+          foreach(var_10 in var_8) {
+            if(var_10.script_parameters == "blue_lights") {
+              var_7.var_6E86.var_6128 = var_10;
               var_7.var_6E86.var_6128 hide();
               continue;
             }
 
-            if(var_0A.script_parameters == "red_lights") {
-              var_7.var_6E86.var_6123 = var_0A;
+            if(var_10.script_parameters == "red_lights") {
+              var_7.var_6E86.var_6123 = var_10;
               var_7.var_6E86.var_6123 hide();
             }
           }
@@ -252,17 +252,17 @@ func_FA3C() {
 
       func_F18A(var_5, var_1, var_7);
       var_7 linkto(var_7.var_CBFA);
-      foreach(var_0F in var_7.var_10870) {
-        var_0F.var_F187 = var_0F.origin - var_7.var_CBFA.origin;
+      foreach(var_15 in var_7.var_10870) {
+        var_15.var_F187 = var_15.origin - var_7.var_CBFA.origin;
       }
 
-      foreach(var_0F in var_7.var_B7D5) {
-        var_0F.var_F187 = var_0F.origin - var_7.var_CBFA.origin;
+      foreach(var_15 in var_7.var_B7D5) {
+        var_15.var_F187 = var_15.origin - var_7.var_CBFA.origin;
       }
 
       if(isDefined(var_7.var_75B5)) {
-        foreach(var_0F in var_7.var_75B5) {
-          var_0F.var_F187 = var_0F.origin - var_7.var_CBFA.origin;
+        foreach(var_15 in var_7.var_75B5) {
+          var_15.var_F187 = var_15.origin - var_7.var_CBFA.origin;
         }
       }
 
@@ -300,8 +300,8 @@ func_FA3C() {
             } else if(var_17.script_parameters == "unfold") {
               var_17.var_7595 = "vfx_vr_blockdrop_extra_small";
             } else if(var_17.script_parameters == "angled") {
-              var_0F = scripts\engine\utility::getstruct(var_17.target, "targetname");
-              var_17.var_7587 = anglesToForward(var_0F.angles);
+              var_15 = scripts\engine\utility::getstruct(var_17.target, "targetname");
+              var_17.var_7587 = anglesToForward(var_15.angles);
             }
           }
 

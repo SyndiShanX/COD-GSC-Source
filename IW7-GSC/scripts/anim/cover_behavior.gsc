@@ -82,7 +82,7 @@ main(var_0) {
 
     var_5 = 0;
     var_6 = 0;
-    if(isalive(self.isnodeoccupied)) {
+    if(isalive(self.enemy)) {
       var_5 = func_9DDA();
       var_6 = scripts\anim\utility_common::cansuppressenemyfromexposed();
     }
@@ -170,8 +170,8 @@ func_5927(var_0) {
 }
 
 func_2538(var_0) {
-  if(distancesquared(self.origin, self.isnodeoccupied.origin) > 562500) {
-    if(func_128AF(var_0, self.isnodeoccupied)) {
+  if(distancesquared(self.origin, self.enemy.origin) > 562500) {
+    if(func_128AF(var_0, self.enemy)) {
       return;
     }
   }
@@ -208,7 +208,7 @@ func_2533(var_0, var_1) {
     }
   }
 
-  if(func_128AF(var_0, self.isnodeoccupied)) {
+  if(func_128AF(var_0, self.enemy)) {
     return;
   }
 
@@ -220,8 +220,8 @@ func_252A(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(self.isnodeoccupied)) {
-    if(func_128AF(var_0, self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
+    if(func_128AF(var_0, self.enemy)) {
       return 0;
     }
   }
@@ -239,7 +239,7 @@ func_252A(var_0, var_1) {
     }
   }
 
-  if(self.var_FC || gettime() >= var_1.var_BF6F && isDefined(self.isnodeoccupied)) {
+  if(self.var_FC || gettime() >= var_1.var_BF6F && isDefined(self.enemy)) {
     if(func_AB2D(var_0, "ambush")) {
       if(func_9DDA()) {
         func_E26B();
@@ -256,11 +256,11 @@ func_252A(var_0, var_1) {
 }
 
 func_9DDA() {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
-  if(distancesquared(self.isnodeoccupied.origin, self.var_46A6) < 256) {
+  if(distancesquared(self.enemy.origin, self.var_46A6) < 256) {
     return 0;
   }
 
@@ -315,7 +315,7 @@ func_112C9(var_0) {
         }
       }
 
-      if(func_128AF(var_0, self.isnodeoccupied)) {
+      if(func_128AF(var_0, self.enemy)) {
         var_2 = 1;
         continue;
       }
@@ -399,7 +399,7 @@ func_13B72() {
 }
 
 func_4742(var_0, var_1) {
-  if(self.bulletsinclip > weaponclipsize(self.var_394) * var_1) {
+  if(self.bulletsinclip > weaponclipsize(self.weapon) * var_1) {
     return 0;
   }
 
@@ -564,7 +564,7 @@ func_2FBF() {
     }
 
     wait(0.5 + randomfloat(0.75));
-    if(!isDefined(self.isnodeoccupied)) {
+    if(!isDefined(self.enemy)) {
       continue;
     }
 
@@ -595,8 +595,8 @@ func_E257() {
     return;
   }
 
-  if(isDefined(self.isnodeoccupied)) {
-    var_1 = distance2d(self.origin, self.isnodeoccupied.origin);
+  if(isDefined(self.enemy)) {
+    var_1 = distance2d(self.origin, self.enemy.origin);
     if(var_1 < self.issentient) {
       self.a.var_7E0C = var_0 + randomintrange(5000, 10000);
       return;
@@ -637,11 +637,11 @@ func_18D4() {
   }
 
   var_0 = 0;
-  if(!isDefined(self.isnodeoccupied) || !self.isnodeoccupied scripts\engine\utility::isflashed()) {
+  if(!isDefined(self.enemy) || !self.enemy scripts\engine\utility::isflashed()) {
     var_0 = scripts\anim\combat_utility::func_B019();
   }
 
-  if(!var_0 && isDefined(self.isnodeoccupied) && !scripts\anim\utility_common::canseeenemyfromexposed()) {
+  if(!var_0 && isDefined(self.enemy) && !scripts\anim\utility_common::canseeenemyfromexposed()) {
     if(gettime() >= self.var_F17F) {
       return scripts\anim\combat_utility::func_128AA(0);
     }
@@ -679,7 +679,7 @@ func_F318() {
 func_129B4(var_0) {}
 
 func_BD1C() {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -688,11 +688,11 @@ func_BD1C() {
     return 0;
   }
 
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return 0;
   }
 
-  if(scripts\engine\utility::isnodecover3d(self.target_getindexoftarget)) {
+  if(scripts\engine\utility::isnodecover3d(self.node)) {
     return 0;
   }
 
@@ -704,12 +704,12 @@ func_BD1C() {
     return 0;
   }
 
-  if(distancesquared(self.origin, self.target_getindexoftarget.origin) > 256) {
+  if(distancesquared(self.origin, self.node.origin) > 256) {
     return 0;
   }
 
   var_0 = self func_80E8();
-  if(isDefined(var_0) && var_0 != self.target_getindexoftarget && self func_83D4(var_0)) {
+  if(isDefined(var_0) && var_0 != self.node && self func_83D4(var_0)) {
     self.var_1016F = 1;
     self.shufflenode = var_0;
     self.var_54C3 = 1;

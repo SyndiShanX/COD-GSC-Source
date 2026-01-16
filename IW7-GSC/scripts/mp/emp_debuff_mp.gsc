@@ -10,7 +10,7 @@ func_13A12() {
   thread func_A639(var_0);
   thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
   self endon("end_explode");
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   self waittill("explode", var_2);
   thread func_0118(var_2, 256, var_1, var_0);
 }
@@ -47,7 +47,7 @@ func_0118(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_8 = scripts\engine\utility::ter_op(isDefined(var_7.triggerportableradarping), var_7.triggerportableradarping, var_7);
+    var_8 = scripts\engine\utility::ter_op(isDefined(var_7.owner), var_7.owner, var_7);
     if(!scripts\mp\weapons::friendlyfirecheck(var_2, var_8) && var_8 != var_2) {
       continue;
     }
@@ -55,45 +55,45 @@ func_0118(var_0, var_1, var_2, var_3) {
     var_7 notify("emp_damage", var_2, 3, var_0, var_4, "MOD_EXPLOSIVE");
   }
 
-  var_0A = scripts\mp\utility::clearscrambler(var_0, var_1);
-  foreach(var_0C in var_0A) {
-    if(!isDefined(var_0C)) {
+  var_10 = scripts\mp\utility::clearscrambler(var_0, var_1);
+  foreach(var_12 in var_10) {
+    if(!isDefined(var_12)) {
       continue;
     }
 
-    if(!scripts\mp\utility::isreallyalive(var_0C)) {
+    if(!scripts\mp\utility::isreallyalive(var_12)) {
       continue;
     }
 
-    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_0C, self)) {
+    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_12, self)) {
       continue;
     }
 
-    if(var_0C != var_2 && scripts\mp\utility::func_9E05(var_2.team, var_0C)) {
+    if(var_12 != var_2 && scripts\mp\utility::func_9E05(var_2.team, var_12)) {
       continue;
     }
 
-    if(!var_0C scripts\mp\killstreaks\_emp_common::func_FFC5()) {
+    if(!var_12 scripts\mp\killstreaks\emp_common::func_FFC5()) {
       var_2 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
       continue;
     }
 
-    if(scripts\mp\utility::istrue(var_0C.var_9F72)) {
+    if(scripts\mp\utility::istrue(var_12.var_9F72)) {
       continue;
     }
 
-    var_0C dodamage(1, var_2.origin, var_2, var_3, "MOD_EXPLOSIVE", var_4);
-    var_0C scripts\mp\killstreaks\_emp_common::func_20C7(3);
+    var_12 dodamage(1, var_2.origin, var_2, var_3, "MOD_EXPLOSIVE", var_4);
+    var_12 scripts\mp\killstreaks\emp_common::func_20C7(3);
     if(var_4 == "gltacburst_big") {
-      var_0C func_20BF(self, var_2);
+      var_12 func_20BF(self, var_2);
     }
 
-    thread scripts\mp\gamescore::func_11ACF(var_2, var_0C, var_4, 3);
+    thread scripts\mp\gamescore::func_11ACF(var_2, var_12, var_4, 3);
   }
 }
 
 func_20C3(var_0, var_1, var_2) {
-  if(!scripts\mp\killstreaks\_emp_common::func_FFC5()) {
+  if(!scripts\mp\killstreaks\emp_common::func_FFC5()) {
     if(var_1 != self) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
     }
@@ -106,7 +106,7 @@ func_20C3(var_0, var_1, var_2) {
     var_3 = 1;
   }
 
-  scripts\mp\killstreaks\_emp_common::func_20C7(var_3);
+  scripts\mp\killstreaks\emp_common::func_20C7(var_3);
   thread scripts\mp\gamescore::func_11ACF(var_1, self, scripts\engine\utility::ter_op(issubstr(var_2, "iw7_tacburst_mpl"), "gltacburst_big", "gltacburst"), var_3);
 }
 
@@ -124,7 +124,7 @@ func_20BF(var_0, var_1) {
   }
 
   var_5 = var_2 + var_3 * var_4;
-  var_5 = scripts\mp\perks\_perkfunctions::applystunresistence(var_1, self, var_5);
+  var_5 = scripts\mp\perks\perkfunctions::applystunresistence(var_1, self, var_5);
   thread scripts\mp\gamescore::func_11ACF(var_1, self, "gltacburst_big", var_5);
   var_1 notify("stun_hit");
   self notify("concussed", var_1);

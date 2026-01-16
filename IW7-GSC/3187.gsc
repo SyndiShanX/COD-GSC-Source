@@ -36,7 +36,7 @@ shouldplayarenaintro() {
     return 0;
   }
 
-  if(isDefined(self.isnodeoccupied) && self.isnodeoccupied.health < 91) {
+  if(isDefined(self.enemy) && self.enemy.health < 91) {
     return 0;
   }
 
@@ -193,26 +193,26 @@ func_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   var_9 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
-  var_0A = self getsafecircleorigin(var_1, var_9);
-  var_0B = getanimlength(var_0A);
-  var_0C = getnotetracktimes(var_0A, "hit");
-  var_0D = var_0B / var_6 * 0.33;
-  if(var_0C.size > 0) {
-    var_0D = var_0B / var_6 * var_0C[0];
+  var_10 = self getsafecircleorigin(var_1, var_9);
+  var_11 = getanimlength(var_10);
+  var_12 = getnotetracktimes(var_10, "hit");
+  var_13 = var_11 / var_6 * 0.33;
+  if(var_12.size > 0) {
+    var_13 = var_11 / var_6 * var_12[0];
   }
 
-  var_0E = getnotetracktimes(var_0A, "finish");
-  var_0F = 0.9;
-  if(var_0E.size > 0) {
-    var_0F = var_0E[0];
+  var_14 = getnotetracktimes(var_10, "finish");
+  var_15 = 0.9;
+  if(var_14.size > 0) {
+    var_15 = var_14[0];
   } else {
-    var_0F = 0.9;
+    var_15 = 0.9;
   }
 
-  var_10 = var_0B / var_6 * var_0F;
+  var_10 = var_11 / var_6 * var_15;
   self gib_fx_override("gravity");
-  if(var_5 && isDefined(self.isnodeoccupied)) {
-    thread func_6A6A(var_1, self.isnodeoccupied);
+  if(var_5 && isDefined(self.enemy)) {
+    thread func_6A6A(var_1, self.enemy);
   } else if(isDefined(var_2)) {
     self orientmode("face angle abs", (0, vectortoyaw(var_2.origin - self.origin), 0));
   } else {
@@ -222,41 +222,41 @@ func_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self ghostlaunched("anim deltas");
   scripts\mp\agents\_scriptedagents::func_F2B1(var_1, var_9, var_6);
   if(var_7) {
-    var_11 = getnotetracktimes(var_0A, "lunge_start");
+    var_11 = getnotetracktimes(var_10, "lunge_start");
     var_12 = 0;
     if(var_11.size > 0) {
-      var_12 = var_0B / var_6 * var_11[0];
+      var_12 = var_11 / var_6 * var_11[0];
     }
 
-    var_0D = var_0D - var_12;
+    var_13 = var_13 - var_12;
     if(var_12 > 0) {
       wait(var_12);
     }
 
     if(self.var_B0FC) {
       var_13 = var_3 - self.origin;
-      var_14 = getmovedelta(var_0A, var_11[0], var_0C[0]);
+      var_14 = getmovedelta(var_10, var_11[0], var_12[0]);
       var_15 = scripts\mp\agents\_scriptedagents::func_7DC9(var_13, var_14);
       var_6 = var_6 * clamp(1 / var_15.var_13E2B, 0.5, 1);
-      var_0D = var_0B / var_6 * var_0C[0] - var_0B / var_6 * var_11[0];
+      var_13 = var_11 / var_6 * var_12[0] - var_11 / var_6 * var_11[0];
       scripts\mp\agents\_scriptedagents::func_F2B1(var_1 + "_norestart", var_9, var_6);
     }
   }
 
   if(var_4) {
     self scragentsetanimscale(0, 1);
-    self ghostexplode(self.origin, var_3, var_0D);
-    childthread func_12EC0(var_2, var_0D, 1, self.var_B101);
+    self ghostexplode(self.origin, var_3, var_13);
+    childthread func_12EC0(var_2, var_13, 1, self.var_B101);
     scripts\mp\agents\_scriptedagents::setstatelocked(1, "DoAttack");
   } else {
     self scragentsetanimscale(1, 1);
   }
 
-  wait(var_0D);
+  wait(var_13);
   scripts\asm\asm_bb::bb_clearmeleerequest();
   self notify("cancel_updatelerppos");
-  if(var_5 && isDefined(self.isnodeoccupied)) {
-    thread func_6A6A(var_1, self.isnodeoccupied);
+  if(var_5 && isDefined(self.enemy)) {
+    thread func_6A6A(var_1, self.enemy);
   } else {
     func_1106E();
     if(isDefined(var_2)) {
@@ -297,7 +297,7 @@ func_57E5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   self.var_A9B9 = self.origin;
-  var_17 = var_10 - var_0D;
+  var_17 = var_10 - var_13;
   if(var_17 > 0) {
     scripts\mp\agents\_scriptedagents::func_1384D(var_1, "end", var_17);
   }
@@ -463,7 +463,7 @@ isenemyinfrontofme(var_0, var_1) {
 
 func_13D99() {
   var_0 = self.entered_playspace;
-  if(isDefined(self.isnodeoccupied) && !ispointonnavmesh(self.isnodeoccupied.origin) && !scripts\asm\asm_bb::bb_moverequested()) {
+  if(isDefined(self.enemy) && !ispointonnavmesh(self.enemy.origin) && !scripts\asm\asm_bb::bb_moverequested()) {
     if(scripts\mp\agents\zombie\zombie_util::func_DD7C("offmesh", var_0)) {
       return 1;
     }

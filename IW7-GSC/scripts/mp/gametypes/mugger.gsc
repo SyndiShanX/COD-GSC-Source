@@ -210,7 +210,7 @@ mugger_init_tags() {
 
 spawndogtags(var_0, var_1) {
   if(isagent(var_1)) {
-    var_1 = var_1.triggerportableradarping;
+    var_1 = var_1.owner;
   }
 
   var_2 = 0;
@@ -231,11 +231,11 @@ spawndogtags(var_0, var_1) {
       if(isplayer(var_1) && isDefined(var_0.attackerdata) && isDefined(var_1.guid) && isDefined(var_0.attackerdata[var_1.guid])) {
         var_4 = var_0.attackerdata[var_1.guid];
         if(isDefined(var_4) && isDefined(var_4.attackerent) && var_4.attackerent == var_1) {
-          if(isDefined(var_4.smeansofdeath) && var_4.smeansofdeath == "MOD_MELEE" || (var_4.var_394 == "throwingknife_mp" || var_4.var_394 == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac > 0) {
+          if(isDefined(var_4.smeansofdeath) && var_4.smeansofdeath == "MOD_MELEE" || (var_4.weapon == "throwingknife_mp" || var_4.weapon == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac > 0) {
             var_3 = 1;
             if(var_0.tags_carried > 0) {
               var_2 = var_0.tags_carried;
-              if((var_4.var_394 == "throwingknife_mp" || var_4.var_394 == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac < 1) {
+              if((var_4.weapon == "throwingknife_mp" || var_4.weapon == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac < 1) {
                 var_2 = int(ceil(var_0.tags_carried * level.mugger_throwing_knife_mug_frac));
               }
 
@@ -250,7 +250,7 @@ spawndogtags(var_0, var_1) {
 
               playsoundatpos(var_0.origin, "mugger_mugging");
               var_1 thread scripts\mp\hud_message::showsplash("callout_mugger", var_2);
-              if(var_4.var_394 == "throwingknife_mp" || var_4.var_394 == "throwingknifejugg_mp") {
+              if(var_4.weapon == "throwingknife_mp" || var_4.weapon == "throwingknifejugg_mp") {
                 var_1 playlocalsound("mugger_you_mugged");
               }
             }
@@ -268,7 +268,7 @@ spawndogtags(var_0, var_1) {
     playsoundatpos(var_5, "mp_killconfirm_tags_drop");
     level notify("mugger_jackpot_increment");
     var_6 = mugger_tag_temp_spawn(var_0.origin, 40, 160);
-    var_6.victim = var_0.triggerportableradarping;
+    var_6.victim = var_0.owner;
     if(isDefined(var_1) && var_0 != var_1) {
       var_6.var_4F = var_1;
     } else {
@@ -285,7 +285,7 @@ spawndogtags(var_0, var_1) {
     var_8 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
     var_8.var_336 = "trigger_dogtag";
     var_8 hide();
-    level.dogtags[var_2.guid] = scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
+    level.dogtags[var_2.guid] = ::scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
     scripts\mp\objpoints::deleteobjpoint(level.dogtags[var_2.guid].objpoints["allies"]);
     scripts\mp\objpoints::deleteobjpoint(level.dogtags[var_2.guid].objpoints["axis"]);
     level.dogtags[var_2.guid] scripts\mp\gameobjects::setusetime(0);
@@ -498,12 +498,12 @@ mugger_monitor_tank_pickups() {
     foreach(var_3 in level.players) {
       if(isDefined(var_3.using_remote_tank) && var_3.using_remote_tank == 1) {
         foreach(var_5 in var_0) {
-          if(isDefined(var_5) && isDefined(var_5.triggerportableradarping) && var_5.triggerportableradarping == var_3) {
+          if(isDefined(var_5) && isDefined(var_5.owner) && var_5.owner == var_3) {
             foreach(var_7 in var_1) {
               if(isDefined(var_7) && isDefined(var_7.dogtag)) {
                 if(isDefined(var_7.dogtag.interactteam) && var_7.dogtag.interactteam != "none") {
                   if(var_5 istouching(var_7)) {
-                    var_7.dogtag onuse(var_5.triggerportableradarping);
+                    var_7.dogtag onuse(var_5.owner);
                   }
                 }
               }
@@ -582,8 +582,8 @@ _hidefromplayer(var_0) {
 }
 
 onuse(var_0) {
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0 = var_0.triggerportableradarping;
+  if(isDefined(var_0.owner)) {
+    var_0 = var_0.owner;
   }
 
   if(self.temp_tag) {

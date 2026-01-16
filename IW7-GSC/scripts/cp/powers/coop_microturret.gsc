@@ -29,12 +29,12 @@ init() {
   level.sentrysettings["sentry_microturret"].cooldowntime = 0.1;
   level.sentrysettings["sentry_microturret"].fxtime = 0.3;
   level.sentrysettings["sentry_microturret"].streakname = "sentry";
-  level.sentrysettings["sentry_microturret"].var_39B = "micro_turret_gun_zm";
+  level.sentrysettings["sentry_microturret"].weaponinfo = "micro_turret_gun_zm";
   level.sentrysettings["sentry_microturret"].modelbase = "vehicle_drone_backup_buddy_gun";
   level.sentrysettings["sentry_microturret"].modelplacement = "weapon_sentry_chaingun_obj";
   level.sentrysettings["sentry_microturret"].modelplacementfailed = "weapon_sentry_chaingun_obj_red";
   level.sentrysettings["sentry_microturret"].modeldestroyed = "vehicle_drone_backup_buddy_gun";
-  level.sentrysettings["sentry_microturret"].pow = &"SENTRY_PICKUP";
+  level.sentrysettings["sentry_microturret"].hintstring = &"SENTRY_PICKUP";
   level.sentrysettings["sentry_microturret"].playerphysicstrace = 1;
   level.sentrysettings["sentry_microturret"].teamsplash = "used_sentry";
   level.sentrysettings["sentry_microturret"].shouldsplash = 0;
@@ -58,7 +58,7 @@ microturret_use(var_0) {
   }
 
   var_0 waittill("missile_stuck", var_2);
-  if(isDefined(var_2) && isDefined(var_2.triggerportableradarping)) {
+  if(isDefined(var_2) && isDefined(var_2.owner)) {
     thread placementfailed(var_0);
     return;
   }
@@ -75,7 +75,7 @@ microturret_use(var_0) {
   var_3 = spawnturret("misc_turret", var_0.origin, "micro_turret_gun_zm");
   var_3 setModel("micro_turret_wm");
   var_3.angles = var_0.angles;
-  var_3.triggerportableradarping = self;
+  var_3.owner = self;
   var_3.team = self.team;
   var_3.weapon_name = "micro_turret_zm";
   var_3 getvalidattachments();
@@ -122,7 +122,7 @@ sentry_handledamage() {
   self.var_E1 = 0;
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping, var_1, 0)) {
+    if(!scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_1, 0)) {
       continue;
     }
 
@@ -134,26 +134,26 @@ sentry_handledamage() {
       self.var_E1 = self.var_E1 + self.maxhealth;
     }
 
-    var_0A = var_0;
+    var_10 = var_0;
     if(isplayer(var_1)) {
       var_1 scripts\cp\cp_damage::updatedamagefeedback("sentry");
       if(var_1 scripts\cp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0A = var_0 * level.armorpiercingmod;
+        var_10 = var_0 * level.armorpiercingmod;
       }
     }
 
-    if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-      var_1.triggerportableradarping scripts\cp\cp_damage::updatedamagefeedback("sentry");
+    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+      var_1.owner scripts\cp\cp_damage::updatedamagefeedback("sentry");
     }
 
-    self.var_E1 = self.var_E1 + var_0A;
+    self.var_E1 = self.var_E1 + var_10;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_1 notify("destroyed_killstreak");
       }
 
-      if(isDefined(self.triggerportableradarping)) {
-        self.triggerportableradarping thread scripts\cp\utility::leaderdialogonplayer(level.sentrysettings[self.sentrytype].vodestroyed, undefined, undefined, self.origin);
+      if(isDefined(self.owner)) {
+        self.owner thread scripts\cp\utility::leaderdialogonplayer(level.sentrysettings[self.sentrytype].vodestroyed, undefined, undefined, self.origin);
       }
 
       self notify("death");
@@ -217,7 +217,7 @@ sentry_setinactive() {
     return;
   }
 
-  if(isDefined(self.triggerportableradarping)) {
+  if(isDefined(self.owner)) {
     scripts\cp\utility::setplayerheadicon(undefined, (0, 0, 0));
   }
 }
@@ -269,7 +269,7 @@ watchforplayerdeath(var_0) {
   self notify("turret_deleted");
   self endon("turret_deleted");
   var_0 endon("death");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   var_0 delete();
   self notify("microTurret_update", -1);
 }
@@ -322,8 +322,8 @@ func_B701() {
 func_B717() {
   self endon("stunned");
   self endon("death");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping endon("disconnect");
+  if(isDefined(self.owner)) {
+    self.owner endon("disconnect");
   }
 
   self give_player_session_tokens("manual");
@@ -346,34 +346,34 @@ func_B717() {
       var_7 = vectornormalize(var_6);
       var_8 = vectordot(var_6, var_7);
       var_9 = scripts\engine\utility::anglebetweenvectorsunit(var_0, var_7);
-      var_0A = 1 - var_8 / 800;
-      var_0B = 1 - var_9 / 180;
-      var_0C = var_0A * 0.5 + var_0B * 0.8;
+      var_10 = 1 - var_8 / 800;
+      var_11 = 1 - var_9 / 180;
+      var_12 = var_10 * 0.5 + var_11 * 0.8;
       var_2[var_2.size] = var_5;
-      var_3[var_3.size] = var_0C;
+      var_3[var_3.size] = var_12;
     }
 
     for(;;) {
-      var_0E = 0;
-      for(var_0F = 0; var_0F < var_2.size - 1; var_0F++) {
-        var_10 = var_2[var_0F];
-        var_11 = var_3[var_0F];
-        if(var_11 < var_3[var_0F]) {
-          var_2[var_0F] = var_2[var_0F + 1];
-          var_3[var_0F] = var_3[var_0F + 1];
-          var_2[var_0F + 1] = var_10;
-          var_3[var_0F + 1] = var_11;
-          var_0E = 1;
+      var_14 = 0;
+      for(var_15 = 0; var_15 < var_2.size - 1; var_15++) {
+        var_10 = var_2[var_15];
+        var_11 = var_3[var_15];
+        if(var_11 < var_3[var_15]) {
+          var_2[var_15] = var_2[var_15 + 1];
+          var_3[var_15] = var_3[var_15 + 1];
+          var_2[var_15 + 1] = var_10;
+          var_3[var_15 + 1] = var_11;
+          var_14 = 1;
         }
       }
 
-      if(!var_0E) {
+      if(!var_14) {
         break;
       }
     }
 
-    for(var_0F = 0; var_0F < var_2.size; var_0F++) {
-      var_12 = var_2[var_0F];
+    for(var_15 = 0; var_15 < var_2.size; var_15++) {
+      var_12 = var_2[var_15];
       var_13 = func_B714(var_12);
       if(isDefined(var_13)) {
         func_B70D(var_12, var_13);
@@ -499,7 +499,7 @@ func_B6EC() {
         self shootturret();
         self.var_1E2D--;
         if(self.var_1E2D <= 0) {
-          self.triggerportableradarping thread func_B6F4(self);
+          self.owner thread func_B6F4(self);
         }
       }
 
@@ -692,7 +692,7 @@ canbetargeted(var_0) {
     return 0;
   }
 
-  if(isplayer(var_0) && var_0 == self.triggerportableradarping) {
+  if(isplayer(var_0) && var_0 == self.owner) {
     return 0;
   }
 

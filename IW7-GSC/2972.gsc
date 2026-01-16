@@ -25,44 +25,44 @@ func_13BFD() {
 
       var_9 = 0;
       var_4 = undefined;
-      var_0A = undefined;
-      var_0B = 0;
-      var_0C = undefined;
-      var_0D = undefined;
+      var_10 = undefined;
+      var_11 = 0;
+      var_12 = undefined;
+      var_13 = undefined;
       if(isDefined(var_2.var_ECF0)) {
         var_4 = var_2.var_ECF0;
         var_9 = 1;
       }
 
       if(isDefined(var_2.var_ECF1)) {
-        var_0A = var_2.var_ECF1;
+        var_10 = var_2.var_ECF1;
         var_9 = 1;
       }
 
       if(isDefined(var_2.var_ECEE)) {
-        var_0C = var_2.var_ECEE;
-        var_0B = 1;
+        var_12 = var_2.var_ECEE;
+        var_11 = 1;
       }
 
       if(isDefined(var_2.var_ECEF)) {
-        var_0D = var_2.var_ECEF;
-        var_0B = 1;
+        var_13 = var_2.var_ECEF;
+        var_11 = 1;
       }
 
       if(var_9) {
         if(!isDefined(var_4)) {}
 
-        if(!isDefined(var_0A)) {}
+        if(!isDefined(var_10)) {}
 
-        var_2 gettimepassedpercentage(var_4, var_0A);
+        var_2 gettimepassedpercentage(var_4, var_10);
       }
 
-      if(var_0B) {
-        if(!isDefined(var_0C)) {}
+      if(var_11) {
+        if(!isDefined(var_12)) {}
 
-        if(!isDefined(var_0D)) {}
+        if(!isDefined(var_13)) {}
 
-        var_2 gettimepassedpercentage(var_0C, var_0D, 0, 1);
+        var_2 gettimepassedpercentage(var_12, var_13, 0, 1);
       }
     }
   }

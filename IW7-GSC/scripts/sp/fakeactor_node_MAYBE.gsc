@@ -61,9 +61,9 @@ func_6B3D() {
       self.var_1EEF.angles = self.angles;
       var_8 = scripts\sp\utility::func_7DC3(self.animation);
       var_9 = getstartorigin(self.origin, self.angles, var_8);
-      var_0A = getstartangles(self.origin, self.angles, var_8);
+      var_10 = getstartangles(self.origin, self.angles, var_8);
       self.origin = var_9;
-      self.angles = var_0A;
+      self.angles = var_10;
       break;
   }
 }
@@ -99,7 +99,7 @@ func_6B28() {
       level.var_6B23[var_2] = [];
     }
 
-    level.var_6B23[var_2] = scripts\engine\utility::array_add(level.var_6B23[var_2], self);
+    level.var_6B23[var_2] = ::scripts\engine\utility::array_add(level.var_6B23[var_2], self);
   }
 }
 
@@ -321,22 +321,22 @@ func_6B21(var_0, var_1, var_2, var_3) {
         var_8.angles = (0, 0, 0);
       }
 
-      var_0A = anglesToForward(var_8.angles);
-      var_0B = anglestoright(var_8.angles);
-      var_0C = anglestoup(var_8.angles);
-      var_0D = (0, self.var_5CC2 * var_8.fgetarg, 0);
-      var_9 = var_9 + var_0A * var_0D[0];
-      var_9 = var_9 + var_0B * var_0D[1];
-      var_9 = var_9 + var_0C * var_0D[2];
+      var_10 = anglesToForward(var_8.angles);
+      var_11 = anglestoright(var_8.angles);
+      var_12 = anglestoup(var_8.angles);
+      var_13 = (0, self.var_5CC2 * var_8.fgetarg, 0);
+      var_9 = var_9 + var_10 * var_13[0];
+      var_9 = var_9 + var_11 * var_13[1];
+      var_9 = var_9 + var_12 * var_13[2];
     }
 
     var_4[var_7]["origin"] = var_9;
     var_4[var_7]["angles"] = var_8 func_6B1E(var_2);
     if(var_7 > 0) {
-      var_0E = var_9 - var_4[var_7 - 1]["origin"];
-      var_4[var_7 - 1]["dist"] = length(var_0E);
+      var_14 = var_9 - var_4[var_7 - 1]["origin"];
+      var_4[var_7 - 1]["dist"] = length(var_14);
       var_4[0]["total_dist"] = var_4[0]["total_dist"] + var_4[var_7 - 1]["dist"];
-      var_4[var_7 - 1]["to_next_node"] = vectornormalize(var_0E);
+      var_4[var_7 - 1]["to_next_node"] = vectornormalize(var_14);
       if(isDefined(var_8.fgetarg)) {
         var_4[var_7 - 1]["radius"] = var_8.fgetarg;
       } else {
@@ -344,8 +344,8 @@ func_6B21(var_0, var_1, var_2, var_3) {
       }
     }
 
-    var_0F = var_3 && var_7 == 1;
-    if(var_8 func_6B2D(var_0F)) {
+    var_15 = var_3 && var_7 == 1;
+    if(var_8 func_6B2D(var_15)) {
       break;
     }
   }

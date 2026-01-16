@@ -196,7 +196,7 @@ func_1AD9() {
         var_6 = "front";
       }
 
-      var_2.var_ECCE[var_6] = scripts\engine\utility::array_add(var_2.var_ECCE[var_6], var_5);
+      var_2.var_ECCE[var_6] = ::scripts\engine\utility::array_add(var_2.var_ECCE[var_6], var_5);
       if(var_6 == "front") {
         var_5 setscriptablepartstate("root", "0");
         continue;
@@ -226,12 +226,12 @@ func_1AAE() {
   foreach(var_4 in level.createfxent) {
     if(isDefined(var_4.v["exploder"])) {
       if(var_4.v["exploder"] == var_0) {
-        var_2["pressurize"] = scripts\engine\utility::array_add(var_2["pressurize"], var_4);
+        var_2["pressurize"] = ::scripts\engine\utility::array_add(var_2["pressurize"], var_4);
         continue;
       }
 
       if(var_4.v["exploder"] == var_1) {
-        var_2["depressurize"] = scripts\engine\utility::array_add(var_2["depressurize"], var_4);
+        var_2["depressurize"] = ::scripts\engine\utility::array_add(var_2["depressurize"], var_4);
       }
     }
   }
@@ -241,16 +241,16 @@ func_1AAE() {
   var_6 = ["pressurize", "depressurize"];
   foreach(var_8 in var_6) {
     foreach(var_4 in var_2[var_8]) {
-      var_0A = var_4.v["fxid"];
-      var_0B = var_4.v["origin"];
-      var_0C = var_4.v["angles"];
-      var_0D = var_4.v["delay"];
-      var_0E = spawnStruct();
-      var_0E.var_762C = var_4.v["fxid"];
-      var_0E.origin = var_4.v["origin"];
-      var_0E.angles = var_4.v["angles"];
-      var_0E.delay = var_4.v["delay"];
-      self.var_4CD3[var_8] = scripts\engine\utility::array_add(self.var_4CD3[var_8], var_0E);
+      var_10 = var_4.v["fxid"];
+      var_11 = var_4.v["origin"];
+      var_12 = var_4.v["angles"];
+      var_13 = var_4.v["delay"];
+      var_14 = spawnStruct();
+      var_14.var_762C = var_4.v["fxid"];
+      var_14.origin = var_4.v["origin"];
+      var_14.angles = var_4.v["angles"];
+      var_14.delay = var_4.v["delay"];
+      self.var_4CD3[var_8] = ::scripts\engine\utility::array_add(self.var_4CD3[var_8], var_14);
     }
   }
 }
@@ -401,23 +401,23 @@ func_1AA9(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(var_8) && !isDefined(var_8.var_ACD5)) {
       var_8.var_ACD5 = [];
       var_9 = [15, -7];
-      foreach(var_0B in var_9) {
-        var_0C = var_8 scripts\engine\utility::spawn_tag_origin();
-        var_0C linkto(var_8, "door_jnt", (38.5, var_0B, 16), (0, 0, 0));
-        var_8.var_ACD5[var_8.var_ACD5.size] = var_0C;
+      foreach(var_11 in var_9) {
+        var_12 = var_8 scripts\engine\utility::spawn_tag_origin();
+        var_12 linkto(var_8, "door_jnt", (38.5, var_11, 16), (0, 0, 0));
+        var_8.var_ACD5[var_8.var_ACD5.size] = var_12;
       }
     }
   }
 
-  var_0F = "airlock_pressurize_lr";
+  var_15 = "airlock_pressurize_lr";
   if(!isDefined(var_4) || var_4) {
     setglobalsoundcontext("atmosphere", "", 2);
   } else {
-    var_0F = "airlock_depressurize_lr";
+    var_15 = "airlock_depressurize_lr";
     setglobalsoundcontext("atmosphere", "space", 2);
   }
 
-  var_10 = lookupsoundlength(var_0F);
+  var_10 = lookupsoundlength(var_15);
   var_5.var_4CD5 = 1;
   var_5 thread func_1AD7(var_10, var_4);
   scripts\engine\utility::array_thread(var_6, ::func_1AB1, var_5, "cycling");
@@ -426,7 +426,7 @@ func_1AA9(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5 thread func_1AAD(var_4);
-  level.player scripts\sp\utility::play_sound_on_entity(var_0F);
+  level.player scripts\sp\utility::play_sound_on_entity(var_15);
   var_5.var_4CD5 = 0;
   var_11 = "back";
   if(var_1) {
@@ -572,8 +572,8 @@ func_1AD7(var_0, var_1) {
   var_6 = ["front", "back"];
   while(var_5 != var_4) {
     foreach(var_8 in var_6) {
-      foreach(var_0A in self.var_ECCE[var_8]) {
-        var_0A setscriptablepartstate("root", var_5);
+      foreach(var_10 in self.var_ECCE[var_8]) {
+        var_10 setscriptablepartstate("root", var_5);
       }
     }
 
@@ -610,15 +610,15 @@ func_1AD8(var_0, var_1, var_2, var_3) {
   var_6 = ["front", "back"];
   foreach(var_8 in var_6) {
     if(var_8 == var_5) {
-      foreach(var_0A in var_4.var_ECCE[var_8]) {
-        var_0A setscriptablepartstate("root", 12);
+      foreach(var_10 in var_4.var_ECCE[var_8]) {
+        var_10 setscriptablepartstate("root", 12);
       }
 
       continue;
     }
 
-    foreach(var_0A in var_4.var_ECCE[var_8]) {
-      var_0A setscriptablepartstate("root", 0);
+    foreach(var_10 in var_4.var_ECCE[var_8]) {
+      var_10 setscriptablepartstate("root", 0);
     }
   }
 
@@ -697,7 +697,7 @@ func_A852() {
           var_1["ai"] = [];
         }
 
-        var_1["ai"] = scripts\engine\utility::array_add(var_1["ai"], var_4);
+        var_1["ai"] = ::scripts\engine\utility::array_add(var_1["ai"], var_4);
       }
 
       var_4 glinton(#animtree);
@@ -907,15 +907,15 @@ buddy_down_two_enemy_dead_thread(var_0) {
       level.player thread scripts\sp\utility::play_sound_on_entity(self.var_C62B);
     }
 
-    var_0A = 5;
-    var_0B = var_0[0] getscoreinfocategory(var_0[0] scripts\sp\utility::func_7DC1(func_5997("pull")));
-    var_0C = var_1 * var_0B;
-    var_0C = var_0C / var_0A;
+    var_10 = 5;
+    var_11 = var_0[0] getscoreinfocategory(var_0[0] scripts\sp\utility::func_7DC1(func_5997("pull")));
+    var_12 = var_1 * var_11;
+    var_12 = var_12 / var_10;
     foreach(var_5 in var_0) {
-      var_5 func_82B1(var_5 scripts\sp\utility::func_7DC1(func_5997("pull")), var_0A * -1);
+      var_5 func_82B1(var_5 scripts\sp\utility::func_7DC1(func_5997("pull")), var_10 * -1);
     }
 
-    wait(var_0C);
+    wait(var_12);
     level.player playrumbleonentity("damage_heavy");
     self notify("stop_pry_anim");
     scripts\sp\utility::func_65DD("player_prying_open_door");
@@ -1272,18 +1272,18 @@ func_5982(var_0, var_1, var_2) {
   var_6 = [[var_2]]();
   var_7 = [var_4, var_5, var_6];
   foreach(var_9 in var_7) {
-    foreach(var_12, var_0B in var_9) {
-      var_0C = 0;
-      foreach(var_0E in var_0B) {
-        var_0F = getarraykeys(var_0B)[var_0C];
-        var_10 = var_3 + var_0F;
-        if(var_0F == "idle") {
-          level.var_EC85[var_12][var_10][0] = var_0B[var_0F];
+    foreach(var_12, var_11 in var_9) {
+      var_12 = 0;
+      foreach(var_14 in var_11) {
+        var_15 = getarraykeys(var_11)[var_12];
+        var_10 = var_3 + var_15;
+        if(var_15 == "idle") {
+          level.var_EC85[var_12][var_10][0] = var_11[var_15];
         } else {
-          level.var_EC85[var_12][var_10] = var_0B[var_0F];
+          level.var_EC85[var_12][var_10] = var_11[var_15];
         }
 
-        var_0C++;
+        var_12++;
       }
     }
   }
@@ -1348,10 +1348,10 @@ func_D0A6(var_0) {
   }
 
   var_9 = var_8 / 4;
-  var_0A = var_9;
+  var_10 = var_9;
   level.player func_598D();
   wait(0.3);
-  level.player playerlinktoblend(var_1, "tag_player", var_8, var_9, var_0A);
+  level.player playerlinktoblend(var_1, "tag_player", var_8, var_9, var_10);
   wait(var_8);
   level.player notify("player_attached_to_door");
   level.player playerlinktodelta(var_1, "tag_player", 1, 5, 5, 5, 5, 1);

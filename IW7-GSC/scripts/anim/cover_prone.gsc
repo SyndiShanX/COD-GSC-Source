@@ -8,22 +8,22 @@ func_9509() {}
 main() {
   self endon("killanimscript");
   scripts\anim\utility::func_9832("cover_prone");
-  if(weaponclass(self.var_394) == "rocketlauncher") {
+  if(weaponclass(self.weapon) == "rocketlauncher") {
     scripts\anim\combat::main();
     return;
   }
 
-  if(isDefined(self.target_getindexoftarget.turret)) {
+  if(isDefined(self.node.turret)) {
     scripts\anim\cover_wall::func_130DF();
   }
 
-  if(isDefined(self.isnodeoccupied) && lengthsquared(self.origin - self.isnodeoccupied.origin) < squared(512)) {
+  if(isDefined(self.enemy) && lengthsquared(self.origin - self.enemy.origin) < squared(512)) {
     thread scripts\anim\combat::main();
     return;
   }
 
   func_F924();
-  self.covernode = self.target_getindexoftarget;
+  self.covernode = self.node;
   self orientmode("face angle", self.covernode.angles[1]);
   self.a.func_8445 = 1;
   self give_run_perk(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
@@ -117,7 +117,7 @@ func_DA83(var_0) {
 }
 
 func_F924() {
-  self func_82D0(self.target_getindexoftarget);
+  self func_82D0(self.node);
   self.a.var_2274 = scripts\anim\utility::func_B028("cover_prone");
 }
 
@@ -144,23 +144,23 @@ func_453F() {
     }
   }
 
-  if(isDefined(self.isnodeoccupied)) {
-    return func_128AF(self.isnodeoccupied, 850);
+  if(isDefined(self.enemy)) {
+    return func_128AF(self.enemy, 850);
   }
 
   return 0;
 }
 
 func_10012() {
-  if(!isDefined(self.var_394) || !weaponisauto(self.var_394) || !weaponisbeam(self.var_394)) {
+  if(!isDefined(self.weapon) || !weaponisauto(self.weapon) || !weaponisbeam(self.weapon)) {
     return 0;
   }
 
-  if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 256) {
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256) {
     return 0;
   }
 
-  if(isDefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied) && !isDefined(self.objective_position) && scripts\anim\shared::getaimyawtoshootentorpos() < 20) {
+  if(isDefined(self.enemy) && self cansee(self.enemy) && !isDefined(self.objective_position) && scripts\anim\shared::getaimyawtoshootentorpos() < 20) {
     return scripts\anim\move::func_B4EC();
   }
 

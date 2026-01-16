@@ -93,7 +93,7 @@ skeleton_arrival_cowbell(var_0) {
   thread scripts\engine\utility::play_sound_in_space("chi_snake_skeleton_spawn", var_2.origin);
   triggerfx(var_2);
   self playSound("chi_snake_skeleton_spawn_foley");
-  scripts\engine\utility::waittill_any_3("death", "intro_vignette_done");
+  scripts\engine\utility::waittill_any("death", "intro_vignette_done");
   var_2 delete();
 }
 
@@ -101,7 +101,7 @@ set_skeleton_attributes(var_0) {
   level endon("game_ended");
   self endon("death");
   self.playerowner = var_0;
-  self.triggerportableradarping = var_0;
+  self.owner = var_0;
   var_1 = self;
   var_1.team = "allies";
   var_1.synctransients = "sprint";
@@ -219,7 +219,7 @@ skeleton_move_to_player(var_0) {
   self.scripted_mode = 1;
   self ghostskulls_total_waves(96);
   self ghosts_attack_logic(self.playerowner);
-  scripts\engine\utility::waittill_any_timeout_1(2, "goal_reached");
+  scripts\engine\utility::waittill_any_timeout(2, "goal_reached");
 }
 
 determine_skeleton_mode(var_0) {

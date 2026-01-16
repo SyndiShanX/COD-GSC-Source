@@ -131,8 +131,8 @@ func_257D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.player func_82C0("fade_to_black_minus_music", var_2);
   while(1 && iscinematicplaying()) {
     var_9 = cinematicgettimeinmsec() / 1000;
-    var_0A = var_0 - var_9;
-    if(var_0A <= var_7) {
+    var_10 = var_0 - var_9;
+    if(var_10 <= var_7) {
       var_8 = 0;
       break;
     }

@@ -125,9 +125,9 @@ func_3600() {
     func_3547(var_9, var_7);
     var_6 = self getscoreinfocategory(var_1);
     if(!var_5) {
-      var_0A = func_3583();
-      var_0B = var_0A < 0;
-      if(var_4 != var_0B) {
+      var_10 = func_3583();
+      var_11 = var_10 < 0;
+      if(var_4 != var_11) {
         var_2["zero"] = var_6;
         var_5 = 1;
       }
@@ -314,13 +314,13 @@ func_3603(var_0) {
   wait(0.1);
   var_8 = func_358F(var_0);
   var_9 = func_358C(var_3, var_0);
-  var_0A = func_3590(var_0);
-  var_0B = func_351F(var_6, var_7, var_9, var_0A);
-  var_1.var_DCCF[var_0]["rail"]["center_offset"] = var_0B;
-  var_0C = func_358D(var_0);
-  var_0D = distance(var_5, var_0C);
-  var_0E = distance(var_8, var_0C);
-  var_1.var_DCCF[var_0]["rail"]["radius"] = var_0D + var_0E * 0.5;
+  var_10 = func_3590(var_0);
+  var_11 = func_351F(var_6, var_7, var_9, var_10);
+  var_1.var_DCCF[var_0]["rail"]["center_offset"] = var_11;
+  var_12 = func_358D(var_0);
+  var_13 = distance(var_5, var_12);
+  var_14 = distance(var_8, var_12);
+  var_1.var_DCCF[var_0]["rail"]["radius"] = var_13 + var_14 * 0.5;
   self func_82B0(var_3, 0);
   wait(0.1);
   var_1.var_DCCF[var_0]["rail"]["min"] = func_358B(var_0);
@@ -343,10 +343,10 @@ func_3603(var_0) {
   wait(0.1);
   var_1.var_DCCF[var_0]["pitch"]["max"] = func_358E(var_3, var_0);
   var_1.var_DCCF[var_0]["pitch"]["rate"] = 0.05 * abs(var_1.var_DCCF[var_0]["pitch"]["max"] - var_1.var_DCCF[var_0]["pitch"]["min"]) / getanimlength(var_3);
-  var_0F = 0;
+  var_15 = 0;
   self func_82B0(var_3, 0);
   self func_82B1(var_3, 1);
-  while(var_0F < 8) {
+  while(var_15 < 8) {
     var_10 = undefined;
     if(var_0 == "left") {
       var_10 = "j_clavicle_x_le";
@@ -359,7 +359,7 @@ func_3603(var_0) {
     var_13 = self gettagangles(var_10);
     func_3547(anglestoaxis(var_13), self gettagorigin(var_10));
     wait(0.05);
-    var_0F = var_0F + 0.05;
+    var_15 = var_15 + 0.05;
   }
 
   self func_82B1(var_3, 0);
@@ -425,42 +425,42 @@ func_3602(var_0) {
   var_8 = var_4 - var_5;
   var_9 = vectordot(var_7, var_8);
   var_1.var_DCCF["main"]["minigun"]["pitch_offset"] = distance(var_5, var_6);
-  var_0A = lib_0A1E::func_2356("aimset_minigun", "aim_2");
-  self give_attacker_kill_rewards(var_0A, 1, 0, 1, 0);
+  var_10 = lib_0A1E::func_2356("aimset_minigun", "aim_2");
+  self give_attacker_kill_rewards(var_10, 1, 0, 1, 0);
   wait(0.1);
   var_4 = func_3587(var_0);
   var_6 = func_3586(var_0);
-  var_0B = var_4 - var_6;
-  var_0C = var_0B[2];
-  var_1.var_DCCF["main"]["minigun"][2] = 0 - asin(var_0C / length(var_0B));
-  self clearanim(var_0A, 0);
-  var_0D = lib_0A1E::func_2356("aimset_minigun", "aim_8");
-  self give_attacker_kill_rewards(var_0D, 1, 0, 1, 0);
+  var_11 = var_4 - var_6;
+  var_12 = var_11[2];
+  var_1.var_DCCF["main"]["minigun"][2] = 0 - asin(var_12 / length(var_11));
+  self clearanim(var_10, 0);
+  var_13 = lib_0A1E::func_2356("aimset_minigun", "aim_8");
+  self give_attacker_kill_rewards(var_13, 1, 0, 1, 0);
   wait(0.1);
   var_4 = func_3587(var_0);
   var_6 = func_3586(var_0);
-  var_0B = var_4 - var_6;
-  var_0C = var_0B[2];
-  var_1.var_DCCF["main"]["minigun"][8] = 0 - asin(var_0C / length(var_0B));
-  self clearanim(var_0D, 0);
-  var_0E = anglestoright(self.angles);
-  var_0F = lib_0A1E::func_2356("aimset_minigun", "aim_4");
-  self give_attacker_kill_rewards(var_0F, 1, 0, 1, 0);
+  var_11 = var_4 - var_6;
+  var_12 = var_11[2];
+  var_1.var_DCCF["main"]["minigun"][8] = 0 - asin(var_12 / length(var_11));
+  self clearanim(var_13, 0);
+  var_14 = anglestoright(self.angles);
+  var_15 = lib_0A1E::func_2356("aimset_minigun", "aim_4");
+  self give_attacker_kill_rewards(var_15, 1, 0, 1, 0);
   wait(0.1);
   var_4 = func_3587(var_0);
   var_6 = func_3586(var_0);
-  var_0B = var_4 - var_6;
-  var_10 = vectordot(var_0B, var_0E) * -1;
-  var_1.var_DCCF["main"]["minigun"][4] = asin(var_10 / length(var_0B));
-  self clearanim(var_0F, 0);
+  var_11 = var_4 - var_6;
+  var_10 = vectordot(var_11, var_14) * -1;
+  var_1.var_DCCF["main"]["minigun"][4] = asin(var_10 / length(var_11));
+  self clearanim(var_15, 0);
   var_11 = lib_0A1E::func_2356("aimset_minigun", "aim_6");
   self give_attacker_kill_rewards(var_11, 1, 0, 1, 0);
   wait(0.1);
   var_4 = func_3587(var_0);
   var_6 = func_3586(var_0);
-  var_0B = var_4 - var_6;
-  var_10 = vectordot(var_0B, var_0E) * -1;
-  var_1.var_DCCF["main"]["minigun"][6] = asin(var_10 / length(var_0B));
+  var_11 = var_4 - var_6;
+  var_10 = vectordot(var_11, var_14) * -1;
+  var_1.var_DCCF["main"]["minigun"][6] = asin(var_10 / length(var_11));
   self clearanim(var_11, 0);
   var_12 = lib_0A1E::func_2356("aimset_minigun", "aim_knob_28");
   self clearanim(var_12, 0);
@@ -567,9 +567,9 @@ func_3582() {
         var_7 = scripts\engine\utility::flatten_vector(var_4 - self.origin);
         var_8 = vectortoyaw(var_6);
         var_9 = vectortoyaw(var_7);
-        var_0A = angleclamp180(var_8 + var_9 * 0.5);
-        var_0B = anglesToForward((0, var_0A, 0));
-        var_5 = self.origin + var_0B * 256;
+        var_10 = angleclamp180(var_8 + var_9 * 0.5);
+        var_11 = anglesToForward((0, var_10, 0));
+        var_5 = self.origin + var_11 * 256;
       }
 
       return var_5;
@@ -642,18 +642,18 @@ func_351E(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_9 = anglestoaxis(self.angles + (0, var_1 + var_8, 0));
-  var_0A = var_6 - var_7;
-  var_0B = vectordot(var_0A, var_9["right"]) * -1;
-  var_0C = vectordot(var_0A, var_9["up"]);
-  var_0D = var_0A - var_0C * var_9["up"];
-  var_0E = length(var_0D);
-  var_0F = var_0A + var_0B * var_9["right"];
-  var_10 = length(var_0F);
+  var_10 = var_6 - var_7;
+  var_11 = vectordot(var_10, var_9["right"]) * -1;
+  var_12 = vectordot(var_10, var_9["up"]);
+  var_13 = var_10 - var_12 * var_9["up"];
+  var_14 = length(var_13);
+  var_15 = var_10 + var_11 * var_9["right"];
+  var_10 = length(var_15);
   var_11 = clamp(func_3628("main", "minigun", "pitch_offset") / var_10, -1, 1);
   var_12 = 90 - acos(var_11);
-  var_13 = clamp(var_0B / var_0E, -1, 1);
+  var_13 = clamp(var_11 / var_14, -1, 1);
   var_4.var_B7A9 = asin(var_13) - func_3628("main", "minigun", "yaw_delta");
-  var_13 = clamp(var_0C / var_10, -1, 1);
+  var_13 = clamp(var_12 / var_10, -1, 1);
   var_4.var_B7A6 = -1 * asin(var_13) - func_3581(var_0, var_3) + var_12;
 }
 
@@ -676,8 +676,8 @@ func_3521(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(-1 < var_9 && var_9 < 1) {
-      var_0A = vectorcross(var_5, var_8);
-      if(var_0A[2] > 0) {
+      var_10 = vectorcross(var_5, var_8);
+      if(var_10[2] > 0) {
         var_7 = var_7 - acos(var_9);
       } else {
         var_7 = var_7 + acos(var_9);
@@ -693,10 +693,10 @@ func_3520(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = anglesToForward(var_6);
   var_8 = var_3 + var_4 * var_7;
   var_9 = var_1 - var_8;
-  var_0A = var_9[2];
-  var_0B = clamp(var_0A / length(var_9), -1, 1);
-  var_0C = asin(var_0B);
-  return -1 * var_0C;
+  var_10 = var_9[2];
+  var_11 = clamp(var_10 / length(var_9), -1, 1);
+  var_12 = asin(var_11);
+  return -1 * var_12;
 }
 
 func_3522(var_0) {
@@ -720,10 +720,10 @@ func_3522(var_0) {
 
   var_9 = func_3595("left");
   if(isDefined(var_9)) {
-    var_0A = func_3580("left", var_8);
-    var_0B = func_3628("left", "rail", "radius");
-    var_2.var_AB57 = func_3521("left", var_9, var_8, var_0A, var_0B);
-    var_2.var_AB56 = func_3520("left", var_9, var_8, var_0A, var_0B, var_2.var_AB57);
+    var_10 = func_3580("left", var_8);
+    var_11 = func_3628("left", "rail", "radius");
+    var_2.var_AB57 = func_3521("left", var_9, var_8, var_10, var_11);
+    var_2.var_AB56 = func_3520("left", var_9, var_8, var_10, var_11, var_2.var_AB57);
     if(self.var_13CC3["left"] == "minigun") {
       func_351E("left", var_8, var_0.var_AB57, var_0.var_AB56, var_2);
     } else if(self.var_13CC3["left"] == "rocket") {
@@ -738,12 +738,12 @@ func_3522(var_0) {
     var_2.var_AB56 = 0;
   }
 
-  var_0C = func_3595("right");
-  if(isDefined(var_0C)) {
-    var_0A = func_3580("right", var_8);
-    var_0B = func_3628("right", "rail", "radius");
-    var_2.var_E530 = func_3521("right", var_0C, var_8, var_0A, var_0B);
-    var_2.var_E52F = func_3520("right", var_0C, var_8, var_0A, var_0B, var_2.var_E530);
+  var_12 = func_3595("right");
+  if(isDefined(var_12)) {
+    var_10 = func_3580("right", var_8);
+    var_11 = func_3628("right", "rail", "radius");
+    var_2.var_E530 = func_3521("right", var_12, var_8, var_10, var_11);
+    var_2.var_E52F = func_3520("right", var_12, var_8, var_10, var_11, var_2.var_E530);
     if(self.var_13CC3["right"] == "minigun") {
       func_351E("right", var_8, var_0.var_E530, var_0.var_E52F, var_2);
     } else if(self.var_13CC3["right"] == "rocket") {
@@ -868,62 +868,62 @@ func_3607(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_1 = self getscoreinfocategory(var_0);
   }
 
-  var_0A = var_6 + var_1 * var_8;
-  var_0B = abs(var_4 - var_0A);
-  if(var_0B > var_5) {
-    var_0B = var_5;
+  var_10 = var_6 + var_1 * var_8;
+  var_11 = abs(var_4 - var_10);
+  if(var_11 > var_5) {
+    var_11 = var_5;
   }
 
-  if(-0.002 < var_0B && var_0B < 0.002) {
-    var_0B = 0;
+  if(-0.002 < var_11 && var_11 < 0.002) {
+    var_11 = 0;
     self func_82B0(var_0, var_9);
   }
 
-  var_0C = 1;
+  var_12 = 1;
   if(var_9 < var_1) {
-    var_0C = -1;
+    var_12 = -1;
   }
 
-  var_0D = func_3628(var_2, var_3, "rate");
-  self func_82B1(var_0, var_0C * var_0B / var_0D);
+  var_13 = func_3628(var_2, var_3, "rate");
+  self func_82B1(var_0, var_12 * var_11 / var_13);
 }
 
 func_360B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = 0;
-  var_0A = 0;
-  var_0B = 0;
-  var_0C = 0;
-  var_0D = 0.1;
+  var_10 = 0;
+  var_11 = 0;
+  var_12 = 0;
+  var_13 = 0.1;
   self give_attacker_kill_rewards(var_4, 0.01, 0, 1);
   if(var_0 > 0) {
-    var_0A = var_0 / func_3628("main", "minigun", 4);
-    var_0A = clamp(var_0A, 0, 1);
-    self clearanim(var_5, var_0D);
-    self give_attacker_kill_rewards(var_3, 1, var_0D);
-    self give_attacker_kill_rewards(var_8, var_0A, var_0D);
+    var_10 = var_0 / func_3628("main", "minigun", 4);
+    var_10 = clamp(var_10, 0, 1);
+    self clearanim(var_5, var_13);
+    self give_attacker_kill_rewards(var_3, 1, var_13);
+    self give_attacker_kill_rewards(var_8, var_10, var_13);
   } else if(var_0 < 0) {
-    var_0B = var_0 / func_3628("main", "minigun", 6);
-    var_0B = clamp(var_0B, 0, 1);
-    self clearanim(var_3, var_0D);
-    self give_attacker_kill_rewards(var_5, 1, var_0D);
-    self give_attacker_kill_rewards(var_8, var_0B, var_0D);
+    var_11 = var_0 / func_3628("main", "minigun", 6);
+    var_11 = clamp(var_11, 0, 1);
+    self clearanim(var_3, var_13);
+    self give_attacker_kill_rewards(var_5, 1, var_13);
+    self give_attacker_kill_rewards(var_8, var_11, var_13);
   }
 
   if(var_1 > 0) {
     var_9 = var_1 / func_3628("main", "minigun", 2);
     var_9 = clamp(var_9, 0, 1);
-    self clearanim(var_6, var_0D);
-    self give_attacker_kill_rewards(var_2, 1, var_0D);
-    self give_attacker_kill_rewards(var_7, var_9, var_0D);
+    self clearanim(var_6, var_13);
+    self give_attacker_kill_rewards(var_2, 1, var_13);
+    self give_attacker_kill_rewards(var_7, var_9, var_13);
     return;
   }
 
   if(var_1 < 0) {
-    var_0C = var_1 / func_3628("main", "minigun", 8);
-    var_0C = clamp(var_0C, 0, 1);
-    self clearanim(var_2, var_0D);
-    self give_attacker_kill_rewards(var_6, 1, var_0D);
-    self give_attacker_kill_rewards(var_7, var_0C, var_0D);
+    var_12 = var_1 / func_3628("main", "minigun", 8);
+    var_12 = clamp(var_12, 0, 1);
+    self clearanim(var_2, var_13);
+    self give_attacker_kill_rewards(var_6, 1, var_13);
+    self give_attacker_kill_rewards(var_7, var_12, var_13);
   }
 }
 
@@ -938,12 +938,12 @@ func_362C() {
   var_7 = lib_0A1E::func_2356("aimset_minigun", "aim_6");
   var_8 = lib_0A1E::func_2356("aimset_minigun", "aim_8");
   var_9 = lib_0A1E::func_2356("aimset_minigun", "aim_5");
-  var_0A = lib_0A1E::func_2356("aimset_minigun", "aim_knob_28");
-  var_0B = lib_0A1E::func_2356("aimset_minigun", "aim_knob_46");
-  var_0C = func_358A();
-  var_0D = 0;
-  var_0E = 0;
-  var_0F = 6;
+  var_10 = lib_0A1E::func_2356("aimset_minigun", "aim_knob_28");
+  var_11 = lib_0A1E::func_2356("aimset_minigun", "aim_knob_46");
+  var_12 = func_358A();
+  var_13 = 0;
+  var_14 = 0;
+  var_15 = 6;
   var_10 = spawnStruct();
   for(;;) {
     var_11 = scripts\asm\asm::func_231B(self.asm.var_11AC7, "aim");
@@ -971,7 +971,7 @@ func_362C() {
         var_10.var_AB56 = self getscoreinfocategory(var_2);
         var_10.var_E52F = self getscoreinfocategory(var_4);
         var_12 = func_3522(var_10);
-        self give_attacker_kill_rewards(var_0C, 1000, 0.1, 1);
+        self give_attacker_kill_rewards(var_12, 1000, 0.1, 1);
         func_3607(var_0, var_10.var_8E54, "main", "hex", var_12.var_8E55, 6 * self.var_1A48);
         if(isDefined(var_12.var_AB57)) {
           func_3607(var_1, var_10.var_AB57, "left", "rail", var_12.var_AB57, 8 * self.var_1A48);
@@ -992,33 +992,33 @@ func_362C() {
         if(isDefined(var_12.var_B7A9) && isDefined(var_12.var_B7A6)) {
           var_13 = var_12.var_B7A9;
           var_14 = var_12.var_B7A6;
-          var_15 = var_0D - var_13;
-          var_16 = var_0E - var_14;
-          if(var_15 > var_0F) {
-            var_13 = var_0D - var_0F;
-          } else if(var_15 < -1 * var_0F) {
-            var_13 = var_0D + var_0F;
+          var_15 = var_13 - var_13;
+          var_16 = var_14 - var_14;
+          if(var_15 > var_15) {
+            var_13 = var_13 - var_15;
+          } else if(var_15 < -1 * var_15) {
+            var_13 = var_13 + var_15;
           }
 
-          if(var_16 > var_0F) {
-            var_14 = var_0E - var_0F;
-          } else if(var_16 < -1 * var_0F) {
-            var_14 = var_0E + var_0F;
+          if(var_16 > var_15) {
+            var_14 = var_14 - var_15;
+          } else if(var_16 < -1 * var_15) {
+            var_14 = var_14 + var_15;
           }
 
-          func_360B(var_13, var_14, var_5, var_6, var_9, var_7, var_8, var_0A, var_0B);
-          var_0D = var_12.var_B7A9;
-          var_0E = var_12.var_B7A6;
+          func_360B(var_13, var_14, var_5, var_6, var_9, var_7, var_8, var_10, var_11);
+          var_13 = var_12.var_B7A9;
+          var_14 = var_12.var_B7A6;
         }
       } else {
         func_363C();
-        var_0D = 0;
-        var_0E = 0;
+        var_13 = 0;
+        var_14 = 0;
       }
     } else if(self.asm.var_11B08.btracking) {
       func_3630();
-      var_0D = 0;
-      var_0E = 0;
+      var_13 = 0;
+      var_14 = 0;
       self.asm.var_11B08.btracking = 0;
     }
 
@@ -1055,31 +1055,31 @@ func_35D6(var_0, var_1, var_2, var_3) {
   }
 
   var_9 = var_7.var_C241;
-  var_0A = [];
+  var_10 = [];
   if(isDefined(var_7.var_EF76)) {
-    foreach(var_0C in var_7.var_EF76) {
-      var_0A[var_0A.size] = var_0C;
+    foreach(var_12 in var_7.var_EF76) {
+      var_10[var_10.size] = var_12;
     }
   } else {
-    var_0A[0] = var_7.ent;
+    var_10[0] = var_7.ent;
   }
 
-  if(var_0A.size == 0) {
+  if(var_10.size == 0) {
     wait(1);
     scripts\asm\asm::asm_fireevent(var_1, "end");
     return;
   }
 
-  var_0E = ["top", "bottom"];
+  var_14 = ["top", "bottom"];
   if(isDefined(self._blackboard.scriptableparts)) {
-    var_0F = self._blackboard.scriptableparts[var_6 + "_arm"];
-    if(isDefined(var_0F)) {
-      if(var_0F.state == "dmg_upper") {
-        var_0E = ["bottom"];
+    var_15 = self._blackboard.scriptableparts[var_6 + "_arm"];
+    if(isDefined(var_15)) {
+      if(var_15.state == "dmg_upper") {
+        var_14 = ["bottom"];
       }
 
-      if(var_0F.state == "dmg_lower") {
-        var_0E = ["top"];
+      if(var_15.state == "dmg_lower") {
+        var_14 = ["top"];
       }
     }
   }
@@ -1089,18 +1089,18 @@ func_35D6(var_0, var_1, var_2, var_3) {
   var_12 = lib_0C08::func_FE67(var_7, 1);
   var_7.var_E5E0 = var_12;
   var_13 = [];
-  foreach(var_15, var_0C in var_0A) {
-    var_13[var_15] = var_0C.origin;
+  foreach(var_15, var_12 in var_10) {
+    var_13[var_15] = var_12.origin;
   }
 
-  thread func_35E9(var_6, var_0E[0], var_12, var_7.var_DCE8 * var_9, var_1 + "_finished");
+  thread func_35E9(var_6, var_14[0], var_12, var_7.var_DCE8 * var_9, var_1 + "_finished");
   self waittill("rocket_ready");
   self func_82EA(var_1, var_4, 1, var_2, 1);
   thread func_360F(var_1);
   var_16 = 0;
   var_17 = 0;
   while(var_16 < var_9) {
-    if(isDefined(var_7.var_E5E0) || isDefined(var_0A[var_17])) {
+    if(isDefined(var_7.var_E5E0) || isDefined(var_10[var_17])) {
       if(var_16 == 0) {
         if(var_16 < var_10.size) {
           func_35D3(var_1, "fire", 1);
@@ -1118,8 +1118,8 @@ func_35D6(var_0, var_1, var_2, var_3) {
       }
 
       var_19 = int(var_16 / 4) % 2;
-      var_1A = func_3593(var_6, var_0E[var_19]);
-      var_1B = func_3592(var_6, var_0E[var_19]);
+      var_1A = func_3593(var_6, var_14[var_19]);
+      var_1B = func_3592(var_6, var_14[var_19]);
       var_1C = anglesToForward(var_1B);
       if(var_6 == "left") {
         var_1D = self.secondaryweapon;
@@ -1132,23 +1132,23 @@ func_35D6(var_0, var_1, var_2, var_3) {
       }
 
       var_1E = magicbullet(var_1D, var_1A, var_13[var_17]);
-      playFXOnTag(level.var_7649["muz_c12_rocket"], self, func_3594(var_6, var_0E[var_19]));
+      playFXOnTag(level.var_7649["muz_c12_rocket"], self, func_3594(var_6, var_14[var_19]));
       if(isDefined(self.var_11B06)) {
         func_362D(var_1E);
       }
 
       if(isDefined(var_7.var_E5E0)) {
-        var_1E.var_1155F = var_0A[var_17];
+        var_1E.var_1155F = var_10[var_17];
         var_1E missile_settargetpos(var_13[var_17]);
-      } else if(isDefined(var_0A[var_17])) {
-        var_1E.var_1155F = var_0A[var_17];
-        var_1E missile_settargetent(var_0A[var_17]);
+      } else if(isDefined(var_10[var_17])) {
+        var_1E.var_1155F = var_10[var_17];
+        var_1E missile_settargetent(var_10[var_17]);
       }
 
       var_16++;
     }
 
-    var_17 = var_17 + 1 % var_0A.size;
+    var_17 = var_17 + 1 % var_10.size;
   }
 
   wait(3);
@@ -1163,19 +1163,19 @@ func_3635(var_0, var_1, var_2) {
   var_7 = self gettagorigin(var_0);
   var_8 = self gettagangles(var_0);
   var_9 = invertangles(var_8);
-  var_0A = combineangles(var_8, (0, 0, -90 * 1 - var_2));
-  for(var_0B = 0; var_0B < var_3; var_0B++) {
-    var_0C = self.var_E5DB[var_0B];
-    var_0D = var_0B + 0.5 * var_4;
-    var_0E = var_6 * (0, cos(var_0D), sin(var_0D));
-    var_0F = var_7 + rotatevector(var_0E, var_8);
-    var_10 = var_5 * (-1 * sin(var_0D), cos(var_0D), 0);
-    var_11 = vectortoangles(var_1 - var_0F);
+  var_10 = combineangles(var_8, (0, 0, -90 * 1 - var_2));
+  for(var_11 = 0; var_11 < var_3; var_11++) {
+    var_12 = self.var_E5DB[var_11];
+    var_13 = var_11 + 0.5 * var_4;
+    var_14 = var_6 * (0, cos(var_13), sin(var_13));
+    var_15 = var_7 + rotatevector(var_14, var_8);
+    var_10 = var_5 * (-1 * sin(var_13), cos(var_13), 0);
+    var_11 = vectortoangles(var_1 - var_15);
     var_12 = combineangles(var_9, var_11);
     var_13 = anglelerpquatfrac(var_10, var_12, var_2);
-    var_13 = combineangles(var_0A, var_13);
-    var_0C.origin = var_0F;
-    var_0C.angles = var_13;
+    var_13 = combineangles(var_10, var_13);
+    var_12.origin = var_15;
+    var_12.angles = var_13;
   }
 }
 
@@ -1186,32 +1186,32 @@ func_35E9(var_0, var_1, var_2, var_3, var_4) {
   var_7 = 360 / var_6;
   var_8 = 45;
   var_9 = 9;
-  var_0A = 1;
-  var_0B = var_3 / 1000;
-  var_0C = var_0A + level.var_35EC + var_0B;
-  createnavrepulsor("c12_rocket", var_0C, var_2, 256, 1);
+  var_10 = 1;
+  var_11 = var_3 / 1000;
+  var_12 = var_10 + level.var_35EC + var_11;
+  createnavrepulsor("c12_rocket", var_12, var_2, 256, 1);
   self notify("rocket_targeting");
   lib_0A16::func_17BA("targeting");
   self func_857A("target", var_2);
   self.var_E5DB = [];
-  for(var_0D = 0; var_0D < var_6; var_0D++) {
-    var_0E = spawn("script_model", (0, 0, 0));
-    self.var_E5DB[var_0D] = var_0E;
-    var_0E setModel("tag_flash");
-    var_0E func_81D6();
-    var_0E setotherent(self);
-    var_0E func_8575(self.secondaryweapon);
+  for(var_13 = 0; var_13 < var_6; var_13++) {
+    var_14 = spawn("script_model", (0, 0, 0));
+    self.var_E5DB[var_13] = var_14;
+    var_14 setModel("tag_flash");
+    var_14 func_81D6();
+    var_14 setotherent(self);
+    var_14 func_8575(self.secondaryweapon);
   }
 
   func_3635(var_5, var_2, 0);
-  foreach(var_0E in self.var_E5DB) {
-    var_0E linkto(self, var_5);
+  foreach(var_14 in self.var_E5DB) {
+    var_14 linkto(self, var_5);
   }
 
-  wait(var_0A);
+  wait(var_10);
   wait(level.var_35EC);
   self notify("rocket_ready");
-  var_11 = int(var_0B * 20);
+  var_11 = int(var_11 * 20);
   while(var_11 > 0) {
     if(!isDefined(self.var_E5DB)) {
       return;
@@ -1287,34 +1287,34 @@ func_35D5(var_0, var_1, var_2, var_3) {
   var_7 = var_5.var_13CC3[var_6];
   var_8 = var_7.var_32BC;
   var_9 = var_7.var_DCE8;
-  var_0A = 1.5;
-  self give_attacker_kill_rewards(var_4, 1, var_2, var_0A);
-  var_0B = lib_0A1E::func_2356(var_1, "recoil");
-  self give_attacker_kill_rewards(var_0B, 1, var_2, 1);
-  var_0C = gettime();
-  var_0D = var_0C;
-  var_0E = var_0C + var_9;
+  var_10 = 1.5;
+  self give_attacker_kill_rewards(var_4, 1, var_2, var_10);
+  var_11 = lib_0A1E::func_2356(var_1, "recoil");
+  self give_attacker_kill_rewards(var_11, 1, var_2, 1);
+  var_12 = gettime();
+  var_13 = var_12;
+  var_14 = var_12 + var_9;
   self.var_164D[var_0].var_4C1A = var_7;
   self playSound("weap_c12_minigun_spinup");
   self playLoopSound("weap_c12_minigun_fire");
-  var_0F = lib_0C08::func_9F7B(var_6);
-  while(var_0C < var_8) {
-    if(func_3615(var_6, var_7, var_0F)) {
+  var_15 = lib_0C08::func_9F7B(var_6);
+  while(var_12 < var_8) {
+    if(func_3615(var_6, var_7, var_15)) {
       func_3509(var_7);
       break;
     }
 
-    if(var_0C >= var_0E) {
+    if(var_12 >= var_14) {
       if(lib_0C08::func_8BEC(var_7)) {
-        var_10 = var_8 - var_0C < 0.05;
-        func_35C5(var_6, var_10, var_0F);
+        var_10 = var_8 - var_12 < 0.05;
+        func_35C5(var_6, var_10, var_15);
       }
 
-      var_0E = var_0E + var_9;
+      var_14 = var_14 + var_9;
     }
 
     wait(0.05);
-    var_0C = gettime();
+    var_12 = gettime();
   }
 }
 
@@ -1334,20 +1334,20 @@ func_35C5(var_0, var_1, var_2) {
   var_8 = 1;
   var_9 = 0;
   if(var_7.var_29A1 && !var_2) {
-    var_0A = undefined;
+    var_10 = undefined;
     if(isDefined(var_7.ent)) {
-      var_0A = var_7.ent;
+      var_10 = var_7.ent;
     } else if(isDefined(var_7.var_EF76)) {
-      var_0A = var_7.var_EF76[0];
+      var_10 = var_7.var_EF76[0];
     }
 
-    self func_8494(var_4, var_5, var_6, var_8, var_0A, var_9, var_1, var_3);
+    self func_8494(var_4, var_5, var_6, var_8, var_10, var_9, var_1, var_3);
     return;
   }
 
-  var_0B = func_3595(var_0, var_2);
-  var_0C = bulletspread(var_5, var_0B, 4);
-  self func_8494(var_4, var_5, var_6, var_8, var_0C, var_9, var_1, var_3);
+  var_11 = func_3595(var_0, var_2);
+  var_12 = bulletspread(var_5, var_11, 4);
+  self func_8494(var_4, var_5, var_6, var_8, var_12, var_9, var_1, var_3);
 }
 
 func_3615(var_0, var_1, var_2) {

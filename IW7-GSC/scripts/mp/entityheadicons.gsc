@@ -12,20 +12,20 @@ init() {
   if(level.multiteambased) {
     foreach(var_1 in level.teamnamelist) {
       var_2 = "entity_headicon_" + var_1;
-      game[var_2] = scripts\mp\teams::func_BD71(var_1);
+      game[var_2] = ::scripts\mp\teams::func_BD71(var_1);
       precacheshader(game[var_2]);
     }
 
     return;
   }
 
-  game["entity_headicon_allies"] = scripts\mp\teams::func_81B0("allies");
-  game["entity_headicon_axis"] = scripts\mp\teams::func_81B0("axis");
+  game["entity_headicon_allies"] = ::scripts\mp\teams::func_81B0("allies");
+  game["entity_headicon_axis"] = ::scripts\mp\teams::func_81B0("axis");
   precacheshader(game["entity_headicon_allies"]);
   precacheshader(game["entity_headicon_axis"]);
 }
 
-setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
+setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(scripts\mp\utility::isgameparticipant(var_0) && !isplayer(var_0)) {
     return;
   }
@@ -54,17 +54,17 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
     var_9 = 0;
   }
 
-  if(!isDefined(var_0A)) {
-    var_0A = 1;
+  if(!isDefined(var_10)) {
+    var_10 = 1;
   }
 
   if(!isplayer(var_0) && var_0 == "none") {
-    foreach(var_0D, var_0C in self.entityheadicons) {
-      if(isDefined(var_0C)) {
-        var_0C destroy();
+    foreach(var_13, var_12 in self.entityheadicons) {
+      if(isDefined(var_12)) {
+        var_12 destroy();
       }
 
-      self.entityheadicons[var_0D] = undefined;
+      self.entityheadicons[var_13] = undefined;
     }
 
     return;
@@ -87,8 +87,8 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
       }
     }
 
-    var_0C = newclienthudelem(var_3);
-    self.entityheadicons[var_2.guid] = var_0D;
+    var_12 = newclienthudelem(var_3);
+    self.entityheadicons[var_2.guid] = var_13;
   } else {
     if(isDefined(self.entityheadicons[var_3])) {
       self.entityheadicons[var_3] destroy();
@@ -99,20 +99,20 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
       return;
     }
 
-    foreach(var_0E in self.entityheadicons) {
+    foreach(var_14 in self.entityheadicons) {
       if(var_10 == "axis" || var_10 == "allies") {
         continue;
       }
 
-      var_0F = scripts\mp\utility::getplayerforguid(var_10);
-      if(var_0F.team == var_1) {
+      var_15 = scripts\mp\utility::getplayerforguid(var_10);
+      if(var_15.team == var_1) {
         self.entityheadicons[var_10] destroy();
         self.entityheadicons[var_10] = undefined;
       }
     }
 
-    var_0C = newteamhudelem(var_1);
-    self.entityheadicons[var_1] = var_0C;
+    var_12 = newteamhudelem(var_1);
+    self.entityheadicons[var_1] = var_12;
   }
 
   if(!isDefined(var_4) || !isDefined(var_5)) {
@@ -120,24 +120,24 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
     var_5 = 10;
   }
 
-  var_0C.archived = var_6;
-  var_0C.x = self.origin[0] + var_3[0];
-  var_0C.y = self.origin[1] + var_3[1];
-  var_0C.var_3A6 = self.origin[2] + var_3[2];
-  var_0C.alpha = 0.85;
-  var_0C setshader(var_2, var_4, var_5);
-  var_0C setwaypoint(var_8, var_9, var_0A, var_0B);
-  var_0C thread keeppositioned(self, var_3, var_7);
+  var_12.archived = var_6;
+  var_12.x = self.origin[0] + var_3[0];
+  var_12.y = self.origin[1] + var_3[1];
+  var_12.var_3A6 = self.origin[2] + var_3[2];
+  var_12.alpha = 0.85;
+  var_12 setshader(var_2, var_4, var_5);
+  var_12 setwaypoint(var_8, var_9, var_10, var_11);
+  var_12 thread keeppositioned(self, var_3, var_7);
   thread destroyiconsondeath();
   if(isplayer(var_1)) {
-    var_0C thread destroyonownerdisconnect(var_1);
+    var_12 thread destroyonownerdisconnect(var_1);
   }
 
   if(isplayer(self)) {
-    var_0C thread destroyonownerdisconnect(self);
+    var_12 thread destroyonownerdisconnect(self);
   }
 
-  return var_0C;
+  return var_12;
 }
 
 destroyonownerdisconnect(var_0) {

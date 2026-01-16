@@ -93,27 +93,27 @@ slam_executeinternal(var_0, var_1, var_2, var_3) {
 
   thread slam_physicspulse(var_1);
   var_9 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  foreach(var_0B in var_9) {
-    if(!isDefined(var_0B) || var_0B == var_0 || !scripts\cp\utility::isreallyalive(var_0B)) {
+  foreach(var_11 in var_9) {
+    if(!isDefined(var_11) || var_11 == var_0 || !scripts\cp\utility::isreallyalive(var_11)) {
       continue;
     }
 
-    var_0C = undefined;
-    var_0D = distancesquared(var_1, var_0B.origin);
-    if(var_0D <= var_6) {
-      var_0C = 250;
-    } else if(var_0D <= var_7) {
-      var_0C = 100;
+    var_12 = undefined;
+    var_13 = distancesquared(var_1, var_11.origin);
+    if(var_13 <= var_6) {
+      var_12 = 250;
+    } else if(var_13 <= var_7) {
+      var_12 = 100;
     } else {
       continue;
     }
 
-    var_0B scripts\cp\cp_weapon::shellshockondamage("MOD_EXPLOSIVE", var_0C);
-    if(var_0C >= var_0B.health) {
-      var_0B.customdeath = 1;
+    var_11 scripts\cp\cp_weapon::shellshockondamage("MOD_EXPLOSIVE", var_12);
+    if(var_12 >= var_11.health) {
+      var_11.customdeath = 1;
     }
 
-    var_0B dodamage(var_0C, var_1, var_0, var_0, "MOD_CRUSH");
+    var_11 dodamage(var_12, var_1, var_0, var_0, "MOD_CRUSH");
   }
 
   wait(0.5);
@@ -127,7 +127,7 @@ slam_physicspulse(var_0) {
 }
 
 slam_delent(var_0, var_1) {
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect", "slam_finished");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect", "slam_finished");
   scripts\engine\utility::waitframe();
   if(isDefined(var_1)) {
     var_1 delete();

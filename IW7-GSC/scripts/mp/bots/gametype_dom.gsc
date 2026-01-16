@@ -36,7 +36,7 @@ bot_is_assigned_location(var_0) {
 
 crate_can_use_smartglass(var_0) {
   if(isagent(self)) {
-    if(!isDefined(level.smartglass_commander) || self.triggerportableradarping != level.smartglass_commander) {
+    if(!isDefined(level.smartglass_commander) || self.owner != level.smartglass_commander) {
       return crate_can_use();
     }
 
@@ -182,7 +182,7 @@ setup_bot_dom() {
         var_1[var_3.teleport_zone] = [];
       }
 
-      var_1[var_3.teleport_zone] = scripts\engine\utility::array_add(var_1[var_3.teleport_zone], var_3);
+      var_1[var_3.teleport_zone] = ::scripts\engine\utility::array_add(var_1[var_3.teleport_zone], var_3);
     }
 
     foreach(var_7, var_6 in var_1) {
@@ -264,10 +264,10 @@ add_missing_nodes(var_0) {
     }
 
     var_1 = getnodesinradius(var_0.origin, var_4, 0, 100);
-    foreach(var_0A in var_1) {
-      if(!ispointinvolume(var_0A.origin, var_0)) {
-        if(ispointinvolume(var_0A.origin + (0, 0, 40), var_0) || ispointinvolume(var_0A.origin + (0, 0, 80), var_0) || ispointinvolume(var_0A.origin + (0, 0, 120), var_0)) {
-          var_0.nodes = scripts\engine\utility::array_add(var_0.nodes, var_0A);
+    foreach(var_10 in var_1) {
+      if(!ispointinvolume(var_10.origin, var_0)) {
+        if(ispointinvolume(var_10.origin + (0, 0, 40), var_0) || ispointinvolume(var_10.origin + (0, 0, 80), var_0) || ispointinvolume(var_10.origin + (0, 0, 120), var_0)) {
+          var_0.nodes = scripts\engine\utility::array_add(var_0.nodes, var_10);
         }
       }
     }
@@ -458,35 +458,35 @@ bot_choose_flag() {
     }
 
     if(var_3 && !has_override_flag_targets()) {
-      var_0A = get_num_allies_capturing_flag(var_9[0], 1);
-      if(var_0A < 2) {
-        var_0B = 0;
+      var_10 = get_num_allies_capturing_flag(var_9[0], 1);
+      if(var_10 < 2) {
+        var_11 = 0;
       } else {
-        var_0C = 20;
-        var_0D = 65;
-        var_0E = 15;
+        var_12 = 20;
+        var_13 = 65;
+        var_14 = 15;
         if(self.strategy_level == 0) {
-          var_0C = 50;
-          var_0D = 25;
-          var_0E = 25;
+          var_12 = 50;
+          var_13 = 25;
+          var_14 = 25;
         }
 
-        var_0F = randomint(100);
-        if(var_0F < var_0C) {
-          var_0B = 0;
-        } else if(var_0F < var_0C + var_0D) {
-          var_0B = 1;
+        var_15 = randomint(100);
+        if(var_15 < var_12) {
+          var_11 = 0;
+        } else if(var_15 < var_12 + var_13) {
+          var_11 = 1;
         } else {
-          var_0B = 2;
+          var_11 = 2;
         }
       }
 
       var_10 = undefined;
-      if(var_0B == 0) {
+      if(var_11 == 0) {
         var_10 = "critical";
       }
 
-      capture_flag(var_9[var_0B], var_10);
+      capture_flag(var_9[var_11], var_10);
       return;
     }
 
@@ -511,10 +511,10 @@ bot_choose_flag() {
       }
 
       if(self.strategy_level == 0) {
-        var_0F = randomint(100);
-        if(var_0F < 50) {
+        var_15 = randomint(100);
+        if(var_15 < 50) {
           var_3 = var_10[0];
-        } else if(var_0F < 50 + 50 / var_10.size - 1) {
+        } else if(var_15 < 50 + 50 / var_10.size - 1) {
           var_3 = var_10[1];
         } else {
           var_3 = var_10[2];
@@ -539,8 +539,8 @@ bot_choose_flag() {
           }
         }
 
-        var_0F = randomint(100);
-        if(var_0F < var_15[0]) {
+        var_15 = randomint(100);
+        if(var_15 < var_15[0]) {
           var_3 = var_10[0];
         } else {
           var_3 = var_10[1];
@@ -571,10 +571,10 @@ bot_choose_flag() {
           }
         }
 
-        var_0F = randomint(100);
-        if(var_0F < var_15[0]) {
+        var_15 = randomint(100);
+        if(var_15 < var_15[0]) {
           var_3 = var_10[0];
-        } else if(var_0F < var_15[0] + var_15[1]) {
+        } else if(var_15 < var_15[0] + var_15[1]) {
           var_3 = var_10[1];
         } else {
           var_3 = var_10[2];
@@ -601,8 +601,8 @@ bot_choose_flag() {
       } else if(var_18.size == 2) {
         var_1C = get_other_flag(var_18[0], var_18[1]);
         var_1D = scripts\engine\utility::get_array_of_closest(var_1C.origin, var_18);
-        var_0F = randomint(100);
-        if(var_0F < 70) {
+        var_15 = randomint(100);
+        if(var_15 < 70) {
           var_3 = var_1D[0];
         } else {
           var_3 = var_1D[1];
@@ -613,7 +613,7 @@ bot_choose_flag() {
     }
   }
 
-  if(var_0B) {
+  if(var_11) {
     capture_flag(var_3);
     return;
   }
@@ -768,9 +768,9 @@ monitor_flag_status(var_0) {
         }
       }
 
-      foreach(var_0A in var_8) {
-        if(var_0A != var_0 && bot_allow_to_capture_flag(var_0A)) {
-          if(distancesquared(self.origin, var_0A.origin) < var_3) {
+      foreach(var_10 in var_8) {
+        if(var_10 != var_0 && bot_allow_to_capture_flag(var_10)) {
+          if(distancesquared(self.origin, var_10.origin) < var_3) {
             var_5 = 1;
           }
         }
@@ -778,21 +778,21 @@ monitor_flag_status(var_0) {
 
       if(self istouching(var_0) && var_0.useobj.userate <= 0) {
         if(self bothasscriptgoal()) {
-          var_0C = self botgetscriptgoal();
-          var_0D = self botgetscriptgoalradius();
-          if(distancesquared(self.origin, var_0C) < squared(var_0D)) {
-            var_0E = self getnearestnode();
-            if(isDefined(var_0E)) {
-              var_0F = undefined;
+          var_12 = self botgetscriptgoal();
+          var_13 = self botgetscriptgoalradius();
+          if(distancesquared(self.origin, var_12) < squared(var_13)) {
+            var_14 = self getnearestnode();
+            if(isDefined(var_14)) {
+              var_15 = undefined;
               foreach(var_11 in var_0.nodes) {
-                if(!nodesvisible(var_11, var_0E)) {
-                  var_0F = var_11.origin;
+                if(!nodesvisible(var_11, var_14)) {
+                  var_15 = var_11.origin;
                   break;
                 }
               }
 
-              if(isDefined(var_0F)) {
-                self.defense_investigate_specific_point = var_0F;
+              if(isDefined(var_15)) {
+                self.defense_investigate_specific_point = var_15;
                 self notify("defend_force_node_recalculation");
               }
             }

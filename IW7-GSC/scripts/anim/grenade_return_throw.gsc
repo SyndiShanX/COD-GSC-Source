@@ -17,8 +17,8 @@ main() {
   self animmode("zonly_physics");
   var_0 = undefined;
   var_1 = 1000;
-  if(isDefined(self.isnodeoccupied)) {
-    var_1 = distance(self.origin, self.isnodeoccupied.origin);
+  if(isDefined(self.enemy)) {
+    var_1 = distance(self.origin, self.enemy.origin);
   }
 
   var_2 = [];
@@ -38,7 +38,7 @@ main() {
   self func_82E4("throwanim", var_0, % body, 1, 0.3);
   var_4 = animhasnotetrack(var_0, "grenade_left") || animhasnotetrack(var_0, "grenade_right");
   if(var_4) {
-    scripts\anim\shared::placeweaponon(self.var_394, "left");
+    scripts\anim\shared::placeweaponon(self.weapon, "left");
     thread func_DB3A();
     thread func_C162("throwanim", "grenade_left");
     thread func_C162("throwanim", "grenade_right");
@@ -59,7 +59,7 @@ main() {
   wait(1);
   if(var_4) {
     self notify("put_weapon_back_in_right_hand");
-    scripts\anim\shared::placeweaponon(self.var_394, "right");
+    scripts\anim\shared::placeweaponon(self.weapon, "right");
   }
 }
 
@@ -73,7 +73,7 @@ func_DB3A() {
   self endon("death");
   self endon("put_weapon_back_in_right_hand");
   self waittill("killanimscript");
-  scripts\anim\shared::placeweaponon(self.var_394, "right");
+  scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
 func_C162(var_0, var_1) {

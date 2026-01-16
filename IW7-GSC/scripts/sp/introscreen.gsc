@@ -446,9 +446,9 @@ func_C369(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(var_7 = 0; var_7 < var_6; var_7++) {
     var_8 = func_DCB1(var_0, var_1, var_2);
     var_9 = func_DCB1(var_3, var_4, var_5);
-    var_0A[0] = [var_8, var_9];
-    var_0A[1] = [var_8 - 10, var_9];
-    thread func_915B(var_0A);
+    var_10[0] = [var_8, var_9];
+    var_10[1] = [var_8 - 10, var_9];
+    thread func_915B(var_10);
     wait(randomfloatrange(0.5, 1));
   }
 }
@@ -981,9 +981,9 @@ func_111A0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 setpulsefx(var_6, -15536, 700);
   var_8 = [var_7];
   var_9 = func_5F33(var_7, 2);
-  foreach(var_0B in var_9) {
-    var_0B.alpha = 0;
-    var_0B thread func_9130(randomfloatrange(0.5, 1.5), randomfloatrange(0.05, 0.2), var_1 - 0.5);
+  foreach(var_11 in var_9) {
+    var_11.alpha = 0;
+    var_11 thread func_9130(randomfloatrange(0.5, 1.5), randomfloatrange(0.05, 0.2), var_1 - 0.5);
   }
 
   var_7 thread func_DB9D(0);
@@ -1083,17 +1083,17 @@ func_A03D(var_0) {
   var_2 thread func_2BA1(3);
   var_3 thread func_2BA1(3);
   wait(0.3);
-  var_0A = 0.4;
-  var_3 moveovertime(var_0A);
+  var_10 = 0.4;
+  var_3 moveovertime(var_10);
   var_3.x = var_3.var_C39F;
-  var_0A = var_0A / var_4.size;
-  for(var_0B = var_4.size - 1; var_0B >= 0; var_0B--) {
-    var_8 = var_4[var_0B];
-    var_8 fadeovertime(var_4.size - var_0B * var_0A);
+  var_10 = var_10 / var_4.size;
+  for(var_11 = var_4.size - 1; var_11 >= 0; var_11--) {
+    var_8 = var_4[var_11];
+    var_8 fadeovertime(var_4.size - var_11 * var_10);
     var_8.alpha = 0;
   }
 
-  wait(var_0A + 0.3);
+  wait(var_10 + 0.3);
   var_2 thread func_2BA0(3);
   var_3 thread func_2BA0(3);
   wait(1);

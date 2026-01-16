@@ -56,8 +56,9 @@ func_13A73() {
       }
 
       scripts\mp\supers::refundsuper();
-    } else if(isDefined(var_0.var_10DE6) && isDefined(var_0.var_4E59))
+    } else if(isDefined(var_0.var_10DE6) && isDefined(var_0.var_4E59)) {
       scripts\mp\supers::refundsuper();
+    }
     else if(isDefined(var_0.var_637B)) {
       self notify("teleport_success");
       func_6391();

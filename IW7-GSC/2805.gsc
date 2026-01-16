@@ -260,8 +260,9 @@ func_12F37() {
     if(isDefined(game["BalanceTeamsNextRound"])) {
       level balanceteams();
       game["BalanceTeamsNextRound"] = undefined;
-    } else if(!func_81A2())
+    } else if(!func_81A2()) {
       game["BalanceTeamsNextRound"] = 1;
+    }
   } else {
     level endon("game_ended");
 
@@ -570,8 +571,9 @@ func_FADC() {
     var_1 = getplayermodelindex();
     self.bodyindex = var_1;
     var_2 = clearclienttriggeraudiozone(var_1);
-  } else
+  } else {
     self give_explosive_touch_on_revived("vestLight");
+  }
 
   self.voice = level.dropscavengerfordeath[self.team];
 
@@ -742,8 +744,9 @@ checkforafk() {
         if(self.team == "axis") {
           var_1 = 1;
         }
-      } else
+      } else {
         var_1 = 1;
+      }
     }
   }
 

@@ -138,7 +138,7 @@ func_13808(var_0, var_1, var_2) {
   var_3 waittill("returned", var_4, var_5, var_6, var_7);
   var_3 notify("die");
   var_8 = spawnStruct();
-  var_8.var_394 = var_4;
+  var_8.weapon = var_4;
   var_8.location = var_5;
   var_8.angles = var_6;
   var_8.string = var_7;

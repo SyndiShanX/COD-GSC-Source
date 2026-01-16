@@ -28,7 +28,7 @@ func_DE0C() {
   var_1 = 0;
   var_2 = 120;
   for(;;) {
-    self waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+    self waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     if(isDefined(var_4) && isai(var_4)) {
       continue;
     }
@@ -37,7 +37,7 @@ func_DE0C() {
       continue;
     }
 
-    if(isDefined(var_0C) && scripts\engine\utility::weaponclass(var_0C) == "sniper") {
+    if(isDefined(var_12) && scripts\engine\utility::weaponclass(var_12) == "sniper") {
       var_3 = 999999;
       var_0 = 0;
     }
@@ -64,21 +64,21 @@ func_DE0C() {
         self.var_C528 = 1;
       }
 
-      var_0D = var_2 / 50;
-      var_0 = var_0 * var_0D;
+      var_13 = var_2 / 50;
+      var_0 = var_0 * var_13;
       thread lib_0E1D::func_2835(var_0);
     }
 
     if(isDefined(var_5)) {
-      var_0E = length(var_5);
-      if(var_0E > 20) {
-        var_0F = vectornormalize(var_5);
+      var_14 = length(var_5);
+      if(var_14 > 20) {
+        var_15 = vectornormalize(var_5);
         var_10 = 20;
         if(isDefined(var_7) && var_7 == "MOD_IMPACT") {
           var_10 = 3;
         }
 
-        var_5 = var_0F * var_10;
+        var_5 = var_15 * var_10;
       }
 
       self physicslaunchserver(var_6, var_5 * 1000);
@@ -146,61 +146,61 @@ func_DE0D() {
   }
 
   var_9 = scripts\sp\utility::maymovefrompointtopoint();
-  foreach(var_0B in var_9) {
-    var_0C = 400;
-    var_0D = 370;
-    if(isDefined(var_0B.script_team) && var_0B.script_team == "allies") {
+  foreach(var_11 in var_9) {
+    var_12 = 400;
+    var_13 = 370;
+    if(isDefined(var_11.script_team) && var_11.script_team == "allies") {
       continue;
     }
 
-    var_0E = distance(self.origin, var_0B.origin);
-    var_0E = 0;
-    if(var_0E <= 25000) {
-      var_6 = var_0E / 250 * 100;
-      var_0C = var_0C - var_6 * var_0D;
+    var_14 = distance(self.origin, var_11.origin);
+    var_14 = 0;
+    if(var_14 <= 25000) {
+      var_6 = var_14 / 250 * 100;
+      var_12 = var_12 - var_6 * var_13;
       if(getdvarint("barrel_debug")) {
-        iprintln("BARREL DID " + var_0C + " TO VEH");
+        iprintln("BARREL DID " + var_12 + " TO VEH");
       }
 
-      var_0B dodamage(var_0C, self.origin, self, self, "MOD_EXPLOSIVE");
+      var_11 dodamage(var_12, self.origin, self, self, "MOD_EXPLOSIVE");
     }
   }
 
   var_10 = getaiarray("axis");
   foreach(var_12 in var_10) {
-    var_0C = 400;
-    var_0D = 370;
+    var_12 = 400;
+    var_13 = 370;
     if(!isDefined(var_12.subclass)) {
       continue;
     }
 
     if(var_12.subclass == "C6") {
-      var_0C = var_0C + 20;
+      var_12 = var_12 + 20;
     }
 
     var_13 = distance(self.origin, var_12.origin);
     if(var_13 <= 250) {
       var_6 = var_13 / 250;
-      var_0C = var_0C - var_6 * var_0D;
+      var_12 = var_12 - var_6 * var_13;
       if(getdvarint("barrel_debug")) {
-        iprintln("BARREL DID " + var_0C + " TO AI");
+        iprintln("BARREL DID " + var_12 + " TO AI");
       }
 
-      var_12 dodamage(var_0C, self.origin, self, self, "MOD_EXPLOSIVE");
+      var_12 dodamage(var_12, self.origin, self, self, "MOD_EXPLOSIVE");
     }
   }
 
   var_15 = distance(self.origin, level.player.origin);
   if(var_15 <= 350) {
     var_6 = var_15 / 350;
-    var_0D = 420;
-    var_0C = 420 - var_6 * var_0D;
+    var_13 = 420;
+    var_12 = 420 - var_6 * var_13;
     if(getdvarint("barrel_debug")) {
-      iprintln("BARREL DID " + var_0C + " TO PLAYER");
+      iprintln("BARREL DID " + var_12 + " TO PLAYER");
     }
 
     if(!level.player scripts\sp\utility::func_65DB("player_retract_shield_active")) {
-      level.player dodamage(var_0C, self.origin, self, self, "MOD_EXPLOSIVE");
+      level.player dodamage(var_12, self.origin, self, self, "MOD_EXPLOSIVE");
     }
   }
 

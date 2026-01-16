@@ -310,8 +310,9 @@ func_D185() {
         var_3 = 1;
         var_4 = 0;
       }
-    } else if(self.var_72A8 == "fly" && var_6 != self.var_72A8)
+    } else if(self.var_72A8 == "fly" && var_6 != self.var_72A8) {
       var_3 = 1;
+    }
     else if(self.var_72A8 == "hover" && var_6 != self.var_72A8) {
       var_4 = 1;
     } else if(self.var_72A8 == "land" && var_6 != self.var_72A8) {
@@ -426,8 +427,9 @@ func_D14F() {
       func_D183();
       wait 0.3;
       thread func_D177();
-    } else
+    } else {
       func_D150();
+    }
 
     while(level.player secondaryoffhandbuttonpressed()) {
       wait 0.05;
@@ -781,8 +783,9 @@ func_D14C() {
       var_26 = length(var_14 - var_22);
       var_26 = scripts\sp\math::func_C097(10, 80, var_26);
       var_26 = var_26 * var_4 * var_25;
-    } else
+    } else {
       var_26 = 0;
+    }
 
     if(var_26 > var_5) {
       var_27 = var_8;
@@ -1981,8 +1984,9 @@ func_104A9() {
       var_21 = var_21 * var_13;
       var_22 = var_22 * var_13;
       level.var_A056.var_EBAD = var_13;
-    } else
+    } else {
       level.var_A056.var_EBAD = 1;
+    }
 
     if(level.var_A056.var_1C6D) {
       var_19 = var_19 * var_14;
@@ -2274,8 +2278,9 @@ func_D16E() {
         } else {
           level.var_D127.var_C2CB = 0;
         }
-      } else
+      } else {
         level.var_D127.var_C2CB = 0;
+      }
     }
 
     wait 0.05;
@@ -2577,8 +2582,9 @@ func_D18B() {
             }
 
             var_0 func_E061(var_3);
-          } else
+          } else {
             var_0 func_E061(var_0.var_AEDF.var_3A5C);
+          }
         } else if(var_1) {
           if(isDefined(var_0.var_AEDF)) {
             var_0 func_E061(var_0.var_AEDF.var_3A5C);
@@ -2679,8 +2685,9 @@ func_D174() {
         var_11 = scripts\sp\math::func_C097(0.96, 0.995, var_10);
         var_12 = 1 - scripts\sp\math::func_C097(0, 30000, var_9);
         var_7.var_377E = var_11 * var_12;
-      } else
+      } else {
         var_7.var_377E = 0;
+      }
 
       if(var_7.var_377E > var_5) {
         var_4 = var_7;
@@ -3376,8 +3383,9 @@ func_1423() {
     }
 
     return [var_25, var_26];
-  } else
+  } else {
     return [var_17[0], var_18[0]];
+  }
 }
 
 func_1422() {

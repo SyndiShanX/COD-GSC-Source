@@ -315,53 +315,53 @@ start_crystal_path(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = scripts\engine\utility::getclosest(var_6.origin, scripts\engine\utility::getstructarray("essence_ufo_path", "script_noteworthy"));
   var_8 = 0;
   var_9 = var_7;
-  var_0A = 1;
-  var_0B = undefined;
-  for(var_0C = get_next_valid_struct(var_6, var_9); var_0A; var_0C = var_0F) {
+  var_10 = 1;
+  var_11 = undefined;
+  for(var_12 = get_next_valid_struct(var_6, var_9); var_10; var_12 = var_15) {
     if(isDefined(var_9.script_speed)) {
-      var_0D = var_9.script_speed;
+      var_13 = var_9.script_speed;
     } else {
-      var_0D = undefined;
+      var_13 = undefined;
     }
 
-    var_0E = get_move_rate(var_6, var_9.origin, var_0C.origin, var_0D);
-    var_0F = var_0C;
-    var_0F = get_next_valid_struct(var_6, var_0F);
-    thread changeangledelay(var_6, var_0E, var_0F, var_9, var_0C);
-    var_6 moveto(var_0C.origin, var_0E);
+    var_14 = get_move_rate(var_6, var_9.origin, var_12.origin, var_13);
+    var_15 = var_12;
+    var_15 = get_next_valid_struct(var_6, var_15);
+    thread changeangledelay(var_6, var_14, var_15, var_9, var_12);
+    var_6 moveto(var_12.origin, var_14);
     var_10 = var_6 scripts\engine\utility::waittill_any_return("movedone", "fully_charged");
     if(scripts\engine\utility::istrue(var_6.fully_charged)) {
       for(;;) {
-        var_0E = get_move_rate(var_6, var_6.origin, var_0C.origin, 2000);
-        var_6 moveto(var_0C.origin, var_0E);
-        if(can_use_struct_for_final_pos(var_0, var_0C)) {
-          var_11 = scripts\engine\utility::drop_to_ground(var_0C.origin, 0, -400) + (0, 0, 40);
+        var_14 = get_move_rate(var_6, var_6.origin, var_12.origin, 2000);
+        var_6 moveto(var_12.origin, var_14);
+        if(can_use_struct_for_final_pos(var_0, var_12)) {
+          var_11 = scripts\engine\utility::drop_to_ground(var_12.origin, 0, -400) + (0, 0, 40);
           var_12 = magicbullet("bolasprayprojhome_mp", var_6.origin, var_11);
           scripts\engine\utility::play_sound_in_space("miniufo_fire", var_6.origin, 0, var_6);
           var_0 dontinterpolate();
           var_0.origin = var_11;
           var_6.fully_charged = undefined;
           var_6 thread movetotraploop(var_6, var_6.origin, var_1);
-          var_12 scripts\engine\utility::waittill_any_timeout_1(1.25, "death");
+          var_12 scripts\engine\utility::waittill_any_timeout(1.25, "death");
           if(isDefined(var_12)) {
             var_12 delete();
           }
 
           var_0.at_end_loc = 1;
-          var_0A = 0;
+          var_10 = 0;
           break;
         } else {
           var_6 waittill("movedone");
-          var_9 = var_0C;
-          var_0C = get_next_valid_struct(var_6, var_9);
-          var_6 notify("next_position_found", var_9, var_0C);
+          var_9 = var_12;
+          var_12 = get_next_valid_struct(var_6, var_9);
+          var_6 notify("next_position_found", var_9, var_12);
         }
       }
 
       continue;
     }
 
-    var_9 = var_0C;
+    var_9 = var_12;
   }
 }
 
@@ -717,26 +717,26 @@ struct_wait_for_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = strtok(var_1, "_");
   var_8 = var_7[3];
   var_9 = level.arkqueststation;
-  var_0A = scripts\engine\utility::getstruct("slot_" + var_0, "script_noteworthy");
-  var_2.origin = var_0A.origin;
-  var_2.angles = anglestoup(var_0A.angles);
+  var_10 = scripts\engine\utility::getstruct("slot_" + var_0, "script_noteworthy");
+  var_2.origin = var_10.origin;
+  var_2.angles = anglestoup(var_10.angles);
   var_2 setModel(var_1);
-  var_0B = getent("crystal_damage_trigger_" + var_0, "targetname");
-  var_0B.origin = var_0B.origin + (0, 0.25, 0);
-  var_0B setCanDamage(1);
-  var_0B.team = "axis";
-  var_0B.max_health = 100;
-  var_0B.health = 100;
+  var_11 = getent("crystal_damage_trigger_" + var_0, "targetname");
+  var_11.origin = var_11.origin + (0, 0.25, 0);
+  var_11 setCanDamage(1);
+  var_11.team = "axis";
+  var_11.max_health = 100;
+  var_11.health = 100;
   for(;;) {
     wait(0.05);
     scripts\engine\utility::flag_wait("gator_gold_tooth_placed");
-    var_0B waittill("damage", var_0C, var_0D, var_0E, var_0F, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18);
-    if(!isDefined(var_0D)) {
+    var_11 waittill("damage", var_12, var_13, var_14, var_15, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18);
+    if(!isDefined(var_13)) {
       continue;
     }
 
     if(!isDefined(var_15)) {
-      var_15 = var_0D getcurrentweapon();
+      var_15 = var_13 getcurrentweapon();
     }
 
     if(!scripts\cp\utility::weaponhasattachment(var_15, "ark" + var_8)) {
@@ -744,8 +744,8 @@ struct_wait_for_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     playsoundatpos(var_2.origin, "arc_machine_door_shoot_off");
-    var_0B setCanDamage(0);
-    var_0B hide();
+    var_11 setCanDamage(0);
+    var_11 hide();
     if(!isDefined(var_9.crystals)) {
       var_9.crystals = [];
     }
@@ -756,26 +756,26 @@ struct_wait_for_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   level.wor_items_picked_up[var_3.gun][var_6] = 1;
-  if(isplayer(var_0D)) {
+  if(isplayer(var_13)) {
     switch (var_3.gun) {
       case "iw7_headcutter_zm":
-        var_0D thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_crystal_yellow", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_13 thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_crystal_yellow", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       case "iw7_facemelter_zm":
-        var_0D thread scripts\cp\cp_vo::try_to_play_vo("quest_melter_crystal_blue", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_13 thread scripts\cp\cp_vo::try_to_play_vo("quest_melter_crystal_blue", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       case "iw7_shredder_zm":
-        var_0D thread scripts\cp\cp_vo::try_to_play_vo("quest_shredder_crystal_red", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_13 thread scripts\cp\cp_vo::try_to_play_vo("quest_shredder_crystal_red", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       case "iw7_dischord_zm":
-        var_0D thread scripts\cp\cp_vo::try_to_play_vo("quest_dischord_crystal_green", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+        var_13 thread scripts\cp\cp_vo::try_to_play_vo("quest_dischord_crystal_green", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
         break;
 
       default:
-        var_0D thread scripts\cp\cp_vo::try_to_play_vo("part_collect_wor", "zmb_comment_vo");
+        var_13 thread scripts\cp\cp_vo::try_to_play_vo("part_collect_wor", "zmb_comment_vo");
         break;
     }
   }
@@ -881,26 +881,26 @@ run_toy_logic(var_0, var_1, var_2, var_3, var_4) {
   var_0 setusefov(120);
   var_0 sethintstring(&"CP_QUEST_WOR_PART");
   var_0 thread spin_toy();
-  var_0 waittill("trigger", var_0A);
+  var_0 waittill("trigger", var_10);
   switch (var_0.model) {
     case "zmb_ice_monster_toy":
-      var_0A thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_icemonster", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+      var_10 thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_icemonster", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
       break;
 
     case "decor_spaceshuttle_boosters_toy":
-      var_0A thread scripts\cp\cp_vo::try_to_play_vo("quest_melter_rocket", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+      var_10 thread scripts\cp\cp_vo::try_to_play_vo("quest_melter_rocket", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
       break;
 
     case "zmb_spaceland_discoball_toy":
-      var_0A thread scripts\cp\cp_vo::try_to_play_vo("quest_dischord_discoball", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+      var_10 thread scripts\cp\cp_vo::try_to_play_vo("quest_dischord_discoball", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
       break;
 
     case "statue_angry_mike_toy":
-      var_0A thread scripts\cp\cp_vo::try_to_play_vo("quest_shredder_monster", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
+      var_10 thread scripts\cp\cp_vo::try_to_play_vo("quest_shredder_monster", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
       break;
 
     default:
-      var_0A thread scripts\cp\cp_vo::try_to_play_vo("part_collect_wor", "zmb_comment_vo");
+      var_10 thread scripts\cp\cp_vo::try_to_play_vo("part_collect_wor", "zmb_comment_vo");
       break;
   }
 
@@ -2214,7 +2214,7 @@ trackplayersworammo(var_0, var_1, var_2) {
   var_2.stock = var_0 getweaponammostock(var_1);
   var_2.clip = var_0 getweaponammoclip(var_1);
   for(;;) {
-    var_0 scripts\engine\utility::waittill_any_3("weapon_fired", "reload");
+    var_0 scripts\engine\utility::waittill_any("weapon_fired", "reload");
     if(scripts\engine\utility::istrue(var_0.inlaststand)) {
       continue;
     }
@@ -2257,8 +2257,8 @@ watchforplayerdeath(var_0, var_1, var_2) {
 
     var_7 = var_0 getweaponslistall();
     foreach(var_9 in var_7) {
-      var_0A = getweaponbasename(var_9);
-      if(var_0A == var_3) {
+      var_10 = getweaponbasename(var_9);
+      if(var_10 == var_3) {
         var_0 thread watchforweaponremoved(var_0, var_1, var_2);
         var_4 = 1;
         break;
@@ -2297,7 +2297,7 @@ watchforweaponremoved(var_0, var_1, var_2) {
       break;
     }
 
-    var_0 scripts\engine\utility::waittill_any_3("weapon_purchased", "mule_munchies_sold");
+    var_0 scripts\engine\utility::waittill_any("weapon_purchased", "mule_munchies_sold");
     var_4 = 0;
     var_5 = var_0 getweaponslistall();
     foreach(var_7 in var_5) {

@@ -236,8 +236,9 @@ stinger_finalizelock(var_0) {
   if(isDefined(var_0.inlosid)) {
     var_1 = var_0.offsets[var_0.inlosid];
     var_1 = (var_1[1], -1 * var_1[0], var_1[2]);
-  } else
+  } else {
     var_1 = (0, 0, 0);
+  }
 
   self func_8402(self.var_10FAA, var_1);
 }
@@ -306,8 +307,9 @@ stingtargstruct_getoffsets() {
     self.offsets[self.offsets.size] = (0, 0, 70);
     self.offsets[self.offsets.size] = (0, 0, 5);
     self.useoldlosverification = 0;
-  } else
+  } else {
     self.offsets[self.offsets.size] = (0, 0, 0);
+  }
 }
 
 stingtargstruct_getorigins() {

@@ -89,7 +89,7 @@ func_FA8D(var_0, var_1) {
 }
 
 func_9D2F() {
-  var_0 = self.isnodeoccupied getshootatpos();
+  var_0 = self.enemy getshootatpos();
   var_1 = self getspawnpointdist();
   var_2 = vectortoangles(var_0 - self getmuzzlepos());
   var_3 = scripts\engine\utility::absangleclamp180(var_1[1] - var_2[1]);
@@ -141,11 +141,11 @@ func_9DD8(var_0) {
     return 1;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
-  var_1 = vectornormalize(self.isnodeoccupied getshootatpos() - self getEye());
+  var_1 = vectornormalize(self.enemy getshootatpos() - self getEye());
   return vectordot(var_1, var_0) > 0.5;
 }
 
@@ -280,8 +280,8 @@ func_CF2A(var_0, var_1, var_2, var_3) {
 
 func_CF2B(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
-  if(isDefined(self.isnodeoccupied)) {
-    self func_8306(self.isnodeoccupied);
+  if(isDefined(self.enemy)) {
+    self func_8306(self.enemy);
   }
 
   if(isDefined(self.a.var_7280)) {
@@ -386,8 +386,8 @@ func_D541(var_0, var_1, var_2, var_3) {
     }
 
     for(;;) {
-      var_0A = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
-      if(var_0A == "code_move") {
+      var_10 = lib_0A1E::func_231F(var_0, var_1, scripts\asm\asm::func_2341(var_0, var_1));
+      if(var_10 == "code_move") {
         break;
       }
     }
@@ -666,7 +666,7 @@ func_AFE6(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 

@@ -317,19 +317,19 @@ func_13013(var_0, var_1) {
     return;
   }
 
-  var_0B = scripts\sp\utility::func_7D74(1);
-  foreach(var_0D in var_0B) {
+  var_11 = scripts\sp\utility::func_7D74(1);
+  foreach(var_13 in var_11) {
     if(var_4) {
-      if(issubstr(var_0D, "m4")) {
-        var_6 = var_0D;
+      if(issubstr(var_13, "m4")) {
+        var_6 = var_13;
         break;
       }
 
       continue;
     }
 
-    if(issubstr(var_0D, "fhr")) {
-      var_6 = var_0D;
+    if(issubstr(var_13, "fhr")) {
+      var_6 = var_13;
       break;
     }
   }
@@ -374,11 +374,11 @@ func_119C6(var_0, var_1) {
       }
 
       if(issubstr(var_2[var_7], "hybrid")) {
-        var_2[var_7] = scripts\engine\utility::ter_op(var_1, "hybrid_snow", "hybrid");
+        var_2[var_7] = ::scripts\engine\utility::ter_op(var_1, "hybrid_snow", "hybrid");
       }
 
       if(issubstr(var_2[var_7], "reflexsmg")) {
-        var_2[var_7] = scripts\engine\utility::ter_op(var_1, "reflexsmg_snow", "reflexsmg");
+        var_2[var_7] = ::scripts\engine\utility::ter_op(var_1, "reflexsmg_snow", "reflexsmg");
       }
 
       var_6 = var_6 + "+" + var_2[var_7];
@@ -988,21 +988,21 @@ func_36DF(var_0, var_1, var_2, var_3) {
   var_7 = var_1[0];
   var_8 = var_1[1];
   var_9 = var_1[2];
-  var_0A = [var_0, var_1];
-  var_0B = func_7ADF(var_0A, var_2);
-  var_0C = var_0B[0];
-  var_0D = var_0B[1];
-  var_0E = var_0B[2];
-  var_0F = [];
+  var_10 = [var_0, var_1];
+  var_11 = func_7ADF(var_10, var_2);
+  var_12 = var_11[0];
+  var_13 = var_11[1];
+  var_14 = var_11[2];
+  var_15 = [];
   for(var_10 = 1; var_10 <= var_3; var_10++) {
     var_11 = var_10 / var_3;
-    var_12 = int(1 - var_11 * 1 - var_11 * var_4 + 2 * 1 - var_11 * var_11 * var_0C + var_11 * var_11 * var_7);
-    var_13 = int(1 - var_11 * 1 - var_11 * var_5 + 2 * 1 - var_11 * var_11 * var_0D + var_11 * var_11 * var_8);
-    var_14 = int(1 - var_11 * 1 - var_11 * var_6 + 2 * 1 - var_11 * var_11 * var_0E + var_11 * var_11 * var_9);
-    var_0F[var_10] = (var_12, var_13, var_14);
+    var_12 = int(1 - var_11 * 1 - var_11 * var_4 + 2 * 1 - var_11 * var_11 * var_12 + var_11 * var_11 * var_7);
+    var_13 = int(1 - var_11 * 1 - var_11 * var_5 + 2 * 1 - var_11 * var_11 * var_13 + var_11 * var_11 * var_8);
+    var_14 = int(1 - var_11 * 1 - var_11 * var_6 + 2 * 1 - var_11 * var_11 * var_14 + var_11 * var_11 * var_9);
+    var_15[var_10] = (var_12, var_13, var_14);
   }
 
-  return var_0F;
+  return var_15;
 }
 
 func_7ADF(var_0, var_1) {
@@ -1026,7 +1026,7 @@ func_1776(var_0) {
   if(!isDefined(level.var_67B9[var_0])) {}
 
   var_1 = spawnStruct();
-  level.var_67B9[var_0] = scripts\engine\utility::array_add(level.var_67B9[var_0], var_1);
+  level.var_67B9[var_0] = ::scripts\engine\utility::array_add(level.var_67B9[var_0], var_1);
   var_1 waittill("queue_hit");
   return var_1;
 }
@@ -1049,7 +1049,7 @@ func_7766(var_0, var_1, var_2) {
         var_3[0] waittill("continue_queue");
       }
 
-      level.var_67B9[var_0] = scripts\engine\utility::array_remove(level.var_67B9[var_0], var_3[0]);
+      level.var_67B9[var_0] = ::scripts\engine\utility::array_remove(level.var_67B9[var_0], var_3[0]);
     }
 
     wait(0.1);
@@ -1277,13 +1277,13 @@ func_65D8(var_0, var_1, var_2, var_3, var_4) {
   var_8 = 0;
   var_9 = 0;
   for(;;) {
-    var_0A = getEntArray("script_model", "classname");
-    var_0B = getEntArray("script_origin", "classname");
-    var_0 settext("models : " + var_0A.size);
-    var_1 settext("origins : " + var_0B.size);
-    var_0C = var_0A.size + var_0B.size;
-    var_2 settext("total : " + var_0C);
-    var_7 = var_7 + var_0C;
+    var_10 = getEntArray("script_model", "classname");
+    var_11 = getEntArray("script_origin", "classname");
+    var_0 settext("models : " + var_10.size);
+    var_1 settext("origins : " + var_11.size);
+    var_12 = var_10.size + var_11.size;
+    var_2 settext("total : " + var_12);
+    var_7 = var_7 + var_12;
     var_3 settext("average : " + var_5);
     var_8++;
     if(var_8 == var_6) {
@@ -1292,8 +1292,8 @@ func_65D8(var_0, var_1, var_2, var_3, var_4) {
       var_8 = 0;
     }
 
-    if(var_0C > var_9) {
-      var_9 = var_0C;
+    if(var_12 > var_9) {
+      var_9 = var_12;
       var_4 settext("highest :" + var_9);
     }
 
@@ -1351,7 +1351,7 @@ func_A764(var_0, var_1, var_2) {
     level.var_5A91[var_0] = [];
   }
 
-  level.var_5A91[var_0] = scripts\engine\utility::array_add(level.var_5A91[var_0], var_3);
+  level.var_5A91[var_0] = ::scripts\engine\utility::array_add(level.var_5A91[var_0], var_3);
   if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
   }
@@ -1386,8 +1386,8 @@ func_A764(var_0, var_1, var_2) {
   var_3 notify("awaken");
   if(isDefined(self.var_EDCF)) {
     var_9 = self.var_EDCF;
-    var_0A = getnode(self.target, "targetname");
-    if(isDefined(var_0A)) {
+    var_10 = getnode(self.target, "targetname");
+    if(isDefined(var_10)) {
       var_3 func_82F0(level.enableoffhandsecondaryweapons[var_9]);
     } else {
       var_3 func_82F1(level.enableoffhandsecondaryweapons[var_9]);
@@ -1481,13 +1481,13 @@ func_E59C(var_0) {
   var_1 givescorefortrophyblocks();
   scripts\sp\anim::func_1F2C(var_2, "robot_locker_on");
   var_3 = anglesToForward(self.angles);
-  var_0B = scripts\engine\utility::spawn_tag_origin(var_1.origin);
-  var_1 linkto(var_0B);
-  var_0C = var_0B.origin + var_3 * 40;
-  var_0B moveto(var_0C, 0.2);
+  var_11 = scripts\engine\utility::spawn_tag_origin(var_1.origin);
+  var_1 linkto(var_11);
+  var_12 = var_11.origin + var_3 * 40;
+  var_11 moveto(var_12, 0.2);
   wait(0.2);
   var_1 unlink();
-  var_0B delete();
+  var_11 delete();
   var_1 scripts\sp\utility::func_1101B();
   var_1 scripts\sp\utility::func_6224();
   var_1.precacheleaderboards = 0;
@@ -1539,13 +1539,13 @@ func_E59A() {
 
   func_E59B();
   if(var_0) {
-    foreach(var_0A in self.doors) {
-      var_0B = 45;
-      if(var_0A.script_parameters == "left") {
-        var_0B = var_0B * -1;
+    foreach(var_10 in self.doors) {
+      var_11 = 45;
+      if(var_10.script_parameters == "left") {
+        var_11 = var_11 * -1;
       }
 
-      var_0A rotateyaw(var_0B, 0.05);
+      var_10 rotateyaw(var_11, 0.05);
     }
   }
 }
@@ -1896,7 +1896,7 @@ func_10F55(var_0) {
   }
 
   if(isalive(var_0)) {
-    magicbullet(self.var_394, self gettagorigin("tag_flash"), var_0 getEye());
+    magicbullet(self.weapon, self gettagorigin("tag_flash"), var_0 getEye());
   }
 
   wait(0.25);
@@ -2016,7 +2016,7 @@ func_10F4C() {
   var_0 = 400;
   for(;;) {
     if(distancesquared(self.origin, level.player.origin) < var_0 * var_0) {
-      if(self getpersstat(level.player)) {
+      if(self cansee(level.player)) {
         if(getdvarint("debug_stealthlight")) {}
 
         self notify("stealthlight_attack");
@@ -2195,16 +2195,16 @@ func_BE3C(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    foreach(var_0A in var_0) {
+    foreach(var_10 in var_0) {
       if(var_6) {
-        thread scripts\sp\utility::func_16C5(var_0A[0], var_0A[1]);
-        var_8 = var_0A[1];
+        thread scripts\sp\utility::func_16C5(var_10[0], var_10[1]);
+        var_8 = var_10[1];
       } else if(var_7) {
-        var_0A[0] scripts\sp\utility::func_10346(var_0A[1]);
-        var_8 = var_0A[1];
+        var_10[0] scripts\sp\utility::func_10346(var_10[1]);
+        var_8 = var_10[1];
       } else {
-        scripts\sp\utility::func_10346(var_0A);
-        var_8 = var_0A;
+        scripts\sp\utility::func_10346(var_10);
+        var_8 = var_10;
       }
 
       wait(randomfloatrange(var_2, var_3));
@@ -2461,72 +2461,72 @@ func_4AF3(var_0, var_1, var_2, var_3, var_4) {
   var_8 = distance(var_0[0].origin, var_0[1].origin);
   while(isDefined(var_0[var_5.segments.size + 2])) {
     var_9 = var_5.segments.size;
-    var_0A = var_0[var_9].origin;
-    var_0B = var_0[var_9 + 1].origin;
-    var_0C = var_0[var_9 + 2].origin;
-    var_0D = var_8;
+    var_10 = var_0[var_9].origin;
+    var_11 = var_0[var_9 + 1].origin;
+    var_12 = var_0[var_9 + 2].origin;
+    var_13 = var_8;
     var_8 = distance(var_0[var_9 + 1].origin, var_0[var_9 + 2].origin);
-    var_0E = var_7;
-    var_7 = func_4AE5(var_0A, var_0C, var_0D, var_8, 0.5);
+    var_14 = var_7;
+    var_7 = func_4AE5(var_10, var_12, var_13, var_8, 0.5);
     if(var_9 == 0) {
       if(isDefined(var_2)) {
-        var_0E["outgoing"] = var_2 * var_0D;
+        var_14["outgoing"] = var_2 * var_13;
       } else {
-        var_0E = func_4AE6(var_0A, var_0B, var_7["incoming"]);
+        var_14 = func_4AE6(var_10, var_11, var_7["incoming"]);
       }
     }
 
     if(var_4) {
-      var_5.segments[var_9] = func_4AFC(var_0A, var_0B, var_0E["outgoing"], var_7["incoming"], var_0D);
+      var_5.segments[var_9] = func_4AFC(var_10, var_11, var_14["outgoing"], var_7["incoming"], var_13);
       var_6 = var_6 + var_5.segments[var_9].var_630D;
       continue;
     }
 
-    var_5.segments[var_9] = func_4AFB(var_0A, var_0B, var_0E["outgoing"], var_7["incoming"]);
-    var_6 = var_6 + var_0D;
+    var_5.segments[var_9] = func_4AFB(var_10, var_11, var_14["outgoing"], var_7["incoming"]);
+    var_6 = var_6 + var_13;
     var_5.segments[var_9].var_630D = var_6;
   }
 
   var_9 = var_5.segments.size;
-  var_0A = var_0[var_9].origin;
-  var_0B = var_0[var_9 + 1].origin;
-  var_0D = var_8;
-  var_0E = var_7;
+  var_10 = var_0[var_9].origin;
+  var_11 = var_0[var_9 + 1].origin;
+  var_13 = var_8;
+  var_14 = var_7;
   if(var_9 == 0 && isDefined(var_2)) {
-    var_0E["outgoing"] = var_2 * var_0D;
+    var_14["outgoing"] = var_2 * var_13;
   }
 
   if(isDefined(var_3)) {
-    var_7["incoming"] = var_3 * var_0D;
+    var_7["incoming"] = var_3 * var_13;
   } else {
-    var_7 = func_4AE6(var_0A, var_0B, var_0E["outgoing"]);
+    var_7 = func_4AE6(var_10, var_11, var_14["outgoing"]);
   }
 
   if(var_9 == 0 && !isDefined(var_2)) {
-    var_0E = func_4AE6(var_0A, var_0B, var_7["incoming"]);
+    var_14 = func_4AE6(var_10, var_11, var_7["incoming"]);
   }
 
   if(var_4) {
-    var_5.segments[var_9] = func_4AFC(var_0A, var_0B, var_0E["outgoing"], var_7["incoming"], var_0D);
+    var_5.segments[var_9] = func_4AFC(var_10, var_11, var_14["outgoing"], var_7["incoming"], var_13);
     var_6 = var_6 + var_5.segments[var_9].var_630D;
   } else {
-    var_5.segments[var_9] = func_4AFB(var_0A, var_0B, var_0E["outgoing"], var_7["incoming"]);
-    var_6 = var_6 + var_0D;
+    var_5.segments[var_9] = func_4AFB(var_10, var_11, var_14["outgoing"], var_7["incoming"]);
+    var_6 = var_6 + var_13;
   }
 
   var_5.segments[var_9].var_630D = var_6;
   if(var_1) {
-    var_0F = 0;
+    var_15 = 0;
     var_10 = 0;
     for(var_9 = 0; var_9 < var_5.segments.size; var_9++) {
       if(!isDefined(var_0[var_9 + 1].getclosestpointonnavmesh3d)) {
         var_0[var_9 + 1].getclosestpointonnavmesh3d = var_0[var_9].getclosestpointonnavmesh3d;
       }
 
-      var_0D = var_5.segments[var_9].var_630D - var_10;
-      var_11 = 2 * var_0D / var_0[var_9].getclosestpointonnavmesh3d + var_0[var_9 + 1].getclosestpointonnavmesh3d / 20;
-      var_0F = var_0F + var_11;
-      var_5.segments[var_9].var_6393 = var_0F;
+      var_13 = var_5.segments[var_9].var_630D - var_10;
+      var_11 = 2 * var_13 / var_0[var_9].getclosestpointonnavmesh3d + var_0[var_9 + 1].getclosestpointonnavmesh3d / 20;
+      var_15 = var_15 + var_11;
+      var_5.segments[var_9].var_6393 = var_15;
       var_10 = var_5.segments[var_9].var_630D;
       var_5.segments[var_9].var_109B1 = var_0[var_9].getclosestpointonnavmesh3d / 20;
       var_5.segments[var_9].var_109A8 = var_0[var_9 + 1].getclosestpointonnavmesh3d / 20;
@@ -2633,32 +2633,32 @@ func_4AFF(var_0, var_1) {
   }
 
   var_9 = 36 * var_2;
-  var_0A = 36 * var_3;
-  var_0B = 12 * var_4 + 8 * var_5;
-  var_0C = 4 * var_6;
-  var_0D = [];
-  var_0D[0] = 0;
+  var_10 = 36 * var_3;
+  var_11 = 12 * var_4 + 8 * var_5;
+  var_12 = 4 * var_6;
+  var_13 = [];
+  var_13[0] = 0;
   if(var_9 == 0) {
-    if(var_0A == 0 && var_0B == 0 && var_0C == 0) {
+    if(var_10 == 0 && var_11 == 0 && var_12 == 0) {
       return sqrt(var_7) / var_1;
     }
 
-    var_0E = func_E6EB(var_0A, var_0B, var_0C);
-    if(isDefined(var_0E[0]) && var_0E[0] > 0 && var_0E[0] < 1) {
-      var_0F = 2 * var_0A * var_0E[0] + var_0B;
-      if(var_0F < 0) {
-        var_0D[var_0D.size] = var_0E[0];
+    var_14 = func_E6EB(var_10, var_11, var_12);
+    if(isDefined(var_14[0]) && var_14[0] > 0 && var_14[0] < 1) {
+      var_15 = 2 * var_10 * var_14[0] + var_11;
+      if(var_15 < 0) {
+        var_13[var_13.size] = var_14[0];
       }
     }
 
-    if(isDefined(var_0E[1]) && var_0E[1] > 0 && var_0E[1] < 1) {
-      var_0F = 2 * var_0A * var_0E[0] + var_0B;
-      if(var_0F < 0) {
-        var_0D[var_0D.size] = var_0E[1];
+    if(isDefined(var_14[1]) && var_14[1] > 0 && var_14[1] < 1) {
+      var_15 = 2 * var_10 * var_14[0] + var_11;
+      if(var_15 < 0) {
+        var_13[var_13.size] = var_14[1];
       }
     }
   } else {
-    var_10 = func_E6EB(3 * var_9, 2 * var_0A, var_0B);
+    var_10 = func_E6EB(3 * var_9, 2 * var_10, var_11);
     var_11 = 0;
     var_12[0] = 0;
     for(var_11 = 0; var_11 < var_10.size; var_11++) {
@@ -2671,23 +2671,23 @@ func_4AFF(var_0, var_1) {
     for(var_11 = 1; var_11 < var_12.size; var_11++) {
       var_13 = var_12[var_11 - 1];
       var_14 = var_12[var_11];
-      var_15 = var_9 * var_13 * var_13 * var_13 + var_0A * var_13 * var_13 + var_0B * var_13 + var_0C;
-      var_16 = var_9 * var_14 * var_14 * var_14 + var_0A * var_14 * var_14 + var_0B * var_14 + var_0C;
+      var_15 = var_9 * var_13 * var_13 * var_13 + var_10 * var_13 * var_13 + var_11 * var_13 + var_12;
+      var_16 = var_9 * var_14 * var_14 * var_14 + var_10 * var_14 * var_14 + var_11 * var_14 + var_12;
       if(var_15 > 0 && var_16 < 0) {
-        var_0D[var_0D.size] = func_BF2D(var_13, var_14, var_9, var_0A, var_0B, var_0C, 0.02);
+        var_13[var_13.size] = func_BF2D(var_13, var_14, var_9, var_10, var_11, var_12, 0.02);
       }
     }
   }
 
-  var_0D[var_0D.size] = 1;
+  var_13[var_13.size] = 1;
   var_9 = 9 * var_2;
-  var_0A = 12 * var_3;
-  var_0B = 6 * var_4 + 4 * var_5;
-  var_0C = 4 * var_6;
+  var_10 = 12 * var_3;
+  var_11 = 6 * var_4 + 4 * var_5;
+  var_12 = 4 * var_6;
   var_17 = var_7;
   var_18 = 0;
-  foreach(var_1A in var_0D) {
-    var_1B = var_9 * var_1A * var_1A * var_1A * var_1A + var_0A * var_1A * var_1A * var_1A + var_0B * var_1A * var_1A + var_0C * var_1A + var_17;
+  foreach(var_1A in var_13) {
+    var_1B = var_9 * var_1A * var_1A * var_1A * var_1A + var_10 * var_1A * var_1A * var_1A + var_11 * var_1A * var_1A + var_12 * var_1A + var_17;
     if(var_1B > var_18) {
       var_18 = var_1B;
     }
@@ -2773,18 +2773,18 @@ func_BF2D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = var_0 + var_1 / 2;
   var_9 = var_6 + 1;
   while(abs(var_9) > var_6 && var_7 > 0) {
-    var_0A = var_2 * var_8 * var_8 * var_8 + var_3 * var_8 * var_8 + var_4 * var_8 + var_5;
-    var_0B = 3 * var_2 * var_8 * var_8 + 2 * var_3 * var_8 + var_4;
-    var_9 = -1 * var_0A / var_0B;
-    var_0C = var_8;
+    var_10 = var_2 * var_8 * var_8 * var_8 + var_3 * var_8 * var_8 + var_4 * var_8 + var_5;
+    var_11 = 3 * var_2 * var_8 * var_8 + 2 * var_3 * var_8 + var_4;
+    var_9 = -1 * var_10 / var_11;
+    var_12 = var_8;
     var_8 = var_8 + var_9;
     if(var_8 > var_1) {
-      var_8 = var_0C + 3 * var_1 / 4;
+      var_8 = var_12 + 3 * var_1 / 4;
       continue;
     }
 
     if(var_8 < var_0) {
-      var_8 = var_0C + 3 * var_0 / 4;
+      var_8 = var_12 + 3 * var_0 / 4;
     }
 
     var_7--;

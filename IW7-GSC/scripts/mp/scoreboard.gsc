@@ -30,12 +30,12 @@ func_D9AB() {
       }
     }
 
-    var_0B = "tied";
+    var_11 = "tied";
     if(scripts\mp\utility::inovertime() && scripts\mp\utility::istimetobeatrulegametype()) {
       if(game["timeToBeatTeam"] == "none") {
         setclientmatchdata("alliesTTB", 0);
         setclientmatchdata("axisTTB", 0);
-        var_0B = "tied";
+        var_11 = "tied";
       } else {
         if("allies" == game["timeToBeatTeam"]) {
           var_5++;
@@ -45,40 +45,40 @@ func_D9AB() {
 
         setclientmatchdata("alliesTTB", scripts\engine\utility::ter_op("allies" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"]));
         setclientmatchdata("axisTTB", scripts\engine\utility::ter_op("axis" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"]));
-        var_0B = game["timeToBeatTeam"];
+        var_11 = game["timeToBeatTeam"];
       }
     } else if(var_5 == var_6) {
-      var_0B = "tied";
+      var_11 = "tied";
     } else if(var_5 > var_6) {
-      var_0B = "allies";
+      var_11 = "allies";
     } else {
-      var_0B = "axis";
+      var_11 = "axis";
     }
 
     setclientmatchdata("alliesScore", var_5);
     setclientmatchdata("axisScore", var_6);
     setclientmatchdata("alliesKills", var_7);
     setclientmatchdata("alliesDeaths", var_8);
-    if(var_0B == "tied") {
+    if(var_11 == "tied") {
       func_3219("allies");
       func_3219("axis");
       foreach(var_1 in level.players) {
-        var_0D = var_1.pers["team"];
-        if(!isDefined(var_0D)) {
+        var_13 = var_1.pers["team"];
+        if(!isDefined(var_13)) {
           continue;
         }
 
-        if(var_0D == "spectator") {
+        if(var_13 == "spectator") {
           var_1 setplayerdata("common", "round", "scoreboardType", "allies");
           continue;
         }
 
-        var_1 setplayerdata("common", "round", "scoreboardType", var_0D);
+        var_1 setplayerdata("common", "round", "scoreboardType", var_13);
       }
     } else {
-      func_3219(var_0B);
+      func_3219(var_11);
       foreach(var_1 in level.players) {
-        var_1 setplayerdata("common", "round", "scoreboardType", var_0B);
+        var_1 setplayerdata("common", "round", "scoreboardType", var_11);
       }
     }
   } else {
@@ -131,8 +131,8 @@ func_F7F8() {
     setclientmatchdata("players", self.clientmatchdataid, "timeplayed", var_8);
     var_9 = scripts\mp\rank::getrank();
     setclientmatchdata("players", self.clientmatchdataid, "rank", var_9);
-    var_0A = scripts\mp\rank::detachshieldmodel();
-    setclientmatchdata("players", self.clientmatchdataid, "prestige", var_0A);
+    var_10 = scripts\mp\rank::detachshieldmodel();
+    setclientmatchdata("players", self.clientmatchdataid, "prestige", var_10);
     var_0++;
     setclientmatchdata("scoreboardPlayerCount", var_0);
   }
@@ -185,14 +185,14 @@ func_3219(var_0) {
     return;
   }
 
-  var_0A = scripts\mp\utility::getotherteam(var_5);
+  var_10 = scripts\mp\utility::getotherteam(var_5);
   var_1 = 0;
   foreach(var_5 in level.placement[var_0]) {
     setclientmatchdata("scoreboards", computescoreboardslot(var_0, var_1), var_5.clientmatchdataid);
     var_1++;
   }
 
-  foreach(var_5 in level.placement[var_0A]) {
+  foreach(var_5 in level.placement[var_10]) {
     setclientmatchdata("scoreboards", computescoreboardslot(var_0, var_1), var_5.clientmatchdataid);
     var_1++;
   }

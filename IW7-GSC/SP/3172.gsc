@@ -51,7 +51,7 @@ donotetracks_vsplayer(var_0, var_1) {
             return;
           }
 
-          if(!isDefined(self.isnodeoccupied) || self.isnodeoccupied != var_5) {
+          if(!isDefined(self.enemy) || self.enemy != var_5) {
             return;
           }
 
@@ -82,32 +82,32 @@ donotetracks_vsplayer(var_0, var_1) {
 
               if(var_7 <= var_8) {
                 var_9 = undefined;
-                var_0A = undefined;
-                var_0B = undefined;
-                var_0C = 20;
-                var_0D = 0.45;
-                var_0E = 0.35;
-                var_0F = isDefined(level.player.var_C337) && level.player.var_C337.var_19;
-                if(self.var_394 == "none") {
+                var_10 = undefined;
+                var_11 = undefined;
+                var_12 = 20;
+                var_13 = 0.45;
+                var_14 = 0.35;
+                var_15 = isDefined(level.player.var_C337) && level.player.var_C337.var_19;
+                if(self.weapon == "none") {
                   var_9 = self.var_12B7F;
                 }
 
                 if(self.unittype == "c8") {
                   var_9 = self.var_3507;
-                  var_0A = 24;
-                  var_0B = 24;
+                  var_10 = 24;
+                  var_11 = 24;
                   self playSound("c8_melee_shield_swing");
                 }
 
-                if(var_0F) {
-                  var_0C = 10;
-                  var_0D = 0.7;
-                  var_0E = 0.5;
+                if(var_15) {
+                  var_12 = 10;
+                  var_13 = 0.7;
+                  var_14 = 0.5;
                   setsaveddvar("player_meleeDamageMultiplier", 0.05);
                 }
 
-                self melee(undefined, var_9, sqrt(var_8), var_0A, var_0B);
-                if(var_0F && self.unittype == "soldier") {
+                self melee(undefined, var_9, sqrt(var_8), var_10, var_11);
+                if(var_15 && self.unittype == "soldier") {
                   self playSound("ai_melee_vs_shield");
                 }
 
@@ -117,10 +117,10 @@ donotetracks_vsplayer(var_0, var_1) {
                   self playSound("c8_melee_shield_impact");
                 }
 
-                level.player func_D0EA(self.origin, var_0C);
+                level.player func_D0EA(self.origin, var_12);
                 earthquake(0.45, 0.35, level.player.origin, 1000);
                 level.player playrumbleonentity("damage_heavy");
-                if(!var_0F) {
+                if(!var_15) {
                   level.player thread scripts\sp\gameskill::func_2BDB(0.3, 0.25);
                   level.player viewkick(30, self.origin);
                 } else {
@@ -293,29 +293,29 @@ func_67D6(var_0, var_1, var_2, var_3) {
 
   var_8 = var_3[1];
   var_9 = 30;
-  var_0A = angleclamp180(self.melee.var_10D6D[1] - self.angles[1]);
-  if(abs(var_0A) > var_9) {
+  var_10 = angleclamp180(self.melee.var_10D6D[1] - self.angles[1]);
+  if(abs(var_10) > var_9) {
     return 0;
   }
 
   if(var_8) {
-    var_0B = var_4.angles - (0, var_0A * 0.5, 0);
-    var_0C = getstartorigin(var_4.origin, var_0B, var_6);
+    var_11 = var_4.angles - (0, var_10 * 0.5, 0);
+    var_12 = getstartorigin(var_4.origin, var_11, var_6);
   } else {
-    var_0C = self.melee.areanynavvolumesloaded;
-    var_0B = self.melee.var_10D6D;
+    var_12 = self.melee.areanynavvolumesloaded;
+    var_11 = self.melee.var_10D6D;
   }
 
-  var_0D = self.origin - var_0C;
-  var_0E = vectornormalize(var_4.origin - var_0C);
-  var_0F = vectordot(var_0E, var_0D);
-  if(var_0F > 12) {
+  var_13 = self.origin - var_12;
+  var_14 = vectornormalize(var_4.origin - var_12);
+  var_15 = vectordot(var_14, var_13);
+  if(var_15 > 12) {
     return 0;
   }
 
   if(var_8) {
-    self.melee.var_10D6D = self.angles + (0, var_0A * 0.5, 0);
-    var_4.melee.var_10D6D = var_0B;
+    self.melee.var_10D6D = self.angles + (0, var_10 * 0.5, 0);
+    var_4.melee.var_10D6D = var_11;
   }
 
   var_4.melee.var_331C = 1;

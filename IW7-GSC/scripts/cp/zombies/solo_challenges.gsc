@@ -28,17 +28,17 @@ update_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
       return;
     }
 
-    var_0A = self.current_challenge;
-    self thread[[var_0A.var_12E9C]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    var_10 = self.current_challenge;
+    self thread[[var_10.var_12E9C]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     return;
   }
 
-  if(!var_0A current_challenge_is(var_1)) {
+  if(!var_10 current_challenge_is(var_1)) {
     return;
   }
 
-  var_0A = var_0A.current_challenge;
-  var_9 thread[[var_0A.var_12E9C]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+  var_10 = var_10.current_challenge;
+  var_9 thread[[var_10.var_12E9C]](var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
 func_62C6() {
@@ -242,40 +242,40 @@ reset_omnvars() {
   self setclientomnvar("zm_show_challenge", -1);
 }
 
-register_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
-  var_0B = spawnStruct();
-  var_0B.ref = var_0;
-  var_0B.objective_icon = var_1;
-  var_0B.default_success = var_2;
-  var_0B.var_9F82 = ::func_4FFA;
+register_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = spawnStruct();
+  var_11.ref = var_0;
+  var_11.objective_icon = var_1;
+  var_11.default_success = var_2;
+  var_11.var_9F82 = ::func_4FFA;
   if(isDefined(var_3)) {
-    var_0B.var_9F82 = var_3;
+    var_11.var_9F82 = var_3;
   }
 
-  var_0B.var_386E = ::func_4FDD;
+  var_11.var_386E = ::func_4FDD;
   if(isDefined(var_4)) {
-    var_0B.var_386E = var_4;
+    var_11.var_386E = var_4;
   }
 
-  var_0B.var_1609 = var_5;
-  var_0B.var_4DDE = var_6;
-  var_0B.var_6ACB = ::func_4FED;
+  var_11.var_1609 = var_5;
+  var_11.var_4DDE = var_6;
+  var_11.var_6ACB = ::func_4FED;
   if(isDefined(var_7)) {
-    var_0B.var_6ACB = var_7;
+    var_11.var_6ACB = var_7;
   }
 
-  var_0B.var_12E9C = var_8;
-  var_0B.var_E4C5 = ::func_5011;
+  var_11.var_12E9C = var_8;
+  var_11.var_E4C5 = ::func_5011;
   if(isDefined(var_9)) {
-    var_0B.var_E4C5 = var_9;
+    var_11.var_E4C5 = var_9;
   }
 
-  var_0B.var_6AD0 = ::func_4FEE;
-  if(isDefined(var_0A)) {
-    var_0B.var_6AD0 = var_0A;
+  var_11.var_6AD0 = ::func_4FEE;
+  if(isDefined(var_10)) {
+    var_11.var_6AD0 = var_10;
   }
 
-  level.challenge_data[var_0] = var_0B;
+  level.challenge_data[var_0] = var_11;
 }
 
 update_challenge_progress(var_0, var_1) {
@@ -344,17 +344,17 @@ func_97B0() {
   var_7 = 7;
   var_8 = 8;
   for(var_9 = var_2; var_9 <= var_3; var_9++) {
-    var_0A = tablelookup(var_0, var_1, var_9, var_4);
-    if(var_0A == "") {
+    var_10 = tablelookup(var_0, var_1, var_9, var_4);
+    if(var_10 == "") {
       break;
     }
 
-    var_0B = tablelookup(var_0, var_1, var_9, var_5);
-    var_0C = tablelookup(var_0, var_1, var_9, var_8);
-    if(isDefined(level.challenge_data[var_0A])) {
-      level.challenge_data[var_0A].var_1C81 = var_0B;
-      level.challenge_data[var_0A].var_1C8C = int(tablelookup(var_0, var_1, var_9, var_6));
-      level.challenge_data[var_0A].active_time = strtok(var_0C, " ");
+    var_11 = tablelookup(var_0, var_1, var_9, var_5);
+    var_12 = tablelookup(var_0, var_1, var_9, var_8);
+    if(isDefined(level.challenge_data[var_10])) {
+      level.challenge_data[var_10].var_1C81 = var_11;
+      level.challenge_data[var_10].var_1C8C = int(tablelookup(var_0, var_1, var_9, var_6));
+      level.challenge_data[var_10].active_time = strtok(var_12, " ");
     }
   }
 }
@@ -381,10 +381,10 @@ update_death_challenges(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     return;
   }
 
-  var_0A = var_9.current_challenge;
+  var_10 = var_9.current_challenge;
   if(isDefined(level.custom_death_challenge_func)) {
-    var_0B = self[[level.custom_death_challenge_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
-    if(!scripts\engine\utility::istrue(var_0B)) {
+    var_11 = self[[level.custom_death_challenge_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+    if(!scripts\engine\utility::istrue(var_11)) {
       return;
     }
   }

@@ -11,7 +11,7 @@ main() {
   self.subclass = "regular";
   self.accuracy = 0.2;
   self.health = 200;
-  self.objective_team = "";
+  self.grenadeweapon = "";
   self.objective_state = 0;
   self.secondaryweapon = "";
   self.var_101B4 = "";
@@ -22,7 +22,7 @@ main() {
     self func_82DB(50, 1024);
   }
 
-  self.var_394 = "none";
+  self.weapon = "none";
   lib_0920::main();
 }
 

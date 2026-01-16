@@ -166,11 +166,11 @@ func_4842(var_0, var_1) {
         }
 
         var_9 = scripts\sp\utility::func_7BD7();
-        var_0A = weaponmaxammo(var_8);
-        var_0B = min(var_0A, var_9 + var_2.var_1E2D);
-        var_0C = var_0B - var_9;
-        var_2.var_1E2D = var_2.var_1E2D - var_0C;
-        level.player setweaponammostock(var_8, int(var_0B));
+        var_10 = weaponmaxammo(var_8);
+        var_11 = min(var_10, var_9 + var_2.var_1E2D);
+        var_12 = var_11 - var_9;
+        var_2.var_1E2D = var_2.var_1E2D - var_12;
+        level.player setweaponammostock(var_8, int(var_11));
       } else if(var_2.var_AE46 == "secondaryxsecondary") {
         var_8 = level.player lib_0A2F::func_7BB5(var_2.weapon_name);
         if(scripts\sp\utility::func_7C3D() != var_8) {
@@ -183,11 +183,11 @@ func_4842(var_0, var_1) {
         }
 
         var_9 = scripts\sp\utility::func_7C3E();
-        var_0A = weaponmaxammo(var_8);
-        var_0B = min(var_0A, var_9 + var_2.var_1E2D);
-        var_0C = var_0B - var_9;
-        var_2.var_1E2D = var_2.var_1E2D - var_0C;
-        level.player setweaponammostock(var_8, int(var_0B));
+        var_10 = weaponmaxammo(var_8);
+        var_11 = min(var_10, var_9 + var_2.var_1E2D);
+        var_12 = var_11 - var_9;
+        var_2.var_1E2D = var_2.var_1E2D - var_12;
+        level.player setweaponammostock(var_8, int(var_11));
       } else if(var_2.var_AE46 == "newequipment_primary" || var_2.var_AE46 == "newequipment_secondary") {
         if(var_2.var_AE46 == "newequipment_primary") {
           var_9 = scripts\sp\utility::func_7BD7();
@@ -214,23 +214,23 @@ func_4842(var_0, var_1) {
           level.player setweaponammostock(var_8, self.var_EDE7);
           self.var_EDE7 = undefined;
         } else if(var_8 == "helmet" || var_8 == "nanoshot") {
-          var_0A = weaponmaxammo(var_8);
-          level.player setweaponammostock(var_8, var_0A);
+          var_10 = weaponmaxammo(var_8);
+          level.player setweaponammostock(var_8, var_10);
         }
 
         var_2.weapon_name = "none";
         var_2.var_1E2D = 0;
       }
     } else {
-      var_0D = var_7 getweaponslistall();
-      var_0E = scripts\sp\utility::func_7BD6();
-      var_0F = scripts\sp\utility::func_7C3D();
-      var_10 = [var_0E, var_0F];
+      var_13 = var_7 getweaponslistall();
+      var_14 = scripts\sp\utility::func_7BD6();
+      var_15 = scripts\sp\utility::func_7C3D();
+      var_10 = [var_14, var_15];
       var_10 = scripts\engine\utility::array_removeundefined(var_10);
-      var_0D = scripts\engine\utility::array_remove_array(var_0D, var_10);
+      var_13 = scripts\engine\utility::array_remove_array(var_13, var_10);
       var_11 = "";
       var_12 = 0;
-      foreach(var_14 in var_0D) {
+      foreach(var_14 in var_13) {
         if(lib_0A2F::func_DA40(var_14)) {
           var_12 = 1;
           var_11 = var_14;
@@ -339,9 +339,9 @@ func_4846() {
   var_7 = undefined;
   var_8 = undefined;
   var_9 = scripts\sp\utility::func_7BD6();
-  var_0A = scripts\sp\utility::func_7CAF();
-  var_0B = scripts\sp\utility::func_7C3D();
-  var_0C = scripts\sp\utility::func_7CB1();
+  var_10 = scripts\sp\utility::func_7CAF();
+  var_11 = scripts\sp\utility::func_7C3D();
+  var_12 = scripts\sp\utility::func_7CB1();
   if(isDefined(var_9) && var_9 != "nanoshot") {
     var_5 = weaponmaxammo(var_9);
   } else {
@@ -349,41 +349,41 @@ func_4846() {
     var_1 = 100;
   }
 
-  if(isDefined(var_0A) && var_0A != "nanoshot") {
-    var_6 = weaponmaxammo(var_0A);
+  if(isDefined(var_10) && var_10 != "nanoshot") {
+    var_6 = weaponmaxammo(var_10);
   } else {
-    var_0A = "frag";
+    var_10 = "frag";
     var_2 = 100;
   }
 
-  if(isDefined(var_0B) && var_0B != "helmet") {
-    var_7 = weaponmaxammo(var_0B);
+  if(isDefined(var_11) && var_11 != "helmet") {
+    var_7 = weaponmaxammo(var_11);
   } else {
-    var_0B = "offhandshield";
+    var_11 = "offhandshield";
     var_3 = 100;
   }
 
-  if(isDefined(var_0C) && var_0C != "helmet") {
-    var_8 = weaponmaxammo(var_0C);
+  if(isDefined(var_12) && var_12 != "helmet") {
+    var_8 = weaponmaxammo(var_12);
   } else {
-    var_0C = "offhandshield";
+    var_12 = "offhandshield";
     var_4 = 100;
   }
 
-  var_0D = scripts\sp\utility::func_7BD7();
-  var_0E = scripts\sp\utility::func_7CB0();
-  var_0F = scripts\sp\utility::func_7C3E();
+  var_13 = scripts\sp\utility::func_7BD7();
+  var_14 = scripts\sp\utility::func_7CB0();
+  var_15 = scripts\sp\utility::func_7C3E();
   var_10 = scripts\sp\utility::func_7CB2();
   if(!isDefined(var_1)) {
-    var_1 = var_0D / var_5;
+    var_1 = var_13 / var_5;
   }
 
   if(!isDefined(var_2)) {
-    var_2 = var_0E / var_6;
+    var_2 = var_14 / var_6;
   }
 
   if(!isDefined(var_3)) {
-    var_3 = var_0F / var_7;
+    var_3 = var_15 / var_7;
   }
 
   if(!isDefined(var_4)) {
@@ -394,15 +394,15 @@ func_4846() {
     var_11 = var_9;
     var_12 = var_1;
   } else {
-    var_11 = var_0C;
+    var_11 = var_12;
     var_12 = var_3;
   }
 
   if(var_3 <= var_4) {
-    var_13 = var_0B;
+    var_13 = var_11;
     var_14 = var_3;
   } else {
-    var_13 = var_0E;
+    var_13 = var_14;
     var_14 = var_5;
   }
 
@@ -563,12 +563,12 @@ func_484A() {
   var_7 = 0;
   var_8 = undefined;
   var_9 = undefined;
-  var_0A = 0;
-  var_0B = 0;
-  var_0C = 0;
-  var_0D = 0;
-  var_0E = (0, 0, 0);
-  var_0F = vectornormalize(anglesToForward(self.angles));
+  var_10 = 0;
+  var_11 = 0;
+  var_12 = 0;
+  var_13 = 0;
+  var_14 = (0, 0, 0);
+  var_15 = vectornormalize(anglesToForward(self.angles));
   var_10 = vectornormalize(anglestoright(self.angles));
   var_11 = vectornormalize(anglestoup(self.angles));
   if(isDefined(self.var_6698)) {
@@ -583,45 +583,45 @@ func_484A() {
 
   if(self.weapon_name == "frag") {
     var_2 = self.origin + var_10 * 4;
-    var_2 = var_2 + var_0F * 4;
+    var_2 = var_2 + var_15 * 4;
     var_2 = var_2 + var_11 * 1.5;
     var_1 = (0, 0, 90);
-    var_0A = 45;
-    var_0B = 90;
+    var_10 = 45;
+    var_11 = 90;
     var_5 = 8;
     var_6 = 8;
     var_9 = "frag_grenade_wm";
   } else if(self.weapon_name == "emp") {
     var_2 = self.origin + var_10 * 4;
-    var_2 = var_2 + var_0F * 4;
+    var_2 = var_2 + var_15 * 4;
     var_2 = var_2 + var_11 * 1;
     var_1 = (0, 0, 90);
-    var_0A = 45;
+    var_10 = 45;
     var_5 = 8;
     var_6 = 8;
     var_9 = "emp_grenade_wm";
   } else if(self.weapon_name == "antigrav") {
     var_2 = self.origin + var_10 * 7;
-    var_2 = var_2 + var_0F * 3.25;
+    var_2 = var_2 + var_15 * 3.25;
     var_2 = var_2 + var_11;
     var_1 = (0, 0, -90);
-    var_0A = 15;
-    var_0B = 25;
+    var_10 = 15;
+    var_11 = 25;
     var_5 = 8;
     var_6 = 8;
     var_9 = "anti_grav_grenade_wm";
   } else if(self.weapon_name == "seeker") {
     var_2 = self.origin + var_10 * 4;
-    var_2 = var_2 + var_0F * 4;
+    var_2 = var_2 + var_15 * 4;
     var_2 = var_2 + var_11 * -1;
-    var_0A = 5;
+    var_10 = 5;
     var_5 = 8;
     var_6 = 8;
     var_1 = (0, 0, 0);
     var_9 = "seeker_grenade_folded";
   } else if(self.weapon_name == "supportdrone") {
     var_2 = self.origin + var_10 * 4.7;
-    var_2 = var_2 + var_0F * 0.5;
+    var_2 = var_2 + var_15 * 0.5;
     var_2 = var_2 + var_11 * 3;
     var_5 = 9;
     var_6 = 0;
@@ -634,41 +634,41 @@ func_484A() {
   } else if(self.weapon_name == "offhandshield") {
     var_0 = 1;
     var_2 = self.origin + var_10 * 2;
-    var_2 = var_2 - var_0F * 2;
+    var_2 = var_2 - var_15 * 2;
     var_2 = var_2 + var_11;
     var_1 = (0, 45, 0);
     var_9 = "weapon_retract_shield_folded_vm";
   } else if(self.weapon_name == "hackingdevice") {
     var_2 = self.origin + var_10 * 4;
-    var_2 = var_2 + var_0F * 4;
+    var_2 = var_2 + var_15 * 4;
     var_2 = var_2 + var_11;
     var_1 = (0, 270, 0);
-    var_0A = 25;
+    var_10 = 25;
     var_5 = 8;
     var_6 = 8;
     var_9 = "equipment_memory_chip_01";
   } else if(self.weapon_name == "coverwall") {
     var_2 = self.origin + var_10 * 4;
-    var_2 = var_2 + var_0F * 4;
+    var_2 = var_2 + var_15 * 4;
     var_2 = var_2 + var_11 * 1.65;
     var_1 = (0, 0, 90);
-    var_0A = 45;
-    var_0B = 90;
+    var_10 = 45;
+    var_11 = 90;
     var_5 = 8;
     var_6 = 8;
     var_9 = "foam_grenade_wm";
   } else if(self.weapon_name == "nanoshot") {
     var_2 = self.origin + var_10 * 4;
-    var_2 = var_2 + var_0F * 4;
+    var_2 = var_2 + var_15 * 4;
     var_2 = var_2 + var_11 * 0.5;
     var_1 = (0, 0, 90);
-    var_0A = 45;
+    var_10 = 45;
     var_5 = 8;
     var_6 = 8;
     var_9 = "equipment_mp_nanoshot";
   } else if(self.weapon_name == "helmet") {
     var_2 = self.origin + var_10 * -1;
-    var_2 = var_2 + var_0F * 7.1;
+    var_2 = var_2 + var_15 * 7.1;
     var_2 = var_2 + var_11 * -8.5;
     var_1 = (297, 227, -90);
     var_6 = 14;
@@ -691,15 +691,15 @@ func_484A() {
     if(isDefined(self.var_6694[var_14])) {
       var_15 = self.var_6694[var_14];
     } else {
-      if(var_0B != 0) {
-        var_0D = randomintrange(-1 * var_0B, var_0B);
+      if(var_11 != 0) {
+        var_13 = randomintrange(-1 * var_11, var_11);
       }
 
-      if(var_0A != 0) {
-        var_0C = randomintrange(-1 * var_0A, var_0A);
+      if(var_10 != 0) {
+        var_12 = randomintrange(-1 * var_10, var_10);
       }
 
-      var_15 = (var_0D, var_0C, 0);
+      var_15 = (var_13, var_12, 0);
       self.var_6694[var_14] = var_15;
     }
 
@@ -724,9 +724,9 @@ func_484A() {
   var_3 = var_13;
   if(var_6 > 0) {
     if(!var_7) {
-      var_2 = var_13 - var_6 * var_0F;
+      var_2 = var_13 - var_6 * var_15;
     } else {
-      var_2 = var_2 - var_6 * var_0F;
+      var_2 = var_2 - var_6 * var_15;
     }
 
     if(isDefined(var_8) && var_8 != int(var_8)) {
@@ -739,15 +739,15 @@ func_484A() {
       if(isDefined(self.var_6694[var_16])) {
         var_15 = self.var_6694[var_16];
       } else {
-        if(var_0B != 0) {
-          var_0D = randomintrange(-1 * var_0B, var_0B);
+        if(var_11 != 0) {
+          var_13 = randomintrange(-1 * var_11, var_11);
         }
 
-        if(var_0A != 0) {
-          var_0C = randomintrange(-1 * var_0A, var_0A);
+        if(var_10 != 0) {
+          var_12 = randomintrange(-1 * var_10, var_10);
         }
 
-        var_15 = (var_0D, var_0C, 0);
+        var_15 = (var_13, var_12, 0);
         self.var_6694[var_16] = var_15;
       }
 
@@ -759,7 +759,7 @@ func_484A() {
       }
 
       if(isDefined(var_3)) {
-        var_2 = var_3 - var_6 * var_0F;
+        var_2 = var_3 - var_6 * var_15;
         var_3 = undefined;
       }
 
@@ -793,7 +793,7 @@ func_4845() {
       self waittill("hint_destroyed");
       if(self.var_3860) {
         lib_0E46::func_48C4(undefined, (0, 0, 4), var_0, 40, 300, undefined, undefined, undefined, 0, &"hud_interaction_prompt_center_equipment");
-        level.player scripts\engine\utility::waittill_any_3("picked_up_equipment", "equipment_change", "hackingdevice_end", "offhand_ammo", "item_ammo");
+        level.player scripts\engine\utility::waittill_any("picked_up_equipment", "equipment_change", "hackingdevice_end", "offhand_ammo", "item_ammo");
       }
     }
 

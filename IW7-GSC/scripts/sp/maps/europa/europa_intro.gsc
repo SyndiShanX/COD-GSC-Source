@@ -96,10 +96,10 @@ func_9CF7() {
   }
 
   if(issubstr(level.player getcurrentweapon(), "hybrid_snow")) {
-    return !level.player func_8519(level.player getcurrentprimaryweapon());
+    return !level.player isalternatemode(level.player getcurrentprimaryweapon());
   }
 
-  return level.player func_8519(level.player getcurrentprimaryweapon());
+  return level.player isalternatemode(level.player getcurrentprimaryweapon());
 }
 
 func_9B50() {
@@ -135,7 +135,7 @@ func_5E01() {
   level.player.var_8632 linkto(level.var_D267, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player getwholescenedurationmin(level.player.var_8632);
   if(scripts\sp\utility::func_9BB5()) {
-    level.var_EBBC scripts\anim\shared::placeweaponon(level.var_EBBC.var_394, "none");
+    level.var_EBBC scripts\anim\shared::placeweaponon(level.var_EBBC.weapon, "none");
     level.var_EBBC.var_8719 = scripts\sp\utility::func_10639("fhr40", level.var_5D6C.origin, level.var_5D6C.angles);
     level.var_EBBC.var_8719 attach("attachment_suppressor_energy_1_wm");
     level.var_5D6C.group = [level.var_EBBB, level.var_EBBC, level.var_EBBC.var_8719, level.var_D267, level.var_5D6C];
@@ -153,7 +153,7 @@ func_5E01() {
 
 func_EBBD() {
   level waittill("scar2_stow_weapon");
-  scripts\anim\shared::placeweaponon(self.var_394, "right");
+  scripts\anim\shared::placeweaponon(self.weapon, "right");
   self.var_8719 hide();
 }
 
@@ -679,15 +679,15 @@ func_CFE2(var_0, var_1, var_2, var_3, var_4, var_5) {
       self.var_1EE3[var_5] = self.var_1EE3[var_5] * var_3 / abs(self.var_1EE3[var_5]);
     }
 
-    var_0A = 1;
-    var_0B = abs(var_1 - var_7);
+    var_10 = 1;
+    var_11 = abs(var_1 - var_7);
     if(self.var_1EE3[var_5] > 0 && var_1 > var_7) {
-      var_0A = scripts\sp\math::func_C097(0, var_4, var_0B);
+      var_10 = scripts\sp\math::func_C097(0, var_4, var_11);
     } else if(self.var_1EE3[var_5] < 0 && var_1 < var_7) {
-      var_0A = scripts\sp\math::func_C097(0, var_4, var_0B);
+      var_10 = scripts\sp\math::func_C097(0, var_4, var_11);
     }
 
-    self.var_1EE3[var_5] = self.var_1EE3[var_5] * var_0A;
+    self.var_1EE3[var_5] = self.var_1EE3[var_5] * var_10;
     self func_82B1(var_0, self.var_1EE3[var_5]);
     wait(0.05);
   }
@@ -713,12 +713,12 @@ func_5727() {
   var_8 = undefined;
   for(;;) {
     var_9 = func_7942();
-    var_0A = scripts\sp\math::func_7ADE(level.var_EBCA[0].origin, level.var_EBCA[1].origin);
+    var_10 = scripts\sp\math::func_7ADE(level.var_EBCA[0].origin, level.var_EBCA[1].origin);
     self.var_7440 = scripts\sp\math::func_C097(0, var_0, var_9);
-    if(level.player getEye()[0] > var_0A[0]) {
-      var_0B = "right";
+    if(level.player getEye()[0] > var_10[0]) {
+      var_11 = "right";
     } else {
-      var_0B = "left";
+      var_11 = "left";
     }
 
     if(self.var_7440 <= 0.175) {
@@ -732,26 +732,26 @@ func_5727() {
     if(self.var_7440 >= var_2 || var_4 > var_5 * 0.5) {
       if(var_6) {
         var_7 = "scn_europa_halo_altitude_beep_lp_02";
-        var_0C = func_E758(scripts\engine\utility::mod(var_3, 5));
-        if(!var_0C) {
+        var_12 = func_E758(scripts\engine\utility::mod(var_3, 5));
+        if(!var_12) {
           var_6 = 0;
-          thread func_B293("red", var_0B, 11);
+          thread func_B293("red", var_11, 11);
           var_4 = var_4 + 4;
         }
       } else {
         var_8 = "scn_europa_halo_altitude_beep_lp_03";
-        var_0C = func_E758(scripts\engine\utility::mod(var_4, 4));
-        if(!var_0C) {
-          thread func_B293("red", var_0B, 11);
+        var_12 = func_E758(scripts\engine\utility::mod(var_4, 4));
+        if(!var_12) {
+          thread func_B293("red", var_11, 11);
           var_4 = var_4 + 4;
         }
       }
     } else if(self.var_7440 >= var_1) {
       var_6 = 1;
       var_4 = var_4 + 1;
-      var_0C = func_E758(scripts\engine\utility::mod(var_3, 5));
-      if(!var_0C) {
-        thread func_B293("white", var_0B, 9);
+      var_12 = func_E758(scripts\engine\utility::mod(var_3, 5));
+      if(!var_12) {
+        thread func_B293("white", var_11, 9);
       }
     }
 
@@ -823,18 +823,18 @@ func_B293(var_0, var_1, var_2) {
   var_8 = 0.6;
   var_9 = gettime() + var_8 * 1000;
   var_5 thread scripts\sp\hud_util::func_6AAB(0, var_8);
-  var_0A = var_6 - var_7;
-  var_0B = var_7;
-  var_0C = var_0A / var_8 / 0.05;
+  var_10 = var_6 - var_7;
+  var_11 = var_7;
+  var_12 = var_10 / var_8 / 0.05;
   while(gettime() < var_9) {
-    var_0D = var_0B;
-    var_0E = var_5.y;
-    var_0B = int(var_0B + var_0C);
-    var_0F = var_0D - var_0B;
+    var_13 = var_11;
+    var_14 = var_5.y;
+    var_11 = int(var_11 + var_12);
+    var_15 = var_13 - var_11;
     var_5.alpha = var_5.alpha - 0.01;
     var_5.x = var_5.x + var_2;
-    var_5.y = var_5.y + var_0F / 2;
-    var_5 setshader(var_3, 50, var_0B);
+    var_5.y = var_5.y + var_15 / 2;
+    var_5 setshader(var_3, 50, var_11);
     wait(0.05);
   }
 
@@ -1266,7 +1266,7 @@ func_59B9() {
     var_7 = 0;
     var_8 = 0;
     var_9 = 0;
-    var_0A = 1;
+    var_10 = 1;
     level.player func_8291(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     wait(var_3);
   }
@@ -1650,27 +1650,27 @@ func_AB7E() {
   var_9[2] = "europa_cmp_warningtemperatu";
   var_9[3] = "europa_cmp_warningairsuppl";
   scripts\engine\utility::delaythread(3.5, ::func_6745);
-  var_0A = 1;
+  var_10 = 1;
   for(;;) {
     if(scripts\sp\math::func_D638(level.player.origin, var_6, var_5, var_4)) {
       var_1 = 0;
       if(gettime() > var_8) {
-        var_0B = 0.002;
+        var_11 = 0.002;
       } else {
-        var_0B = 0;
+        var_11 = 0;
       }
     } else {
-      var_0C = distance2dsquared(level.player.origin, var_6) < distance2dsquared(var_7, var_6);
+      var_12 = distance2dsquared(level.player.origin, var_6) < distance2dsquared(var_7, var_6);
       if(!var_1) {}
 
-      if(var_0C) {
-        var_0B = 0.005;
+      if(var_12) {
+        var_11 = 0.005;
       } else {
-        var_0B = 0.02;
+        var_11 = 0.02;
       }
     }
 
-    level.var_7452.alpha = level.var_7452.alpha + var_0B;
+    level.var_7452.alpha = level.var_7452.alpha + var_11;
     thread scripts\sp\maps\europa\europa_util::func_D988(level.var_7452.alpha);
     if(level.var_7452.alpha >= 1) {
       func_738B();
@@ -1678,13 +1678,13 @@ func_AB7E() {
     }
 
     var_7 = level.player.origin;
-    var_0D = func_E758(level.var_7452.alpha);
-    if(var_0D == func_E758(var_0A / var_9.size)) {
-      level.player thread scripts\sp\utility::play_sound_on_entity(var_9[var_0A]);
-      var_0A++;
+    var_13 = func_E758(level.var_7452.alpha);
+    if(var_13 == func_E758(var_10 / var_9.size)) {
+      level.player thread scripts\sp\utility::play_sound_on_entity(var_9[var_10]);
+      var_10++;
       level.player thread scripts\sp\maps\europa\europa_util::func_12992();
       level.player scripts\engine\utility::delaythread(5, scripts\sp\maps\europa\europa_util::func_12970);
-      if(var_0A == 2) {
+      if(var_10 == 2) {
         thread start_player_freezing_sfx();
       }
     }
@@ -1938,7 +1938,7 @@ func_1081C() {
   var_0 = self gettagorigin("tag_weapon_right") + (0, 0, 15);
   var_0 = scripts\sp\utility::func_864C(var_0) + (0, 0, 1);
   var_1 = self gettagangles("tag_weapon_right");
-  var_2 = spawn("weapon_" + self.var_394, var_0);
+  var_2 = spawn("weapon_" + self.weapon, var_0);
   var_2.angles = var_1;
 }
 

@@ -10,7 +10,7 @@ init() {
   var_0.modelplacement = "cp_town_teleporter_device_good";
   var_0.modelplacementfailed = "cp_town_teleporter_device_bad";
   var_0.placedmodel = "cp_town_teleporter_device";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -163,7 +163,7 @@ waitrestoreperks() {
 createportalforplayer(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_0.angles;
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   var_2.name = "crafted_portal";
   var_2.carriedportal = spawn("script_model", var_2.origin);
   var_2.carriedportal.angles = var_0.angles;
@@ -216,7 +216,7 @@ portal_setplaced(var_0, var_1) {
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
   var_1.iscarrying = 0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.var_130D2 = self.var_130D2;
   var_2.name = "crafted_portal";
   var_2 thread portal_setactive(var_0);
@@ -243,8 +243,8 @@ portal_setplaced(var_0, var_1) {
 
 portal_setcancelled() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.carriedportal delete();
@@ -269,12 +269,12 @@ portal_setcarried(var_0, var_1) {
 portal_setactive(var_0) {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.crafted_portal_settings["crafted_portal"].pow);
+  self sethintstring(level.crafted_portal_settings["crafted_portal"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
-  thread portal_handledeath(self.triggerportableradarping);
+  thread portal_handledeath(self.owner);
   thread scripts\cp\utility::item_handleownerdisconnect("elecportal_handleOwner");
   thread scripts\cp\utility::item_timeout(var_0, level.crafted_portal_settings["crafted_portal"].timeout);
   thread portal_handleuse();
@@ -286,12 +286,12 @@ portal_setactive(var_0) {
   }
 
   iprintlnbold("PAP PORTAL ACTIVE");
-  self.triggerportableradarping notify("craft_dpad_watcher");
-  self.triggerportableradarping setclientomnvar("zom_crafted_weapon", 0);
-  self.triggerportableradarping.current_crafted_inventory = undefined;
+  self.owner notify("craft_dpad_watcher");
+  self.owner setclientomnvar("zom_crafted_weapon", 0);
+  self.owner.current_crafted_inventory = undefined;
   level.portal_opened = 1;
   activate_pap_portals(self.origin);
-  foreach(var_2 in self.triggerportableradarping.placed_portals) {
+  foreach(var_2 in self.owner.placed_portals) {
     var_2 notify("death");
   }
 }
@@ -331,21 +331,21 @@ portal_setinactive() {
 }
 
 portal_wait_for_player() {
-  self.triggerportableradarping endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("death");
+  self.owner endon("disconnect");
   self endon("death");
   for(;;) {
-    if(scripts\engine\utility::istrue(self.triggerportableradarping.teleporting)) {
-      while(distancesquared(self.triggerportableradarping.origin, self.origin) < 576) {
+    if(scripts\engine\utility::istrue(self.owner.teleporting)) {
+      while(distancesquared(self.owner.origin, self.origin) < 576) {
         wait(0.1);
       }
 
-      self.triggerportableradarping.teleporting = undefined;
+      self.owner.teleporting = undefined;
     }
 
-    if(distancesquared(self.triggerportableradarping.origin, self.origin) < 576) {
-      self.triggerportableradarping.teleporting = 1;
-      self.triggerportableradarping thread teleport_owner(self);
+    if(distancesquared(self.owner.origin, self.origin) < 576) {
+      self.owner.teleporting = 1;
+      self.owner thread teleport_owner(self);
       wait(5);
     }
 

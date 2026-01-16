@@ -214,9 +214,9 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
     return 0;
   }
 
-  var_0A = var_9.kung_fu_progression.active_discipline;
-  var_0B = var_9.kung_fu_progression.disciplines_levels[var_9.kung_fu_progression.active_discipline];
-  switch (var_0B) {
+  var_10 = var_9.kung_fu_progression.active_discipline;
+  var_11 = var_9.kung_fu_progression.disciplines_levels[var_9.kung_fu_progression.active_discipline];
+  switch (var_11) {
     case 0:
       if(!issubstr(var_4, "fists_zm_")) {
         return 0;
@@ -224,7 +224,7 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
       break;
 
     case 1:
-      if(var_4 != "iw7_shuriken_" + var_0A + "_proj" && var_4 != "iw7_shuriken_zm_" + var_0A) {
+      if(var_4 != "iw7_shuriken_" + var_10 + "_proj" && var_4 != "iw7_shuriken_zm_" + var_10) {
         return 0;
       }
       break;
@@ -234,7 +234,7 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
         break;
       }
 
-      if(var_0A == "tiger" && var_3 == "MOD_EXPLOSIVE" && var_4 == "none") {
+      if(var_10 == "tiger" && var_3 == "MOD_EXPLOSIVE" && var_4 == "none") {
         break;
       }
 
@@ -251,6 +251,6 @@ default_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
   }
 
   var_9.kung_fu_progression.challenge_progress[var_9.kung_fu_progression.active_discipline]++;
-  var_9 thread scripts\cp\zombies\solo_challenges::update_challenge(var_0A + "_" + var_0B + 1 + "_challenge", 1);
+  var_9 thread scripts\cp\zombies\solo_challenges::update_challenge(var_10 + "_" + var_11 + 1 + "_challenge", 1);
   return 0;
 }

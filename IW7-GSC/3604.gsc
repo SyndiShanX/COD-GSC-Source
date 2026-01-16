@@ -33,9 +33,9 @@ func_B554(var_0) {
   var_2 = 1200;
   var_3 = 350;
   self energy_setmax(0, var_1);
-  self goal_radius(0, var_1);
-  self goalflag(0, var_2);
-  self goal_type(0, var_3);
+  self energy_setenergy(0, var_1);
+  self energy_setrestorerate(0, var_2);
+  self energy_setresttimems(0, var_3);
   return 1;
 }
 
@@ -51,9 +51,9 @@ func_B552(var_0) {
   var_1 = 400;
   var_2 = 400;
   self energy_setmax(0, var_1);
-  self goal_radius(0, var_1);
-  self goalflag(0, var_2);
-  self goal_type(0, 900);
+  self energy_setenergy(0, var_1);
+  self energy_setrestorerate(0, var_2);
+  self energy_setresttimems(0, 900);
   if(!var_0) {
     self.var_B551 = 0;
     self setscriptablepartstate("megaboost", "megaboostOff", 0);
@@ -63,7 +63,7 @@ func_B552(var_0) {
 
 func_B555() {
   self endon("megaboost_end");
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "game_ended");
+  scripts\engine\utility::waittill_any("death", "disconnect", "game_ended");
   thread func_B552();
 }
 

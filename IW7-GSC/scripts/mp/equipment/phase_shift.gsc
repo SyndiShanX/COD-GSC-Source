@@ -100,10 +100,10 @@ restartweaponvfx() {
   self notify("startWeaponVFX");
   self endon("restartWeaponVFX");
   var_0 = self getcurrentprimaryweapon();
-  scripts\mp\weapons::clearweaponscriptvfx(var_0, scripts\mp\utility::istrue(self func_8519(var_0)));
+  scripts\mp\weapons::clearweaponscriptvfx(var_0, scripts\mp\utility::istrue(self isalternatemode(var_0)));
   scripts\engine\utility::waitframe();
   var_0 = self getcurrentprimaryweapon();
-  scripts\mp\weapons::runweaponscriptvfx(var_0, scripts\mp\utility::istrue(self func_8519(var_0)));
+  scripts\mp\weapons::runweaponscriptvfx(var_0, scripts\mp\utility::istrue(self isalternatemode(var_0)));
 }
 
 exitphaseshift(var_0) {}
@@ -126,7 +126,7 @@ func_108EE(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_model", var_1.origin);
   var_5.angles = var_1.angles;
   var_5 setModel("tag_origin");
-  var_5.triggerportableradarping = var_1;
+  var_5.owner = var_1;
   var_5.var_CACB = var_2;
   var_5.var_762C = var_0;
   wait(0.1);
@@ -165,7 +165,7 @@ func_12EEA(var_0) {
   var_1 = 0;
   var_2 = 0.15;
   for(;;) {
-    if(!isDefined(self) || !isDefined(self.triggerportableradarping) || !scripts\mp\utility::isreallyalive(self.triggerportableradarping) || !isDefined(self.var_CACB) || !scripts\mp\utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_1 > var_0) {
+    if(!isDefined(self) || !isDefined(self.owner) || !scripts\mp\utility::isreallyalive(self.owner) || !isDefined(self.var_CACB) || !scripts\mp\utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_1 > var_0) {
       self.origin = self.origin + (0, 0, 10000);
       wait(0.2);
       self delete();
@@ -173,9 +173,9 @@ func_12EEA(var_0) {
     }
 
     var_1 = var_1 + var_2;
-    if(self.var_CACB == self.triggerportableradarping) {
+    if(self.var_CACB == self.owner) {
       foreach(var_4 in level.players) {
-        if(!areentitiesinphase(var_4, self.triggerportableradarping)) {
+        if(!areentitiesinphase(var_4, self.owner)) {
           self showtoplayer(var_4);
           continue;
         }
@@ -184,16 +184,16 @@ func_12EEA(var_0) {
       }
     } else {
       foreach(var_4 in level.players) {
-        if(!areentitiesinphase(var_4, self.triggerportableradarping)) {
-          self showtoplayer(self.triggerportableradarping);
+        if(!areentitiesinphase(var_4, self.owner)) {
+          self showtoplayer(self.owner);
           continue;
         }
 
-        self hidefromplayer(self.triggerportableradarping);
+        self hidefromplayer(self.owner);
       }
     }
 
-    self moveto(self.triggerportableradarping.origin, var_2);
+    self moveto(self.owner.origin, var_2);
     wait(var_2);
   }
 }

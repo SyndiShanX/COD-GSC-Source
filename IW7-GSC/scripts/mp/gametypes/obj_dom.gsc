@@ -37,15 +37,15 @@ func_591D(var_0) {
   var_7 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
   var_8 = [];
   var_9 = scripts\common\trace::ray_trace(var_5, var_6, var_8, var_7);
-  var_0A = checkmapoffsets(var_3.label);
-  var_3.baseeffectpos = var_9["position"] + var_0A;
-  var_0B = vectortoangles(var_9["normal"]);
-  var_0C = checkmapfxangles(var_3.label, var_0B);
-  var_3.baseeffectforward = anglesToForward(var_0C);
-  var_0D = spawn("script_model", var_3.baseeffectpos);
-  var_0D setModel("dom_flag_scriptable");
-  var_0D.angles = generateaxisanglesfromforwardvector(var_3.baseeffectforward, var_0D.angles);
-  var_3.physics_capsulecast = var_0D;
+  var_10 = checkmapoffsets(var_3.label);
+  var_3.baseeffectpos = var_9["position"] + var_10;
+  var_11 = vectortoangles(var_9["normal"]);
+  var_12 = checkmapfxangles(var_3.label, var_11);
+  var_3.baseeffectforward = anglesToForward(var_12);
+  var_13 = spawn("script_model", var_3.baseeffectpos);
+  var_13 setModel("dom_flag_scriptable");
+  var_13.angles = generateaxisanglesfromforwardvector(var_3.baseeffectforward, var_13.angles);
+  var_3.physics_capsulecast = var_13;
   var_3.vfxnamemod = "";
   if(var_3.trigger.fgetarg == 160) {
     var_3.vfxnamemod = "_160";
@@ -285,8 +285,8 @@ setcrankedtimerdomflag(var_0) {
 dompoint_setupflagmodels() {
   game["flagmodels"] = [];
   game["flagmodels"]["neutral"] = "prop_flag_neutral";
-  game["flagmodels"]["allies"] = scripts\mp\teams::ismeleeing("allies");
-  game["flagmodels"]["axis"] = scripts\mp\teams::ismeleeing("axis");
+  game["flagmodels"]["allies"] = ::scripts\mp\teams::ismeleeing("allies");
+  game["flagmodels"]["axis"] = ::scripts\mp\teams::ismeleeing("axis");
 }
 
 updateflagstate(var_0, var_1) {
@@ -333,8 +333,8 @@ giveflagassistedcapturepoints(var_0) {
       continue;
     }
 
-    if(isDefined(var_3.triggerportableradarping)) {
-      var_3 = var_3.triggerportableradarping;
+    if(isDefined(var_3.owner)) {
+      var_3 = var_3.owner;
     }
 
     if(!isplayer(var_3)) {

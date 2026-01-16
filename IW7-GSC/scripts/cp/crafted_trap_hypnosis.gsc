@@ -176,7 +176,7 @@ waitrestoreperks() {
 createhypnosisforplayer(var_0) {
   var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = var_0.angles;
-  var_1.triggerportableradarping = var_0;
+  var_1.owner = var_0;
   var_1.name = "crafted_hypnosis";
   var_1.carriedhypnosis = spawn("script_model", var_1.origin);
   var_1.carriedhypnosis.angles = var_0.angles;
@@ -226,7 +226,7 @@ hypnosis_setplaced(var_0, var_1) {
   self delete();
   var_4 = spawn("script_model", var_2);
   var_4.angles = var_3;
-  var_4.triggerportableradarping = var_1;
+  var_4.owner = var_1;
   var_4.team = "allies";
   var_4 setModel(level.crafted_hypnosis_settings["crafted_hypnosis"].placedmodel);
   var_4.name = "crafted_hypnosis";
@@ -239,8 +239,8 @@ hypnosis_setplaced(var_0, var_1) {
 
 hypnosis_setcancelled() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.carriedhypnosis delete();
@@ -268,7 +268,7 @@ hypnosis_setactive(var_0) {
   wait(0.5);
   playFXOnTag(level._effect["hypnosis_active"], self, "tag_origin");
   create_attract_positions((1, 1, 0), 0, 15, 36);
-  thread hypnosis_handledeath(self.triggerportableradarping);
+  thread hypnosis_handledeath(self.owner);
   thread scripts\cp\utility::item_handleownerdisconnect("elechypnosis_handleOwner");
   thread scripts\cp\utility::item_timeout(var_0, level.crafted_hypnosis_settings["crafted_hypnosis"].timeout, "explode");
   thread hypnosis_trap_enemies();
@@ -340,16 +340,16 @@ go_to_radio_and_dance(var_0, var_1) {
   var_3 = vectortoangles(var_2);
   self.desired_dance_angles = (0, var_3[1], 0);
   self give_mp_super_weapon(var_1.origin);
-  scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+  scripts\engine\utility::waittill_any("goal", "goal_reached");
   self setscriptablepartstate("eyes", "hypnotized");
-  self.var_CF80 = var_0.triggerportableradarping;
+  self.var_CF80 = var_0.owner;
   self.is_dancing = 1;
   var_0.dancers[var_0.dancers.size] = self;
 }
 
 release_zombie_on_radio_death(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("death", "explode");
+  var_0 scripts\engine\utility::waittill_any("death", "explode");
   if(isDefined(self.og_goalradius)) {
     self.objective_playermask_showto = self.og_goalradius;
   }
@@ -365,8 +365,8 @@ hypnosis_explode() {
   var_0 = self.dancers;
   foreach(var_3, var_2 in var_0) {
     var_2 thread hypnosis_delayed_death(var_3, self);
-    if(isDefined(self.triggerportableradarping)) {
-      self.triggerportableradarping scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
+    if(isDefined(self.owner)) {
+      self.owner scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
     }
   }
 }
@@ -416,19 +416,19 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
   for(var_7 = var_1; var_7 < 360 + var_1; var_7 = var_7 + var_6) {
     var_8 = var_0 * var_3;
     var_9 = (cos(var_7) * var_8[0] - sin(var_7) * var_8[1], sin(var_7) * var_8[0] + cos(var_7) * var_8[1], var_8[2]);
-    var_0A = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
-    if(!scripts\cp\loot::is_in_active_volume(var_0A)) {
+    var_10 = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
+    if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
 
-    if(isDefined(var_0A) && distancesquared(var_0A, self.origin) > var_4) {
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
     } else {
-      if(abs(var_0A[2] - self.origin[2]) < 60) {
-        var_0B = spawnStruct();
-        var_0B.origin = var_0A;
-        var_0B.occupied = 0;
-        self.attract_positions[self.attract_positions.size] = var_0B;
+      if(abs(var_10[2] - self.origin[2]) < 60) {
+        var_11 = spawnStruct();
+        var_11.origin = var_10;
+        var_11.occupied = 0;
+        self.attract_positions[self.attract_positions.size] = var_11;
         continue;
       }
 
@@ -439,19 +439,19 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
   for(var_7 = var_1; var_7 < 360 + var_1; var_7 = var_7 + var_6) {
     var_8 = var_0 * var_3 + 56;
     var_9 = (cos(var_7) * var_8[0] - sin(var_7) * var_8[1], sin(var_7) * var_8[0] + cos(var_7) * var_8[1], var_8[2]);
-    var_0A = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
-    if(!scripts\cp\loot::is_in_active_volume(var_0A)) {
+    var_10 = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
+    if(!scripts\cp\loot::is_in_active_volume(var_10)) {
       continue;
     }
 
-    if(isDefined(var_0A) && distancesquared(var_0A, self.origin) > var_4) {
+    if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_4) {
       continue;
     } else {
-      if(abs(var_0A[2] - self.origin[2]) < 60) {
-        var_0B = spawnStruct();
-        var_0B.origin = var_0A;
-        var_0B.occupied = 0;
-        self.attract_positions[self.attract_positions.size] = var_0B;
+      if(abs(var_10[2] - self.origin[2]) < 60) {
+        var_11 = spawnStruct();
+        var_11.origin = var_10;
+        var_11.occupied = 0;
+        self.attract_positions[self.attract_positions.size] = var_11;
         continue;
       }
 

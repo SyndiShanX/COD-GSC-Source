@@ -183,7 +183,7 @@ showtoteam(var_0, var_1) {
   }
 
   for(;;) {
-    level scripts\engine\utility::waittill_any_3("joined_team", "update_phase_visibility");
+    level scripts\engine\utility::waittill_any("joined_team", "update_phase_visibility");
     self hide();
     foreach(var_3 in level.players) {
       if(playercanusetags(var_3)) {
@@ -229,8 +229,8 @@ func_BA31(var_0) {
       continue;
     }
 
-    if(isagent(var_1) && isDefined(var_1.triggerportableradarping)) {
-      var_1 = var_1.triggerportableradarping;
+    if(isagent(var_1) && isDefined(var_1.owner)) {
+      var_1 = var_1.owner;
     }
 
     if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_0, var_1)) {
@@ -285,7 +285,7 @@ playersettagcount(var_0) {
 monitorjointeam() {
   self endon("disconnect");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+    scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
     playersettagcount(0);
     if(self.team == "allies") {
       level.var_1C26 = scripts\engine\utility::array_add(level.var_1C26, self);
@@ -377,7 +377,7 @@ processscoring(var_0, var_1) {
       scoreamount(var_0, level.megabanklimit);
       var_2 = scripts\mp\rank::getscoreinfovalue("tag_score");
       var_2 = var_2 * level.megabanklimit;
-      var_0 thread scripts\mp\utility::giveunifiedpoints("mega_bank", var_0.var_394, var_2 + level.megabankbonus);
+      var_0 thread scripts\mp\utility::giveunifiedpoints("mega_bank", var_0.weapon, var_2 + level.megabankbonus);
       var_0 scripts\mp\missions::func_D991("ch_mega_bank");
     } else {
       var_3 = level.bankrate;
@@ -547,44 +547,44 @@ placepoint() {
       var_9[0].angles = var_1.angles;
       level.objectives[level.objectives.size] = var_1;
       level.var_13FC1[level.var_13FC1.size] = var_1;
-      var_0A = spawn("trigger_radius", var_1.origin, 0, 90, 128);
-      var_0A.script_label = var_1.script_label;
-      var_1 = var_0A;
-      var_0B = scripts\mp\gameobjects::createuseobject("neutral", var_1, var_9, (0, 0, 100));
-      var_0C = var_0;
-      var_0B.label = var_0C;
-      var_0B thread runzonethink();
-      var_0B scripts\mp\gameobjects::allowuse("enemy");
-      var_0B scripts\mp\gameobjects::setusetime(level.bankcapturetime);
-      var_0B scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
-      var_0B scripts\mp\gameobjects::set2dicon("friendly", "waypoint_defend" + var_0C);
-      var_0B scripts\mp\gameobjects::set3dicon("friendly", "waypoint_defend" + var_0C);
-      var_0B scripts\mp\gameobjects::set2dicon("enemy", "waypoint_captureneutral" + var_0C);
-      var_0B scripts\mp\gameobjects::set3dicon("enemy", "waypoint_captureneutral" + var_0C);
-      var_0B scripts\mp\gameobjects::setvisibleteam("any");
-      var_0B scripts\mp\gameobjects::cancontestclaim(1);
-      var_0B.onuse = scripts\mp\gametypes\obj_grindzone::zone_onuse;
-      var_0B.onbeginuse = scripts\mp\gametypes\obj_grindzone::zone_onusebegin;
-      var_0B.onunoccupied = scripts\mp\gametypes\obj_grindzone::zone_onunoccupied;
-      var_0B.oncontested = scripts\mp\gametypes\obj_grindzone::zone_oncontested;
-      var_0B.onuncontested = scripts\mp\gametypes\obj_grindzone::zone_onuncontested;
-      var_0B.claimgracetime = level.bankcapturetime * 1000;
-      var_6 = var_0B.visuals[0].origin + (0, 0, 32);
-      var_7 = var_0B.visuals[0].origin + (0, 0, -32);
-      var_0D = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
-      var_0E = [];
-      var_8 = scripts\common\trace::ray_trace(var_6, var_7, var_0E, var_0D);
-      var_0B.baseeffectpos = var_8["position"];
-      var_0F = vectortoangles(var_8["normal"]);
-      var_0F = -1 * var_0F;
-      var_0B.baseeffectforward = anglesToForward(var_0F);
-      var_0B scripts\mp\gametypes\obj_grindzone::setneutral();
+      var_10 = spawn("trigger_radius", var_1.origin, 0, 90, 128);
+      var_10.script_label = var_1.script_label;
+      var_1 = var_10;
+      var_11 = scripts\mp\gameobjects::createuseobject("neutral", var_1, var_9, (0, 0, 100));
+      var_12 = var_0;
+      var_11.label = var_12;
+      var_11 thread runzonethink();
+      var_11 scripts\mp\gameobjects::allowuse("enemy");
+      var_11 scripts\mp\gameobjects::setusetime(level.bankcapturetime);
+      var_11 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
+      var_11 scripts\mp\gameobjects::set2dicon("friendly", "waypoint_defend" + var_12);
+      var_11 scripts\mp\gameobjects::set3dicon("friendly", "waypoint_defend" + var_12);
+      var_11 scripts\mp\gameobjects::set2dicon("enemy", "waypoint_captureneutral" + var_12);
+      var_11 scripts\mp\gameobjects::set3dicon("enemy", "waypoint_captureneutral" + var_12);
+      var_11 scripts\mp\gameobjects::setvisibleteam("any");
+      var_11 scripts\mp\gameobjects::cancontestclaim(1);
+      var_11.onuse = scripts\mp\gametypes\obj_grindzone::zone_onuse;
+      var_11.onbeginuse = scripts\mp\gametypes\obj_grindzone::zone_onusebegin;
+      var_11.onunoccupied = scripts\mp\gametypes\obj_grindzone::zone_onunoccupied;
+      var_11.oncontested = scripts\mp\gametypes\obj_grindzone::zone_oncontested;
+      var_11.onuncontested = scripts\mp\gametypes\obj_grindzone::zone_onuncontested;
+      var_11.claimgracetime = level.bankcapturetime * 1000;
+      var_6 = var_11.visuals[0].origin + (0, 0, 32);
+      var_7 = var_11.visuals[0].origin + (0, 0, -32);
+      var_13 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
+      var_14 = [];
+      var_8 = scripts\common\trace::ray_trace(var_6, var_7, var_14, var_13);
+      var_11.baseeffectpos = var_8["position"];
+      var_15 = vectortoangles(var_8["normal"]);
+      var_15 = -1 * var_15;
+      var_11.baseeffectforward = anglesToForward(var_15);
+      var_11 scripts\mp\gametypes\obj_grindzone::setneutral();
       for(var_10 = 0; var_10 < level.objectives.size; var_10++) {
-        level.objectives[var_10].useobj = var_0B;
-        var_0B.levelflag = level.objectives[var_10];
+        level.objectives[var_10].useobj = var_11;
+        var_11.levelflag = level.objectives[var_10];
       }
 
-      level.var_13FC1[level.var_13FC1.size].useobj = var_0B;
+      level.var_13FC1[level.var_13FC1.size].useobj = var_11;
       setdynamicdvar("scr_devPlaceDomFlag", "");
     }
 

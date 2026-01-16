@@ -93,8 +93,9 @@ updateenemy() {
     if(gettime() - self.ratkingenemystarttime < 3000) {
       return self.ratkingenemy;
     }
-  } else
+  } else {
     self.ratkingenemy = undefined;
+  }
 
   if(isDefined(self.ratkingenemy)) {
     var_0 = self.ratkingenemy;
@@ -145,8 +146,9 @@ updateeveryframe(var_0) {
       if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
       }
-    } else
+    } else {
       self.enemyreacquiredtime = undefined;
+    }
   } else {
     self.lastenemysighttime = 0;
     self.lastenemysightpos = undefined;
@@ -649,8 +651,9 @@ tryblock() {
       self.desiredaction = "block";
       self.damageaccumulator.accumulateddamage = 0;
       return 1;
-    } else
+    } else {
       self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage - var_0.need_to_block_damage_threshold / 2;
+    }
   }
 
   return 0;
@@ -854,15 +857,17 @@ trymeleeattacks(var_0) {
     if(isDefined(self.nextstaffstomptime) && var_3 < self.nextstaffstomptime) {
       return 0;
     }
-  } else if(isDefined(self.nextstaffstompinnertime) && var_3 < self.nextstaffstompinnertime)
+  } else if(isDefined(self.nextstaffstompinnertime) && var_3 < self.nextstaffstompinnertime) {
     var_6 = 1;
+  }
 
   if(!ispointonnavmesh(var_1.origin)) {
     if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       var_6 = 1;
     }
-  } else if(var_0 > self.meleeradiusbasesq)
+  } else if(var_0 > self.meleeradiusbasesq) {
     var_6 = 1;
+  }
 
   if(var_4 && var_6 && !var_5) {
     self.desiredaction = "staff_stomp";
@@ -893,8 +898,9 @@ trymeleeattacks(var_0) {
       self.desiredaction = "staff_stomp";
       return 1;
     }
-  } else if(var_6)
+  } else if(var_6) {
     return 0;
+  }
 
   self.desiredaction = "melee_attack";
   return 1;
@@ -1219,8 +1225,9 @@ findteleportpos(var_0, var_1, var_2, var_3, var_4) {
     } else if(var_14.size <= 0) {
       self.findteleportposstatus = "failure";
       return;
-    } else
+    } else {
       var_13 = var_14;
+    }
   }
 
   var_13 = scripts\engine\utility::array_randomize_objects(var_13);
@@ -1414,8 +1421,9 @@ findteleportposinfrontofenemy() {
         self.nextteleporttesttime = gettime() + 200;
         return undefined;
       }
-    } else
+    } else {
       return var_12;
+    }
   }
 
   return undefined;
@@ -1464,8 +1472,9 @@ shouldtryshieldattackatpos() {
     } else {
       return 0;
     }
-  } else
+  } else {
     return 0;
+  }
 }
 
 shouldtryblock() {
@@ -1567,20 +1576,23 @@ decideaction(var_0) {
           if(shouldtryblock() && tryblock()) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
         case "melee_attack":
           if(shouldtrymelee() && trymeleeattacks(var_3)) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
         case "staff_stomp":
           if(shouldtrystomp() && trymeleeattacks(var_3)) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
         case "summon":
           if(shouldtrysummon() && trysummon(var_3)) {
             return anim.success;
@@ -1591,32 +1603,37 @@ decideaction(var_0) {
           if(shouldtrystaffprojectile() && trystaffprojectile(var_3)) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
         case "shield_attack":
           if(shouldtryshieldattack() && tryshieldattack(var_3)) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
         case "shield_attack_spot":
           if(shouldtryshieldattackatpos() && tryshieldattackatpos(var_3)) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
         case "teleport":
           if(shouldtryteleport() && tryteleport(var_3)) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
         default:
           if(shouldtryteleport() && tryteleport()) {
             self.lastenemyengagetime = var_2;
             return anim.success;
-          } else
+          } else {
             break;
+          }
       }
     }
   }
@@ -1733,8 +1750,9 @@ setplatformstate() {
   if(scripts\engine\utility::is_true(self.teleporttospot)) {
     rk_setonplatform(1);
     self notify("teleport_to_platform");
-  } else
+  } else {
     rk_setonplatform(0);
+  }
 }
 
 togglerkhasstaff(var_0) {

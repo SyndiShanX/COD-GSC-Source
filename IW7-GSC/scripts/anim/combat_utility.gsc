@@ -12,8 +12,8 @@ func_8197(var_0) {
 }
 
 getjointype() {
-  if(isplayer(self.isnodeoccupied)) {
-    return randomfloatrange(self.isnodeoccupied.gs.var_B750, self.isnodeoccupied.gs.var_B461);
+  if(isplayer(self.enemy)) {
+    return randomfloatrange(self.enemy.gs.var_B750, self.enemy.gs.var_B461);
   }
 
   return randomfloatrange(level.var_B750, level.var_B461);
@@ -68,7 +68,7 @@ func_32BE() {
 
 func_1A39() {
   for(var_0 = int(60); var_0 > 0; var_0--) {
-    if(isDefined(self.dontevershoot) || isDefined(self.isnodeoccupied) && isDefined(self.isnodeoccupied.var_5951)) {
+    if(isDefined(self.dontevershoot) || isDefined(self.enemy) && isDefined(self.enemy.var_5951)) {
       wait(0.05);
       continue;
     }
@@ -83,16 +83,16 @@ func_FEDF() {
   self endon("shoot_behavior_change");
   self endon("stopShooting");
   if(scripts\anim\utility_common::islongrangeai()) {
-    if(isDefined(self.isnodeoccupied) && isai(self.isnodeoccupied) && distancesquared(level.player.origin, self.isnodeoccupied.origin) < 147456) {
-      self.isnodeoccupied scripts\anim\battlechatter_ai::func_183F("infantry", self, 1);
+    if(isDefined(self.enemy) && isai(self.enemy) && distancesquared(level.player.origin, self.enemy.origin) < 147456) {
+      self.enemy scripts\anim\battlechatter_ai::func_183F("infantry", self, 1);
     }
 
-    if(scripts\anim\utility_common::usingrocketlauncher() && issentient(self.isnodeoccupied)) {
+    if(scripts\anim\utility_common::usingrocketlauncher() && issentient(self.enemy)) {
       wait(randomfloat(2));
     }
   }
 
-  if(isDefined(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) > 160000) {
+  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 160000) {
     var_0 = randomintrange(1, 5);
   } else {
     var_0 = 10;
@@ -280,7 +280,7 @@ func_6D98() {
 
 func_6D99(var_0, var_1, var_2, var_3) {
   self endon("enemy");
-  if(isplayer(self.isnodeoccupied) && self.var_FED7 == "full" || self.var_FED7 == "semi") {
+  if(isplayer(self.enemy) && self.var_FED7 == "full" || self.var_FED7 == "semi") {
     level endon("player_becoming_invulnerable");
   }
 
@@ -295,7 +295,7 @@ func_6D99(var_0, var_1, var_2, var_3) {
 
   var_4 = 0;
   var_5 = animhasnotetrack(var_1, "fire");
-  var_6 = scripts\engine\utility::weaponclass(self.var_394) == "rocketlauncher";
+  var_6 = scripts\engine\utility::weaponclass(self.weapon) == "rocketlauncher";
   thread func_6D98();
   while(var_4 < var_3 && var_3 > 0) {
     if(var_5) {
@@ -313,7 +313,7 @@ func_6D99(var_0, var_1, var_2, var_3) {
     }
 
     shootatshootentorpos();
-    if(isplayer(self.isnodeoccupied) && self.isnodeoccupied scripts\sp\utility::func_65DB("player_is_invulnerable")) {
+    if(isplayer(self.enemy) && self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable")) {
       if(randomint(3) == 0) {
         self.bulletsinclip--;
       }
@@ -323,7 +323,7 @@ func_6D99(var_0, var_1, var_2, var_3) {
 
     if(var_6) {
       self.a.rockets--;
-      if(issubstr(tolower(self.var_394), "rpg") || issubstr(tolower(self.var_394), "panzerfaust")) {
+      if(issubstr(tolower(self.weapon), "rpg") || issubstr(tolower(self.weapon), "panzerfaust")) {
         self hidepart("tag_rocket");
         self.a.rocketvisible = 0;
       }
@@ -372,9 +372,9 @@ func_C168(var_0, var_1) {
 }
 
 func_9F57() {
-  if(weaponburstcount(self.var_394) > 0) {
+  if(weaponburstcount(self.weapon) > 0) {
     return 0;
-  } else if(weaponisauto(self.var_394) || weaponisbeam(self.var_394)) {
+  } else if(weaponisauto(self.weapon) || weaponisbeam(self.weapon)) {
     return 0;
   }
 
@@ -384,7 +384,7 @@ func_9F57() {
 shootatshootentorpos() {
   var_0 = func_9F57();
   if(isDefined(self.var_FE9E)) {
-    if(isDefined(self.isnodeoccupied) && self.var_FE9E == self.isnodeoccupied) {
+    if(isDefined(self.enemy) && self.var_FE9E == self.enemy) {
       scripts\anim\utility_common::shootenemywrapper(var_0);
     }
   } else {
@@ -465,12 +465,12 @@ func_F62B(var_0) {
   if(isplayer(var_0)) {
     self.var_1652.isplayertimer = 1;
     self.var_1652.player = var_0;
-    self.var_1652.timername = self.objective_team;
+    self.var_1652.timername = self.grenadeweapon;
     return;
   }
 
   self.var_1652.isplayertimer = 0;
-  self.var_1652.timername = "AI_" + self.objective_team;
+  self.var_1652.timername = "AI_" + self.grenadeweapon;
 }
 
 usingplayer() {
@@ -522,7 +522,7 @@ func_453D(var_0) {
         return var_0;
       }
 
-      if(self getpersstat(level.player) || isai(var_0) && var_0 getpersstat(level.player)) {
+      if(self cansee(level.player) || isai(var_0) && var_0 cansee(level.player)) {
         if(isDefined(self.covernode)) {
           var_3 = vectortoangles(level.player.origin - self.origin);
           var_4 = angleclamp180(self.covernode.angles[1] - var_3[1]);
@@ -611,7 +611,7 @@ func_128A1(var_0, var_1, var_2, var_3) {
 }
 
 func_128A0(var_0, var_1) {
-  if(self.var_394 == "mg42" || self.objective_state <= 0) {
+  if(self.weapon == "mg42" || self.objective_state <= 0) {
     return 0;
   }
 
@@ -622,7 +622,7 @@ func_128A0(var_0, var_1) {
   }
 
   var_2 = func_7EE8(var_1);
-  if(isDefined(self.isnodeoccupied) && var_0 == self.isnodeoccupied) {
+  if(isDefined(self.enemy) && var_0 == self.enemy) {
     if(!func_3E1C()) {
       return 0;
     }
@@ -663,7 +663,7 @@ func_58BA(var_0, var_1, var_2, var_3) {
     self orientmode("face direction", var_1);
   }
 
-  scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
+  scripts\anim\battlechatter_ai::func_67CF(self.grenadeweapon);
   self notify("stop_aiming_at_enemy");
   self func_82E4("throwanim", var_0, % body, func_6B9A(), 0.1, 1);
   thread scripts\anim\notetracks::donotetracksforever("throwanim", "killanimscript");
@@ -698,9 +698,9 @@ func_58BA(var_0, var_1, var_2, var_3) {
   }
 
   if(var_3) {
-    var_0D = self.var_1652.player;
-    if(var_0D.numgrenadesinprogresstowardsplayer > 1 || gettime() - var_0D.var_A990 < 2000) {
-      var_0D.grenadetimers["double_grenade"] = gettime() + min(5000, var_0D.gs.var_D382);
+    var_13 = self.var_1652.player;
+    if(var_13.numgrenadesinprogresstowardsplayer > 1 || gettime() - var_13.var_A990 < 2000) {
+      var_13.grenadetimers["double_grenade"] = gettime() + min(5000, var_13.gs.var_D382);
     }
   }
 
@@ -731,7 +731,7 @@ func_13A99(var_0) {
   var_2 = spawnStruct();
   var_2 thread func_13A9A(5);
   var_2 endon("watchGrenadeTowardsPlayerTimeout");
-  var_3 = self.objective_team;
+  var_3 = self.grenadeweapon;
   var_4 = func_7EE6();
   if(!isDefined(var_4)) {
     return;
@@ -755,16 +755,16 @@ func_13A99(var_0) {
 
     if(distancesquared(var_4.origin, var_8) < 400) {
       var_9 = [];
-      for(var_0A = 0; var_0A < var_7.size; var_0A++) {
-        var_0B = var_7[var_0A];
-        var_0C = distancesquared(var_4.origin, var_0B.origin);
-        if(var_0C < var_5) {
-          var_0B func_85C8(var_1, var_0);
+      for(var_10 = 0; var_10 < var_7.size; var_10++) {
+        var_11 = var_7[var_10];
+        var_12 = distancesquared(var_4.origin, var_11.origin);
+        if(var_12 < var_5) {
+          var_11 func_85C8(var_1, var_0);
           continue;
         }
 
-        if(var_0C < var_6) {
-          var_9[var_9.size] = var_0B;
+        if(var_12 < var_6) {
+          var_9[var_9.size] = var_11;
         }
       }
 
@@ -858,7 +858,7 @@ func_5D29() {
 }
 
 func_B019() {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -918,7 +918,7 @@ func_10026() {
     }
 
     var_1 = isDefined(var_0) && distancesquared(self.origin, var_0.origin) < 65536;
-    if((var_1 || distancesquared(self.origin, level.var_A935[self.team]) < 65536) && !isDefined(self.isnodeoccupied) || distancesquared(self.isnodeoccupied.origin, level.var_A934[self.team]) < 262144) {
+    if((var_1 || distancesquared(self.origin, level.var_A935[self.team]) < 65536) && !isDefined(self.enemy) || distancesquared(self.enemy.origin, level.var_A934[self.team]) < 262144) {
       return 1;
     }
   }
@@ -939,7 +939,7 @@ func_3DE5() {
     return 0;
   }
 
-  if(!issentient(self.isnodeoccupied)) {
+  if(!issentient(self.enemy)) {
     return 0;
   }
 
@@ -948,7 +948,7 @@ func_3DE5() {
   }
 
   var_0 = isDefined(self.var_18CC) && self.var_18CC;
-  if(!var_0 && getaicount(self.team) < getaicount(self.isnodeoccupied.team)) {
+  if(!var_0 && getaicount(self.team) < getaicount(self.enemy.team)) {
     return 0;
   }
 
@@ -956,7 +956,7 @@ func_3DE5() {
 }
 
 func_128AA(var_0) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -968,7 +968,7 @@ func_128AA(var_0) {
     return 0;
   }
 
-  if(!self func_81A5(self.isnodeoccupied.origin)) {
+  if(!self func_81A5(self.enemy.origin)) {
     return 0;
   }
 
@@ -995,7 +995,7 @@ func_128AA(var_0) {
     }
 
     level.var_A935[self.team] = self.origin;
-    level.var_A934[self.team] = self.isnodeoccupied.origin;
+    level.var_A934[self.team] = self.enemy.origin;
     level.var_18D5[self.team]++;
     return 1;
   }
@@ -1054,11 +1054,11 @@ func_7EEB() {
 }
 
 canspawntestclient() {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
-  var_0 = self.isnodeoccupied getshootatpos() - self getshootatpos();
+  var_0 = self.enemy getshootatpos() - self getshootatpos();
   var_0 = vectornormalize(var_0);
   var_1 = vectortoangles(var_0)[0];
   return angleclamp180(var_1);
@@ -1131,9 +1131,9 @@ func_118EC(var_0, var_1) {
 }
 
 func_3E1C() {
-  var_0 = self.isnodeoccupied.origin - self.origin;
+  var_0 = self.enemy.origin - self.origin;
   var_1 = lengthsquared((var_0[0], var_0[1], 0));
-  if(self.objective_team == "flash_grenade") {
+  if(self.grenadeweapon == "flash_grenade") {
     return var_1 < 589824;
   }
 
@@ -1226,7 +1226,7 @@ dospawn(var_0) {
 func_D285() {
   var_0 = self getEye();
   foreach(var_2 in level.players) {
-    if(!self getpersstat(var_2)) {
+    if(!self cansee(var_2)) {
       continue;
     }
 

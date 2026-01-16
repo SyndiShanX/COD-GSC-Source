@@ -115,18 +115,18 @@ capsule_trace(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   var_8 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, create_default_contents());
   var_9 = convert_capsule_data(var_0, var_1, var_2, var_3, var_4);
-  var_0A = physics_capsulecast(var_9["trace_start"], var_9["trace_end"], var_2, var_9["half_height"], var_4, var_8, var_5, "physicsquery_closest");
-  if(var_0A.size) {
-    var_0A = var_0A[0];
+  var_10 = physics_capsulecast(var_9["trace_start"], var_9["trace_end"], var_2, var_9["half_height"], var_4, var_8, var_5, "physicsquery_closest");
+  if(var_10.size) {
+    var_10 = var_10[0];
   } else {
-    var_0A = internal_pack_default_trace(var_1);
+    var_10 = internal_pack_default_trace(var_1);
   }
 
   if(isDefined(var_7) && var_7) {
-    var_0A = convert_surface_flag(var_0A);
+    var_10 = convert_surface_flag(var_10);
   }
 
-  return var_0A;
+  return var_10;
 }
 
 capsule_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -136,14 +136,14 @@ capsule_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
   var_8 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, create_default_contents());
   var_9 = convert_capsule_data(var_0, var_1, var_2, var_3, var_4);
-  var_0A = physics_capsulecast(var_9["trace_start"], var_9["trace_end"], var_2, var_9["half_height"], var_4, var_8, var_5, "physicsquery_all");
+  var_10 = physics_capsulecast(var_9["trace_start"], var_9["trace_end"], var_2, var_9["half_height"], var_4, var_8, var_5, "physicsquery_all");
   if(isDefined(var_7) && var_7) {
-    foreach(var_0C in var_0A) {
-      var_0C = convert_surface_flag(var_0C);
+    foreach(var_12 in var_10) {
+      var_12 = convert_surface_flag(var_12);
     }
   }
 
-  return var_0A;
+  return var_10;
 }
 
 capsule_trace_passed(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -163,18 +163,18 @@ capsule_get_closest_point(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
   var_8 = scripts\engine\utility::ter_op(isDefined(var_6), var_6, create_default_contents());
   var_9 = convert_capsule_data(var_0, undefined, var_1, var_2, var_3);
-  var_0A = physics_getclosestpointtocapsule(var_9["trace_start"], var_1, var_9["half_height"], var_3, var_4, var_8, var_5, "physicsquery_closest");
-  if(var_0A.size) {
-    var_0A = var_0A[0];
+  var_10 = physics_getclosestpointtocapsule(var_9["trace_start"], var_1, var_9["half_height"], var_3, var_4, var_8, var_5, "physicsquery_closest");
+  if(var_10.size) {
+    var_10 = var_10[0];
   } else {
-    var_0A = internal_pack_default_trace(var_0);
+    var_10 = internal_pack_default_trace(var_0);
   }
 
   if(isDefined(var_7) && var_7) {
-    var_0A = convert_surface_flag(var_0A);
+    var_10 = convert_surface_flag(var_10);
   }
 
-  return var_0A;
+  return var_10;
 }
 
 player_trace(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -221,8 +221,8 @@ player_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_8 = physics_charactercast(var_0, var_1, self, var_6, var_2, var_7, var_3, "physicsquery_all");
   if(isDefined(var_5) && var_5) {
-    foreach(var_0A in var_8) {
-      var_0A = convert_surface_flag(var_0A);
+    foreach(var_10 in var_8) {
+      var_10 = convert_surface_flag(var_10);
     }
   }
 
@@ -328,8 +328,8 @@ ai_trace_get_all_results(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_8 = physics_charactercast(var_0, var_1, self, var_6, var_2, var_7, var_3, "physicsquery_all");
   if(isDefined(var_5) && var_5) {
-    foreach(var_0A in var_8) {
-      var_0A = convert_surface_flag(var_0A);
+    foreach(var_10 in var_8) {
+      var_10 = convert_surface_flag(var_10);
     }
   }
 

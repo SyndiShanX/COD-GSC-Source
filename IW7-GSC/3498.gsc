@@ -633,8 +633,9 @@ func_128A4(var_0, var_1, var_2) {
     if(!isDefined(var_4[var_6])) {
       if(var_6 >= 4) {
         break;
-      } else
+      } else {
         continue;
+      }
     }
 
     if(var_4[var_6] == var_3) {
@@ -1442,8 +1443,9 @@ func_6CBA(var_0) {
       if(var_2 >= 4) {
         break;
       }
-    } else if(var_0 == var_3)
+    } else if(var_0 == var_3) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -1718,8 +1720,9 @@ initridekillstreak_internal(var_0) {
       thread scripts\mp\utility\game::set_visionset_for_watching_players("black_bw", 0.75, 1.0, undefined, 1);
       var_2 = scripts\engine\utility::waittill_any_timeout(0.8, "disconnect", "death");
     }
-  } else
+  } else {
     var_2 = scripts\engine\utility::waittill_any_timeout(1.0, "disconnect", "death");
+  }
 
   self notify("black_out_done");
   scripts\mp\hostmigration::waittillhostmigrationdone();
@@ -1935,8 +1938,9 @@ func_11086(var_0) {
     if(scripts\mp\utility\game::istrue(var_0)) {
       wait 0.1;
       self notify("finished_with_manual_weapon_" + var_1);
-    } else
+    } else {
       self notify("killstreak_finished_with_weapon_" + var_1);
+    }
   }
 
   thread scripts\mp\utility\game::delaysetclientomnvar(1.3, "ui_remote_control_sequence", 0);

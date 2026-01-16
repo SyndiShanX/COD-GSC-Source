@@ -318,8 +318,9 @@ func_6312() {
     if(isDefined(self.agent_type) && self.agent_type != "zombie_brute" && self.agent_type != "zombie_grey") {
       self setscriptablepartstate("burning", "inactive", 1);
     }
-  } else if(isplayer(self))
+  } else if(isplayer(self)) {
     self setscriptablepartstate("burning", "neutral", 1);
+  }
 }
 
 func_139C0() {
@@ -342,8 +343,9 @@ func_139C0() {
         var_5 = func_7E11();
         self getrandomarmkillstreak(var_5, var_2.origin, var_3, var_2, "MOD_EXPLOSIVE", var_4);
         var_1 = 0.25;
-      } else
+      } else {
         var_1 = var_1 - 0.05;
+      }
     } else {
       var_0.var_32A0 = var_0.var_32A0 + 0.05;
 

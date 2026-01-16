@@ -57,8 +57,9 @@ get_hudoutline_item(var_0, var_1) {
       } else {
         var_2 = var_0.cost * 0.5;
       }
-    } else
+    } else {
       var_2 = var_0.cost * 0.5;
+    }
   }
 
   if(scripts\cp\cp_persistence::player_has_enough_currency(var_2) || scripts\engine\utility::is_true(var_0.enabled)) {

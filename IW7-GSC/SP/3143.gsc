@@ -96,16 +96,16 @@ func_351B() {
     if(var_0 == "left") {
       thread func_35F2(var_2);
       thread func_D404(var_2);
-      var_0A = lib_0A1E::func_2356(var_6, "struggle");
-      self func_82EA("RodeoStruggle", var_0A, 1, 0.2, 1);
+      var_10 = lib_0A1E::func_2356(var_6, "struggle");
+      self func_82EA("RodeoStruggle", var_10, 1, 0.2, 1);
       self waittill("struggle_succeeded");
-      self clearanim(var_0A, 0.2);
+      self clearanim(var_10, 0.2);
       thread lib_0F3D::func_50E8(0.2);
     }
 
-    var_0A = lib_0A1E::func_2356(var_6, "success");
+    var_10 = lib_0A1E::func_2356(var_6, "success");
     thread func_D3ED(self.var_D267, var_0);
-    self func_82E7("RodeoDismount", var_0A, 1, 0.2, 1);
+    self func_82E7("RodeoDismount", var_10, 1, 0.2, 1);
     if(var_0 == "left") {
       self give_attacker_kill_rewards(lib_0A1E::func_2356("rodeo_right", "fire"), 1, 0.2, 1);
     }
@@ -113,10 +113,10 @@ func_351B() {
     lib_0A1E::func_231F("rodeo", "RodeoDismount", ::func_35EE);
     self.var_30EA = 1;
   } else {
-    var_0A = lib_0A1E::func_2356(var_7, "fail");
-    var_0B = scripts\engine\utility::get_notetrack_time(var_0A, "knockoff");
-    thread func_D3F6(self.var_D267, var_0, var_0B);
-    self func_82E7("RodeoKnockOff", var_0A, 1, 0.2, 1);
+    var_10 = lib_0A1E::func_2356(var_7, "fail");
+    var_11 = scripts\engine\utility::get_notetrack_time(var_10, "knockoff");
+    thread func_D3F6(self.var_D267, var_0, var_11);
+    self func_82E7("RodeoKnockOff", var_10, 1, 0.2, 1);
     lib_0A1E::func_231F("rodeo", "RodeoKnockOff", ::func_35EE);
     self.asm.var_11B08.var_30E6 = 0;
   }
@@ -212,14 +212,14 @@ func_35F2(var_0) {
   self.var_6D3E = 1;
   thread func_35F3();
   var_0 func_8244("steady_rumble");
-  var_0A = getdvarint("cg_fov");
-  var_0B = 50;
-  var_0C = var_0A - var_0B;
+  var_10 = getdvarint("cg_fov");
+  var_11 = 50;
+  var_12 = var_10 - var_11;
   while(var_5 < 0.9) {
     scripts\engine\utility::waitframe();
     var_4 = var_3;
     var_3 = self.var_B3C3 >= var_8;
-    var_0D = gettime() - self.var_A8E4;
+    var_13 = gettime() - self.var_A8E4;
     var_5 = self getscoreinfocategory(var_1);
     if(var_3 && !var_4) {
       self func_82B1(var_1, var_7);
@@ -240,7 +240,7 @@ func_35F2(var_0) {
       }
     }
 
-    level.player func_81DE(var_0A - var_0C * var_5, 0.05);
+    level.player func_81DE(var_10 - var_12 * var_5, 0.05);
   }
 
   self notify("mash_end");
@@ -250,7 +250,7 @@ func_35F2(var_0) {
   var_2 delete();
   self func_82B1(var_1, var_7);
   var_0 func_82B1(var_0.var_11169, var_7);
-  level.player func_81DE(var_0B, getanimlength(var_1) * 1 - var_5 / var_7);
+  level.player func_81DE(var_11, getanimlength(var_1) * 1 - var_5 / var_7);
   while(self getscoreinfocategory(var_1) < 1) {
     scripts\engine\utility::waitframe();
   }
@@ -268,7 +268,7 @@ func_35F2(var_0) {
   wait(0.05);
   setslowmotion(1, 0.2, 0.2);
   level.player playrumbleonentity("heavy_1s");
-  level.player func_81DE(var_0A, 1);
+  level.player func_81DE(var_10, 1);
   wait(0.3);
   setslowmotion(0.2, 1, 2);
   self.brodeostrugglesucceeded = 1;
@@ -373,7 +373,7 @@ func_35EF() {
   var_0 playSound("ui_c12_rodeo_temperature_warning_lp_start");
   wait(0.5);
   var_0 thread c12_rodeo_temperature_sfx_lp();
-  level.player scripts\engine\utility::waittill_any_3("stop_temperature_sfx", "death");
+  level.player scripts\engine\utility::waittill_any("stop_temperature_sfx", "death");
   var_0 stoploopsound("ui_c12_rodeo_temperature_warning_lp");
   var_0 delete();
   level.player playSound("ui_c12_rodeo_temperature_warning_lp_end");
@@ -402,28 +402,28 @@ func_6D73() {
   var_8 = "titan_c12_rodeo_bullet_hits_lp";
   var_9 = 0;
   for(;;) {
-    var_0A = self gettagorigin(var_1);
-    var_0B = self gettagangles(var_1);
-    var_0C = var_0A + anglesToForward(var_0B);
-    var_0D = bulletspread(var_0A, var_0C, 4);
-    self func_8494(var_0, var_0A, var_0B, 1, var_0D, 0, 0, var_1);
-    var_0E = 0.35;
+    var_10 = self gettagorigin(var_1);
+    var_11 = self gettagangles(var_1);
+    var_12 = var_10 + anglesToForward(var_11);
+    var_13 = bulletspread(var_10, var_12, 4);
+    self func_8494(var_0, var_10, var_11, 1, var_13, 0, 0, var_1);
+    var_14 = 0.35;
     if(!isDefined(self.brodeostrugglesucceeded) || !self.brodeostrugglesucceeded) {
-      var_0F = self getscoreinfocategory(var_2);
-      if(var_5 < var_3.size && var_0F >= var_3[var_5]) {
+      var_15 = self getscoreinfocategory(var_2);
+      if(var_5 < var_3.size && var_15 >= var_3[var_5]) {
         self.var_E5EF = var_4[var_5];
         var_5++;
       }
 
-      if(var_7 < var_6.size && var_0F >= var_6[var_7]) {
+      if(var_7 < var_6.size && var_15 >= var_6[var_7]) {
         self setscriptablepartstate("head", "rodeo" + var_7);
         var_7++;
       }
 
       if(isDefined(self.var_E5EF)) {
-        var_10 = scripts\common\trace::ray_trace_detail(var_0C, var_0D);
+        var_10 = scripts\common\trace::ray_trace_detail(var_12, var_13);
         if(isDefined(var_10["entity"]) && var_10["entity"] == self) {
-          var_0E = 0.6;
+          var_14 = 0.6;
           playFXOnTag(self.var_E5EF, self, "j_helmet");
           level.player playrumbleonentity("light_1s");
           if(!var_9) {
@@ -437,7 +437,7 @@ func_6D73() {
       }
     }
 
-    earthquake(var_0E, 0.1, self gettagorigin("tag_brass_le"), 32);
+    earthquake(var_14, 0.1, self gettagorigin("tag_brass_le"), 32);
     wait(0.1);
   }
 }

@@ -1024,8 +1024,9 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
                   updatecurrentobjective();
                 }
               }
-            } else if(scripts\engine\utility::isbulletdamage(var_3))
+            } else if(scripts\engine\utility::isbulletdamage(var_3)) {
               updatecurrentobjective();
+            }
           }
 
           break;
@@ -1035,7 +1036,7 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
               var_15 = scripts\mp\utility\game::getweaponrootname(var_2);
 
               if(var_15 == "iw7_rvn") {
-                if(self func_8519(var_2)) {
+                if(self isalternatemode(var_2)) {
                   updatecurrentobjective();
                 }
               }
@@ -1046,13 +1047,14 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
                 var_16 = getweaponvariantindex(var_2);
 
                 if(isDefined(var_16) && (var_16 == 3 || var_16 == 35)) {
-                  if(self func_8519(var_2)) {
+                  if(self isalternatemode(var_2)) {
                     updatecurrentobjective();
                   }
                 }
               }
-            } else if(scripts\engine\utility::isbulletdamage(var_3))
+            } else if(scripts\engine\utility::isbulletdamage(var_3)) {
               updatecurrentobjective();
+            }
           }
 
           break;
@@ -1239,8 +1241,9 @@ intelattachmentcountchallenge(var_0, var_1, var_2) {
     if(var_4 > var_1) {
       updatecurrentobjective();
     }
-  } else if(var_4 == var_1)
+  } else if(var_4 == var_1) {
     updatecurrentobjective();
+  }
 }
 
 combinealtweaponarray(var_0) {

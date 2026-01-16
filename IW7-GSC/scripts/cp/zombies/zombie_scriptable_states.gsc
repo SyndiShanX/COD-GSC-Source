@@ -16,14 +16,14 @@ applyzombiescriptablestate(var_0, var_1) {
   var_8 = 0;
   var_9 = 0;
   while(var_2) {
-    var_0A = scripts\engine\utility::istrue(var_0.is_afflicted);
-    var_0B = scripts\engine\utility::istrue(var_0.is_burning);
-    var_0C = scripts\engine\utility::istrue(var_0.stunned);
-    var_0D = scripts\engine\utility::istrue(var_0.isfrozen);
-    var_0E = scripts\engine\utility::istrue(var_0.is_chem_burning);
-    var_0F = scripts\engine\utility::istrue(var_0.is_electrified);
+    var_10 = scripts\engine\utility::istrue(var_0.is_afflicted);
+    var_11 = scripts\engine\utility::istrue(var_0.is_burning);
+    var_12 = scripts\engine\utility::istrue(var_0.stunned);
+    var_13 = scripts\engine\utility::istrue(var_0.isfrozen);
+    var_14 = scripts\engine\utility::istrue(var_0.is_chem_burning);
+    var_15 = scripts\engine\utility::istrue(var_0.is_electrified);
     var_10 = isDefined(var_0.frozentick);
-    if(var_0D) {
+    if(var_13) {
       if(!var_5) {
         var_5 = 1;
         var_3 = 0;
@@ -59,7 +59,7 @@ applyzombiescriptablestate(var_0, var_1) {
       continue;
     }
 
-    if(var_0A) {
+    if(var_10) {
       if(!var_8) {
         var_8 = 1;
         var_3 = 0;
@@ -78,7 +78,7 @@ applyzombiescriptablestate(var_0, var_1) {
       continue;
     }
 
-    if(var_0E) {
+    if(var_14) {
       if(!var_6) {
         var_6 = 1;
         var_3 = 0;
@@ -97,7 +97,7 @@ applyzombiescriptablestate(var_0, var_1) {
       continue;
     }
 
-    if(var_0B) {
+    if(var_11) {
       if(!var_3) {
         var_3 = 1;
         var_4 = 0;
@@ -116,7 +116,7 @@ applyzombiescriptablestate(var_0, var_1) {
       continue;
     }
 
-    if(var_0F) {
+    if(var_15) {
       if(!var_7) {
         var_7 = 1;
         var_3 = 0;
@@ -135,7 +135,7 @@ applyzombiescriptablestate(var_0, var_1) {
       continue;
     }
 
-    if(var_0C) {
+    if(var_12) {
       if(!var_4) {
         var_4 = 1;
         var_3 = 0;

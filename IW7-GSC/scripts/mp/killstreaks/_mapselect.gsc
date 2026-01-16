@@ -101,7 +101,7 @@ func_13AE7() {
   self endon("map_select_exit");
   level endon("game_ended");
   self setclientomnvar("ui_location_selection_countdown", gettime() + 30000);
-  scripts\engine\utility::waittill_any_timeout_1(30, "death");
+  scripts\engine\utility::waittill_any_timeout(30, "death");
   self notify("cancel_location");
 }
 

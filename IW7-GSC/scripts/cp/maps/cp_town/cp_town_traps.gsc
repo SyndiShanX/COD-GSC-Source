@@ -54,7 +54,7 @@ check_for_trap_master_achievement(var_0) {
     self.used_traps = [];
   }
 
-  self.used_traps = scripts\engine\utility::array_add_safe(self.used_traps, var_0);
+  self.used_traps = scripts\engine\utility::add_to_array(self.used_traps, var_0);
   self.used_traps = scripts\engine\utility::array_remove_duplicates(self.used_traps);
   if(self.used_traps.size > 4) {
     scripts\cp\zombies\achievement::update_achievement("BAIT_AND_SWITCH", 1);
@@ -111,23 +111,23 @@ electric_trap_init() {
     }
   }
 
-  var_0A = scripts\engine\utility::getstruct(var_2.target, "targetname");
-  if(isDefined(var_0A.angles)) {
-    var_0B = (322.4, 26, -6.6);
+  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  if(isDefined(var_10.angles)) {
+    var_11 = (322.4, 26, -6.6);
   } else {
-    var_0B = (0, 0, 0);
+    var_11 = (0, 0, 0);
   }
 
   var_2.part = spawn("script_model", (5561, -2903, 119));
-  var_2.part.angles = var_0B;
+  var_2.part.angles = var_11;
   var_2.part setModel("container_electrical_box_01_components");
-  var_0C = scripts\engine\utility::getstruct("fix_electric_trap", "script_noteworthy");
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0C);
+  var_12 = scripts\engine\utility::getstruct("fix_electric_trap", "script_noteworthy");
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(var_12);
   level waittill("power_active");
   level.interactions["fix_electric_trap"].disable_guided_interactions = undefined;
   level thread elec_trap_sparks();
   wait(1);
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_0C);
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_12);
 }
 
 elec_trap_sparks() {
@@ -337,15 +337,15 @@ freeze_trap_init() {
     }
   }
 
-  var_0A = scripts\engine\utility::getstruct(var_2.target, "targetname");
-  if(isDefined(var_0A.angles)) {
-    var_0B = var_0A.angles;
+  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  if(isDefined(var_10.angles)) {
+    var_11 = var_10.angles;
   } else {
-    var_0B = (0, 0, 0);
+    var_11 = (0, 0, 0);
   }
 
-  var_2.part = spawn("script_model", var_0A.origin);
-  var_2.part.angles = var_0B;
+  var_2.part = spawn("script_model", var_10.origin);
+  var_2.part.angles = var_11;
   var_2.part setModel("ship_hallway_fuse_box");
   level thread freeze_trap_panel_fx();
   foreach(var_5 in var_3) {
@@ -359,8 +359,8 @@ freeze_trap_init() {
   scripts\engine\utility::exploder(75);
   var_3 = scripts\engine\utility::getstructarray("trap_freeze", "script_noteworthy");
   foreach(var_5 in var_3) {
-    var_0F = getent(var_5.target, "targetname");
-    var_0F setModel("mp_frag_button_on_green");
+    var_15 = getent(var_5.target, "targetname");
+    var_15 setModel("mp_frag_button_on_green");
   }
 }
 
@@ -374,7 +374,7 @@ func_13611(var_0) {
     }
 
     if(isDefined(var_1)) {
-      level scripts\engine\utility::waittill_any_3("power_on", var_1 + " power_on");
+      level scripts\engine\utility::waittill_any("power_on", var_1 + " power_on");
     }
   }
 
@@ -536,7 +536,7 @@ chill_scrnfx() {
   self.scrnfx = spawnfxforclient(level._effect["vfx_freezer_frost_scrn"], self getEye(), self);
   wait(0.1);
   triggerfx(self.scrnfx);
-  scripts\engine\utility::waittill_any_timeout_1(5, "last_stand");
+  scripts\engine\utility::waittill_any_timeout(5, "last_stand");
   self.scrnfx delete();
   self.scrnfx = undefined;
 }
@@ -558,15 +558,15 @@ pool_trap_init() {
     }
   }
 
-  var_0A = scripts\engine\utility::getstruct(var_2.target, "targetname");
-  if(isDefined(var_0A.angles)) {
-    var_0B = var_0A.angles;
+  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  if(isDefined(var_10.angles)) {
+    var_11 = var_10.angles;
   } else {
-    var_0B = (0, 0, 0);
+    var_11 = (0, 0, 0);
   }
 
-  var_2.part = spawn("script_model", var_0A.origin);
-  var_2.part.angles = var_0B;
+  var_2.part = spawn("script_model", var_10.origin);
+  var_2.part.angles = var_11;
   var_2.part setModel("gas_canister_iw6");
 }
 
@@ -715,15 +715,15 @@ propane_trap_init() {
     }
   }
 
-  var_0A = scripts\engine\utility::getstruct(var_2.target, "targetname");
-  if(isDefined(var_0A.angles)) {
-    var_0B = var_0A.angles;
+  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  if(isDefined(var_10.angles)) {
+    var_11 = var_10.angles;
   } else {
-    var_0B = (0, 0, 0);
+    var_11 = (0, 0, 0);
   }
 
-  var_2.part = spawn("script_model", var_0A.origin);
-  var_2.part.angles = var_0B;
+  var_2.part = spawn("script_model", var_10.origin);
+  var_2.part.angles = var_11;
   var_2.part setModel("cp_town_pipe_t_valve");
 }
 
@@ -941,7 +941,7 @@ init_elvira_trap() {
   }
 
   if(isDefined(var_1)) {
-    level scripts\engine\utility::waittill_any_3("power_on", var_1 + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", var_1 + " power_on");
   }
 
   var_0.powered_on = 1;

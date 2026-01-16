@@ -98,7 +98,7 @@ logsuperactivatedevent(var_0, var_1) {
   }
 
   logsupercommoneventdata("supersActivated", var_2, var_0, var_1);
-  self.scoreatsuperactivation = self.destroynavrepulsor;
+  self.scoreatsuperactivation = self.score;
 }
 
 logsuperexpiredevent(var_0, var_1, var_2) {
@@ -113,7 +113,7 @@ logsuperexpiredevent(var_0, var_1, var_2) {
   setmatchdata("supersExpired", var_3, "expirationThroughDeath", var_2);
   var_5 = 0;
   if(isDefined(self.scoreatsuperactivation)) {
-    var_5 = self.destroynavrepulsor - self.scoreatsuperactivation;
+    var_5 = self.score - self.scoreatsuperactivation;
   }
 
   setmatchdata("supersExpired", var_3, "scoreEarned", var_5);
@@ -270,11 +270,11 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_8 = gettimefrommatchstart(gettime());
   var_9 = undefined;
-  var_0A = [];
+  var_10 = [];
   if(isDefined(self.var_AA47)) {
     var_9 = self.var_AA47;
-    var_0A = scripts\mp\utility::getweaponattachmentsbasenames(var_9);
-    var_0A = scripts\mp\utility::func_249F(var_0A);
+    var_10 = scripts\mp\utility::getweaponattachmentsbasenames(var_9);
+    var_10 = scripts\mp\utility::func_249F(var_10);
     if(scripts\mp\utility::ispickedupweapon(var_9)) {
       setmatchdata("lives", var_0, "victimCurrentWeaponPickedUp", 1);
     }
@@ -284,16 +284,16 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     setmatchdata("lives", var_0, "victimSuperActive", 1);
   }
 
-  var_0B = 0;
+  var_11 = 0;
   if(isDefined(self.var_13905)) {
-    var_0B = self.var_13905;
+    var_11 = self.var_13905;
   }
 
   if(isplayer(var_1) && canlogclient(var_1)) {
-    var_0C = var_1 scripts\mp\utility::func_9EE8();
-    var_0D = 0.4226;
-    var_0E = scripts\engine\utility::within_fov(self.origin, self.angles, var_1.origin, var_0D);
-    var_0F = scripts\engine\utility::within_fov(var_1.origin, var_1.angles, self.origin, var_0D);
+    var_12 = var_1 scripts\mp\utility::func_9EE8();
+    var_13 = 0.4226;
+    var_14 = scripts\engine\utility::within_fov(self.origin, self.angles, var_1.origin, var_13);
+    var_15 = scripts\engine\utility::within_fov(var_1.origin, var_1.angles, self.origin, var_13);
     var_10 = -1;
     if(isDefined(var_1.matchdatalifeindex)) {
       var_10 = var_1.matchdatalifeindex;
@@ -313,7 +313,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_11 = scripts\mp\utility::iskillstreakweapon(var_4);
-    self logmatchdatadeath(var_0, self.clientid, var_1, var_1.clientid, var_4, var_3, var_11, var_1 scripts\mp\utility::isjuggernaut(), var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0F, var_0E, var_10);
+    self logmatchdatadeath(var_0, self.clientid, var_1, var_1.clientid, var_4, var_3, var_11, var_1 scripts\mp\utility::isjuggernaut(), var_7, var_8, var_9, var_10, var_11, var_12, var_15, var_14, var_10);
     if(var_11) {
       if(isDefined(var_1.lastmatchdatakillstreakindex) && var_1.lastmatchdatakillstreakindex != -1) {
         setmatchdata("lives", var_0, "attackerKillstreakIndex", var_1.lastmatchdatakillstreakindex);
@@ -332,7 +332,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
   } else {
-    self logmatchdatadeath(var_0, self.clientid, undefined, undefined, var_4, var_3, scripts\mp\utility::iskillstreakweapon(var_4), 0, var_7, var_8, var_9, var_0A, var_0B, 0, 0, 0, -1);
+    self logmatchdatadeath(var_0, self.clientid, undefined, undefined, var_4, var_3, scripts\mp\utility::iskillstreakweapon(var_4), 0, var_7, var_8, var_9, var_10, var_11, 0, 0, 0, -1);
     setmatchdata("lives", var_0, "attackerKillstreakIndex", -1);
   }
 
@@ -343,8 +343,8 @@ logxpscoreearnedinlife(var_0) {
   var_1 = self.pers["summary"]["xp"];
   var_2 = var_1 - self.pers["xpAtLastDeath"];
   self.pers["xpAtLastDeath"] = var_1;
-  var_3 = self.destroynavrepulsor - self.pers["scoreAtLastDeath"];
-  self.pers["scoreAtLastDeath"] = self.destroynavrepulsor;
+  var_3 = self.score - self.pers["scoreAtLastDeath"];
+  self.pers["scoreAtLastDeath"] = self.score;
   setmatchdata("lives", var_0, "scoreEarned", var_3);
   setmatchdata("lives", var_0, "xpEarned", var_2);
 }
@@ -380,7 +380,7 @@ logplayerdata() {
   var_1 = 0;
   var_2 = 0;
   foreach(var_4 in self.pers["matchdataWeaponStats"]) {
-    setmatchdata("players", self.clientid, "weaponStats", var_2, "weapon", var_4.var_394);
+    setmatchdata("players", self.clientid, "weaponStats", var_2, "weapon", var_4.weapon);
     setmatchdata("players", self.clientid, "weaponStats", var_2, "variantID", var_4.variantid);
     foreach(var_7, var_6 in var_4.var_10E53) {
       setmatchdata("players", self.clientid, "weaponStats", var_2, var_7, int(var_6));
@@ -405,19 +405,19 @@ logplayerdata() {
     var_9 = self.pers["matchdataSuperKills"];
   }
 
-  var_0A = 0;
+  var_10 = 0;
   if(isDefined(self.pers["matchdataLongshotCount"])) {
-    var_0A = self.pers["matchdataLongshotCount"];
+    var_10 = self.pers["matchdataLongshotCount"];
   }
 
-  var_0B = 0;
+  var_11 = 0;
   if(isDefined(self.pers["matchdataDoubleKillsCount"])) {
-    var_0B = self.pers["matchdataDoubleKillsCount"];
+    var_11 = self.pers["matchdataDoubleKillsCount"];
   }
 
-  self func_85AC(self.clientid, scripts\mp\utility::getpersstat("headshots"), var_0A, var_0B, var_9);
-  foreach(var_8, var_0D in self.pers["matchdataScoreEventCounts"]) {
-    setmatchdata("players", self.clientid, "scoreEventCount", var_8, var_0D);
+  self func_85AC(self.clientid, scripts\mp\utility::getpersstat("headshots"), var_10, var_11, var_9);
+  foreach(var_8, var_13 in self.pers["matchdataScoreEventCounts"]) {
+    setmatchdata("players", self.clientid, "scoreEventCount", var_8, var_13);
   }
 
   setmatchdata("players", self.clientid, "playerXpModifier", int(scripts\mp\rank::getrankxpmultiplier()));
@@ -428,9 +428,9 @@ logplayerdata() {
   setmatchdata("players", self.clientid, "weaponXpModifier", int(scripts\mp\weaponrank::getweaponrankxpmultiplier()));
   level scripts\mp\playerlogic::writesegmentdata(self);
   if(isDefined(self.contracts)) {
-    foreach(var_10, var_0F in self.contracts) {
-      setmatchdata("players", self.clientid, "contracts", var_0F.slot, "challengeID", var_0F.id);
-      setmatchdata("players", self.clientid, "contracts", var_0F.slot, "progress", var_0F.progress);
+    foreach(var_10, var_15 in self.contracts) {
+      setmatchdata("players", self.clientid, "contracts", var_15.slot, "challengeID", var_15.id);
+      setmatchdata("players", self.clientid, "contracts", var_15.slot, "progress", var_15.progress);
     }
   }
 }
@@ -566,7 +566,7 @@ func_AFDC(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.pers["matchdataWeaponStats"][var_4])) {
     self.pers["matchdataWeaponStats"][var_4] = spawnStruct();
     self.pers["matchdataWeaponStats"][var_4].var_10E53 = [];
-    self.pers["matchdataWeaponStats"][var_4].var_394 = var_0;
+    self.pers["matchdataWeaponStats"][var_4].weapon = var_0;
     if(isDefined(var_3)) {
       self.pers["matchdataWeaponStats"][var_4].variantid = var_3;
     } else {

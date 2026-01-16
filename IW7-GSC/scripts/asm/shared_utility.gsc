@@ -44,10 +44,10 @@ choosedemeanoranimwithoverridevariants(var_0, var_1, var_2) {
 
   if(!scripts\asm\asm::asm_hasalias(var_2, var_4)) {
     var_5 = [];
-    var_5[0] = scripts\asm\asm::asm_lookupanimfromalias(var_2, "trans_to_one_hand_run");
-    var_5[1] = scripts\asm\asm::asm_lookupanimfromalias(var_2, "one_hand_run");
-    var_5[2] = scripts\asm\asm::asm_lookupanimfromalias(var_2, "trans_to_two_hand_run");
-    var_5[3] = scripts\asm\asm::asm_lookupanimfromalias(var_2, "two_hand_run");
+    var_5[0] = ::scripts\asm\asm::asm_lookupanimfromalias(var_2, "trans_to_one_hand_run");
+    var_5[1] = ::scripts\asm\asm::asm_lookupanimfromalias(var_2, "one_hand_run");
+    var_5[2] = ::scripts\asm\asm::asm_lookupanimfromalias(var_2, "trans_to_two_hand_run");
+    var_5[3] = ::scripts\asm\asm::asm_lookupanimfromalias(var_2, "two_hand_run");
     return var_5;
   }
 
@@ -55,7 +55,7 @@ choosedemeanoranimwithoverridevariants(var_0, var_1, var_2) {
 }
 
 func_3EAA(var_0, var_1, var_2) {
-  var_3 = weaponclass(self.var_394);
+  var_3 = weaponclass(self.weapon);
   if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
     var_3 = "rifle";
   }
@@ -81,7 +81,7 @@ func_3E9A(var_0, var_1, var_2) {
 }
 
 chooseanim_weaponswitch(var_0, var_1, var_2) {
-  if(weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm::asm_hasalias(var_1, "drop_rpg")) {
+  if(weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm::asm_hasalias(var_1, "drop_rpg")) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_1, "drop_rpg");
   }
 
@@ -173,8 +173,8 @@ getnodeyawfromoffsettable(var_0, var_1, var_2) {
 }
 
 func_1C9C() {
-  var_0 = scripts\engine\utility::weaponclass(self.var_394) == "mg";
-  return var_0 || isDefined(self._blackboard.var_522F) && isDefined(self.target_getindexoftarget) && self.target_getindexoftarget == self._blackboard.var_522F;
+  var_0 = scripts\engine\utility::weaponclass(self.weapon) == "mg";
+  return var_0 || isDefined(self._blackboard.var_522F) && isDefined(self.node) && self.node == self._blackboard.var_522F;
 }
 
 getnodeyawoffset(var_0, var_1) {

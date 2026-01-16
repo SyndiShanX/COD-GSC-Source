@@ -172,9 +172,9 @@ calculate_player_encounter_scores(var_0, var_1, var_2) {
   }
 
   if(isDefined(level.bonusscorefunc)) {
-    var_0A = [[level.bonusscorefunc]](var_0, var_4);
-    var_4 = var_4 + var_0A.var_3C;
-    set_lua_encounter_score_row(var_0, var_3, var_0A.var_12B27, var_0A.var_3C);
+    var_10 = [[level.bonusscorefunc]](var_0, var_4);
+    var_4 = var_4 + var_10.var_3C;
+    set_lua_encounter_score_row(var_0, var_3, var_10.var_12B27, var_10.var_3C);
     var_3++;
   }
 

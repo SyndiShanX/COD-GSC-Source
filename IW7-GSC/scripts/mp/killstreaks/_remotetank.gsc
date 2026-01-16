@@ -4,7 +4,7 @@
 **************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("remote_tank", ::func_128FE);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_tank", ::func_128FE);
   level.tanksettings = [];
   level.tanksettings["remote_tank"] = spawnStruct();
   level.tanksettings["remote_tank"].timeout = 60;
@@ -55,7 +55,7 @@ func_128FE(var_0, var_1) {
 
 func_1146D(var_0) {
   var_1 = scripts\mp\utility::getkillstreakweapon(level.tanksettings[var_0].streakname);
-  scripts\mp\killstreaks\_killstreaks::func_1146C(var_1);
+  scripts\mp\killstreaks\killstreaks::func_1146C(var_1);
   scripts\mp\utility::_takeweapon(level.tanksettings[var_0].var_A84D);
   scripts\mp\utility::_takeweapon(level.tanksettings[var_0].remotedetonatethink);
 }
@@ -172,7 +172,7 @@ func_4A20(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), level.tanksettings[var_0].mgturretinfo);
   var_2.angles = var_1.angles;
   var_2.tanktype = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2 setModel(level.tanksettings[var_0].modelbase);
   var_2 getvalidattachments();
   var_2 setturretmodechangewait(1);
@@ -298,8 +298,8 @@ func_114CD() {
     self.carriedby getrigindexfromarchetyperef();
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   if(isDefined(self)) {
@@ -313,11 +313,11 @@ func_114D0() {
   self notify("placed");
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return 0;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0.iscarrying = 0;
   var_1 = func_4A1F(self);
   if(!isDefined(var_1)) {
@@ -333,11 +333,11 @@ func_114D0() {
 func_114BB() {
   self endon("death");
   level endon("game_ended");
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("death");
   self waittill("placed");
   var_0 func_1146D(self.tanktype);
@@ -346,7 +346,7 @@ func_114BB() {
 }
 
 func_4A1F(var_0) {
-  var_1 = var_0.triggerportableradarping;
+  var_1 = var_0.owner;
   var_2 = var_0.tanktype;
   var_3 = var_0.lifeid;
   var_4 = spawnvehicle(level.tanksettings[var_2].modelbase, var_2, level.tanksettings[var_2].vehicleinfo, var_0.origin, var_0.angles, var_1);
@@ -359,7 +359,7 @@ func_4A1F(var_0) {
   var_6 linkto(var_4, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
   var_6 setModel(level.tanksettings[var_2].var_B922);
   var_6.health = level.tanksettings[var_2].health;
-  var_6.triggerportableradarping = var_1;
+  var_6.owner = var_1;
   var_6.angles = var_1.angles;
   var_6.var_10955 = ::func_3758;
   var_6.var_114B1 = var_4;
@@ -369,7 +369,7 @@ func_4A1F(var_0) {
   var_4.var_10955 = ::func_3758;
   var_4.lifeid = var_3;
   var_4.team = var_1.team;
-  var_4.triggerportableradarping = var_1;
+  var_4.owner = var_1;
   var_4 setotherent(var_1);
   var_4.mgturret = var_6;
   var_4.health = level.tanksettings[var_2].health;
@@ -393,16 +393,16 @@ func_4A1F(var_0) {
 
 func_114CC() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
   self makeunusable();
   self.mgturret getvalidlocation();
   self makevehiclesolidcapsule(23, 23, 23);
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_1 = (0, 0, 20);
   if(level.teambased) {
     self.team = var_0.team;
@@ -429,7 +429,7 @@ func_114CC() {
 }
 
 func_10E09() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 scripts\mp\utility::setusingremote(self.tanktype);
   if(getdvarint("camera_thirdPerson")) {
     var_0 scripts\mp\utility::setthirdpersondof(0);
@@ -437,7 +437,7 @@ func_10E09() {
 
   var_0.restoreangles = var_0.angles;
   var_0 scripts\mp\utility::freezecontrolswrapper(1);
-  var_1 = var_0 scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_tank");
+  var_1 = var_0 scripts\mp\killstreaks\killstreaks::initridekillstreak("remote_tank");
   if(var_1 != "success") {
     if(var_1 != "disconnect") {
       var_0 scripts\mp\utility::clearusingremote();
@@ -493,15 +493,15 @@ func_114CF() {
   self.mgturret give_player_session_tokens(level.tanksettings[self.tanktype].sentrymodeoff);
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  } else if(isDefined(self.triggerportableradarping)) {
+  } else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   if(isDefined(var_0.using_remote_tank) && var_0.using_remote_tank) {
     var_0 notify("end_remote");
     var_0 remotecontrolvehicleoff(self);
@@ -534,7 +534,7 @@ func_114BA() {
 
 func_114BF() {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   if(isDefined(self.mgturret)) {
     self.mgturret notify("death");
   }
@@ -544,13 +544,13 @@ func_114BF() {
 
 func_114C0() {
   self endon("death");
-  self.triggerportableradarping waittill("stop_using_remote");
+  self.owner waittill("stop_using_remote");
   self notify("death");
 }
 
 func_114BC() {
   self endon("death");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   self notify("death");
 }
 
@@ -573,9 +573,9 @@ func_114BE() {
   self playSound("talon_destroyed");
   removefromugvlist(var_0);
   self setModel(level.tanksettings[self.tanktype].modeldestroyed);
-  if(isDefined(self.triggerportableradarping) && self.triggerportableradarping.using_remote_tank || self.triggerportableradarping scripts\mp\utility::isusingremote()) {
+  if(isDefined(self.owner) && self.owner.using_remote_tank || self.owner scripts\mp\utility::isusingremote()) {
     func_114CF();
-    self.triggerportableradarping.using_remote_tank = 0;
+    self.owner.using_remote_tank = 0;
   }
 
   self.mgturret setdefaultdroppitch(40);
@@ -589,31 +589,31 @@ func_114BE() {
   self delete();
 }
 
-func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = self;
+func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = self;
   if(isDefined(self.var_114B1)) {
-    var_0C = self.var_114B1;
+    var_12 = self.var_114B1;
   }
 
-  if(isDefined(var_0C.var_1D41) && var_0C.var_1D41) {
+  if(isDefined(var_12.var_1D41) && var_12.var_1D41) {
     return;
   }
 
-  if(!scripts\mp\weapons::friendlyfirecheck(var_0C.triggerportableradarping, var_1)) {
+  if(!scripts\mp\weapons::friendlyfirecheck(var_12.owner, var_1)) {
     return;
   }
 
   if(isDefined(var_3) && var_3 &level.idflags_penetration) {
-    var_0C.wasdamagedfrombulletpenetration = 1;
+    var_12.wasdamagedfrombulletpenetration = 1;
   }
 
   if(isDefined(var_3) && var_3 &level.idflags_ricochet) {
-    var_0C.wasdamagedfrombulletricochet = 1;
+    var_12.wasdamagedfrombulletricochet = 1;
   }
 
-  var_0C.wasdamaged = 1;
-  var_0C.var_4D49 = 0;
-  playfxontagforclients(level._effect["remote_tank_spark"], var_0C, "tag_player", var_0C.triggerportableradarping);
+  var_12.wasdamaged = 1;
+  var_12.var_4D49 = 0;
+  playfxontagforclients(level._effect["remote_tank_spark"], var_12, "tag_player", var_12.owner);
   if(isDefined(var_5)) {
     switch (var_5) {
       case "stealth_bomb_mp":
@@ -624,29 +624,29 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   if(var_4 == "MOD_MELEE") {
-    var_2 = var_0C.maxhealth * 0.5;
+    var_2 = var_12.maxhealth * 0.5;
   }
 
-  var_0D = var_2;
+  var_13 = var_2;
   if(isplayer(var_1)) {
     var_1 scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
     if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
       if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0D = var_0D + var_2 * level.armorpiercingmod;
+        var_13 = var_13 + var_2 * level.armorpiercingmod;
       }
     }
 
     if(isexplosivedamagemod(var_4)) {
-      var_0D = var_0D + var_2;
+      var_13 = var_13 + var_2;
     }
   }
 
   if(isexplosivedamagemod(var_4) && isDefined(var_5) && var_5 == "destructible_car") {
-    var_0D = var_0C.maxhealth;
+    var_13 = var_12.maxhealth;
   }
 
-  if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-    var_1.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
+  if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
   }
 
   if(isDefined(var_5)) {
@@ -657,46 +657,46 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       case "stinger_mp":
       case "ac130_40mm_mp":
       case "ac130_105mm_mp":
-        var_0C.largeprojectiledamage = 1;
-        var_0D = var_0C.maxhealth + 1;
+        var_12.largeprojectiledamage = 1;
+        var_13 = var_12.maxhealth + 1;
         break;
 
       case "stealth_bomb_mp":
       case "artillery_mp":
-        var_0C.largeprojectiledamage = 0;
-        var_0D = var_0C.maxhealth * 0.5;
+        var_12.largeprojectiledamage = 0;
+        var_13 = var_12.maxhealth * 0.5;
         break;
 
       case "bomb_site_mp":
-        var_0C.largeprojectiledamage = 0;
-        var_0D = var_0C.maxhealth + 1;
+        var_12.largeprojectiledamage = 0;
+        var_13 = var_12.maxhealth + 1;
         break;
 
       case "emp_grenade_mp":
-        var_0D = 0;
-        var_0C thread func_114B8();
+        var_13 = 0;
+        var_12 thread func_114B8();
         break;
 
       case "ims_projectile_mp":
-        var_0C.largeprojectiledamage = 1;
-        var_0D = var_0C.maxhealth * 0.5;
+        var_12.largeprojectiledamage = 1;
+        var_13 = var_12.maxhealth * 0.5;
         break;
     }
 
-    scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_5, self);
+    scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_5, self);
   }
 
-  var_0C.var_E1 = var_0C.var_E1 + var_0D;
-  var_0C playSound("talon_damaged");
-  if(var_0C.var_E1 >= var_0C.maxhealth) {
-    if(isplayer(var_1) && !isDefined(var_0C.triggerportableradarping) || var_1 != var_0C.triggerportableradarping) {
-      var_0C.var_1D41 = 1;
+  var_12.var_E1 = var_12.var_E1 + var_13;
+  var_12 playSound("talon_damaged");
+  if(var_12.var_E1 >= var_12.maxhealth) {
+    if(isplayer(var_1) && !isDefined(var_12.owner) || var_1 != var_12.owner) {
+      var_12.var_1D41 = 1;
       var_1 notify("destroyed_killstreak", var_5);
       thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_remote_tank", var_1);
       var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_5, 300);
     }
 
-    var_0C notify("death");
+    var_12 notify("death");
   }
 }
 
@@ -704,7 +704,7 @@ func_114B8() {
   self notify("tank_EMPGrenaded");
   self endon("tank_EMPGrenaded");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
   self.empgrenaded = 1;
   self.mgturret turretfiredisable();
@@ -858,7 +858,7 @@ func_114B6(var_0) {
 
 func_114B7() {
   self endon("death");
-  self.triggerportableradarping endon("end_remote");
+  self.owner endon("end_remote");
   for(;;) {
     earthquake(0.1, 0.25, self.mgturret gettagorigin("tag_player"), 50);
     wait(0.25);
@@ -874,11 +874,11 @@ removefromugvlist(var_0) {
 }
 
 func_114CA() {
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("end_remote");

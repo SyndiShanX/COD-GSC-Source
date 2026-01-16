@@ -27,30 +27,30 @@ func_DDAE(var_0, var_1) {
       }
     }
 
-    var_0A = scripts\cp\zombies\zombie_entrances::func_7B13(var_3);
-    if(!isDefined(var_0A)) {
+    var_10 = scripts\cp\zombies\zombie_entrances::func_7B13(var_3);
+    if(!isDefined(var_10)) {
       wait(0.5);
       break;
     }
 
     if(var_1 scripts\cp\utility::is_consumable_active("faster_window_reboard")) {
-      var_7 = 50 * var_0A * level.cash_scalar;
-      var_8 = var_8 * var_0A;
+      var_7 = 50 * var_10 * level.cash_scalar;
+      var_8 = var_8 * var_10;
       level func_DDB8(var_3);
       level notify("reboard", 1, var_1);
-      for(var_0B = 0; var_0B < var_0A; var_0B++) {
+      for(var_11 = 0; var_11 < var_10; var_11++) {
         var_1 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
       }
 
       var_1 notify("window_reboard_notify");
       var_1 scripts\cp\utility::notify_used_consumable("faster_window_reboard");
     } else {
-      scripts\cp\zombies\zombie_entrances::func_F2E3(var_3, var_0A - 1, "repairing");
-      func_DDB6(var_3, var_0A, var_6, var_0, var_1);
+      scripts\cp\zombies\zombie_entrances::func_F2E3(var_3, var_10 - 1, "repairing");
+      func_DDB6(var_3, var_10, var_6, var_0, var_1);
       level notify("reboard", 1, var_1);
       var_1 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
       var_1 notify("window_reboard_notify");
-      scripts\cp\zombies\zombie_entrances::func_F2E3(var_3, var_0A - 1, "boarded");
+      scripts\cp\zombies\zombie_entrances::func_F2E3(var_3, var_10 - 1, "boarded");
     }
 
     var_1.reboarding_points = var_1.reboarding_points + var_8;

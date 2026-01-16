@@ -245,13 +245,13 @@ init_dj_quest_part(var_0, var_1) {
   }
 
   var_9 = scripts\engine\utility::getstruct(var_5.target, "targetname");
-  var_0A = spawn("script_model", var_9.origin);
-  var_0A setModel(var_1);
+  var_10 = spawn("script_model", var_9.origin);
+  var_10 setModel(var_1);
   if(isDefined(var_9.angles)) {
-    var_0A.angles = var_9.angles;
+    var_10.angles = var_9.angles;
   }
 
-  var_5.part_model = var_0A;
+  var_5.part_model = var_10;
   var_5.custom_search_dist = 96;
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_5);
   add_to_dj_quest_part_list(var_5);
@@ -938,8 +938,8 @@ startspeakereventspawning(var_0) {
   foreach(var_9 in var_1) {
     if(ispointinvolume(var_0.origin, var_9)) {
       var_2 = var_9;
-      foreach(var_0B in var_3) {
-        var_0B thread sendzombietospeaker(var_0B, var_2);
+      foreach(var_11 in var_3) {
+        var_11 thread sendzombietospeaker(var_11, var_2);
       }
 
       break;
@@ -947,8 +947,8 @@ startspeakereventspawning(var_0) {
   }
 
   if(isDefined(var_2.spawners)) {
-    var_0E = scripts\engine\utility::get_array_of_closest(var_0.origin, var_2.spawners, undefined, 100, 400);
-    foreach(var_10 in var_0E) {
+    var_14 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_2.spawners, undefined, 100, 400);
+    foreach(var_10 in var_14) {
       var_10 scripts\cp\zombies\zombies_spawning::make_spawner_inactive();
     }
   }
@@ -1043,7 +1043,7 @@ set_up_and_start_speaker(var_0, var_1) {
   var_3 thread quest_timer(var_3, var_0);
   level.current_speaker = var_3;
   var_3.hit_point_left = 10;
-  level.fake_players = scripts\engine\utility::array_add_safe(level.fake_players, level.frequency_device_clip);
+  level.fake_players = scripts\engine\utility::add_to_array(level.fake_players, level.frequency_device_clip);
 }
 
 destroyspeakerifonlyoneplayer(var_0) {
@@ -1126,7 +1126,7 @@ damage_monitor(var_0, var_1) {
 removelockedonflagonspeakerdeath(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("death");
-  var_1 scripts\engine\utility::waittill_any_3("death", "speaker_defense_completed");
+  var_1 scripts\engine\utility::waittill_any("death", "speaker_defense_completed");
   var_0.attackent = undefined;
 }
 
@@ -1163,7 +1163,7 @@ speaker_icon_timer(var_0, var_1) {
 
 turn_off_timer(var_0, var_1) {
   level endon("game_ended");
-  level scripts\engine\utility::waittill_any_timeout_1(var_0, "complete_defense", "speaker_defense_failed");
+  level scripts\engine\utility::waittill_any_timeout(var_0, "complete_defense", "speaker_defense_failed");
   playsoundatpos(var_1.origin, "speaker_defense_tone_scrubbing_end");
   var_1 stoploopsound();
   setomnvar("zm_speaker_defense_timer", 0);
@@ -1304,7 +1304,7 @@ clear_goal_icon_on(var_0) {
   foreach(var_2 in var_0.goal_head_icon) {
     if(isDefined(var_2)) {
       var_2 destroy();
-      var_2 scripts\cp\zombies\zombie_afterlife_arcade::remove_from_icons_to_hide_in_afterlife(var_2.triggerportableradarping, var_2);
+      var_2 scripts\cp\zombies\zombie_afterlife_arcade::remove_from_icons_to_hide_in_afterlife(var_2.owner, var_2);
     }
   }
 }
@@ -1470,7 +1470,7 @@ blank() {}
 
 setup_dj_booth(var_0) {
   if(!isDefined(level.dj)) {
-    level scripts\engine\utility::waittill_any_3("power_on", "moon power_on");
+    level scripts\engine\utility::waittill_any("power_on", "moon power_on");
     level.active_dj_spot = scripts\engine\utility::getstruct(var_0.target, "targetname");
     level.active_dj_door = scripts\engine\utility::getclosest(level.active_dj_spot.origin, getEntArray("dj_doors", "targetname"));
     level.vo_functions["zmb_dj_vo"] = ::dj_broadcast_vo_handler;

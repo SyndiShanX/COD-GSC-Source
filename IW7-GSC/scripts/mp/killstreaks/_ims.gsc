@@ -4,16 +4,16 @@
 *********************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("ims", ::func_128EA);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("ims", ::func_128EA);
   level.var_9385 = [];
   var_0 = spawnStruct();
-  var_0.var_39B = "ims_projectile_mp";
+  var_0.weaponinfo = "ims_projectile_mp";
   var_0.modelbase = "ims_scorpion_body_iw6";
   var_0.modelplacement = "ims_scorpion_body_iw6_placement";
   var_0.modelplacementfailed = "ims_scorpion_body_iw6_placement_failed";
   var_0.modeldestroyed = "ims_scorpion_body_iw6";
   var_0.modelbombsquad = "ims_scorpion_body_iw6_bombsquad";
-  var_0.pow = &"KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_IMS_PICKUP_TO_MOVE";
   var_0.placestring = &"KILLSTREAKS_HINTS_IMS_PLACE";
   var_0.cannotplacestring = &"KILLSTREAKS_HINTS_IMS_CANNOT_PLACE";
   var_0.streakname = "ims";
@@ -167,7 +167,7 @@ createimsforplayer(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.var_9386 = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2 setModel(level.var_9385[var_0].modelbase);
   var_2 getvalidattachments();
   var_2 setturretmodechangewait(1);
@@ -178,14 +178,14 @@ createimsforplayer(var_0, var_1) {
 }
 
 createims(var_0) {
-  var_1 = var_0.triggerportableradarping;
+  var_1 = var_0.owner;
   var_2 = var_0.var_9386;
   var_3 = spawn("script_model", var_0.origin);
   var_3 setModel(level.var_9385[var_2].modelbase);
   var_3.var_EB9C = 3;
   var_3.angles = var_0.angles;
   var_3.var_9386 = var_2;
-  var_3.triggerportableradarping = var_1;
+  var_3.owner = var_1;
   var_3 setotherent(var_1);
   var_3.team = var_1.team;
   var_3.shouldsplash = 0;
@@ -205,7 +205,7 @@ func_9363() {
   var_0 = spawn("script_model", self.origin);
   var_0.angles = self.angles;
   var_0 hide();
-  var_0 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+  var_0 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
   var_0 setModel(level.var_9385[self.var_9386].modelbombsquad);
   var_0 linkto(self);
   var_0 setcontents(0);
@@ -344,8 +344,8 @@ func_9379() {
   }
 
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.firstplacement = undefined;
@@ -509,8 +509,8 @@ func_9371(var_0) {
 
 func_9375() {
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_9385[self.var_9386].pow);
-  var_0 = self.triggerportableradarping;
+  self sethintstring(level.var_9385[self.var_9386].hintstring);
+  var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 60));
@@ -550,31 +550,31 @@ func_9375() {
   var_8 = (0, 0, 256) - var_7;
   var_9 = [];
   self.var_A637 = [];
-  for(var_0A = 0; var_0A < self.config.var_C228; var_0A++) {
+  for(var_10 = 0; var_10 < self.config.var_C228; var_10++) {
     if(func_C229()) {
-      var_0B = func_FCA8(var_0A + 1, self.config.var_C228 - 4);
+      var_11 = func_FCA8(var_10 + 1, self.config.var_C228 - 4);
     } else {
-      var_0B = var_0A + 1;
+      var_11 = var_10 + 1;
     }
 
-    var_0C = self gettagorigin(self.config.var_6A09 + var_0B + "_attach");
-    var_0D = self gettagorigin(self.config.var_6A09 + var_0B + "_attach") + var_7;
-    var_9[var_0A] = bulletTrace(var_0D, var_0D + var_8, 0, self);
-    if(var_0A < 4) {
-      var_0E = spawn("script_model", var_0C + self.config.killcamoffset);
-      var_0E setscriptmoverkillcam("explosive");
-      self.var_A637[self.var_A637.size] = var_0E;
-    }
-  }
-
-  var_0F = var_9[0];
-  for(var_0A = 0; var_0A < var_9.size; var_0A++) {
-    if(var_9[var_0A]["position"][2] < var_0F["position"][2]) {
-      var_0F = var_9[var_0A];
+    var_12 = self gettagorigin(self.config.var_6A09 + var_11 + "_attach");
+    var_13 = self gettagorigin(self.config.var_6A09 + var_11 + "_attach") + var_7;
+    var_9[var_10] = bulletTrace(var_13, var_13 + var_8, 0, self);
+    if(var_10 < 4) {
+      var_14 = spawn("script_model", var_12 + self.config.killcamoffset);
+      var_14 setscriptmoverkillcam("explosive");
+      self.var_A637[self.var_A637.size] = var_14;
     }
   }
 
-  self.var_2514 = var_0F["position"] - (0, 0, 20) - self.origin;
+  var_15 = var_9[0];
+  for(var_10 = 0; var_10 < var_9.size; var_10++) {
+    if(var_9[var_10]["position"][2] < var_15["position"][2]) {
+      var_15 = var_9[var_10];
+    }
+  }
+
+  self.var_2514 = var_15["position"] - (0, 0, 20) - self.origin;
   var_10 = spawn("trigger_radius", self.origin, 0, 256, 100);
   self.var_2536 = var_10;
   self.var_2536 enablelinkto();
@@ -615,7 +615,7 @@ func_9374(var_0) {
 func_9372() {
   self endon("death");
   level endon("game_ended");
-  self.triggerportableradarping waittill("killstreak_disowned");
+  self.owner waittill("killstreak_disowned");
   if(isDefined(self.isplaced)) {
     self notify("death");
     return;
@@ -633,7 +633,7 @@ func_9378() {
   self makeunusable();
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  } else if(isDefined(self.triggerportableradarping)) {
+  } else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 
@@ -644,7 +644,7 @@ func_9378() {
   if(isDefined(self.var_A637)) {
     foreach(var_1 in self.var_A637) {
       if(isDefined(var_1)) {
-        if(isDefined(self.triggerportableradarping) && isDefined(self.triggerportableradarping.var_9381) && var_1 == self.triggerportableradarping.var_9381) {
+        if(isDefined(self.owner) && isDefined(self.owner.var_9381) && var_1 == self.owner.var_9381) {
           continue;
         } else {
           var_1 delete();
@@ -680,7 +680,7 @@ func_9362() {
 
     self.var_2536 waittill("trigger", var_0);
     if(isplayer(var_0)) {
-      if(isDefined(self.triggerportableradarping) && var_0 == self.triggerportableradarping) {
+      if(isDefined(self.owner) && var_0 == self.owner) {
         continue;
       }
 
@@ -691,12 +691,12 @@ func_9362() {
       if(!scripts\mp\utility::isreallyalive(var_0)) {
         continue;
       }
-    } else if(isDefined(var_0.triggerportableradarping)) {
-      if(isDefined(self.triggerportableradarping) && var_0.triggerportableradarping == self.triggerportableradarping) {
+    } else if(isDefined(var_0.owner)) {
+      if(isDefined(self.owner) && var_0.owner == self.owner) {
         continue;
       }
 
-      if(level.teambased && var_0.triggerportableradarping.pers["team"] == self.team) {
+      if(level.teambased && var_0.owner.pers["team"] == self.team) {
         continue;
       }
     }
@@ -741,12 +741,12 @@ func_9362() {
     func_937F();
     self waittill("sensor_exploded");
     wait(self.config.var_DDAC);
-    if(!isDefined(self.triggerportableradarping)) {
+    if(!isDefined(self.owner)) {
       break;
     }
   }
 
-  if(isDefined(self.carriedby) && isDefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping) {
+  if(isDefined(self.carriedby) && isDefined(self.owner) && self.carriedby == self.owner) {
     return;
   }
 
@@ -763,16 +763,16 @@ func_6D2C(var_0, var_1) {
   var_3 = self.config.var_AC49 + var_1;
   playFXOnTag(level._effect["ims_sensor_explode"], self, var_3);
   func_9384(var_1, self.config);
-  var_4 = self.config.var_39B;
-  var_5 = self.triggerportableradarping;
+  var_4 = self.config.weaponinfo;
+  var_5 = self.owner;
   var_2 unlink();
   var_2 rotateyaw(3600, self.var_2528);
   var_2 moveto(self.var_2514 + self.origin, self.var_2528, self.var_2528 * 0.25, self.var_2528 * 0.25);
   if(isDefined(var_2.killcament)) {
     var_6 = var_2.killcament;
     var_6 unlink();
-    if(isDefined(self.triggerportableradarping)) {
-      self.triggerportableradarping.var_9381 = var_6;
+    if(isDefined(self.owner)) {
+      self.owner.var_9381 = var_6;
     }
 
     var_6 moveto(self.var_2514 + self.origin + self.config.killcamoffset, self.var_2528, self.var_2528 * 0.25, self.var_2528 * 0.25);

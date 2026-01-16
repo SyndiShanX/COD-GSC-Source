@@ -5,7 +5,7 @@
 
 placeweaponon(var_0, var_1, var_2) {
   self notify("weapon_position_change");
-  var_3 = self.var_39B[var_0].weaponisauto;
+  var_3 = self.weaponinfo[var_0].weaponisauto;
   if(var_1 != "none" && self.a.weaponpos[var_1] == var_0) {
     return;
   }
@@ -30,7 +30,7 @@ placeweaponon(var_0, var_1, var_2) {
 
   if(var_2 && var_1 == "left" || var_1 == "right") {
     func_24AF(var_0, var_1);
-    self.var_394 = var_0;
+    self.weapon = var_0;
   } else {
     func_24AF(var_0, var_1);
   }
@@ -39,12 +39,12 @@ placeweaponon(var_0, var_1, var_2) {
 }
 
 func_5398(var_0) {
-  self.a.weaponpos[self.var_39B[var_0].weaponisauto] = "none";
-  self.var_39B[var_0].weaponisauto = "none";
+  self.a.weaponpos[self.weaponinfo[var_0].weaponisauto] = "none";
+  self.weaponinfo[var_0].weaponisauto = "none";
 }
 
 func_24AF(var_0, var_1) {
-  self.var_39B[var_0].weaponisauto = var_1;
+  self.weaponinfo[var_0].weaponisauto = var_1;
   self.a.weaponpos[var_1] = var_0;
   if(self.a.weaponposdropping[var_1] != "none") {
     self notify("end_weapon_drop_" + var_1);
@@ -105,7 +105,7 @@ func_12E61() {
       continue;
     }
 
-    if(self.var_39B[var_7].var_13053 && !self.var_39B[var_7].var_8BDE) {
+    if(self.weaponinfo[var_7].var_13053 && !self.weaponinfo[var_7].var_8BDE) {
       self hidepart("tag_clip");
     }
   }
@@ -136,7 +136,7 @@ func_3939() {
     return 0;
   }
 
-  if(scripts\anim\utility_common::isshotgun(self.var_394)) {
+  if(scripts\anim\utility_common::isshotgun(self.weapon)) {
     return 0;
   }
 
@@ -170,7 +170,7 @@ func_8193(var_0) {
 
 func_5D19(var_0) {
   if(!isDefined(var_0)) {
-    var_0 = self.var_394;
+    var_0 = self.weapon;
   }
 
   if(var_0 == "none") {
@@ -182,14 +182,14 @@ func_5D19(var_0) {
   }
 
   func_5390();
-  var_1 = self.var_39B[var_0].weaponisauto;
+  var_1 = self.weaponinfo[var_0].weaponisauto;
   if(self.iscinematicplaying && var_1 != "none") {
     thread func_5EF5(var_0, var_1);
   }
 
   func_5398(var_0);
-  if(var_0 == self.var_394) {
-    self.var_394 = "none";
+  if(var_0 == self.weapon) {
+    self.weapon = "none";
   }
 
   func_12E61();
@@ -212,14 +212,14 @@ func_5D1A() {
       continue;
     }
 
-    self.var_39B[var_3].weaponisauto = "none";
+    self.weaponinfo[var_3].weaponisauto = "none";
     self.a.weaponpos[var_2] = "none";
     if(self.iscinematicplaying) {
       thread func_5EF5(var_3, var_2);
     }
   }
 
-  self.var_394 = "none";
+  self.weapon = "none";
   func_12E61();
 }
 
@@ -362,7 +362,7 @@ func_DC5A(var_0) {
 
 func_4F65() {
   var_0 = 0;
-  var_1 = weaponburstcount(self.var_394);
+  var_1 = weaponburstcount(self.weapon);
   if(var_1) {
     var_0 = var_1;
   } else if(scripts\anim\weaponlist::usingsemiautoweapon()) {
@@ -386,7 +386,7 @@ func_4F65() {
 
 func_4F66() {
   var_0 = self.bulletsinclip;
-  if(weaponclass(self.var_394) == "mg") {
+  if(weaponclass(self.weapon) == "mg") {
     var_1 = randomfloat(10);
     if(var_1 < 3) {
       var_0 = randomintrange(2, 6);
@@ -403,13 +403,13 @@ func_4F66() {
 handledropclip(var_0) {
   self endon("abort_reload");
   self endon(var_0 + "_finished");
-  var_1 = self.var_394;
+  var_1 = self.weapon;
   var_2 = undefined;
-  if(self.var_39B[self.var_394].var_13053) {
-    var_2 = getweaponclipmodel(self.var_394);
+  if(self.weaponinfo[self.weapon].var_13053) {
+    var_2 = getweaponclipmodel(self.weapon);
   }
 
-  if(self.var_39B[self.var_394].var_8BDE) {
+  if(self.weaponinfo[self.weapon].var_8BDE) {
     if(scripts\anim\utility_common::isusingsidearm()) {
       self playSound("weap_reload_pistol_clipout_npc");
     } else {
@@ -419,7 +419,7 @@ handledropclip(var_0) {
     if(isDefined(var_2)) {
       self hidepart("tag_clip");
       thread func_5D25(var_2, "tag_clip");
-      self.var_39B[self.var_394].var_8BDE = 0;
+      self.weaponinfo[self.weapon].var_8BDE = 0;
     }
   }
 
@@ -435,7 +435,7 @@ handledropclip(var_0) {
         case "attach clip left":
           if(isDefined(var_2)) {
             self attach(var_2, "tag_accessory_left");
-            if(!self.var_39B[self.var_394].var_8BDE) {
+            if(!self.weaponinfo[self.weapon].var_8BDE) {
               self hidepart("tag_clip");
             }
           }
@@ -446,7 +446,7 @@ handledropclip(var_0) {
         case "attach clip right":
           if(isDefined(var_2)) {
             self attach(var_2, "tag_accessory_right");
-            if(!self.var_39B[self.var_394].var_8BDE) {
+            if(!self.weaponinfo[self.weapon].var_8BDE) {
               self hidepart("tag_clip");
             }
           }
@@ -463,14 +463,14 @@ handledropclip(var_0) {
         case "detach clip right":
           if(isDefined(var_2)) {
             self detach(var_2, "tag_accessory_right");
-            if(var_1 == self.var_394) {
+            if(var_1 == self.weapon) {
               self giveperk("tag_clip");
             } else {
-              self.var_39B[var_1].var_8BDE = 1;
+              self.weaponinfo[var_1].var_8BDE = 1;
             }
 
             self notify("clip_detached");
-            self.var_39B[self.var_394].var_8BDE = 1;
+            self.weaponinfo[self.weapon].var_8BDE = 1;
           }
 
           if(scripts\anim\utility_common::isusingsidearm()) {
@@ -486,14 +486,14 @@ handledropclip(var_0) {
         case "detach clip left":
           if(isDefined(var_2)) {
             self detach(var_2, "tag_accessory_left");
-            if(var_1 == self.var_394) {
+            if(var_1 == self.weapon) {
               self giveperk("tag_clip");
             } else {
-              self.var_39B[var_1].var_8BDE = 1;
+              self.weaponinfo[var_1].var_8BDE = 1;
             }
 
             self notify("clip_detached");
-            self.var_39B[self.var_394].var_8BDE = 1;
+            self.weaponinfo[self.weapon].var_8BDE = 1;
           }
 
           if(scripts\anim\utility_common::isusingsidearm()) {
@@ -513,7 +513,7 @@ handledropclip(var_0) {
 func_E24C(var_0, var_1) {
   self notify("clip_detached");
   self endon("clip_detached");
-  scripts\engine\utility::waittill_any_3("killanimscript", "abort_reload");
+  scripts\engine\utility::waittill_any("killanimscript", "abort_reload");
   if(!isDefined(self)) {
     return;
   }
@@ -523,11 +523,11 @@ func_E24C(var_0, var_1) {
   }
 
   if(isalive(self)) {
-    if(self.var_394 != "none" && self.var_39B[self.var_394].weaponisauto != "none") {
+    if(self.weapon != "none" && self.weaponinfo[self.weapon].weaponisauto != "none") {
       self giveperk("tag_clip");
     }
 
-    self.var_39B[self.var_394].var_8BDE = 1;
+    self.weaponinfo[self.weapon].var_8BDE = 1;
     return;
   }
 
@@ -587,7 +587,7 @@ func_D4C2(var_0, var_1, var_2) {
   }
 
   for(var_3 = 0; var_3 < var_1 * 10; var_3++) {
-    if(isalive(self.isnodeoccupied)) {
+    if(isalive(self.enemy)) {
       if(scripts\anim\utility_common::canseeenemy() && [[var_2]]()) {
         return;
       }
@@ -623,11 +623,11 @@ func_E775() {
       continue;
     }
 
-    if(!isDefined(var_1.isnodeoccupied)) {
+    if(!isDefined(var_1.enemy)) {
       continue;
     }
 
-    if(var_1.isnodeoccupied != level.player) {
+    if(var_1.enemy != level.player) {
       continue;
     }
 
@@ -677,13 +677,13 @@ func_CB29() {
     return;
   }
 
-  if(distancesquared(self.origin, self.isnodeoccupied.origin) < self.var_42AE * self.var_42AE) {
+  if(distancesquared(self.origin, self.enemy.origin) < self.var_42AE * self.var_42AE) {
     var_0 = self.var_72BB;
   } else {
     var_0 = self.var_72BC;
   }
 
-  if(var_0 != self.var_394) {
+  if(var_0 != self.weapon) {
     scripts\sp\utility::func_72EC(var_0, "primary");
     self.var_13C4D setModel(getweaponmodel(self.var_72BA));
     self.var_72BA = var_0;

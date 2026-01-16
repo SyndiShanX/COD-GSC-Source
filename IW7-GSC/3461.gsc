@@ -338,8 +338,9 @@ initairdropcrate() {
   if(isDefined(self.target)) {
     self.collision = getent(self.target, "targetname");
     self.collision notsolid();
-  } else
+  } else {
     self.collision = undefined;
+  }
 }
 
 deleteonownerdeath(var_0) {
@@ -514,8 +515,9 @@ createairdropcrate(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_0)) {
     var_6.owner = var_0;
     var_6 setotherent(var_0);
-  } else
+  } else {
     var_6.owner = undefined;
+  }
 
   var_6.cratetype = var_2;
   var_6.droptype = var_1;
@@ -802,10 +804,12 @@ createobjective(var_0, var_1, var_2, var_3, var_4) {
       } else {
         scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_5, self.owner getentitynumber());
       }
-    } else
+    } else {
       scripts\mp\objidpoolmanager::minimap_objective_team(var_5, var_1);
-  } else
+    }
+  } else {
     scripts\mp\objidpoolmanager::minimap_objective_playermask_showtoall(var_5);
+  }
 
   if(isDefined(level.objvisall)) {
     [[level.objvisall]](var_5);
@@ -917,10 +921,12 @@ dropthecrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       if(var_10 == 1) {
         var_11 = getcratetypefordroptype(var_1);
       }
-    } else
+    } else {
       var_11 = getcratetypefordroptype(var_1);
-  } else
+    }
+  } else {
     var_11 = var_4;
+  }
 
   var_6 = (0, 0, 0);
 
@@ -1177,10 +1183,12 @@ getflyheightoffset(var_0) {
       }
 
       return var_1 * level.airstrikeheightscale + 256 + var_0[2];
-    } else
+    } else {
       return var_1 + var_0[2];
-  } else
+    }
+  } else {
     return var_2.origin[2];
+  }
 }
 
 func_581F(var_0, var_1, var_2, var_3, var_4) {
@@ -1423,8 +1431,9 @@ func_13A04(var_0, var_1, var_2) {
       var_5 = self.owner findpath(var_9, var_1);
       self.owner iprintlnbold("3D Nav Volume is not present, using 2D path instead");
     }
-  } else
+  } else {
     var_5 = [var_1 + (0, 0, 12)];
+  }
 
   var_10 = 0;
   var_11 = self.origin;
@@ -1617,8 +1626,9 @@ func_BA1C(var_0, var_1) {
       } else {
         func_12F22("medium_sharpturn", var_5);
       }
-    } else if(var_5 < level.var_109C4["near"].var_B491)
+    } else if(var_5 < level.var_109C4["near"].var_B491) {
       func_12F22("near", var_5);
+    }
     else if(var_5 < level.var_109C4["medium"].var_B491) {
       func_12F22("medium", var_5);
     } else {
@@ -2387,8 +2397,9 @@ juggernautcratethink(var_0) {
         } else {
           var_1 thread hijacknotify(self, "juggernaut");
         }
-      } else if(self.cratetype == "airdrop_juggernaut_maniac")
+      } else if(self.cratetype == "airdrop_juggernaut_maniac") {
         self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut_maniac", undefined, var_1);
+      }
       else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
         self.owner scripts\mp\hud_message::showsplash("giveaway_" + self.cratetype, undefined, var_1);
       } else {

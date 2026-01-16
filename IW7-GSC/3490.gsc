@@ -68,8 +68,9 @@ func_68C1(var_0) {
     } else {
       return 0;
     }
-  } else if(isDefined(level.heli_pilot[var_0]))
+  } else if(isDefined(level.heli_pilot[var_0])) {
     return 1;
+  }
   else {
     return 0;
   }

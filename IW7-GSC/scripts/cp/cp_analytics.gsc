@@ -296,10 +296,10 @@ init_analytics(var_0) {
   var_7 = 4;
   var_8 = 5;
   var_9 = 6;
-  var_0A = 1;
-  var_0B = 100;
-  var_0C = 101;
-  var_0D = 300;
+  var_10 = 1;
+  var_11 = 100;
+  var_12 = 101;
+  var_13 = 300;
   level.blackbox_data_type = [];
   level.matchdata_struct = [];
   level.matchdata_data_type = [];
@@ -307,48 +307,48 @@ init_analytics(var_0) {
   level.clientmatchdata_struct = [];
   level.clientmatchdata_data_type = [];
   level.clientmatchdata = [];
-  for(var_0E = var_0C; var_0E <= var_0D; var_0E++) {
-    var_0F = tablelookup(var_0, var_1, var_0E, var_4);
-    if(var_0F == "") {
+  for(var_14 = var_12; var_14 <= var_13; var_14++) {
+    var_15 = tablelookup(var_0, var_1, var_14, var_4);
+    if(var_15 == "") {
       continue;
     }
 
-    var_10 = tablelookup(var_0, var_1, var_0E, var_5);
+    var_10 = tablelookup(var_0, var_1, var_14, var_5);
     if(var_10 != "") {
-      level.blackbox_data_type[var_0F] = var_10;
+      level.blackbox_data_type[var_15] = var_10;
     }
 
-    var_11 = tablelookup(var_0, var_1, var_0E, var_6);
+    var_11 = tablelookup(var_0, var_1, var_14, var_6);
     if(var_11 != "") {
-      level.matchdata_data_type[var_0F] = var_11;
+      level.matchdata_data_type[var_15] = var_11;
     }
 
-    var_12 = tablelookup(var_0, var_1, var_0E, var_7);
+    var_12 = tablelookup(var_0, var_1, var_14, var_7);
     if(var_12 != "") {
-      level.matchdata_struct[var_0F] = [];
-      level.matchdata[var_0F] = [];
+      level.matchdata_struct[var_15] = [];
+      level.matchdata[var_15] = [];
     }
 
-    var_13 = tablelookup(var_0, var_1, var_0E, var_8);
+    var_13 = tablelookup(var_0, var_1, var_14, var_8);
     if(var_13 != "") {
-      level.clientmatchdata_data_type[var_0F] = var_13;
+      level.clientmatchdata_data_type[var_15] = var_13;
     }
 
-    var_14 = tablelookup(var_0, var_1, var_0E, var_9);
+    var_14 = tablelookup(var_0, var_1, var_14, var_9);
     if(var_14 != "") {
-      level.clientmatchdata_struct[var_0F] = [];
-      level.clientmatchdata[var_0F] = [];
+      level.clientmatchdata_struct[var_15] = [];
+      level.clientmatchdata[var_15] = [];
     }
   }
 
   level.analytics_event = [];
-  for(var_0E = var_0A; var_0E <= var_0B; var_0E++) {
-    var_15 = tablelookup(var_0, var_1, var_0E, var_2);
+  for(var_14 = var_10; var_14 <= var_11; var_14++) {
+    var_15 = tablelookup(var_0, var_1, var_14, var_2);
     if(var_15 == "") {
       break;
     }
 
-    var_16 = tablelookup(var_0, var_1, var_0E, var_3);
+    var_16 = tablelookup(var_0, var_1, var_14, var_3);
     level.analytics_event[var_15] = var_16;
     var_17 = strtok(var_16, " ");
     foreach(var_19 in var_17) {

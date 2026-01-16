@@ -134,15 +134,15 @@ movingmeleenotehandler(var_0, var_1, var_2, var_3) {
       var_8 = var_7[0];
       if(var_8 > var_3) {
         var_9 = getmovedelta(var_6, var_3, var_8);
-        var_0A = length2d(var_9);
-        var_0B = getanimlength(var_6);
-        var_0C = var_8 * var_0B - var_3 * var_0B;
-        var_0D = var_4 getvelocity();
-        var_0E = var_4.origin + var_0D * var_0C;
-        var_0F = distance(var_0E, self.origin);
+        var_10 = length2d(var_9);
+        var_11 = getanimlength(var_6);
+        var_12 = var_8 * var_11 - var_3 * var_11;
+        var_13 = var_4 getvelocity();
+        var_14 = var_4.origin + var_13 * var_12;
+        var_15 = distance(var_14, self.origin);
         var_10 = 1;
-        if(var_0F > var_0A && var_0A > 0) {
-          var_10 = var_0F / var_0A;
+        if(var_15 > var_10 && var_10 > 0) {
+          var_10 = var_15 / var_10;
           if(var_10 < 1) {
             var_10 = 1;
           }
@@ -165,9 +165,9 @@ movingmeleenotehandler(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(var_0C == "check_stuck") {
+  if(var_12 == "check_stuck") {
     if(scripts\mp\agents\crab_mini\crab_mini_agent::iscrabministuck()) {
-      scripts\asm\asm::asm_fireevent(var_0D, "end");
+      scripts\asm\asm::asm_fireevent(var_13, "end");
       return;
     }
 
@@ -259,10 +259,10 @@ playmovingmeleeattack(var_0, var_1, var_2, var_3) {
   var_7 = getnotetracktimes(var_5, "hit");
   var_8 = var_6 * var_7[0];
   var_9 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
-  var_0A = randomfloatrange(var_9.min_stop_facing_enemy_time_before_hit, var_9.max_stop_facing_enemy_time_before_hit);
-  var_0B = var_8 - var_0A;
-  if(var_0B < 0) {
-    var_0B = 0.1;
+  var_10 = randomfloatrange(var_9.min_stop_facing_enemy_time_before_hit, var_9.max_stop_facing_enemy_time_before_hit);
+  var_11 = var_8 - var_10;
+  if(var_11 < 0) {
+    var_11 = 0.1;
   }
 
   if(randomint(100) < var_9.chance_to_get_stuck_if_miss) {
@@ -272,7 +272,7 @@ playmovingmeleeattack(var_0, var_1, var_2, var_3) {
   }
 
   thread scripts\asm\zombie\melee::func_6A6A(var_1, self.curmeleetarget);
-  thread stopfacingenemy(var_1, var_0B);
+  thread stopfacingenemy(var_1, var_11);
   thread domeleedamageoncontact(var_1, self.curmeleetarget);
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, var_4);
 }

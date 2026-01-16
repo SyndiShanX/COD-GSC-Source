@@ -91,7 +91,7 @@ func_10CBC() {
   scripts\engine\utility::array_call(getaiarray(), ::delete);
   scripts\engine\utility::array_call(getspawnerarray(), ::delete);
   var_0 = [];
-  var_0["trigger_multiple_createart_transient"] = scripts\sp\trigger::func_1272E;
+  var_0["trigger_multiple_createart_transient"] = ::scripts\sp\trigger::func_1272E;
   foreach(var_4, var_2 in var_0) {
     var_3 = getEntArray(var_4, "classname");
     scripts\engine\utility::array_levelthread(var_3, var_2);
@@ -137,26 +137,26 @@ func_56CC() {
   var_7 = var_0.size - 1;
   var_8 = 0;
   var_9 = 0;
-  var_0A = 0;
+  var_10 = 0;
   while(var_7 > 0) {
     if(var_0[var_7] == level.var_10CDA) {
-      var_0A = 1;
+      var_10 = 1;
       break;
     }
 
     var_7--;
   }
 
-  if(!var_0A) {
+  if(!var_10) {
     var_7 = var_0.size - 1;
   }
 
   func_10C9E(var_1, var_3, var_7);
-  var_0B = var_7;
+  var_11 = var_7;
   for(;;) {
-    if(var_0B != var_7) {
+    if(var_11 != var_7) {
       func_10C9E(var_1, var_3, var_7);
-      var_0B = var_7;
+      var_11 = var_7;
     }
 
     if(!var_8) {
@@ -277,8 +277,8 @@ func_10C9F() {
 
   if(var_0.size > 0) {
     loadstartpointtransients(var_0);
-    foreach(var_0A in var_0) {
-      scripts\engine\utility::flag_set(var_0A + "_loaded");
+    foreach(var_10 in var_0) {
+      scripts\engine\utility::flag_set(var_10 + "_loaded");
     }
 
     level notify("new_transient_loaded");
@@ -364,8 +364,8 @@ func_8960() {
   waittillframeend;
   scripts\engine\utility::flag_set("start_is_set");
   thread func_10CAD();
-  var_0A = level.var_10BA8[level.var_10CDA];
-  if(isDefined(var_0A) && isDefined(var_0A["start_in_jackal"])) {
+  var_10 = level.var_10BA8[level.var_10CDA];
+  if(isDefined(var_10) && isDefined(var_10["start_in_jackal"])) {
     setomnvar("ui_active_hud", "jackal");
     setsaveddvar("spaceship_disableViewModelNotetracks", 1);
   } else {
@@ -377,13 +377,13 @@ func_8960() {
       level thread[[level.var_5018]]();
     }
   } else {
-    var_0A = level.var_10BA8[level.var_10CDA];
-    thread[[var_0A["start_func"]]]();
+    var_10 = level.var_10BA8[level.var_10CDA];
+    thread[[var_10["start_func"]]]();
   }
 
   if(scripts\sp\utility::func_9BB5()) {
-    var_0B = func_7CB8(var_1);
-    setdvar("start", var_0B);
+    var_11 = func_7CB8(var_1);
+    setdvar("start", var_11);
   }
 
   waittillframeend;
@@ -391,41 +391,41 @@ func_8960() {
     wait(0.1);
   }
 
-  var_0C = [];
+  var_12 = [];
   if(!scripts\sp\utility::func_9BB5() && level.var_10CDA != "no_game") {
-    var_0D = gettime();
+    var_13 = gettime();
     for(var_3 = 0; var_3 < level.var_10C58.size; var_3++) {
-      var_0A = level.var_10C58[var_3];
-      if(var_0A["name"] == level.var_10CDA) {
+      var_10 = level.var_10C58[var_3];
+      if(var_10["name"] == level.var_10CDA) {
         break;
       }
 
-      if(!isDefined(var_0A["catchup_function"])) {
+      if(!isDefined(var_10["catchup_function"])) {
         continue;
       }
 
       [
-        [var_0A["catchup_function"]]
+        [var_10["catchup_function"]]
       ]();
     }
   }
 
   for(var_3 = var_2; var_3 < level.var_10C58.size; var_3++) {
-    var_0A = level.var_10C58[var_3];
-    if(!isDefined(var_0A["logic_func"])) {
+    var_10 = level.var_10C58[var_3];
+    if(!isDefined(var_10["logic_func"])) {
       continue;
     }
 
-    if(func_1D3E(var_0A["logic_func"], var_0C)) {
+    if(func_1D3E(var_10["logic_func"], var_12)) {
       continue;
     }
 
     if(getdvarint("feedback")) {
-      func_6BBF(var_0A, var_3);
+      func_6BBF(var_10, var_3);
     }
 
-    level.var_10D36[[var_0A["logic_func"]]]();
-    var_0C[var_0C.size] = var_0A["logic_func"];
+    level.var_10D36[[var_10["logic_func"]]]();
+    var_12[var_12.size] = var_10["logic_func"];
     if(getdvarint("feedback")) {
       func_6BC1();
     }

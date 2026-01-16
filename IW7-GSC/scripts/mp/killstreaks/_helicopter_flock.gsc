@@ -9,7 +9,7 @@ init() {
   precachemodel("vehicle_apache_mg");
   precacheturret("apache_minigun_mp");
   precachevehicle("apache_strafe_mp");
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("littlebird_flock", ::func_128ED);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("littlebird_flock", ::func_128ED);
   level.var_8D4F = [];
 }
 
@@ -166,7 +166,7 @@ func_1082F(var_0, var_1, var_2, var_3) {
   var_4.maxhealth = 2000;
   var_4.var_E1 = 0;
   var_4 setCanDamage(1);
-  var_4.triggerportableradarping = var_0;
+  var_4.owner = var_0;
   var_4.team = var_0.team;
   var_4.var_A644 = 0;
   var_4.streakname = "littlebird_flock";
@@ -176,8 +176,8 @@ func_1082F(var_0, var_1, var_2, var_3) {
   var_5 linkto(var_4, "tag_turret", (0, 0, 0), (0, 0, 0));
   var_5 setModel("vehicle_apache_mg");
   var_5.angles = var_4.angles;
-  var_5.triggerportableradarping = var_4.triggerportableradarping;
-  var_5.team = var_5.triggerportableradarping.team;
+  var_5.owner = var_4.owner;
+  var_5.team = var_5.owner.team;
   var_5 getvalidattachments();
   var_5.vehicle = var_4;
   var_6 = var_4.origin + anglesToForward(var_4.angles) * -200 + anglestoright(var_4.angles) * -200 + (0, 0, 50);
@@ -187,9 +187,9 @@ func_1082F(var_0, var_1, var_2, var_3) {
   var_4.var_B6BC = var_5;
   var_4.var_B6BC setdefaultdroppitch(0);
   var_4.var_B6BC give_player_session_tokens("auto_nonai");
-  var_4.var_B6BC setsentryowner(var_4.triggerportableradarping);
+  var_4.var_B6BC setsentryowner(var_4.owner);
   if(level.teambased) {
-    var_4.var_B6BC setturretteam(var_4.triggerportableradarping.team);
+    var_4.var_B6BC setturretteam(var_4.owner.team);
   }
 
   level.var_8D4F[var_3] = var_4;
@@ -283,7 +283,7 @@ func_6F4A() {
   }
 }
 
-func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(self.var_1D41) && self.var_1D41) {
     return;
   }
@@ -292,7 +292,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     return;
   }
 
-  if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_1)) {
+  if(!scripts\mp\weapons::friendlyfirecheck(self.owner, var_1)) {
     return;
   }
 
@@ -305,18 +305,18 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   self.wasdamaged = 1;
-  var_0C = var_2;
+  var_12 = var_2;
   if(isplayer(var_1)) {
     var_1 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
     if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
       if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0C = var_0C + var_2 * level.armorpiercingmod;
+        var_12 = var_12 + var_2 * level.armorpiercingmod;
       }
     }
   }
 
-  if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-    var_1.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
+  if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+    var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
   }
 
   if(isDefined(var_5)) {
@@ -328,26 +328,26 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       case "ac130_40mm_mp":
       case "ac130_105mm_mp":
         self.largeprojectiledamage = 1;
-        var_0C = self.maxhealth + 1;
+        var_12 = self.maxhealth + 1;
         break;
 
       case "sam_projectile_mp":
         self.largeprojectiledamage = 1;
-        var_0C = self.maxhealth * 0.25;
+        var_12 = self.maxhealth * 0.25;
         break;
 
       case "emp_grenade_mp":
         self.largeprojectiledamage = 0;
-        var_0C = self.maxhealth + 1;
+        var_12 = self.maxhealth + 1;
         break;
     }
 
-    scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_5, self);
+    scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_5, self);
   }
 
-  self.var_E1 = self.var_E1 + var_0C;
+  self.var_E1 = self.var_E1 + var_12;
   if(self.var_E1 >= self.maxhealth) {
-    if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+    if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
       self.var_1D41 = 1;
       var_1 notify("destroyed_helicopter");
       var_1 notify("destroyed_killstreak", var_5);

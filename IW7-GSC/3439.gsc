@@ -174,8 +174,9 @@ func_139F9() {
       if(var_0[1] < -0.4) {
         self setscriptablepartstate("dodge", "dodge_left");
         break;
-      } else
+      } else {
         break;
+      }
     }
 
     if(isDefined(self.var_5809)) {

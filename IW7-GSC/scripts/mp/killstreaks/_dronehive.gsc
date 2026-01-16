@@ -4,7 +4,7 @@
 *************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("drone_hive", ::tryusedronehive, undefined, undefined, undefined, ::func_13C8C);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("drone_hive", ::tryusedronehive, undefined, undefined, undefined, ::func_13C8C);
   level.dronemissilespawnarray = getEntArray("remoteMissileSpawn", "targetname");
   foreach(var_1 in level.dronemissilespawnarray) {
     var_1.var_1155F = getent(var_1.target, "targetname");
@@ -27,7 +27,7 @@ usedronehive(var_0, var_1, var_2) {
     return 0;
   }
 
-  var_3 = scripts\mp\killstreaks\_killstreaks::func_D507(var_2);
+  var_3 = scripts\mp\killstreaks\killstreaks::func_D507(var_2);
   if(!var_3) {
     return 0;
   }
@@ -88,7 +88,7 @@ watchclosetogoal(var_0) {
     scripts\engine\utility::waitframe();
   }
 
-  var_0 thread scripts\mp\killstreaks\_killstreaks::func_11086();
+  var_0 thread scripts\mp\killstreaks\killstreaks::func_11086();
 }
 
 func_E846(var_0, var_1, var_2, var_3) {
@@ -112,93 +112,93 @@ func_E846(var_0, var_1, var_2, var_3) {
   var_0 notifyonplayercommand("missileTargetSet", "+attack_akimbo_accessible");
   var_8 = func_7DFE(var_0, level.dronemissilespawnarray);
   var_9 = var_8.origin * (1, 1, 0) + (0, 0, level.mapcenter[2] + 10000);
-  var_0A = var_8.var_1155F.origin;
-  var_0B = scripts\mp\utility::_magicbullet(var_5, var_9, var_0A, var_0);
-  var_0B setCanDamage(1);
-  var_0B func_80A2();
-  var_0B give_player_next_weapon(1);
-  var_0B.team = var_0.team;
-  var_0B.lifeid = var_1;
-  var_0B.type = "remote";
-  var_0B.triggerportableradarping = var_0;
-  var_0B.entitynumber = var_0B getentitynumber();
-  var_0B.streakinfo = var_3;
-  var_0B.weapon_name = "drone_hive_projectile_mp";
-  var_0B thread watchmissileextraeffect(var_3, 1);
-  level.rockets[var_0B.entitynumber] = var_0B;
+  var_10 = var_8.var_1155F.origin;
+  var_11 = scripts\mp\utility::_magicbullet(var_5, var_9, var_10, var_0);
+  var_11 setCanDamage(1);
+  var_11 func_80A2();
+  var_11 give_player_next_weapon(1);
+  var_11.team = var_0.team;
+  var_11.lifeid = var_1;
+  var_11.type = "remote";
+  var_11.owner = var_0;
+  var_11.entitynumber = var_11 getentitynumber();
+  var_11.streakinfo = var_3;
+  var_11.weapon_name = "drone_hive_projectile_mp";
+  var_11 thread watchmissileextraeffect(var_3, 1);
+  level.rockets[var_11.entitynumber] = var_11;
   level.remotemissileinprogress = 1;
-  level thread monitordeath(var_0B, 1);
-  level thread monitorboost(var_0B);
+  level thread monitordeath(var_11, 1);
+  level thread monitorboost(var_11);
   if(isDefined(var_0.killsthislifeperweapon)) {
     var_0.killsthislifeperweapon["drone_hive_projectile_mp"] = 0;
     var_0.killsthislifeperweapon["switch_blade_child_mp"] = 0;
   }
 
-  missileeyes(var_0, var_0B);
+  missileeyes(var_0, var_11);
   var_0 setclientomnvar("ui_predator_missile", 1);
-  var_0B thread func_13AA4(var_0);
-  var_0B thread watchhostmigrationfinishedinit(var_0);
-  var_0B thread scripts\mp\killstreaks\_utility::watchsupertrophynotify(var_0);
-  var_0 scripts\mp\matchdata::logkillstreakevent(var_2, var_0B.origin);
-  var_0C = 0;
-  var_0B.missilesleft = 2;
+  var_11 thread func_13AA4(var_0);
+  var_11 thread watchhostmigrationfinishedinit(var_0);
+  var_11 thread scripts\mp\killstreaks\_utility::watchsupertrophynotify(var_0);
+  var_0 scripts\mp\matchdata::logkillstreakevent(var_2, var_11.origin);
+  var_12 = 0;
+  var_11.missilesleft = 2;
   if(scripts\mp\killstreaks\_utility::func_A69F(var_3, "passive_predator")) {
-    var_0B.missilesleft = -1;
-    var_0B.singlefire = 1;
-    var_0B getrankxpmultiplier();
+    var_11.missilesleft = -1;
+    var_11.singlefire = 1;
+    var_11 getrankxpmultiplier();
   }
 
   if(scripts\mp\killstreaks\_utility::func_A69F(var_3, "passive_rapid_missiles")) {
-    var_0B.var_12BA7 = 1;
+    var_11.var_12BA7 = 1;
   }
 
-  var_0D = 2;
-  var_0 setclientomnvar("ui_predator_missiles_left", var_0B.missilesleft);
+  var_13 = 2;
+  var_0 setclientomnvar("ui_predator_missiles_left", var_11.missilesleft);
   for(;;) {
-    var_0E = var_0B scripts\engine\utility::waittill_any_return("death", "missileTargetSet");
+    var_14 = var_11 scripts\engine\utility::waittill_any_return("death", "missileTargetSet");
     scripts\mp\hostmigration::waittillhostmigrationdone();
-    if(var_0E == "death") {
+    if(var_14 == "death") {
       break;
     }
 
-    if(!isDefined(var_0B)) {
+    if(!isDefined(var_11)) {
       break;
     }
 
-    if(scripts\mp\utility::istrue(var_0B.var_12BA7)) {
-      if(scripts\mp\utility::istrue(var_0B.lasttimefired)) {
-        if(gettime() < var_0B.lasttimefired + var_0D * 1000 && var_0C == 0) {
+    if(scripts\mp\utility::istrue(var_11.var_12BA7)) {
+      if(scripts\mp\utility::istrue(var_11.lasttimefired)) {
+        if(gettime() < var_11.lasttimefired + var_13 * 1000 && var_12 == 0) {
           continue;
         }
       }
 
-      level thread firerapidmissiles(var_0B, var_0C, var_3, var_6);
-      var_0C++;
-      var_0B.lasttimefired = gettime();
-      var_0B.missilesleft = 2 - var_0C;
-      var_0F = var_0B.missilesleft;
-      if(var_0B.missilesleft == 0) {
-        var_0F = -1;
+      level thread firerapidmissiles(var_11, var_12, var_3, var_6);
+      var_12++;
+      var_11.lasttimefired = gettime();
+      var_11.missilesleft = 2 - var_12;
+      var_15 = var_11.missilesleft;
+      if(var_11.missilesleft == 0) {
+        var_15 = -1;
       }
 
-      var_0 setclientomnvar("ui_predator_missiles_left", var_0F);
-      if(var_0C == 2) {
-        var_0C = 0;
-        var_0B.missilesleft = 2;
-        var_0 thread resetmissiles(var_0B, var_0D);
+      var_0 setclientomnvar("ui_predator_missiles_left", var_15);
+      if(var_12 == 2) {
+        var_12 = 0;
+        var_11.missilesleft = 2;
+        var_0 thread resetmissiles(var_11, var_13);
       }
 
       continue;
     }
 
-    if(var_0C < 2) {
-      if(!scripts\mp\utility::istrue(var_0B.singlefire)) {
-        level thread spawnswitchblade(var_0B, var_0C, var_3, var_6);
-        var_0C++;
-        var_0B.missilesleft = 2 - var_0C;
-        var_0 setclientomnvar("ui_predator_missiles_left", var_0B.missilesleft);
-        if(var_0C == 2) {
-          var_0B getrankxpmultiplier();
+    if(var_12 < 2) {
+      if(!scripts\mp\utility::istrue(var_11.singlefire)) {
+        level thread spawnswitchblade(var_11, var_12, var_3, var_6);
+        var_12++;
+        var_11.missilesleft = 2 - var_12;
+        var_0 setclientomnvar("ui_predator_missiles_left", var_11.missilesleft);
+        if(var_12 == 2) {
+          var_11 getrankxpmultiplier();
         }
       }
     }
@@ -237,9 +237,9 @@ func_B9EE() {
     var_2 = [];
     var_0 = scripts\mp\killstreaks\_utility::func_7E92();
     foreach(var_4 in var_0) {
-      var_5 = self.triggerportableradarping worldpointinreticle_circle(var_4.origin, 65, 90);
+      var_5 = self.owner worldpointinreticle_circle(var_4.origin, 65, 90);
       if(var_5) {
-        self.triggerportableradarping thread scripts\mp\utility::drawline(self.origin, var_4.origin, 10, (0, 0, 1));
+        self.owner thread scripts\mp\utility::drawline(self.origin, var_4.origin, 10, (0, 0, 1));
         var_2[var_2.size] = var_4;
       }
     }
@@ -256,7 +256,7 @@ func_B9EE() {
 }
 
 spawnswitchblade(var_0, var_1, var_2, var_3) {
-  var_0.triggerportableradarping playlocalsound("ammo_crate_use");
+  var_0.owner playlocalsound("ammo_crate_use");
   var_4 = var_0 gettagangles("tag_origin");
   var_5 = anglesToForward(var_4);
   var_6 = anglestoright(var_4);
@@ -268,26 +268,26 @@ spawnswitchblade(var_0, var_1, var_2, var_3) {
 
   var_9 = bulletTrace(var_0.origin, var_0.origin + var_5 * var_8, 0, var_0);
   var_8 = var_8 * var_9["fraction"];
-  var_0A = var_0.origin + var_6 * var_7;
-  var_0B = var_0.origin + var_5 * var_8;
-  var_0C = scripts\mp\utility::_magicbullet(var_3, var_0A, var_0B, var_0.triggerportableradarping);
-  var_0D = var_0 getclosesttargetinview(var_0.triggerportableradarping, var_0B);
-  if(isDefined(var_0D) && !scripts\mp\killstreaks\_utility::func_A69F(var_2, "passive_rapid_missiles")) {
-    var_0C missile_settargetent(var_0D);
+  var_10 = var_0.origin + var_6 * var_7;
+  var_11 = var_0.origin + var_5 * var_8;
+  var_12 = scripts\mp\utility::_magicbullet(var_3, var_10, var_11, var_0.owner);
+  var_13 = var_0 getclosesttargetinview(var_0.owner, var_11);
+  if(isDefined(var_13) && !scripts\mp\killstreaks\_utility::func_A69F(var_2, "passive_rapid_missiles")) {
+    var_12 missile_settargetent(var_13);
   }
 
-  var_0C setCanDamage(1);
-  var_0C give_player_next_weapon(1);
-  var_0C.team = var_0.team;
-  var_0C.lifeid = var_0.lifeid;
-  var_0C.type = var_0.type;
-  var_0C.triggerportableradarping = var_0.triggerportableradarping;
-  var_0C.entitynumber = var_0C getentitynumber();
-  var_0C.streakinfo = var_2;
-  var_0C.weapon_name = "switch_blade_child_mp";
-  var_0C thread watchmissileextraeffect(var_2, 0);
-  level.rockets[var_0C.entitynumber] = var_0C;
-  level thread monitordeath(var_0C, 0);
+  var_12 setCanDamage(1);
+  var_12 give_player_next_weapon(1);
+  var_12.team = var_0.team;
+  var_12.lifeid = var_0.lifeid;
+  var_12.type = var_0.type;
+  var_12.owner = var_0.owner;
+  var_12.entitynumber = var_12 getentitynumber();
+  var_12.streakinfo = var_2;
+  var_12.weapon_name = "switch_blade_child_mp";
+  var_12 thread watchmissileextraeffect(var_2, 0);
+  level.rockets[var_12.entitynumber] = var_12;
+  level thread monitordeath(var_12, 0);
 }
 
 getclosesttargetinview(var_0, var_1) {
@@ -378,7 +378,7 @@ getnextmissilespawnindex(var_0) {
 monitorboost(var_0) {
   var_0 endon("death");
   for(;;) {
-    var_0.triggerportableradarping waittill("missileTargetSet");
+    var_0.owner waittill("missileTargetSet");
     var_0 notify("missileTargetSet");
   }
 }
@@ -409,16 +409,16 @@ func_7DFE(var_0, var_1) {
   var_7 = var_6[0];
   foreach(var_9 in var_6) {
     var_9.var_101E4 = 0;
-    for(var_0A = 0; var_0A < var_2.size; var_0A++) {
-      var_0B = var_2[var_0A];
-      if(!scripts\mp\utility::isreallyalive(var_0B)) {
-        var_2[var_0A] = var_2[var_2.size - 1];
+    for(var_10 = 0; var_10 < var_2.size; var_10++) {
+      var_11 = var_2[var_10];
+      if(!scripts\mp\utility::isreallyalive(var_11)) {
+        var_2[var_10] = var_2[var_2.size - 1];
         var_2[var_2.size - 1] = undefined;
-        var_0A--;
+        var_10--;
         continue;
       }
 
-      if(bullettracepassed(var_0B.origin + (0, 0, 32), var_9.origin, 0, var_0B)) {
+      if(bullettracepassed(var_11.origin + (0, 0, 32), var_9.origin, 0, var_11)) {
         var_9.var_101E4 = var_9.var_101E4 + 1;
         return var_9;
       }
@@ -481,7 +481,7 @@ monitorobjectivecamera(var_0) {
 }
 
 monitordeath(var_0, var_1) {
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_0 waittill("death");
   scripts\mp\hostmigration::waittillhostmigrationdone();
   if(isDefined(var_0.var_114F1)) {
@@ -516,7 +516,7 @@ func_E474(var_0, var_1, var_2) {
 
   var_0 playlocalsound("trinity_rocket_exp_plr");
   if(!scripts\mp\utility::istrue(var_2)) {
-    var_0 thread scripts\mp\killstreaks\_killstreaks::func_11086();
+    var_0 thread scripts\mp\killstreaks\killstreaks::func_11086();
   }
 
   var_0 setclientomnvar("ui_predator_missile", 2);
@@ -544,7 +544,7 @@ watchmissileextraeffect(var_0, var_1) {
     return;
   }
 
-  var_4 = self.triggerportableradarping;
+  var_4 = self.owner;
   var_5 = self.weapon_name;
   var_6 = scripts\engine\utility::spawn_tag_origin();
   var_6 linkto(self);
@@ -614,7 +614,7 @@ applygasdamageovertime(var_0, var_1, var_2) {
   var_2.gettinggassed = 1;
   while(var_2 istouching(self)) {
     var_2 dodamage(20, self.origin, var_0, self, "MOD_EXPLOSIVE", var_1);
-    var_3 = scripts\engine\utility::waittill_any_timeout_1(0.5, "death");
+    var_3 = scripts\engine\utility::waittill_any_timeout(0.5, "death");
     if(var_3 == "death") {
       break;
     }

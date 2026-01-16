@@ -4,14 +4,14 @@
 *********************************************/
 
 func_3DF2(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.isnodeoccupied)) {
-    var_4 = distancesquared(self.origin, self.isnodeoccupied.origin);
+  if(isDefined(self.enemy)) {
+    var_4 = distancesquared(self.origin, self.enemy.origin);
     if(var_4 < 65536) {
       return 0;
     }
 
-    if(isai(self.isnodeoccupied)) {
-      if(!isDefined(self.isnodeoccupied scripts\asm\asm_bb::bb_getcovernode()) || self.isnodeoccupied scripts\asm\asm_bb::bb_getrequestedcoverstate() != "hide") {
+    if(isai(self.enemy)) {
+      if(!isDefined(self.enemy scripts\asm\asm_bb::bb_getcovernode()) || self.enemy scripts\asm\asm_bb::bb_getrequestedcoverstate() != "hide") {
         return 0;
       }
     } else if(var_4 < 262144) {
@@ -146,24 +146,24 @@ func_1964(var_0) {
   var_7 = self func_8103(self.var_8C61);
   var_8 = self func_8103( % lookat_left_right);
   var_9 = self func_8103( % lookat_up_down);
-  var_0A = self func_8103( % lookat_head_base_partial);
-  var_0B = self func_8103( % head_gesture_look_partial);
-  var_0C = self func_8103( % lookat_head_adds);
+  var_10 = self func_8103( % lookat_head_base_partial);
+  var_11 = self func_8103( % head_gesture_look_partial);
+  var_12 = self func_8103( % lookat_head_adds);
   while(gettime() / 1000 - var_2 < var_0) {
-    var_0D = gettime() / 1000 - var_2 / var_0;
-    var_0D = func_10384(0, 1, var_0D);
-    var_0E = func_AB7A(var_3, 1, var_0D);
-    var_0F = func_AB7A(var_4, 0, var_0D);
-    var_10 = func_AB7A(var_5, 0, var_0D);
-    var_11 = func_AB7A(var_6, 0, var_0D);
-    var_12 = func_AB7A(var_7, 0, var_0D);
-    var_13 = func_AB7A(var_8, 0, var_0D);
-    var_14 = func_AB7A(var_9, 0, var_0D);
-    var_15 = func_AB7A(var_0A, 0, var_0D);
-    var_16 = func_AB7A(var_0B, 0, var_0D);
-    var_17 = func_AB7A(var_0C, 0, var_0D);
-    self func_82AC(self.var_8C5A, var_0E, 0.05);
-    self func_82AC(self.var_8C62, var_0F, 0.05);
+    var_13 = gettime() / 1000 - var_2 / var_0;
+    var_13 = func_10384(0, 1, var_13);
+    var_14 = func_AB7A(var_3, 1, var_13);
+    var_15 = func_AB7A(var_4, 0, var_13);
+    var_10 = func_AB7A(var_5, 0, var_13);
+    var_11 = func_AB7A(var_6, 0, var_13);
+    var_12 = func_AB7A(var_7, 0, var_13);
+    var_13 = func_AB7A(var_8, 0, var_13);
+    var_14 = func_AB7A(var_9, 0, var_13);
+    var_15 = func_AB7A(var_10, 0, var_13);
+    var_16 = func_AB7A(var_11, 0, var_13);
+    var_17 = func_AB7A(var_12, 0, var_13);
+    self func_82AC(self.var_8C5A, var_14, 0.05);
+    self func_82AC(self.var_8C62, var_15, 0.05);
     self func_82AC(self.var_8C60, var_10, 0.05);
     self func_82AC(self.var_8C63, var_11, 0.05);
     self func_82AC(self.var_8C61, var_12, 0.05);
@@ -233,15 +233,15 @@ func_195A(var_0) {
     var_8 = gettime() / 1000 - var_2 / var_1;
     var_8 = func_10384(0, 1, var_8);
     var_9 = func_AB7A(var_3, 0, var_8);
-    var_0A = func_AB7A(var_4, 0, var_8);
-    var_0B = func_AB7A(var_5, 0, var_8);
-    var_0C = func_AB7A(var_6, 0, var_8);
-    var_0D = func_AB7A(var_7, 0, var_8);
+    var_10 = func_AB7A(var_4, 0, var_8);
+    var_11 = func_AB7A(var_5, 0, var_8);
+    var_12 = func_AB7A(var_6, 0, var_8);
+    var_13 = func_AB7A(var_7, 0, var_8);
     self func_82AC( % lookat_left_right, var_9, 0.05);
-    self func_82AC( % lookat_up_down, var_0A, 0.05);
-    self func_82AC( % lookat_head_base_partial, var_0B, 0.05);
-    self func_82AC( % head_gesture_look_partial, var_0C, 0.05);
-    self func_82AC( % lookat_head_adds, var_0D, 0.05);
+    self func_82AC( % lookat_up_down, var_10, 0.05);
+    self func_82AC( % lookat_head_base_partial, var_11, 0.05);
+    self func_82AC( % head_gesture_look_partial, var_12, 0.05);
+    self func_82AC( % lookat_head_adds, var_13, 0.05);
     wait(0.05);
   }
 
@@ -276,15 +276,15 @@ func_195B(var_0) {
     var_8 = gettime() / 1000 - var_2 / var_1;
     var_8 = func_10384(0, 1, var_8);
     var_9 = func_AB7A(var_3, 1, var_8);
-    var_0A = func_AB7A(var_4, 1, var_8);
-    var_0B = func_AB7A(var_5, 10, var_8);
-    var_0C = func_AB7A(var_6, 10, var_8);
-    var_0D = func_AB7A(var_7, 0, var_8);
+    var_10 = func_AB7A(var_4, 1, var_8);
+    var_11 = func_AB7A(var_5, 10, var_8);
+    var_12 = func_AB7A(var_6, 10, var_8);
+    var_13 = func_AB7A(var_7, 0, var_8);
     self func_82AC( % lookat_left_right, var_9, 0.05);
-    self func_82AC( % lookat_up_down, var_0A, 0.05);
-    self func_82AC( % lookat_head_base_partial, var_0B, 0.05);
-    self func_82AC( % head_gesture_look_partial, var_0C, 0.05);
-    self func_82AC( % lookat_head_adds, var_0D, 0.05);
+    self func_82AC( % lookat_up_down, var_10, 0.05);
+    self func_82AC( % lookat_head_base_partial, var_11, 0.05);
+    self func_82AC( % head_gesture_look_partial, var_12, 0.05);
+    self func_82AC( % lookat_head_adds, var_13, 0.05);
     wait(0.05);
   }
 
@@ -321,15 +321,15 @@ func_1967(var_0) {
     var_8 = gettime() / 1000 - var_2 / var_0;
     var_8 = func_10384(0, 1, var_8);
     var_9 = func_AB7A(var_3, 1, var_8);
-    var_0A = func_AB7A(var_4, 0, var_8);
-    var_0B = func_AB7A(var_5, 0, var_8);
-    var_0C = func_AB7A(var_6, 0, var_8);
-    var_0D = func_AB7A(var_7, 0, var_8);
+    var_10 = func_AB7A(var_4, 0, var_8);
+    var_11 = func_AB7A(var_5, 0, var_8);
+    var_12 = func_AB7A(var_6, 0, var_8);
+    var_13 = func_AB7A(var_7, 0, var_8);
     self func_82AC(self.var_11A0C, var_9, 0.05);
-    self func_82AC(self.var_11A11, var_0A, 0.05);
-    self func_82AC(self.var_11A0E, var_0B, 0.05);
-    self func_82AC(self.var_11A12, var_0C, 0.05);
-    self func_82AC(self.var_11A0F, var_0D, 0.05);
+    self func_82AC(self.var_11A11, var_10, 0.05);
+    self func_82AC(self.var_11A0E, var_11, 0.05);
+    self func_82AC(self.var_11A12, var_12, 0.05);
+    self func_82AC(self.var_11A0F, var_13, 0.05);
     wait(0.05);
   }
 
@@ -594,7 +594,7 @@ func_1951() {
   self func_82AC(var_7, 0.005, self.var_2B71);
   self func_82AC(var_8, 0.005, self.var_2B71);
   var_9 = 0;
-  var_0A = 0;
+  var_10 = 0;
   for(;;) {
     if(!isDefined(self)) {
       return;
@@ -606,29 +606,29 @@ func_1951() {
     }
 
     if(isplayer(self.var_77A3)) {
-      var_0B = level.player getEye();
+      var_11 = level.player getEye();
     } else if(isai(self.var_77A3)) {
-      var_0B = self.var_77A3 getEye();
+      var_11 = self.var_77A3 getEye();
     } else if(isvector(self.var_77A3)) {
-      var_0B = self.var_77A3;
+      var_11 = self.var_77A3;
     } else {
-      var_0B = self.var_77A3.origin;
+      var_11 = self.var_77A3.origin;
     }
 
-    var_0C = self gettagangles("J_Spine4") + (0, 0, 0);
-    var_0D = self gettagorigin("J_Spine4");
-    var_0E = vectornormalize(var_0B - var_0D);
-    var_0F = anglestoright(var_0C);
-    var_10 = anglestoup(var_0C);
-    var_11 = anglestoup(var_0C) * -1;
-    var_12 = anglestoright(var_0C) * -1;
-    var_13 = anglesToForward(var_0C);
-    var_14 = clamp(vectordot(var_0E, var_0F), 0.005, 1);
-    var_15 = clamp(vectordot(var_0E, var_10), 0.005, 1);
-    var_16 = clamp(vectordot(var_0E, var_11), 0.005, 1);
-    var_17 = clamp(vectordot(var_0E, var_12), 0.005, 1);
+    var_12 = self gettagangles("J_Spine4") + (0, 0, 0);
+    var_13 = self gettagorigin("J_Spine4");
+    var_14 = vectornormalize(var_11 - var_13);
+    var_15 = anglestoright(var_12);
+    var_10 = anglestoup(var_12);
+    var_11 = anglestoup(var_12) * -1;
+    var_12 = anglestoright(var_12) * -1;
+    var_13 = anglesToForward(var_12);
+    var_14 = clamp(vectordot(var_14, var_15), 0.005, 1);
+    var_15 = clamp(vectordot(var_14, var_10), 0.005, 1);
+    var_16 = clamp(vectordot(var_14, var_11), 0.005, 1);
+    var_17 = clamp(vectordot(var_14, var_12), 0.005, 1);
     var_18 = 1;
-    if(scripts\engine\utility::anglebetweenvectorssigned(var_0F, var_0E, var_13) > 0) {
+    if(scripts\engine\utility::anglebetweenvectorssigned(var_15, var_14, var_13) > 0) {
       var_18 = 0;
     }
 
@@ -637,14 +637,14 @@ func_1951() {
     self func_82AC(var_4, var_14 + 0.005, self.var_778E);
     if(var_18) {
       var_9 = scripts\sp\math::func_AB6F(var_9, var_17, 0.1);
-      var_0A = scripts\sp\math::func_AB6F(var_0A, 0.005, 0.1);
+      var_10 = scripts\sp\math::func_AB6F(var_10, 0.005, 0.1);
     } else {
       var_9 = scripts\sp\math::func_AB6F(var_9, 0.005, 0.1);
-      var_0A = scripts\sp\math::func_AB6F(var_0A, var_17, 0.1);
+      var_10 = scripts\sp\math::func_AB6F(var_10, var_17, 0.1);
     }
 
     self func_82AC(var_7, var_9, self.var_778E);
-    self func_82AC(var_8, var_0A, self.var_778E);
+    self func_82AC(var_8, var_10, self.var_778E);
     scripts\engine\utility::waitframe();
   }
 }
@@ -775,9 +775,9 @@ func_194D() {
     var_7 = scripts\engine\utility::flatten_vector(var_5);
     var_8 = scripts\engine\utility::flatten_vector(var_6);
     var_9 = vectordot(var_8, var_7);
-    var_0A = func_6F41(var_9, 1, -1, 0, 1);
-    var_0B = clamp(var_0A, 0, 1);
-    self func_82B0(self.var_6A5C, var_0B);
+    var_10 = func_6F41(var_9, 1, -1, 0, 1);
+    var_11 = clamp(var_10, 0, 1);
+    self func_82B0(self.var_6A5C, var_11);
     scripts\engine\utility::waitframe();
   }
 }
@@ -856,18 +856,18 @@ func_1966() {
       var_9 = self.var_77A3.origin;
     }
 
-    var_0A = vectornormalize(var_9 - self.origin);
-    var_0B = anglesToForward(self.angles);
-    var_0C = anglestoright(self.angles);
-    var_0D = anglestoright(self.angles) * -1;
-    var_0E = anglesToForward(self.angles) * -1;
-    var_0F = anglestoup(self.angles);
-    var_10 = clamp(vectordot(var_0A, var_0B), 0, 1);
-    var_11 = clamp(vectordot(var_0A, var_0C), 0, 1);
-    var_12 = clamp(vectordot(var_0A, var_0D), 0, 1);
-    var_13 = clamp(vectordot(var_0A, var_0E), 0, 1);
+    var_10 = vectornormalize(var_9 - self.origin);
+    var_11 = anglesToForward(self.angles);
+    var_12 = anglestoright(self.angles);
+    var_13 = anglestoright(self.angles) * -1;
+    var_14 = anglesToForward(self.angles) * -1;
+    var_15 = anglestoup(self.angles);
+    var_10 = clamp(vectordot(var_10, var_11), 0, 1);
+    var_11 = clamp(vectordot(var_10, var_12), 0, 1);
+    var_12 = clamp(vectordot(var_10, var_13), 0, 1);
+    var_13 = clamp(vectordot(var_10, var_14), 0, 1);
     var_14 = 1;
-    if(scripts\engine\utility::anglebetweenvectorssigned(var_0B, var_0A, var_0F) > 0) {
+    if(scripts\engine\utility::anglebetweenvectorssigned(var_11, var_10, var_15) > 0) {
       var_14 = 0;
     }
 
@@ -982,12 +982,12 @@ func_195D(var_0) {
   var_7 = anglestoup(var_4);
   var_8 = vectornormalize(var_3 - var_5);
   var_9 = scripts\engine\utility::flatten_vector(var_6);
-  var_0A = scripts\engine\utility::flatten_vector(var_7);
-  var_0B = scripts\engine\utility::flatten_vector(var_8);
-  var_0C = vectordot(var_9, var_0B) * -1;
-  var_0D = var_0C * -1;
-  var_0E = clamp(func_6F41(var_0C, 0.2, 1, 0, 1), 0, 1);
-  var_0F = clamp(func_6F41(var_0D, 0.2, 1, 0, 1), 0, 1);
+  var_10 = scripts\engine\utility::flatten_vector(var_7);
+  var_11 = scripts\engine\utility::flatten_vector(var_8);
+  var_12 = vectordot(var_9, var_11) * -1;
+  var_13 = var_12 * -1;
+  var_14 = clamp(func_6F41(var_12, 0.2, 1, 0, 1), 0, 1);
+  var_15 = clamp(func_6F41(var_13, 0.2, 1, 0, 1), 0, 1);
   var_10 = self gettagorigin("J_Spine4");
   var_11 = vectornormalize(var_3 - var_10);
   var_12 = anglesToForward(var_4);
@@ -1021,8 +1021,8 @@ func_195D(var_0) {
         self func_82AC(self.var_D635, var_18, 0.2, 0.85);
       }
 
-      self func_82AC(self.var_D639, var_0F, 0.25, 0.85);
-      self func_82AC(self.var_D63B, var_0E, 0.25, 0.85);
+      self func_82AC(self.var_D639, var_15, 0.25, 0.85);
+      self func_82AC(self.var_D63B, var_14, 0.25, 0.85);
     }
   } else {
     if(var_1 != "casual" && var_1 != "casual_gun") {
@@ -1292,14 +1292,14 @@ func_194C(var_0, var_1, var_2) {
   var_7 = var_1[3];
   var_8 = var_1[4];
   var_9 = 0;
-  var_0A = undefined;
+  var_10 = undefined;
   self.var_C00A = 0;
-  var_0B = undefined;
+  var_11 = undefined;
   if(isDefined(var_2)) {
-    var_0A = lib_0A1E::func_2357(self.asm.archetype, "Knobs", "body");
-    var_0B = % gesture_partials;
+    var_10 = lib_0A1E::func_2357(self.asm.archetype, "Knobs", "body");
+    var_11 = % gesture_partials;
   } else {
-    var_0B = % add_gesture;
+    var_11 = % add_gesture;
   }
 
   if(!isDefined(self)) {
@@ -1307,24 +1307,24 @@ func_194C(var_0, var_1, var_2) {
   }
 
   if(isplayer(var_0)) {
-    var_0C = level.player getEye();
+    var_12 = level.player getEye();
   } else if(!isDefined(var_1)) {
-    var_0C = self.origin;
+    var_12 = self.origin;
     var_9 = 1;
   } else if(isai(var_1)) {
-    var_0C = var_1 getEye();
+    var_12 = var_1 getEye();
   } else if(isvector(var_1)) {
-    var_0C = var_1;
+    var_12 = var_1;
   } else {
-    var_0C = var_1.origin;
+    var_12 = var_1.origin;
   }
 
-  var_0D = self gettagangles("tag_origin");
-  var_0E = self gettagorigin("tag_origin");
-  var_0F = anglestoright(var_0D);
-  var_10 = anglesToForward(var_0D);
-  var_11 = vectornormalize(var_0C - var_0E);
-  var_12 = scripts\engine\utility::flatten_vector(var_0F);
+  var_13 = self gettagangles("tag_origin");
+  var_14 = self gettagorigin("tag_origin");
+  var_15 = anglestoright(var_13);
+  var_10 = anglesToForward(var_13);
+  var_11 = vectornormalize(var_12 - var_14);
+  var_12 = scripts\engine\utility::flatten_vector(var_15);
   var_13 = scripts\engine\utility::flatten_vector(var_10);
   var_14 = scripts\engine\utility::flatten_vector(var_11);
   var_15 = vectordot(var_12, var_14);
@@ -1332,8 +1332,8 @@ func_194C(var_0, var_1, var_2) {
   var_17 = clamp(func_6F41(var_15, 0.2, 1, 0, 1), 0, 1);
   var_18 = clamp(func_6F41(var_16, 0.2, 1, 0, 1), 0, 1);
   var_19 = self gettagorigin("J_Spine4");
-  var_1A = vectornormalize(var_0C - var_19);
-  var_1B = anglestoup(var_0D);
+  var_1A = vectornormalize(var_12 - var_19);
+  var_1B = anglestoup(var_13);
   var_1C = vectordot(var_1A, var_1B);
   var_1D = var_1C * -1;
   var_1E = vectordot(var_13, var_1A);
@@ -1342,9 +1342,9 @@ func_194C(var_0, var_1, var_2) {
   var_21 = clamp(func_6F41(var_1D, 0.2, 1, 0, 1), 0, 1);
   if(!self.var_C00A) {
     if(isDefined(var_2)) {
-      self func_82AC(var_0B, 10, 0.25);
+      self func_82AC(var_11, 10, 0.25);
     } else {
-      self func_82AC(var_0B, 1, 0.25);
+      self func_82AC(var_11, 1, 0.25);
     }
 
     if(var_1F < 0.3) {
@@ -1365,17 +1365,17 @@ func_194C(var_0, var_1, var_2) {
     self func_82AC(var_6, var_17, 0.25, 1);
   } else {
     if(isDefined(var_2)) {
-      self func_82AC(var_0A, 0.001, 0.1);
+      self func_82AC(var_10, 0.001, 0.1);
     }
 
-    self func_82AC(var_0B, 1, 0.25);
+    self func_82AC(var_11, 1, 0.25);
     self func_82AC(var_4, 1, 0.25);
   }
 
   var_22 = getanimlength(var_4);
   wait(var_22);
-  self clearanim(var_0B, 0.25);
-  self func_82AC(var_0A, 1, 0.25);
+  self clearanim(var_11, 0.25);
+  self func_82AC(var_10, 1, 0.25);
 }
 
 func_192F(var_0, var_1) {
@@ -1457,14 +1457,14 @@ func_1952() {
     }
 
     var_9 = self gettagangles("J_Head");
-    var_0A = self gettagorigin("J_Head");
-    var_0B = self gettagangles("J_Spine4") + (0, 90, 0);
-    var_0C = self gettagorigin("J_Spine4");
-    var_0D = vectornormalize(var_8 - var_0C);
-    var_0E = anglestoright(var_0B);
-    var_0F = scripts\engine\utility::flatten_vector(var_0E);
-    var_10 = scripts\engine\utility::flatten_vector(var_0D);
-    var_11 = vectordot(var_0F, var_10);
+    var_10 = self gettagorigin("J_Head");
+    var_11 = self gettagangles("J_Spine4") + (0, 90, 0);
+    var_12 = self gettagorigin("J_Spine4");
+    var_13 = vectornormalize(var_8 - var_12);
+    var_14 = anglestoright(var_11);
+    var_15 = scripts\engine\utility::flatten_vector(var_14);
+    var_10 = scripts\engine\utility::flatten_vector(var_13);
+    var_11 = vectordot(var_15, var_10);
     var_12 = func_6F41(var_11, -1, 1, 0, 1);
     var_12 = clamp(var_12, 0, 1);
     var_7 = var_7 + var_12 - var_7 * self.var_778E;
@@ -1632,20 +1632,20 @@ func_2B8A() {
       var_9 = var_0.var_77A3.origin;
     }
 
-    var_0A = var_0 gettagangles("tag_origin");
-    var_0B = var_0 gettagorigin("tag_origin");
-    var_0C = scripts\engine\utility::flatten_vector(vectornormalize(var_9 - var_0B));
-    var_0D = anglesToForward(var_0A);
-    var_0E = anglestoright(var_0A);
-    var_0F = anglestoright(var_0A) * -1;
-    var_10 = anglesToForward(var_0A) * -1;
-    var_11 = anglestoup(var_0A);
-    var_12 = clamp(vectordot(var_0C, var_0D), 0, 1);
-    var_13 = clamp(vectordot(var_0C, var_0E), 0, 1);
-    var_14 = clamp(vectordot(var_0C, var_0F), 0, 1);
-    var_15 = clamp(vectordot(var_0C, var_10), 0, 1);
+    var_10 = var_0 gettagangles("tag_origin");
+    var_11 = var_0 gettagorigin("tag_origin");
+    var_12 = scripts\engine\utility::flatten_vector(vectornormalize(var_9 - var_11));
+    var_13 = anglesToForward(var_10);
+    var_14 = anglestoright(var_10);
+    var_15 = anglestoright(var_10) * -1;
+    var_10 = anglesToForward(var_10) * -1;
+    var_11 = anglestoup(var_10);
+    var_12 = clamp(vectordot(var_12, var_13), 0, 1);
+    var_13 = clamp(vectordot(var_12, var_14), 0, 1);
+    var_14 = clamp(vectordot(var_12, var_15), 0, 1);
+    var_15 = clamp(vectordot(var_12, var_10), 0, 1);
     var_16 = 1;
-    if(scripts\engine\utility::anglebetweenvectorssigned(var_0D, var_0C, var_11) > 0) {
+    if(scripts\engine\utility::anglebetweenvectorssigned(var_13, var_12, var_11) > 0) {
       var_16 = 0;
     }
 
@@ -1790,36 +1790,36 @@ func_2B86() {
   var_7 = 0;
   var_8 = 0;
   var_9 = gettime() / 1000;
-  var_0A = getanimlength(var_0.var_7540);
-  while(gettime() / 1000 - var_9 < var_0A) {
+  var_10 = getanimlength(var_0.var_7540);
+  while(gettime() / 1000 - var_9 < var_10) {
     if(!isDefined(var_0)) {
       break;
     }
 
     if(isplayer(var_0.var_77A3)) {
-      var_0B = level.player getEye();
+      var_11 = level.player getEye();
     } else if(isai(var_0.var_77A3)) {
-      var_0B = var_0.var_77A3 getEye();
+      var_11 = var_0.var_77A3 getEye();
     } else if(isvector(var_0.var_77A3)) {
-      var_0B = var_0.var_77A3;
+      var_11 = var_0.var_77A3;
     } else {
-      var_0B = var_0.var_77A3.origin;
+      var_11 = var_0.var_77A3.origin;
     }
 
-    var_0C = var_0 gettagangles("tag_origin");
-    var_0D = var_0 gettagorigin("tag_origin");
-    var_0E = scripts\engine\utility::flatten_vector(vectornormalize(var_0B - var_0D));
-    var_0F = anglesToForward(var_0C);
-    var_10 = anglestoright(var_0C);
-    var_11 = anglestoright(var_0C) * -1;
-    var_12 = anglesToForward(var_0C) * -1;
-    var_13 = anglestoup(var_0C);
-    var_14 = clamp(vectordot(var_0E, var_0F), 0, 1);
-    var_15 = clamp(vectordot(var_0E, var_10), 0, 1);
-    var_16 = clamp(vectordot(var_0E, var_11), 0, 1);
-    var_17 = clamp(vectordot(var_0E, var_12), 0, 1);
+    var_12 = var_0 gettagangles("tag_origin");
+    var_13 = var_0 gettagorigin("tag_origin");
+    var_14 = scripts\engine\utility::flatten_vector(vectornormalize(var_11 - var_13));
+    var_15 = anglesToForward(var_12);
+    var_10 = anglestoright(var_12);
+    var_11 = anglestoright(var_12) * -1;
+    var_12 = anglesToForward(var_12) * -1;
+    var_13 = anglestoup(var_12);
+    var_14 = clamp(vectordot(var_14, var_15), 0, 1);
+    var_15 = clamp(vectordot(var_14, var_10), 0, 1);
+    var_16 = clamp(vectordot(var_14, var_11), 0, 1);
+    var_17 = clamp(vectordot(var_14, var_12), 0, 1);
     var_18 = 1;
-    if(scripts\engine\utility::anglebetweenvectorssigned(var_0F, var_0E, var_13) > 0) {
+    if(scripts\engine\utility::anglebetweenvectorssigned(var_15, var_14, var_13) > 0) {
       var_18 = 0;
     }
 

@@ -38,10 +38,10 @@ func_5AD1(var_0) {
     var_8 = 600;
     var_9 = self getplayerangles() - vectortoangles(var_3);
     var_9 = (min(0, var_9[0]), var_9[1], 0);
-    var_0A = anglesToForward(var_9) * var_5 * min(1, length(var_3));
-    var_0A = var_0A + var_6;
+    var_10 = anglesToForward(var_9) * var_5 * min(1, length(var_3));
+    var_10 = var_10 + var_6;
     var_7 = 0.6;
-    var_4 moveslide((0, 0, 30), 30, var_0A * 1.5 + (0, 0, var_8));
+    var_4 moveslide((0, 0, 30), 30, var_10 * 1.5 + (0, 0, var_8));
     earthquake(0.1, var_7 * 0.5, self.origin, 512);
     self setstance("stand");
     thread scripts\sp\utility::play_sound_on_entity("player_jet");
@@ -50,17 +50,17 @@ func_5AD1(var_0) {
     self.var_AD32 = var_4;
     wait(var_7);
     if(isDefined(self.var_AD32) && self.var_AD32 == var_4) {
-      self setvelocity(var_0A + (0, 0, 50));
+      self setvelocity(var_10 + (0, 0, 50));
       self unlink();
       self.var_AD32 = undefined;
     }
 
-    var_0B = 0.5;
-    thread scripts\sp\utility::func_D2CD(100, var_0B);
+    var_11 = 0.5;
+    thread scripts\sp\utility::func_D2CD(100, var_11);
     thread func_C144();
     self waittill("landed_on_ground");
     self.var_5AD4 = undefined;
-    wait(var_0B);
+    wait(var_11);
   }
 }
 

@@ -127,7 +127,7 @@ func_A448() {
   for(;;) {
     wait(0.05);
     var_7 = self getcurrentweapon();
-    if((isbot(self) && var_7 != "javelin_mp") || !issubstr(var_7, "javelin") || scripts\mp\killstreaks\_emp_common::isemped()) {
+    if((isbot(self) && var_7 != "javelin_mp") || !issubstr(var_7, "javelin") || scripts\mp\killstreaks\emp_common::isemped()) {
       if(isDefined(self.var_A449)) {
         func_E254();
       }
@@ -135,7 +135,7 @@ func_A448() {
       continue;
     }
 
-    if(self getweaponrankinfominxp() < 0.95) {
+    if(self playerads() < 0.95) {
       var_6 = gettime();
       func_E254();
       continue;
@@ -157,18 +157,18 @@ func_A448() {
     }
 
     if(self.var_A444 == 1) {
-      var_0A = scripts\mp\weapons::func_AF2B();
-      if(var_0A.size != 0) {
-        var_0B = [];
-        foreach(var_0D in var_0A) {
-          var_0E = self worldpointinreticle_circle(var_0D.origin, 65, 40);
-          if(var_0E) {
-            var_0B[var_0B.size] = var_0D;
+      var_10 = scripts\mp\weapons::func_AF2B();
+      if(var_10.size != 0) {
+        var_11 = [];
+        foreach(var_13 in var_10) {
+          var_14 = self worldpointinreticle_circle(var_13.origin, 65, 40);
+          if(var_14) {
+            var_11[var_11.size] = var_13;
           }
         }
 
-        if(var_0B.size != 0) {
-          var_10 = sortbydistance(var_0B, self.origin);
+        if(var_11.size != 0) {
+          var_10 = sortbydistance(var_11, self.origin);
           if(!func_13263(var_10[0])) {
             continue;
           }
@@ -248,8 +248,8 @@ func_A448() {
     }
 
     if(self.var_A444 == 2) {
-      var_0E = self worldpointinreticle_circle(self.var_A447, 65, 45);
-      if(!var_0E) {
+      var_14 = self worldpointinreticle_circle(self.var_A447, 65, 45);
+      if(!var_14) {
         func_E254();
         continue;
       }
@@ -272,8 +272,8 @@ func_A448() {
     }
 
     if(self.var_A444 == 3) {
-      var_0E = self worldpointinreticle_circle(self.var_A447, 65, 45);
-      if(!var_0E) {
+      var_14 = self worldpointinreticle_circle(self.var_A447, 65, 45);
+      if(!var_14) {
         func_E254();
         continue;
       }

@@ -89,7 +89,7 @@ func_13B31() {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("phase_shift_power_activated", "rewind_power_finished", "powers_teleport_used", "orbital_deployment_complete", "phase_slash_entered", "transponder_teleportPlayer");
+  scripts\engine\utility::waittill_any("phase_shift_power_activated", "rewind_power_finished", "powers_teleport_used", "orbital_deployment_complete", "phase_slash_entered", "transponder_teleportPlayer");
   while(!self isonground()) {
     wait(0.05);
   }

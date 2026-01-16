@@ -25,7 +25,7 @@ func_E83B(var_0) {
 func_139AB(var_0, var_1, var_2) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_1(var_0, "death");
+  scripts\engine\utility::waittill_any_timeout(var_0, "death");
   if(!isDefined(var_2)) {
     self notify(var_1);
     return;

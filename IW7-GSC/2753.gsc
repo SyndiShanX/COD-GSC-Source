@@ -578,8 +578,9 @@ showelem() {
     if(self.bar.alpha != 1) {
       self.bar.alpha = 1;
     }
-  } else if(self.alpha != 1)
+  } else if(self.alpha != 1) {
     self.alpha = 1;
+  }
 }
 
 flashthread() {
@@ -671,8 +672,9 @@ transitionreset() {
   if(self.elemtype == "font") {
     self.fontscale = self.basefontscale;
     self.label = &"";
-  } else if(self.elemtype == "icon")
+  } else if(self.elemtype == "icon") {
     self setshader(self.shader, self.width, self.height);
+  }
 
   self.alpha = 0;
 }

@@ -4,7 +4,7 @@
 *********************************************/
 
 func_1000F() {
-  return isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied);
+  return isDefined(self.enemy) && isplayer(self.enemy) && self cansee(self.enemy);
 }
 
 func_6A70(var_0) {
@@ -13,7 +13,7 @@ func_6A70(var_0) {
   for(;;) {
     scripts\engine\utility::waitframe();
     if(func_1000F()) {
-      var_2 = distancesquared(self.origin, self.isnodeoccupied.origin);
+      var_2 = distancesquared(self.origin, self.enemy.origin);
       if(var_2 < var_1) {
         self orientmode("face enemy");
       } else {
@@ -40,8 +40,8 @@ func_D46D(var_0, var_1, var_2, var_3) {
     childthread scripts\asm\shared_utility::setuseanimgoalweight(var_1, var_2);
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
-    self._blackboard.var_AA3D = self.target_getindexoftarget;
+  if(isDefined(self.node)) {
+    self._blackboard.var_AA3D = self.node;
   }
 
   if(self.team != "allies") {
@@ -55,7 +55,7 @@ reload(var_0, var_1, var_2, var_3) {
   self endon("reload_terminate");
   self endon(var_1 + "_finished");
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
-  if(weaponclass(self.var_394) == "pistol") {
+  if(weaponclass(self.weapon) == "pistol") {
     self orientmode("face enemy");
   }
 
@@ -82,13 +82,13 @@ func_D56A(var_0, var_1, var_2, var_3) {
   scripts\sp\gameskill::func_54C4();
   var_4 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
-  if(scripts\engine\utility::actor_is3d() && isDefined(self.isnodeoccupied)) {
+  if(scripts\engine\utility::actor_is3d() && isDefined(self.enemy)) {
     self orientmode("face enemy");
   } else {
     self orientmode("face angle 3d", self.angles);
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
+  if(isDefined(self.node)) {
     self animmode("angle deltas");
   } else {
     self animmode("zonly_physics");
@@ -111,7 +111,7 @@ func_D56A(var_0, var_1, var_2, var_3) {
 func_D56D(var_0, var_1) {
   self endon("death");
   self endon(var_1 + "_finished");
-  var_2 = self.isnodeoccupied;
+  var_2 = self.enemy;
   var_2 endon("death");
   var_3 = getanimlength(var_0);
   var_4 = int(var_3 * 20);
@@ -122,8 +122,8 @@ func_D56D(var_0, var_1) {
     self.var_10F8C = angleclamp180(self.angles[1] + var_7);
     var_8 = self getscoreinfocategory(var_0);
     var_9 = getangledelta(var_0, var_8, 1);
-    var_0A = angleclamp180(var_7 - var_9);
-    self orientmode("face angle", angleclamp(self.angles[1] + var_0A * var_6));
+    var_10 = angleclamp180(var_7 - var_9);
+    self orientmode("face angle", angleclamp(self.angles[1] + var_10 * var_6));
     var_5--;
     wait(0.05);
   }
@@ -147,7 +147,7 @@ func_1007E(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return 0;
   }
 
@@ -163,18 +163,18 @@ func_1007E(var_0, var_1, var_2, var_3) {
 }
 
 func_1007F(var_0, var_1, var_2, var_3) {
-  var_4 = self.target_getindexoftarget;
+  var_4 = self.node;
   var_5 = angleclamp180(scripts\asm\shared_utility::gethighestnodestance(var_4) - self.angles[1]);
   return abs(angleclamp180(var_5)) > self.var_129AF;
 }
 
 func_4C03(var_0, var_1, var_2, var_3) {
   var_4 = var_3;
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return var_4 == "Exposed Crouch";
   }
 
-  if(distance2dsquared(self.origin, self.target_getindexoftarget.origin) > 225) {
+  if(distance2dsquared(self.origin, self.node.origin) > 225) {
     if(scripts\asm\asm_bb::func_292C() == "stand") {
       return var_4 == "Exposed";
     } else {

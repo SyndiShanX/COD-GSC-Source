@@ -258,13 +258,13 @@ updatemlgspectator() {
       var_8 = (var_7[0], var_7[1], 0);
       var_8 = vectornormalize(var_8);
       var_9 = var_4;
-      var_0A = (0, 0, 30);
-      var_0A = var_0A + -80 * var_8;
-      var_0B = var_9 + var_0A;
+      var_10 = (0, 0, 30);
+      var_10 = var_10 + -80 * var_8;
+      var_11 = var_9 + var_10;
       if(var_6 > 600) {
-        self.codcasterballcamfollow.origin = var_0B;
+        self.codcasterballcamfollow.origin = var_11;
       } else {
-        self.codcasterballcamfollow moveto(var_0B, 0.5, 0, 0.2);
+        self.codcasterballcamfollow moveto(var_11, 0.5, 0, 0.2);
       }
 
       self.codcasterballcamfollow rotateto(vectortoangles(var_7), 0.15, 0.05, 0.05);

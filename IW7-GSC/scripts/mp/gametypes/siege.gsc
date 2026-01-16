@@ -344,54 +344,54 @@ domflags() {
       var_9[0].angles = var_8.angles;
     }
 
-    var_0A = scripts\mp\gameobjects::createuseobject("neutral", var_8, var_9, (0, 0, 100));
-    var_0A scripts\mp\gameobjects::allowuse("enemy");
-    var_0A scripts\mp\gameobjects::setusetime(level.caprate);
-    var_0A scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
-    var_0B = var_0A scripts\mp\gameobjects::getlabel();
-    var_0A.label = var_0B;
-    var_0A scripts\mp\gameobjects::set2dicon("friendly", "waypoint_defend" + var_0B);
-    var_0A scripts\mp\gameobjects::set3dicon("friendly", "waypoint_defend" + var_0B);
-    var_0A scripts\mp\gameobjects::set2dicon("enemy", "waypoint_captureneutral" + var_0B);
-    var_0A scripts\mp\gameobjects::set3dicon("enemy", "waypoint_captureneutral" + var_0B);
-    var_0A scripts\mp\gameobjects::setvisibleteam("any");
-    var_0A scripts\mp\gameobjects::cancontestclaim(1);
-    var_0A.onuse = ::onuse;
-    var_0A.onbeginuse = ::onbeginuse;
-    var_0A.onuseupdate = ::onuseupdate;
-    var_0A.onenduse = ::onenduse;
-    var_0A.oncontested = ::oncontested;
-    var_0A.onuncontested = ::onuncontested;
-    var_0A.nousebar = 1;
-    var_0A.id = "domFlag";
-    var_0A.firstcapture = 1;
-    var_0A.prevteam = "neutral";
-    var_0A.flagcapsuccess = 0;
-    var_0A.playersrevived = 0;
-    var_0A.claimgracetime = level.caprate * 1000;
-    var_0C = var_9[0].origin + (0, 0, 32);
-    var_0D = var_9[0].origin + (0, 0, -32);
-    var_0E = bulletTrace(var_0C, var_0D, 0, undefined);
-    var_0F = scripts\mp\gametypes\obj_dom::checkmapoffsets(var_0A.label);
-    var_0A.baseeffectpos = var_0E["position"] + var_0F;
-    var_10 = vectortoangles(var_0E["normal"]);
-    var_11 = scripts\mp\gametypes\obj_dom::checkmapfxangles(var_0A.label, var_10);
-    var_0A.baseeffectforward = anglesToForward(var_11);
-    var_12 = spawn("script_model", var_0A.baseeffectpos);
+    var_10 = scripts\mp\gameobjects::createuseobject("neutral", var_8, var_9, (0, 0, 100));
+    var_10 scripts\mp\gameobjects::allowuse("enemy");
+    var_10 scripts\mp\gameobjects::setusetime(level.caprate);
+    var_10 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
+    var_11 = var_10 scripts\mp\gameobjects::getlabel();
+    var_10.label = var_11;
+    var_10 scripts\mp\gameobjects::set2dicon("friendly", "waypoint_defend" + var_11);
+    var_10 scripts\mp\gameobjects::set3dicon("friendly", "waypoint_defend" + var_11);
+    var_10 scripts\mp\gameobjects::set2dicon("enemy", "waypoint_captureneutral" + var_11);
+    var_10 scripts\mp\gameobjects::set3dicon("enemy", "waypoint_captureneutral" + var_11);
+    var_10 scripts\mp\gameobjects::setvisibleteam("any");
+    var_10 scripts\mp\gameobjects::cancontestclaim(1);
+    var_10.onuse = ::onuse;
+    var_10.onbeginuse = ::onbeginuse;
+    var_10.onuseupdate = ::onuseupdate;
+    var_10.onenduse = ::onenduse;
+    var_10.oncontested = ::oncontested;
+    var_10.onuncontested = ::onuncontested;
+    var_10.nousebar = 1;
+    var_10.id = "domFlag";
+    var_10.firstcapture = 1;
+    var_10.prevteam = "neutral";
+    var_10.flagcapsuccess = 0;
+    var_10.playersrevived = 0;
+    var_10.claimgracetime = level.caprate * 1000;
+    var_12 = var_9[0].origin + (0, 0, 32);
+    var_13 = var_9[0].origin + (0, 0, -32);
+    var_14 = bulletTrace(var_12, var_13, 0, undefined);
+    var_15 = scripts\mp\gametypes\obj_dom::checkmapoffsets(var_10.label);
+    var_10.baseeffectpos = var_14["position"] + var_15;
+    var_10 = vectortoangles(var_14["normal"]);
+    var_11 = scripts\mp\gametypes\obj_dom::checkmapfxangles(var_10.label, var_10);
+    var_10.baseeffectforward = anglesToForward(var_11);
+    var_12 = spawn("script_model", var_10.baseeffectpos);
     var_12 setModel("dom_flag_scriptable");
-    var_12.angles = generateaxisanglesfromforwardvector(var_0A.baseeffectforward, var_12.angles);
-    var_0A.physics_capsulecast = var_12;
-    var_0A.vfxnamemod = "";
-    if(var_0A.trigger.fgetarg == 160) {
-      var_0A.vfxnamemod = "_160";
-    } else if(var_0A.trigger.fgetarg == 90) {
-      var_0A.vfxnamemod = "_90";
+    var_12.angles = generateaxisanglesfromforwardvector(var_10.baseeffectforward, var_12.angles);
+    var_10.physics_capsulecast = var_12;
+    var_10.vfxnamemod = "";
+    if(var_10.trigger.fgetarg == 160) {
+      var_10.vfxnamemod = "_160";
+    } else if(var_10.trigger.fgetarg == 90) {
+      var_10.vfxnamemod = "_90";
     }
 
-    var_0A scripts\engine\utility::delaythread(1, ::setneutral);
-    level.magicbullet[var_7].useobj = var_0A;
-    var_0A.levelflag = level.magicbullet[var_7];
-    level.domflags[level.domflags.size] = var_0A;
+    var_10 scripts\engine\utility::delaythread(1, ::setneutral);
+    level.magicbullet[var_7].useobj = var_10;
+    var_10.levelflag = level.magicbullet[var_7];
+    level.domflags[level.domflags.size] = var_10;
   }
 
   var_13 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_axis_start");
@@ -936,12 +936,12 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     scripts\mp\utility::statusdialog("objs_capture", var_1.team, 1);
   }
 
-  var_0A = 0;
-  var_0B = 0;
-  var_0C = 0;
-  var_0D = self;
-  var_0E = var_0D.team;
-  var_0F = var_0D.origin;
+  var_10 = 0;
+  var_11 = 0;
+  var_12 = 0;
+  var_13 = self;
+  var_14 = var_13.team;
+  var_15 = var_13.origin;
   var_10 = var_1.team;
   var_11 = var_1.origin;
   var_12 = 0;
@@ -957,8 +957,8 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
     var_15 = var_14.useobj.ownerteam;
     if(var_10 != var_15) {
-      if(!var_0A) {
-        var_0A = 1;
+      if(!var_10) {
+        var_10 = 1;
       }
 
       continue;
@@ -969,26 +969,26 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     var_15 = var_14.useobj.ownerteam;
     if(var_15 == "neutral") {
       var_18 = var_1 istouching(var_14);
-      var_19 = var_0D istouching(var_14);
+      var_19 = var_13 istouching(var_14);
       if(var_18 || var_19) {
-        if(var_14.useobj.claimteam == var_0E) {
-          if(!var_0B) {
-            if(var_0A) {
+        if(var_14.useobj.claimteam == var_14) {
+          if(!var_11) {
+            if(var_10) {
               var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
             }
 
-            var_0B = 1;
+            var_11 = 1;
             var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
             thread scripts\mp\matchdata::loginitialstats(var_9, "assaulting");
             continue;
           }
         } else if(var_14.useobj.claimteam == var_10) {
-          if(!var_0C) {
-            if(var_0A) {
+          if(!var_12) {
+            if(var_10) {
               var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
             }
 
-            var_0C = 1;
+            var_12 = 1;
             var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
             var_1 scripts\mp\utility::incperstat("defends", 1);
             var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
@@ -1002,14 +1002,14 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     }
 
     if(var_15 != var_10) {
-      if(!var_0B) {
-        var_1A = distsquaredcheck(var_14, var_11, var_0F);
+      if(!var_11) {
+        var_1A = distsquaredcheck(var_14, var_11, var_15);
         if(var_1A) {
-          if(var_0A) {
+          if(var_10) {
             var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
           }
 
-          var_0B = 1;
+          var_11 = 1;
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
           thread scripts\mp\matchdata::loginitialstats(var_9, "assaulting");
           continue;
@@ -1019,14 +1019,14 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
       continue;
     }
 
-    if(!var_0C) {
-      var_1B = distsquaredcheck(var_14, var_11, var_0F);
+    if(!var_12) {
+      var_1B = distsquaredcheck(var_14, var_11, var_15);
       if(var_1B) {
-        if(var_0A) {
+        if(var_10) {
           var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
         }
 
-        var_0C = 1;
+        var_12 = 1;
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
         var_1 scripts\mp\utility::incperstat("defends", 1);
         var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
@@ -1232,8 +1232,8 @@ getnearestflagpoint(var_0) {
 giveflagcapturexp(var_0, var_1) {
   level endon("game_ended");
   var_2 = scripts\mp\gameobjects::getearliestclaimplayer();
-  if(isDefined(var_2.triggerportableradarping)) {
-    var_2 = var_2.triggerportableradarping;
+  if(isDefined(var_2.owner)) {
+    var_2 = var_2.owner;
   }
 
   level.lastcaptime = gettime();
@@ -1245,8 +1245,8 @@ giveflagcapturexp(var_0, var_1) {
   var_3 = getarraykeys(var_0);
   for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_5 = var_0[var_3[var_4]].player;
-    if(isDefined(var_5.triggerportableradarping)) {
-      var_5 = var_5.triggerportableradarping;
+    if(isDefined(var_5.owner)) {
+      var_5 = var_5.owner;
     }
 
     if(!isplayer(var_5)) {
@@ -1375,23 +1375,23 @@ removedompoint() {
           var_2 scripts\mp\gameobjects::set3dicon("friendly", undefined);
           var_2 scripts\mp\gameobjects::set2dicon("enemy", undefined);
           var_2 scripts\mp\gameobjects::set3dicon("enemy", undefined);
-          var_0C = [];
-          for(var_0D = 0; var_0D < level.magicbullet.size; var_0D++) {
-            if(level.magicbullet[var_0D].script_label != var_0) {
-              var_0C[var_0C.size] = level.magicbullet[var_0D];
+          var_12 = [];
+          for(var_13 = 0; var_13 < level.magicbullet.size; var_13++) {
+            if(level.magicbullet[var_13].script_label != var_0) {
+              var_12[var_12.size] = level.magicbullet[var_13];
             }
           }
 
-          level.magicbullet = var_0C;
+          level.magicbullet = var_12;
           level.objectives = level.magicbullet;
-          var_0C = [];
-          for(var_0D = 0; var_0D < level.domflags.size; var_0D++) {
-            if(level.domflags[var_0D].label != var_0) {
-              var_0C[var_0C.size] = level.domflags[var_0D];
+          var_12 = [];
+          for(var_13 = 0; var_13 < level.domflags.size; var_13++) {
+            if(level.domflags[var_13].label != var_0) {
+              var_12[var_12.size] = level.domflags[var_13];
             }
           }
 
-          level.domflags = var_0C;
+          level.domflags = var_12;
           break;
         }
       }
@@ -1455,13 +1455,13 @@ placedompoint() {
       var_9 = [];
       var_5 = scripts\common\trace::ray_trace(var_3, var_4, var_9, var_8);
       var_6.baseeffectpos = var_5["position"];
-      var_0A = vectortoangles(var_5["normal"]);
-      var_6.baseeffectforward = anglesToForward(var_0A);
+      var_10 = vectortoangles(var_5["normal"]);
+      var_6.baseeffectforward = anglesToForward(var_10);
       var_6 scripts\mp\gametypes\obj_dom::initializematchrecording();
       var_6 scripts\engine\utility::delaythread(1, ::setneutral);
-      for(var_0B = 0; var_0B < level.magicbullet.size; var_0B++) {
-        level.magicbullet[var_0B].useobj = var_6;
-        var_6.levelflag = level.magicbullet[var_0B];
+      for(var_11 = 0; var_11 < level.magicbullet.size; var_11++) {
+        level.magicbullet[var_11].useobj = var_6;
+        var_6.levelflag = level.magicbullet[var_11];
       }
 
       level.domflags[level.domflags.size] = var_6;

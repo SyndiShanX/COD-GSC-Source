@@ -64,15 +64,15 @@ func_12F2C(var_0) {
 }
 
 updateenemy() {
-  if(isDefined(self.isnodeoccupied)) {
-    if(!isDefined(self.bt.var_EB89.var_D895) || self.bt.var_EB89.var_D895 != self.isnodeoccupied) {
-      func_17BA("newenemy", self.isnodeoccupied);
+  if(isDefined(self.enemy)) {
+    if(!isDefined(self.bt.var_EB89.var_D895) || self.bt.var_EB89.var_D895 != self.enemy) {
+      func_17BA("newenemy", self.enemy);
     } else if(gettime() > self.bt.var_EB89.var_BFB3["engage"]) {
       self.bt.var_EB89.var_BFB3["engage"] = gettime() + randomfloatrange(1000, 3000);
-      func_17BA("engage", self.isnodeoccupied);
+      func_17BA("engage", self.enemy);
     }
 
-    self.bt.var_EB89.var_D895 = self.isnodeoccupied;
+    self.bt.var_EB89.var_D895 = self.enemy;
   }
 }
 

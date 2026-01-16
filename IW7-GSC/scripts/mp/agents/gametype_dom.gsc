@@ -18,7 +18,7 @@ agent_player_dom_think() {
 
 agent_squadmember_dom_think() {
   var_0 = undefined;
-  foreach(var_2 in self.triggerportableradarping.touchtriggers) {
+  foreach(var_2 in self.owner.touchtriggers) {
     if(var_2.useobj.id == "domFlag") {
       var_0 = var_2;
     }

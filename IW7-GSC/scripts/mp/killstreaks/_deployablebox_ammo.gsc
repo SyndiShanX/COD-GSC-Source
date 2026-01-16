@@ -5,9 +5,9 @@
 
 init() {
   var_0 = spawnStruct();
-  var_0.var_39B = "deployable_vest_marker_mp";
+  var_0.weaponinfo = "deployable_vest_marker_mp";
   var_0.modelbase = "mil_ammo_case_1_open";
-  var_0.pow = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
   var_0.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
   var_0.var_67E5 = "deployable_ammo_taken";
   var_0.streakname = "deployable_ammo";
@@ -34,7 +34,7 @@ init() {
   var_0.allowhvtspawn = 1;
   var_0.maxuses = 4;
   level.boxsettings["deployable_ammo"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("deployable_ammo", ::func_128DE);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("deployable_ammo", ::func_128DE);
   level.deployable_box["deployable_ammo"] = [];
 }
 

@@ -270,15 +270,15 @@ log_purchasingaweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     }
 
     if(isDefined(var_8[var_3])) {
-      var_0A = var_8[var_3];
+      var_10 = var_8[var_3];
     } else {
-      var_0A = 0;
+      var_10 = 0;
     }
 
     var_6 = 0;
   } else {
-    var_0B = var_3.wavesheldwithweapon[getweaponbasename(var_5)];
-    var_6 = var_4 - var_0B;
+    var_11 = var_3.wavesheldwithweapon[getweaponbasename(var_5)];
+    var_6 = var_4 - var_11;
     var_1.wavesheldwithweapon[getweaponbasename(var_2)] = var_4;
     if(!isDefined(var_1.killsperweaponlog[var_3])) {
       var_1.killsperweaponlog[var_3] = 0;
@@ -289,10 +289,10 @@ log_purchasingaweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     }
 
     var_9 = var_1.killsperweaponlog[var_3];
-    var_0A = var_1.downsperweaponlog[var_3];
+    var_10 = var_1.downsperweaponlog[var_3];
   }
 
-  scripts\cp\cp_analytics::func_AF6A("purchasing_weapon", var_0, [var_1.clientid, var_2, var_3, var_4, var_5, var_6, var_9, var_0A], [var_1.clientid, var_9]);
+  scripts\cp\cp_analytics::func_AF6A("purchasing_weapon", var_0, [var_1.clientid, var_2, var_3, var_4, var_5, var_6, var_9, var_10], [var_1.clientid, var_9]);
 }
 
 log_atmused(var_0, var_1, var_2) {
@@ -506,11 +506,11 @@ func_AF91(var_0, var_1) {
   var_7 = var_1 getplayerdata("cp", "DeadliestWeaponKills", var_9);
   if(var_7 < var_3) {
     if(var_3 > 0) {
-      var_0A = var_1 getplayerdata("cp", "killsPerWeapon", var_4);
+      var_10 = var_1 getplayerdata("cp", "killsPerWeapon", var_4);
       if(!isDefined(var_1.aggregateweaponkills[var_4])) {
-        var_1 setplayerdata("cp", "DeadliestWeaponKills", var_4, var_0A);
+        var_1 setplayerdata("cp", "DeadliestWeaponKills", var_4, var_10);
       } else {
-        var_1 setplayerdata("cp", "DeadliestWeaponKills", var_4, var_0A);
+        var_1 setplayerdata("cp", "DeadliestWeaponKills", var_4, var_10);
       }
 
       var_1 setplayerdata("cp", "DeadliestWeaponName", var_4);
@@ -520,14 +520,14 @@ func_AF91(var_0, var_1) {
     return;
   }
 
-  var_0B = var_2 getplayerdata("cp", "killsPerWeapon", var_0A);
-  if(!isDefined(var_2.aggregateweaponkills[var_0A])) {
-    var_2 setplayerdata("cp", "DeadliestWeaponKills", var_0A, var_0B);
+  var_11 = var_2 getplayerdata("cp", "killsPerWeapon", var_10);
+  if(!isDefined(var_2.aggregateweaponkills[var_10])) {
+    var_2 setplayerdata("cp", "DeadliestWeaponKills", var_10, var_11);
   } else {
-    var_2 setplayerdata("cp", "DeadliestWeaponKills", var_0A, var_2.aggregateweaponkills[var_0A] + var_0B);
+    var_2 setplayerdata("cp", "DeadliestWeaponKills", var_10, var_2.aggregateweaponkills[var_10] + var_11);
   }
 
-  var_2 setplayerdata("cp", "DeadliestWeaponName", var_0A);
+  var_2 setplayerdata("cp", "DeadliestWeaponName", var_10);
 }
 
 func_13F5C() {

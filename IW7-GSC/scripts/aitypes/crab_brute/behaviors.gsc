@@ -806,8 +806,9 @@ trymeleeattacks(var_0) {
     if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       return 0;
     }
-  } else if(var_0 > self.meleeradiusbasesq)
+  } else if(var_0 > self.meleeradiusbasesq) {
     return 0;
+  }
 
   scripts\aitypes\dlc3\bt_action_api::setdesiredaction(0, "melee_attack");
   return 1;

@@ -98,10 +98,10 @@ func_BB7B() {
   var_7 = vectornormalize((var_1[0] - var_0[0], var_1[1] - var_0[1], 0));
   var_8 = var_6 * var_7;
   var_9 = var_8 + var_5;
-  var_0A = self launchgrenade("mortarmount_mp", var_0, var_9, 5);
+  var_10 = self launchgrenade("mortarmount_mp", var_0, var_9, 5);
   thread func_BB7C();
-  thread func_BB88(var_0A);
-  thread func_BB86(var_0A);
+  thread func_BB88(var_10);
+  thread func_BB86(var_10);
 }
 
 func_BB88(var_0) {
@@ -303,7 +303,7 @@ func_BB86(var_0) {
 }
 
 func_BB82(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "mortarMount_unset", "mortarMount_deactivated");
+  scripts\engine\utility::waittill_any("death", "disconnect", "mortarMount_unset", "mortarMount_deactivated");
   if(isDefined(var_0)) {
     var_0 delete();
   }
@@ -369,25 +369,25 @@ func_BB7F(var_0, var_1) {
   var_7 = (0, 0, 1);
   var_8 = distance2d(var_3, var_4) / 1.65;
   var_9 = vectornormalize((var_4[0] - var_3[0], var_4[1] - var_3[1], 0));
-  var_0A = 0;
-  var_0B = var_3;
-  var_0C = undefined;
-  var_0D = physics_createcontents(["physicscontents_solid", "physicscontents_structural", "physicscontents_canshootclip", "physicscontents_missileclip"]);
-  while(var_0A <= var_0 + var_1 && !var_2.var_437E) {
-    var_0C = var_0B;
-    var_5 = var_0A * var_0A * -800 / 2;
-    var_0E = (0, 0, var_3[2]) + var_7 * var_6 * var_0A + var_5;
-    var_0F = (var_3[0], var_3[1], 0) + var_9 * var_8 * var_0A;
-    var_0B = var_0E + var_0F;
-    var_10 = physics_raycast(var_0C, var_0B, var_0D, self, 0, "physicsquery_closest");
+  var_10 = 0;
+  var_11 = var_3;
+  var_12 = undefined;
+  var_13 = physics_createcontents(["physicscontents_solid", "physicscontents_structural", "physicscontents_canshootclip", "physicscontents_missileclip"]);
+  while(var_10 <= var_0 + var_1 && !var_2.var_437E) {
+    var_12 = var_11;
+    var_5 = var_10 * var_10 * -800 / 2;
+    var_14 = (0, 0, var_3[2]) + var_7 * var_6 * var_10 + var_5;
+    var_15 = (var_3[0], var_3[1], 0) + var_9 * var_8 * var_10;
+    var_11 = var_14 + var_15;
+    var_10 = physics_raycast(var_12, var_11, var_13, self, 0, "physicsquery_closest");
     if(isDefined(var_10) && var_10.size > 0) {
-      var_0B = var_10[0]["position"];
+      var_11 = var_10[0]["position"];
       var_2.var_437E = 1;
       var_2.var_438B = var_10[0]["normal"];
     }
 
-    var_2.var_D648[var_2.var_D648.size] = var_0B;
-    var_0A = var_0A + var_1;
+    var_2.var_D648[var_2.var_D648.size] = var_11;
+    var_10 = var_10 + var_1;
   }
 
   if(var_2.var_D648.size > 1) {
@@ -486,7 +486,7 @@ func_BB76() {
 
 func_BB92(var_0) {
   var_0 endon("death");
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "mortarMount_unset", "mortarMount_popOut", "mortarMount_fireButtonPressed");
+  scripts\engine\utility::waittill_any("death", "disconnect", "mortarMount_unset", "mortarMount_popOut", "mortarMount_fireButtonPressed");
   if(isDefined(var_0)) {
     killfxontag(scripts\engine\utility::getfx("mortarMount_path_fr"), var_0, "tag_origin");
     var_0 delete();
@@ -495,7 +495,7 @@ func_BB92(var_0) {
 
 func_BB91(var_0) {
   var_0 endon("death");
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "mortarMount_unset", "mortarMount_popOut", "mortarMount_fireButtonPressed");
+  scripts\engine\utility::waittill_any("death", "disconnect", "mortarMount_unset", "mortarMount_popOut", "mortarMount_fireButtonPressed");
   if(isDefined(var_0)) {
     killfxontag(scripts\engine\utility::getfx("mortarMount_target_fr"), var_0, "tag_origin");
     killfxontag(scripts\engine\utility::getfx("mortarMount_target_en"), var_0, "tag_origin");

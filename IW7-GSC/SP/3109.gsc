@@ -29,7 +29,7 @@ func_98CA(var_0) {
 }
 
 func_6744() {
-  while(!isDefined(self.triggerportableradarping)) {
+  while(!isDefined(self.owner)) {
     wait(0.05);
   }
 
@@ -41,7 +41,7 @@ func_6744() {
     self.bt.var_652A = "allies";
   }
 
-  self.bt.var_F15D = self.triggerportableradarping;
+  self.bt.var_F15D = self.owner;
   self.bt.var_9882 = 1;
 }
 
@@ -109,7 +109,7 @@ func_F16F() {
 }
 
 func_9B71() {
-  if(self.bt.var_F15D != self.triggerportableradarping && distancesquared(self.origin, self.bt.var_F15D.origin) < 640000 && self.var_164D["seeker"].var_4BC0 == "run_loop") {
+  if(self.bt.var_F15D != self.owner && distancesquared(self.origin, self.bt.var_F15D.origin) < 640000 && self.var_164D["seeker"].var_4BC0 == "run_loop") {
     return 1;
   }
 
@@ -135,7 +135,7 @@ func_EA0E() {
 func_EB63() {
   self endon("death");
   for(;;) {
-    if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping && isDefined(self.vehicle_getspawnerarray)) {
+    if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.owner && isDefined(self.vehicle_getspawnerarray)) {
       self.var_A9CB = self.vehicle_getspawnerarray;
     }
 
@@ -147,7 +147,7 @@ func_13940() {
   self endon("death");
   for(;;) {
     self waittill("bad_path");
-    if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping) {
+    if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.owner) {
       if(isDefined(self.var_728A) || isplayer(self.bt.var_F15D)) {
         if(isDefined(self.var_A9CB)) {
           self.func_8425 = 1;
@@ -180,15 +180,15 @@ func_1572(var_0) {
   }
 
   if(!self.bt.var_1152B) {
-    var_1 = !isDefined(self.bt.var_F15D) || self.bt.var_F15D == self.triggerportableradarping;
+    var_1 = !isDefined(self.bt.var_F15D) || self.bt.var_F15D == self.owner;
     var_2 = lib_0E26::func_7C41(!var_1);
-    if(isDefined(var_2) && var_2 != self.triggerportableradarping) {
+    if(isDefined(var_2) && var_2 != self.owner) {
       func_DED7(var_2);
     }
   }
 
   func_8420();
-  if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping && !isDefined(self.var_9BB9) && !self.bt.var_54AE) {
+  if(isDefined(self.bt.var_F15D) && self.bt.var_F15D != self.owner && !isDefined(self.var_9BB9) && !self.bt.var_54AE) {
     self.bt.var_54AE = 1;
     self notify("stop soundseeker_seek_lp");
     playworldsound("seeker_acquire_target", self.origin);
@@ -216,7 +216,7 @@ func_F177(var_0) {
     return level.failure;
   }
 
-  if(self.bt.var_F15D == self.triggerportableradarping) {
+  if(self.bt.var_F15D == self.owner) {
     return level.failure;
   }
 
@@ -287,7 +287,7 @@ func_2BD3(var_0) {
     return level.failure;
   }
 
-  if(self.bt.var_F15D == self.triggerportableradarping) {
+  if(self.bt.var_F15D == self.owner) {
     return level.failure;
   }
 
@@ -309,12 +309,12 @@ func_8420() {
   }
 
   if(isplayer(self.bt.var_F15D)) {
-    if(self.bt.var_F15D == self.triggerportableradarping) {
+    if(self.bt.var_F15D == self.owner) {
       self.var_6D = 120;
     } else {
       self.var_6D = 13;
     }
-  } else if(isDefined(self.bt.var_F15D) && self.bt.var_F15D == self.triggerportableradarping) {
+  } else if(isDefined(self.bt.var_F15D) && self.bt.var_F15D == self.owner) {
     self.var_6D = 120;
   } else {
     self.var_6D = 60;
@@ -410,7 +410,7 @@ func_DED7(var_0) {
   self.bt.var_1154B = gettime();
   var_0.var_F126 = self;
   self notify("set_bt_target");
-  if(isai(var_0) && isDefined(self.triggerportableradarping) && isplayer(self.triggerportableradarping)) {
+  if(isai(var_0) && isDefined(self.owner) && isplayer(self.owner)) {
     thread func_F120(var_0);
   }
 
@@ -426,8 +426,8 @@ clear_scripted_anim(var_0) {
   }
 
   level.var_F10A.targets = scripts\engine\utility::array_remove(level.var_F10A.targets, self.bt.var_F15D);
-  if(isalive(self.triggerportableradarping)) {
-    self.bt.var_F15D = self.triggerportableradarping;
+  if(isalive(self.owner)) {
+    self.bt.var_F15D = self.owner;
   } else {
     self.bt.var_F15D = undefined;
   }

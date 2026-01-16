@@ -494,13 +494,13 @@ func_ABA5(var_0, var_1) {
 
   var_9 = scripts\engine\utility::drop_to_ground(self.origin, 0, -2000);
   var_9 = self.spawner.var_ABA6;
-  var_0A = var_9 - self.origin;
-  var_0B = var_0A[2] / var_7[2];
-  var_0C = var_4 * var_6[0] - var_4 * var_5[0];
-  var_0D = var_0C * var_0B;
-  if(var_0B >= 1) {
-    self scragentsetanimscale(1, var_0B);
-    var_8 = 1 / var_0B;
+  var_10 = var_9 - self.origin;
+  var_11 = var_10[2] / var_7[2];
+  var_12 = var_4 * var_6[0] - var_4 * var_5[0];
+  var_13 = var_12 * var_11;
+  if(var_11 >= 1) {
+    self scragentsetanimscale(1, var_11);
+    var_8 = 1 / var_11;
     scripts\mp\agents\_scriptedagents::func_CED3(var_1, var_2, var_8, var_1, "land", undefined);
     var_8 = 1;
     self gib_fx_override("gravity");
@@ -526,11 +526,11 @@ func_C3C6(var_0, var_1) {
   var_8 = scripts\engine\utility::drop_to_ground(self.origin, 0, -2000);
   var_8 = self.spawner.var_ABA6;
   var_9 = var_8 - self.origin;
-  var_0A = var_9[2] / var_7[2];
-  var_0B = var_4 * var_6[0] - var_4 * var_5[0];
-  var_0C = var_0B * var_0A;
-  if(var_0A >= 1) {
-    self scragentsetanimscale(1, var_0A);
+  var_10 = var_9[2] / var_7[2];
+  var_11 = var_4 * var_6[0] - var_4 * var_5[0];
+  var_12 = var_11 * var_10;
+  if(var_10 >= 1) {
+    self scragentsetanimscale(1, var_10);
     scripts\mp\agents\_scriptedagents::func_1384C(var_1, "land", var_1, var_2, undefined);
     self gib_fx_override("gravity");
     self scragentsetanimscale(1, 1);
@@ -709,33 +709,33 @@ func_3724(var_0, var_1, var_2) {
     var_8 = angleclamp180(var_4.angles[1] - var_8[1]);
   } else {
     var_9 = var_5 - self.origin;
-    var_0A = vectortoangles(var_9);
-    var_8 = angleclamp180(var_0A[1] - var_7[1]);
+    var_10 = vectortoangles(var_9);
+    var_8 = angleclamp180(var_10[1] - var_7[1]);
   }
 
-  var_0B = var_1;
-  var_0C = lib_0F3A::getweaponslistprimaries();
-  var_0D = var_4 - self.origin;
-  var_0E = lengthsquared(var_0D);
-  var_0F = 0;
-  var_10 = self getsafecircleorigin(var_0B, var_0F);
+  var_11 = var_1;
+  var_12 = lib_0F3A::getweaponslistprimaries();
+  var_13 = var_4 - self.origin;
+  var_14 = lengthsquared(var_13);
+  var_15 = 0;
+  var_10 = self getsafecircleorigin(var_11, var_15);
   var_11 = getmovedelta(var_10);
   var_12 = getangledelta(var_10);
   var_13 = length(self getvelocity());
   var_14 = var_13 * 0.053;
-  var_15 = length(var_0D);
+  var_15 = length(var_13);
   var_16 = length(var_11);
   if(abs(var_15 - var_16) > var_14) {
     return undefined;
   }
 
-  if(var_0E < lengthsquared(var_11)) {
+  if(var_14 < lengthsquared(var_11)) {
     return undefined;
   }
 
-  var_17 = lib_0F3A::func_36D9(var_0C.pos, var_0C.log[1], var_11, var_12);
-  var_18 = getclosestpointonnavmesh(var_0C.pos, self);
-  var_19 = lib_0F3A::func_36D9(var_18, var_0C.log[1], var_11, var_12);
+  var_17 = lib_0F3A::func_36D9(var_12.pos, var_12.log[1], var_11, var_12);
+  var_18 = getclosestpointonnavmesh(var_12.pos, self);
+  var_19 = lib_0F3A::func_36D9(var_18, var_12.log[1], var_11, var_12);
   var_1A = self func_84AC();
   var_1B = navtrace(var_1A, var_18, self, 1);
   var_1C = var_1B["fraction"] >= 0.9 || navisstraightlinereachable(var_1A, var_18, self);
@@ -746,12 +746,12 @@ func_3724(var_0, var_1, var_2) {
 
   if(var_1C) {
     var_1E = spawnStruct();
-    var_1E.var_11060 = var_0F;
+    var_1E.var_11060 = var_15;
     var_1E.var_3F = 0;
     var_1E.areanynavvolumesloaded = var_17;
     var_1E.var_3E = var_12;
-    var_1E.angles = var_0C.angles;
-    var_1E.log = var_0C.log;
+    var_1E.angles = var_12.angles;
+    var_1E.log = var_12.log;
     var_1E.var_11069 = var_11;
     var_1E.var_22ED = var_4;
     return var_1E;
@@ -773,12 +773,12 @@ func_D563(var_0, var_1, var_2, var_3) {
   var_7 = self getsafecircleorigin(var_1, 0);
   var_8 = getanimlength(var_7);
   var_9 = getmovedelta(var_7);
-  var_0A = length(var_9);
-  var_0B = length(var_5 - self.origin);
-  var_0C = var_8 * var_0B / var_0A;
-  self ghostexplode(self.origin, var_5, var_0C);
+  var_10 = length(var_9);
+  var_11 = length(var_5 - self.origin);
+  var_12 = var_8 * var_11 / var_10;
+  self ghostexplode(self.origin, var_5, var_12);
   self setanimstate(var_1, 0);
-  wait(var_0C);
+  wait(var_12);
   self gib_fx_override("gravity");
   self notify("traverse_end");
   func_11701(var_0, var_1);
@@ -854,51 +854,51 @@ func_5AC4(var_0, var_1, var_2, var_3) {
   var_7 = scripts\asm\asm_mp::asm_getanim(var_0, var_6);
   var_8 = var_5 - var_4.origin;
   var_9 = (var_8[0], var_8[1], 0);
-  var_0A = vectortoangles(var_9);
-  var_0B = issubstr(var_6, "jump_across");
-  var_0C = var_6 == "traverse_boost" && self.species == "humanoid" || self.species == "zombie";
-  self orientmode("face angle abs", var_0A);
+  var_10 = vectortoangles(var_9);
+  var_11 = issubstr(var_6, "jump_across");
+  var_12 = var_6 == "traverse_boost" && self.species == "humanoid" || self.species == "zombie";
+  self orientmode("face angle abs", var_10);
   self ghostlaunched("anim deltas");
-  var_0D = self getsafecircleorigin(var_6, var_7);
-  var_0E = "flex_height_up_start";
-  var_0F = getnotetracktimes(var_0D, var_0E);
-  if(var_0F.size == 0) {
-    var_0E = "flex_height_start";
-    var_0F = getnotetracktimes(var_0D, var_0E);
-    if(var_0F.size == 0) {
-      var_0E = "traverse_jump_start";
-      var_0F = getnotetracktimes(var_0D, var_0E);
+  var_13 = self getsafecircleorigin(var_6, var_7);
+  var_14 = "flex_height_up_start";
+  var_15 = getnotetracktimes(var_13, var_14);
+  if(var_15.size == 0) {
+    var_14 = "flex_height_start";
+    var_15 = getnotetracktimes(var_13, var_14);
+    if(var_15.size == 0) {
+      var_14 = "traverse_jump_start";
+      var_15 = getnotetracktimes(var_13, var_14);
     }
   }
 
   var_10 = "flex_height_up_end";
-  var_11 = getnotetracktimes(var_0D, var_10);
+  var_11 = getnotetracktimes(var_13, var_10);
   if(var_11.size == 0) {
     var_10 = "flex_height_end";
-    var_11 = getnotetracktimes(var_0D, var_10);
+    var_11 = getnotetracktimes(var_13, var_10);
     if(var_11.size == 0) {
       var_10 = "traverse_jump_end";
-      var_11 = getnotetracktimes(var_0D, var_10);
+      var_11 = getnotetracktimes(var_13, var_10);
     }
   }
 
   var_12 = "highest_point";
-  var_13 = getnotetracktimes(var_0D, var_12);
+  var_13 = getnotetracktimes(var_13, var_12);
   var_14 = "flex_height_down_start";
-  var_15 = getnotetracktimes(var_0D, var_14);
+  var_15 = getnotetracktimes(var_13, var_14);
   var_16 = "flex_height_down_end";
-  var_17 = getnotetracktimes(var_0D, var_16);
+  var_17 = getnotetracktimes(var_13, var_16);
   var_18 = "crawler_early_stop";
-  var_19 = getnotetracktimes(var_0D, var_18);
-  var_1A = getnotetracktimes(var_0D, "code_move");
+  var_19 = getnotetracktimes(var_13, var_18);
+  var_1A = getnotetracktimes(var_13, "code_move");
   if(var_1A.size > 0) {
-    var_1B = getmovedelta(var_0D, 0, var_1A[0]);
+    var_1B = getmovedelta(var_13, 0, var_1A[0]);
   } else {
-    var_1B = getmovedelta(var_0E, 0, 1);
+    var_1B = getmovedelta(var_14, 0, 1);
   }
 
   var_1C = scripts\mp\agents\_scriptedagents::func_7DC9(var_8, var_1B);
-  var_1D = animhasnotetrack(var_0D, "ignoreanimscaling");
+  var_1D = animhasnotetrack(var_13, "ignoreanimscaling");
   if(var_1D) {
     var_1C.var_13E2B = 1;
   }
@@ -908,22 +908,22 @@ func_5AC4(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1E) && isDefined(var_1E.target)) {
     self.endnode = var_1E;
     if(var_13.size > 0) {
-      scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_0D, "traverse", var_0E, var_12, 0, ::func_13FAE);
+      scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_13, "traverse", var_14, var_12, 0, ::func_13FAE);
       var_1F = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
       if(isDefined(var_1F.script_noteworthy) && var_1F.script_noteworthy == "continue_flex_height") {
-        scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_0D, "traverse", var_12, var_10, 1, ::func_13FAE);
+        scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_13, "traverse", var_12, var_10, 1, ::func_13FAE);
       }
 
       self scragentsetanimscale(1, 1);
       scripts\mp\agents\_scriptedagents::func_CED5(var_6 + "_norestart", var_7, "traverse", "end", ::func_13FAE);
     } else if(var_15.size == 0) {
-      scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_0D, "traverse", var_0E, var_10, 0, ::func_13FAE);
+      scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_13, "traverse", var_14, var_10, 0, ::func_13FAE);
       self scragentsetanimscale(1, 1);
       scripts\mp\agents\_scriptedagents::func_CED5(var_6 + "_norestart", var_7, "traverse", "end", ::func_13FAE);
     } else {
       var_1F = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
       var_20 = var_15[0];
-      scripts\mp\agents\_scriptedagents::func_5AC2(var_6 + "_norestart", var_7, "traverse", var_0D, var_0E, var_10, var_1F.origin, var_20, ::func_13FAE);
+      scripts\mp\agents\_scriptedagents::func_5AC2(var_6 + "_norestart", var_7, "traverse", var_13, var_14, var_10, var_1F.origin, var_20, ::func_13FAE);
       if(var_15[0] - var_11[0] > 0.02) {
         self scragentsetanimscale(1, 1);
         scripts\mp\agents\_scriptedagents::func_CED5(var_6 + "_norestart", var_7, "traverse", var_14, ::func_13FAE);
@@ -931,7 +931,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
 
       var_1F = self.endnode;
       var_20 = var_17[0];
-      scripts\mp\agents\_scriptedagents::func_5AC2(var_6 + "_norestart", var_7, "traverse", var_0D, var_14, var_16, var_1F.origin, var_20, ::func_13FAE);
+      scripts\mp\agents\_scriptedagents::func_5AC2(var_6 + "_norestart", var_7, "traverse", var_13, var_14, var_16, var_1F.origin, var_20, ::func_13FAE);
       self scragentsetanimscale(1, 1);
       if(var_19.size == 0 || !scripts\engine\utility::istrue(self.dismember_crawl)) {
         scripts\mp\agents\_scriptedagents::func_CED5(var_6 + "_norestart", var_7, "traverse", "end", ::func_13FAE);
@@ -942,12 +942,12 @@ func_5AC4(var_0, var_1, var_2, var_3) {
   } else if(var_15.size > 0 && var_17.size > 0 && self.agent_type != "zombie_brute") {
     self scragentsetanimscale(1, 1);
     scripts\mp\agents\_scriptedagents::func_CED5(var_6 + "_norestart", var_7, "traverse", "end", ::func_13FAE);
-  } else if(var_0B && abs(var_8[2]) < 48) {
-    var_21 = getanimlength(var_0D);
-    var_22 = var_0F[0] * var_21;
+  } else if(var_11 && abs(var_8[2]) < 48) {
+    var_21 = getanimlength(var_13);
+    var_22 = var_15[0] * var_21;
     var_23 = var_11[0] * var_21;
     self scragentsetanimscale(1, 1);
-    scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_0E);
+    scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_14);
     self scragentsetanimscale(1, 0);
     childthread func_126D8(var_4.origin[2], var_5[2], var_23 - var_22 / self.traverseratescale);
     scripts\mp\agents\_scriptedagents::func_CED3(var_6 + "_norestart", var_7, self.traverseratescale, "traverse", var_10);
@@ -955,7 +955,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
     scripts\mp\agents\_scriptedagents::func_CED3(var_6 + "_norestart", var_7, self.traverseratescale, "traverse");
   } else if(var_8[2] > 16) {
     if(var_1B[2] > 0) {
-      if(var_0C) {
+      if(var_12) {
         self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
         var_24 = clamp(2 / var_1C.var_3A6, 0.5, 1);
         if(var_11.size > 0) {
@@ -969,7 +969,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
         }
 
         self scragentsetanimscale(1, 1);
-      } else if(var_0F.size > 0) {
+      } else if(var_15.size > 0) {
         var_1C.var_13E2B = 1;
         var_1C.var_3A6 = 1;
         if(!var_1D && length2dsquared(var_9) < 0.64 * length2dsquared(var_1B)) {
@@ -977,9 +977,9 @@ func_5AC4(var_0, var_1, var_2, var_3) {
         }
 
         self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
-        scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_0E);
-        var_26 = getmovedelta(var_0D, 0, var_0F[0]);
-        var_27 = getmovedelta(var_0D, 0, var_11[0]);
+        scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_14);
+        var_26 = getmovedelta(var_13, 0, var_15[0]);
+        var_27 = getmovedelta(var_13, 0, var_11[0]);
         var_1C.var_13E2B = 1;
         var_1C.var_3A6 = 1;
         var_28 = var_5 - self.origin;
@@ -990,10 +990,10 @@ func_5AC4(var_0, var_1, var_2, var_3) {
 
         var_2A = var_1B - var_27;
         var_2B = (var_2A[0] * var_1C.var_13E2B, var_2A[1] * var_1C.var_13E2B, var_2A[2] * var_1C.var_3A6);
-        var_2C = rotatevector(var_2B, var_0A);
+        var_2C = rotatevector(var_2B, var_10);
         var_2D = var_5 - var_2C;
         var_2E = var_27 - var_26;
-        var_2F = rotatevector(var_2E, var_0A);
+        var_2F = rotatevector(var_2E, var_10);
         var_30 = var_2D - self.origin;
         var_31 = var_1C;
         var_1C = scripts\mp\agents\_scriptedagents::func_7DC9(var_30, var_2F, 1);
@@ -1016,7 +1016,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
         scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse");
       }
     } else {
-      scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_0D, "traverse", "flex_height_start", "flex_height_end", 1, ::func_13FAE);
+      scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_13, "traverse", "flex_height_start", "flex_height_end", 1, ::func_13FAE);
     }
   } else if(abs(var_8[2]) < 16 || var_1B[2] == 0) {
     self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
@@ -1036,15 +1036,15 @@ func_5AC4(var_0, var_1, var_2, var_3) {
     self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
     var_24 = clamp(2 / var_1C.var_3A6, 0.5, 1);
     var_33 = var_6 + "_norestart";
-    if(var_0F.size > 0) {
-      scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_0E);
+    if(var_15.size > 0) {
+      scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_14);
       var_6 = var_33;
     }
 
     if(var_11.size > 0) {
       scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, var_24 * 1, "traverse", var_10);
       scripts\mp\agents\_scriptedagents::func_F2B1(var_33, var_7, self.traverseratescale);
-      if(animhasnotetrack(var_0D, "removestatelock")) {
+      if(animhasnotetrack(var_13, "removestatelock")) {
         scripts\mp\agents\_scriptedagents::func_1384D("traverse", "removestatelock");
       }
 
@@ -1247,19 +1247,19 @@ func_38B2(var_0, var_1, var_2) {
 
   var_8 = getmovedelta(var_0, 0, var_3);
   var_9 = getmovedelta(var_0, 0, var_6);
-  var_0A = self.origin;
-  var_0B = rotatevector(var_8, var_1) + var_0A;
-  var_0C = rotatevector(var_9, var_1) + var_0A;
-  if(!scripts\mp\agents\_scriptedagents::func_38D0(var_0B, var_0C, 0)) {
+  var_10 = self.origin;
+  var_11 = rotatevector(var_8, var_1) + var_10;
+  var_12 = rotatevector(var_9, var_1) + var_10;
+  if(!scripts\mp\agents\_scriptedagents::func_38D0(var_11, var_12, 0)) {
     return 0;
   }
 
-  var_0D = self.fgetarg;
+  var_13 = self.fgetarg;
   if(!var_2) {
-    var_0D = self.fgetarg / 2;
+    var_13 = self.fgetarg / 2;
   }
 
-  if(!scripts\mp\agents\_scriptedagents::func_38D0(var_0A, var_0B, 0, var_0D)) {
+  if(!scripts\mp\agents\_scriptedagents::func_38D0(var_10, var_11, 0, var_13)) {
     return 0;
   }
 

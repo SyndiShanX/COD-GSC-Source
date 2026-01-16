@@ -10,7 +10,7 @@ blackholegrenadeinit() {
 
 blackholeminetrigger() {
   scripts\mp\weapons::makeexplosiveunusable();
-  self.triggerportableradarping blackholegrenadeused(self, 1);
+  self.owner blackholegrenadeused(self, 1);
 }
 
 blackholemineexplode() {}
@@ -50,7 +50,7 @@ func_2B3E(var_0) {
   thread bhg_deleteondisowned(var_0);
   var_0.var_9935 = 1;
   var_1 = spawn("script_model", var_0.origin);
-  var_1 setotherent(var_0.triggerportableradarping);
+  var_1 setotherent(var_0.owner);
   var_1 setModel("prop_mp_black_hole_grenade_scr");
   var_1 give_player_tickets(1);
   var_1 linkto(var_0);
@@ -78,8 +78,8 @@ func_12EB1(var_0, var_1) {
   playsoundatpos(var_0.origin, "blackhole_plant");
   var_0 missilethermal();
   var_0 missileoutline();
-  var_0 setotherent(var_0.triggerportableradarping);
-  var_0 setentityowner(var_0.triggerportableradarping);
+  var_0 setotherent(var_0.owner);
+  var_0 setentityowner(var_0.owner);
   var_0 give_player_tickets(1);
   var_3 = scripts\mp\utility::_hasperk("specialty_rugged_eqp");
   if(var_3) {
@@ -91,7 +91,7 @@ func_12EB1(var_0, var_1) {
   var_0 thread scripts\mp\damage::monitordamage(var_4, var_5, ::bhg_handlefataldamage, ::bhg_handledamage, 0);
   var_0 thread bhg_destroyonemp();
   var_0 thread bhg_destroyongameend();
-  var_0 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_0 thread scripts\mp\perks\perk_equipmentping::runequipmentping();
   thread scripts\mp\weapons::outlineequipmentforowner(var_0, self);
   var_0 bhg_addtoglobalarr();
   var_6 = getblackholecenter(var_0);
@@ -119,7 +119,7 @@ func_12E56(var_0) {
   thread func_13A58(var_0, var_1);
   thread watchforempents(var_0, var_1);
   var_0.physics_capsulecast setscriptablepartstate("vortexUpdate", "active", 0);
-  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.triggerportableradarping, 1);
+  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.owner, 1);
   var_0 thread func_CB0C();
   wait(2);
   scripts\mp\utility::printgameaction("black hole grenade finished", self);
@@ -182,7 +182,7 @@ func_13A58(var_0, var_1) {
     }
 
     var_5 thread func_11AD5(var_0);
-    var_5 dodamage(140, var_0.origin, var_0.triggerportableradarping, var_0, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
+    var_5 dodamage(140, var_0.origin, var_0.owner, var_0, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
   }
 }
 
@@ -205,7 +205,7 @@ watchforempents(var_0, var_1) {
       }
 
       var_6 thread func_11AD5(var_0);
-      var_6 dodamage(140, var_0.origin, var_0.triggerportableradarping, var_0, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
+      var_6 dodamage(140, var_0.origin, var_0.owner, var_0, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
     }
 
     scripts\engine\utility::waitframe();
@@ -215,7 +215,7 @@ watchforempents(var_0, var_1) {
 func_10835(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_1);
   var_3.angles = var_2;
-  var_3 setotherent(var_0.triggerportableradarping);
+  var_3 setotherent(var_0.owner);
   var_3 setentityowner(var_0);
   var_3 setModel("prop_mp_black_hole_grenade_scr");
   var_3 linkto(var_0);
@@ -245,7 +245,7 @@ bhg_handledamage(var_0, var_1, var_2, var_3, var_4) {
     var_6 = 2;
   }
 
-  scripts\mp\powers::equipmenthit(self.triggerportableradarping, var_0, var_1, var_2);
+  scripts\mp\powers::equipmenthit(self.owner, var_0, var_1, var_2);
   return var_6 * var_5;
 }
 
@@ -327,17 +327,17 @@ func_CB0D(var_0) {
 
 bhg_destroyongameend() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  self.owner endon("disconnect");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread bhg_destroy();
 }
 
 bhg_destroyonemp() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
   if(isDefined(var_3) && var_3 == "emp_grenade_mp") {
-    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
       var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
     }
   }
@@ -357,7 +357,7 @@ bhg_destroyonemp() {
 
 bhg_deleteondisowned(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
   self delete();
 }
 
@@ -488,7 +488,7 @@ bhg_delete(var_0) {
 }
 
 bhg_awardpoints(var_0) {
-  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
     var_0 notify("destroyed_equipment");
     var_0 thread scripts\mp\utility::giveunifiedpoints("destroyed_equipment");
   }

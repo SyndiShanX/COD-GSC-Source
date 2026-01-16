@@ -194,13 +194,15 @@ func_50EF() {
   if(scripts\asm\zombie\zombie::func_9F87()) {
     self setscriptablepartstate("right_eye", "active");
     self setscriptablepartstate("left_eye", "active");
-  } else if(scripts\engine\utility::is_true(self.is_turned))
+  } else if(scripts\engine\utility::is_true(self.is_turned)) {
     self setscriptablepartstate("eyes", "turned_eyes");
+  }
   else if(scripts\engine\utility::is_true(self.is_cop)) {
     self getrandomhovernodesaroundtargetpos(1, 0.1);
     self setscriptablepartstate("eyes", "cop_eyes");
-  } else
+  } else {
     self getrandomhovernodesaroundtargetpos(1, 0.1);
+  }
 }
 
 func_13FAF() {
@@ -228,8 +230,9 @@ agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
         if(isDefined(var_1.team) && var_1.team != self.team) {
           self setagentattacker(var_1);
         }
-      } else
+      } else {
         self setagentattacker(var_1);
+      }
     }
   }
 
@@ -686,8 +689,9 @@ func_7E78(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     var_1 = getweaponbasename(var_1);
     var_3 = var_1;
-  } else if(isDefined(var_2))
+  } else if(isDefined(var_2)) {
     var_3 = var_2;
+  }
 
   if(!isDefined(var_3)) {
     return 1;
@@ -702,8 +706,9 @@ func_7E78(var_0, var_1, var_2) {
   if(isDefined(var_0) && isplayer(var_0) && isDefined(var_1) && isDefined(var_4) && !iskillstreakweapon(var_1)) {
     var_4 = func_3E61(var_0, var_1, var_4);
     return var_4;
-  } else if(isDefined(var_4))
+  } else if(isDefined(var_4)) {
     return var_4;
+  }
   else {
     return 1;
   }
@@ -909,8 +914,9 @@ func_BDFB(var_0, var_1, var_2, var_3, var_4) {
           var_5 = 1;
         }
       }
-    } else
+    } else {
       var_5 = 1;
+    }
 
     if(var_5 && var_8) {
       self.var_DDC8 = var_7;
@@ -970,8 +976,9 @@ func_6A58() {
   if(scripts\asm\zombie\zombie::func_9F87()) {
     self setscriptablepartstate("right_eye", "active");
     self setscriptablepartstate("left_eye", "active");
-  } else if(scripts\engine\utility::is_true(self.is_turned))
+  } else if(scripts\engine\utility::is_true(self.is_turned)) {
     self setscriptablepartstate("eyes", "turned_eyes");
+  }
   else if(scripts\engine\utility::is_true(self.is_cop)) {
     self setscriptablepartstate("eyes", "cop_eyes");
   } else {
@@ -1389,8 +1396,9 @@ func_10840(var_0) {
   if(var_2) {
     level.var_74B9++;
     var_3 = scripts\engine\utility::getfx("gib_full_body");
-  } else
+  } else {
     var_3 = scripts\engine\utility::getfx("gib_full_body_cheap");
+  }
 
   if(isDefined(var_0)) {
     if(isDefined(var_0["emz"])) {
@@ -1465,8 +1473,9 @@ func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
     self.body = self cloneagent(var_8, var_12);
     self.body.ragdollhitloc = self.ragdollhitloc;
     self.body.ragdollimpactvector = self.ragdollimpactvector;
-  } else
+  } else {
     self.body = self cloneagent(var_8, var_12);
+  }
 
   if(isDefined(self.is_burning) || isDefined(var_1) && isDefined(var_4) && var_4 == "incendiary_ammo_mp") {
     self.body setscriptablepartstate("burning", "active", 1);

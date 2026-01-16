@@ -26,8 +26,9 @@ func_12F5C(var_0) {
     }
 
     scripts\asm\asm_bb::bb_requestweapon(var_2);
-  } else
+  } else {
     scripts\asm\asm_bb::bb_clearweaponrequest();
+  }
 
   if(scripts\anim\utility_common::isasniper()) {
     if(var_1) {
@@ -49,8 +50,9 @@ func_12F5C(var_0) {
         scripts\aitypes\combat::func_FE5A(self.bt.shootparams);
       }
     }
-  } else if(isDefined(self.bt.shootparams) && isDefined(self.bt.shootparams.var_29AF) && self.bt.shootparams.var_29AF)
+  } else if(isDefined(self.bt.shootparams) && isDefined(self.bt.shootparams.var_29AF) && self.bt.shootparams.var_29AF) {
     scripts\aitypes\combat::func_FE5A(self.bt.shootparams);
+  }
 
   return anim.success;
 }
@@ -151,8 +153,9 @@ func_67D7(var_0, var_1) {
     }
 
     return 100;
-  } else
+  } else {
     return 100;
+  }
 
   return 100;
 }

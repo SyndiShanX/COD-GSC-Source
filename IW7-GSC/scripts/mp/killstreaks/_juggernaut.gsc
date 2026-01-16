@@ -19,7 +19,7 @@ givejuggernaut(var_0) {
   self endon("disconnect");
   wait(0.05);
   if(isDefined(self.lightarmorhp)) {
-    scripts\mp\perks\_perkfunctions::unsetlightarmor();
+    scripts\mp\perks\perkfunctions::unsetlightarmor();
   }
 
   scripts\mp\weapons::func_5608();
@@ -94,7 +94,7 @@ givejuggernaut(var_0) {
   }
 
   if(self.streaktype == "specialist") {
-    thread scripts\mp\killstreaks\_killstreaks::func_41C0();
+    thread scripts\mp\killstreaks\killstreaks::func_41C0();
   }
 
   thread func_A4AC();
@@ -153,7 +153,7 @@ func_A4AC() {
   self endon("disconnect");
   self endon("jugg_removed");
   thread func_A4AB();
-  scripts\engine\utility::waittill_any_3("death", "joined_team", "joined_spectators", "lost_juggernaut");
+  scripts\engine\utility::waittill_any("death", "joined_team", "joined_spectators", "lost_juggernaut");
   self enableweaponpickup();
   self.isjuggernaut = 0;
   self.isjuggernautdef = 0;

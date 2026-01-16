@@ -226,12 +226,12 @@ setupplayerloadouts() {
     var_5.total_currency_earned = min(10000, var_5 scripts\cp\cp_persistence::get_player_max_currency());
     var_5 scripts\cp\cp_persistence::set_player_currency(10000);
     if(issubstr(var_8, "_g18_")) {
-      foreach(var_0B in var_3) {
-        var_5 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_0B, 1);
+      foreach(var_11 in var_3) {
+        var_5 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_11, 1);
       }
     } else {
-      foreach(var_0B in var_2) {
-        var_5 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_0B, 1);
+      foreach(var_11 in var_2) {
+        var_5 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_11, 1);
       }
     }
 
@@ -803,7 +803,7 @@ rhino_audio_monitor() {
   thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix);
   self.playing_stumble = 0;
   for(;;) {
-    var_0 = scripts\engine\utility::waittill_any_timeout_1(3, "attack_hit_big", "attack_hit_small", "taunt", "charge_start", "charge_to_stop");
+    var_0 = scripts\engine\utility::waittill_any_timeout(3, "attack_hit_big", "attack_hit_small", "taunt", "charge_start", "charge_to_stop");
     switch (var_0) {
       case "attack_hit_big":
         level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "attack_pounding_third", 0);
@@ -1050,24 +1050,24 @@ endless_wave() {
   var_7 = [20, 25, 30, 30];
   var_8 = [1, 1, 2, 2];
   var_9 = 0;
-  var_0A = 4;
+  var_10 = 4;
   while(var_0 < var_1) {
     if(level.current_num_spawned_enemies < var_5) {
-      var_0B = get_current_spawners();
-      if(var_0B.size > 0) {
-        var_0C = scripts\engine\utility::random(var_0B);
-        if(var_9 < var_0A && var_0 > 15 && var_0 % 25 == 0 && level.rhino_array.size < var_8[level.players.size - 1]) {
-          var_0D = spawn_rhino(var_0C);
-          if(isDefined(var_0D)) {
+      var_11 = get_current_spawners();
+      if(var_11.size > 0) {
+        var_12 = scripts\engine\utility::random(var_11);
+        if(var_9 < var_10 && var_0 > 15 && var_0 % 25 == 0 && level.rhino_array.size < var_8[level.players.size - 1]) {
+          var_13 = spawn_rhino(var_12);
+          if(isDefined(var_13)) {
             var_9++;
           }
         } else if(var_1 % 10 == 0) {
-          var_0D = spawn_phantom(var_0D);
+          var_13 = spawn_phantom(var_13);
         } else {
-          var_0D = func_10719(var_0D);
+          var_13 = func_10719(var_13);
         }
 
-        if(isDefined(var_0D)) {
+        if(isDefined(var_13)) {
           var_0++;
         }
       }
@@ -1098,21 +1098,21 @@ emp_wave() {
   while(var_0 < var_1) {
     if(level.current_num_spawned_enemies < var_5) {
       update_emp_spawners();
-      var_0A = get_current_spawners();
-      if(var_0A.size > 0) {
-        var_0B = scripts\engine\utility::random(var_0A);
+      var_10 = get_current_spawners();
+      if(var_10.size > 0) {
+        var_11 = scripts\engine\utility::random(var_10);
         if(var_7 < var_8 && var_0 > 15 && var_0 % 25 == 0 && level.rhino_array.size < var_9[level.players.size - 1]) {
-          var_0C = spawn_rhino(var_0B);
-          if(isDefined(var_0C)) {
+          var_12 = spawn_rhino(var_11);
+          if(isDefined(var_12)) {
             var_7++;
           }
         } else if(var_1 % 10 == 0) {
-          var_0C = spawn_phantom(var_0C);
+          var_12 = spawn_phantom(var_12);
         } else {
-          var_0C = func_10719(var_0C);
+          var_12 = func_10719(var_12);
         }
 
-        if(isDefined(var_0C)) {
+        if(isDefined(var_12)) {
           var_0++;
         }
       }
@@ -1176,8 +1176,8 @@ turn_off_spawners(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    var_0A = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
-    foreach(var_5 in var_0A) {
+    var_10 = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
+    foreach(var_5 in var_10) {
       var_5.portal_struct.fx setscriptablepartstate("portal", "off");
       var_5.var_19 = 0;
       if(isDefined(var_5.script_parameters)) {
@@ -1207,8 +1207,8 @@ turn_on_spawners(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_1)) {
-    var_0B = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
-    foreach(var_6 in var_0B) {
+    var_11 = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
+    foreach(var_6 in var_11) {
       var_6.portal_struct.fx setscriptablepartstate("portal", "cooldown");
       var_6.var_19 = 1;
       if(scripts\engine\utility::istrue(var_2) && isDefined(var_6.script_parameters)) {
@@ -1391,37 +1391,37 @@ mammothwave() {
   var_7 = [30, 30, 30, 30];
   var_8 = [2, 2, 2, 2];
   var_9 = [1, 2, 3, 8];
-  var_0A = var_5;
-  var_0B = [1, 1, 2, 2];
-  var_0C = 0;
-  var_0D = 6;
+  var_10 = var_5;
+  var_11 = [1, 1, 2, 2];
+  var_12 = 0;
+  var_13 = 6;
   while(var_0 < var_1) {
     if(level.dead_mammoths >= 1) {
-      var_0A = var_5 + var_9[level.players.size - 1];
+      var_10 = var_5 + var_9[level.players.size - 1];
     }
 
-    if(var_0 % var_0A == 0) {
+    if(var_0 % var_10 == 0) {
       turn_off_spawners("spawner_1");
       turn_off_spawners("spawner_2");
-      var_0E = 1;
-      var_0F = 0;
+      var_14 = 1;
+      var_15 = 0;
       var_10 = 45;
-      while(var_0E && level.current_num_spawned_enemies - level.rhino_array.size >= var_8[level.players.size - 1]) {
+      while(var_14 && level.current_num_spawned_enemies - level.rhino_array.size >= var_8[level.players.size - 1]) {
         wait(0.25);
-        var_0F = var_0F + 0.25;
-        if(var_0F >= var_10) {
-          var_0E = 0;
+        var_15 = var_15 + 0.25;
+        if(var_15 >= var_10) {
+          var_14 = 0;
         }
       }
 
-      if(var_0E) {
+      if(var_14) {
         wait(var_7[level.players.size - 1]);
       }
     }
 
     turn_on_spawners("spawner_1");
     turn_on_spawners("spawner_2");
-    if(level.current_num_spawned_enemies < var_0A) {
+    if(level.current_num_spawned_enemies < var_10) {
       update_emp_spawners();
       var_11 = get_current_spawners();
       if(var_11.size > 0) {
@@ -1840,11 +1840,11 @@ rhino_fight_over() {
   if(var_3) {
     var_9 = 0;
     foreach(var_5 in level.players) {
-      var_0B = var_5 getplayerdata("cp", "haveItems", "item_1");
-      var_0C = var_5 getplayerdata("cp", "haveItems", "item_2");
-      var_0D = var_5 getplayerdata("cp", "haveItems", "item_3");
-      var_0E = var_5 getplayerdata("cp", "haveItems", "item_4");
-      if(var_0B && var_0C && var_0D && var_0E) {
+      var_11 = var_5 getplayerdata("cp", "haveItems", "item_1");
+      var_12 = var_5 getplayerdata("cp", "haveItems", "item_2");
+      var_13 = var_5 getplayerdata("cp", "haveItems", "item_3");
+      var_14 = var_5 getplayerdata("cp", "haveItems", "item_4");
+      if(var_11 && var_12 && var_13 && var_14) {
         var_9 = 1;
       }
     }
@@ -2139,7 +2139,7 @@ perkbox_usefunc(var_0, var_1) {
 
 restockperkafternextrelic(var_0, var_1, var_2) {
   level endon("game_ended");
-  level scripts\engine\utility::waittill_any_timeout_1(180, "create_perk_boxes");
+  level scripts\engine\utility::waittill_any_timeout(180, "create_perk_boxes");
   var_0.respawn_flag = undefined;
   level.num_crates_broken = 0;
   wait(var_2);

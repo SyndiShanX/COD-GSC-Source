@@ -34,10 +34,12 @@ func_E3C6(var_0, var_1, var_2, var_3, var_4) {
       if(isDefined(level.var_B8D2.var_ABFA[scripts\sp\endmission::func_7F6B(var_2)].var_D845)) {
         var_5 = scripts\engine\utility::array_add(level.var_B8D2.var_ABFA[scripts\sp\endmission::func_7F6B(var_2)].var_D845, var_2);
         _preloadzones(var_5);
-      } else
+      } else {
         _preloadzones(var_2);
-    } else
+      }
+    } else {
       level thread scripts\sp\utility::func_BF97();
+    }
   }
 
   level waittill("jackal_taxi_complete");
@@ -51,8 +53,9 @@ func_E3C6(var_0, var_1, var_2, var_3, var_4) {
       setdvar("last_transition_movie", var_6);
       _cinematicingame(var_6, 0, 1);
       _changelevel(var_2);
-    } else
+    } else {
       scripts\sp\utility::func_BF95();
+    }
   }
 }
 
@@ -415,7 +418,7 @@ func_10635() {
         self.var_747F[var_11].var_EB9C = "_large";
       }
 
-      self.var_747E[var_12] = scripts\engine\utility::array_add(self.var_747E[var_12], self.var_747F[var_11]);
+      self.var_747E[var_12] = ::scripts\engine\utility::array_add(self.var_747E[var_12], self.var_747F[var_11]);
       continue;
     }
 

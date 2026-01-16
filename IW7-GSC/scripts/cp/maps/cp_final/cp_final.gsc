@@ -206,7 +206,7 @@ run_pap_machine_logic(var_0) {
 
   var_2 setscriptablepartstate("reels", "on");
   var_2 setscriptablepartstate("door", "open_idle");
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   foreach(var_4 in level.players) {
     if(var_4 != var_0) {
       var_2 hidefromplayer(var_4);
@@ -566,22 +566,22 @@ show_soul_key_progress(var_0) {
   var_8 = (0, 0, 90);
   var_0 waittill("spawned_player");
   var_9 = var_0 getplayerdata("cp", "haveSoulKeys", "soul_key_1");
-  var_0A = var_0 getplayerdata("cp", "haveSoulKeys", "soul_key_2");
-  var_0B = var_0 getplayerdata("cp", "haveSoulKeys", "soul_key_3");
-  var_0C = var_0 getplayerdata("cp", "haveSoulKeys", "soul_key_4");
+  var_10 = var_0 getplayerdata("cp", "haveSoulKeys", "soul_key_2");
+  var_11 = var_0 getplayerdata("cp", "haveSoulKeys", "soul_key_3");
+  var_12 = var_0 getplayerdata("cp", "haveSoulKeys", "soul_key_4");
   if(scripts\engine\utility::istrue(var_9)) {
     playFX(level._effect["soul_jar_d"], var_1, anglesToForward(var_2), anglestoup(var_2), var_0);
   }
 
-  if(scripts\engine\utility::istrue(var_0A)) {
+  if(scripts\engine\utility::istrue(var_10)) {
     playFX(level._effect["soul_jar_e"], var_3, anglesToForward(var_4), anglestoup(var_4), var_0);
   }
 
-  if(scripts\engine\utility::istrue(var_0B)) {
+  if(scripts\engine\utility::istrue(var_11)) {
     playFX(level._effect["soul_jar_a"], var_5, anglesToForward(var_6), anglestoup(var_6), var_0);
   }
 
-  if(scripts\engine\utility::istrue(var_0C)) {
+  if(scripts\engine\utility::istrue(var_12)) {
     playFX(level._effect["soul_jar_t"], var_7, anglesToForward(var_8), anglestoup(var_8), var_0);
   }
 }
@@ -663,7 +663,7 @@ start_wire_models_tracking() {
 streamweaponsonzonechange(var_0) {
   var_0 endon("disconnect");
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(10, "player_spawned");
+  var_0 scripts\engine\utility::waittill_any_timeout(10, "player_spawned");
   scripts\engine\utility::flag_wait("wall_buy_setup_done");
   var_1 = [];
   var_2 = scripts\engine\utility::getstructarray("interaction", "targetname");
@@ -678,16 +678,16 @@ streamweaponsonzonechange(var_0) {
     var_7 = 0;
     var_8 = 0;
     var_9 = [self.last_stand_pistol];
-    var_0A = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 10, 5000, 0);
-    while(var_7 <= var_6 && var_8 < var_0A.size) {
-      var_0B = scripts\cp\utility::getrawbaseweaponname(var_0A[var_8].script_noteworthy);
-      if(isDefined(var_0.weapon_build_models[var_0B])) {
-        var_0C = var_0.weapon_build_models[var_0B];
+    var_10 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 10, 5000, 0);
+    while(var_7 <= var_6 && var_8 < var_10.size) {
+      var_11 = scripts\cp\utility::getrawbaseweaponname(var_10[var_8].script_noteworthy);
+      if(isDefined(var_0.weapon_build_models[var_11])) {
+        var_12 = var_0.weapon_build_models[var_11];
       } else {
-        var_0C = var_0A[var_8].script_noteworthy;
+        var_12 = var_10[var_8].script_noteworthy;
       }
 
-      var_9[var_9.size] = var_0C;
+      var_9[var_9.size] = var_12;
       var_9 = scripts\engine\utility::array_remove_duplicates(var_9);
       var_7 = var_9.size;
       var_8++;
@@ -721,15 +721,15 @@ registerscriptedagents() {
   level.var_C4BE = scripts\mp\agents\zombie_dlc4\zombie_dlc4_agent::onzombiekilled;
   scripts\mp\agents\karatemaster\karatemaster_agent_dlc4::registerscriptedagent();
   scripts\mp\agents\slasher\slasher_agent_dlc4::registerscriptedagent();
-  level.agent_funcs["skeleton"]["on_damaged"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged;
+  level.agent_funcs["skeleton"]["on_damaged"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged;
 }
 
 cp_final_event_wave_init() {
-  level.event_funcs["alien_goon_start"] = scripts\cp\zombies\cp_final_spawning::start_goon_spawn_event_func;
-  level.event_funcs["alien_goon"] = scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
-  level.event_funcs["zombie_clown"] = scripts\cp\zombies\zombies_spawning::goon_spawn_event_func;
-  level.event_funcs["karatemaster"] = scripts\cp\zombies\cp_final_spawning::km_spawn_event_func;
-  level.event_funcs["slasher"] = scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
+  level.event_funcs["alien_goon_start"] = ::scripts\cp\zombies\cp_final_spawning::start_goon_spawn_event_func;
+  level.event_funcs["alien_goon"] = ::scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
+  level.event_funcs["zombie_clown"] = ::scripts\cp\zombies\zombies_spawning::goon_spawn_event_func;
+  level.event_funcs["karatemaster"] = ::scripts\cp\zombies\cp_final_spawning::km_spawn_event_func;
+  level.event_funcs["slasher"] = ::scripts\cp\zombies\cp_final_spawning::goon_spawn_event_func;
   init_final_spawner_locations();
 }
 
@@ -2203,11 +2203,11 @@ cp_final_slasher_loot_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
       }
     }
 
-    var_0A = 400;
-    foreach(var_0C in level.players) {
-      var_0C scripts\cp\cp_persistence::give_player_currency(var_0A);
-      var_0C scripts\cp\cp_merits::processmerit("mt_dlc4_special_wave_kills");
-      var_0C scripts\cp\utility::bufferednotify("kill_event_buffered", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, self.agent_type);
+    var_10 = 400;
+    foreach(var_12 in level.players) {
+      var_12 scripts\cp\cp_persistence::give_player_currency(var_10);
+      var_12 scripts\cp\cp_merits::processmerit("mt_dlc4_special_wave_kills");
+      var_12 scripts\cp\utility::bufferednotify("kill_event_buffered", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, self.agent_type);
     }
   }
 }

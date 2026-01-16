@@ -13,8 +13,9 @@ addheavyarmor(var_0) {
     self.heavyarmor = var_1;
     var_1.hp = var_1.hp + var_0;
     self notify("heavyArmor_added");
-  } else
+  } else {
     var_1.hp = var_1.hp + var_0;
+  }
 }
 
 subtractheavyarmor(var_0) {

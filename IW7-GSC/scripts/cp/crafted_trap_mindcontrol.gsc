@@ -6,11 +6,11 @@
 init() {
   level.mindcontrol_trap_settings = [];
   var_0 = spawnStruct();
-  var_0.var_39B = "zmb_robotprojectile_mp";
+  var_0.weaponinfo = "zmb_robotprojectile_mp";
   var_0.modelbase = "cp_town_mind_control_device";
   var_0.modelplacement = "cp_town_mind_control_device_good";
   var_0.modelplacementfailed = "cp_town_mind_control_device_bad";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -128,7 +128,7 @@ create_mindcontrol_trap_for_player(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.mindcontrol_trap_type = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_mindcontrol";
   var_2.carried_mindcontrol_trap = spawn("script_model", var_2.origin);
   var_2.carried_mindcontrol_trap.angles = var_1.angles;
@@ -141,14 +141,14 @@ create_mindcontrol_trap_for_player(var_0, var_1) {
 }
 
 create_mindcontrol_trap(var_0, var_1) {
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_3 = var_0.mindcontrol_trap_type;
   var_4 = spawn("script_model", var_0.origin + (0, 0, 2));
   var_4 setModel(level.mindcontrol_trap_settings[var_3].modelbase);
   var_4.var_EB9C = 3;
   var_4.angles = (0, var_0.carried_mindcontrol_trap.angles[1], 0);
   var_4.mindcontrol_trap_type = var_3;
-  var_4.triggerportableradarping = var_2;
+  var_4.owner = var_2;
   var_4 setotherent(var_2);
   var_4.team = var_2.team;
   var_4.name = "crafted_mindcontrol";
@@ -239,14 +239,14 @@ mindcontrol_trap_setplaced(var_0) {
   }
 
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.firstplacement = undefined;
   var_1 = create_mindcontrol_trap(self, var_0);
   var_1.isplaced = 1;
-  var_1 thread func_9367(self.triggerportableradarping);
+  var_1 thread func_9367(self.owner);
   self playSound("trap_boom_box_drop");
   self notify("placed");
   var_1 thread mindcontrol_trap_setactive();
@@ -315,9 +315,9 @@ func_9371(var_0) {
 mindcontrol_trap_setactive() {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.mindcontrol_trap_settings[self.mindcontrol_trap_type].pow);
+  self sethintstring(level.mindcontrol_trap_settings[self.mindcontrol_trap_type].hintstring);
   scripts\cp\utility::addtotraplist();
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
   scripts\cp\utility::setselfusable(var_0);
   self setusefov(120);
@@ -395,7 +395,7 @@ mindcontrol_trap_kill_zombies() {
 control_zombie(var_0) {
   self endon("death");
   self.controlled = 1;
-  self.triggerportableradarping = var_0.triggerportableradarping;
+  self.owner = var_0.owner;
   self.var_C384 = self.health;
   self.og_maxhealth = self.maxhealth;
   self.og_movemode = self.synctransients;
@@ -437,8 +437,8 @@ kill_intersecting_zombies(var_0) {
       var_3.full_gib = 1;
       var_3.customdeath = 1;
       var_3 dodamage(var_3.health + 100, var_3.origin, self, self, "MOD_MELEE", "none");
-      if(isDefined(var_0.triggerportableradarping)) {
-        var_0.triggerportableradarping scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
+      if(isDefined(var_0.owner)) {
+        var_0.owner scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
       }
     }
 

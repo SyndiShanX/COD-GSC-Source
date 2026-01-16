@@ -135,13 +135,15 @@ func_12DB(var_0, var_1, var_2, var_3, var_4, var_5) {
       } else {
         return var_3;
       }
-    } else if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy"))
+    } else if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy")) {
       return var_2;
+    }
     else {
       return var_1;
     }
-  } else
+  } else {
     return var_0;
+  }
 }
 
 func_12DC(var_0, var_1) {
@@ -625,8 +627,9 @@ func_10FE6() {
     } else {
       scripts\sp\utility::func_F3CB("DRS_run");
     }
-  } else
+  } else {
     scripts\sp\utility::func_417A();
+  }
 
   self notify("stop_loop");
   scripts\sp\utility::func_65DD("dynamic_run_speed_stopping");
@@ -673,8 +676,9 @@ func_5F8C(var_0) {
         } else {
           scripts\sp\utility::func_F3CB("DRS_run");
         }
-      } else
+      } else {
         scripts\sp\utility::func_417A();
+      }
 
       self notify("stop_loop");
       scripts\sp\utility::anim_stopanimscripted();
@@ -694,8 +698,9 @@ func_5F8C(var_0) {
         } else {
           scripts\sp\utility::func_F3CB("DRS_combat_jog");
         }
-      } else
+      } else {
         scripts\sp\utility::func_417A();
+      }
 
       self notify("stop_loop");
       scripts\sp\utility::anim_stopanimscripted();

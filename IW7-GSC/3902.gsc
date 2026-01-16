@@ -63,8 +63,9 @@ shootblankorrpg(var_0, var_1, var_2) {
         if(randomint(3) == 0) {
           self.bulletsinclip--;
         }
-      } else
+      } else {
         self.bulletsinclip--;
+      }
     }
 
     var_5++;
@@ -112,8 +113,9 @@ func_FE5C(var_0, var_1, var_2, var_3) {
       if(randomint(3) == 0) {
         self.bulletsinclip--;
       }
-    } else
+    } else {
       self.bulletsinclip--;
+    }
 
     if(var_8) {
       if(issubstr(tolower(self.weapon), "rpg") || issubstr(tolower(self.weapon), "panzerfaust")) {

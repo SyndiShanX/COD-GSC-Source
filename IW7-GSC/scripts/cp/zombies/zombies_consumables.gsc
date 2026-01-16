@@ -140,8 +140,8 @@ register_consumable(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.unset = var_6;
   var_7.timeupnotify = var_0 + "_timeup";
   level.consumables[var_0] = var_7;
-  foreach(var_0A, var_9 in level.irish_luck_consumables) {
-    if(var_0A == var_0) {
+  foreach(var_10, var_9 in level.irish_luck_consumables) {
+    if(var_10 == var_0) {
       level.irish_luck_consumables[var_0] = level.consumables[var_0];
       level.irish_luck_consumables[var_0].name = var_0;
     }
@@ -559,7 +559,7 @@ dpad_drain_activations(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   self endon(var_0 + "_exited_early");
   thread watchforearlyexit(var_0, var_5, var_3, var_6, var_7, var_8);
   var_9 = self.consumables[var_0].usednotify;
-  var_0A = 1;
+  var_10 = 1;
   if(var_1 == "triggerwait") {
     self waittill(var_9);
   }
@@ -567,9 +567,9 @@ dpad_drain_activations(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   wait(1);
   for(;;) {
     if(!scripts\engine\utility::istrue(self.spectating) && !scripts\engine\utility::istrue(self.inlaststand)) {
-      var_0A = var_0A - 0.05;
-      self setclientomnvar(var_3, var_0A);
-      if(var_0A <= 0) {
+      var_10 = var_10 - 0.05;
+      self setclientomnvar(var_3, var_10);
+      if(var_10 <= 0) {
         self setclientomnvar(var_3, 0);
         disable_consumable(var_0, var_5, var_3, var_6, var_7, var_8);
         break;
@@ -587,13 +587,13 @@ dpad_drain_triggerpassive(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   thread watchforearlyexit(var_0, var_4, var_2, var_5, var_6, var_7);
   var_8 = 1 / var_1;
   var_9 = self.consumables[var_0].usednotify;
-  var_0A = 1;
+  var_10 = 1;
   for(;;) {
     self waittill(var_9);
     if((!scripts\engine\utility::istrue(self.spectating) && !scripts\engine\utility::istrue(self.inlaststand)) || var_0 == "coagulant") {
-      var_0A = var_0A - var_8;
-      self setclientomnvar(var_2, var_0A);
-      if(var_0A < 0.0001) {
+      var_10 = var_10 - var_8;
+      self setclientomnvar(var_2, var_10);
+      if(var_10 < 0.0001) {
         self setclientomnvar(var_2, 0);
         disable_consumable(var_0, var_4, var_2, var_5, var_6, var_7);
         break;
@@ -799,21 +799,21 @@ fnf_upgrade_weapon(var_0, var_1, var_2, var_3) {
   var_7 = 0;
   var_8 = var_3;
   if(issubstr(var_3, "g18_z")) {
-    foreach(var_0A in var_6) {
-      if(issubstr(var_0A, "akimbo")) {
+    foreach(var_10 in var_6) {
+      if(issubstr(var_10, "akimbo")) {
         var_7 = 1;
-        var_6 = scripts\engine\utility::array_remove(var_6, var_0A);
+        var_6 = scripts\engine\utility::array_remove(var_6, var_10);
       }
     }
   }
 
   if(isDefined(level.custom_epehermal_attachment_func)) {
-    var_0C = [[level.custom_epehermal_attachment_func]](var_0, var_2, var_3);
-    if(isDefined(var_0C)) {
-      if(var_0C == "replace_me") {
+    var_12 = [[level.custom_epehermal_attachment_func]](var_0, var_2, var_3);
+    if(isDefined(var_12)) {
+      if(var_12 == "replace_me") {
         var_5 = undefined;
       } else {
-        var_5 = var_0C;
+        var_5 = var_12;
       }
     }
   }
@@ -836,43 +836,43 @@ fnf_upgrade_weapon(var_0, var_1, var_2, var_3) {
         var_4 = level.pap_2_camo;
       }
 
-      var_0D = var_0 scripts\cp\cp_weapon::get_weapon_level(var_3);
+      var_13 = var_0 scripts\cp\cp_weapon::get_weapon_level(var_3);
       switch (var_2) {
         case "dischord":
-          var_0E = "iw7_dischord_zm_pap1";
+          var_14 = "iw7_dischord_zm_pap1";
           var_4 = "camo20";
           break;
 
         case "facemelter":
-          var_0E = "iw7_facemelter_zm_pap1";
+          var_14 = "iw7_facemelter_zm_pap1";
           var_4 = "camo22";
           break;
 
         case "headcutter":
-          var_0E = "iw7_headcutter_zm_pap1";
+          var_14 = "iw7_headcutter_zm_pap1";
           var_4 = "camo21";
           break;
 
         case "forgefreeze":
-          if(var_0D == 2) {
-            var_0E = "iw7_forgefreeze_zm_pap1";
-          } else if(var_0D == 3) {
-            var_0E = "iw7_forgefreeze_zm_pap2";
+          if(var_13 == 2) {
+            var_14 = "iw7_forgefreeze_zm_pap1";
+          } else if(var_13 == 3) {
+            var_14 = "iw7_forgefreeze_zm_pap2";
           }
 
-          var_0F = 1;
+          var_15 = 1;
           break;
 
         case "axe":
-          if(var_0D == 2) {
-            var_0E = "iw7_axe_zm_pap1";
-          } else if(var_0D == 3) {
-            var_0E = "iw7_axe_zm_pap2";
+          if(var_13 == 2) {
+            var_14 = "iw7_axe_zm_pap1";
+          } else if(var_13 == 3) {
+            var_14 = "iw7_axe_zm_pap2";
           }
           break;
 
         case "shredder":
-          var_0E = "iw7_shredder_zm_pap1";
+          var_14 = "iw7_shredder_zm_pap1";
           var_4 = "camo23";
           break;
 
@@ -883,7 +883,7 @@ fnf_upgrade_weapon(var_0, var_1, var_2, var_3) {
       }
     }
 
-    var_0F = 0;
+    var_15 = 0;
     if(isDefined(var_2)) {
       switch (var_2) {
         case "spiked":
@@ -891,15 +891,15 @@ fnf_upgrade_weapon(var_0, var_1, var_2, var_3) {
         case "two":
         case "axe":
         case "machete":
-          var_0F = 1;
+          var_15 = 1;
           break;
 
         default:
-          var_0F = 0;
+          var_15 = 0;
           break;
       }
     } else {
-      var_0F = 0;
+      var_15 = 0;
     }
 
     var_5 = undefined;
@@ -931,9 +931,9 @@ fnf_upgrade_weapon(var_0, var_1, var_2, var_3) {
 
     var_10 = getweaponattachments(var_3);
     if(issubstr(var_3, "g18_z")) {
-      foreach(var_0A in var_10) {
-        if(issubstr(var_0A, "akimbo")) {
-          var_10 = scripts\engine\utility::array_remove(var_10, var_0A);
+      foreach(var_10 in var_10) {
+        if(issubstr(var_10, "akimbo")) {
+          var_10 = scripts\engine\utility::array_remove(var_10, var_10);
         }
       }
     }
@@ -1054,16 +1054,16 @@ downgradeweaponaftertimeout(var_0, var_1, var_2, var_3) {
   }
 
   var_1.isusingsupercard = undefined;
-  var_0A = scripts\cp\utility::getrawbaseweaponname(var_1 scripts\cp\utility::getvalidtakeweapon());
+  var_10 = scripts\cp\utility::getrawbaseweaponname(var_1 scripts\cp\utility::getvalidtakeweapon());
   if(var_1 scripts\cp\cp_weapon::has_weapon_variation(var_4)) {
-    var_0B = var_1 getweaponslistall();
-    foreach(var_0D in var_0B) {
-      var_0E = scripts\cp\utility::getrawbaseweaponname(var_0D);
-      if(var_0E == scripts\cp\utility::getrawbaseweaponname(var_4)) {
-        var_1 takeweapon(var_0D);
+    var_11 = var_1 getweaponslistall();
+    foreach(var_13 in var_11) {
+      var_14 = scripts\cp\utility::getrawbaseweaponname(var_13);
+      if(var_14 == scripts\cp\utility::getrawbaseweaponname(var_4)) {
+        var_1 takeweapon(var_13);
         var_5 = 1;
         var_2 = var_1 scripts\cp\utility::_giveweapon(var_2, undefined, undefined, 1);
-        if(scripts\cp\utility::getrawbaseweaponname(var_2) == var_0A) {
+        if(scripts\cp\utility::getrawbaseweaponname(var_2) == var_10) {
           var_1 switchtoweaponimmediate(var_2);
         }
 
@@ -1077,12 +1077,12 @@ downgradeweaponaftertimeout(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1.copy_fullweaponlist)) {
     var_10 = var_1.copy_fullweaponlist;
     foreach(var_12 in var_10) {
-      var_0E = getweaponbasename(var_12);
-      if(var_0E == var_4) {
+      var_14 = getweaponbasename(var_12);
+      if(var_14 == var_4) {
         var_13 = var_1.copy_weapon_ammo_clip[var_12];
         var_14 = var_1.copy_weapon_ammo_stock[var_12];
         var_1.copy_fullweaponlist = scripts\engine\utility::array_remove(var_1.copy_fullweaponlist, var_12);
-        if(var_0E == getweaponbasename(var_1.copy_weapon_current)) {
+        if(var_14 == getweaponbasename(var_1.copy_weapon_current)) {
           var_1.copy_weapon_current = var_2;
         }
 
@@ -1109,12 +1109,12 @@ downgradeweaponaftertimeout(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1.lost_and_found_ent)) {
     var_10 = var_1.lost_and_found_ent.copy_fullweaponlist;
     foreach(var_12 in var_10) {
-      var_0E = getweaponbasename(var_12);
-      if(var_0E == var_4) {
+      var_14 = getweaponbasename(var_12);
+      if(var_14 == var_4) {
         var_13 = var_1.copy_weapon_ammo_clip[var_12];
         var_14 = var_1.copy_weapon_ammo_stock[var_12];
         var_1.lost_and_found_ent.copy_fullweaponlist = scripts\engine\utility::array_remove(var_1.lost_and_found_ent.copy_fullweaponlist, var_12);
-        if(var_0E == getweaponbasename(var_1.lost_and_found_ent.copy_weapon_current)) {
+        if(var_14 == getweaponbasename(var_1.lost_and_found_ent.copy_weapon_current)) {
           var_1.lost_and_found_ent.copy_weapon_current = var_2;
         }
 
@@ -1193,14 +1193,14 @@ downgradeweapon(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_8 = scripts\engine\utility::array_add(var_8, "akimbo");
   }
 
-  foreach(var_0A in var_8) {
-    if(issubstr(var_0A, var_3)) {
-      var_8 = scripts\engine\utility::array_remove(var_8, var_0A);
+  foreach(var_10 in var_8) {
+    if(issubstr(var_10, var_3)) {
+      var_8 = scripts\engine\utility::array_remove(var_8, var_10);
     }
   }
 
-  var_0C = var_0 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, var_7, var_8, undefined, var_6);
-  return var_0C;
+  var_12 = var_0 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, var_7, var_8, undefined, var_6);
+  return var_12;
 }
 
 use_spawn_instakill(var_0) {
@@ -1416,7 +1416,7 @@ removeweaponaftertimeout(var_0, var_1, var_2) {
   self.isusingsupercard = 1;
   self.mpsuperpreviousweapon = var_2;
   scripts\engine\utility::allow_reload(0);
-  scripts\engine\utility::waittill_any_timeout_1(getcharactercardgesturelength() + 1, "super_weapon_given");
+  scripts\engine\utility::waittill_any_timeout(getcharactercardgesturelength() + 1, "super_weapon_given");
   self allowmelee(0);
   while(self isswitchingweapon()) {
     wait(0.05);
@@ -1561,7 +1561,7 @@ setandremoveinvulnerability() {
   self endon("disconnect");
   level endon("game_ended");
   scripts\cp\utility::adddamagemodifier("near_death_consumable", 0, 0);
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(1, "death", "last_stand");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(1, "death", "last_stand");
   scripts\cp\utility::removedamagemodifier("near_death_consumable", 0);
 }
 
@@ -1585,12 +1585,12 @@ killnearbyzombies(var_0) {
 
     var_8 playSound("zmb_fnf_second_wind_push");
     var_9 = 0;
-    var_0A = var_8.origin;
-    var_0B = var_8.maxhealth;
+    var_10 = var_8.origin;
+    var_11 = var_8.maxhealth;
     var_2 = anglesToForward(self.angles);
-    var_0C = vectornormalize(var_2) * -100;
-    var_8 setvelocity(vectornormalize(var_8.origin - self.origin + var_0C) * 800 + (0, 0, 300));
-    var_8 killrepulsorvictim(self, var_0B, var_0A, self.origin);
+    var_12 = vectornormalize(var_2) * -100;
+    var_8 setvelocity(vectornormalize(var_8.origin - self.origin + var_12) * 800 + (0, 0, 300));
+    var_8 killrepulsorvictim(self, var_11, var_10, self.origin);
   }
 }
 
@@ -1843,7 +1843,7 @@ watch_for_zombie_touch(var_0) {
 remove_explosive_touch(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3(var_0 + "_timeup", var_0 + "_exited_early");
+  scripts\engine\utility::waittill_any(var_0 + "_timeup", var_0 + "_exited_early");
   self.has_explosive_touch = 0;
   scripts\cp\utility::removedamagemodifier("health_boost", 0);
   if(isDefined(self.explosivetrigger)) {
@@ -2266,7 +2266,7 @@ use_temporal_increase(var_0) {
 remove_temporal_increase(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3(var_0 + "_timeup", "disconnect", "death", var_0 + "_exited_early");
+  scripts\engine\utility::waittill_any(var_0 + "_timeup", "disconnect", "death", var_0 + "_exited_early");
   level.temporal_increase = undefined;
   return 1;
 }
@@ -2289,7 +2289,7 @@ use_twister(var_0) {
 
 remove_twister(var_0, var_1) {
   level endon("game_ended");
-  var_1 scripts\engine\utility::waittill_any_3(var_0 + "_timeup", var_0 + "_exited_early", "disconnect");
+  var_1 scripts\engine\utility::waittill_any(var_0 + "_timeup", var_0 + "_exited_early", "disconnect");
   level notify("stop_twister_sfx");
   if(isDefined(var_1.fx_ent)) {
     var_1.fx_ent delete();
@@ -2491,9 +2491,9 @@ use_dodge_mode(var_0) {
   self endon("death");
   level endon("game_ended");
   self energy_setmax(1, 50);
-  self goal_radius(1, 50);
-  self goalflag(1, 25);
-  self goal_type(1, 0);
+  self energy_setenergy(1, 50);
+  self energy_setrestorerate(1, 25);
+  self energy_setresttimems(1, 0);
   self allowdodge(1);
   self func_8454(5);
   thread func_139F9(var_0);
@@ -2503,7 +2503,7 @@ use_dodge_mode(var_0) {
 remove_dodge_mode(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3(var_0 + "_timeup", var_0 + "_exited_early", "death", "last_stand");
+  scripts\engine\utility::waittill_any(var_0 + "_timeup", var_0 + "_exited_early", "death", "last_stand");
   self allowdodge(0);
   self notify(var_0 + "_timeup");
   self notify(var_0 + "_exited_early");
@@ -2615,7 +2615,7 @@ func_139F9(var_0) {
 
 func_139FB(var_0) {
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3("dodgeEnd", "death", "disconnect", "last_stand");
+  scripts\engine\utility::waittill_any("dodgeEnd", "death", "disconnect", "last_stand");
   self.dodging = 0;
   if(isDefined(self.var_5809)) {
     self.var_5809 delete();
@@ -2726,15 +2726,15 @@ adjust_clip_ammo_from_stock(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_9 = var_0 getweaponammoclip(var_1, var_2);
-  var_0A = var_3 - var_9;
-  var_0B = min(var_9 + var_0A, var_3);
-  var_0 setweaponammoclip(var_1, int(var_0B), var_2);
+  var_10 = var_3 - var_9;
+  var_11 = min(var_9 + var_10, var_3);
+  var_0 setweaponammoclip(var_1, int(var_11), var_2);
 }
 
 remove_ammo_crate(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3(var_0 + "_timeup", var_0 + "_exited_early", "last_stand", "death");
+  scripts\engine\utility::waittill_any(var_0 + "_timeup", var_0 + "_exited_early", "last_stand", "death");
   scripts\cp\utility::notify_used_consumable("ammo_crate");
   if(isDefined(level.ammo_crate)) {
     level.ammo_crate delete();
@@ -2761,7 +2761,7 @@ revive_downed_entities(var_0) {
 remove_stimulus(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3(var_0 + "_timeup", var_0 + "_exited_early", "last_stand", "death");
+  scripts\engine\utility::waittill_any(var_0 + "_timeup", var_0 + "_exited_early", "last_stand", "death");
   if(scripts\engine\utility::istrue(self.stimulus_active)) {
     self.stimulus_active = undefined;
   }
@@ -3167,48 +3167,48 @@ settenthstimer(var_0, var_1, var_2, var_3) {
   var_7 = undefined;
   var_8 = undefined;
   var_9 = self getweaponslistprimaries();
-  var_0A = self getweaponslistprimaries().size;
-  var_0B = 3;
-  var_0C = var_2;
-  var_0D = spawnStruct();
-  var_0D.lvl = 2;
-  var_0.pap[var_0C] = var_0D;
+  var_10 = self getweaponslistprimaries().size;
+  var_11 = 3;
+  var_12 = var_2;
+  var_13 = spawnStruct();
+  var_13.lvl = 2;
+  var_0.pap[var_12] = var_13;
   if(!var_0 scripts\cp\cp_weapon::has_weapon_variation(var_3)) {
-    var_0E = var_0 scripts\cp\utility::getvalidtakeweapon();
-    var_0.curr_weap = var_0E;
-    if(isDefined(var_0E)) {
+    var_14 = var_0 scripts\cp\utility::getvalidtakeweapon();
+    var_0.curr_weap = var_14;
+    if(isDefined(var_14)) {
       var_5 = 1;
-      var_0F = scripts\cp\utility::getrawbaseweaponname(var_0E);
-      if(var_0 scripts\cp\utility::has_special_weapon() && var_0A < var_0B + 1) {
+      var_15 = scripts\cp\utility::getrawbaseweaponname(var_14);
+      if(var_0 scripts\cp\utility::has_special_weapon() && var_10 < var_11 + 1) {
         var_5 = 0;
       }
 
       foreach(var_11 in var_9) {
         if(scripts\cp\utility::isstrstart(var_11, "alt_")) {
-          var_0B++;
+          var_11++;
         }
       }
 
       if(scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
-        var_0B++;
+        var_11++;
       }
 
-      if(var_9.size < var_0B) {
+      if(var_9.size < var_11) {
         var_5 = 0;
       }
 
       if(var_5) {
-        if(isDefined(var_0.pap[var_0F])) {
-          var_0.pap[var_0F] = undefined;
+        if(isDefined(var_0.pap[var_15])) {
+          var_0.pap[var_15] = undefined;
           var_0 notify("weapon_level_changed");
         }
 
-        var_0 takeweapon(var_0E);
+        var_0 takeweapon(var_14);
       }
     }
 
-    if(isDefined(var_0.weapon_build_models[var_0C])) {
-      var_6 = var_0.weapon_build_models[var_0C];
+    if(isDefined(var_0.weapon_build_models[var_12])) {
+      var_6 = var_0.weapon_build_models[var_12];
     } else {
       var_6 = var_3;
     }
@@ -3255,14 +3255,14 @@ settenthstimer(var_0, var_1, var_2, var_3) {
     }
   } else {
     var_0.purchasing_ammo = 1;
-    var_0C = undefined;
+    var_12 = undefined;
     var_18 = var_0 getweaponslistall();
     var_19 = var_0 getcurrentweapon();
     var_1A = scripts\cp\utility::getrawbaseweaponname(var_3);
     var_1B = undefined;
     foreach(var_3 in var_18) {
-      var_0C = scripts\cp\utility::getrawbaseweaponname(var_3);
-      if(var_0C == var_1A) {
+      var_12 = scripts\cp\utility::getrawbaseweaponname(var_3);
+      if(var_12 == var_1A) {
         var_1B = var_3;
         break;
       }
@@ -3485,7 +3485,7 @@ adjustmovespeed(var_0, var_1, var_2, var_3) {
       break;
   }
 
-  var_2 scripts\engine\utility::waittill_any_3(var_1 + "_timeup", "last_stand", "disconnect");
+  var_2 scripts\engine\utility::waittill_any(var_1 + "_timeup", "last_stand", "disconnect");
   var_0 scripts\asm\asm_bb::bb_requestmovetype(var_4);
 }
 
@@ -3624,8 +3624,8 @@ use_phoenix_up(var_0) {
   var_2 = 0;
   foreach(var_4 in var_1) {
     var_5 = var_4;
-    if(isDefined(var_4.triggerportableradarping)) {
-      var_5 = var_4.triggerportableradarping;
+    if(isDefined(var_4.owner)) {
+      var_5 = var_4.owner;
     }
 
     if(scripts\cp\cp_laststand::player_in_laststand(var_5)) {
@@ -3675,7 +3675,7 @@ use_killing_time(var_0) {
 
   scripts\engine\utility::waitframe();
   scripts\cp\utility::notify_used_consumable("killing_time");
-  scripts\engine\utility::waittill_any_timeout_1(20, "death", "last_stand", "disconnect");
+  scripts\engine\utility::waittill_any_timeout(20, "death", "last_stand", "disconnect");
   foreach(var_2 in level.players) {
     if(isDefined(var_2.killing_time)) {
       var_2.killing_time--;
@@ -3757,9 +3757,9 @@ use_anywhere_but_here(var_0) {
   }
 
   if(scripts\cp\utility::map_check(4)) {
-    var_0A = scripts\cp\zombies\zombies_spawning::get_spawn_volumes_player_is_in(0, 1, self);
-    foreach(var_0C in var_0A) {
-      if(isDefined(level.facilityvolumes) && scripts\engine\utility::array_contains(level.facilityvolumes, var_0C.basename)) {
+    var_10 = scripts\cp\zombies\zombies_spawning::get_spawn_volumes_player_is_in(0, 1, self);
+    foreach(var_12 in var_10) {
+      if(isDefined(level.facilityvolumes) && scripts\engine\utility::array_contains(level.facilityvolumes, var_12.basename)) {
         self.currentlocation = "facility";
         continue;
       }
@@ -3820,24 +3820,24 @@ headshot_reload_check(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   }
 
   var_4 = self getcurrentweapon();
-  var_0A = self getweaponammostock(var_4);
-  var_0B = weaponclipsize(var_4);
-  var_0C = self getweaponammoclip(var_4);
-  var_0D = var_0B - var_0C;
-  if(var_0A >= var_0D) {
-    self setweaponammostock(var_4, var_0A - var_0D);
+  var_10 = self getweaponammostock(var_4);
+  var_11 = weaponclipsize(var_4);
+  var_12 = self getweaponammoclip(var_4);
+  var_13 = var_11 - var_12;
+  if(var_10 >= var_13) {
+    self setweaponammostock(var_4, var_10 - var_13);
   } else {
-    var_0B = var_0A;
+    var_11 = var_10;
     self setweaponammostock(var_4, 0);
   }
 
-  var_0E = var_0B;
-  var_0F = min(var_0C + var_0E, var_0B);
-  self setweaponammoclip(var_4, int(var_0F));
+  var_14 = var_11;
+  var_15 = min(var_12 + var_14, var_11);
+  self setweaponammoclip(var_4, int(var_15));
   if(self isdualwielding()) {
-    var_0C = self getweaponammoclip(var_4, "left");
-    var_0F = min(var_0C + var_0E, var_0B);
-    self setweaponammoclip(var_4, int(var_0F), "left");
+    var_12 = self getweaponammoclip(var_4, "left");
+    var_15 = min(var_12 + var_14, var_11);
+    self setweaponammoclip(var_4, int(var_15), "left");
   }
 }
 

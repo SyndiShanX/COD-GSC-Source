@@ -755,8 +755,9 @@ findnewpatrolpoint(var_0) {
   if(scripts\mp\utility\game::istrue(var_2)) {
     self.var_4BF7 = self.initialvalidnode;
     var_2 = 0;
-  } else
+  } else {
     self.var_4BF7 = var_12;
+  }
 
   self.var_4BF7.used = 1;
   return self.var_4BF7.origin + (0, 0, 80);
@@ -864,8 +865,9 @@ func_13B79(var_0, var_1, var_2) {
     if(isDefined(var_0) && self.turret canbetargeted(var_0)) {
       if(scripts\mp\utility\game::istrue(var_2) && !func_A00F(var_0, var_1)) {
         break;
-      } else
+      } else {
         scripts\engine\utility::waitframe();
+      }
 
       continue;
     }
@@ -1057,8 +1059,9 @@ getothermode(var_0, var_1) {
     if(scripts\mp\killstreaks\utility::func_A69F(var_1, "passive_guard")) {
       var_0 = "GUARD";
     }
-  } else
+  } else {
     var_0 = "ASSAULT";
+  }
 
   return var_0;
 }

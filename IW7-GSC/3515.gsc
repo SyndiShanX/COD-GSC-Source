@@ -181,8 +181,9 @@ remotedetonateonset(var_0) {
       if(var_3 == 0) {
         break;
       }
-    } else
+    } else {
       wait 0.05;
+    }
   }
 
   self notify("removed_reaper_ammo");
@@ -540,8 +541,9 @@ func_10FA8(var_0, var_1) {
           if(var_0.team != var_1.team) {
             radiusdamage(self.origin, 1000, 1000, 1000, var_1, "MOD_EXPLOSIVE", "stinger_mp");
           }
-        } else
+        } else {
           radiusdamage(self.origin, 1000, 1000, 1000, var_1, "MOD_EXPLOSIVE", "stinger_mp");
+        }
       }
 
       self hide();
@@ -633,8 +635,9 @@ func_EB18(var_0, var_1, var_2) {
               if(var_0.team != var_1.team) {
                 radiusdamage(var_2[var_6].origin, var_4, var_3, var_3, var_1, "MOD_EXPLOSIVE", "sam_projectile_mp");
               }
-            } else
+            } else {
               radiusdamage(var_2[var_6].origin, var_4, var_3, var_3, var_1, "MOD_EXPLOSIVE", "sam_projectile_mp");
+            }
           }
 
           var_2[var_6] hide();

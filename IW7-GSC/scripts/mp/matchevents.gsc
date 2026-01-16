@@ -105,51 +105,51 @@ func_FAC7(var_0, var_1, var_2) {
   var_7 = 1200;
   var_8 = 1000;
   var_9 = var_5[var_0][0];
-  var_0A = undefined;
+  var_10 = undefined;
   if(!isDefined(var_2)) {
-    var_0B = anglesToForward(var_9.angles);
-    var_0C = anglestoup(var_9.angles);
-    var_0D = anglestoright(var_9.angles);
-    var_0A = 300 * var_0B + var_6 * var_0C + 3200 * var_0D;
-    var_2 = var_9.origin + var_0A;
+    var_11 = anglesToForward(var_9.angles);
+    var_12 = anglestoup(var_9.angles);
+    var_13 = anglestoright(var_9.angles);
+    var_10 = 300 * var_11 + var_6 * var_12 + 3200 * var_13;
+    var_2 = var_9.origin + var_10;
   } else {
-    var_0A = var_9 - var_2;
+    var_10 = var_9 - var_2;
   }
 
   if(!isDefined(var_1)) {
     var_1 = "veh_mil_air_ca_dropship_mp";
   }
 
-  var_0E = spawnhelicopter(var_3, var_2, vectortoangles(var_0A), "veh_jackal_mp", var_1);
-  if(!isDefined(var_0E)) {
+  var_14 = spawnhelicopter(var_3, var_2, vectortoangles(var_10), "veh_jackal_mp", var_1);
+  if(!isDefined(var_14)) {
     return;
   }
 
-  level.var_9918[var_0] = var_0E;
-  var_0E.var_5D3C = 0;
-  var_0E.var_AD31 = [];
-  var_0E vehicle_setspeed(50, 15);
-  var_0E setvehgoalpos(var_9.origin + (0, 0, var_7 / 2), 1);
-  var_0E waittill("goal");
-  var_0E givelastonteamwarning(0, 1, 1);
-  var_0E setvehgoalpos(var_9.origin + (0, 0, var_7 / 8), 1);
-  var_0E waittill("goal");
-  var_0E.var_5D3C = 1;
-  foreach(var_4 in var_0E.var_AD31) {
+  level.var_9918[var_0] = var_14;
+  var_14.var_5D3C = 0;
+  var_14.var_AD31 = [];
+  var_14 vehicle_setspeed(50, 15);
+  var_14 setvehgoalpos(var_9.origin + (0, 0, var_7 / 2), 1);
+  var_14 waittill("goal");
+  var_14 givelastonteamwarning(0, 1, 1);
+  var_14 setvehgoalpos(var_9.origin + (0, 0, var_7 / 8), 1);
+  var_14 waittill("goal");
+  var_14.var_5D3C = 1;
+  foreach(var_4 in var_14.var_AD31) {
     func_56A7(var_4);
   }
 
   wait(2);
-  var_0E givelastonteamwarning(60, 40, 40, 0.3);
-  var_0E setvehgoalpos(var_9.origin + (0, 0, var_7), 1);
-  var_0E waittill("goal");
-  var_0E vehicle_setspeed(80, 60);
-  var_0E setvehgoalpos(var_9.origin + (0, 0, var_8) + var_0A, 1);
-  var_0E waittill("goal");
-  var_0E vehicle_setspeed(120, 120);
-  var_0E setvehgoalpos(var_9.origin + 2 * var_0A, 1);
-  var_0E waittill("goal");
-  var_0E delete();
+  var_14 givelastonteamwarning(60, 40, 40, 0.3);
+  var_14 setvehgoalpos(var_9.origin + (0, 0, var_7), 1);
+  var_14 waittill("goal");
+  var_14 vehicle_setspeed(80, 60);
+  var_14 setvehgoalpos(var_9.origin + (0, 0, var_8) + var_10, 1);
+  var_14 waittill("goal");
+  var_14 vehicle_setspeed(120, 120);
+  var_14 setvehgoalpos(var_9.origin + 2 * var_10, 1);
+  var_14 waittill("goal");
+  var_14 delete();
 }
 
 func_5915() {
@@ -208,31 +208,31 @@ func_57DE(var_0) {
   var_7 = anglesToForward((0, randomint(45), 0));
   var_8 = var_2 + var_6 + var_7 * var_3 * -1;
   var_9 = var_2 + var_6 + var_7 * var_4;
-  var_0A = var_8 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
-  var_0B = var_9 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
-  var_0C = spawnplane(self, "script_model", var_8);
-  var_0D = spawnplane(self, "script_model", var_0A);
+  var_10 = var_8 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
+  var_11 = var_9 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
+  var_12 = spawnplane(self, "script_model", var_8);
+  var_13 = spawnplane(self, "script_model", var_10);
   if(scripts\engine\utility::cointoss()) {
-    var_0C setModel("vehicle_av8b_harrier_jet_mp");
-    var_0D setModel("vehicle_av8b_harrier_jet_mp");
+    var_12 setModel("vehicle_av8b_harrier_jet_mp");
+    var_13 setModel("vehicle_av8b_harrier_jet_mp");
   } else {
-    var_0C setModel("vehicle_av8b_harrier_jet_opfor_mp");
-    var_0D setModel("vehicle_av8b_harrier_jet_opfor_mp");
+    var_12 setModel("vehicle_av8b_harrier_jet_opfor_mp");
+    var_13 setModel("vehicle_av8b_harrier_jet_opfor_mp");
   }
 
-  var_0C.angles = vectortoangles(var_9 - var_8);
-  var_0C playLoopSound("veh_mig29_dist_loop");
-  var_0C thread playplanefx();
-  var_0D.angles = vectortoangles(var_9 - var_0A);
-  var_0D playLoopSound("veh_mig29_dist_loop");
-  var_0D thread playplanefx();
-  var_0E = distance(var_8, var_9);
-  var_0C moveto(var_9 * 2, var_0E / 2000, 0, 0);
+  var_12.angles = vectortoangles(var_9 - var_8);
+  var_12 playLoopSound("veh_mig29_dist_loop");
+  var_12 thread playplanefx();
+  var_13.angles = vectortoangles(var_9 - var_10);
+  var_13 playLoopSound("veh_mig29_dist_loop");
+  var_13 thread playplanefx();
+  var_14 = distance(var_8, var_9);
+  var_12 moveto(var_9 * 2, var_14 / 2000, 0, 0);
   wait(randomfloatrange(0.25, 0.5));
-  var_0D moveto(var_0B * 2, var_0E / 2000, 0, 0);
-  wait(var_0E / 2000);
-  var_0C delete();
-  var_0D delete();
+  var_13 moveto(var_11 * 2, var_14 / 2000, 0, 0);
+  wait(var_14 / 2000);
+  var_12 delete();
+  var_13 delete();
 }
 
 playplanefx() {
@@ -288,44 +288,44 @@ func_5A59() {
 
     var_8 = anglesToForward(var_0["axis"][0].angles) * 300;
     var_9 = anglestoup(var_0["axis"][0].angles) * var_1;
-    var_0A = var_0["axis"][0].origin + var_8 + var_9;
-    var_0B = spawnhelicopter(self, var_0A, var_0["axis"][0].angles, "osprey_minigun_mp", "vehicle_v22_osprey_body_mp");
-    if(!isDefined(var_0B)) {
+    var_10 = var_0["axis"][0].origin + var_8 + var_9;
+    var_11 = spawnhelicopter(self, var_10, var_0["axis"][0].angles, "osprey_minigun_mp", "vehicle_v22_osprey_body_mp");
+    if(!isDefined(var_11)) {
       var_7 delete();
       return;
     }
 
     var_7 thread scripts\mp\killstreaks\_escortairdrop::func_1AEE();
-    var_0B thread scripts\mp\killstreaks\_escortairdrop::func_1AEE();
+    var_11 thread scripts\mp\killstreaks\_escortairdrop::func_1AEE();
     var_7 thread scripts\mp\killstreaks\_escortairdrop::func_1AEB();
-    var_0B thread scripts\mp\killstreaks\_escortairdrop::func_1AEB();
+    var_11 thread scripts\mp\killstreaks\_escortairdrop::func_1AEB();
     var_7 vehicle_setspeed(20, 10);
     var_7 givelastonteamwarning(3, 3, 3, 0.3);
     var_7 setvehgoalpos(var_6 + (0, 0, var_2), 1);
-    var_0B vehicle_setspeed(20, 10);
-    var_0B givelastonteamwarning(3, 3, 3, 0.3);
-    var_0B setvehgoalpos(var_0A + (0, 0, var_2), 1);
+    var_11 vehicle_setspeed(20, 10);
+    var_11 givelastonteamwarning(3, 3, 3, 0.3);
+    var_11 setvehgoalpos(var_10 + (0, 0, var_2), 1);
     var_7 waittill("goal");
     var_7 thread scripts\mp\killstreaks\_escortairdrop::func_1AEC();
-    var_0B thread scripts\mp\killstreaks\_escortairdrop::func_1AEC();
+    var_11 thread scripts\mp\killstreaks\_escortairdrop::func_1AEC();
     wait(2);
     var_7 vehicle_setspeed(80, 60);
     var_7 givelastonteamwarning(30, 15, 15, 0.3);
     var_7 setvehgoalpos(var_6 + (0, 0, var_3), 1);
-    var_0B vehicle_setspeed(80, 60);
-    var_0B givelastonteamwarning(30, 15, 15, 0.3);
-    var_0B setvehgoalpos(var_0A + (0, 0, var_3), 1);
+    var_11 vehicle_setspeed(80, 60);
+    var_11 givelastonteamwarning(30, 15, 15, 0.3);
+    var_11 setvehgoalpos(var_10 + (0, 0, var_3), 1);
     var_7 waittill("goal");
     var_7 thread scripts\mp\killstreaks\_escortairdrop::func_1AED();
-    var_0B thread scripts\mp\killstreaks\_escortairdrop::func_1AED();
+    var_11 thread scripts\mp\killstreaks\_escortairdrop::func_1AED();
     var_7 vehicle_setspeed(120, 120);
     var_7 givelastonteamwarning(100, 100, 40, 0.3);
     var_7 setvehgoalpos(var_6 + (0, 0, var_3) + var_4 * -20, 1);
-    var_0B vehicle_setspeed(120, 120);
-    var_0B givelastonteamwarning(100, 100, 40, 0.3);
-    var_0B setvehgoalpos(var_0A + (0, 0, var_3) + var_8 * -20, 1);
+    var_11 vehicle_setspeed(120, 120);
+    var_11 givelastonteamwarning(100, 100, 40, 0.3);
+    var_11 setvehgoalpos(var_10 + (0, 0, var_3) + var_8 * -20, 1);
     var_7 waittill("goal");
     var_7 delete();
-    var_0B delete();
+    var_11 delete();
   }
 }

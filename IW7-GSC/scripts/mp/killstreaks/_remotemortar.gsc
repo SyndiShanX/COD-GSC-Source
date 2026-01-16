@@ -7,7 +7,7 @@ init() {
   level.reminder_vo_init["laserTarget"] = loadfx("vfx\misc\laser_glow");
   level.reminder_vo_init["missileExplode"] = loadfx("vfx\core\expl\bouncing_betty_explosion");
   level.reminder_vo_init["deathExplode"] = loadfx("vfx\core\expl\uav_advanced_death");
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("remote_mortar", ::func_128FD);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_mortar", ::func_128FD);
   level.reminder_reaction_pointat = undefined;
 }
 
@@ -18,7 +18,7 @@ func_128FD(var_0, var_1) {
   }
 
   scripts\mp\utility::setusingremote("remote_mortar");
-  var_2 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_mortar");
+  var_2 = scripts\mp\killstreaks\killstreaks::initridekillstreak("remote_mortar");
   if(var_2 != "success") {
     if(var_2 != "disconnect") {
       scripts\mp\utility::clearusingremote();
@@ -56,7 +56,7 @@ func_10906(var_0, var_1) {
   var_2 setModel("vehicle_predator_b");
   var_2.lifeid = var_0;
   var_2.team = var_1.team;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.numflares = 1;
   var_2 setCanDamage(1);
   var_2 thread damagetracker();
@@ -252,7 +252,7 @@ remotemissile_fx(var_0) {
   self endon("death");
   for(;;) {
     var_1 = distance(self.origin, var_0.var_1155F.origin);
-    var_0.triggerportableradarping setclientdvar("ui_reaper_targetDistance", int(var_1 / 12));
+    var_0.owner setclientdvar("ui_reaper_targetDistance", int(var_1 / 12));
     wait(0.05);
   }
 }
@@ -328,7 +328,7 @@ func_89CE(var_0) {
   self endon("death");
   var_0 endon("disconnect");
   var_0 endon("removed_reaper_ammo");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   if(isDefined(var_0)) {
     var_0 remotedefusesetup(self);
   }
@@ -385,13 +385,13 @@ remotedetonatebeginuse() {
 
 damagetracker() {
   level endon("game_ended");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self.health = 999999;
   self.maxhealth = 1500;
   self.var_E1 = 0;
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_1)) {
+    if(!scripts\mp\weapons::friendlyfirecheck(self.owner, var_1)) {
       continue;
     }
 
@@ -408,12 +408,12 @@ damagetracker() {
     }
 
     self.wasdamaged = 1;
-    var_0A = var_0;
+    var_10 = var_0;
     if(isplayer(var_1)) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
       if(var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
         if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-          var_0A = var_0A + var_0 * level.armorpiercingmod;
+          var_10 = var_10 + var_0 * level.armorpiercingmod;
         }
       }
     }
@@ -423,7 +423,7 @@ damagetracker() {
         case "javelin_mp":
         case "stinger_mp":
           self.largeprojectiledamage = 1;
-          var_0A = self.maxhealth + 1;
+          var_10 = self.maxhealth + 1;
           break;
 
         case "sam_projectile_mp":
@@ -431,23 +431,23 @@ damagetracker() {
           break;
       }
 
-      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_9, self);
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_9, self);
     }
 
-    self.var_E1 = self.var_E1 + var_0A;
-    if(isDefined(self.triggerportableradarping)) {
-      self.triggerportableradarping playlocalsound("reaper_damaged");
+    self.var_E1 = self.var_E1 + var_10;
+    if(isDefined(self.owner)) {
+      self.owner playlocalsound("reaper_damaged");
     }
 
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_1 notify("destroyed_killstreak", var_9);
         thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_remote_mortar", var_1);
         var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_9, 50);
       }
 
-      if(isDefined(self.triggerportableradarping)) {
-        self.triggerportableradarping stoplocalsound("missile_incoming");
+      if(isDefined(self.owner)) {
+        self.owner stoplocalsound("missile_incoming");
       }
 
       thread remotedetonatebeginuse();
@@ -474,8 +474,8 @@ func_89B7() {
 func_10FA8(var_0, var_1) {
   self endon("death");
   var_0 endon("death");
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0.triggerportableradarping playlocalsound("missile_incoming");
+  if(isDefined(var_0.owner)) {
+    var_0.owner playlocalsound("missile_incoming");
   }
 
   self missile_settargetent(var_0);
@@ -496,8 +496,8 @@ func_10FA8(var_0, var_1) {
       var_6 = var_0 scripts\mp\killstreaks\_flares::func_6EA0();
       self missile_settargetent(var_6);
       var_0 = var_6;
-      if(isDefined(var_0.triggerportableradarping)) {
-        var_0.triggerportableradarping stoplocalsound("missile_incoming");
+      if(isDefined(var_0.owner)) {
+        var_0.owner stoplocalsound("missile_incoming");
       }
 
       return;
@@ -512,8 +512,8 @@ func_10FA8(var_0, var_1) {
         return;
       }
 
-      if(isDefined(var_1.triggerportableradarping)) {
-        var_1.triggerportableradarping stoplocalsound("missile_incoming");
+      if(isDefined(var_1.owner)) {
+        var_1.owner stoplocalsound("missile_incoming");
         if(level.teambased) {
           if(var_1.team != var_2.team) {
             radiusdamage(self.origin, 1000, 1000, 1000, var_2, "MOD_EXPLOSIVE", "stinger_mp");
@@ -548,8 +548,8 @@ func_89B6() {
 
 func_EB18(var_0, var_1, var_2) {
   var_0 endon("death");
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0.triggerportableradarping playlocalsound("missile_incoming");
+  if(isDefined(var_0.owner)) {
+    var_0.owner playlocalsound("missile_incoming");
   }
 
   var_3 = 150;
@@ -580,30 +580,30 @@ func_EB18(var_0, var_1, var_2) {
           var_0.numflares--;
           var_0 thread scripts\mp\killstreaks\_flares::func_6EAE();
           var_9 = var_0 scripts\mp\killstreaks\_flares::func_6EA0();
-          for(var_0A = 0; var_0A < var_2.size; var_0A++) {
-            if(isDefined(var_2[var_0A])) {
-              var_2[var_0A] missile_settargetent(var_9);
+          for(var_10 = 0; var_10 < var_2.size; var_10++) {
+            if(isDefined(var_2[var_10])) {
+              var_2[var_10] missile_settargetent(var_9);
             }
           }
 
-          if(isDefined(var_0.triggerportableradarping)) {
-            var_0.triggerportableradarping stoplocalsound("missile_incoming");
+          if(isDefined(var_0.owner)) {
+            var_0.owner stoplocalsound("missile_incoming");
           }
 
           return;
         }
 
-        if(var_0A[var_8] < var_7[var_8]) {
-          var_7[var_8] = var_0A[var_8];
+        if(var_10[var_8] < var_7[var_8]) {
+          var_7[var_8] = var_10[var_8];
         }
 
-        if(var_0A[var_8] > var_7[var_8]) {
-          if(var_0A[var_8] > 1536) {
+        if(var_10[var_8] > var_7[var_8]) {
+          if(var_10[var_8] > 1536) {
             continue;
           }
 
-          if(isDefined(var_2.triggerportableradarping)) {
-            var_2.triggerportableradarping stoplocalsound("missile_incoming");
+          if(isDefined(var_2.owner)) {
+            var_2.owner stoplocalsound("missile_incoming");
             if(level.teambased) {
               if(var_2.team != var_3.team) {
                 radiusdamage(var_4[var_8].origin, var_6, var_5, var_5, var_3, "MOD_EXPLOSIVE", "sam_projectile_mp");

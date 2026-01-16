@@ -158,7 +158,7 @@ is_valid_achievement(var_0) {
   return isDefined(var_0);
 }
 
-update_achievement(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+update_achievement(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(scripts\cp\utility::is_codxp()) {
     return;
   }
@@ -167,12 +167,12 @@ update_achievement(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     return;
   }
 
-  var_0C = self.achievement_list[var_0];
-  if(!is_valid_achievement(var_0C)) {
+  var_12 = self.achievement_list[var_0];
+  if(!is_valid_achievement(var_12)) {
     return;
   }
 
-  if(var_0C is_completed()) {
+  if(var_12 is_completed()) {
     return;
   }
 
@@ -180,11 +180,11 @@ update_achievement(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     return;
   }
 
-  if(var_0C[[var_0C.should_update_func]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B)) {
-    var_0C update_progress(var_1);
-    if(var_0C[[var_0C.is_goal_reached_func]]()) {
+  if(var_12[[var_12.should_update_func]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11)) {
+    var_12 update_progress(var_1);
+    if(var_12[[var_12.is_goal_reached_func]]()) {
       self giveachievement(var_0);
-      var_0C mark_completed();
+      var_12 mark_completed();
     }
   }
 }

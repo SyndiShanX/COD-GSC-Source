@@ -78,7 +78,7 @@ func_12754() {
 func_DDE1() {
   foreach(var_1 in level.var_9A2E.var_4D94["actors"]) {
     if(!isDefined(var_1)) {
-      level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], var_1);
+      level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], var_1);
     }
   }
 }
@@ -86,14 +86,14 @@ func_DDE1() {
 func_168F() {
   if(isDefined(level.var_9A2E)) {
     if(!scripts\engine\utility::array_contains(level.var_9A2E.var_4D94["actors"], self)) {
-      level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
+      level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["actors"], self);
     }
   }
 }
 
 func_DFB5() {
   if(isDefined(level.var_9A2E)) {
-    level.var_9A2E.var_4D94["actors"] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], self);
+    level.var_9A2E.var_4D94["actors"] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["actors"], self);
   }
 }
 
@@ -371,7 +371,7 @@ func_E815(var_0) {
 }
 
 reminder_animnode() {
-  level scripts\engine\utility::waittill_any_3("stop_reminders", "reminders_done");
+  level scripts\engine\utility::waittill_any("stop_reminders", "reminders_done");
   level.var_9A2E.var_4D94["reminder_queue"] = [];
 }
 
@@ -617,8 +617,8 @@ func_77B1(var_0, var_1) {
           var_3 = undefined;
         } else {
           var_3 = var_4[randomint(var_4.size)];
-          level.var_9A2E.var_4D94["reminder_vo"][var_0]["spent_" + self.gender] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["reminder_vo"][var_0]["spent_" + self.gender], var_3);
-          level.var_9A2E.var_4D94["reminder_vo"][var_0][self.gender] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["reminder_vo"][var_0][self.gender], var_3);
+          level.var_9A2E.var_4D94["reminder_vo"][var_0]["spent_" + self.gender] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["reminder_vo"][var_0]["spent_" + self.gender], var_3);
+          level.var_9A2E.var_4D94["reminder_vo"][var_0][self.gender] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["reminder_vo"][var_0][self.gender], var_3);
         }
         break;
     }
@@ -636,8 +636,8 @@ func_77B1(var_0, var_1) {
       var_3 = undefined;
     } else {
       var_3 = var_4[randomint(var_4.size)];
-      level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender] = scripts\engine\utility::array_add(level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender], var_3);
-      level.var_9A2E.var_4D94["busy_vo"][self.gender] = scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["busy_vo"][self.gender], var_3);
+      level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender] = ::scripts\engine\utility::array_add(level.var_9A2E.var_4D94["busy_vo"]["spent_" + self.gender], var_3);
+      level.var_9A2E.var_4D94["busy_vo"][self.gender] = ::scripts\engine\utility::array_remove(level.var_9A2E.var_4D94["busy_vo"][self.gender], var_3);
     }
   }
 
@@ -916,9 +916,9 @@ func_CD37(var_0, var_1, var_2, var_3) {
   func_1377E(var_0, var_2);
   func_CD36(var_0, var_3, var_2);
   foreach(var_5 in var_0) {
-    var_0A = randomfloatrange(0, 1);
-    var_0B = randomfloatrange(0.5, 1.5);
-    var_5 scripts\engine\utility::delaythread(var_0A, scripts\sp\utility::func_77B9, var_0B);
+    var_10 = randomfloatrange(0, 1);
+    var_11 = randomfloatrange(0.5, 1.5);
+    var_5 scripts\engine\utility::delaythread(var_10, scripts\sp\utility::func_77B9, var_11);
   }
 }
 
@@ -1193,9 +1193,9 @@ func_CD27(var_0, var_1) {
           } else if(issubstr(var_9, "plr")) {
             level.player scripts\sp\utility::func_1034D(var_9);
           } else {
-            var_0A = func_B19B(var_9);
-            if(isDefined(var_0A)) {
-              var_0A scripts\sp\utility::func_10346(var_9);
+            var_10 = func_B19B(var_9);
+            if(isDefined(var_10)) {
+              var_10 scripts\sp\utility::func_10346(var_9);
             } else {
               scripts\sp\utility::func_10346(var_9);
             }
@@ -1212,9 +1212,9 @@ func_CD27(var_0, var_1) {
       lib_0B6A::func_EC0E(var_5);
     } else {
       func_509C(var_5);
-      var_0A = func_B19B(var_5);
-      if(isDefined(var_0A)) {
-        var_0A scripts\sp\utility::func_10346(var_5);
+      var_10 = func_B19B(var_5);
+      if(isDefined(var_10)) {
+        var_10 scripts\sp\utility::func_10346(var_5);
       } else {
         scripts\sp\utility::func_10346(var_5);
       }

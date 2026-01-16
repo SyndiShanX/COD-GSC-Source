@@ -309,20 +309,20 @@ givepower(var_0, var_1, var_2, var_3, var_4) {
     var_6.passives = var_3;
   }
 
-  var_0B = 0;
+  var_11 = 0;
   if(isDefined(self.var_D76F) && isDefined(self.var_D76F[var_0])) {
-    var_0C = self.var_D76F[var_0];
-    var_0D = func_D720(var_0C);
-    if(var_0D > 0) {
-      var_0E = var_6.charges * var_7.cooldowntime;
-      var_6.charges = int(var_0E - var_0D / var_7.cooldowntime);
+    var_12 = self.var_D76F[var_0];
+    var_13 = func_D720(var_12);
+    if(var_13 > 0) {
+      var_14 = var_6.charges * var_7.cooldowntime;
+      var_6.charges = int(var_14 - var_13 / var_7.cooldowntime);
       if(var_6.charges < 0) {
         var_6.charges = 0;
       }
 
-      var_0B = var_0D;
-      while(var_0B > var_7.cooldowntime) {
-        var_0B = var_0B - var_7.cooldowntime;
+      var_11 = var_13;
+      while(var_11 > var_7.cooldowntime) {
+        var_11 = var_11 - var_7.cooldowntime;
       }
     }
   }
@@ -338,8 +338,8 @@ givepower(var_0, var_1, var_2, var_3, var_4) {
     var_6.weaponuse = var_7.weaponuse;
   }
 
-  var_0F = func_8090(var_0);
-  var_10 = scripts\engine\utility::ter_op(isDefined(var_0F), var_0F, var_6.weaponuse);
+  var_15 = func_8090(var_0);
+  var_10 = scripts\engine\utility::ter_op(isDefined(var_15), var_15, var_6.weaponuse);
   var_6.weaponuse = var_10;
   scripts\mp\utility::_giveweapon(var_10, 0);
   self setweaponammoclip(var_10, var_6.charges);
@@ -356,7 +356,7 @@ givepower(var_0, var_1, var_2, var_3, var_4) {
   }
 
   thread func_D73D(var_0);
-  thread func_B2F0(var_7, var_0, var_6.slot, var_7.cooldowntime, var_7.var_12ED9, var_7.usednotify, var_10, var_0B, var_2);
+  thread func_B2F0(var_7, var_0, var_6.slot, var_7.cooldowntime, var_7.var_12ED9, var_7.usednotify, var_10, var_11, var_2);
 }
 
 removepower(var_0) {
@@ -560,10 +560,10 @@ func_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     func_D765(var_1);
     var_9 = var_6 + "_success";
     thread func_13A0E(var_3, var_1, var_9, var_2);
-    var_0A = scripts\engine\utility::ter_op(var_0.var_130F3 == "weapon_hold", "offhand_pullback", "offhand_fired");
+    var_10 = scripts\engine\utility::ter_op(var_0.var_130F3 == "weapon_hold", "offhand_pullback", "offhand_fired");
     if(var_0.var_130F3 == "weapon_hold") {
-      self waittill(var_0A, var_0B);
-      if(var_0B != var_6) {
+      self waittill(var_10, var_11);
+      if(var_11 != var_6) {
         continue;
       }
     } else if(!func_D76B(var_6)) {
@@ -573,17 +573,17 @@ func_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     self notify("power_activated", var_1, var_2);
     scripts\mp\utility::printgameaction("power used - " + var_1, self);
     self notify(var_9);
-    var_0C = undefined;
+    var_12 = undefined;
     if(isDefined(var_0.usefunc)) {
-      var_0C = self thread[[var_0.usefunc]]();
-      if(isDefined(var_0C) && var_0C == 0) {
+      var_12 = self thread[[var_0.usefunc]]();
+      if(isDefined(var_12) && var_12 == 0) {
         continue;
       }
     }
 
     if(isDefined(var_5)) {
-      self waittill(var_5, var_0C);
-      if(isDefined(var_0C) && var_0C == 0) {
+      self waittill(var_5, var_12);
+      if(isDefined(var_12) && var_12 == 0) {
         continue;
       }
     }
@@ -1309,13 +1309,13 @@ func_D767(var_0, var_1, var_2, var_3) {
             var_6 = 0.05;
           }
 
-          var_0A = 0;
+          var_10 = 0;
           while(self usebuttonpressed()) {
-            var_0A = var_0A + 0.05;
-            if(var_0A >= var_6) {
+            var_10 = var_10 + 0.05;
+            if(var_10 >= var_6) {
               var_1 = func_93FD(var_1, var_2, var_3);
               var_5 = 1;
-              var_0A = 0;
+              var_10 = 0;
               var_6 = 0.7;
               var_4 = 1;
               self[[var_9]](var_1);
@@ -1394,35 +1394,35 @@ func_C179() {
 
   switch (self.weapon_name) {
     case "bouncingbetty_mp":
-      self.triggerportableradarping notify("bouncing_betty_update", 0);
+      self.owner notify("bouncing_betty_update", 0);
       break;
 
     case "transponder_mp":
-      self.triggerportableradarping notify("transponder_update", 0);
+      self.owner notify("transponder_update", 0);
       break;
 
     case "trip_mine_mp":
-      self.triggerportableradarping notify("trip_mine_update", 0);
+      self.owner notify("trip_mine_update", 0);
       break;
 
     case "sonic_sensor_mp":
-      self.triggerportableradarping notify("sonic_sensor_update", 0);
+      self.owner notify("sonic_sensor_update", 0);
       break;
 
     case "trophy_mp":
-      self.triggerportableradarping notify("trophy_update", 0);
+      self.owner notify("trophy_update", 0);
       break;
 
     case "fear_grenade_mp":
-      self.triggerportableradarping notify("restart_fear_grenade_cooldown", 0);
+      self.owner notify("restart_fear_grenade_cooldown", 0);
       break;
 
     case "cryo_mine":
-      self.triggerportableradarping notify("cryo_mine_update", 0);
+      self.owner notify("cryo_mine_update", 0);
       break;
 
     case "micro_turret_mp":
-      self.triggerportableradarping notify("microTurret_update", 0);
+      self.owner notify("microTurret_update", 0);
       break;
 
     default:

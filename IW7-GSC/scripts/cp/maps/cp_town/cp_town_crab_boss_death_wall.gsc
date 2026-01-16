@@ -570,7 +570,7 @@ death_wall_zombie_spawning_logic() {
   wait(1.5);
   var_0 = [(2744, 3725, -197), (3498, 2990, -197)];
   foreach(var_3, var_2 in var_0) {
-    var_0[var_3] = scripts\engine\utility::drop_to_ground(var_0[var_3], 0, -500);
+    var_0[var_3] = ::scripts\engine\utility::drop_to_ground(var_0[var_3], 0, -500);
   }
 
   var_4 = randomint(2);

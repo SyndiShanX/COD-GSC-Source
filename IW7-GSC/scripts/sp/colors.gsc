@@ -51,13 +51,13 @@ func_957E() {
     }
   }
 
-  foreach(var_0A in var_1) {
-    if(isDefined(var_0A.var_ED33)) {
-      var_0A thread func_12757(var_0A.var_ED33, "allies");
+  foreach(var_10 in var_1) {
+    if(isDefined(var_10.var_ED33)) {
+      var_10 thread func_12757(var_10.var_ED33, "allies");
     }
 
-    if(isDefined(var_0A.var_ED34)) {
-      var_0A thread func_12757(var_0A.var_ED34, "axis");
+    if(isDefined(var_10.var_ED34)) {
+      var_10 thread func_12757(var_10.var_ED34, "axis");
     }
   }
 
@@ -118,17 +118,17 @@ func_957E() {
   level.var_A95D = [];
   level.var_A95D["allies"] = [];
   level.var_A95D["axis"] = [];
-  foreach(var_0D in level.var_43A8) {
-    level.var_22E0["allies"][var_0D] = [];
-    level.var_22E0["axis"][var_0D] = [];
-    level.var_4BE0["allies"][var_0D] = undefined;
-    level.var_4BE0["axis"][var_0D] = undefined;
+  foreach(var_13 in level.var_43A8) {
+    level.var_22E0["allies"][var_13] = [];
+    level.var_22E0["axis"][var_13] = [];
+    level.var_4BE0["allies"][var_13] = undefined;
+    level.var_4BE0["axis"][var_13] = undefined;
   }
 
   thread func_CFD2();
-  var_0F = getspawnerteamarray("allies");
+  var_15 = getspawnerteamarray("allies");
   level.var_11AE = [];
-  foreach(var_11 in var_0F) {
+  foreach(var_11 in var_15) {
     level.var_11AE[var_11.classname] = var_11;
   }
 }
@@ -142,7 +142,7 @@ func_19CE(var_0) {
     func_45ED();
     self.var_4BDF = var_0;
     var_1 = self.var_EDAD;
-    level.var_22E0[func_7CE4()][var_1] = scripts\engine\utility::array_add(level.var_22E0[func_7CE4()][var_1], self);
+    level.var_22E0[func_7CE4()][var_1] = ::scripts\engine\utility::array_add(level.var_22E0[func_7CE4()][var_1], self);
     thread func_8467();
   }
 }
@@ -239,11 +239,11 @@ func_78D7(var_0, var_1) {
   }
 
   var_2 = var_5;
-  var_0D = [];
-  var_0D["colorCodes"] = var_2;
-  var_0D["colorCodesByColorIndex"] = var_4;
-  var_0D["colors"] = var_3;
-  return var_0D;
+  var_13 = [];
+  var_13["colorCodes"] = var_2;
+  var_13["colorCodesByColorIndex"] = var_4;
+  var_13["colors"] = var_3;
+  return var_13;
 }
 
 func_43A4(var_0, var_1) {
@@ -290,12 +290,12 @@ func_12732() {
     }
 
     var_1 = [];
-    foreach(var_0B in var_2) {
-      if(!isDefined(var_0B.var_ED33) && !isDefined(var_0B.var_ED34)) {
+    foreach(var_11 in var_2) {
+      if(!isDefined(var_11.var_ED33) && !isDefined(var_11.var_ED34)) {
         continue;
       }
 
-      var_1[var_1.size] = var_0B;
+      var_1[var_1.size] = var_11;
     }
   }
 
@@ -325,35 +325,35 @@ func_159A(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    level.var_22DE[var_2][var_0[var_4]] = scripts\engine\utility::array_removeundefined(level.var_22DE[var_2][var_0[var_4]]);
+    level.var_22DE[var_2][var_0[var_4]] = ::scripts\engine\utility::array_removeundefined(level.var_22DE[var_2][var_0[var_4]]);
     for(var_5 = 0; var_5 < level.var_22DE[var_2][var_0[var_4]].size; var_5++) {
       level.var_22DE[var_2][var_0[var_4]][var_5].var_4BDF = var_0[var_4];
     }
   }
 
   foreach(var_7 in var_1) {
-    level.var_22E0[var_2][var_7] = scripts\sp\utility::func_22B9(level.var_22E0[var_2][var_7]);
+    level.var_22E0[var_2][var_7] = ::scripts\sp\utility::func_22B9(level.var_22E0[var_2][var_7]);
     level.var_A95D[var_2][var_7] = level.var_4BE0[var_2][var_7];
     level.var_4BE0[var_2][var_7] = var_3[var_7];
   }
 
-  var_0B = [];
+  var_11 = [];
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
     if(func_EB12(var_2, var_1[var_4])) {
       continue;
     }
 
-    var_0C = var_0[var_4];
-    if(!isDefined(level.var_22DC[var_2][var_0C])) {
+    var_12 = var_0[var_4];
+    if(!isDefined(level.var_22DC[var_2][var_12])) {
       continue;
     }
 
-    var_0B[var_0C] = func_9F85(var_0C, var_1[var_4], var_2);
+    var_11[var_12] = func_9F85(var_12, var_1[var_4], var_2);
   }
 
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
-    var_0C = var_0[var_4];
-    if(!isDefined(var_0B[var_0C])) {
+    var_12 = var_0[var_4];
+    if(!isDefined(var_11[var_12])) {
       continue;
     }
 
@@ -361,11 +361,11 @@ func_159A(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(!isDefined(level.var_22DC[var_2][var_0C])) {
+    if(!isDefined(level.var_22DC[var_2][var_12])) {
       continue;
     }
 
-    func_9F83(var_0C, var_1[var_4], var_2, var_0B[var_0C]);
+    func_9F83(var_12, var_1[var_4], var_2, var_11[var_12]);
   }
 }
 
@@ -418,10 +418,10 @@ func_D923(var_0, var_1, var_2) {
   var_4.var_4708 = scripts\engine\utility::array_randomize(var_4.var_4708);
   var_8 = [];
   var_3 = [];
-  foreach(var_0A, var_7 in var_4.var_4708) {
+  foreach(var_10, var_7 in var_4.var_4708) {
     if(isDefined(var_7.var_ED38)) {
       var_8[var_8.size] = var_7;
-      var_3[var_0A] = undefined;
+      var_3[var_10] = undefined;
       continue;
     }
 
@@ -452,7 +452,7 @@ func_78D6(var_0, var_1) {
 }
 
 func_9F85(var_0, var_1, var_2) {
-  level.var_22DC[var_2][var_0] = scripts\sp\utility::func_22B9(level.var_22DC[var_2][var_0]);
+  level.var_22DC[var_2][var_0] = ::scripts\sp\utility::func_22B9(level.var_22DC[var_2][var_0]);
   var_3 = level.var_22DC[var_2][var_0];
   var_3 = scripts\engine\utility::array_combine(var_3, level.var_22E0[var_2][var_1]);
   var_4 = [];
@@ -501,14 +501,14 @@ func_9F83(var_0, var_1, var_2, var_3) {
   var_7 = 0;
   var_8 = var_3.size;
   for(var_9 = 0; var_9 < var_5.size; var_9++) {
-    var_0A = var_5[var_9];
-    if(isalive(var_0A.var_43A2)) {
+    var_10 = var_5[var_9];
+    if(isalive(var_10.var_43A2)) {
       continue;
     }
 
-    var_0B = scripts\engine\utility::getclosest(var_0A.origin, var_3);
-    var_3 = scripts\engine\utility::array_remove(var_3, var_0B);
-    var_0B func_1142E(var_0A, var_0, self, var_7);
+    var_11 = scripts\engine\utility::getclosest(var_10.origin, var_3);
+    var_3 = scripts\engine\utility::array_remove(var_3, var_11);
+    var_11 func_1142E(var_10, var_0, self, var_7);
     var_7++;
     if(!var_3.size) {
       return;
@@ -525,20 +525,20 @@ func_1142E(var_0, var_1, var_2, var_3) {
 func_CFD2() {
   for(;;) {
     var_0 = undefined;
-    if(!isDefined(level.player.target_getindexoftarget)) {
+    if(!isDefined(level.player.node)) {
       wait(0.05);
       continue;
     }
 
-    var_1 = level.player.target_getindexoftarget.var_43A2;
-    var_0 = level.player.target_getindexoftarget;
+    var_1 = level.player.node.var_43A2;
+    var_0 = level.player.node;
     var_0.var_43A2 = level.player;
     for(;;) {
-      if(!isDefined(level.player.target_getindexoftarget)) {
+      if(!isDefined(level.player.node)) {
         break;
       }
 
-      if(level.player.target_getindexoftarget != var_0) {
+      if(level.player.node != var_0) {
         break;
       }
 
@@ -777,7 +777,7 @@ func_13689(var_0, var_1) {
 }
 
 func_BE08() {
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return 0;
   }
 
@@ -786,7 +786,7 @@ func_BE08() {
     return 1;
   }
 
-  return self.target_getindexoftarget scripts\sp\utility::script_delay();
+  return self.node scripts\sp\utility::script_delay();
 }
 
 func_D966(var_0, var_1, var_2) {
@@ -851,7 +851,7 @@ func_7860() {
 func_D987(var_0) {
   self endon("stopScript");
   self endon("death");
-  if(isDefined(self.target_getindexoftarget)) {
+  if(isDefined(self.node)) {
     return;
   }
 
@@ -877,11 +877,11 @@ func_DD19(var_0) {
   var_1 = getaiarray();
   var_2 = undefined;
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
-    if(!isDefined(var_1[var_3].target_getindexoftarget)) {
+    if(!isDefined(var_1[var_3].node)) {
       continue;
     }
 
-    if(var_1[var_3].target_getindexoftarget != var_0) {
+    if(var_1[var_3].node != var_0) {
       continue;
     }
 
@@ -928,7 +928,7 @@ func_171E(var_0, var_1) {
   var_2 = func_22AE(var_2);
   foreach(var_4 in var_2) {
     if(isDefined(level.var_22DD[var_1]) && isDefined(level.var_22DD[var_1][var_4])) {
-      level.var_22DD[var_1][var_4] = scripts\engine\utility::array_add(level.var_22DD[var_1][var_4], self);
+      level.var_22DD[var_1][var_4] = ::scripts\engine\utility::array_add(level.var_22DD[var_1][var_4], self);
       continue;
     }
 
@@ -981,7 +981,7 @@ func_E16F() {
   var_3 = strtok(var_2, " ");
   var_3 = func_22AE(var_3);
   for(var_4 = 0; var_4 < var_3.size; var_4++) {
-    level.var_22DE[var_1][var_3[var_4]] = scripts\engine\utility::array_remove(level.var_22DE[var_1][var_3[var_4]], self);
+    level.var_22DE[var_1][var_3[var_4]] = ::scripts\engine\utility::array_remove(level.var_22DE[var_1][var_3[var_4]], self);
   }
 }
 

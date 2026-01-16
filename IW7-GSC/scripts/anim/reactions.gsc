@@ -96,7 +96,7 @@ func_BF22() {
   }
 
   self animmode("gravity");
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     func_BF20();
   }
 }

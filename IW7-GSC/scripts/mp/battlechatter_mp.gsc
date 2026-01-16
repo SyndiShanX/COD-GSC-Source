@@ -194,11 +194,11 @@ func_85D1() {
           continue;
         }
 
-        if(!isDefined(var_5.triggerportableradarping)) {
-          var_5.triggerportableradarping = getmissileowner(var_5);
+        if(!isDefined(var_5.owner)) {
+          var_5.owner = getmissileowner(var_5);
         }
 
-        if(isDefined(var_5.triggerportableradarping) && level.teambased && var_5.triggerportableradarping.team == self.team) {
+        if(isDefined(var_5.owner) && level.teambased && var_5.owner.team == self.team) {
           continue;
         }
 
@@ -445,7 +445,7 @@ func_117E1() {
 
     var_1 = 0;
     var_2 = 4000000;
-    if(self getweaponrankinfominxp() > 0.7) {
+    if(self playerads() > 0.7) {
       var_2 = 6250000;
     }
 
@@ -527,7 +527,7 @@ dosound(var_0, var_1, var_2) {
   }
 
   thread timehack(var_0);
-  scripts\engine\utility::waittill_any_3(var_0, "death", "disconnect");
+  scripts\engine\utility::waittill_any(var_0, "death", "disconnect");
   level removespeaker(self, var_3);
 }
 
@@ -553,7 +553,7 @@ dothreatcalloutresponse(var_0, var_1) {
     var_4 = self.pers["voicePrefix"];
     var_5 = self.origin;
     wait(0.5);
-    foreach(var_0B, var_7 in level.participants) {
+    foreach(var_11, var_7 in level.participants) {
       if(!isDefined(var_7)) {
         continue;
       }
@@ -578,12 +578,12 @@ dothreatcalloutresponse(var_0, var_1) {
       if(var_8 != var_4 && distancesquared(var_5, var_7.origin) <= 262144 && !isspeakerinrange(var_7)) {
         var_9 = var_8 + "co_loc_" + var_1 + "_echo";
         if(soundexists(var_9) && scripts\engine\utility::cointoss()) {
-          var_0A = var_9;
+          var_10 = var_9;
         } else {
-          var_0A = var_0B + level.bcsounds["callout_response_generic"];
+          var_10 = var_11 + level.bcsounds["callout_response_generic"];
         }
 
-        var_7 thread dosound(var_0A, 0, 1);
+        var_7 thread dosound(var_10, 0, 1);
         break;
       }
     }

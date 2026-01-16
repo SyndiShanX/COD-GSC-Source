@@ -13,16 +13,16 @@ remote_vehicle_setup() {
   }
   level.bot_ks_heli_offset["heli_pilot"] = (0, 0, 350);
   level.bot_ks_heli_offset["heli_sniper"] = (0, 0, 228);
-  level.bot_ks_funcs["isUsing"]["odin_assault"] = scripts\mp\utility\game::isusingremote;
-  level.bot_ks_funcs["isUsing"]["odin_support"] = scripts\mp\utility\game::isusingremote;
-  level.bot_ks_funcs["isUsing"]["heli_pilot"] = scripts\mp\utility\game::isusingremote;
+  level.bot_ks_funcs["isUsing"]["odin_assault"] = ::scripts\mp\utility\game::isusingremote;
+  level.bot_ks_funcs["isUsing"]["odin_support"] = ::scripts\mp\utility\game::isusingremote;
+  level.bot_ks_funcs["isUsing"]["heli_pilot"] = ::scripts\mp\utility\game::isusingremote;
   level.bot_ks_funcs["isUsing"]["heli_sniper"] = ::isusinggunship;
-  level.bot_ks_funcs["isUsing"]["switchblade_cluster"] = scripts\mp\utility\game::isusingremote;
+  level.bot_ks_funcs["isUsing"]["switchblade_cluster"] = ::scripts\mp\utility\game::isusingremote;
   level.bot_ks_funcs["isUsing"]["vanguard"] = ::isusingvanguard;
   level.bot_ks_funcs["waittill_initial_goal"]["heli_pilot"] = ::heli_pilot_waittill_initial_goal;
   level.bot_ks_funcs["waittill_initial_goal"]["heli_sniper"] = ::heli_sniper_waittill_initial_goal;
   level.bot_ks_funcs["control_aiming"]["heli_pilot"] = ::heli_pilot_control_heli_aiming;
-  level.bot_ks_funcs["control_aiming"]["heli_sniper"] = scripts\engine\utility::empty_init_func;
+  level.bot_ks_funcs["control_aiming"]["heli_sniper"] = ::scripts\engine\utility::empty_init_func;
   level.bot_ks_funcs["control_aiming"]["vanguard"] = ::vanguard_control_aiming;
   level.bot_ks_funcs["control_other"]["heli_pilot"] = ::heli_pilot_monitor_flares;
   level.bot_ks_funcs["heli_pick_node"]["heli_pilot"] = ::heli_pilot_pick_node;
@@ -117,8 +117,9 @@ bot_killstreak_remote_control(var_0, var_1, var_2, var_3, var_4) {
     if(var_9 < squared(var_8)) {
       var_5 = 0;
       var_6 = 0;
-    } else if(var_9 < squared(200))
+    } else if(var_9 < squared(200)) {
       var_5 = 0;
+    }
   }
 
   var_10 = var_0.streakname == "vanguard" && is_indoor_map();
@@ -160,8 +161,9 @@ bot_killstreak_remote_control(var_0, var_1, var_2, var_3, var_4) {
 
           wait 0.05;
         }
-      } else if(var_11.size > 0)
+      } else if(var_11.size > 0) {
         var_7 = self botnodepick(var_11, min(3, var_11.size), "node_hide");
+      }
 
       if(!isDefined(var_7)) {
         return 0;
@@ -709,8 +711,9 @@ bot_control_vanguard() {
       if(scripts\engine\utility::cointoss()) {
         self botpressbutton("tactical");
       }
-    } else
+    } else {
       self botpressbutton("lethal");
+    }
 
     wait 0.05;
   }
@@ -924,8 +927,9 @@ bot_vanguard_find_unvisited_nodes(var_0) {
         var_2 = [];
         var_2[0] = var_4;
         var_1 = var_5;
-      } else if(var_5 == var_1)
+      } else if(var_5 == var_1) {
         var_2[var_2.size] = var_4;
+      }
     }
   }
 
@@ -1448,8 +1452,9 @@ bot_control_odin(var_0) {
       var_13 = vectortoangles(var_12);
       self botsetscriptmove(var_13[1], 0.05);
       self botlookatpoint(var_4, 0.1, "script_forced");
-    } else
+    } else {
       var_6 = gettime();
+    }
 
     wait 0.05;
   }
@@ -1704,7 +1709,7 @@ bot_killstreak_get_zone_allies_outside(var_0) {
     var_7 = getnodezone(var_6);
 
     if(isDefined(var_7)) {
-      var_2[var_7] = scripts\engine\utility::array_add(var_2[var_7], var_5);
+      var_2[var_7] = ::scripts\engine\utility::array_add(var_2[var_7], var_5);
     }
   }
 
@@ -1722,7 +1727,7 @@ bot_killstreak_get_zone_enemies_outside(var_0) {
   foreach(var_5 in var_1) {
     var_6 = var_5 getnearestnode();
     var_7 = getnodezone(var_6);
-    var_2[var_7] = scripts\engine\utility::array_add(var_2[var_7], var_5);
+    var_2[var_7] = ::scripts\engine\utility::array_add(var_2[var_7], var_5);
   }
 
   return var_2;
@@ -1781,8 +1786,9 @@ bot_heli_find_unvisited_nodes(var_0) {
         var_2 = [];
         var_2[0] = var_4;
         var_1 = var_5;
-      } else if(var_5 == var_1)
+      } else if(var_5 == var_1) {
         var_2[var_2.size] = var_4;
+      }
     }
   }
 
@@ -1865,8 +1871,9 @@ bot_control_heli_main_move_loop(var_0, var_1) {
           var_15 = var_5.origin + (scripts\mp\utility\game::gethelipilotmeshoffset() - level.bot_heli_pilot_traceoffset);
           var_16 = bulletTrace(var_14, var_15, 0, undefined, 0, 0, 1);
           var_6 = var_16["position"] - scripts\mp\utility\game::gethelipilotmeshoffset() + level.bot_ks_heli_offset[var_0];
-        } else
+        } else {
           var_6 = var_13;
+        }
       }
 
       if(isDefined(var_6)) {

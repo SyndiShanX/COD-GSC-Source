@@ -62,7 +62,7 @@ register_zombie_perks() {
 
 update_perk_machines_based_on_num_players() {
   for(;;) {
-    level scripts\engine\utility::waittill_any_3("player_count_determined", "multiple_players");
+    level scripts\engine\utility::waittill_any("player_count_determined", "multiple_players");
     update_revive_perks();
   }
 }
@@ -804,7 +804,7 @@ adjust_last_stand_type() {
   self endon("turn_off_self_revive");
   self endon("self_revive_removed");
   for(;;) {
-    level scripts\engine\utility::waittill_any_3("player_spawned", "disconnected");
+    level scripts\engine\utility::waittill_any("player_spawned", "disconnected");
     self notify("remove_self_revive");
   }
 }
@@ -1007,14 +1007,14 @@ explode_head_shards(var_0, var_1, var_2, var_3) {
   }
 
   var_9 = scripts\engine\utility::get_array_of_closest(var_1, var_6, var_7, undefined, var_8, 0);
-  foreach(var_0B in var_9) {
-    if(isDefined(var_0B.agent_type) && var_0B.agent_type == "crab_mini" || var_0B.agent_type == "crab_brute") {
-      var_0C = 100;
+  foreach(var_11 in var_9) {
+    if(isDefined(var_11.agent_type) && var_11.agent_type == "crab_mini" || var_11.agent_type == "crab_brute") {
+      var_12 = 100;
     } else {
-      var_0C = 100000;
+      var_12 = 100000;
     }
 
-    var_0B dodamage(var_0C, var_1, var_0, var_0, "MOD_EXPLOSIVE", var_5);
+    var_11 dodamage(var_12, var_1, var_0, var_0, "MOD_EXPLOSIVE", var_5);
   }
 }
 
@@ -1140,8 +1140,8 @@ give_rat_a_tat_perk() {
     if(isDefined(var_6)) {
       var_8 = undefined;
       var_9 = undefined;
-      var_0A = self getweaponammoclip(var_3);
-      var_0B = self getweaponammostock(var_3);
+      var_10 = self getweaponammoclip(var_3);
+      var_11 = self getweaponammostock(var_3);
       if(var_7) {
         var_8 = self getweaponammoclip(var_3, "left");
         var_9 = self getweaponammoclip(var_3, "right");
@@ -1157,10 +1157,10 @@ give_rat_a_tat_perk() {
           self setweaponammoclip(var_6, var_9, "right");
         }
       } else {
-        self setweaponammoclip(var_6, var_0A);
+        self setweaponammoclip(var_6, var_10);
       }
 
-      self setweaponammostock(var_6, var_0B);
+      self setweaponammostock(var_6, var_11);
       if(getweaponbasename(var_6) == getweaponbasename(var_1)) {
         var_1 = var_6;
       }
@@ -1217,7 +1217,7 @@ take_rat_a_tat_perk() {
 
     self takeweapon(var_3);
     var_9 = getweaponattachments(var_3);
-    var_0A = scripts\cp\utility::getcurrentcamoname(var_3);
+    var_10 = scripts\cp\utility::getcurrentcamoname(var_3);
     if(scripts\engine\utility::array_contains(var_9, "doubletap")) {
       var_9 = scripts\engine\utility::array_remove(var_9, "doubletap");
     }
@@ -1226,25 +1226,25 @@ take_rat_a_tat_perk() {
       var_9[var_9.size] = "rof";
     }
 
-    var_0B = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_3, undefined, var_9, undefined, var_0A);
-    var_0B = scripts\cp\utility::_giveweapon(var_0B, undefined, undefined, 1);
-    if(isDefined(var_0B)) {
+    var_11 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_3, undefined, var_9, undefined, var_10);
+    var_11 = scripts\cp\utility::_giveweapon(var_11, undefined, undefined, 1);
+    if(isDefined(var_11)) {
       if(var_4) {
-        if(issubstr(var_0B, "akimbofmg")) {
-          self setweaponammoclip(var_0B, var_7 + var_8);
+        if(issubstr(var_11, "akimbofmg")) {
+          self setweaponammoclip(var_11, var_7 + var_8);
         } else {
-          self setweaponammoclip(var_0B, var_7, "left");
-          self setweaponammoclip(var_0B, var_8, "right");
+          self setweaponammoclip(var_11, var_7, "left");
+          self setweaponammoclip(var_11, var_8, "right");
         }
       } else {
-        self setweaponammoclip(var_0B, var_6);
+        self setweaponammoclip(var_11, var_6);
       }
 
-      self setweaponammostock(var_0B, var_5);
+      self setweaponammostock(var_11, var_5);
     }
 
-    if(getweaponbasename(var_0B) == getweaponbasename(var_0)) {
-      var_0 = var_0B;
+    if(getweaponbasename(var_11) == getweaponbasename(var_0)) {
+      var_0 = var_11;
     }
   }
 
@@ -1452,13 +1452,13 @@ create_zap_ring(var_0, var_1) {
   self radiusdamage(self.origin, var_0, var_1, var_1, self, "MOD_GRENADE_SPLASH", "iw7_bluebolts_zm");
   var_7 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_8 = var_0 * var_0;
-  foreach(var_0A in level.spawned_enemies) {
-    if(!scripts\cp\utility::should_be_affected_by_trap(var_0A)) {
+  foreach(var_10 in level.spawned_enemies) {
+    if(!scripts\cp\utility::should_be_affected_by_trap(var_10)) {
       continue;
     }
 
-    if(distancesquared(var_0A.origin, self.origin) < var_8) {
-      var_0A thread zap_over_time(2, self);
+    if(distancesquared(var_10.origin, self.origin) < var_8) {
+      var_10 thread zap_over_time(2, self);
     }
   }
 }
@@ -1492,7 +1492,7 @@ zap_over_time(var_0, var_1) {
   }
 }
 
-should_mutilate_perk_check(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D) {
+should_mutilate_perk_check(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   if(var_6 == "iw7_bluebolts_zm") {
     if(isDefined(var_2) && isplayer(var_2) && var_2 scripts\cp\utility::has_zombie_perk("perk_machine_zap")) {
       return 0;

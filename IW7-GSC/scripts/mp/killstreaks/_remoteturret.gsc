@@ -6,7 +6,7 @@
 init() {
   level.var_12A9A = [];
   level.var_12A9A["mg_turret"] = "remote_mg_turret";
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("remote_mg_turret", ::func_128FC);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_mg_turret", ::func_128FC);
   level.var_12A8D = [];
   level.var_12A8D["mg_turret"] = spawnStruct();
   level.var_12A8D["mg_turret"].sentrymodeon = "manual";
@@ -15,7 +15,7 @@ init() {
   level.var_12A8D["mg_turret"].health = 999999;
   level.var_12A8D["mg_turret"].maxhealth = 1000;
   level.var_12A8D["mg_turret"].streakname = "remote_mg_turret";
-  level.var_12A8D["mg_turret"].var_39B = "remote_turret_mp";
+  level.var_12A8D["mg_turret"].weaponinfo = "remote_turret_mp";
   level.var_12A8D["mg_turret"].modelbase = "mp_remote_turret";
   level.var_12A8D["mg_turret"].modelplacement = "mp_remote_turret_placement";
   level.var_12A8D["mg_turret"].modelplacementfailed = "mp_remote_turret_placement_failed";
@@ -207,9 +207,9 @@ func_12A2E() {
   self setCanDamage(1);
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
-    scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", self.triggerportableradarping);
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
+    scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", self.owner);
   }
 
   self playSound("sentry_gun_plant");
@@ -219,8 +219,8 @@ func_12A2E() {
 
 func_12A2B() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self delete();
@@ -293,7 +293,7 @@ func_12A17(var_0) {
 func_12A15(var_0) {
   self endon("placed");
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   self delete();
 }
 
@@ -305,10 +305,10 @@ func_12A18(var_0) {
 }
 
 func_4A2C(var_0, var_1) {
-  var_2 = spawnturret("misc_turret", var_1.origin, level.var_12A8D[var_0].var_39B);
+  var_2 = spawnturret("misc_turret", var_1.origin, level.var_12A8D[var_0].weaponinfo);
   var_2.angles = var_1.angles;
   var_2 setModel(level.var_12A8D[var_0].modelbase);
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.health = level.var_12A8D[var_0].health;
   var_2.maxhealth = level.var_12A8D[var_0].maxhealth;
   var_2.var_E1 = 0;
@@ -329,15 +329,15 @@ func_4A2C(var_0, var_1) {
 
 func_12A2A() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self setdefaultdroppitch(0);
   self makeunusable();
   self getvalidlocation();
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   if(isDefined(var_0.var_DF89)) {
     foreach(var_2 in var_0.var_DF89) {
       var_2 notify("death");
@@ -359,7 +359,7 @@ func_12A2A() {
     self setturretteam(var_0.team);
     scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 65));
   } else {
-    scripts\mp\entityheadicons::setplayerheadicon(self.triggerportableradarping, (0, 0, 65));
+    scripts\mp\entityheadicons::setplayerheadicon(self.owner, (0, 0, 65));
   }
 
   self.ownertrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 32, 64);
@@ -374,10 +374,10 @@ func_12A2A() {
 }
 
 func_10E08() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 scripts\mp\utility::setusingremote(self.var_12A9A);
   var_0 scripts\mp\utility::freezecontrolswrapper(1);
-  var_1 = var_0 scripts\mp\killstreaks\_killstreaks::initridekillstreak();
+  var_1 = var_0 scripts\mp\killstreaks\killstreaks::initridekillstreak();
   if(var_1 != "success") {
     if(var_1 != "disconnect") {
       var_0 scripts\mp\utility::clearusingremote();
@@ -417,7 +417,7 @@ waitsetthermal(var_0, var_1) {
 }
 
 func_1109C() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   if(var_0 scripts\mp\utility::isusingremote()) {
     var_0 thermalvisionoff();
     var_0 thermalvisionfofoverlayoff();
@@ -431,7 +431,7 @@ func_1109C() {
 
     var_0 visionsetthermalforplayer(game["thermal_vision"], 0);
     var_1 = scripts\mp\utility::getkillstreakweapon(level.var_12A8D[self.var_12A9A].streakname);
-    var_0 scripts\mp\killstreaks\_killstreaks::func_1146C(var_1);
+    var_0 scripts\mp\killstreaks\killstreaks::func_1146C(var_1);
   }
 
   if(self.stunned) {
@@ -477,10 +477,10 @@ func_13A1D() {
   self endon("death");
   self endon("carried");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   for(;;) {
     var_1 = var_0 getcurrentweapon();
-    if(scripts\mp\utility::iskillstreakweapon(var_1) && var_1 != level.var_12A8D[self.var_12A9A].var_39B && var_1 != level.var_12A8D[self.var_12A9A].var_A84D && var_1 != level.var_12A8D[self.var_12A9A].remotedetonatethink && var_1 != "none" && !var_0 scripts\mp\utility::isjuggernaut() || var_0 scripts\mp\utility::isusingremote()) {
+    if(scripts\mp\utility::iskillstreakweapon(var_1) && var_1 != level.var_12A8D[self.var_12A9A].weaponinfo && var_1 != level.var_12A8D[self.var_12A9A].var_A84D && var_1 != level.var_12A8D[self.var_12A9A].remotedetonatethink && var_1 != "none" && !var_0 scripts\mp\utility::isjuggernaut() || var_0 scripts\mp\utility::isusingremote()) {
       if(!isDefined(var_0.var_6617) || !var_0.var_6617) {
         var_0.var_6617 = 1;
         var_0 scripts\mp\utility::clearlowermessage("enter_remote_turret");
@@ -588,7 +588,7 @@ turret_handlepickup(var_0) {
   var_1 = 0;
   for(;;) {
     var_2 = self getcurrentweapon();
-    if(scripts\mp\utility::iskillstreakweapon(var_2) && var_2 != "killstreak_remote_turret_mp" && var_2 != level.var_12A8D[var_0.var_12A9A].var_39B && var_2 != level.var_12A8D[var_0.var_12A9A].var_A84D && var_2 != level.var_12A8D[var_0.var_12A9A].remotedetonatethink && var_2 != "none" && !scripts\mp\utility::isjuggernaut() || scripts\mp\utility::isusingremote()) {
+    if(scripts\mp\utility::iskillstreakweapon(var_2) && var_2 != "killstreak_remote_turret_mp" && var_2 != level.var_12A8D[var_0.var_12A9A].weaponinfo && var_2 != level.var_12A8D[var_0.var_12A9A].var_A84D && var_2 != level.var_12A8D[var_0.var_12A9A].remotedetonatethink && var_2 != "none" && !scripts\mp\utility::isjuggernaut() || scripts\mp\utility::isusingremote()) {
       if(!isDefined(self.var_CB39) || !self.var_CB39) {
         self.var_CB39 = 1;
         scripts\mp\utility::clearlowermessage("pickup_remote_turret");
@@ -674,15 +674,15 @@ func_12A2D() {
   self give_player_session_tokens(level.var_12A8D[self.var_12A9A].sentrymodeoff);
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  } else if(isDefined(self.triggerportableradarping)) {
+  } else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   if(isDefined(var_0.using_remote_turret) && var_0.using_remote_turret) {
     var_0 thermalvisionoff();
     var_0 thermalvisionfofoverlayoff();
@@ -694,7 +694,7 @@ func_12A2D() {
       var_0 scripts\mp\utility::setthirdpersondof(1);
     }
 
-    var_0 scripts\mp\killstreaks\_killstreaks::clearrideintro();
+    var_0 scripts\mp\killstreaks\killstreaks::clearrideintro();
     var_0 visionsetthermalforplayer(game["thermal_vision"], 0);
     if(isDefined(var_0.disabledusability) && var_0.disabledusability) {
       var_0 scripts\engine\utility::allow_usability(1);
@@ -709,7 +709,7 @@ func_129FC() {
   level endon("game_ended");
   self notify("turret_handleOwner");
   self endon("turret_handleOwner");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
   self notify("death");
 }
 
@@ -725,8 +725,8 @@ func_12A44() {
     }
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer("sentry_gone");
+  if(isDefined(self.owner)) {
+    self.owner thread scripts\mp\utility::leaderdialogonplayer("sentry_gone");
   }
 
   self notify("death");
@@ -749,7 +749,7 @@ func_129FB() {
     self.ownertrigger delete();
   }
 
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   if(isDefined(var_1)) {
     var_1.using_remote_turret = 0;
     var_1 scripts\mp\utility::clearlowermessage("enter_remote_turret");
@@ -791,7 +791,7 @@ func_129FA() {
   self setCanDamage(1);
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping, var_1)) {
+    if(!scripts\mp\weapons::friendlyfirecheck(self.owner, var_1)) {
       continue;
     }
 
@@ -800,7 +800,7 @@ func_129FA() {
         case "sensor_grenade_mp":
         case "flash_grenade_mp":
         case "concussion_grenade_mp":
-          if(var_4 == "MOD_GRENADE_SPLASH" && self.triggerportableradarping.using_remote_turret) {
+          if(var_4 == "MOD_GRENADE_SPLASH" && self.owner.using_remote_turret) {
             self.stunned = 1;
             thread func_12A35();
           }
@@ -831,16 +831,16 @@ func_129FA() {
 
     self.wasdamaged = 1;
     self.var_4D49 = 0;
-    var_0A = var_0;
+    var_10 = var_0;
     if(isplayer(var_1)) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
       if(var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-        var_0A = var_0 * level.armorpiercingmod;
+        var_10 = var_0 * level.armorpiercingmod;
       }
     }
 
-    if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-      var_1.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
+    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+      var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
     }
 
     if(isDefined(var_9)) {
@@ -852,34 +852,34 @@ func_129FA() {
         case "ac130_40mm_mp":
         case "ac130_105mm_mp":
           self.largeprojectiledamage = 1;
-          var_0A = self.maxhealth + 1;
+          var_10 = self.maxhealth + 1;
           break;
 
         case "stealth_bomb_mp":
         case "artillery_mp":
           self.largeprojectiledamage = 0;
-          var_0A = var_0A + var_0 * 4;
+          var_10 = var_10 + var_0 * 4;
           break;
 
         case "emp_grenade_mp":
         case "bomb_site_mp":
           self.largeprojectiledamage = 0;
-          var_0A = self.maxhealth + 1;
+          var_10 = self.maxhealth + 1;
           break;
       }
 
-      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_9, self, var_4);
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_9, self, var_4);
     }
 
-    self.var_E1 = self.var_E1 + var_0A;
+    self.var_E1 = self.var_E1 + var_10;
     if(self.var_E1 >= self.maxhealth) {
-      if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+      if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
         var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_9, 100);
         var_1 notify("destroyed_killstreak");
       }
 
-      if(isDefined(self.triggerportableradarping)) {
-        self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer(level.var_12A8D[self.var_12A9A].vodestroyed, undefined, undefined, self.origin);
+      if(isDefined(self.owner)) {
+        self.owner thread scripts\mp\utility::leaderdialogonplayer(level.var_12A8D[self.var_12A9A].vodestroyed, undefined, undefined, self.origin);
       }
 
       self notify("death");
@@ -930,7 +930,7 @@ func_12A35() {
   self endon("stunned");
   self endon("death");
   while(self.stunned) {
-    self.triggerportableradarping shellshock("concussion_grenade_mp", self.var_11199);
+    self.owner shellshock("concussion_grenade_mp", self.var_11199);
     playFXOnTag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
     var_0 = 0;
     while(var_0 < self.var_11199) {

@@ -53,16 +53,16 @@ func_C904() {
     var_7 = tablelookupbyrow(var_0, var_1, 5);
     var_8 = tablelookupbyrow(var_0, var_1, 6);
     var_9 = tablelookupbyrow(var_0, var_1, 7);
-    var_0A = tablelookupbyrow(var_0, var_1, 8);
-    var_0B = tablelookupbyrow(var_0, var_1, 9);
-    var_0C = int(tablelookupbyrow(var_0, var_1, 10));
-    var_0D = int(tablelookupbyrow(var_0, var_1, 11));
-    var_0E = tablelookupbyrow(var_0, var_1, 12);
-    var_0F = int(tablelookupbyrow(var_0, var_1, 13));
+    var_10 = tablelookupbyrow(var_0, var_1, 8);
+    var_11 = tablelookupbyrow(var_0, var_1, 9);
+    var_12 = int(tablelookupbyrow(var_0, var_1, 10));
+    var_13 = int(tablelookupbyrow(var_0, var_1, 11));
+    var_14 = tablelookupbyrow(var_0, var_1, 12);
+    var_15 = int(tablelookupbyrow(var_0, var_1, 13));
     var_10 = tablelookupbyrow(var_0, var_1, 15);
     var_11 = int(tablelookupbyrow(var_0, var_1, 16));
     var_12 = int(tablelookupbyrow(var_0, var_1, 17));
-    func_DEDE(var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10, var_11, var_12);
+    func_DEDE(var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10, var_11, var_12);
     if(var_1 % 5 == 1) {
       wait(0.05);
     }
@@ -71,29 +71,29 @@ func_C904() {
   }
 }
 
-func_DEDE(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, param_10) {
+func_DEDE(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, param_10) {
   var_11 = spawnStruct();
   if(isDefined(var_2) && var_2 > 0) {
     var_11.cooldown = var_2;
     var_11.var_A9CE = 0;
   }
 
-  if(isDefined(var_0D) && var_0D > 0) {
-    var_11.var_C9CA = var_0D;
+  if(isDefined(var_13) && var_13 > 0) {
+    var_11.var_C9CA = var_13;
   }
 
-  if(scripts\engine\utility::istrue(var_0A)) {
+  if(scripts\engine\utility::istrue(var_10)) {
     var_11.var_C555 = 1;
   } else {
     var_11.var_C555 = 0;
   }
 
-  if(isDefined(var_0B) && var_0B > 0) {
-    var_11.var_32A0 = var_0B;
+  if(isDefined(var_11) && var_11 > 0) {
+    var_11.var_32A0 = var_11;
   }
 
-  if(isDefined(var_0C)) {
-    var_11.priority = var_0C;
+  if(isDefined(var_12)) {
+    var_11.priority = var_12;
   }
 
   if(isDefined(var_4) && var_4 > 0) {
@@ -145,12 +145,12 @@ func_DEDE(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_11.nextdialogue = var_9;
   }
 
-  if(isDefined(var_0E)) {
-    var_11.var_18E3 = var_0E;
+  if(isDefined(var_14)) {
+    var_11.var_18E3 = var_14;
   }
 
-  if(isDefined(var_0F)) {
-    var_11.pap_approval = var_0F;
+  if(isDefined(var_15)) {
+    var_11.pap_approval = var_15;
   }
 
   if(isDefined(param_10)) {
@@ -289,7 +289,7 @@ set_vo_currently_playing(var_0) {
 
 game_ended_vo_watcher() {
   var_0 = "";
-  level scripts\engine\utility::waittill_any_3("game_ended");
+  level scripts\engine\utility::waittill_any("game_ended");
   foreach(var_2 in level.players) {
     foreach(var_4 in level.vo_priority_level) {
       if(isDefined(var_2.vo_system.vo_queue[var_4]) && var_2.vo_system.vo_queue[var_4].size > 0) {
@@ -306,36 +306,36 @@ game_ended_vo_watcher() {
     }
 
     if(isDefined(level.dialogue_arr) && level.dialogue_arr.size > 0) {
-      foreach(var_0A in level.dialogue_arr) {
-        if(issubstr(var_0A, "pg_")) {
-          var_2 stoplocalsound(var_0A);
+      foreach(var_10 in level.dialogue_arr) {
+        if(issubstr(var_10, "pg_")) {
+          var_2 stoplocalsound(var_10);
         }
 
-        if(soundexists(var_2.vo_prefix + var_0A)) {
-          var_2 stoplocalsound(var_2.vo_prefix + var_0A);
+        if(soundexists(var_2.vo_prefix + var_10)) {
+          var_2 stoplocalsound(var_2.vo_prefix + var_10);
         }
 
-        if(soundexists(var_2.vo_prefix + "plr_" + var_0A)) {
-          var_2 stoplocalsound(var_2.vo_prefix + "plr_" + var_0A);
+        if(soundexists(var_2.vo_prefix + "plr_" + var_10)) {
+          var_2 stoplocalsound(var_2.vo_prefix + "plr_" + var_10);
         }
       }
     }
 
     if(isDefined(var_2.current_vo_queue) && var_2.current_vo_queue.size > 0) {
-      foreach(var_0D in var_2.current_vo_queue) {
-        if(isDefined(var_0D)) {
-          if(soundexists(var_0D)) {
-            var_2 stoplocalsound(var_0D);
+      foreach(var_13 in var_2.current_vo_queue) {
+        if(isDefined(var_13)) {
+          if(soundexists(var_13)) {
+            var_2 stoplocalsound(var_13);
             continue;
           }
 
-          if(soundexists(var_2.vo_prefix + var_0D)) {
-            var_2 stoplocalsound(var_2.vo_prefix + var_0D);
+          if(soundexists(var_2.vo_prefix + var_13)) {
+            var_2 stoplocalsound(var_2.vo_prefix + var_13);
             continue;
           }
 
-          if(soundexists(var_2.vo_prefix + "plr_" + var_0D)) {
-            var_2 stoplocalsound(var_2.vo_prefix + "plr_" + var_0D);
+          if(soundexists(var_2.vo_prefix + "plr_" + var_13)) {
+            var_2 stoplocalsound(var_2.vo_prefix + "plr_" + var_13);
           }
         }
       }
@@ -449,8 +449,8 @@ play_vo(var_0, var_1) {
     }
   }
 
-  foreach(var_0B in var_0.var_3B94) {
-    level.var_134C0[var_0B] = gettime();
+  foreach(var_11 in var_0.var_3B94) {
+    level.var_134C0[var_11] = gettime();
   }
 
   if(!isDefined(self.var_C1F6[var_4])) {
@@ -572,9 +572,9 @@ try_to_play_vo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_6 = level.vo_alias_data[var_0].var_C555;
     }
 
-    var_0A = func_788D(var_0);
-    foreach(var_0C in var_0A) {
-      level.var_134C0[var_0C] = gettime();
+    var_10 = func_788D(var_0);
+    foreach(var_12 in var_10) {
+      level.var_134C0[var_12] = gettime();
     }
 
     if(var_9 && isDefined(level.vo_alias_data[var_0].var_32A0)) {
@@ -636,9 +636,9 @@ func_FF79(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   var_8 = func_788D(var_0);
-  foreach(var_0A in var_8) {
-    var_0B = scripts\engine\utility::ter_op(isDefined(level.vo_alias_data[var_0].cooldown), level.vo_alias_data[var_0].cooldown, 30);
-    if(var_7 < level.var_134C0[var_0A] + var_0B * 1000) {
+  foreach(var_10 in var_8) {
+    var_11 = scripts\engine\utility::ter_op(isDefined(level.vo_alias_data[var_0].cooldown), level.vo_alias_data[var_0].cooldown, 30);
+    if(var_7 < level.var_134C0[var_10] + var_11 * 1000) {
       return 0;
     }
   }

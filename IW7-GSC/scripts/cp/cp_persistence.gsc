@@ -282,12 +282,12 @@ eog_player_tracking_init() {
       var_0 = 0;
     }
 
-    var_0A = var_8 getplayerdata("cp", "EoGPlayer", var_0, "name");
-    var_0B = var_8 getplayerdata("cp", "EoGPlayer", var_0, "kills");
-    var_0C = var_8 getplayerdata("cp", "EoGPlayer", var_0, "score");
-    var_0D = var_8 getplayerdata("cp", "EoGPlayer", var_0, "assists");
-    var_0E = var_8 getplayerdata("cp", "EoGPlayer", var_0, "revives");
-    var_0F = var_8 getplayerdata("cp", "EoGPlayer", var_0, "drillrestarts");
+    var_10 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "name");
+    var_11 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "kills");
+    var_12 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "score");
+    var_13 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "assists");
+    var_14 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "revives");
+    var_15 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "drillrestarts");
     var_10 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "drillplants");
     var_11 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "downs");
     var_12 = var_8 getplayerdata("cp", "EoGPlayer", var_0, "deaths");
@@ -304,12 +304,12 @@ eog_player_tracking_init() {
     var_1D = var_8 getplayerdata("cp", "EoGPlayer", var_0, "consumablesearned");
     var_1E = var_8 getplayerdata("cp", "EoGPlayer", var_0, "headShots");
     var_1F = var_8 getplayerdata("cp", "EoGPlayer", var_0, "connected");
-    self setplayerdata("cp", "EoGPlayer", var_0, "name", var_0A);
-    self setplayerdata("cp", "EoGPlayer", var_0, "kills", var_0B);
-    self setplayerdata("cp", "EoGPlayer", var_0, "score", var_0C);
-    self setplayerdata("cp", "EoGPlayer", var_0, "assists", var_0D);
-    self setplayerdata("cp", "EoGPlayer", var_0, "revives", var_0E);
-    self setplayerdata("cp", "EoGPlayer", var_0, "drillrestarts", var_0F);
+    self setplayerdata("cp", "EoGPlayer", var_0, "name", var_10);
+    self setplayerdata("cp", "EoGPlayer", var_0, "kills", var_11);
+    self setplayerdata("cp", "EoGPlayer", var_0, "score", var_12);
+    self setplayerdata("cp", "EoGPlayer", var_0, "assists", var_13);
+    self setplayerdata("cp", "EoGPlayer", var_0, "revives", var_14);
+    self setplayerdata("cp", "EoGPlayer", var_0, "drillrestarts", var_15);
     self setplayerdata("cp", "EoGPlayer", var_0, "drillplants", var_10);
     self setplayerdata("cp", "EoGPlayer", var_0, "downs", var_11);
     self setplayerdata("cp", "EoGPlayer", var_0, "deaths", var_12);

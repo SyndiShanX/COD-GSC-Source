@@ -4,16 +4,16 @@
 *********************************************/
 
 usingautomaticweapon() {
-  return weaponisauto(self.var_394) || weaponisbeam(self.var_394) || weaponburstcount(self.var_394) > 0;
+  return weaponisauto(self.weapon) || weaponisbeam(self.weapon) || weaponburstcount(self.weapon) > 0;
 }
 
 usingsemiautoweapon() {
-  return weaponissemiauto(self.var_394);
+  return weaponissemiauto(self.weapon);
 }
 
 autoshootanimrate() {
   if(usingautomaticweapon()) {
-    return 0.1 / weaponfiretime(self.var_394);
+    return 0.1 / weaponfiretime(self.weapon);
   }
 
   return 0.5;
@@ -21,7 +21,7 @@ autoshootanimrate() {
 
 burstshootanimrate() {
   if(usingautomaticweapon()) {
-    return 0.1 / weaponfiretime(self.var_394);
+    return 0.1 / weaponfiretime(self.weapon);
   }
 
   return 0.2;
@@ -34,22 +34,22 @@ waitaftershot() {
 shootanimtime(var_0) {
   if(!usingautomaticweapon() || isDefined(var_0) && var_0 == 1) {
     var_1 = 0.5 + randomfloat(1);
-    return weaponfiretime(self.var_394) * var_1;
+    return weaponfiretime(self.weapon) * var_1;
   }
 
-  return weaponfiretime(self.var_394);
+  return weaponfiretime(self.weapon);
 }
 
 refillclip() {
-  if(self.var_394 == "none") {
+  if(self.weapon == "none") {
     self.bulletsinclip = 0;
     return 0;
   }
 
   if(!isDefined(self.bulletsinclip)) {
-    self.bulletsinclip = weaponclipsize(self.var_394);
+    self.bulletsinclip = weaponclipsize(self.weapon);
   } else {
-    self.bulletsinclip = weaponclipsize(self.var_394);
+    self.bulletsinclip = weaponclipsize(self.weapon);
   }
 
   if(self.bulletsinclip <= 0) {

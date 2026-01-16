@@ -152,17 +152,17 @@ func_62CD(var_0) {
 }
 
 func_D724(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = spawnStruct();
-  var_0A.var_130F3 = var_1;
-  var_0A.weaponuse = var_2;
-  var_0A.cooldowntime = var_4;
-  var_0A.id = var_3;
-  var_0A.maxcharges = var_5;
-  var_0A.var_4E5A = var_6;
-  var_0A.var_13058 = var_7;
-  var_0A.var_12B2B = var_8;
-  var_0A.defaultslot = var_9;
-  level.powers[var_0] = var_0A;
+  var_10 = spawnStruct();
+  var_10.var_130F3 = var_1;
+  var_10.weaponuse = var_2;
+  var_10.cooldowntime = var_4;
+  var_10.id = var_3;
+  var_10.maxcharges = var_5;
+  var_10.var_4E5A = var_6;
+  var_10.var_13058 = var_7;
+  var_10.var_12B2B = var_8;
+  var_10.defaultslot = var_9;
+  level.powers[var_0] = var_10;
 }
 
 func_D77D() {
@@ -186,9 +186,9 @@ func_D77D() {
     var_7 = tablelookupbyrow(var_1, var_0, 9);
     var_8 = tablelookupbyrow(var_1, var_0, 10);
     var_9 = tablelookupbyrow(var_1, var_0, 11);
-    var_0A = tablelookupbyrow(var_1, var_0, 16);
-    var_0B = tablelookupbyrow(var_1, var_0, 13);
-    func_D724(var_3, var_4, var_5, int(var_2), float(var_6), int(var_7), int(var_8), int(var_9), var_0A, var_0B);
+    var_10 = tablelookupbyrow(var_1, var_0, 16);
+    var_11 = tablelookupbyrow(var_1, var_0, 13);
+    func_D724(var_3, var_4, var_5, int(var_2), float(var_6), int(var_7), int(var_8), int(var_9), var_10, var_11);
     if(isDefined(level.var_D7A4[var_5]) && var_5 != "<power_script_generic_weapon>") {
       switch (var_5) {
         case "power_rewind":
@@ -417,37 +417,37 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   var_9 = getarraykeys(self.powers);
-  foreach(var_0B in var_9) {
-    if(self.powers[var_0B].slot == var_1) {
-      self.var_A037 = var_0B;
-      removepower(var_0B);
+  foreach(var_11 in var_9) {
+    if(self.powers[var_11].slot == var_1) {
+      self.var_A037 = var_11;
+      removepower(var_11);
       scripts\cp\zombies\zombie_analytics::func_AF76(self.var_A037, level.transactionid);
       break;
     }
   }
 
   func_D725(var_0, var_1, var_4, var_5, var_6);
-  var_0D = self.powers[var_0];
-  var_0E = level.powers[var_0];
+  var_13 = self.powers[var_0];
+  var_14 = level.powers[var_0];
   self notify("delete_equipment " + var_1);
   if(isDefined(var_3)) {
-    var_0D.passives = var_3;
+    var_13.passives = var_3;
   }
 
-  var_0F = 0;
+  var_15 = 0;
   if(isDefined(self.var_D76F) && isDefined(self.var_D76F[var_0])) {
     var_10 = self.var_D76F[var_0];
     var_11 = func_D720(var_10);
     if(var_11 > 0) {
-      var_12 = var_0D.charges * var_0E.cooldowntime;
-      var_0D.charges = int(var_12 - var_11 / var_0E.cooldowntime);
-      if(var_0D.charges < 0) {
-        var_0D.charges = 0;
+      var_12 = var_13.charges * var_14.cooldowntime;
+      var_13.charges = int(var_12 - var_11 / var_14.cooldowntime);
+      if(var_13.charges < 0) {
+        var_13.charges = 0;
       }
 
-      var_0F = var_11;
-      while(var_0F > var_0E.cooldowntime) {
-        var_0F = var_0F - var_0E.cooldowntime;
+      var_15 = var_11;
+      while(var_15 > var_14.cooldowntime) {
+        var_15 = var_15 - var_14.cooldowntime;
       }
     }
   }
@@ -456,22 +456,22 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return;
   }
 
-  var_0D.weaponuse = undefined;
-  if(var_0E.weaponuse == "<power_script_generic_weapon>") {
-    var_0D.weaponuse = scripts\engine\utility::ter_op(var_1 == "primary", "power_script_generic_primary_mp", "power_script_generic_secondary_mp");
+  var_13.weaponuse = undefined;
+  if(var_14.weaponuse == "<power_script_generic_weapon>") {
+    var_13.weaponuse = scripts\engine\utility::ter_op(var_1 == "primary", "power_script_generic_primary_mp", "power_script_generic_secondary_mp");
   } else {
-    var_0D.weaponuse = var_0E.weaponuse;
+    var_13.weaponuse = var_14.weaponuse;
   }
 
   var_13 = func_8090(var_0);
-  var_14 = scripts\engine\utility::ter_op(isDefined(var_13), var_13, var_0D.weaponuse);
-  var_0D.weaponuse = var_14;
+  var_14 = scripts\engine\utility::ter_op(isDefined(var_13), var_13, var_13.weaponuse);
+  var_13.weaponuse = var_14;
   self giveweapon(var_14, 0);
-  self setweaponammoclip(var_14, var_0D.charges);
-  if(var_0D.slot == "primary") {
+  self setweaponammoclip(var_14, var_13.charges);
+  if(var_13.slot == "primary") {
     self assignweaponoffhandprimary(var_14);
     self.powerprimarygrenade = var_14;
-  } else if(var_0D.slot == "secondary") {
+  } else if(var_13.slot == "secondary") {
     self assignweaponoffhandsecondary(var_14);
     self.powersecondarygrenade = var_14;
   }
@@ -486,7 +486,7 @@ givepower(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(!isai(self)) {
     thread func_D73D(var_0);
-    thread func_B2F0(var_0E, var_0, var_0D.slot, var_0E.cooldowntime, var_0E.var_12ED9, var_0E.usednotify, var_14, var_0F, var_2);
+    thread func_B2F0(var_14, var_0, var_13.slot, var_14.cooldowntime, var_14.var_12ED9, var_14.usednotify, var_14, var_15, var_2);
   }
 }
 
@@ -670,32 +670,32 @@ func_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   func_D750(var_2, 2);
   for(;;) {
     if(scripts\cp\cp_laststand::player_in_laststand(self)) {
-      scripts\engine\utility::waittill_any_3("revive", "revive_success", "challenge_complete_revive");
+      scripts\engine\utility::waittill_any("revive", "revive_success", "challenge_complete_revive");
     }
 
     func_D765(var_1);
     var_9 = var_6 + "_success";
     thread func_13A0E(var_3, var_1, var_9);
-    var_0A = scripts\engine\utility::ter_op(var_0.var_130F3 == "weapon_hold", "offhand_pullback", "offhand_fired");
-    self waittill(var_0A, var_0B);
-    if(var_0B != var_6) {
+    var_10 = scripts\engine\utility::ter_op(var_0.var_130F3 == "weapon_hold", "offhand_pullback", "offhand_fired");
+    self waittill(var_10, var_11);
+    if(var_11 != var_6) {
       continue;
     }
 
     var_3 = controlslinkto(var_0);
     self notify(var_9);
     if(self.powers[var_1].charges != 0 && !self.powers[var_1].var_19) {
-      var_0C = undefined;
+      var_12 = undefined;
       if(isDefined(var_0.usefunc)) {
-        var_0C = self thread[[var_0.usefunc]]();
-        if(isDefined(var_0C) && var_0C == 0) {
+        var_12 = self thread[[var_0.usefunc]]();
+        if(isDefined(var_12) && var_12 == 0) {
           continue;
         }
       }
 
       if(isDefined(var_5)) {
-        self waittill(var_5, var_0C);
-        if(isDefined(var_0C) && var_0C == 0) {
+        self waittill(var_5, var_12);
+        if(isDefined(var_12) && var_12 == 0) {
           continue;
         }
       }
@@ -893,7 +893,7 @@ func_D72A(var_0, var_1, var_2) {
     if(func_D752(var_0)) {
       wait(0.1);
     } else {
-      level scripts\engine\utility::waittill_any_3("grenade_cooldown activated", "infinite_grenade_active", "start_power_cooldown");
+      level scripts\engine\utility::waittill_any("grenade_cooldown activated", "infinite_grenade_active", "start_power_cooldown");
       var_1 = controlslinkto(var_3);
     }
 
@@ -1393,13 +1393,13 @@ func_D767(var_0, var_1, var_2, var_3) {
             var_6 = 0.05;
           }
 
-          var_0A = 0;
+          var_10 = 0;
           while(self usebuttonpressed()) {
-            var_0A = var_0A + 0.05;
-            if(var_0A >= var_6) {
+            var_10 = var_10 + 0.05;
+            if(var_10 >= var_6) {
               var_1 = func_93FD(var_1, var_2, var_3);
               var_5 = 1;
-              var_0A = 0;
+              var_10 = 0;
               var_6 = 0.7;
               var_4 = 1;
               self[[var_9]](var_1);
@@ -1478,33 +1478,33 @@ func_C179() {
 
   switch (self.weapon_name) {
     case "bouncingbetty_mp":
-      self.triggerportableradarping notify("bouncing_betty_update", 0);
+      self.owner notify("bouncing_betty_update", 0);
       break;
 
     case "ztransponder_mp":
     case "transponder_mp":
-      self.triggerportableradarping notify("transponder_update", 0);
+      self.owner notify("transponder_update", 0);
       break;
 
     case "sticky_mine_mp":
-      self.triggerportableradarping notify("sticky_mine_update", 0);
+      self.owner notify("sticky_mine_update", 0);
       break;
 
     case "sonic_sensor_mp":
-      self.triggerportableradarping notify("sonic_sensor_update", 0);
+      self.owner notify("sonic_sensor_update", 0);
       break;
 
     case "trophy_mp":
-      self.triggerportableradarping notify("trophy_update", 0);
+      self.owner notify("trophy_update", 0);
       break;
 
     case "cryo_grenade_mp":
-      self.triggerportableradarping notify("restart_cryo_grenade_cooldown", 0);
+      self.owner notify("restart_cryo_grenade_cooldown", 0);
       break;
 
     case "micro_turret_zm":
     case "micro_turret_mp":
-      self.triggerportableradarping notify("microTurret_update", 0);
+      self.owner notify("microTurret_update", 0);
       break;
 
     default:

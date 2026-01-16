@@ -46,9 +46,9 @@ item_outline_weapon_monitor() {
 
 get_hudoutline_item(var_0, var_1) {
   var_2 = var_0.cost;
-  if(isDefined(var_0.struct.var_394) && scripts\cp\cp_weapon::has_weapon_variation(var_0.struct.var_394)) {
+  if(isDefined(var_0.struct.weapon) && scripts\cp\cp_weapon::has_weapon_variation(var_0.struct.weapon)) {
     if(isDefined(level.get_weapon_level_func)) {
-      var_3 = self[[level.get_weapon_level_func]](var_0.struct.var_394);
+      var_3 = self[[level.get_weapon_level_func]](var_0.struct.weapon);
       if(var_3 > 1) {
         var_2 = 4500;
       } else {

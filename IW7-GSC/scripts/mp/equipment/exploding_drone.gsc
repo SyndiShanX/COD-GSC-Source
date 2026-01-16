@@ -23,7 +23,7 @@ func_69D4(var_0, var_1) {
   if(!var_1) {
     thread func_69CD();
     thread func_69CC();
-    scripts\mp\utility::printgameaction("exploding drone spawn", var_0.triggerportableradarping);
+    scripts\mp\utility::printgameaction("exploding drone spawn", var_0.owner);
   } else if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
     return;
   }
@@ -35,13 +35,13 @@ func_69D4(var_0, var_1) {
 
 func_69C6() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   wait(0.1);
-  thread func_69C8(self.triggerportableradarping);
+  thread func_69C8(self.owner);
 }
 
 func_69C8(var_0) {
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   if(!isDefined(var_0)) {
     var_0 = var_1;
   }
@@ -65,7 +65,7 @@ func_69C8(var_0) {
 }
 
 func_69C2(var_0) {
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   if(!isDefined(var_0)) {
     var_0 = var_1;
   }
@@ -138,7 +138,7 @@ func_69D2() {
 func_69C5() {
   self endon("death");
   self endon("exploding_drone_transform");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("missile_stuck", var_0, var_1);
   self notify("exploding_drone_stuck");
   var_2 = isDefined(var_1) && var_1 == "tag_flicker";
@@ -146,7 +146,7 @@ func_69C5() {
   if(!self.issmokeversion) {
     if(isDefined(var_0) && isplayer(var_0) || isagent(var_0) && !var_3 && !var_2) {
       if(scripts\mp\equipment\phase_shift::areentitiesinphase(var_0, self)) {
-        var_0 dodamage(35, self.origin, self.triggerportableradarping, self, "MOD_IMPACT", scripts\engine\utility::ter_op(self.issmokeversion, "power_smoke_drone_mp", "power_exploding_drone_mp"));
+        var_0 dodamage(35, self.origin, self.owner, self, "MOD_IMPACT", scripts\engine\utility::ter_op(self.issmokeversion, "power_smoke_drone_mp", "power_exploding_drone_mp"));
       }
     }
   }
@@ -159,8 +159,8 @@ func_69C5() {
 func_69D1() {
   self endon("death");
   self endon("exploding_drone_stuck");
-  self.triggerportableradarping endon("disconnect");
-  var_0 = self.triggerportableradarping;
+  self.owner endon("disconnect");
+  var_0 = self.owner;
   self setentityowner(var_0);
   self setotherent(var_0);
   var_1 = anglesToForward(var_0 getgunangles());
@@ -194,32 +194,32 @@ func_69D1() {
   thread func_69C9(var_2);
   thread func_69C3();
   thread func_69C4();
-  thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  thread scripts\mp\perks\perk_equipmentping::runequipmentping();
   thread scripts\mp\weapons::outlineequipmentforowner(self, var_0);
   var_9 = scripts\engine\utility::spawn_tag_origin();
   var_9 thread func_69C1(self);
   self linkto(var_9);
-  var_0A = 4;
+  var_10 = 4;
   if(self.issmokeversion) {
     if(issubstr(var_0 getcurrentweapon(), "iw7_unsalmg_mpl")) {
-      var_0A = 10;
+      var_10 = 10;
     } else {
-      var_0A = 6;
+      var_10 = 6;
     }
   }
 
-  var_9 moveto(var_2, var_0A, 3, 0);
-  wait(var_0A);
+  var_9 moveto(var_2, var_10, 3, 0);
+  wait(var_10);
   thread func_69C8();
 }
 
 func_69C9(var_0) {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_1 = vectornormalize(var_0 - self.origin);
   var_2 = scripts\common\trace::create_contents(1, 1, 1, 0, 1, 1, 0);
   for(;;) {
-    if(physics_spherecast(self.origin, self.origin + var_1 * 12, 6, var_2, [self, self.triggerportableradarping], "physicsquery_any")) {
+    if(physics_spherecast(self.origin, self.origin + var_1 * 12, 6, var_2, [self, self.owner], "physicsquery_any")) {
       thread func_69C8();
     }
 
@@ -229,10 +229,10 @@ func_69C9(var_0) {
 
 func_69C3() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
   if(isDefined(var_3) && var_3 == "emp_grenade_mp") {
-    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
       var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
     }
   }
@@ -243,8 +243,8 @@ func_69C3() {
 
 func_69C4() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  self.owner endon("disconnect");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread func_69C2();
 }
 
@@ -478,7 +478,7 @@ explodingdrone_handledamage(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  scripts\mp\powers::equipmenthit(self.triggerportableradarping, var_0, var_1, var_2);
+  scripts\mp\powers::equipmenthit(self.owner, var_0, var_1, var_2);
   return var_3;
 }
 
@@ -489,7 +489,7 @@ func_69CA(var_0, var_1, var_2, var_3) {
 
 func_69C0() {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   self delete();
 }
 

@@ -52,8 +52,9 @@ func_1008A(var_0, var_1, var_2, var_3) {
     } else {
       var_4 = var_3[0];
     }
-  } else
+  } else {
     var_4 = "Exposed";
+  }
 
   if(!func_9D4C(var_0, var_1, var_2, var_4)) {
     return 0;
@@ -183,8 +184,9 @@ func_3721(var_0, var_1, var_2, var_3) {
   if(var_2 == "Custom") {
     var_14 = func_8174(self.asm.var_4C86.var_22F1, undefined, self.asm.var_4C86.var_22F6);
     var_13 = self.asm.var_4C86.var_22F1;
-  } else
+  } else {
     var_14 = func_8174(var_1, undefined, var_3);
+  }
 
   var_15 = getweaponslistprimaries();
   var_16 = var_5 - self.origin;
@@ -439,14 +441,14 @@ func_36D9(var_0, var_1, var_2, var_3) {
 
 func_8174(var_0, var_1, var_2) {
   var_3 = [];
-  var_3[5] = scripts\asm\asm::func_235C(1, var_0, var_2);
-  var_3[4] = scripts\asm\asm::func_235C(2, var_0, var_2);
-  var_3[3] = scripts\asm\asm::func_235C(3, var_0, var_2);
-  var_3[6] = scripts\asm\asm::func_235C(4, var_0, var_2);
-  var_3[2] = scripts\asm\asm::func_235C(6, var_0, var_2);
-  var_3[7] = scripts\asm\asm::func_235C(7, var_0, var_2);
-  var_3[0] = scripts\asm\asm::func_235C(8, var_0, var_2);
-  var_3[1] = scripts\asm\asm::func_235C(9, var_0, var_2);
+  var_3[5] = ::scripts\asm\asm::func_235C(1, var_0, var_2);
+  var_3[4] = ::scripts\asm\asm::func_235C(2, var_0, var_2);
+  var_3[3] = ::scripts\asm\asm::func_235C(3, var_0, var_2);
+  var_3[6] = ::scripts\asm\asm::func_235C(4, var_0, var_2);
+  var_3[2] = ::scripts\asm\asm::func_235C(6, var_0, var_2);
+  var_3[7] = ::scripts\asm\asm::func_235C(7, var_0, var_2);
+  var_3[0] = ::scripts\asm\asm::func_235C(8, var_0, var_2);
+  var_3[1] = ::scripts\asm\asm::func_235C(9, var_0, var_2);
   var_3[8] = var_3[0];
   return var_3;
 }
@@ -491,8 +493,9 @@ func_1008F(var_0, var_1, var_2, var_3) {
     } else {
       var_4 = var_3[0];
     }
-  } else
+  } else {
     var_4 = "Exposed";
+  }
 
   if(!func_9D4C(var_0, var_1, var_2, var_4)) {
     return 0;

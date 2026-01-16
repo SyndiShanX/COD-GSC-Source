@@ -695,14 +695,14 @@ func_F53D() {
     var_7 = 0;
     var_8 = undefined;
     var_9 = undefined;
-    var_0A = undefined;
-    var_0B = 0;
-    var_0C = undefined;
-    var_0D = 400;
-    var_0E = 1000;
-    var_0F = 1500;
+    var_10 = undefined;
+    var_11 = 0;
+    var_12 = undefined;
+    var_13 = 400;
+    var_14 = 1000;
+    var_15 = 1500;
     var_10 = func_7AA8(self);
-    var_0B = var_2;
+    var_11 = var_2;
     if(isDefined(level.player_suit)) {
       self setsuit(level.player_suit);
     } else {
@@ -711,7 +711,7 @@ func_F53D() {
 
     self.suit = "zom_suit";
     self allowdoublejump(0);
-    self allowslide(var_0B &var_2);
+    self allowslide(var_11 &var_2);
     self allowwallrun(0);
     self allowdodge(0);
     if(isDefined(var_8) && isDefined(var_9)) {
@@ -729,13 +729,13 @@ func_F53D() {
       thread scripts\cp\powers\coop_powers::givepower(var_10, "primary", undefined, undefined, undefined, 0, 1);
     }
 
-    _allowbattleslide(var_0B &var_3);
-    self energy_setmax(0, var_0D);
-    self goal_radius(0, var_0D);
-    self goalflag(0, var_0E);
-    self goal_type(0, var_0F);
-    if(isDefined(var_0C)) {
-      self[[var_0C]]();
+    _allowbattleslide(var_11 &var_3);
+    self energy_setmax(0, var_13);
+    self energy_setenergy(0, var_13);
+    self energy_setrestorerate(0, var_14);
+    self energy_setresttimems(0, var_15);
+    if(isDefined(var_12)) {
+      self[[var_12]]();
     }
   }
 
@@ -765,7 +765,7 @@ _allowbattleslide(var_0) {
   self notify("battleSlide_unset");
 }
 
-register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, param_10) {
+register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, param_10) {
   var_11 = spawnStruct();
   var_11.body_model = var_2;
   var_11.view_model = var_3;
@@ -775,13 +775,13 @@ register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   var_11.vo_suffix = var_7;
   var_11.pap_gesture = var_8;
   var_11.revive_gesture = var_9;
-  var_11.photo_index = var_0A;
-  var_11.fate_card_weapon = var_0B;
-  var_11.intro_music = var_0C;
-  var_11.intro_gesture = var_0D;
-  var_11.melee_weapon = var_0E;
+  var_11.photo_index = var_10;
+  var_11.fate_card_weapon = var_11;
+  var_11.intro_music = var_12;
+  var_11.intro_gesture = var_13;
+  var_11.melee_weapon = var_14;
   var_11.starting_weapon = param_10;
-  var_11.post_setup_func = var_0F;
+  var_11.post_setup_func = var_15;
   level.player_character_info[var_0] = var_11;
   if(var_1 == "yes") {
     level.available_player_characters[level.available_player_characters.size] = var_0;

@@ -130,7 +130,7 @@ allowedwhileplanting(var_0) {
   scripts\engine\utility::allow_jump(var_0);
   scripts\mp\utility::func_1C47(var_0);
   if(var_0) {
-    scripts\engine\utility::waittill_any_timeout_1(0.8, "bomb_allow_offhands");
+    scripts\engine\utility::waittill_any_timeout(0.8, "bomb_allow_offhands");
   }
 
   scripts\engine\utility::allow_offhand_weapons(var_0);
@@ -447,15 +447,15 @@ bombzone_onbombplanted(var_0, var_1) {
 
   var_9 = randomfloat(360);
   if(isDefined(var_0.trigger.effect)) {
-    var_0A = var_0.trigger.effect;
+    var_10 = var_0.trigger.effect;
   } else {
-    var_0A = "bomb_explosion";
+    var_10 = "bomb_explosion";
   }
 
-  var_0B = var_8 + (0, 0, 50);
-  var_0C = spawnfx(level._effect[var_0A], var_0B, (0, 0, 1), (cos(var_9), sin(var_9), 0));
-  triggerfx(var_0C);
-  physicsexplosionsphere(var_0B, 200, 100, 3);
+  var_11 = var_8 + (0, 0, 50);
+  var_12 = spawnfx(level._effect[var_10], var_11, (0, 0, 1), (cos(var_9), sin(var_9), 0));
+  triggerfx(var_12);
+  physicsexplosionsphere(var_11, 200, 100, 3);
   scripts\mp\shellshock::func_13B9("grenade_rumble", var_8);
   scripts\mp\shellshock::_earthquake(0.75, 2, var_8, 2000);
   thread scripts\mp\utility::playsoundinspace("exp_suitcase_bomb_main", var_8);
@@ -785,7 +785,7 @@ applybombcarrierclass() {
 
   self.pers["gamemodeLoadout"] = level.sd_loadout[self.team];
   if(isDefined(self.setspawnpoint)) {
-    scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
+    scripts\mp\perks\perkfunctions::deleteti(self.setspawnpoint);
   }
 
   var_0 = spawn("script_model", self.origin);
@@ -828,7 +828,7 @@ removebombcarrierclass() {
 
   self.pers["gamemodeLoadout"] = undefined;
   if(isDefined(self.setspawnpoint)) {
-    scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
+    scripts\mp\perks\perkfunctions::deleteti(self.setspawnpoint);
   }
 
   var_0 = spawn("script_model", self.origin);

@@ -528,8 +528,9 @@ getblackholecenter(var_0) {
     if(isDefined(var_5) && var_5.size > 0) {
       var_3 = var_5[0]["position"];
       var_0.centeroffset = max(3, vectordot(var_1, var_3 - var_2) - 2);
-    } else
+    } else {
       var_0.centeroffset = 55.0;
+    }
   }
 
   return var_0.origin + anglestoup(var_0.angles) * var_0.centeroffset;

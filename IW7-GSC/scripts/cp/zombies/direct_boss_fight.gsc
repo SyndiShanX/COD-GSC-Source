@@ -184,8 +184,8 @@ clean_up_weapon_purchase_board() {
     }
   }
 
-  foreach(var_0A in level.weapon_purchase_models) {
-    var_0A delete();
+  foreach(var_10 in level.weapon_purchase_models) {
+    var_10 delete();
   }
 }
 
@@ -236,13 +236,13 @@ get_candy_box_struct_loc(var_0, var_1) {
   var_7 = 40;
   var_8 = anglestoup(level.perk_purchase_board.angles);
   var_9 = anglestoright(level.perk_purchase_board.angles) * -1;
-  var_0A = anglesToForward(level.perk_purchase_board.angles) * -1;
-  var_0B = level.perk_purchase_board.origin + var_8 * var_3 + var_9 * var_4;
-  var_0C = var_7 / ceil(var_1 / var_2 - 1);
-  var_0D = floor(var_0 / var_2) * var_0C * var_8 * -1;
-  var_0E = var_0 % var_2 * var_5 * var_9 * -1;
-  var_0F = var_0A * var_6;
-  return var_0B + var_0D + var_0E + var_0F;
+  var_10 = anglesToForward(level.perk_purchase_board.angles) * -1;
+  var_11 = level.perk_purchase_board.origin + var_8 * var_3 + var_9 * var_4;
+  var_12 = var_7 / ceil(var_1 / var_2 - 1);
+  var_13 = floor(var_0 / var_2) * var_12 * var_8 * -1;
+  var_14 = var_0 % var_2 * var_5 * var_9 * -1;
+  var_15 = var_10 * var_6;
+  return var_11 + var_13 + var_14 + var_15;
 }
 
 create_perk_purchase_board() {
@@ -452,7 +452,7 @@ perk_purchase_internal(var_0) {
     self.current_perk_list = [];
   }
 
-  self.current_perk_list = scripts\engine\utility::array_add_safe(self.current_perk_list, var_1);
+  self.current_perk_list = scripts\engine\utility::add_to_array(self.current_perk_list, var_1);
   var_0 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_1, 0);
 }
 
@@ -780,16 +780,16 @@ create_weapon_board_lights() {
   var_7 = anglestoup(var_4.angles);
   var_8 = get_weapon_purchase_board_start_pos() + var_6 * var_1;
   for(var_9 = 0; var_9 < 2; var_9++) {
-    for(var_0A = 0; var_0A < 4; var_0A++) {
-      var_0B = var_8 + var_5 * var_2 * var_0A + var_7 * var_3 * var_9;
-      if(var_0A == 0) {
-        var_0B = var_0B + var_5 * var_0;
+    for(var_10 = 0; var_10 < 4; var_10++) {
+      var_11 = var_8 + var_5 * var_2 * var_10 + var_7 * var_3 * var_9;
+      if(var_10 == 0) {
+        var_11 = var_11 + var_5 * var_0;
       }
 
-      var_0B = spawn("script_model", var_0B);
-      var_0B setModel("direct_boss_fight_origin");
-      var_0B setscriptablepartstate("weapon_board_light", "on");
-      level.weapon_board_light_vfx[level.weapon_board_light_vfx.size] = var_0B;
+      var_11 = spawn("script_model", var_11);
+      var_11 setModel("direct_boss_fight_origin");
+      var_11 setscriptablepartstate("weapon_board_light", "on");
+      level.weapon_board_light_vfx[level.weapon_board_light_vfx.size] = var_11;
     }
   }
 }
@@ -892,7 +892,7 @@ create_weapon_purchase_model(var_0, var_1, var_2) {
     var_7 = undefined;
     var_8 = 0;
     var_9 = var_0;
-    var_0A = level.players[0];
+    var_10 = level.players[0];
     var_7 = level.pap_2_camo;
     if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_5)) {
       var_7 = undefined;
@@ -958,10 +958,10 @@ create_weapon_purchase_model(var_0, var_1, var_2) {
     if(var_5 == "katana") {
       var_0 = "iw7_katana_zm_pap1";
       var_7 = "camo222";
-      var_0B = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
-      var_0C = anglesToForward(var_0B.angles);
-      var_0D = var_0C * -1;
-      var_1 = var_1 + var_0D * 10;
+      var_11 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+      var_12 = anglesToForward(var_11.angles);
+      var_13 = var_12 * -1;
+      var_1 = var_1 + var_13 * 10;
       var_8 = 1;
     }
 
@@ -986,16 +986,16 @@ create_weapon_purchase_model(var_0, var_1, var_2) {
       var_6 = undefined;
     }
 
-    var_0E = getweaponattachments(var_0);
+    var_14 = getweaponattachments(var_0);
     if(issubstr(var_0, "g18_z")) {
-      foreach(var_10 in var_0E) {
+      foreach(var_10 in var_14) {
         if(issubstr(var_10, "akimbo")) {
-          var_0E = scripts\engine\utility::array_remove(var_0E, var_10);
+          var_14 = scripts\engine\utility::array_remove(var_14, var_10);
         }
       }
     }
 
-    var_12 = var_0E;
+    var_12 = var_14;
     foreach(var_10 in var_12) {
       if(issubstr(var_10, "silencer") || issubstr(var_10, "arcane") || issubstr(var_10, "ark")) {
         var_12 = scripts\engine\utility::array_remove(var_12, var_10);
@@ -1012,7 +1012,7 @@ create_weapon_purchase_model(var_0, var_1, var_2) {
     } else {
       var_2 = var_12 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_2, undefined, var_10);
       var_15 = var_12 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_2, var_8, var_10, undefined, var_9);
-      var_16 = var_0E scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, var_7, var_12, undefined, var_8);
+      var_16 = var_14 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, var_7, var_12, undefined, var_8);
     }
 
     if(var_8) {
@@ -1307,7 +1307,7 @@ direct_boss_purchase_weapon(var_0) {
       if(scripts\cp\utility::isaltmodeweapon(var_4)) {
         var_2 = getweaponbasename(var_4);
         if(isDefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed, var_2)) {
-          var_0B = "alt_" + var_1;
+          var_11 = "alt_" + var_1;
           break;
         }
       }
@@ -1721,26 +1721,26 @@ open_sesame() {
       }
     }
 
-    var_0A = scripts\engine\utility::getstructarray("interaction", "targetname");
-    foreach(var_0C in var_0A) {
-      var_0D = scripts\engine\utility::getstructarray(var_0C.script_noteworthy, "script_noteworthy");
-      foreach(var_0F in var_0D) {
-        if(isDefined(var_0F.target) && isDefined(var_0C.target)) {
-          if(var_0F.target == var_0C.target && var_0F != var_0C) {
-            if(scripts\engine\utility::array_contains(var_0A, var_0F)) {
-              var_0A = scripts\engine\utility::array_remove(var_0A, var_0F);
+    var_10 = scripts\engine\utility::getstructarray("interaction", "targetname");
+    foreach(var_12 in var_10) {
+      var_13 = scripts\engine\utility::getstructarray(var_12.script_noteworthy, "script_noteworthy");
+      foreach(var_15 in var_13) {
+        if(isDefined(var_15.target) && isDefined(var_12.target)) {
+          if(var_15.target == var_12.target && var_15 != var_12) {
+            if(scripts\engine\utility::array_contains(var_10, var_15)) {
+              var_10 = scripts\engine\utility::array_remove(var_10, var_15);
             }
           }
         }
       }
 
-      if(scripts\cp\cp_interaction::interaction_is_door_buy(var_0C)) {
-        if(!isDefined(var_0C.script_noteworthy)) {
+      if(scripts\cp\cp_interaction::interaction_is_door_buy(var_12)) {
+        if(!isDefined(var_12.script_noteworthy)) {
           continue;
         }
 
-        if(var_0C.script_noteworthy == "team_door_switch") {
-          scripts\cp\zombies\interaction_openareas::use_team_door_switch(var_0C, level.players[0]);
+        if(var_12.script_noteworthy == "team_door_switch") {
+          scripts\cp\zombies\interaction_openareas::use_team_door_switch(var_12, level.players[0]);
         }
       }
     }

@@ -54,7 +54,7 @@ func_590C(var_0, var_1, var_2) {
   var_6 give_player_tickets(1);
   var_6 linkto(var_0);
   var_6.var_2B0E = 1;
-  var_6.triggerportableradarping = self;
+  var_6.owner = self;
   var_6.var_7734 = var_0;
   var_6 thread domeshield_cleanuponparentdeath(var_0);
   var_0.var_58EF = var_6;
@@ -73,7 +73,7 @@ func_590C(var_0, var_1, var_2) {
   var_0 thread domeshield_destroyontimeout();
   var_0 thread domeshield_destroyongameend();
   var_0 thread domeshield_deploysequence();
-  var_0 thread scripts\mp\perks\_perk_equipmentping::runequipmentping(var_6);
+  var_0 thread scripts\mp\perks\perk_equipmentping::runequipmentping(var_6);
   thread scripts\mp\weapons::outlineequipmentforowner(var_0, self);
   domeshield_addtoarrays(var_0, self);
 }
@@ -101,7 +101,7 @@ domeshield_delete(var_0) {
   self notify("death");
   self setCanDamage(0);
   self.exploding = 1;
-  thread domeshield_removefromarrays(self, self.triggerportableradarping, self getentitynumber());
+  thread domeshield_removefromarrays(self, self.owner, self getentitynumber());
   if(isDefined(self.var_58EF)) {
     self.var_58EF delete();
   }
@@ -117,13 +117,13 @@ domeshield_handledamage(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_3;
   var_5 = scripts\mp\damage::handlemeleedamage(var_1, var_2, var_5);
   var_5 = scripts\mp\damage::handleapdamage(var_1, var_2, var_5);
-  scripts\mp\powers::equipmenthit(self.triggerportableradarping, var_0, var_1, var_2);
+  scripts\mp\powers::equipmenthit(self.owner, var_0, var_1, var_2);
   return var_5;
 }
 
 domeshield_handledamagefatal(var_0, var_1, var_2, var_3, var_4) {
   domeshield_awardpoints(var_0);
-  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_2) && scripts\engine\utility::isbulletdamage(var_2) && var_0 != self.triggerportableradarping) {
+  if(isDefined(var_0) && isplayer(var_0) && isDefined(var_2) && scripts\engine\utility::isbulletdamage(var_2) && var_0 != self.owner) {
     var_0 scripts\mp\missions::func_D991("ch_dome_kill");
   }
 
@@ -140,12 +140,12 @@ domeshield_domehandledamage(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(var_3 > 0) {
-    self.triggerportableradarping scripts\mp\missions::func_D991("ch_tactical_domeshield", var_3);
+    self.owner scripts\mp\missions::func_D991("ch_tactical_domeshield", var_3);
   }
 
-  self.triggerportableradarping scripts\mp\missions::func_D998(var_0, var_1, self);
-  self.triggerportableradarping scripts\mp\damage::combatrecordtacticalstat("power_domeshield", var_3);
-  scripts\mp\powers::equipmenthit(self.triggerportableradarping, var_0, var_1, var_2);
+  self.owner scripts\mp\missions::func_D998(var_0, var_1, self);
+  self.owner scripts\mp\damage::combatrecordtacticalstat("power_domeshield", var_3);
+  scripts\mp\powers::equipmenthit(self.owner, var_0, var_1, var_2);
   return var_3;
 }
 
@@ -181,7 +181,7 @@ domeshield_destroyonemp() {
   self endon("death");
   self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
   if(isDefined(var_3) && var_3 == "emp_grenade_mp") {
-    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
       var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
     }
   }
@@ -199,14 +199,14 @@ domeshield_destroyontimeout() {
 
 domeshield_destroyongameend() {
   self endon("death");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread domeshield_destroy(0);
 }
 
 domeshield_deleteondisowned(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators", "disconnect");
-  thread domeshield_removefromarrays(self, self.triggerportableradarping, self getentitynumber());
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
+  thread domeshield_removefromarrays(self, self.owner, self getentitynumber());
   if(isDefined(self.var_58EF)) {
     self.var_58EF delete();
   }
@@ -227,7 +227,7 @@ domeshield_getplacementinfo(var_0, var_1) {
 
     var_7 = length2dsquared(var_1 - var_6.origin);
     if(var_7 < var_4) {
-      if(isDefined(var_6.triggerportableradarping) && var_6.triggerportableradarping != var_0 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_6.triggerportableradarping, var_0))) {
+      if(isDefined(var_6.owner) && var_6.owner != var_0 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_6.owner, var_0))) {
         var_2.var_38EE = 0;
         break;
       }
@@ -295,7 +295,7 @@ domeshield_givedamagefeedback(var_0) {
 }
 
 domeshield_awardpoints(var_0) {
-  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
     var_0 notify("destroyed_equipment");
     var_0 thread scripts\mp\utility::giveunifiedpoints("destroyed_equipment");
   }
@@ -369,7 +369,7 @@ domeshield_removefromarraysondeath(var_0) {
   var_0 notify("domeShield_removeFromArraysOnDeath");
   var_0 endon("domeShield_removeFromArraysOnDeath");
   var_0 endon("domeShield_removeFromArrays");
-  var_1 = var_0.triggerportableradarping;
+  var_1 = var_0.owner;
   var_2 = var_0 getentitynumber();
   var_0 waittill("death");
   thread domeshield_removefromarrays(var_0, var_1, var_2);

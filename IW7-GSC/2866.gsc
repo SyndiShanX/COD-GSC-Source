@@ -151,8 +151,9 @@ func_73B1(var_0) {
         } else {
           level.player.var_C929 = level.player.var_C929 + level.friendlyfire["friend_kill_points"];
         }
-      } else
+      } else {
         level.player.var_C929 = level.player.var_C929 - var_1;
+      }
 
       func_C92A();
 

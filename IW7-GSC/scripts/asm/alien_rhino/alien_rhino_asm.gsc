@@ -108,8 +108,8 @@ dochargedamageoncontact(var_0, var_1) {
       } else {
         var_8 = vectornormalize(var_5.origin - self.origin * (1, 1, 0));
         var_9 = anglesToForward(self.angles);
-        var_0A = vectordot(var_8, var_9);
-        if(var_0A < var_2.charge_abort_dot) {
+        var_10 = vectordot(var_8, var_9);
+        if(var_10 < var_2.charge_abort_dot) {
           self.bchargehit = 0;
           scripts\asm\dlc4\dlc4_asm::clearasmaction();
           var_3 = 1;

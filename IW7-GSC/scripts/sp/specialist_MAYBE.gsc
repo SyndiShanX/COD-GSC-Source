@@ -298,7 +298,7 @@ func_4D39() {
       var_1 = var_1 * 0.5;
     }
 
-    if(level.player getweaponrankinfominxp() > 0) {
+    if(level.player playerads() > 0) {
       var_0 = var_0 * 0.5;
       var_1 = var_1 * 0.4;
       var_2 = var_2 * 0.333333;
@@ -595,7 +595,7 @@ func_4D1D() {
 
 func_86CB(var_0) {
   var_1 = level.player getcurrentprimaryweapon();
-  if(level.player func_8519(var_1, 1) && !issubstr(var_1, "iw7_fmg")) {
+  if(level.player isalternatemode(var_1, 1) && !issubstr(var_1, "iw7_fmg")) {
     var_1 = weaponaltweaponname(var_1);
   }
 
@@ -644,7 +644,7 @@ func_86CC(var_0, var_1) {
   level.player scripts\engine\utility::delaycall(0.5, ::enableweaponpickup);
   thread func_86C9();
   thread func_86CF(var_0);
-  level scripts\engine\utility::waittill_any_3("weapon_pickup_failed", "player_grabbed_weapon");
+  level scripts\engine\utility::waittill_any("weapon_pickup_failed", "player_grabbed_weapon");
   setslowmotion(0.25, 1, 0.4);
   level.player getrawbaseweaponname(1, 1);
   level.player allowmovement(1);
@@ -694,16 +694,16 @@ func_86CE(var_0) {
 
     var_8 = level.player getEye();
     var_9 = anglesToForward(level.player.angles);
-    var_0A = anglestoup(level.player.angles);
-    var_0B = var_8 + var_9 * var_4;
-    var_0B = var_0B + var_0A * var_5;
-    var_0C = distance(self.origin, var_0B);
-    var_0D = vectortoangles(var_0B - self.origin);
-    var_0D = anglesToForward(var_0D);
-    var_0E = scripts\sp\math::func_C097(0, var_4, var_0C);
-    self.origin = self.origin + var_0D * var_7;
-    var_0F = randomfloatrange(-11, -9);
-    self.angles = self.angles + (var_0F, var_0F, var_0F);
+    var_10 = anglestoup(level.player.angles);
+    var_11 = var_8 + var_9 * var_4;
+    var_11 = var_11 + var_10 * var_5;
+    var_12 = distance(self.origin, var_11);
+    var_13 = vectortoangles(var_11 - self.origin);
+    var_13 = anglesToForward(var_13);
+    var_14 = scripts\sp\math::func_C097(0, var_4, var_12);
+    self.origin = self.origin + var_13 * var_7;
+    var_15 = randomfloatrange(-11, -9);
+    self.angles = self.angles + (var_15, var_15, var_15);
     wait(0.05);
   }
 
@@ -1034,9 +1034,9 @@ func_914F(var_0, var_1, var_2, var_3) {
   level.var_10964.helmetimpacts[level.var_10964.helmetimpacts.size] = var_4;
   if(var_2) {
     var_4["burn"].alpha = 0.7;
-    var_0A = 3;
-    var_4["burn"] scripts\engine\utility::delaythread(0.5, scripts\sp\hud_util::func_6AAB, 0, var_0A - 0.5);
-    var_4["burn"] thread func_9175(var_0A);
+    var_10 = 3;
+    var_4["burn"] scripts\engine\utility::delaythread(0.5, scripts\sp\hud_util::func_6AAB, 0, var_10 - 0.5);
+    var_4["burn"] thread func_9175(var_10);
   }
 
   func_137D1();
@@ -2194,14 +2194,14 @@ func_2296(var_0) {
   foreach(var_3 in level.var_10964.var_2C19) {
     if(var_0) {
       if(func_2C94(var_3.name)) {
-        var_1 = scripts\engine\utility::array_add_safe(var_1, var_3);
+        var_1 = scripts\engine\utility::add_to_array(var_1, var_3);
       }
 
       continue;
     }
 
     if(var_3.health < var_3.maxhealth) {
-      var_1 = scripts\engine\utility::array_add_safe(var_1, var_3);
+      var_1 = scripts\engine\utility::add_to_array(var_1, var_3);
     }
   }
 
@@ -3026,16 +3026,16 @@ specialist_crate_move(var_0, var_1, var_2, var_3, var_4) {
 
   var_8 = getEntArray("specialist_mode_only", "targetname");
   var_9 = sortbydistance(var_8, var_7.origin);
-  var_0A = undefined;
-  var_0B = undefined;
-  foreach(var_0D in var_9) {
-    if(!isDefined(var_0A) && var_0D.classname == "script_model") {
-      var_0A = var_0D;
-    } else if(!isDefined(var_0B) && var_0D.classname == "script_brushmodel") {
-      var_0B = var_0D;
+  var_10 = undefined;
+  var_11 = undefined;
+  foreach(var_13 in var_9) {
+    if(!isDefined(var_10) && var_13.classname == "script_model") {
+      var_10 = var_13;
+    } else if(!isDefined(var_11) && var_13.classname == "script_brushmodel") {
+      var_11 = var_13;
     }
 
-    if(isDefined(var_0A) && isDefined(var_0B)) {
+    if(isDefined(var_10) && isDefined(var_11)) {
       break;
     }
   }
@@ -3050,8 +3050,8 @@ specialist_crate_move(var_0, var_1, var_2, var_3, var_4) {
 
   var_7.var_99F7 notify("remove_pickup_cache");
   var_7.var_99F7 delete();
-  var_0B delete();
-  var_0A delete();
+  var_11 delete();
+  var_10 delete();
   var_7 = undefined;
   thread lib_0B04::spawn_equipment_crate(var_0, var_2, var_3, var_4);
 }
@@ -3078,9 +3078,9 @@ specialist_crate_delete(var_0) {
   }
 
   if(isDefined(var_3.var_99F7.var_6698)) {
-    foreach(var_0C in var_3.var_99F7.var_6698) {
-      if(isDefined(var_0C)) {
-        var_0C delete();
+    foreach(var_12 in var_3.var_99F7.var_6698) {
+      if(isDefined(var_12)) {
+        var_12 delete();
       }
     }
   }

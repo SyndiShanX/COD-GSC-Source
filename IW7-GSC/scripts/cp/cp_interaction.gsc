@@ -188,7 +188,7 @@ func_BC88(var_0) {
       }
 
       var_6 = sortbydistance(var_6, var_0.origin);
-      foreach(var_0E in var_6) {
+      foreach(var_14 in var_6) {
         var_4 = 0;
         if(var_0 adsbuttonpressed()) {
           func_12E34(var_0, -1, undefined, undefined);
@@ -198,16 +198,16 @@ func_BC88(var_0) {
           }
         }
 
-        if(distancesquared(var_0.origin, var_0E.origin) <= var_5) {
+        if(distancesquared(var_0.origin, var_14.origin) <= var_5) {
           func_12E34(var_0, -1, undefined, undefined);
           var_1 = undefined;
           continue;
-        } else if(isDefined(var_1) && var_0E == var_1) {
+        } else if(isDefined(var_1) && var_14 == var_1) {
           break;
         } else {
-          var_2 = func_7A4A(var_0E, var_0);
-          var_3 = func_7A48(var_0E, var_0);
-          var_1 = var_0E;
+          var_2 = func_7A4A(var_14, var_0);
+          var_3 = func_7A48(var_14, var_0);
+          var_1 = var_14;
           var_4 = 1;
           break;
         }
@@ -450,20 +450,20 @@ func_9C64(var_0, var_1, var_2) {
     var_5 = get_spawn_volumes_player_is_in(0, undefined, var_0);
     foreach(var_7 in var_5) {
       var_8 = var_7 func_77D3();
-      foreach(var_0A in var_8) {
-        if(ispointinvolume(var_1.origin, var_0A)) {
+      foreach(var_10 in var_8) {
+        if(ispointinvolume(var_1.origin, var_10)) {
           return 0;
         }
       }
     }
   }
 
-  var_0D = physics_createcontents(["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid"]);
+  var_13 = physics_createcontents(["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid"]);
   if(var_1.script_noteworthy == "trap_hydrant") {
     var_4 = var_1.origin + (0, 0, 50);
   }
 
-  if(scripts\common\trace::ray_trace_passed(var_0 getEye(), var_4, [var_0], var_0D)) {
+  if(scripts\common\trace::ray_trace_passed(var_0 getEye(), var_4, [var_0], var_13)) {
     return 1;
   }
 
@@ -602,7 +602,7 @@ func_D104() {
   self endon("disconnect");
   self endon("death");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("weapon_switch_started", "weapon_change", "weaponchange");
+    scripts\engine\utility::waittill_any("weapon_switch_started", "weapon_change", "weaponchange");
     self.last_interaction_point = undefined;
     self.resetguidedinteraction = 1;
     self notify("stop_interaction_logic");
@@ -625,7 +625,7 @@ get_player_interaction_trigger() {
 
 func_DF3F() {
   var_0 = self.interaction_trigger;
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   var_0.in_use = 0;
 }
 
@@ -1402,9 +1402,9 @@ can_purchase_ammo(var_0) {
   if(isDefined(var_2)) {
     var_8 = self getweaponammostock(var_2);
     var_9 = weaponmaxammo(var_2);
-    var_0A = scripts\cp\perks\prestige::prestige_getminammo();
-    var_0B = int(var_0A * var_9);
-    if(var_8 < var_0B) {
+    var_10 = scripts\cp\perks\prestige::prestige_getminammo();
+    var_11 = int(var_10 * var_9);
+    if(var_8 < var_11) {
       return 1;
     } else if(weaponmaxammo(var_2) == weaponclipsize(var_2) && self getweaponammoclip(var_2) < weaponclipsize(var_2)) {
       return 1;
@@ -1577,8 +1577,8 @@ can_purchase_interaction(var_0, var_1, var_2, var_3) {
     var_7 = weaponmaxammo(var_0.script_noteworthy);
     var_8 = scripts\cp\perks\prestige::prestige_getminammo();
     var_9 = int(var_8 * var_7);
-    var_0A = self getweaponammostock(var_6);
-    if(var_0A >= var_9) {
+    var_10 = self getweaponammostock(var_6);
+    if(var_10 >= var_9) {
       return 0;
     }
   }
@@ -1627,13 +1627,13 @@ func_7DBA(var_0, var_1) {
   var_7 = var_1 scripts\cp\perks\prestige::prestige_getminammo();
   var_8 = int(var_7 * var_6);
   var_9 = var_1 getweaponammostock(var_4);
-  var_0A = self getweaponslistall();
-  foreach(var_0C in var_0A) {
-    var_0D = scripts\cp\utility::getrawbaseweaponname(var_0C);
-    if(var_0D == scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy)) {
-      var_0E = var_0C;
-      var_9 = self getweaponammostock(var_0E);
-      var_6 = weaponmaxammo(var_0E);
+  var_10 = self getweaponslistall();
+  foreach(var_12 in var_10) {
+    var_13 = scripts\cp\utility::getrawbaseweaponname(var_12);
+    if(var_13 == scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy)) {
+      var_14 = var_12;
+      var_9 = self getweaponammostock(var_14);
+      var_6 = weaponmaxammo(var_14);
       var_8 = int(var_7 * var_6);
     }
   }
@@ -2062,7 +2062,7 @@ interaction_cooldown(var_0, var_1) {
   if(scripts\engine\utility::istrue(level.var_4614)) {
     wait(1);
   } else {
-    level scripts\engine\utility::waittill_any_timeout_1(var_1, "override_cooldowns");
+    level scripts\engine\utility::waittill_any_timeout(var_1, "override_cooldowns");
   }
 
   foreach(var_4 in var_2) {
@@ -2072,13 +2072,13 @@ interaction_cooldown(var_0, var_1) {
   }
 
   var_8 = 5184;
-  foreach(var_0A in level.players) {
+  foreach(var_10 in level.players) {
     foreach(var_4 in var_2) {
-      if(distancesquared(var_0A.origin, var_4.origin) >= var_8) {
+      if(distancesquared(var_10.origin, var_4.origin) >= var_8) {
         continue;
       }
 
-      var_0A refresh_interaction();
+      var_10 refresh_interaction();
     }
   }
 }

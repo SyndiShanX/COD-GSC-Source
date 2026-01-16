@@ -165,11 +165,11 @@ check_for_invalid_attachments() {
         }
       }
 
-      foreach(var_0B in var_6) {
-        if(issubstr(var_0B, var_3[0])) {
-          if(var_0 != var_0B) {
-            self.copy_weapon_ammo_stock[var_0] = self.copy_weapon_ammo_stock[var_0B];
-            self.copy_weapon_ammo_stock[var_0B] = undefined;
+      foreach(var_11 in var_6) {
+        if(issubstr(var_11, var_3[0])) {
+          if(var_0 != var_11) {
+            self.copy_weapon_ammo_stock[var_0] = self.copy_weapon_ammo_stock[var_11];
+            self.copy_weapon_ammo_stock[var_11] = undefined;
           }
         }
       }
@@ -391,10 +391,10 @@ wait_for_self_revive(var_0, var_1) {
   return 1;
 }
 
-wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = makereviveentity(var_0, var_1, var_2, var_3, var_4);
+wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = makereviveentity(var_0, var_1, var_2, var_3, var_4);
   if(var_8) {
-    thread enter_spectate(var_0, var_1, var_0C);
+    thread enter_spectate(var_0, var_1, var_12);
   }
 
   if(var_9) {
@@ -402,39 +402,39 @@ wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     return 0;
   }
 
-  var_0D = var_0C;
+  var_13 = var_12;
   if(var_8) {
-    var_0D = makereviveiconentity(var_0, var_0C);
+    var_13 = makereviveiconentity(var_0, var_12);
   }
 
-  if(var_0A) {
-    var_0D makereviveicon(var_0D, var_0, var_6, var_7);
+  if(var_10) {
+    var_13 makereviveicon(var_13, var_0, var_6, var_7);
   }
 
-  var_0.reviveent = var_0C;
-  var_0.reviveiconent = var_0D;
+  var_0.reviveent = var_12;
+  var_0.reviveiconent = var_13;
   if(isDefined(level.wait_to_be_revived_func)) {
-    var_0E = [[level.wait_to_be_revived_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
-    if(isDefined(var_0E)) {
-      return var_0E;
+    var_14 = [[level.wait_to_be_revived_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+    if(isDefined(var_14)) {
+      return var_14;
     }
   }
 
-  if(var_0A) {
-    var_0C thread laststandwaittillrevivebyteammate(var_0, var_5);
+  if(var_10) {
+    var_12 thread laststandwaittillrevivebyteammate(var_0, var_5);
   }
 
   if(isDefined(var_7)) {
-    var_0E = var_0C scripts\cp\utility::waittill_any_ents_or_timeout_return(var_7, var_0C, "revive_success", var_0, "force_bleed_out", var_0, "revive_success", var_0, "challenge_complete_revive");
+    var_14 = var_12 scripts\cp\utility::waittill_any_ents_or_timeout_return(var_7, var_12, "revive_success", var_0, "force_bleed_out", var_0, "revive_success", var_0, "challenge_complete_revive");
   } else {
-    var_0E = var_0D scripts\cp\utility::waittill_any_ents_return(var_0D, "revive_success", var_1, "challenge_complete_revive");
+    var_14 = var_13 scripts\cp\utility::waittill_any_ents_return(var_13, "revive_success", var_1, "challenge_complete_revive");
   }
 
-  if(var_0E == "timeout" && is_being_revived(var_0)) {
-    var_0E = var_0C scripts\engine\utility::waittill_any_return("revive_success", "revive_fail");
+  if(var_14 == "timeout" && is_being_revived(var_0)) {
+    var_14 = var_12 scripts\engine\utility::waittill_any_return("revive_success", "revive_fail");
   }
 
-  if(var_0E == "revive_success" || var_0E == "challenge_complete_revive") {
+  if(var_14 == "revive_success" || var_14 == "challenge_complete_revive") {
     return 1;
   }
 
@@ -542,7 +542,7 @@ makereviveentity(var_0, var_1, var_2, var_3, var_4) {
   var_6 = spawn("script_model", var_1);
   var_6 setcursorhint("HINT_NOICON");
   var_6 sethintstring(&"PLATFORM_REVIVE");
-  var_6.triggerportableradarping = var_0;
+  var_6.owner = var_0;
   var_6.inuse = 0;
   var_6.var_336 = "revive_trigger";
   if(isDefined(var_2)) {
@@ -648,7 +648,7 @@ can_use_pistol_during_last_stand(var_0) {
 
 cleanupreviveent(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect", "revive");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect", "revive");
   self delete();
 }
 
@@ -782,18 +782,18 @@ camera_zoomout(var_0, var_1, var_2) {
   var_7 = 0.6;
   var_8 = 0.6;
   var_9 = var_1 + var_3;
-  var_0A = bulletTrace(var_9, var_9 + var_4, 0, var_0);
-  var_0B = var_0A["position"];
-  var_0A = bulletTrace(var_0B, var_0B + var_5, 0, var_0);
-  var_0C = var_0A["position"];
-  var_0D = spawn("script_model", var_0B);
-  var_0D setModel("tag_origin");
-  var_0D.angles = vectortoangles((0, 0, -1));
-  var_0D thread cleanupreviveent(var_0);
-  var_0 cameralinkto(var_0D, "tag_origin");
-  var_0D moveto(var_0C, var_6, var_7, var_8);
-  var_0D waittill("movedone");
-  var_0D delete();
+  var_10 = bulletTrace(var_9, var_9 + var_4, 0, var_0);
+  var_11 = var_10["position"];
+  var_10 = bulletTrace(var_11, var_11 + var_5, 0, var_0);
+  var_12 = var_10["position"];
+  var_13 = spawn("script_model", var_11);
+  var_13 setModel("tag_origin");
+  var_13.angles = vectortoangles((0, 0, -1));
+  var_13 thread cleanupreviveent(var_0);
+  var_0 cameralinkto(var_13, "tag_origin");
+  var_13 moveto(var_12, var_6, var_7, var_8);
+  var_13 waittill("movedone");
+  var_13 delete();
   var_0 enter_bleed_out(var_0);
 }
 
@@ -1251,7 +1251,7 @@ disable_self_revive(var_0) {
 }
 
 self_revive(var_0) {
-  var_0 scripts\engine\utility::waittill_any_timeout_1(3, "revive_success");
+  var_0 scripts\engine\utility::waittill_any_timeout(3, "revive_success");
   return 1;
 }
 

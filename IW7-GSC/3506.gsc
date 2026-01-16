@@ -144,8 +144,9 @@ func_C6D4() {
       func_4074();
       self notify("death");
       break;
-    } else
+    } else {
       var_0 scripts\mp\utility\game::func_13A7("odin_negative_action");
+    }
 
     wait 1.1;
   }

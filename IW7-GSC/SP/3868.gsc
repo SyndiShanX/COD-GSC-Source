@@ -194,14 +194,14 @@ func_67FF(var_0, var_1, var_2, var_3) {
     }
 
     var_9 = distancesquared(var_8.origin, self.origin);
-    var_0A = var_9 <= var_5;
-    if(!var_0A && var_9 <= var_6) {
+    var_10 = var_9 <= var_5;
+    if(!var_10 && var_9 <= var_6) {
       if(var_8 lib_0F27::func_9D11(self) || var_8 lib_0F27::func_9D11(level.player)) {
-        var_0A = 1;
+        var_10 = 1;
       }
     }
 
-    if(var_0A) {
+    if(var_10) {
       var_8 func_84F7(var_0, var_1, var_1.origin);
     }
   }

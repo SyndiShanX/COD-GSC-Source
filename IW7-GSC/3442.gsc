@@ -24,8 +24,9 @@ init() {
       level.tactic_notifies[5] = "tactic_war_pincer";
       level.tactic_notifies[6] = "tactic_war_ctc";
       level.tactic_notifies[7] = "tactic_war_rg";
-    } else
+    } else {
       return;
+    }
 
     level.fireteam_commander = [];
     level.fireteam_commander["axis"] = undefined;
@@ -77,7 +78,7 @@ commander_aggregate_score_on_game_end() {
 
 commander_create_dom_obj(var_0) {
   if(!isDefined(self.fireteam_dom_point_obj[var_0])) {
-    self.fireteam_dom_point_obj[var_0] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.fireteam_dom_point_obj[var_0] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
     var_1 = (0, 0, 0);
 
     foreach(var_3 in level.domflags) {
@@ -341,7 +342,7 @@ hud_monitorplayerownership() {
   self.ownershipstring = [];
 
   for(var_0 = 0; var_0 < 16; var_0++) {
-    self.ownershipstring[var_0] = scripts\mp\hud_util::createfontstring("default", 1);
+    self.ownershipstring[var_0] = ::scripts\mp\hud_util::createfontstring("default", 1);
     self.ownershipstring[var_0].color = (1, 1, 1);
     self.ownershipstring[var_0].x = 0;
     self.ownershipstring[var_0].y = 30 + var_0 * 12;
@@ -387,13 +388,15 @@ hud_monitorplayerownership() {
           } else {
             self.ownershipstring[var_1].color = (1, 1, 1);
           }
-        } else if(isDefined(var_7.bot_fireteam_follower))
+        } else if(isDefined(var_7.bot_fireteam_follower)) {
           var_8 = 1;
+        }
         else {
           self.ownershipstring[var_1].color = (1, 1, 0);
         }
-      } else
+      } else {
         var_8 = 1;
+      }
 
       if(!var_8) {
         var_1++;
@@ -589,8 +592,9 @@ commander_spectate_next_bot(var_0) {
     if(isDefined(var_1)) {
       var_1 bot_free_to_move();
     }
-  } else
+  } else {
     self playlocalsound("counter_uav_deactivate");
+  }
 }
 
 commander_spectate_bot(var_0) {

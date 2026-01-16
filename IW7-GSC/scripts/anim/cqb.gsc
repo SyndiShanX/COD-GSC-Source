@@ -162,30 +162,30 @@ func_6CB4() {
         }
 
         var_9 = -1;
-        var_0A = 1048576;
-        for(var_0B = 0; var_0B < level.var_479A.size; var_0B++) {
-          var_0C = level.var_479A[var_0B];
-          var_0D = distancesquared(var_0C, var_6);
-          if(var_0D < var_0A) {
+        var_10 = 1048576;
+        for(var_11 = 0; var_11 < level.var_479A.size; var_11++) {
+          var_12 = level.var_479A[var_11];
+          var_13 = distancesquared(var_12, var_6);
+          if(var_13 < var_10) {
             if(var_4) {
-              if(distancesquared(var_0C, var_5) < 4096) {
+              if(distancesquared(var_12, var_5) < 4096) {
                 continue;
               }
 
-              var_0E = vectordot(vectornormalize(var_0C - var_5), var_7);
-              if(var_0E < 0.643 || var_0E > 0.966) {
+              var_14 = vectordot(vectornormalize(var_12 - var_5), var_7);
+              if(var_14 < 0.643 || var_14 > 0.966) {
                 continue;
               }
-            } else if(var_0D < 2500) {
+            } else if(var_13 < 2500) {
               continue;
             }
 
-            if(!sighttracepassed(var_6, var_0C, 0, undefined)) {
+            if(!sighttracepassed(var_6, var_12, 0, undefined)) {
               continue;
             }
 
-            var_0A = var_0D;
-            var_9 = var_0B;
+            var_10 = var_13;
+            var_9 = var_11;
           }
         }
 

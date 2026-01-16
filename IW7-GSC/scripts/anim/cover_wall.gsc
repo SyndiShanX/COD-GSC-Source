@@ -7,9 +7,9 @@ func_950B() {}
 
 func_470E(var_0) {
   self endon("killanimscript");
-  self.covernode = self.target_getindexoftarget;
+  self.covernode = self.node;
   self.var_4757 = var_0;
-  if(!isDefined(self.target_getindexoftarget.turret)) {
+  if(!isDefined(self.node.turret)) {
     scripts\anim\cover_behavior::func_129B4(0);
   }
 
@@ -22,7 +22,7 @@ func_470E(var_0) {
 
   self.a.var_1A3E = undefined;
   self orientmode("face angle", self.covernode.angles[1]);
-  if(isDefined(self.target_getindexoftarget) && isDefined(self.target_getindexoftarget.turret)) {
+  if(isDefined(self.node) && isDefined(self.node.turret)) {
     func_130DF();
   }
 
@@ -529,7 +529,7 @@ func_51B9(var_0) {
 }
 
 func_130DF() {
-  var_0 = self.target_getindexoftarget.turret;
+  var_0 = self.node.turret;
   if(!var_0.var_9F46) {
     return;
   }
@@ -542,9 +542,9 @@ func_F92B(var_0) {
   self.a.var_2274 = scripts\anim\utility::func_B028("cover_crouch");
   if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
     if(var_0 == "lean" || var_0 == "stand") {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_stand", "single");
     } else {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_crouch", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_crouch", "single");
     }
   }
 
@@ -566,7 +566,7 @@ func_FA52(var_0) {
     self.a.var_2274["semi4"] = var_1["semi4"];
     self.a.var_2274["semi5"] = var_1["semi5"];
     if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-      self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand", "single");
+      self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_stand", "single");
     } else {
       self.a.var_2274["single"] = var_1["single"];
     }

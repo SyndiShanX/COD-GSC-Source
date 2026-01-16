@@ -290,19 +290,19 @@ func_814E(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0;
   for(var_7 = var_1; var_7 <= var_2; var_7++) {
     if(!var_6) {
-      foreach(var_0A, var_9 in var_4) {
-        if(isDefined(level.archetypes[var_0]["cover_trans"]) && isDefined(level.archetypes[var_0]["cover_trans"][var_0A]) && isDefined(level.archetypes[var_0]["cover_trans"][var_0A][var_7])) {
-          level.archetypes[var_0]["cover_trans_predist"][var_0A][var_7] = getmovedelta(level.archetypes[var_0]["cover_trans"][var_0A][var_7], 0, func_81D6(var_0, var_0A, var_7));
-          level.archetypes[var_0]["cover_trans_dist"][var_0A][var_7] = getmovedelta(level.archetypes[var_0]["cover_trans"][var_0A][var_7], 0, 1) - level.archetypes[var_0]["cover_trans_predist"][var_0A][var_7];
-          level.archetypes[var_0]["cover_trans_angles"][var_0A][var_7] = getangledelta(level.archetypes[var_0]["cover_trans"][var_0A][var_7], 0, 1);
+      foreach(var_10, var_9 in var_4) {
+        if(isDefined(level.archetypes[var_0]["cover_trans"]) && isDefined(level.archetypes[var_0]["cover_trans"][var_10]) && isDefined(level.archetypes[var_0]["cover_trans"][var_10][var_7])) {
+          level.archetypes[var_0]["cover_trans_predist"][var_10][var_7] = getmovedelta(level.archetypes[var_0]["cover_trans"][var_10][var_7], 0, func_81D6(var_0, var_10, var_7));
+          level.archetypes[var_0]["cover_trans_dist"][var_10][var_7] = getmovedelta(level.archetypes[var_0]["cover_trans"][var_10][var_7], 0, 1) - level.archetypes[var_0]["cover_trans_predist"][var_10][var_7];
+          level.archetypes[var_0]["cover_trans_angles"][var_10][var_7] = getangledelta(level.archetypes[var_0]["cover_trans"][var_10][var_7], 0, 1);
         }
       }
 
-      foreach(var_0A, var_9 in var_5) {
-        if(isDefined(level.archetypes[var_0]["cover_exit"]) && isDefined(level.archetypes[var_0]["cover_exit"][var_0A]) && isDefined(level.archetypes[var_0]["cover_exit"][var_0A][var_7])) {
-          level.archetypes[var_0]["cover_exit_dist"][var_0A][var_7] = getmovedelta(level.archetypes[var_0]["cover_exit"][var_0A][var_7], 0, func_7EA4(var_0, var_0A, var_7));
-          level.archetypes[var_0]["cover_exit_postdist"][var_0A][var_7] = getmovedelta(level.archetypes[var_0]["cover_exit"][var_0A][var_7], 0, 1) - level.archetypes[var_0]["cover_exit_dist"][var_0A][var_7];
-          level.archetypes[var_0]["cover_exit_angles"][var_0A][var_7] = getangledelta(level.archetypes[var_0]["cover_exit"][var_0A][var_7], 0, 1);
+      foreach(var_10, var_9 in var_5) {
+        if(isDefined(level.archetypes[var_0]["cover_exit"]) && isDefined(level.archetypes[var_0]["cover_exit"][var_10]) && isDefined(level.archetypes[var_0]["cover_exit"][var_10][var_7])) {
+          level.archetypes[var_0]["cover_exit_dist"][var_10][var_7] = getmovedelta(level.archetypes[var_0]["cover_exit"][var_10][var_7], 0, func_7EA4(var_0, var_10, var_7));
+          level.archetypes[var_0]["cover_exit_postdist"][var_10][var_7] = getmovedelta(level.archetypes[var_0]["cover_exit"][var_10][var_7], 0, 1) - level.archetypes[var_0]["cover_exit_dist"][var_10][var_7];
+          level.archetypes[var_0]["cover_exit_angles"][var_10][var_7] = getangledelta(level.archetypes[var_0]["cover_exit"][var_10][var_7], 0, 1);
         }
       }
 

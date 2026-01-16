@@ -565,9 +565,9 @@ func_786D(var_0, var_1) {
       var_7 = var_2[var_3 - 1]["val"];
       var_8 = var_4 - var_6;
       var_9 = var_5 - var_7;
-      var_0A = var_1 - var_6;
-      var_0B = var_0A / var_8;
-      return var_7 + var_0B * var_9;
+      var_10 = var_1 - var_6;
+      var_11 = var_10 / var_8;
+      return var_7 + var_11 * var_9;
     }
 
     var_9++;
@@ -605,11 +605,11 @@ func_C868() {
 }
 
 func_C869() {
-  if(!isalive(self.isnodeoccupied)) {
+  if(!isalive(self.enemy)) {
     return 0;
   }
 
-  if(!isplayer(self.isnodeoccupied)) {
+  if(!isplayer(self.enemy)) {
     return 0;
   }
 
@@ -629,12 +629,12 @@ func_C869() {
 }
 
 func_F288() {
-  if(scripts\anim\utility_common::isasniper() && isalive(self.isnodeoccupied)) {
+  if(scripts\anim\utility_common::isasniper() && isalive(self.enemy)) {
     func_F84B();
     return;
   }
 
-  if(isplayer(self.isnodeoccupied)) {
+  if(isplayer(self.enemy)) {
     func_E258();
     if(self.a.var_B8D6 > gettime()) {
       self.accuracy = 0;
@@ -675,14 +675,14 @@ func_F84B() {
 
   self.var_103BF++;
   var_2 = level.var_7683;
-  if(isplayer(self.isnodeoccupied)) {
-    var_2 = self.isnodeoccupied.var_7683;
+  if(isplayer(self.enemy)) {
+    var_2 = self.enemy.var_7683;
   }
 
   if(func_10019()) {
     self.accuracy = 0;
     if(var_2 > 0 || self.var_103BF > 1) {
-      self.var_A9BA = self.isnodeoccupied;
+      self.var_A9BA = self.enemy;
     }
 
     return;
@@ -707,11 +707,11 @@ func_10019() {
     return 0;
   }
 
-  if(isDefined(self.var_A9BA) && self.isnodeoccupied == self.var_A9BA) {
+  if(isDefined(self.var_A9BA) && self.enemy == self.var_A9BA) {
     return 0;
   }
 
-  if(distancesquared(self.origin, self.isnodeoccupied.origin) > 250000) {
+  if(distancesquared(self.origin, self.enemy.origin) > 250000) {
     return 0;
   }
 
@@ -733,15 +733,15 @@ func_E242() {
 func_13847() {
   var_0 = 0;
   waittillframeend;
-  if(!isalive(self.isnodeoccupied)) {
+  if(!isalive(self.enemy)) {
     return var_0;
   }
 
-  if(!isplayer(self.isnodeoccupied)) {
+  if(!isplayer(self.enemy)) {
     return var_0;
   }
 
-  if(self.isnodeoccupied scripts\sp\utility::func_65DB("player_is_invulnerable")) {
+  if(self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable")) {
     var_0 = 0.3 + randomfloat(0.4);
   }
 
@@ -760,7 +760,7 @@ resetmisstime_code() {
     return;
   }
 
-  if(self.var_394 == "none") {
+  if(self.weapon == "none") {
     return;
   }
 
@@ -773,17 +773,17 @@ resetmisstime_code() {
     return;
   }
 
-  if(!isalive(self.isnodeoccupied)) {
+  if(!isalive(self.enemy)) {
     return;
   }
 
-  if(!isplayer(self.isnodeoccupied)) {
+  if(!isplayer(self.enemy)) {
     self.accuracy = self.var_2894;
     return;
   }
 
-  var_0 = distance(self.isnodeoccupied.origin, self.origin);
-  func_F79C(self.isnodeoccupied.gs.var_B8D7 + var_0 * self.isnodeoccupied.gs.var_B8D9);
+  var_0 = distance(self.enemy.origin, self.origin);
+  func_F79C(self.enemy.gs.var_B8D7 + var_0 * self.enemy.gs.var_B8D9);
 }
 
 func_E258() {
@@ -1083,15 +1083,15 @@ playerhealthregen() {
     }
 
     var_0 = var_7;
-    var_0A = self.gs.worthydamageratio;
+    var_10 = self.gs.worthydamageratio;
     if(self.var_51 == 1) {
-      var_0A = var_0A * 3;
+      var_10 = var_10 * 3;
     }
 
-    var_0B = var_0 - var_9 >= var_0A;
+    var_11 = var_0 - var_9 >= var_10;
     if(self.health <= 1) {
       self setnormalhealth(2 / self.maxhealth);
-      var_0B = 1;
+      var_11 = 1;
     }
 
     var_0 = self.health / self.maxhealth;
@@ -1099,7 +1099,7 @@ playerhealthregen() {
     var_1 = 0;
     var_5 = gettime();
     thread func_2BDB(3, 0.8);
-    if(!var_0B) {
+    if(!var_11) {
       continue;
     }
 
@@ -1658,16 +1658,16 @@ func_DE15(var_0, var_1, var_2) {
     var_9 = 0;
   }
 
-  var_0A = 0.8 + var_1 * 0.1;
-  var_0B = 0.5 + var_1 * 0.3;
+  var_10 = 0.8 + var_1 * 0.1;
+  var_11 = 0.5 + var_1 * 0.3;
   var_0 fadeovertime(var_5);
   var_0.alpha = var_2 * 1;
   wait(var_5 + var_6);
   var_0 fadeovertime(var_7);
-  var_0.alpha = var_2 * var_0A;
+  var_0.alpha = var_2 * var_10;
   wait(var_7);
   var_0 fadeovertime(var_8);
-  var_0.alpha = var_2 * var_0B;
+  var_0.alpha = var_2 * var_11;
   wait(var_8);
   wait(var_9);
 }
@@ -1901,31 +1901,31 @@ func_9137(var_0, var_1, var_2) {
   }
 
   if(var_2) {
-    var_0A = newhudelem();
-    var_0A.x = 204.5;
-    var_0A.y = level.var_4F45 + level.var_9184 * 15;
-    var_0A.foreground = 1;
-    var_0A.sort = 100;
-    var_0A.alpha = 1;
-    var_0A.alignx = "left";
-    var_0A.horzalign = "left";
-    var_0A.fontscale = 1;
-    var_0A settext(".");
-    level.var_9177[level.var_9177.size] = var_0A;
+    var_10 = newhudelem();
+    var_10.x = 204.5;
+    var_10.y = level.var_4F45 + level.var_9184 * 15;
+    var_10.foreground = 1;
+    var_10.sort = 100;
+    var_10.alpha = 1;
+    var_10.alignx = "left";
+    var_10.horzalign = "left";
+    var_10.fontscale = 1;
+    var_10 settext(".");
+    level.var_9177[level.var_9177.size] = var_10;
   }
 
   if(var_3) {
-    var_0B = newhudelem();
-    var_0B.x = 195.5;
-    var_0B.y = level.var_4F45 + level.var_9184 * 15;
-    var_0B.foreground = 1;
-    var_0B.sort = 100;
-    var_0B.alpha = 1;
-    var_0B.alignx = "left";
-    var_0B.horzalign = "left";
-    var_0B.fontscale = 1;
-    var_0B settext(" - ");
-    level.var_9177[level.var_9184] = var_0B;
+    var_11 = newhudelem();
+    var_11.x = 195.5;
+    var_11.y = level.var_4F45 + level.var_9184 * 15;
+    var_11.foreground = 1;
+    var_11.sort = 100;
+    var_11.alpha = 1;
+    var_11.alignx = "left";
+    var_11.horzalign = "left";
+    var_11.fontscale = 1;
+    var_11 settext(" - ");
+    level.var_9177[level.var_9184] = var_11;
   }
 
   level.var_9184++;
@@ -2075,32 +2075,32 @@ func_262C(var_0) {
   level.var_2629[var_0] = 0;
   func_14F5();
   var_9 = getdvarfloat("aa_time_tracking") - var_1;
-  var_0A = getdvarint("aa_player_kills") - var_2;
-  var_0B = getdvarint("aa_enemy_deaths") - var_3;
-  var_0C = 0;
-  if(var_0B > 0) {
-    var_0C = var_0A / var_0B;
-    var_0C = var_0C * 100;
-    var_0C = int(var_0C);
+  var_10 = getdvarint("aa_player_kills") - var_2;
+  var_11 = getdvarint("aa_enemy_deaths") - var_3;
+  var_12 = 0;
+  if(var_11 > 0) {
+    var_12 = var_10 / var_11;
+    var_12 = var_12 * 100;
+    var_12 = int(var_12);
   }
 
-  var_0D = getdvarint("aa_enemy_damage_taken") - var_4;
-  var_0E = getdvarint("aa_player_damage_dealt") - var_6;
-  var_0F = 0;
+  var_13 = getdvarint("aa_enemy_damage_taken") - var_4;
+  var_14 = getdvarint("aa_player_damage_dealt") - var_6;
+  var_15 = 0;
   var_10 = 0;
-  if(var_0D > 0 && var_9 > 0) {
-    var_0F = var_0E / var_0D;
-    var_0F = var_0F * 100;
-    var_0F = int(var_0F);
-    var_10 = var_0E / var_9;
+  if(var_13 > 0 && var_9 > 0) {
+    var_15 = var_14 / var_13;
+    var_15 = var_15 * 100;
+    var_15 = int(var_15);
+    var_10 = var_14 / var_9;
     var_10 = var_10 * 60;
     var_10 = int(var_10);
   }
 
   var_11 = getdvarint("aa_ads_damage_dealt") - var_7;
   var_12 = 0;
-  if(var_0E > 0) {
-    var_12 = var_11 / var_0E;
+  if(var_14 > 0) {
+    var_12 = var_11 / var_14;
     var_12 = var_12 * 100;
     var_12 = int(var_12);
   }
@@ -2385,7 +2385,7 @@ func_13C1A() {
     }
 
     level.player waittill("weapon_change", var_6);
-    var_7 = level.player func_8519(var_6, 1);
+    var_7 = level.player isalternatemode(var_6, 1);
     var_8 = getweaponbasename(var_6);
     var_9 = "";
     switch (var_8) {

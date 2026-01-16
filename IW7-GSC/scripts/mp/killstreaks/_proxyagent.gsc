@@ -10,7 +10,7 @@ func_45D0(var_0, var_1, var_2, var_3, var_4, var_5) {
     return 0;
   }
 
-  var_6 = scripts\mp\killstreaks\_killstreaks::func_D507(var_1, 1);
+  var_6 = scripts\mp\killstreaks\killstreaks::func_D507(var_1, 1);
   if(!var_6) {
     return 0;
   }
@@ -94,7 +94,7 @@ watchplayerkillstreakemp(var_0) {
 }
 
 watchplayerkillstreakend(var_0) {
-  scripts\engine\utility::waittill_any_3(var_0, "level_game_ended");
+  scripts\engine\utility::waittill_any(var_0, "level_game_ended");
   stopcontrol();
 }
 
@@ -136,7 +136,7 @@ stopcontrol() {
       self visionsetnakedforplayer("", 0);
     }
 
-    thread scripts\mp\killstreaks\_killstreaks::func_11086(1);
+    thread scripts\mp\killstreaks\killstreaks::func_11086(1);
     self.playerproxyagent = undefined;
     self.var_165A = undefined;
   }
@@ -144,7 +144,7 @@ stopcontrol() {
 
 cleararchetype(var_0) {
   scripts\mp\archetypes\archcommon::removearchetype(var_0.loadoutarchetype);
-  scripts\mp\perks\_perks::_clearperks();
+  scripts\mp\perks\perks::_clearperks();
 }
 
 func_DDA3(var_0) {

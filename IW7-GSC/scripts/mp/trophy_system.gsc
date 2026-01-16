@@ -55,7 +55,7 @@ func_12827(var_0) {
   var_0 thread scripts\mp\entityheadicons::setheadicon_factionimage(self, (0, 0, 38), 1.3);
   thread scripts\mp\weapons::outlineequipmentforowner(var_0, self);
   var_0 thread func_1280B();
-  var_0 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_0 thread scripts\mp\perks\perk_equipmentping::runequipmentping();
 }
 
 trophy_destroy() {
@@ -72,8 +72,8 @@ trophy_delete(var_0) {
   self makeunusable();
   scripts\mp\weapons::makeexplosiveunusuabletag();
   self.exploding = 1;
-  var_1 = self.triggerportableradarping;
-  if(isDefined(self.triggerportableradarping)) {
+  var_1 = self.owner;
+  if(isDefined(self.owner)) {
     var_1.plantedtacticalequip = scripts\engine\utility::array_remove(var_1.plantedtacticalequip, self);
     var_1 notify("trophy_update", 0);
   }
@@ -91,7 +91,7 @@ func_1280B() {
 
 func_1282B() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   if(!isDefined(level.grenades)) {
     level.grenades = [];
   }
@@ -125,12 +125,12 @@ func_1282B() {
         continue;
       }
 
-      var_6 = var_5.triggerportableradarping;
+      var_6 = var_5.owner;
       if(!isDefined(var_6) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade") {
         var_6 = getmissileowner(var_5);
       }
 
-      if(isDefined(var_6) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_6))) {
+      if(isDefined(var_6) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_6))) {
         continue;
       }
 
@@ -151,15 +151,15 @@ func_1282B() {
 }
 
 func_1281E(var_0) {
-  self.triggerportableradarping thread scripts\mp\utility::giveunifiedpoints("trophy_defense");
-  self.triggerportableradarping scripts\mp\missions::func_D991("ch_tactical_trophy");
-  self.triggerportableradarping thread scripts\mp\gamelogic::threadedsetweaponstatbyname("trophy_mp", 1, "hits");
-  self.triggerportableradarping scripts\mp\damage::combatrecordtacticalstat("power_trophy");
+  self.owner thread scripts\mp\utility::giveunifiedpoints("trophy_defense");
+  self.owner scripts\mp\missions::func_D991("ch_tactical_trophy");
+  self.owner thread scripts\mp\gamelogic::threadedsetweaponstatbyname("trophy_mp", 1, "hits");
+  self.owner scripts\mp\damage::combatrecordtacticalstat("power_trophy");
   var_0 setCanDamage(0);
   var_0.exploding = 1;
   var_0 stopsounds();
   func_12821(var_0);
-  func_12817(var_0, "trophy_mp", self.triggerportableradarping);
+  func_12817(var_0, "trophy_mp", self.owner);
   var_1 = var_0.origin;
   var_2 = var_0.angles;
   if(scripts\mp\weapons::isplantedequipment(var_0)) {
@@ -184,7 +184,7 @@ func_12811(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_3;
   var_5 = scripts\mp\damage::handlemeleedamage(var_1, var_2, var_5);
   var_5 = scripts\mp\damage::handleapdamage(var_1, var_2, var_5);
-  scripts\mp\powers::equipmenthit(self.triggerportableradarping, var_0, var_1, var_2);
+  scripts\mp\powers::equipmenthit(self.owner, var_0, var_1, var_2);
   return var_5;
 }
 
@@ -195,7 +195,7 @@ func_12812(var_0, var_1, var_2, var_3, var_4) {
 
 trophy_destroyonemp() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1);
   trophy_givepointsfordeath(var_0);
   trophy_givedamagefeedback(var_0);
@@ -204,26 +204,26 @@ trophy_destroyonemp() {
 
 trophy_destroyongameend() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  self.owner endon("disconnect");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread trophy_destroy();
 }
 
 func_12818() {
-  if(self.triggerportableradarping scripts\mp\powers::hasequipment("power_trophy")) {
-    self.triggerportableradarping func_12803(self.var_1E2D);
+  if(self.owner scripts\mp\powers::hasequipment("power_trophy")) {
+    self.owner func_12803(self.var_1E2D);
   }
 }
 
 trophy_createexplosion(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1.killcament = var_0;
-  var_1.triggerportableradarping = var_0.triggerportableradarping;
+  var_1.owner = var_0.owner;
   var_1.team = var_0.team;
   var_1.power = var_0.power;
   var_1.weapon_name = var_0.weapon_name;
-  var_1 setotherent(var_1.triggerportableradarping);
-  var_1 setentityowner(var_1.triggerportableradarping);
+  var_1 setotherent(var_1.owner);
+  var_1 setentityowner(var_1.owner);
   var_1 setModel("trophy_system_mp_explode");
   var_1.explode1available = 1;
   var_1.explode2available = 1;
@@ -256,7 +256,7 @@ func_12804() {
 }
 
 trophy_modifiedprotectiondistsqr(var_0, var_1) {
-  if(isDefined(var_0.weapon_name) && isDefined(var_0.triggerportableradarping)) {
+  if(isDefined(var_0.weapon_name) && isDefined(var_0.owner)) {
     switch (var_0.weapon_name) {
       case "jackal_cannon_mp":
       case "shockproj_mp":
@@ -331,11 +331,11 @@ func_12821(var_0) {
 }
 
 func_12817(var_0, var_1, var_2) {
-  if(!isDefined(var_0.triggerportableradarping) || !isplayer(var_0.triggerportableradarping)) {
+  if(!isDefined(var_0.owner) || !isplayer(var_0.owner)) {
     return;
   }
 
-  var_0.triggerportableradarping thread scripts\mp\damagefeedback::updatedamagefeedback("hiticontrophysystem");
+  var_0.owner thread scripts\mp\damagefeedback::updatedamagefeedback("hiticontrophysystem");
   if(isDefined(var_0.weapon_name)) {
     switch (var_0.weapon_name) {
       case "jackal_cannon_mp":
@@ -344,7 +344,7 @@ func_12817(var_0, var_1, var_2) {
       case "thorproj_tracking_mp":
       case "thorproj_zoomed_mp":
       case "drone_hive_projectile_mp":
-        var_0.triggerportableradarping notify("destroyed_by_trophy", var_2, var_1, var_0.weapon_name, var_0.origin, var_0.angles);
+        var_0.owner notify("destroyed_by_trophy", var_2, var_1, var_0.weapon_name, var_0.origin, var_0.angles);
         break;
     }
   }
@@ -354,12 +354,12 @@ trophy_getbesttag(var_0) {
   var_1 = level.var_12802.var_1141B;
   var_2 = undefined;
   var_3 = undefined;
-  foreach(var_0A, var_5 in var_1) {
+  foreach(var_10, var_5 in var_1) {
     var_6 = self gettagorigin(var_5);
     var_7 = self gettagangles(var_5);
     var_8 = anglesToForward(var_7);
     var_9 = vectordot(vectornormalize(var_0 - var_6), var_8);
-    if(var_0A == 0 || var_9 > var_2) {
+    if(var_10 == 0 || var_9 > var_2) {
       var_2 = var_9;
       var_3 = var_5;
     }
@@ -380,7 +380,7 @@ trophy_getpartbytag(var_0) {
 }
 
 trophy_givepointsfordeath(var_0) {
-  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
     var_0 notify("destroyed_equipment");
     var_0 thread scripts\mp\utility::giveunifiedpoints("destroyed_equipment");
   }

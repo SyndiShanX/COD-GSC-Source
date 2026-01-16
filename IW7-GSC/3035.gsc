@@ -877,8 +877,9 @@ func_11482() {
           scripts\engine\utility::flag_set("jackal_reving_hint");
           func_A2CE();
         }
-      } else
+      } else {
         scripts\engine\utility::flag_clear("jackal_reving_hint");
+      }
     }
 
     if(var_17 && !var_19) {
@@ -905,8 +906,9 @@ func_11482() {
         break;
       }
       var_2 = 1;
-    } else
+    } else {
       var_2 = 0;
+    }
 
     var_24 = scripts\sp\math::func_6A8E(var_6, var_5, var_3);
     var_7 = var_7 + (var_24 - var_7) * var_8;
@@ -1036,8 +1038,9 @@ func_1147A() {
           scripts\engine\utility::flag_set("jackal_reving_hint");
           func_A2CE();
         }
-      } else
+      } else {
         scripts\engine\utility::flag_clear("jackal_reving_hint");
+      }
     }
 
     if(var_17 && !var_19) {
@@ -1060,8 +1063,9 @@ func_1147A() {
         break;
       }
       var_2 = 1;
-    } else
+    } else {
       var_2 = 0;
+    }
 
     if(scripts\engine\utility::flag("flag_launch_fail")) {
       break;
@@ -1843,8 +1847,9 @@ func_F919(var_0) {
     setomnvar("ui_hide_hud", 1);
     var_1 = level.var_A056.mount_instant_hud_boot_delay;
     level.var_A056.mount_instant_hud_boot_delay = undefined;
-  } else
+  } else {
     var_1 = 0;
+  }
 
   if(var_0) {
     thread func_BBE0();
@@ -2255,8 +2260,9 @@ func_A2F2(var_0, var_1) {
     } else {
       var_2 = self.var_E8AD;
     }
-  } else
+  } else {
     var_2 = self.var_E8AD;
+  }
 
   scripts\engine\utility::flag_set("jackal_runway_landing_active");
   scripts\engine\utility::flag_set("jackal_runway_first_attempt");
@@ -2362,8 +2368,9 @@ func_A2F1(var_0) {
     } else {
       var_1 = self.var_E8AD;
     }
-  } else
+  } else {
     var_1 = self.var_E8AD;
+  }
 
   level notify("notify_stop_runway_landing");
   scripts\engine\utility::flag_clear("jackal_runway_landing_active");

@@ -50,7 +50,7 @@ func_127D1() {
   self endon("mine_destroyed");
   self endon("mine_selfdestruct");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   wait(1);
   var_0 = self gettagorigin("tag_laser");
   var_1 = var_0 + anglestoup(self.angles) * 1000;
@@ -60,9 +60,9 @@ func_127D1() {
 
 func_127DC() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   self waittill("detonateExplosive", var_1);
   if(isDefined(var_1)) {
     thread func_127DB(var_1);
@@ -74,9 +74,9 @@ func_127DC() {
 
 func_127D8() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1);
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 
@@ -110,10 +110,10 @@ func_127D7(var_0) {
 func_127E7(var_0) {
   var_1 = spawn("script_model", self gettagorigin("tag_laser"));
   var_1.angles = self.angles;
-  var_1 setotherent(self.triggerportableradarping);
-  var_1 setentityowner(self.triggerportableradarping);
+  var_1 setotherent(self.owner);
+  var_1 setentityowner(self.owner);
   var_1 setModel("trip_mine_wm_projectile");
-  var_1.triggerportableradarping = self.triggerportableradarping;
+  var_1.owner = self.owner;
   var_1.team = self.team;
   var_1.weapon_name = "trip_mine_mp";
   var_1.power = "power_tripMine";
@@ -122,7 +122,7 @@ func_127E7(var_0) {
   var_1 moveto(var_0, 0.2, 0.1);
   wait(0.2);
   var_2 = undefined;
-  if(isDefined(var_1.triggerportableradarping)) {
+  if(isDefined(var_1.owner)) {
     var_2 = 5;
     var_1 setscriptablepartstate("explode", "active_cp", 0);
   } else {
@@ -140,7 +140,7 @@ func_127F4() {
   self endon("mine_selfdestruct");
   self endon("death");
   self.var_6316 endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_0 = self.var_ABC7;
   var_1 = func_127D2();
   while(isDefined(var_0)) {
@@ -160,9 +160,9 @@ func_127F4() {
     var_7 = var_6[0];
     var_8 = var_6[1];
     var_9 = var_6[2];
-    var_0A = var_8[2] > var_3[2];
-    var_0B = var_8[2] < var_2.origin[2];
-    if(var_0A || var_0B || var_9 > 16) {
+    var_10 = var_8[2] > var_3[2];
+    var_11 = var_8[2] < var_2.origin[2];
+    if(var_10 || var_11 || var_9 > 16) {
       continue;
     }
 
@@ -176,7 +176,7 @@ func_127F7() {
   self endon("mine_destroyed");
   self endon("mine_selfdestruct");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_0 = self.var_ABC9;
   var_1 = func_127D2();
   while(isDefined(var_0)) {
@@ -203,7 +203,7 @@ func_127E8(var_0, var_1) {
   self endon("mine_destroyed");
   self endon("mine_selfdestruct");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self notify("mine_triggered");
   self setscriptablepartstate("trigger", "active", 0);
   scripts\cp\cp_weapon::explosivetrigger(var_0, 0.3, "tripMine");
@@ -256,8 +256,8 @@ func_127E0(var_0, var_1) {
     return;
   }
 
-  var_4 = self.triggerportableradarping;
-  var_5 = self.triggerportableradarping.team;
+  var_4 = self.owner;
+  var_5 = self.owner.team;
   foreach(var_7 in level.players) {
     if(!isDefined(var_7)) {
       continue;
@@ -274,9 +274,9 @@ func_127E0(var_0, var_1) {
   func_127E1();
   self.var_10D97 delete();
   self.var_6316 delete();
-  foreach(var_0B in self.var_41EF) {
-    if(isDefined(var_0B)) {
-      var_0B delete();
+  foreach(var_11 in self.var_41EF) {
+    if(isDefined(var_11)) {
+      var_11 delete();
     }
   }
 }
@@ -285,7 +285,7 @@ func_127E1() {
   self endon("mine_destroyed");
   self endon("mine_selfdestruct");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("forever");
 }
 
@@ -293,9 +293,9 @@ func_127F0() {
   self endon("mine_destroyed");
   self endon("mine_selfdestruct");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  var_0 = self.triggerportableradarping;
-  var_1 = self.triggerportableradarping.team;
+  self.owner endon("disconnect");
+  var_0 = self.owner;
+  var_1 = self.owner.team;
   for(;;) {
     level waittill("joined_team", var_2);
     var_3 = var_2 getentitynumber();
@@ -312,7 +312,7 @@ func_127EF() {
   self endon("mine_destroyed");
   self endon("mine_selfdestruct");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   for(;;) {
     foreach(var_2, var_1 in self.var_41F6) {
       if(!isDefined(var_1)) {
@@ -333,7 +333,7 @@ func_127F1() {
   self endon("mine_destroyed");
   self endon("mine_selfdestruct");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   var_0 = func_127D2();
   for(;;) {
     var_1 = self.var_10D97.origin;
@@ -356,8 +356,8 @@ func_127D6(var_0) {
   self setCanDamage(0);
   self freeentitysentient();
   self.exploding = 1;
-  var_1 = self.triggerportableradarping;
-  if(isDefined(self.triggerportableradarping)) {
+  var_1 = self.owner;
+  if(isDefined(self.owner)) {
     var_1.plantedlethalequip = scripts\engine\utility::array_remove(var_1.plantedlethalequip, self);
     var_1 notify("c4_update", 0);
   }

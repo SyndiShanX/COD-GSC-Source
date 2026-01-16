@@ -30,8 +30,9 @@ func_A3B5(var_0) {
       return;
     }
     var_1 = self.anims.state;
-  } else
+  } else {
     var_1 = "none";
+  }
 
   self.anims.state = var_0;
   self notify("notify_change_anim_state");
@@ -45,8 +46,9 @@ func_A3B5(var_0) {
   if(isDefined(var_2.var_11B54)) {
     self setanimknob(var_2.var_11B54, 1.0, 0.2);
     var_3 = getanimlength(var_2.var_11B54);
-  } else
+  } else {
     var_3 = 0;
+  }
 
   self setanimknob(var_2.var_BBB5, 1.0, var_3);
   wait(var_3);

@@ -13,7 +13,7 @@ init() {
   var_0.modelbase = "zmb_medusa_energy_collector_01_empty";
   var_0.modelplacement = "zmb_medusa_energy_collector_01_empty";
   var_0.modelplacementfailed = "zmb_medusa_energy_collector_bad";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -196,7 +196,7 @@ setcarryingims(var_0, var_1, var_2, var_3) {
 func_49E8(var_0) {
   var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = var_0.angles;
-  var_1.triggerportableradarping = var_0;
+  var_1.owner = var_0;
   var_1.name = "crafted_medusa";
   var_1 hide();
   var_1.carriedmedusa = spawn("script_model", var_1.origin + (0, 0, 25));
@@ -325,7 +325,7 @@ func_B545(var_0, var_1, var_2) {
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
   var_2.iscarrying = 0;
-  var_3.triggerportableradarping = var_2;
+  var_3.owner = var_2;
   var_3 thread func_B541(var_0, var_1);
   self notify("placed");
   self delete();
@@ -333,8 +333,8 @@ func_B545(var_0, var_1, var_2) {
 
 func_B542() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.carriedmedusa delete();
@@ -361,12 +361,12 @@ func_B543(var_0, var_1) {
 
 func_B541(var_0, var_1) {
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_B549["crafted_medusa"].pow);
+  self sethintstring(level.var_B549["crafted_medusa"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
-  thread func_B53C(self.triggerportableradarping);
+  thread func_B53C(self.owner);
   thread scripts\cp\utility::item_handleownerdisconnect("medusa_handleOwner");
   thread scripts\cp\utility::item_timeout(var_0, level.var_B549["crafted_medusa"].timeout);
   thread func_B53D();
@@ -437,7 +437,7 @@ func_B544() {
 }
 
 func_1862(var_0) {
-  level.var_B548 = scripts\engine\utility::array_add_safe(level.var_B548, self);
+  level.var_B548 = scripts\engine\utility::add_to_array(level.var_B548, self);
   scripts\cp\utility::addtotraplist();
 }
 

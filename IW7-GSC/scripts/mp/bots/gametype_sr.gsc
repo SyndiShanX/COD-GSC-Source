@@ -159,7 +159,7 @@ clear_bot_on_reset() {
 clear_bot_on_bot_death(var_0) {
   self endon("reset");
   var_1 = var_0.team;
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect");
   self.bot_picking_up[var_1] = undefined;
 }
 
@@ -215,6 +215,6 @@ clear_bot_camping_on_reset() {
 clear_bot_camping_on_bot_death(var_0) {
   self endon("reset");
   var_1 = var_0.team;
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect");
   self.bot_camping[var_1] = undefined;
 }

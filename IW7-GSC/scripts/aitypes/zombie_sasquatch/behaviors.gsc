@@ -381,8 +381,9 @@ rush_charge(var_0) {
       self scragentsetgoalpos(self.bt.meleetarget.origin);
       self scragentsetgoalradius(24);
     }
-  } else if(self pathdisttogoal() < 144)
+  } else if(self pathdisttogoal() < 144) {
     return anim.success;
+  }
 
   return anim.running;
 }

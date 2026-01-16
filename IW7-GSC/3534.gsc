@@ -116,7 +116,7 @@ func_5802() {
 
 func_139FB() {
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3("dodgeEnd", "death", "disconnect");
+  scripts\engine\utility::waittill_any("dodgeEnd", "death", "disconnect");
   self.dodging = 0;
   if(scripts\mp\utility::_hasperk("specialty_dodge_defense")) {
     self setclientomnvar("ui_light_armor", 0);

@@ -69,14 +69,14 @@ func_1008A(var_0, var_1, var_2, var_3) {
     var_9 = scripts\asm\asm_bb::func_2928(var_3[2]);
   }
 
-  var_0A = scripts\asm\asm::asm_getdemeanor();
-  if(var_0A == "casual" || var_0A == "casual_gun") {
-    var_0B = 0.4;
+  var_10 = scripts\asm\asm::asm_getdemeanor();
+  if(var_10 == "casual" || var_10 == "casual_gun") {
+    var_11 = 0.4;
     if(self pathdisttogoal() < 25) {
-      var_0B = 2;
+      var_11 = 2;
     }
 
-    self.asm.var_11068 = func_3721(var_0, var_1, var_2, var_5, var_8, undefined, var_9, var_0B);
+    self.asm.var_11068 = func_3721(var_0, var_1, var_2, var_5, var_8, undefined, var_9, var_11);
   } else {
     self.asm.var_11068 = func_3721(var_0, var_1, var_2, var_5, var_8, undefined, var_9);
   }
@@ -168,8 +168,8 @@ func_3EA4(var_0, var_1, var_2) {
     var_7 = getguid(var_5);
     var_8 = getguid(var_6);
     var_9 = var_8 + "_to_" + var_7;
-    var_0A = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_9);
-    return var_0A;
+    var_10 = scripts\asm\asm::asm_lookupanimfromalias(var_1, var_9);
+    return var_10;
   }
 }
 
@@ -224,26 +224,26 @@ func_3721(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_9 = var_6;
   }
 
-  var_0A = undefined;
+  var_10 = undefined;
   if(isDefined(var_8)) {
-    var_0A = var_8.origin;
+    var_10 = var_8.origin;
   } else {
-    var_0A = self.vehicle_getspawnerarray;
+    var_10 = self.vehicle_getspawnerarray;
   }
 
-  if(vectordot(vectornormalize(var_0A - self.origin), anglesToForward(self.angles)) < 0.707) {
+  if(vectordot(vectornormalize(var_10 - self.origin), anglesToForward(self.angles)) < 0.707) {
     return undefined;
   }
 
-  var_0B = lib_0F3D::func_C057(var_8);
-  var_0C = undefined;
-  var_0D = undefined;
-  if(var_0B) {
-    var_0C = scripts\asm\shared_utility::getnodeforwardyaw(var_8, var_3);
-    var_0D = var_8.angles;
+  var_11 = lib_0F3D::func_C057(var_8);
+  var_12 = undefined;
+  var_13 = undefined;
+  if(var_11) {
+    var_12 = scripts\asm\shared_utility::getnodeforwardyaw(var_8, var_3);
+    var_13 = var_8.angles;
   }
 
-  return self func_8547(var_0A, var_0D, func_7E54(), var_5, var_0B, self.asm.archetype, var_2, scripts\asm\asm::asm_getdemeanor(), var_0C, var_9, var_6, var_7, var_3);
+  return self func_8547(var_10, var_13, func_7E54(), var_5, var_11, self.asm.archetype, var_2, scripts\asm\asm::asm_getdemeanor(), var_12, var_9, var_6, var_7, var_3);
 }
 
 func_CECA(var_0, var_1) {
@@ -313,21 +313,21 @@ func_CEAA(var_0, var_1, var_2, var_3) {
   var_7 = var_5.var_3F;
   var_8 = (0, var_6[1] - var_5.var_3E, 0);
   var_9 = var_5.areanynavvolumesloaded;
-  var_0A = var_8[1];
+  var_10 = var_8[1];
   if(isDefined(var_5.updategamerprofile) && isDefined(var_5.unloadtransient)) {
-    var_0B = var_5.areanynavvolumesloaded - var_5.updategamerprofile;
-    var_0B = rotatevectorinverted(var_0B, var_5.unloadtransient);
-    var_0C = invertangles(var_5.unloadtransient);
-    var_0D = combineangles(var_8, var_0C);
-    var_0E = self func_846B();
-    var_0B = rotatevector(var_0B, var_0E.angles);
-    var_9 = var_0B + var_0E.origin;
-    var_0F = combineangles(var_0D, var_0E.angles);
-    var_0A = var_0F[1];
+    var_11 = var_5.areanynavvolumesloaded - var_5.updategamerprofile;
+    var_11 = rotatevectorinverted(var_11, var_5.unloadtransient);
+    var_12 = invertangles(var_5.unloadtransient);
+    var_13 = combineangles(var_8, var_12);
+    var_14 = self func_846B();
+    var_11 = rotatevector(var_11, var_14.angles);
+    var_9 = var_11 + var_14.origin;
+    var_15 = combineangles(var_13, var_14.angles);
+    var_10 = var_15[1];
   }
 
   var_10 = self.vehicle_getspawnerarray;
-  self func_8396(var_9, var_0A);
+  self func_8396(var_9, var_10);
   if(isDefined(self.asm.var_4C86.var_4C38)) {
     var_11 = self.asm.var_4C86.var_4C38;
     self animmode(var_11);
@@ -369,14 +369,14 @@ func_7E54() {
 
 func_8174(var_0, var_1, var_2, var_3) {
   var_4 = [];
-  var_4[5] = scripts\asm\asm::func_235C(1, var_0, var_2, var_3);
-  var_4[4] = scripts\asm\asm::func_235C(2, var_0, var_2, var_3);
-  var_4[3] = scripts\asm\asm::func_235C(3, var_0, var_2, var_3);
-  var_4[6] = scripts\asm\asm::func_235C(4, var_0, var_2, var_3);
-  var_4[2] = scripts\asm\asm::func_235C(6, var_0, var_2, var_3);
-  var_4[7] = scripts\asm\asm::func_235C(7, var_0, var_2, var_3);
-  var_4[0] = scripts\asm\asm::func_235C(8, var_0, var_2, var_3);
-  var_4[1] = scripts\asm\asm::func_235C(9, var_0, var_2, var_3);
+  var_4[5] = ::scripts\asm\asm::func_235C(1, var_0, var_2, var_3);
+  var_4[4] = ::scripts\asm\asm::func_235C(2, var_0, var_2, var_3);
+  var_4[3] = ::scripts\asm\asm::func_235C(3, var_0, var_2, var_3);
+  var_4[6] = ::scripts\asm\asm::func_235C(4, var_0, var_2, var_3);
+  var_4[2] = ::scripts\asm\asm::func_235C(6, var_0, var_2, var_3);
+  var_4[7] = ::scripts\asm\asm::func_235C(7, var_0, var_2, var_3);
+  var_4[0] = ::scripts\asm\asm::func_235C(8, var_0, var_2, var_3);
+  var_4[1] = ::scripts\asm\asm::func_235C(9, var_0, var_2, var_3);
   var_4[8] = var_4[0];
   return var_4;
 }
@@ -492,9 +492,9 @@ func_1008F(var_0, var_1, var_2, var_3) {
 
   var_8 = undefined;
   var_9 = self.var_164D[var_0].var_4BC0;
-  var_0A = scripts\asm\asm::func_233F(var_9, "cover_approach");
-  if(isDefined(var_0A)) {
-    var_8 = var_0A.params;
+  var_10 = scripts\asm\asm::func_233F(var_9, "cover_approach");
+  if(isDefined(var_10)) {
+    var_8 = var_10.params;
   }
 
   self.asm.var_11068 = func_3721(var_0, var_1, var_2, var_4, var_7, var_8);

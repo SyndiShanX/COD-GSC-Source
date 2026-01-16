@@ -36,76 +36,76 @@ blinkknifedetonate(var_0, var_1, var_2) {
       return 0;
     }
 
-    var_0A = spawnStruct();
-    var_0A.origin = var_9;
-    var_0A.var_10B53 = "stand";
-    var_0A.cleararbup = 0;
-    var_0B = anglesToForward(var_2 getplayerangles());
-    var_0B = var_0B * (1, 1, 0);
-    var_0C = vectortoangles(var_0B);
-    var_0A.playerangles = var_0C;
-    var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(var_2, var_0A)) {
-      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
+    var_10 = spawnStruct();
+    var_10.origin = var_9;
+    var_10.var_10B53 = "stand";
+    var_10.cleararbup = 0;
+    var_11 = anglesToForward(var_2 getplayerangles());
+    var_11 = var_11 * (1, 1, 0);
+    var_12 = vectortoangles(var_11);
+    var_10.playerangles = var_12;
+    var_10.angles = var_12 * (0, 1, 0);
+    if(blinkknife_validatedestination(var_2, var_10)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_10, var_0);
       return 1;
     }
-  } else if(var_0B) {
-    var_0A = spawnStruct();
-    var_0C.origin = var_5;
-    var_0C.var_10B53 = "stand";
-    var_0C.cleararbup = 1;
-    var_0B = anglesToForward(var_4 getplayerangles());
-    var_0C = var_0C * (1, 1, 0);
-    var_0C = vectortoangles(var_0C);
-    var_0A.playerangles = var_0C;
-    var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(var_2, var_0A)) {
-      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
-      return 1;
-    }
-
-    var_0A.var_10B53 = "crouch";
-    if(blinkknife_validatedestination(var_2, var_0A)) {
-      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
+  } else if(var_11) {
+    var_10 = spawnStruct();
+    var_12.origin = var_5;
+    var_12.var_10B53 = "stand";
+    var_12.cleararbup = 1;
+    var_11 = anglesToForward(var_4 getplayerangles());
+    var_12 = var_12 * (1, 1, 0);
+    var_12 = vectortoangles(var_12);
+    var_10.playerangles = var_12;
+    var_10.angles = var_12 * (0, 1, 0);
+    if(blinkknife_validatedestination(var_2, var_10)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_10, var_0);
       return 1;
     }
 
-    var_0A.var_10B53 = var_6;
-    var_0B = anglesToForward(var_5);
-    var_0B = var_0B * (1, 1, 0);
-    var_0C = vectortoangles(var_0B);
-    var_0A.playerangles = var_0C;
-    var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(var_2, var_0A)) {
-      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
+    var_10.var_10B53 = "crouch";
+    if(blinkknife_validatedestination(var_2, var_10)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_10, var_0);
+      return 1;
+    }
+
+    var_10.var_10B53 = var_6;
+    var_11 = anglesToForward(var_5);
+    var_11 = var_11 * (1, 1, 0);
+    var_12 = vectortoangles(var_11);
+    var_10.playerangles = var_12;
+    var_10.angles = var_12 * (0, 1, 0);
+    if(blinkknife_validatedestination(var_2, var_10)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_10, var_0);
       return 1;
     }
   } else {
-    var_0A = spawnStruct();
-    var_0C.origin = var_5;
-    var_0C.angles = var_4.angles;
-    var_0C.playerangles = var_4 getplayerangles();
-    var_0C.var_10B53 = "stand";
-    var_0C.cleararbup = 0;
-    if(blinkknife_validatedestination(var_4, var_0C)) {
-      thread blinkknife_detonatesuccess(var_4, var_3, var_0C, var_2);
+    var_10 = spawnStruct();
+    var_12.origin = var_5;
+    var_12.angles = var_4.angles;
+    var_12.playerangles = var_4 getplayerangles();
+    var_12.var_10B53 = "stand";
+    var_12.cleararbup = 0;
+    if(blinkknife_validatedestination(var_4, var_12)) {
+      thread blinkknife_detonatesuccess(var_4, var_3, var_12, var_2);
       return 1;
     }
 
-    var_0C.var_10B53 = "crouch";
-    if(blinkknife_validatedestination(var_4, var_0C)) {
-      thread blinkknife_detonatesuccess(var_4, var_3, var_0C, var_2);
+    var_12.var_10B53 = "crouch";
+    if(blinkknife_validatedestination(var_4, var_12)) {
+      thread blinkknife_detonatesuccess(var_4, var_3, var_12, var_2);
       return 1;
     }
 
-    var_0C.var_10B53 = var_8;
-    var_0B = anglesToForward(var_7);
-    var_0C = var_0C * (1, 1, 0);
-    var_0C = vectortoangles(var_0C);
-    var_0A.playerangles = var_0C;
-    var_0A.angles = var_0C * (0, 1, 0);
-    if(blinkknife_validatedestination(var_2, var_0A)) {
-      thread blinkknife_detonatesuccess(var_2, var_1, var_0A, var_0);
+    var_12.var_10B53 = var_8;
+    var_11 = anglesToForward(var_7);
+    var_12 = var_12 * (1, 1, 0);
+    var_12 = vectortoangles(var_12);
+    var_10.playerangles = var_12;
+    var_10.angles = var_12 * (0, 1, 0);
+    if(blinkknife_validatedestination(var_2, var_10)) {
+      thread blinkknife_detonatesuccess(var_2, var_1, var_10, var_0);
       return 1;
     }
   }
@@ -158,7 +158,7 @@ blinkknife_detonatefailed(var_0) {
 blinkknife_watchteleport(var_0) {
   var_0 endon("disconnect");
   var_0.blinkknife_teleporting = 1;
-  var_0 scripts\engine\utility::waittill_any_timeout_1(0.05, "death");
+  var_0 scripts\engine\utility::waittill_any_timeout(0.05, "death");
   var_0.blinkknife_teleporting = undefined;
 }
 

@@ -198,8 +198,9 @@ bot_fireteam_buddy_search() {
               if(isDefined(self.owner.last_commanded_bot)) {
                 self.owner = self.owner.last_commanded_bot;
                 self.owner.bot_fireteam_follower = self;
-              } else
+              } else {
                 self.owner = undefined;
+              }
             }
           }
         } else if(isDefined(level.fireteam_commander[self.team])) {
@@ -255,8 +256,9 @@ fireteam_tdm_set_hunt_leader(var_0) {
         if(!isbot(var_3)) {
           level.fireteam_hunt_leader[var_0] = var_3;
           return 1;
-        } else
+        } else {
           var_1[var_1.size] = var_3;
+        }
       }
     }
   }
@@ -280,7 +282,7 @@ fireteam_tdm_hunt_end(var_0) {
   level notify("hunting_party_end_" + var_0);
   level.fireteam_hunt_leader[var_0] = undefined;
   level.fireteam_hunt_target_zone[var_0] = undefined;
-  level.bot_random_path_function[var_0] = scripts\mp\bots\bots_personality::bot_random_path_default;
+  level.bot_random_path_function[var_0] = ::scripts\mp\bots\bots_personality::bot_random_path_default;
 }
 
 fireteam_tdm_hunt_most_dangerous_zone(var_0, var_1) {
@@ -353,8 +355,9 @@ fireteam_tdm_find_hunt_zone(var_0) {
           level.fireteam_hunt_target_zone[var_0] = var_2;
           level.fireteam_hunt_next_zone_search_time[var_0] = gettime() + 1000;
           var_1 = 0.5;
-        } else
+        } else {
           var_1 = 1;
+        }
       } else {
         var_3 = 0;
         var_4 = 0;

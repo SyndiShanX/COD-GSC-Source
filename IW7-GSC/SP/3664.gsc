@@ -42,9 +42,9 @@ func_11851() {
     var_7 = anglesToForward(var_6);
     var_8 = anglestoright(var_6);
     var_9 = anglestoup(var_6);
-    var_0A = abs(vectordot(var_3, var_7));
-    var_0B = abs(vectordot(var_3, var_9));
-    var_0C = abs(vectordot(var_3, var_8));
+    var_10 = abs(vectordot(var_3, var_7));
+    var_11 = abs(vectordot(var_3, var_9));
+    var_12 = abs(vectordot(var_3, var_8));
     if(var_5 != 0) {
       if(var_4 > 20) {
         if(level.player issprinting()) {
@@ -56,7 +56,7 @@ func_11851() {
         func_12875();
       }
 
-      if(var_0B > 20 || var_0A > 20 || var_0C > 20) {
+      if(var_11 > 20 || var_10 > 20 || var_12 > 20) {
         func_12876();
       }
     }
@@ -128,7 +128,7 @@ func_CF84() {
   for(;;) {
     scripts\engine\utility::waitframe();
     var_2 = 0;
-    if(level.player getweaponrankinfominxp() > 0.5 && gettime() > var_0) {
+    if(level.player playerads() > 0.5 && gettime() > var_0) {
       var_2 = 1;
       var_0 = gettime() + 6000;
       thread func_CD54("player_short_breath_in");
@@ -353,11 +353,11 @@ func_5B6A(var_0, var_1) {
   var_7 = var_6 * var_4;
   var_8 = 2;
   var_9 = var_6 * var_4 - var_8;
-  var_0A = anglestoright(var_3);
-  var_0B = var_0A * var_8 * -1;
-  var_0C = var_0A * var_8;
-  var_0D = (0.8, 0.8, 0);
-  var_0E = 4;
+  var_10 = anglestoright(var_3);
+  var_11 = var_10 * var_8 * -1;
+  var_12 = var_10 * var_8;
+  var_13 = (0.8, 0.8, 0);
+  var_14 = 4;
 }
 
 draw_axis(var_0) {

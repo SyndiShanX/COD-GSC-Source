@@ -199,8 +199,9 @@ func_10805(var_0) {
     }
 
     return var_11;
-  } else
+  } else {
     return spawn_group();
+  }
 }
 
 func_1041B(var_0) {
@@ -551,8 +552,9 @@ func_131FA() {
         self notify("newpath");
         self func_83E8();
         return;
-      } else
+      } else {
         _freezelookcontrols();
+      }
 
       if(self.var_B91F) {
         self hide();
@@ -1087,8 +1089,9 @@ func_8DAB(var_0, var_1) {
         var_2.claimed = undefined;
         self notify("crash_done");
         return;
-      } else
+      } else {
         var_8 = "death";
+      }
     }
 
     self setvehgoalpos(var_2.origin, 0);
@@ -1285,8 +1288,9 @@ func_12FC(var_0, var_1) {
     var_0 = vectornormalize(var_0);
     var_3 = vectorlerp(var_2, var_0, var_1);
     return var_3;
-  } else
+  } else {
     return undefined;
+  }
 }
 
 func_12FB(var_0, var_1, var_2) {
@@ -1414,8 +1418,9 @@ func_4E49() {
     var_0 hide();
     var_0 linkto(self);
     self.var_4E49 = var_0;
-  } else
+  } else {
     self.var_4E49 setModel(self.model);
+  }
 
   return self.var_4E49;
 }
@@ -1546,8 +1551,9 @@ func_12E33(var_0) {
 
       var_0.var_10F82 = var_0.var_10F82 + var_4;
     }
-  } else
+  } else {
     var_0.var_10F82 = 0;
+  }
 
   return var_0.var_10F82;
 }
@@ -2337,8 +2343,9 @@ func_740E() {
     self.var_EE50 = 1;
     self.var_3233 = 5000;
     self.health = 350;
-  } else
+  } else {
     self.var_EE50 = 0;
+  }
 
   self.var_8CB6 = 20000;
   self.health = self.health + self.var_8CB6;
@@ -2366,8 +2373,9 @@ func_740E() {
     } else if(func_9029(var_1)) {
       self.health = self.var_4BF0;
       self.var_3233 = self.var_3233 - var_3;
-    } else
+    } else {
       self.var_4BF0 = self.health;
+    }
 
     if(self.health < self.var_8CB6 && !isDefined(self.var_13243)) {
       break;
@@ -2557,8 +2565,9 @@ func_134D() {
       if(var_1.var_5041 != "sentry") {
         var_1 give_player_session_tokens(var_1.var_5041);
       }
-    } else
+    } else {
       var_1 give_player_session_tokens("auto_nonai");
+    }
 
     func_F5D8(var_1);
   }

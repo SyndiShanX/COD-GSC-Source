@@ -353,8 +353,9 @@ func_114D9() {
     if(self.health <= 0) {
       self notify("death");
       return;
-    } else if(self.health < var_1 / 4 && var_4 == 0)
+    } else if(self.health < var_1 / 4 && var_4 == 0) {
       var_4 = 1;
+    }
     else if(self.health < var_1 / 2 && var_3 == 0) {
       var_3 = 1;
     } else if(self.health < var_1 / 1.5 && var_2 == 0) {
@@ -434,8 +435,9 @@ relative_ads_anims(var_0) {
     } else {
       return "front_side";
     }
-  } else if(var_3 < -0.9)
+  } else if(var_3 < -0.9) {
     return "rear";
+  }
   else {
     return "rear_side";
   }
@@ -897,8 +899,9 @@ func_114DF() {
         if(isDefined(var_1[var_2])) {
           var_0[var_0.size] = var_1[var_2];
         }
-      } else
+      } else {
         continue;
+      }
 
       wait 0.05;
     }
@@ -906,8 +909,9 @@ func_114DF() {
     if(var_0.size > 0) {
       func_1571(var_0);
       return;
-    } else
+    } else {
       wait 0.5;
+    }
   }
 }
 

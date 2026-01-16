@@ -175,7 +175,7 @@ handlesplashqueue() {
   self endon("death");
   self endon("disconnect");
   while(isDefined(self.splashqueuehead)) {
-    scripts\engine\utility::waittill_any_3("splash_list_cleared", "spawned_player");
+    scripts\engine\utility::waittill_any("splash_list_cleared", "spawned_player");
     for(var_0 = 0; var_0 < 6; var_0++) {
       var_1 = self.splashqueuehead;
       showsplashinternal(var_1.ref, var_1.optionalnumber, var_1.playerforplayercard, var_1.playernumforplayercard, var_1.altdisplayindex);

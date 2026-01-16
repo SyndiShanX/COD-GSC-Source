@@ -228,7 +228,7 @@ watchforcharmweaponremoved(var_0, var_1, var_2) {
       break;
     }
 
-    var_1 scripts\engine\utility::waittill_any_3("weapon_purchased", "mule_munchies_sold");
+    var_1 scripts\engine\utility::waittill_any("weapon_purchased", "mule_munchies_sold");
     var_3 = 0;
     var_4 = var_1 getweaponslistall();
     foreach(var_6 in var_4) {
@@ -545,33 +545,33 @@ run_toad_quest(var_0) {
   var_7 = scripts\engine\utility::getstruct("toad_move_struct_seven", "targetname");
   var_8 = scripts\engine\utility::getstruct("toad_move_struct_eight", "targetname");
   var_9 = scripts\engine\utility::getstruct("toad_move_struct_nine", "targetname");
-  var_0A = scripts\engine\utility::getstruct("toad_move_struct_ten", "targetname");
-  var_0B = [var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A];
-  var_0C = 0;
-  for(var_0C = 0; var_0C < 10; var_0C++) {
-    if(var_0C <= 5) {
-      var_0D = scripts\engine\utility::random(var_0B);
-      level.toad_ent_array[var_0C] = spawn("script_model", var_0D.origin, 0, 64, 32);
-      level.toad_ent_array[var_0C] setModel("tag_origin_memory_quest");
-      level.toad_ent_array[var_0C] setCanDamage(1);
-      level.toad_ent_array[var_0C].maxhealth = 5;
-      level.toad_ent_array[var_0C].health = 5;
-      level.toad_ent_array[var_0C] playLoopSound("memory_quest_frogs");
-      level.toad_ent_array[var_0C] thread move_ents_in_random_directions(var_0B);
-      level.toad_ent_array[var_0C] thread watch_for_ground_pound_on_toad();
+  var_10 = scripts\engine\utility::getstruct("toad_move_struct_ten", "targetname");
+  var_11 = [var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10];
+  var_12 = 0;
+  for(var_12 = 0; var_12 < 10; var_12++) {
+    if(var_12 <= 5) {
+      var_13 = scripts\engine\utility::random(var_11);
+      level.toad_ent_array[var_12] = spawn("script_model", var_13.origin, 0, 64, 32);
+      level.toad_ent_array[var_12] setModel("tag_origin_memory_quest");
+      level.toad_ent_array[var_12] setCanDamage(1);
+      level.toad_ent_array[var_12].maxhealth = 5;
+      level.toad_ent_array[var_12].health = 5;
+      level.toad_ent_array[var_12] playLoopSound("memory_quest_frogs");
+      level.toad_ent_array[var_12] thread move_ents_in_random_directions(var_11);
+      level.toad_ent_array[var_12] thread watch_for_ground_pound_on_toad();
     }
   }
 
   level waittill("toad_quest_complete");
-  foreach(var_0F in level.toad_ent_array) {
-    if(isDefined(var_0F)) {
-      var_0F delete();
+  foreach(var_15 in level.toad_ent_array) {
+    if(isDefined(var_15)) {
+      var_15 delete();
     }
   }
 
   level.toad_ent_array = undefined;
   level.toads_killed = undefined;
-  var_0B = undefined;
+  var_11 = undefined;
   return 1;
 }
 
@@ -666,8 +666,8 @@ choose_new_dir(var_0, var_1) {
   var_7 = cos(var_6) * sin(var_5);
   var_8 = sin(var_6) * sin(var_5);
   var_9 = cos(var_5);
-  var_0A = scripts\engine\utility::drop_to_ground(var_7 * var_3 + var_8 * var_4 + var_9 * var_2 / 0.33);
-  return -1 * var_0A;
+  var_10 = scripts\engine\utility::drop_to_ground(var_7 * var_3 + var_8 * var_4 + var_9 * var_2 / 0.33);
+  return -1 * var_10;
 }
 
 run_pacifier_quest(var_0) {
@@ -700,8 +700,8 @@ wait_for_area_cleared(var_0) {
   var_6 = 15;
   thread check_for_players_in_area(var_1, var_2, var_3, var_4, var_0);
   for(;;) {
-    level waittill("zombie_killed", var_7, var_8, var_9, var_0A);
-    if(isDefined(var_0A) && isplayer(var_0A)) {
+    level waittill("zombie_killed", var_7, var_8, var_9, var_10);
+    if(isDefined(var_10) && isplayer(var_10)) {
       if(is_in_box(var_1, var_2, var_3, var_4, var_7)) {
         var_5++;
       }
@@ -712,9 +712,9 @@ wait_for_area_cleared(var_0) {
     }
   }
 
-  foreach(var_0C in var_0) {
-    if(isDefined(var_0C)) {
-      var_0C delete();
+  foreach(var_12 in var_0) {
+    if(isDefined(var_12)) {
+      var_12 delete();
     }
   }
 
@@ -734,9 +734,9 @@ check_for_players_in_area(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(!var_5) {
-      foreach(var_0A in var_4) {
-        if(isDefined(var_0A)) {
-          var_0A delete();
+      foreach(var_10 in var_4) {
+        if(isDefined(var_10)) {
+          var_10 delete();
         }
       }
 
@@ -801,12 +801,12 @@ is_in_box(var_0, var_1, var_2, var_3, var_4) {
   for(var_6 = 0; var_6 < 2; var_6++) {
     foreach(var_8 in var_5) {
       var_9 = 0;
-      foreach(var_0B in var_5) {
-        if(var_8 == var_0B) {
+      foreach(var_11 in var_5) {
+        if(var_8 == var_11) {
           continue;
         }
 
-        if((var_4[var_6] > var_8[var_6] && var_4[var_6] < var_0B[var_6]) || var_4[var_6] > var_0B[var_6] && var_4[var_6] < var_8[var_6]) {
+        if((var_4[var_6] > var_8[var_6] && var_4[var_6] < var_11[var_6]) || var_4[var_6] > var_11[var_6] && var_4[var_6] < var_8[var_6]) {
           break;
         } else {
           var_9++;
@@ -844,7 +844,7 @@ watch_for_player_damage(var_0, var_1, var_2) {
   var_0.model.maxhealth = 1;
   var_0.model setCanDamage(1);
   for(;;) {
-    var_0.model waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+    var_0.model waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     var_0.model playsoundtoplayer("memory_quest_pool_ball", var_4);
     scripts\engine\utility::waitframe();
     var_1.total_pool_balls++;
@@ -880,14 +880,14 @@ run_ring_quest(var_0) {
   }
 
   wait(1);
-  foreach(var_0B in level.players) {
-    if(isDefined(var_0.currentlyownedby) && isDefined(var_0.currentlyownedby[var_0B.name])) {
-      var_0.currentlyownedby[var_0B.name] setscriptablepartstate("idle_effects", "sparkle");
+  foreach(var_11 in level.players) {
+    if(isDefined(var_0.currentlyownedby) && isDefined(var_0.currentlyownedby[var_11.name])) {
+      var_0.currentlyownedby[var_11.name] setscriptablepartstate("idle_effects", "sparkle");
     }
   }
 
-  foreach(var_0E in level.players) {
-    var_0E scripts\cp\cp_interaction::refresh_interaction();
+  foreach(var_14 in level.players) {
+    var_14 scripts\cp\cp_interaction::refresh_interaction();
   }
 
   return 1;
@@ -1037,7 +1037,7 @@ waittill_archery_target_damaged(var_0, var_1) {
       var_2 = 1.5;
     }
 
-    var_3 = scripts\engine\utility::waittill_any_timeout_1(var_2, "damage");
+    var_3 = scripts\engine\utility::waittill_any_timeout(var_2, "damage");
     self setCanDamage(0);
     if(var_3 == "damage") {
       var_4 = 418;
@@ -1151,7 +1151,7 @@ run_shovel_quest(var_0) {
   var_9 = determine_best_shovel_spawns(var_7.origin, var_1);
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(var_1);
   wait(2);
-  var_0A = skeleton_spawner(var_9);
+  var_10 = skeleton_spawner(var_9);
   while(level.skeletons_alive > 0) {
     wait(0.1);
   }
@@ -1248,7 +1248,7 @@ skeleton_arrival_cowbell(var_0) {
   var_1 = (0, 0, -11);
   var_2 = spawnfx(level._effect["superslasher_summon_zombie_portal"], var_0 + var_1, (0, 0, 1), (1, 0, 0));
   triggerfx(var_2);
-  scripts\engine\utility::waittill_any_3("death", "intro_vignette_done");
+  scripts\engine\utility::waittill_any("death", "intro_vignette_done");
   var_2 delete();
 }
 
@@ -1287,8 +1287,8 @@ run_tiki_quest(var_0) {
   var_2 delete();
   var_8 = scripts\engine\utility::getstruct(var_1.target, "targetname");
   var_9 = scripts\engine\utility::getstruct(var_8.target, "targetname");
-  var_0A = var_1.origin;
-  var_0B = var_1.angles;
+  var_10 = var_1.origin;
+  var_11 = var_1.angles;
   var_1 moveto(var_8.origin, 0.1);
   var_1 rotateto(var_8.angles, 0.1);
   wait(0.1);
@@ -1309,20 +1309,20 @@ run_binocular_quest(var_0) {
   var_7 = scripts\engine\utility::getstruct("totem_struct_two", "targetname");
   var_8 = scripts\engine\utility::getstruct("totem_struct_three", "targetname");
   var_9 = scripts\engine\utility::getstruct("totem_struct_four", "targetname");
-  var_0A = [var_2, var_3, var_4, var_5];
-  var_0B = [var_6, var_7, var_8, var_9];
-  var_0C = 15;
-  level thread check_for_beach_structs_shot(var_0, var_0A, var_1);
-  level thread check_for_totem_poles_shot(var_0, var_0B, var_1);
-  foreach(var_0E in level.players) {
-    var_0E thread run_sniper_watcher(var_0E, var_0, var_1, var_0C);
+  var_10 = [var_2, var_3, var_4, var_5];
+  var_11 = [var_6, var_7, var_8, var_9];
+  var_12 = 15;
+  level thread check_for_beach_structs_shot(var_0, var_10, var_1);
+  level thread check_for_totem_poles_shot(var_0, var_11, var_1);
+  foreach(var_14 in level.players) {
+    var_14 thread run_sniper_watcher(var_14, var_0, var_1, var_12);
   }
 
   level scripts\engine\utility::waittill_multiple("totem_part_complete", "sniper_quest_kills_done");
   scripts\engine\utility::waitframe();
   thread play_vfx_between_points_mem_quest_binoculars(var_0.origin, (-1806.99, 1061.74, 913));
-  foreach(var_0E in level.players) {
-    var_0E scripts\cp\cp_interaction::refresh_interaction();
+  foreach(var_14 in level.players) {
+    var_14 scripts\cp\cp_interaction::refresh_interaction();
   }
 
   level.sniper_quest_on = undefined;
@@ -1363,7 +1363,7 @@ check_for_totem_poles_shot(var_0, var_1, var_2) {
 watch_for_totem_death(var_0) {
   self endon("totem_part_complete");
   while(level.totems_killed < 8) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!isplayer(var_2) && !isagent(var_2)) {
       continue;
     }
@@ -1487,9 +1487,9 @@ run_boots_quest(var_0) {
   var_8.angles = var_3 gettagangles("tag_inhand");
   var_8 linkto(var_3, "tag_inhand");
   while(!var_6) {
-    foreach(var_0A in level.players) {
-      if(distance2dsquared(var_0A.origin, var_2.origin) <= 26896) {
-        if(scripts\engine\utility::within_fov(var_0A.origin, var_0A getplayerangles(), var_3.origin, 0.83)) {
+    foreach(var_10 in level.players) {
+      if(distance2dsquared(var_10.origin, var_2.origin) <= 26896) {
+        if(scripts\engine\utility::within_fov(var_10.origin, var_10 getplayerangles(), var_3.origin, 0.83)) {
           var_6 = 1;
           break;
         }
@@ -1504,8 +1504,8 @@ run_boots_quest(var_0) {
   var_8 show();
   var_3 show();
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
-  var_0C = getanimlength( % iw7_cp_slasher_walk_forward_01);
-  wait(var_0C);
+  var_12 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+  wait(var_12);
   var_3 delete();
   var_8 delete();
   var_1 = scripts\engine\utility::getstruct("boot_spooky_guy_2", "targetname");
@@ -1539,9 +1539,9 @@ run_boots_quest(var_0) {
   var_8.angles = var_3 gettagangles("tag_inhand");
   var_8 linkto(var_3, "tag_inhand");
   while(!var_6) {
-    foreach(var_0A in level.players) {
-      if(distance2dsquared(var_0A.origin, var_2.origin) <= 26896) {
-        if(scripts\engine\utility::within_fov(var_0A.origin, var_0A getplayerangles(), var_3.origin, 0.83)) {
+    foreach(var_10 in level.players) {
+      if(distance2dsquared(var_10.origin, var_2.origin) <= 26896) {
+        if(scripts\engine\utility::within_fov(var_10.origin, var_10 getplayerangles(), var_3.origin, 0.83)) {
           var_6 = 1;
           break;
         }
@@ -1556,10 +1556,10 @@ run_boots_quest(var_0) {
   var_8 show();
   var_3 show();
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
-  var_0C = getanimlength( % iw7_cp_slasher_walk_forward_01);
-  wait(var_0C);
+  var_12 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+  wait(var_12);
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
-  wait(var_0C * 0.75);
+  wait(var_12 * 0.75);
   var_3 delete();
   var_8 delete();
   var_1 = scripts\engine\utility::getstruct("boot_spooky_guy_3", "targetname");
@@ -1589,9 +1589,9 @@ run_boots_quest(var_0) {
   var_8.angles = var_3 gettagangles("tag_inhand");
   var_8 linkto(var_3, "tag_inhand");
   while(!var_6) {
-    foreach(var_0A in level.players) {
-      if(distance2dsquared(var_0A.origin, var_2.origin) <= 26896) {
-        if(scripts\engine\utility::within_fov(var_0A.origin, var_0A getplayerangles(), var_3.origin, 0.83)) {
+    foreach(var_10 in level.players) {
+      if(distance2dsquared(var_10.origin, var_2.origin) <= 26896) {
+        if(scripts\engine\utility::within_fov(var_10.origin, var_10 getplayerangles(), var_3.origin, 0.83)) {
           var_6 = 1;
           break;
         }
@@ -1606,8 +1606,8 @@ run_boots_quest(var_0) {
   var_8 show();
   var_3 show();
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
-  var_0C = getanimlength( % iw7_cp_slasher_walk_forward_01);
-  wait(var_0C * 0.8);
+  var_12 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+  wait(var_12 * 0.8);
   var_3 delete();
   var_8 delete();
   return 1;

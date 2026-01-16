@@ -224,7 +224,7 @@ grenadethrownotehandler(var_0, var_1, var_2, var_3) {
       self notify("stop grenade check");
       var_4 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
       if(isDefined(var_4)) {
-        var_5 = self.setignoremegroup;
+        var_5 = self.lastenemysightpos;
         var_6 = self getplayerassets(scripts\mp\agents\slasher\slasher_agent::getslashergrenadehandoffset(), var_5, 0, "min time", "min energy");
         if(isDefined(var_6)) {
           self func_83C2();
@@ -587,10 +587,10 @@ startspinattackdamage(var_0) {
         continue;
       }
 
-      var_0A = var_6.origin - self.origin * (1, 1, 0);
-      var_0B = vectornormalize(var_0A);
-      var_0C = vectordot(var_0B, var_4);
-      if(var_0C < 0.966) {
+      var_10 = var_6.origin - self.origin * (1, 1, 0);
+      var_11 = vectornormalize(var_10);
+      var_12 = vectordot(var_11, var_4);
+      if(var_12 < 0.966) {
         continue;
       }
 

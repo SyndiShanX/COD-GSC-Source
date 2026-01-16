@@ -279,10 +279,10 @@ escape_game_logic() {
     }
 
     var_9 = getent(var_8, "script_noteworthy");
-    var_0A = make_waypoint_to_door(var_9);
+    var_10 = make_waypoint_to_door(var_9);
     scripts\engine\utility::flag_wait("score goal reached");
     var_5 = var_8;
-    var_0A destroy();
+    var_10 destroy();
     open_current_door(var_9);
     level notify("next_area_opened", var_8);
     var_6++;
@@ -339,14 +339,14 @@ get_door_connecting_areas(var_0, var_1) {
     }
   }
 
-  foreach(var_0A in var_3) {
-    foreach(var_0C in var_4) {
-      if(distancesquared(var_0A.origin, var_0C.origin) > var_2) {
+  foreach(var_10 in var_3) {
+    foreach(var_12 in var_4) {
+      if(distancesquared(var_10.origin, var_12.origin) > var_2) {
         continue;
       }
 
-      if(isDefined(var_0A.script_noteworthy) && isDefined(var_0C.script_noteworthy) && var_0A.script_noteworthy == var_0C.script_noteworthy) {
-        var_5[var_5.size] = var_0C;
+      if(isDefined(var_10.script_noteworthy) && isDefined(var_12.script_noteworthy) && var_10.script_noteworthy == var_12.script_noteworthy) {
+        var_5[var_5.size] = var_12;
       }
     }
   }
@@ -741,9 +741,9 @@ zombie_get_player_respawn_loc(var_0) {
 
   var_8 = (var_1 / var_4, var_2 / var_4, var_3 / var_4);
   var_9 = sortbydistance(level.active_player_respawn_locs, var_8);
-  foreach(var_0B in var_9) {
-    if(canspawn(var_0B.origin) && !positionwouldtelefrag(var_0B.origin)) {
-      return var_0B;
+  foreach(var_11 in var_9) {
+    if(canspawn(var_11.origin) && !positionwouldtelefrag(var_11.origin)) {
+      return var_11;
     }
   }
 
@@ -912,7 +912,7 @@ watchglproxy() {
   var_0 = undefined;
   self notifyonplayercommand("fired", "+attack");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("weapon_switch_started", "weapon_change", "weaponchange");
+    scripts\engine\utility::waittill_any("weapon_switch_started", "weapon_change", "weaponchange");
     self notify("stop_regen_on_weapons");
     wait(0.1);
     var_1 = self getweaponslistall();

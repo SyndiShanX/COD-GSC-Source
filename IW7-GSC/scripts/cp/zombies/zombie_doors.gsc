@@ -137,11 +137,11 @@ func_95B5(var_0) {
   }
 
   if(isDefined(var_0.target)) {
-    var_0D = var_0.target;
+    var_13 = var_0.target;
     if(isDefined(var_0.var_336)) {
-      var_0E = getEntArray(var_0.var_336, "targetname");
-      foreach(var_10 in var_0E) {
-        if(var_10.target == var_0D) {
+      var_14 = getEntArray(var_0.var_336, "targetname");
+      foreach(var_10 in var_14) {
+        if(var_10.target == var_13) {
           var_10 delete();
         }
       }
@@ -438,7 +438,7 @@ chi_door_think() {
   }
 
   for(;;) {
-    self.physics_capsulecast waittill("damage", var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10, var_11);
+    self.physics_capsulecast waittill("damage", var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10, var_11);
     if(!isDefined(level.open_sesame) || !level.open_sesame) {
       if(!var_9 scripts\cp\utility::is_valid_player()) {
         continue;

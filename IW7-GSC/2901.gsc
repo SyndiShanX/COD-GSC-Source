@@ -77,7 +77,7 @@ func_171A(var_0, var_1) {
 }
 
 func_E05B(var_0, var_1) {
-  level.var_BE4D[var_0] = scripts\engine\utility::array_remove(level.var_BE4D[var_0], var_1);
+  level.var_BE4D[var_0] = ::scripts\engine\utility::array_remove(level.var_BE4D[var_0], var_1);
 }
 
 func_9725() {

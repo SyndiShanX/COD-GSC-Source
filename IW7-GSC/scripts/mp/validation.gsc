@@ -51,8 +51,8 @@ validateloadout(var_0) {
 func_1314B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = scripts\mp\utility::getweaponrootname(var_1);
   var_9 = scripts\mp\utility::iscacsecondaryweapon(var_1);
-  var_0A = scripts\engine\utility::ter_op(var_7, "secondary", "primary");
-  var_0B = scripts\engine\utility::ter_op(var_7, 4, 1);
+  var_10 = scripts\engine\utility::ter_op(var_7, "secondary", "primary");
+  var_11 = scripts\engine\utility::ter_op(var_7, 4, 1);
   if(isDefined(var_1) && var_1 != "none" && var_1 != "iw7_fists") {
     var_0.var_D640++;
     if(var_7) {
@@ -62,57 +62,57 @@ func_1314B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
     } else if(var_9) {
       validationerror("secondaryAsPrimary", undefined, var_1);
-      var_0.invaliditems[var_0B] = 1;
+      var_0.invaliditems[var_11] = 1;
     }
 
-    var_0C = scripts\mp\utility::func_13CAC(var_8);
-    if(!isDefined(var_0C)) {
-      validationerror("unknownWeapon", var_0A, var_1);
-      var_0.invaliditems[var_0B] = 1;
+    var_12 = scripts\mp\utility::func_13CAC(var_8);
+    if(!isDefined(var_12)) {
+      validationerror("unknownWeapon", var_10, var_1);
+      var_0.invaliditems[var_11] = 1;
     } else {
-      var_0D = tablelookup("mp\statstable.csv", 0, var_0C, 41);
-      if(int(var_0D) < 0) {
-        validationerror("unreleasedWeapon", var_0A, var_1);
-        var_0.invaliditems[var_0B] = 1;
+      var_13 = tablelookup("mp\statstable.csv", 0, var_12, 41);
+      if(int(var_13) < 0) {
+        validationerror("unreleasedWeapon", var_10, var_1);
+        var_0.invaliditems[var_11] = 1;
       }
     }
 
     if(!self isitemunlocked(var_8, "weapon") && !weaponunlocksvialoot(var_8)) {
-      validationerror("lockedWeapon", var_0A, var_1);
-      var_0.invaliditems[var_0B] = 1;
+      validationerror("lockedWeapon", var_10, var_1);
+      var_0.invaliditems[var_11] = 1;
     }
 
     if(var_5 == 0) {
       if(var_6 != -1) {
-        validationerror("emptyItemIDMismatch", var_0A, var_1);
-        var_0.invaliditems[var_0B] = 1;
+        validationerror("emptyItemIDMismatch", var_10, var_1);
+        var_0.invaliditems[var_11] = 1;
       }
     } else if(var_6 == -1) {
-      validationerror("emptyVariantIDMismatch", var_0A, var_1);
-      var_0.invaliditems[var_0B] = 1;
+      validationerror("emptyVariantIDMismatch", var_10, var_1);
+      var_0.invaliditems[var_11] = 1;
     } else {
       if(!scripts\mp\loot::isweaponitem(var_5)) {
-        validationerror("nonWeaponLootItemID", var_0A, var_1);
-        var_0.invaliditems[var_0B] = 1;
+        validationerror("nonWeaponLootItemID", var_10, var_1);
+        var_0.invaliditems[var_11] = 1;
       }
 
-      var_0E = scripts\mp\loot::getlootweaponref(var_5);
-      if(!isDefined(var_0E)) {
-        validationerror("badLootItemID", var_0A, var_1);
-        var_0.invaliditems[var_0B] = 1;
+      var_14 = scripts\mp\loot::getlootweaponref(var_5);
+      if(!isDefined(var_14)) {
+        validationerror("badLootItemID", var_10, var_1);
+        var_0.invaliditems[var_11] = 1;
       } else {
-        var_0F = scripts\mp\loot::lookupvariantref(var_1, var_6);
-        if(!isDefined(var_0F)) {
-          validationerror("badVariantRef", var_0A, var_1);
-          var_0.invaliditems[var_0B] = 1;
-        } else if(var_0F != var_0E) {
-          validationerror("lootDataMismatch", var_0A, var_1);
-          var_0.invaliditems[var_0B] = 1;
+        var_15 = scripts\mp\loot::lookupvariantref(var_1, var_6);
+        if(!isDefined(var_15)) {
+          validationerror("badVariantRef", var_10, var_1);
+          var_0.invaliditems[var_11] = 1;
+        } else if(var_15 != var_14) {
+          validationerror("lootDataMismatch", var_10, var_1);
+          var_0.invaliditems[var_11] = 1;
         }
       }
     }
 
-    validateattachments(var_0, var_2, var_1, var_8, var_0A);
+    validateattachments(var_0, var_2, var_1, var_8, var_10);
   }
 }
 
@@ -122,37 +122,37 @@ validateattachments(var_0, var_1, var_2, var_3, var_4) {
   var_7 = scripts\engine\utility::ter_op(var_4 == "primary", 2, 5);
   var_8 = 0;
   var_9 = 0;
-  var_0A = scripts\engine\utility::ter_op(var_4 == "primary", 2, 2);
-  foreach(var_11, var_0C in var_1) {
-    var_0D = 0;
-    if(isDefined(var_0C) && var_0C != "none") {
-      var_0E = scripts\mp\utility::getattachmenttype(var_0C);
-      if(isDefined(var_0E) && var_0E != "") {
-        var_0F = scripts\mp\utility::attachmentmap_tounique(var_0C, var_2);
-        if(isDefined(var_0F)) {
-          if(var_0E == "rail") {
-            var_0D = 1;
+  var_10 = scripts\engine\utility::ter_op(var_4 == "primary", 2, 2);
+  foreach(var_11, var_12 in var_1) {
+    var_13 = 0;
+    if(isDefined(var_12) && var_12 != "none") {
+      var_14 = scripts\mp\utility::getattachmenttype(var_12);
+      if(isDefined(var_14) && var_14 != "") {
+        var_15 = scripts\mp\utility::attachmentmap_tounique(var_12, var_2);
+        if(isDefined(var_15)) {
+          if(var_14 == "rail") {
+            var_13 = 1;
           }
         }
       }
 
-      var_10 = var_3 + "+" + var_0C;
+      var_10 = var_3 + "+" + var_12;
       if(!self isitemunlocked(var_10, var_6)) {
-        validationerror("lockedAttachment", var_4, var_0C);
+        validationerror("lockedAttachment", var_4, var_12);
         var_0.invaliditems[var_7][var_0.invaliditems[var_7].size] = var_11;
       }
 
-      if(!scripts\mp\weapons::func_9F3C(var_3, var_0C)) {
-        validationerror("nonSelectableAttachment", var_4, var_0C);
+      if(!scripts\mp\weapons::func_9F3C(var_3, var_12)) {
+        validationerror("nonSelectableAttachment", var_4, var_12);
         var_0.invaliditems[var_7][var_0.invaliditems[var_7].size] = var_11;
       }
 
-      if(var_0D) {
+      if(var_13) {
         var_8++;
         var_0.var_D640++;
       } else {
         var_9++;
-        if(var_9 <= var_0A) {
+        if(var_9 <= var_10) {
           var_0.var_D640++;
         } else {
           var_0.var_13D1E[var_4 + "_attachment_" + var_9 + 1] = 1;
@@ -217,7 +217,7 @@ func_13145(var_0, var_1, var_2) {
         var_0.invaliditems[9][var_0.invaliditems[9].size] = var_5;
       }
 
-      var_6 = scripts\mp\perks\_perks::func_805C(var_5);
+      var_6 = scripts\mp\perks\perks::func_805C(var_5);
       if(isDefined(var_6)) {
         var_3[var_6]++;
         if(var_3[var_6] > 2) {
@@ -261,7 +261,7 @@ validatestreaks(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_7 = scripts\mp\killstreaks\_killstreaks::getkillstreaksetupinfo(var_6);
+    var_7 = scripts\mp\killstreaks\killstreaks::getkillstreaksetupinfo(var_6);
     if(!isDefined(var_7)) {
       validationerror("unknownStreak", undefined, var_6);
       var_0.invaliditems[12] = 1;

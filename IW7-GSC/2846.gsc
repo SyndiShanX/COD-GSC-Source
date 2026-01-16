@@ -536,8 +536,9 @@ func_11F5(var_0, var_1, var_2) {
     if(var_8 == 1.0 && var_15 == 1.0) {
       var_16 = var_16 * 1.01 * scripts\sp\utility::func_E753(var_9, 0, 1);
       var_9 = var_9 + 0.5;
-    } else
+    } else {
       var_9 = 1;
+    }
 
     var_16 = clamp(var_16, 0 - var_4.var_B4B9, var_4.var_B4B9);
 
@@ -1205,8 +1206,9 @@ func_11D6(var_0, var_1, var_2) {
     if(isDefined(level.var_5A23[var_0].var_C9FD)) {
       level.var_5A23[var_0].var_C9FD delete();
     }
-  } else if(isDefined(level.var_5A23[var_0].var_A5AE))
+  } else if(isDefined(level.var_5A23[var_0].var_A5AE)) {
     level.var_5A23[var_0].var_A5AE delete();
+  }
 
   var_5 = func_12A1(var_0, var_1);
   var_3.origin = var_5;
@@ -1319,8 +1321,9 @@ func_11EA(var_0, var_1, var_2, var_3, var_4) {
   if(func_794C(var_0) < var_8) {
     thread func_11F9(var_0, var_1, var_2, 0, 1);
     thread func_120B(var_1, var_2, var_3);
-  } else
+  } else {
     thread func_1210(var_0, var_2);
+  }
 }
 
 func_1209(var_0, var_1, var_2, var_3) {
@@ -1378,8 +1381,9 @@ func_1209(var_0, var_1, var_2, var_3) {
       if(var_17 >= var_5) {
         var_6++;
       }
-    } else
+    } else {
       var_6 = 0;
+    }
 
     if(var_6 >= 1) {
       break;
@@ -1461,8 +1465,9 @@ func_1296(var_0, var_1) {
         if(var_24 <= var_22) {
           var_25 = var_24 - var_21;
           var_23 = 1.0 - (1.0 - var_20) * (var_25 / (var_22 - var_21));
-        } else
+        } else {
           var_23 = 0;
+        }
       }
     }
 
@@ -1661,8 +1666,9 @@ func_1159(var_0, var_1) {
     } else {
       scripts\sp\utility::func_56BA("peek_hint_pc");
     }
-  } else if(level.console || level.player global_fx())
+  } else if(level.console || level.player global_fx()) {
     scripts\sp\utility::func_56BA("peek_hint_shove");
+  }
   else {
     scripts\sp\utility::func_56BA("peek_hint_shove_pc");
   }
@@ -2055,8 +2061,9 @@ func_11F0(var_0, var_1, var_2) {
     }
 
     var_7 scripts\sp\utility::anim_stopanimscripted();
-  } else
+  } else {
     wait(var_36 - var_35);
+  }
 
   level notify(var_0 + "door_kick_finished");
   level notify("door_kick_finished");

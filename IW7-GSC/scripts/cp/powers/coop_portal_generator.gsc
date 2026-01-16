@@ -19,7 +19,7 @@ portalgeneratorused(var_0) {
     return;
   }
 
-  if(isDefined(var_1) && isDefined(var_1.triggerportableradarping)) {
+  if(isDefined(var_1) && isDefined(var_1.owner)) {
     thread placementfailed(var_0);
     return;
   }
@@ -46,7 +46,7 @@ portalgeneratorused(var_0) {
     var_6 setModel("black_hole_projector_wm");
     var_6.angles = var_0.angles;
     var_6.team = self.team;
-    var_6.triggerportableradarping = self;
+    var_6.owner = self;
     var_6 thread func_D68C();
     var_6 thread func_D685(self);
     var_6 thread func_D688(10);
@@ -77,7 +77,7 @@ func_D684(var_0) {
 }
 
 func_D686(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 
@@ -217,7 +217,7 @@ func_6979() {
 }
 
 func_13B14(var_0, var_1) {
-  var_0 scripts\engine\utility::waittill_any_timeout_1(var_1, "death");
+  var_0 scripts\engine\utility::waittill_any_timeout(var_1, "death");
   if(isDefined(self.objid)) {
     objective_delete(self.objid);
   }

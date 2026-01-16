@@ -24,7 +24,7 @@ registernotetracks() {
                       level.notetracks["anim_gunhand = \"left\"] = ::notetrackgunhand;
                         level.notetracks["anim_gunhand = \"right\"] = ::notetrackgunhand;
                           level.notetracks["anim_gunhand = \"none\"] = ::notetrackgunhand;
-                            level.notetracks["anim_pose = stand"] = ::notetrackposestand; level.notetracks["anim_pose = crouch"] = ::notetrackposecrouch; level.notetracks["anim_pose = prone"] = ::notetrackposeprone; level.notetracks["anim_pose = crawl"] = ::notetrackposecrawl; level.notetracks["anim_pose = back"] = ::notetrackposeback; level.notetracks["anim_movement = stop"] = ::notetrackmovementstop; level.notetracks["anim_movement = walk"] = ::notetrackmovementwalk; level.notetracks["anim_movement = run"] = ::notetrackmovementrun; level.notetracks["anim_movement_gun_pose_override = run_gun_down"] = ::notetrackmovementgunposeoverride; level.notetracks["anim_aiming = 1"] = ::notetrackalertnessaiming; level.notetracks["anim_aiming = 0"] = ::notetrackalertnessalert; level.notetracks["anim_alertness = causal"] = ::notetrackalertnesscasual; level.notetracks["anim_alertness = alert"] = ::notetrackalertnessalert; level.notetracks["anim_alertness = aiming"] = ::notetrackalertnessaiming; level.notetracks["gunhand = (gunhand)_left"] = ::notetrackgunhand; level.notetracks["anim_gunhand = left"] = ::notetrackgunhand; level.notetracks["gunhand = (gunhand)_right"] = ::notetrackgunhand; level.notetracks["anim_gunhand = right"] = ::notetrackgunhand; level.notetracks["anim_gunhand = none"] = ::notetrackgunhand; level.notetracks["gun drop"] = ::notetrackgundrop; level.notetracks["dropgun"] = ::notetrackgundrop; level.notetracks["gun_2_chest"] = ::notetrackguntochest; level.notetracks["gun_2_back"] = ::notetrackguntoback; level.notetracks["pistol_pickup"] = ::notetrackpistolpickup; level.notetracks["pistol_putaway"] = ::notetrackpistolputaway; level.notetracks["drop clip"] = ::notetrackdropclip; level.notetracks["refill clip"] = ::notetrackrefillclip; level.notetracks["reload done"] = ::notetrackrefillclip; level.notetracks["load_shell"] = ::notetrackloadshell; level.notetracks["pistol_rechamber"] = ::notetrackpistolrechamber; level.notetracks["gravity on"] = ::notetrackgravity; level.notetracks["gravity off"] = ::notetrackgravity; level.notetracks["footstep_right_large"] = ::notetrackfootstep; level.notetracks["footstep_right_small"] = ::notetrackfootstep; level.notetracks["footstep_left_large"] = ::notetrackfootstep; level.notetracks["footstep_left_small"] = ::notetrackfootstep; level.notetracks["handstep_left"] = ::notetrackhandstep; level.notetracks["handstep_right"] = ::notetrackhandstep; level.notetracks["footscrape"] = ::notetrackfootscrape; level.notetracks["land"] = ::notetrackland; level.notetracks["bodyfall large"] = ::notetrackbodyfall; level.notetracks["bodyfall small"] = ::notetrackbodyfall; level.notetracks["code_move"] = ::notetrackcodemove; level.notetracks["face_enemy"] = ::notetrackfaceenemy; level.notetracks["laser_on"] = ::notetracklaser; level.notetracks["laser_off"] = ::notetracklaser; level.notetracks["start_ragdoll"] = ::notetrackstartragdoll; level.notetracks["ragdollblendinit"] = ::notetrackragdollblendinit; level.notetracks["ragdollblendstart"] = ::notetrackragdollblendstart; level.notetracks["ragdollblendend"] = ::notetrackragdollblendend; level.notetracks["ragdollblendrootanim"] = ::notetrackragdollblendrootanim; level.notetracks["ragdollblendrootragdoll"] = ::notetrackragdollblendrootragdoll; level.notetracks["fire"] = ::notetrackfire; level.notetracks["fire_spray"] = ::notetrackfirespray; level.notetracks["bloodpool"] = scripts\anim\death::play_blood_pool; level.notetracks["space_jet_top"] = ::notetrackspacejet; level.notetracks["space_jet_top_1"] = ::notetrackspacejet; level.notetracks["space_jet_top_2"] = ::notetrackspacejet; level.notetracks["space_jet_bottom"] = ::notetrackspacejet; level.notetracks["space_jet_bottom_1"] = ::notetrackspacejet; level.notetracks["space_jet_bottom_2"] = ::notetrackspacejet; level.notetracks["space_jet_left"] = ::notetrackspacejet; level.notetracks["space_jet_left_1"] = ::notetrackspacejet; level.notetracks["space_jet_left_2"] = ::notetrackspacejet; level.notetracks["space_jet_right"] = ::notetrackspacejet; level.notetracks["space_jet_right_1"] = ::notetrackspacejet; level.notetracks["space_jet_right_2"] = ::notetrackspacejet; level.notetracks["space_jet_front"] = ::notetrackspacejet; level.notetracks["space_jet_front_1"] = ::notetrackspacejet; level.notetracks["space_jet_front_2"] = ::notetrackspacejet; level.notetracks["space_jet_back"] = ::notetrackspacejet; level.notetracks["space_jet_back_1"] = ::notetrackspacejet; level.notetracks["space_jet_back_2"] = ::notetrackspacejet; level.notetracks["space_jet_back_3"] = ::notetrackspacejet; level.notetracks["space_jet_back_4"] = ::notetrackspacejet; level.notetracks["space_jet_random"] = ::notetrackspacejet; level.notetracks["fingers_out_start_left_hand"] = ::notetrackfingerposeoffleft; level.notetracks["fingers_out_start_right_hand"] = ::notetrackfingerposeoffright; level.notetracks["fingers_in_start_left_hand"] = ::notetrackfingerposeonleft; level.notetracks["fingers_in_start_right_hand"] = ::notetrackfingerposeonright; level.notetracks["anim_facial = idle"] = ::notetrackfacialidle; level.notetracks["anim_facial = run"] = ::notetrackfacialrun; level.notetracks["anim_facial = pain"] = ::notetrackfacialpain; level.notetracks["anim_facial = death"] = ::notetrackfacialdeath; level.notetracks["anim_facial = talk"] = ::notetrackfacialtalk; level.notetracks["anim_facial = cheer"] = ::notetrackfacialcheer; level.notetracks["anim_facial = happy"] = ::notetrackfacialhappy; level.notetracks["anim_facial = angry"] = ::notetrackfacialangry; level.notetracks["anim_facial = scared"] = ::notetrackfacialscared; level.notetracks["visor_raise"] = ::notetrackvisorraise; level.notetracks["visor_lower"] = ::notetrackvisorlower; level.notetracks["c12_death_dying"] = ::func_3538; level.notetracks["c12_death_bodyfall"] = ::func_3537;
+                            level.notetracks["anim_pose = stand"] = ::notetrackposestand; level.notetracks["anim_pose = crouch"] = ::notetrackposecrouch; level.notetracks["anim_pose = prone"] = ::notetrackposeprone; level.notetracks["anim_pose = crawl"] = ::notetrackposecrawl; level.notetracks["anim_pose = back"] = ::notetrackposeback; level.notetracks["anim_movement = stop"] = ::notetrackmovementstop; level.notetracks["anim_movement = walk"] = ::notetrackmovementwalk; level.notetracks["anim_movement = run"] = ::notetrackmovementrun; level.notetracks["anim_movement_gun_pose_override = run_gun_down"] = ::notetrackmovementgunposeoverride; level.notetracks["anim_aiming = 1"] = ::notetrackalertnessaiming; level.notetracks["anim_aiming = 0"] = ::notetrackalertnessalert; level.notetracks["anim_alertness = causal"] = ::notetrackalertnesscasual; level.notetracks["anim_alertness = alert"] = ::notetrackalertnessalert; level.notetracks["anim_alertness = aiming"] = ::notetrackalertnessaiming; level.notetracks["gunhand = (gunhand)_left"] = ::notetrackgunhand; level.notetracks["anim_gunhand = left"] = ::notetrackgunhand; level.notetracks["gunhand = (gunhand)_right"] = ::notetrackgunhand; level.notetracks["anim_gunhand = right"] = ::notetrackgunhand; level.notetracks["anim_gunhand = none"] = ::notetrackgunhand; level.notetracks["gun drop"] = ::notetrackgundrop; level.notetracks["dropgun"] = ::notetrackgundrop; level.notetracks["gun_2_chest"] = ::notetrackguntochest; level.notetracks["gun_2_back"] = ::notetrackguntoback; level.notetracks["pistol_pickup"] = ::notetrackpistolpickup; level.notetracks["pistol_putaway"] = ::notetrackpistolputaway; level.notetracks["drop clip"] = ::notetrackdropclip; level.notetracks["refill clip"] = ::notetrackrefillclip; level.notetracks["reload done"] = ::notetrackrefillclip; level.notetracks["load_shell"] = ::notetrackloadshell; level.notetracks["pistol_rechamber"] = ::notetrackpistolrechamber; level.notetracks["gravity on"] = ::notetrackgravity; level.notetracks["gravity off"] = ::notetrackgravity; level.notetracks["footstep_right_large"] = ::notetrackfootstep; level.notetracks["footstep_right_small"] = ::notetrackfootstep; level.notetracks["footstep_left_large"] = ::notetrackfootstep; level.notetracks["footstep_left_small"] = ::notetrackfootstep; level.notetracks["handstep_left"] = ::notetrackhandstep; level.notetracks["handstep_right"] = ::notetrackhandstep; level.notetracks["footscrape"] = ::notetrackfootscrape; level.notetracks["land"] = ::notetrackland; level.notetracks["bodyfall large"] = ::notetrackbodyfall; level.notetracks["bodyfall small"] = ::notetrackbodyfall; level.notetracks["code_move"] = ::notetrackcodemove; level.notetracks["face_enemy"] = ::notetrackfaceenemy; level.notetracks["laser_on"] = ::notetracklaser; level.notetracks["laser_off"] = ::notetracklaser; level.notetracks["start_ragdoll"] = ::notetrackstartragdoll; level.notetracks["ragdollblendinit"] = ::notetrackragdollblendinit; level.notetracks["ragdollblendstart"] = ::notetrackragdollblendstart; level.notetracks["ragdollblendend"] = ::notetrackragdollblendend; level.notetracks["ragdollblendrootanim"] = ::notetrackragdollblendrootanim; level.notetracks["ragdollblendrootragdoll"] = ::notetrackragdollblendrootragdoll; level.notetracks["fire"] = ::notetrackfire; level.notetracks["fire_spray"] = ::notetrackfirespray; level.notetracks["bloodpool"] = ::scripts\anim\death::play_blood_pool; level.notetracks["space_jet_top"] = ::notetrackspacejet; level.notetracks["space_jet_top_1"] = ::notetrackspacejet; level.notetracks["space_jet_top_2"] = ::notetrackspacejet; level.notetracks["space_jet_bottom"] = ::notetrackspacejet; level.notetracks["space_jet_bottom_1"] = ::notetrackspacejet; level.notetracks["space_jet_bottom_2"] = ::notetrackspacejet; level.notetracks["space_jet_left"] = ::notetrackspacejet; level.notetracks["space_jet_left_1"] = ::notetrackspacejet; level.notetracks["space_jet_left_2"] = ::notetrackspacejet; level.notetracks["space_jet_right"] = ::notetrackspacejet; level.notetracks["space_jet_right_1"] = ::notetrackspacejet; level.notetracks["space_jet_right_2"] = ::notetrackspacejet; level.notetracks["space_jet_front"] = ::notetrackspacejet; level.notetracks["space_jet_front_1"] = ::notetrackspacejet; level.notetracks["space_jet_front_2"] = ::notetrackspacejet; level.notetracks["space_jet_back"] = ::notetrackspacejet; level.notetracks["space_jet_back_1"] = ::notetrackspacejet; level.notetracks["space_jet_back_2"] = ::notetrackspacejet; level.notetracks["space_jet_back_3"] = ::notetrackspacejet; level.notetracks["space_jet_back_4"] = ::notetrackspacejet; level.notetracks["space_jet_random"] = ::notetrackspacejet; level.notetracks["fingers_out_start_left_hand"] = ::notetrackfingerposeoffleft; level.notetracks["fingers_out_start_right_hand"] = ::notetrackfingerposeoffright; level.notetracks["fingers_in_start_left_hand"] = ::notetrackfingerposeonleft; level.notetracks["fingers_in_start_right_hand"] = ::notetrackfingerposeonright; level.notetracks["anim_facial = idle"] = ::notetrackfacialidle; level.notetracks["anim_facial = run"] = ::notetrackfacialrun; level.notetracks["anim_facial = pain"] = ::notetrackfacialpain; level.notetracks["anim_facial = death"] = ::notetrackfacialdeath; level.notetracks["anim_facial = talk"] = ::notetrackfacialtalk; level.notetracks["anim_facial = cheer"] = ::notetrackfacialcheer; level.notetracks["anim_facial = happy"] = ::notetrackfacialhappy; level.notetracks["anim_facial = angry"] = ::notetrackfacialangry; level.notetracks["anim_facial = scared"] = ::notetrackfacialscared; level.notetracks["visor_raise"] = ::notetrackvisorraise; level.notetracks["visor_lower"] = ::notetrackvisorlower; level.notetracks["c12_death_dying"] = ::func_3538; level.notetracks["c12_death_bodyfall"] = ::func_3537;
                             if(isDefined(level._notetrackfx)) {
                               var_0 = getarraykeys(level._notetrackfx);
                               foreach(var_2 in var_0) {
@@ -65,7 +65,7 @@ registernotetracks() {
 
                               scripts\anim\utility_common::shootenemywrapper(var_0);
                               scripts\anim\combat_utility::decrementbulletsinclip();
-                              if(weaponclass(self.var_394) == "rocketlauncher") {
+                              if(weaponclass(self.weapon) == "rocketlauncher") {
                                 self.a.rockets--;
                               }
                             }
@@ -106,7 +106,7 @@ registernotetracks() {
                             if(isDefined(self._blackboard)) {
                               if(isDefined(self._blackboard.var_26C6) && self._blackboard.var_26C6 == 1) {
                                 scripts\anim\shared::func_5D19();
-                                self.lastweapon = self.var_394;
+                                self.lastweapon = self.weapon;
                               }
                             }
 
@@ -135,7 +135,7 @@ registernotetracks() {
                             if(isDefined(self._blackboard)) {
                               if(isDefined(self._blackboard.var_26C6) && self._blackboard.var_26C6 == 1) {
                                 scripts\anim\shared::func_5D19();
-                                self.lastweapon = self.var_394;
+                                self.lastweapon = self.weapon;
                               }
                             }
 
@@ -248,19 +248,19 @@ registernotetracks() {
 
                           notetrackgunhand(var_0, var_1) {
                             if(issubstr(var_0, "left")) {
-                              scripts\anim\shared::placeweaponon(self.var_394, "left");
+                              scripts\anim\shared::placeweaponon(self.weapon, "left");
                               self notify("weapon_switch_done");
                               return;
                             }
 
                             if(issubstr(var_0, "right")) {
-                              scripts\anim\shared::placeweaponon(self.var_394, "right");
+                              scripts\anim\shared::placeweaponon(self.weapon, "right");
                               self notify("weapon_switch_done");
                               return;
                             }
 
                             if(issubstr(var_0, "none")) {
-                              scripts\anim\shared::placeweaponon(self.var_394, "none");
+                              scripts\anim\shared::placeweaponon(self.weapon, "none");
                               return;
                             }
                           }
@@ -268,34 +268,34 @@ registernotetracks() {
                           notetrackgundrop(var_0, var_1) {
                             scripts\anim\shared::func_5D19();
                             self._blackboard.var_26C6 = 0;
-                            self.lastweapon = self.var_394;
+                            self.lastweapon = self.weapon;
                           }
 
                           notetrackguntochest(var_0, var_1) {
-                            scripts\anim\shared::placeweaponon(self.var_394, "chest");
+                            scripts\anim\shared::placeweaponon(self.weapon, "chest");
                           }
 
                           notetrackguntoback(var_0, var_1) {
-                            scripts\anim\shared::placeweaponon(self.var_394, "back");
-                            self.var_394 = scripts\anim\utility::detachall();
-                            self.bulletsinclip = weaponclipsize(self.var_394);
+                            scripts\anim\shared::placeweaponon(self.weapon, "back");
+                            self.weapon = scripts\anim\utility::detachall();
+                            self.bulletsinclip = weaponclipsize(self.weapon);
                           }
 
                           notetrackpistolpickup(var_0, var_1) {
                             scripts\anim\shared::placeweaponon(self.var_101B4, "right");
-                            self.bulletsinclip = weaponclipsize(self.var_394);
+                            self.bulletsinclip = weaponclipsize(self.weapon);
                             self notify("weapon_switch_done");
                           }
 
                           notetrackpistolputaway(var_0, var_1) {
                             if(isDefined(self.var_110CB)) {
-                              scripts\anim\shared::placeweaponon(self.var_394, "thigh");
+                              scripts\anim\shared::placeweaponon(self.weapon, "thigh");
                             } else {
-                              scripts\anim\shared::placeweaponon(self.var_394, "none");
+                              scripts\anim\shared::placeweaponon(self.weapon, "none");
                             }
 
-                            self.var_394 = scripts\anim\utility::detachall();
-                            self.bulletsinclip = weaponclipsize(self.var_394);
+                            self.weapon = scripts\anim\utility::detachall();
+                            self.bulletsinclip = weaponclipsize(self.weapon);
                           }
 
                           notetrackdropclip(var_0, var_1) {
@@ -347,8 +347,8 @@ registernotetracks() {
                             var_5 = get_notetrack_movement();
                             if(isDefined(self.classname) && self.classname != "script_model") {
                               self func_8584(var_5);
-                              if(isDefined(self.var_394)) {
-                                var_6 = self func_8583(var_5, self.var_394);
+                              if(isDefined(self.weapon)) {
+                                var_6 = self func_8583(var_5, self.weapon);
                               }
                             }
                           }
@@ -669,7 +669,7 @@ registernotetracks() {
 
                             self playsurfacesound("default_step_land", var_2);
                             self func_8584("land");
-                            self func_8583("land", self.var_394);
+                            self func_8583("land", self.weapon);
                           }
 
                           notetrackcodemove(var_0, var_1) {
@@ -682,7 +682,7 @@ registernotetracks() {
                               return;
                             }
 
-                            if(isDefined(self.isnodeoccupied) && distancesquared(self.isnodeoccupied.origin, self.getreflectionlocs) < 4096) {
+                            if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.getreflectionlocs) < 4096) {
                               self orientmode("face enemy");
                               return;
                             }
@@ -725,9 +725,9 @@ registernotetracks() {
                             }
 
                             self.rocketlauncherammo = spawn("script_model", self.origin);
-                            if(issubstr(tolower(self.var_394), "lockon")) {
+                            if(issubstr(tolower(self.weapon), "lockon")) {
                               self.rocketlauncherammo setModel("weapon_launcher_missile_wm");
-                            } else if(issubstr(tolower(self.var_394), "panzerfaust")) {
+                            } else if(issubstr(tolower(self.weapon), "panzerfaust")) {
                               self.rocketlauncherammo setModel("weapon_panzerfaust3_missle");
                             } else {
                               self.rocketlauncherammo setModel("projectile_rpg7");
@@ -748,7 +748,7 @@ registernotetracks() {
                               return;
                             }
 
-                            if(scripts\sp\utility::hastag(getweaponmodel(self.var_394), "tag_rocket")) {
+                            if(scripts\sp\utility::hastag(getweaponmodel(self.weapon), "tag_rocket")) {
                               self giveperk("tag_rocket");
                             }
                           }
@@ -778,7 +778,7 @@ registernotetracks() {
                                 return var_0;
 
                               case "finish early":
-                                if(isDefined(self.isnodeoccupied)) {
+                                if(isDefined(self.enemy)) {
                                   return var_0;
                                 }
                                 break;
@@ -1115,17 +1115,17 @@ registernotetracks() {
 
                               self playrumbleonentity(var_7);
                               screenshake(self.origin, var_9, var_9, var_9, 0.3, 0, -1, var_8, 5, 0.2, 2);
-                              var_0A = self gettagorigin(var_3);
-                              var_0B = self.angles;
-                              var_0C = anglestoup(var_0B);
-                              var_0C = var_0C * 0.35;
-                              physicsjolt(var_0A, 50, 25, var_0C);
-                              var_0D = 100;
-                              if(!level.player isjumping() && distancesquared(level.player.origin, var_0A) <= squared(var_0D)) {
-                                level.player dodamage(level.player.maxhealth * 0.5, var_0A, self);
-                                level.player viewkick(1, var_0A, 0);
-                                var_0E = vectornormalize(level.player.origin - var_0A);
-                                level.player setvelocity(150 * var_0E);
+                              var_10 = self gettagorigin(var_3);
+                              var_11 = self.angles;
+                              var_12 = anglestoup(var_11);
+                              var_12 = var_12 * 0.35;
+                              physicsjolt(var_10, 50, 25, var_12);
+                              var_13 = 100;
+                              if(!level.player isjumping() && distancesquared(level.player.origin, var_10) <= squared(var_13)) {
+                                level.player dodamage(level.player.maxhealth * 0.5, var_10, self);
+                                level.player viewkick(1, var_10, 0);
+                                var_14 = vectornormalize(level.player.origin - var_10);
+                                level.player setvelocity(150 * var_14);
                               }
                             }
 
@@ -1276,8 +1276,8 @@ registernotetracks() {
                             }
 
                             var_6 = 0;
-                            if(isalive(self.isnodeoccupied) && issentient(self.isnodeoccupied) && self canshootenemy()) {
-                              var_7 = vectornormalize(self.isnodeoccupied getEye() - var_3);
+                            if(isalive(self.enemy) && issentient(self.enemy) && self canshootenemy()) {
+                              var_7 = vectornormalize(self.enemy getEye() - var_3);
                               if(vectordot(var_4, var_7) > cos(var_5)) {
                                 var_6 = 1;
                               }

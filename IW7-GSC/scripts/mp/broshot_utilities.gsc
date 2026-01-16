@@ -36,12 +36,12 @@ processepictaunt(var_0, var_1, var_2) {
   var_7 = [];
   var_8 = [];
   var_9 = [];
-  var_0A = [];
-  var_0B = [];
-  var_0C = [];
-  var_0D = [];
-  var_0E = 0;
-  var_0F = 0;
+  var_10 = [];
+  var_11 = [];
+  var_12 = [];
+  var_13 = [];
+  var_14 = 0;
+  var_15 = 0;
   var_10 = [];
   var_11 = [];
   var_12 = [];
@@ -237,9 +237,9 @@ processepictaunt(var_0, var_1, var_2) {
       var_9[0] = [];
       var_9[0][0] = "weapon_c8_shield_top_mp";
       var_9[0][1] = "weapon_c8_shield_bottom_mp";
-      var_0A[0] = [];
-      var_0A[0][0] = "j_wristshield";
-      var_0A[0][1] = "j_wristbtmshield";
+      var_10[0] = [];
+      var_10[0][0] = "j_wristshield";
+      var_10[0][1] = "j_wristbtmshield";
       var_16 = 1.67;
       var_17[0] = 5.15;
       break;
@@ -278,8 +278,8 @@ processepictaunt(var_0, var_1, var_2) {
       var_8[4] = 4.7;
       var_8[5] = 4.7;
       var_8[6] = 4.7;
-      var_0E = 1;
-      var_0F = 1.5;
+      var_14 = 1;
+      var_15 = 1.5;
       var_16 = 4.5;
       var_21 = 1;
       break;
@@ -298,21 +298,21 @@ processepictaunt(var_0, var_1, var_2) {
     case "IW7_mp_taunt_phantom_cloak_3rd":
     case "IW7_mp_taunt_phantom_cloak_2nd":
     case "IW7_mp_taunt_phantom_cloak":
-      var_0B[0] = "cloak";
-      var_0C[0] = "on";
-      var_0D[0] = 0.01;
-      var_0B[1] = "cloak";
-      var_0C[1] = "off";
-      var_0D[1] = 1.5;
-      var_0B[2] = "cloak";
-      var_0C[2] = "on";
-      var_0D[2] = 3.2;
-      var_0B[3] = "cloak";
-      var_0C[3] = "off";
-      var_0D[3] = 4.7;
+      var_11[0] = "cloak";
+      var_12[0] = "on";
+      var_13[0] = 0.01;
+      var_11[1] = "cloak";
+      var_12[1] = "off";
+      var_13[1] = 1.5;
+      var_11[2] = "cloak";
+      var_12[2] = "on";
+      var_13[2] = 3.2;
+      var_11[3] = "cloak";
+      var_12[3] = "off";
+      var_13[3] = 4.7;
       var_8[0] = 5.1;
-      var_0E = 1;
-      var_0F = 2;
+      var_14 = 1;
+      var_15 = 2;
       break;
 
     case "iw7_mp_taunt_super_merc_steeldragon":
@@ -370,15 +370,15 @@ processepictaunt(var_0, var_1, var_2) {
 
   level.broshotepictauntprops[var_1] = [];
   level.broshotepictauntsubprops[var_1] = [];
-  if(var_2 && var_0E) {
+  if(var_2 && var_14) {
     if(!isDefined(level.queuedtaunts)) {
       level.queuedtaunts = [];
     }
 
     if(isDefined(level.queuedtaunts[var_0])) {
       var_29 = gettime() - level.queuedtaunts[var_0];
-      if(var_29 < var_0F * 1000) {
-        wait(var_0F - var_29 / 1000);
+      if(var_29 < var_15 * 1000) {
+        wait(var_15 - var_29 / 1000);
       }
     }
 
@@ -420,7 +420,7 @@ processepictaunt(var_0, var_1, var_2) {
         var_2D.angles = var_4 + var_2A;
         var_2D notsolid();
         var_2D dontinterpolate();
-        var_2D linkto(var_2B, var_0A[var_28][var_2C], (0, 0, 0), (0, 0, 0));
+        var_2D linkto(var_2B, var_10[var_28][var_2C], (0, 0, 0), (0, 0, 0));
         level.broshotepictauntsubprops[var_1][var_2C] = var_2D;
       }
     }
@@ -431,8 +431,8 @@ processepictaunt(var_0, var_1, var_2) {
     var_2E = max(var_2E, var_8[var_28]);
   }
 
-  for(var_28 = 0; var_28 < var_0B.size; var_28++) {
-    thread doepictauntscriptablestep(var_2, var_1, var_0B[var_28], var_0C[var_28], var_0D[var_28]);
+  for(var_28 = 0; var_28 < var_11.size; var_28++) {
+    thread doepictauntscriptablestep(var_2, var_1, var_11[var_28], var_12[var_28], var_13[var_28]);
   }
 
   if(var_2 == 0) {

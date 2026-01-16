@@ -97,8 +97,9 @@ func_6D54() {
     if(!scripts\engine\utility::flag("jackal_shooting")) {
       thread scripts\sp\utility::play_loop_sound_on_tag(self._blackboard.var_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
     }
-  } else
+  } else {
     thread scripts\sp\utility::play_loop_sound_on_tag(self._blackboard.var_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
+  }
 
   var_2 = 0;
 
@@ -142,8 +143,9 @@ func_6D55() {
     if(!scripts\engine\utility::flag("jackal_shooting")) {
       thread scripts\sp\utility::play_loop_sound_on_tag(self._blackboard.var_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
     }
-  } else
+  } else {
     thread scripts\sp\utility::play_loop_sound_on_tag(self._blackboard.var_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
+  }
 
   if(!scripts\sp\utility::func_65DF("jackal_firing")) {
     scripts\sp\utility::func_65E0("jackal_firing");
@@ -364,8 +366,9 @@ func_6D2F() {
       var_3 = scripts\engine\utility::mph_to_ips(var_0.spaceship_vel);
       var_4 = scripts\engine\utility::mph_to_ips(self.spaceship_vel);
       var_5 = func_36CE(self.origin, var_4, var_0.origin, var_3, 20000);
-    } else
+    } else {
       var_5 = var_0.origin;
+    }
 
     var_6 = var_1 + var_5;
   } else {
@@ -650,8 +653,9 @@ func_12E3A() {
   if(isDefined(self.ignoreall) && self.ignoreall) {
     var_1 = undefined;
     return;
-  } else if(isalive(self._blackboard.var_11577))
+  } else if(isalive(self._blackboard.var_11577)) {
     var_1 = self._blackboard.var_11577;
+  }
   else if(isDefined(self._blackboard.var_90EE)) {
     var_1 = self._blackboard.var_90EE;
   } else if(isDefined(self._blackboard.var_7002)) {
@@ -792,8 +796,9 @@ func_12D7B() {
 
     var_3 = var_3 * func_7CFC(var_0);
     self._blackboard.accuracy = var_3;
-  } else
+  } else {
     self func_846A();
+  }
 }
 
 func_9CC7() {

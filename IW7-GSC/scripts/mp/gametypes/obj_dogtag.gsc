@@ -53,7 +53,7 @@ spawndogtags(var_0, var_1, var_2) {
   }
 
   if(isagent(var_1)) {
-    var_1 = var_1.triggerportableradarping;
+    var_1 = var_1.owner;
   }
 
   var_4 = 14;
@@ -92,7 +92,7 @@ spawndogtags(var_0, var_1, var_2) {
       }
     }
 
-    level.dogtags[var_0.guid] = scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
+    level.dogtags[var_0.guid] = ::scripts\mp\gameobjects::createuseobject("any", var_8, var_7, (0, 0, 16));
     level.dogtags[var_0.guid] scripts\mp\gameobjects::setusetime(0);
     level.dogtags[var_0.guid].onuse = ::onuse;
     level.dogtags[var_0.guid].victim = var_0;
@@ -250,8 +250,8 @@ onuse(var_0) {
     return;
   }
 
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0 = var_0.triggerportableradarping;
+  if(isDefined(var_0.owner)) {
+    var_0 = var_0.owner;
   }
 
   if(level.gametype == "conf") {

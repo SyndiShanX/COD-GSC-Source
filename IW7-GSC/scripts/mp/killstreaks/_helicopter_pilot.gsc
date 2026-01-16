@@ -4,7 +4,7 @@
 ********************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("heli_pilot", ::func_128E7);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("heli_pilot", ::func_128E7);
   level.heli_pilot = [];
   level.helipilotsettings = [];
   level.helipilotsettings["heli_pilot"] = spawnStruct();
@@ -102,7 +102,7 @@ func_49D2(var_0) {
   var_7 thread scripts\mp\killstreaks\_helicopter::func_E111();
   var_7.maxhealth = level.helipilotsettings[var_0].maxhealth;
   var_7.getclosestpointonnavmesh3d = 40;
-  var_7.triggerportableradarping = self;
+  var_7.owner = self;
   var_7 setotherent(self);
   var_7.team = self.team;
   var_7.helitype = "littlebird";
@@ -126,7 +126,7 @@ func_49D2(var_0) {
   var_7 thread helipilot_watchobjectivecam();
   var_7 thread helipilot_watchdeath();
   var_7 thread watchhostmigrationfinishedinit(self);
-  var_7.triggerportableradarping scripts\mp\matchdata::logkillstreakevent(level.helipilotsettings[var_7.helipilottype].streakname, var_7.targetpos);
+  var_7.owner scripts\mp\matchdata::logkillstreakevent(level.helipilotsettings[var_7.helipilottype].streakname, var_7.targetpos);
   return var_7;
 }
 
@@ -152,7 +152,7 @@ func_10DA3(var_0) {
   var_0 thread scripts\mp\killstreaks\_flares::func_A730(2, "+smoke", "ui_heli_pilot_flare_ammo", "ui_heli_pilot_warn");
   thread watchintrocleared(var_0);
   scripts\mp\utility::freezecontrolswrapper(1);
-  var_1 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(var_0.helipilottype);
+  var_1 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_0.helipilottype);
   if(var_1 != "success") {
     if(isDefined(self.disabledweapon) && self.disabledweapon) {
       scripts\engine\utility::allow_weapon(1);
@@ -223,7 +223,7 @@ watchforperkremoval(var_0) {
   self endon("watchForPerkRemoval");
   self endon("death");
   self waittill("removed_specialty_noplayertarget");
-  var_1 = scripts\mp\utility::outlineenableforplayer(self, "orange", var_0.triggerportableradarping, 0, 0, "killstreak");
+  var_1 = scripts\mp\utility::outlineenableforplayer(self, "orange", var_0.owner, 0, 0, "killstreak");
   removeoutline(var_1, var_0);
 }
 
@@ -232,7 +232,7 @@ watchplayersspawning() {
   self endon("death");
   for(;;) {
     level waittill("player_spawned", var_0);
-    if(var_0.sessionstate == "playing" && self.triggerportableradarping scripts\mp\utility::isenemy(var_0)) {
+    if(var_0.sessionstate == "playing" && self.owner scripts\mp\utility::isenemy(var_0)) {
       var_0 thread watchforperkremoval(self);
     }
   }
@@ -273,8 +273,8 @@ helipilot_watchdeath() {
   level endon("game_ended");
   self endon("gone");
   self waittill("death");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping helipilot_endride(self);
+  if(isDefined(self.owner)) {
+    self.owner helipilot_endride(self);
   }
 
   if(isDefined(self.killcament)) {
@@ -287,22 +287,22 @@ helipilot_watchdeath() {
 helipilot_watchobjectivecam() {
   level endon("game_ended");
   self endon("gone");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
   level waittill("objective_cam");
   thread scripts\mp\killstreaks\_helicopter::lbonkilled();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping helipilot_endride(self);
+  if(isDefined(self.owner)) {
+    self.owner helipilot_endride(self);
   }
 }
 
 helipilot_watchtimeout() {
   level endon("game_ended");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
   var_0 = level.helipilotsettings[self.helipilottype].timeout;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
   thread helipilot_leave();
@@ -312,25 +312,25 @@ helipilot_watchownerloss() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
   thread helipilot_leave();
 }
 
 helipilot_watchroundend() {
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
-  level scripts\engine\utility::waittill_any_3("round_end_finished", "game_ended");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
+  level scripts\engine\utility::waittill_any("round_end_finished", "game_ended");
   thread helipilot_leave();
 }
 
 helipilot_leave() {
   self endon("death");
   self notify("leaving");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping helipilot_endride(self);
+  if(isDefined(self.owner)) {
+    self.owner helipilot_endride(self);
   }
 
   var_0 = scripts\mp\killstreaks\_airdrop::getflyheightoffset(self.origin);
@@ -392,14 +392,14 @@ helipilot_watchads() {
   level endon("game_ended");
   var_0 = 0;
   for(;;) {
-    if(isDefined(self.triggerportableradarping)) {
-      if(self.triggerportableradarping adsbuttonpressed()) {
+    if(isDefined(self.owner)) {
+      if(self.owner adsbuttonpressed()) {
         if(!var_0) {
-          self.triggerportableradarping setclientomnvar("ui_heli_pilot", 2);
+          self.owner setclientomnvar("ui_heli_pilot", 2);
           var_0 = 1;
         }
       } else if(var_0) {
-        self.triggerportableradarping setclientomnvar("ui_heli_pilot", 1);
+        self.owner setclientomnvar("ui_heli_pilot", 1);
         var_0 = 0;
       }
     }
@@ -444,7 +444,7 @@ watchearlyexit(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   self endon("leaving");
-  var_0 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  var_0 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
   var_0 waittill("killstreakExit");
   var_0 thread helipilot_leave();
 }

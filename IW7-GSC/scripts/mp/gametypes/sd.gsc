@@ -358,14 +358,14 @@ removebombzonec(var_0) {
     }
   }
 
-  foreach(var_0A in var_1) {
-    var_0A.relatedbrushmodel delete();
-    var_0B = getEntArray(var_0A.target, "targetname");
-    foreach(var_0D in var_0B) {
-      var_0D delete();
+  foreach(var_10 in var_1) {
+    var_10.relatedbrushmodel delete();
+    var_11 = getEntArray(var_10.target, "targetname");
+    foreach(var_13 in var_11) {
+      var_13 delete();
     }
 
-    var_0A delete();
+    var_10 delete();
   }
 
   return scripts\engine\utility::array_removeundefined(var_0);
@@ -437,7 +437,7 @@ onuseplantobject(var_0) {
 
 setspecialloadout() {
   if(isusingmatchrulesdata() && scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses", game["attackers"], 5, "class", "inUse")) {
-    level.sd_loadout[game["attackers"]] = scripts\mp\utility::getmatchrulesspecialclass(game["attackers"], 5);
+    level.sd_loadout[game["attackers"]] = ::scripts\mp\utility::getmatchrulesspecialclass(game["attackers"], 5);
   }
 }
 

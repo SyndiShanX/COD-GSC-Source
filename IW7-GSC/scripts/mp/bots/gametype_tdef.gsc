@@ -125,7 +125,7 @@ bot_tdm_apply_commander_tactics(var_0) {
 
       if(var_5.team == self.team) {
         if(isbot(var_5)) {
-          var_5.triggerportableradarping = undefined;
+          var_5.owner = undefined;
           var_5.bot_fireteam_follower = undefined;
           var_5 notify("buddy_cancel");
           var_5 scripts\mp\bots\_bots_personality::bot_assign_personality_functions();

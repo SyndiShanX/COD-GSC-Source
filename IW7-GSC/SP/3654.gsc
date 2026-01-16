@@ -18,11 +18,11 @@ func_959B() {
   level.var_4C22 = 1;
 }
 
-func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E) {
-  var_0F = self;
-  if(isstruct(var_0F) || var_0F.classname == "script_origin" || isDefined(var_1)) {
-    var_0F = spawn("script_origin", self.origin);
-    self.var_4C1F = var_0F;
+func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  var_15 = self;
+  if(isstruct(var_15) || var_15.classname == "script_origin" || isDefined(var_1)) {
+    var_15 = spawn("script_origin", self.origin);
+    self.var_4C1F = var_15;
     thread func_8FF7();
   }
 
@@ -30,36 +30,36 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_10 = "tag_origin";
     if(isDefined(var_0)) {
       var_10 = var_0;
-      var_0F.origin = self gettagorigin(var_10);
+      var_15.origin = self gettagorigin(var_10);
     }
 
     if(isDefined(self.model) && self.classname == "script_model" && scripts\sp\utility::hastag(self.model, var_10)) {
-      var_0F linkto(self, var_10, var_1, (0, 0, 0));
+      var_15 linkto(self, var_10, var_1, (0, 0, 0));
     } else if(isDefined(var_0)) {
-      var_0F linkto(self, var_10, var_1, (0, 0, 0));
+      var_15 linkto(self, var_10, var_1, (0, 0, 0));
     } else if(isDefined(self.angles)) {
-      var_0F.origin = var_0F.origin + rotatevector(var_1, self.angles);
+      var_15.origin = var_15.origin + rotatevector(var_1, self.angles);
       if(isent(self)) {
-        var_0F linkto(self);
+        var_15 linkto(self);
       }
     } else {
-      var_0F.origin = var_0F.origin + var_1;
+      var_15.origin = var_15.origin + var_1;
       if(isent(self)) {
-        var_0F linkto(self);
+        var_15 linkto(self);
       }
     }
   } else if(isDefined(var_0)) {
-    var_0F func_84A7(var_0);
+    var_15 func_84A7(var_0);
   }
 
   if(isDefined(var_8) && var_8) {
-    var_0F setcursorhint("HINT_NOICON");
+    var_15 setcursorhint("HINT_NOICON");
   } else {
-    var_0F setcursorhint("HINT_BUTTON");
+    var_15 setcursorhint("HINT_BUTTON");
   }
 
   if(isDefined(var_2)) {
-    var_0F sethintstring(var_2);
+    var_15 sethintstring(var_2);
   }
 
   var_11 = 360;
@@ -67,58 +67,58 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_11 = var_3;
   }
 
-  var_0F func_84A6(var_11);
+  var_15 func_84A6(var_11);
   var_12 = 65;
-  if(isDefined(var_0E)) {
-    var_12 = var_0E;
+  if(isDefined(var_14)) {
+    var_12 = var_14;
   }
 
-  var_0F setusefov(var_12);
+  var_15 setusefov(var_12);
   var_13 = 500;
   if(isDefined(var_4)) {
     var_13 = var_4;
   }
 
-  var_0F func_84A4(var_13);
+  var_15 func_84A4(var_13);
   var_14 = 80;
   if(isDefined(var_5)) {
     var_14 = var_5;
   }
 
-  var_0F setuserange(var_14);
+  var_15 setuserange(var_14);
   if(isDefined(var_6) && var_6) {
-    var_0F func_84A9("show");
+    var_15 func_84A9("show");
   } else {
-    var_0F func_84A9("hide");
+    var_15 func_84A9("hide");
   }
 
-  if(isDefined(var_0A) && var_0A) {
-    var_0F func_84A9("disable");
+  if(isDefined(var_10) && var_10) {
+    var_15 func_84A9("disable");
   }
 
   if(isDefined(var_7) && var_7) {
-    var_0F func_84B8(var_7);
-  } else if(isDefined(var_0B) && var_0B) {
-    var_0F func_8560(var_0B);
+    var_15 func_84B8(var_7);
+  } else if(isDefined(var_11) && var_11) {
+    var_15 func_8560(var_11);
   } else {
     thread func_8FF0();
   }
 
   if(isDefined(var_9)) {
-    var_0F sethintstringparams(var_9);
+    var_15 sethintstringparams(var_9);
   }
 
-  if(isDefined(var_0C)) {
-    var_0F func_84A3(var_0C);
+  if(isDefined(var_12)) {
+    var_15 func_84A3(var_12);
   }
 
-  if(isDefined(var_0D)) {
-    var_0F func_8561(1);
+  if(isDefined(var_13)) {
+    var_15 func_8561(1);
   } else {
-    var_0F func_8561(0);
+    var_15 func_8561(0);
   }
 
-  var_0F makeusable();
+  var_15 makeusable();
 }
 
 func_8FF7() {
@@ -212,19 +212,19 @@ func_48C6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9.sort = -1;
   var_9.var_1012F = 0;
   var_8.icon["circle"] = var_9;
-  var_0A = newhudelem();
-  var_0A.alpha = 0;
+  var_10 = newhudelem();
+  var_10.alpha = 0;
   if(level.var_DADC) {
-    var_0A setshader("cursor_hint_square", 1, 1);
+    var_10 setshader("cursor_hint_square", 1, 1);
   } else {
-    var_0A setshader("cursor_hint_x", 1, 1);
+    var_10 setshader("cursor_hint_x", 1, 1);
   }
 
-  var_0A setwaypoint(0, 0, 1);
-  var_0A settargetent(var_8);
-  var_0A.sort = 1;
-  var_0A.var_1012F = 0;
-  var_8.icon["button"] = var_0A;
+  var_10 setwaypoint(0, 0, 1);
+  var_10 settargetent(var_8);
+  var_10.sort = 1;
+  var_10.var_1012F = 0;
+  var_8.icon["button"] = var_10;
   var_8.hidden = 0;
   var_8.var_369 = 0;
   if(isDefined(var_2)) {
@@ -268,13 +268,13 @@ func_48C6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_8.priority = self.var_900A;
   }
 
-  var_0B = 0;
+  var_11 = 0;
   if(level.var_4C21.size == 0) {
-    var_0B = 1;
+    var_11 = 1;
   }
 
   level.var_4C21 = scripts\engine\utility::array_add(level.var_4C21, var_8);
-  if(var_0B) {
+  if(var_11) {
     thread func_4C20();
   }
 }
@@ -320,32 +320,32 @@ func_4C20() {
       scripts\engine\utility::array_thread(var_7["remove"], ::func_8E8E);
       var_8 = func_10425(var_7["viewable"]);
       var_9 = func_10425(var_7["useable"]);
-      var_0A = scripts\engine\utility::array_combine(var_9, var_8);
-      var_0B = undefined;
-      foreach(var_0E, var_0D in var_0A) {
-        if(var_0E >= level.var_4C22) {
-          var_0D func_8E8E();
+      var_10 = scripts\engine\utility::array_combine(var_9, var_8);
+      var_11 = undefined;
+      foreach(var_14, var_13 in var_10) {
+        if(var_14 >= level.var_4C22) {
+          var_13 func_8E8E();
           continue;
         }
 
-        if(var_0D.var_369 && !isDefined(var_0B)) {
-          var_0B = var_0D;
-          var_0D func_100E9();
+        if(var_13.var_369 && !isDefined(var_11)) {
+          var_11 = var_13;
+          var_13 func_100E9();
           continue;
         }
 
-        var_0D func_8E8E();
-        var_0D func_100E9("circle");
+        var_13 func_8E8E();
+        var_13 func_100E9("circle");
       }
 
-      if(!isDefined(var_0B)) {} else if(level.player usebuttonpressed()) {
-        if(isDefined(var_0B.var_9075)) {
-          var_0F = 0;
+      if(!isDefined(var_11)) {} else if(level.player usebuttonpressed()) {
+        if(isDefined(var_11.var_9075)) {
+          var_15 = 0;
           if(!isDefined(var_3)) {
             var_3 = func_D9DC();
           }
 
-          if(!isDefined(var_0) || var_0B == var_0) {
+          if(!isDefined(var_0) || var_11 == var_0) {
             if(!isDefined(var_2)) {
               var_2 = gettime();
             }
@@ -360,20 +360,20 @@ func_4C20() {
             }
 
             var_10 = gettime() - var_1;
-            if(var_10 >= var_0B.var_9075) {
+            if(var_10 >= var_11.var_9075) {
               var_1 = undefined;
-              var_0F = 1;
+              var_15 = 1;
               var_3 func_D9DB();
             } else {
-              var_3 func_D9DE(var_10, var_0B.var_9075);
+              var_3 func_D9DE(var_10, var_11.var_9075);
             }
           }
 
-          var_0 = var_0B;
-          if(!var_0F) {} else {
-            var_0B notify("trigger", level.player);
-            var_0B.var_13084 notify("trigger", level.player);
-            var_0B func_408B();
+          var_0 = var_11;
+          if(!var_15) {} else {
+            var_11 notify("trigger", level.player);
+            var_11.var_13084 notify("trigger", level.player);
+            var_11 func_408B();
             wait(0.4);
           }
         }
@@ -398,10 +398,10 @@ func_10424() {
 
     var_2.var_4BEC = var_4;
     if(var_4 < var_2.var_7345) {
-      var_0["not_viewable"] = scripts\engine\utility::array_add(var_0["not_viewable"], var_2);
+      var_0["not_viewable"] = ::scripts\engine\utility::array_add(var_0["not_viewable"], var_2);
       continue;
     } else {
-      var_0["viewable"] = scripts\engine\utility::array_add(var_0["viewable"], var_2);
+      var_0["viewable"] = ::scripts\engine\utility::array_add(var_0["viewable"], var_2);
     }
 
     if(getdvarint("cursor_hint_debug")) {
@@ -437,23 +437,23 @@ func_10426(var_0, var_1) {
       }
 
       if(var_7) {
-        var_2["remove"] = scripts\engine\utility::array_add(var_2["remove"], var_4);
+        var_2["remove"] = ::scripts\engine\utility::array_add(var_2["remove"], var_4);
         continue;
       }
     }
 
     var_8 = distancesquared(var_4.origin, level.player.origin);
     if(var_8 > squared(var_4.var_13393)) {
-      var_2["remove"] = scripts\engine\utility::array_add(var_2["remove"], var_4);
+      var_2["remove"] = ::scripts\engine\utility::array_add(var_2["remove"], var_4);
       continue;
     }
 
     if(var_8 > squared(var_4.var_13078) || var_4.var_9035) {
-      var_2["viewable"] = scripts\engine\utility::array_add(var_2["viewable"], var_4);
+      var_2["viewable"] = ::scripts\engine\utility::array_add(var_2["viewable"], var_4);
       continue;
     }
 
-    var_2["useable"] = scripts\engine\utility::array_add(var_2["useable"], var_4);
+    var_2["useable"] = ::scripts\engine\utility::array_add(var_2["useable"], var_4);
     var_4.var_369 = 1;
   }
 
@@ -487,16 +487,16 @@ func_10425(var_0) {
   var_8 = [];
   foreach(var_3 in var_1) {
     if(var_3.var_4BEC >= 0.95) {
-      var_0A = 0;
-      foreach(var_6, var_0C in var_8) {
-        if(var_3.var_4BEC > var_0C.var_4BEC) {
-          var_0A = 1;
+      var_10 = 0;
+      foreach(var_6, var_12 in var_8) {
+        if(var_3.var_4BEC > var_12.var_4BEC) {
+          var_10 = 1;
           var_8 = scripts\engine\utility::array_insert(var_8, var_3, var_6);
           break;
         }
       }
 
-      if(!var_0A) {
+      if(!var_10) {
         var_8 = scripts\engine\utility::array_add(var_8, var_3);
       }
 

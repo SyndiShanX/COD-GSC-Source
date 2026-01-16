@@ -17,7 +17,7 @@ func_D490(var_0, var_1, var_2, var_3) {
   var_6 = animhasnotetrack(var_4, "grenade_right");
   var_7 = var_5 || var_6;
   if(var_7) {
-    scripts\anim\shared::placeweaponon(self.var_394, "left");
+    scripts\anim\shared::placeweaponon(self.weapon, "left");
     thread lib_0A1E::func_231F(var_0, var_1);
     if(var_5) {
       self waittillmatch("grenade_left", var_1);
@@ -51,9 +51,9 @@ func_D490(var_0, var_1, var_2, var_3) {
 
 func_116F6(var_0, var_1, var_2) {
   scripts\asm\asm::asm_fireephemeralevent("grenade response", "return throw complete");
-  scripts\anim\shared::placeweaponon(self.var_394, "right");
+  scripts\anim\shared::placeweaponon(self.weapon, "right");
   if(isDefined(self.var_C3F2)) {
-    self.objective_team = self.var_C3F2;
+    self.grenadeweapon = self.var_C3F2;
     self.var_C3F2 = undefined;
   }
 }
@@ -67,8 +67,8 @@ func_9E8C() {
 func_3EDB(var_0, var_1, var_2) {
   var_3 = undefined;
   var_4 = 1000;
-  if(isDefined(self.isnodeoccupied)) {
-    var_4 = distance(self.origin, self.isnodeoccupied.origin);
+  if(isDefined(self.enemy)) {
+    var_4 = distance(self.origin, self.enemy.origin);
   }
 
   var_5 = [];

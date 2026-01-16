@@ -46,7 +46,7 @@ func_115CD() {
 
 func_5817(var_0) {
   thread func_115CD();
-  if(self.objective_team == "flash_grenade") {
+  if(self.grenadeweapon == "flash_grenade") {
     self notify("flashbang_thrown");
   }
 
@@ -60,7 +60,7 @@ func_5817(var_0) {
   self waittill("done_grenade_throw");
   self orientmode("face default");
   self.var_B7B5 = gettime() + 5000;
-  self.objective_team = self.var_C3F2;
+  self.grenadeweapon = self.var_C3F2;
   self.var_C3F2 = undefined;
   scripts\anim\run::func_6318();
   thread scripts\anim\move::func_C968();
@@ -77,22 +77,22 @@ func_5A08(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_9 = (var_0.origin[0], var_0.origin[1], var_0.origin[2] + 64);
-  var_0A = var_9;
+  var_10 = var_9;
   if(var_2) {
-    var_0B = anglestoright(var_0.angles);
-    var_0C = var_0.origin - self.origin;
-    var_0D = vectordot(var_0B, var_0C);
-    if(var_0D > 20) {
-      var_0D = 20;
-    } else if(var_0D < -20) {
-      var_0D = -20;
+    var_11 = anglestoright(var_0.angles);
+    var_12 = var_0.origin - self.origin;
+    var_13 = vectordot(var_11, var_12);
+    if(var_13 > 20) {
+      var_13 = 20;
+    } else if(var_13 < -20) {
+      var_13 = -20;
     }
 
-    var_0A = var_9 + var_0D * var_0B;
+    var_10 = var_9 + var_13 * var_11;
   }
 
   while(var_6 > 0) {
-    if(isDefined(self.objective_position) || !isDefined(self.isnodeoccupied)) {
+    if(isDefined(self.objective_position) || !isDefined(self.enemy)) {
       return;
     }
 
@@ -100,7 +100,7 @@ func_5A08(var_0, var_1, var_2, var_3, var_4) {
       return;
     }
 
-    if(!self seerecently(self.isnodeoccupied, 0.2) && self.a.pose == "stand" && func_56F2(self.isnodeoccupied.origin - var_0.origin, 360000, 16384)) {
+    if(!self seerecently(self.enemy, 0.2) && self.a.pose == "stand" && func_56F2(self.enemy.origin - var_0.origin, 360000, 16384)) {
       if(isDefined(var_0.var_BF7D) && var_0.var_BF7D > gettime()) {
         return;
       }
@@ -109,27 +109,27 @@ func_5A08(var_0, var_1, var_2, var_3, var_4) {
         return;
       }
 
-      var_0C = var_0.origin - self.origin;
-      if(lengthsquared(var_0C) < var_3) {
+      var_12 = var_0.origin - self.origin;
+      if(lengthsquared(var_12) < var_3) {
         return;
       }
 
-      if(vectordot(var_0C, var_8) < 0) {
+      if(vectordot(var_12, var_8) < 0) {
         return;
       }
 
-      self.var_C3F2 = self.objective_team;
-      self.objective_team = var_1;
-      scripts\anim\combat_utility::func_F62B(self.isnodeoccupied);
+      self.var_C3F2 = self.grenadeweapon;
+      self.grenadeweapon = var_1;
+      scripts\anim\combat_utility::func_F62B(self.enemy);
       if(!var_5) {
-        var_0E = var_9 + var_8 * 100;
-        if(!self func_81A2(self.isnodeoccupied, var_0E, 128)) {
+        var_14 = var_9 + var_8 * 100;
+        if(!self func_81A2(self.enemy, var_14, 128)) {
           return;
         }
       }
 
       var_5 = 1;
-      if(scripts\anim\combat_utility::trygrenadethrow(self.isnodeoccupied, var_0A, var_7, scripts\anim\combat_utility::func_7EE8(var_7), 1, 0, 1)) {
+      if(scripts\anim\combat_utility::trygrenadethrow(self.enemy, var_10, var_7, scripts\anim\combat_utility::func_7EE8(var_7), 1, 0, 1)) {
         func_5817(var_0);
         return;
       }
@@ -137,8 +137,8 @@ func_5A08(var_0, var_1, var_2, var_3, var_4) {
 
     var_6--;
     wait(var_4);
-    var_0F = self func_811E();
-    if(!isDefined(var_0F) || var_0F != var_0) {
+    var_15 = self func_811E();
+    if(!isDefined(var_15) || var_15 != var_0) {
       return;
     }
   }
@@ -187,7 +187,7 @@ func_56F2(var_0, var_1, var_2) {
 
 func_C586(var_0, var_1) {
   var_2 = var_0.origin - self.origin;
-  var_3 = var_0.origin - self.isnodeoccupied.origin;
+  var_3 = var_0.origin - self.enemy.origin;
   return vectordot(var_2, var_1) * vectordot(var_3, var_1) > 0;
 }
 

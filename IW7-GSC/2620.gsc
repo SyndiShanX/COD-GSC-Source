@@ -113,8 +113,9 @@ create_loopsound() {
     } else {
       var_1 = "stop_loop";
     }
-  } else if(level._fx.server_culled_sounds && isDefined(self.v["server_culled"]))
+  } else if(level._fx.server_culled_sounds && isDefined(self.v["server_culled"])) {
     var_0 = self.v["server_culled"];
+  }
 
   var_2 = self;
 
@@ -147,8 +148,9 @@ create_interval_sound() {
     if(isDefined(self.looper)) {
       var_1 = self.looper;
       var_0 = "death";
-    } else
+    } else {
       var_0 = "stop_loop";
+    }
   }
 
   var_1 thread scripts\engine\utility::loop_fx_sound_interval_with_angles(self.v["soundalias"], self.v["origin"], self.v["angles"], var_0, undefined, self.v["delay_min"], self.v["delay_max"]);
@@ -458,6 +460,7 @@ playfxnophase(var_0, var_1, var_2, var_3) {
     foreach(var_7 in var_5) {
       playFX(var_0, var_1, var_2, var_3, var_7);
     }
-  } else
+  } else {
     playFX(var_0, var_1, var_2, var_3);
+  }
 }

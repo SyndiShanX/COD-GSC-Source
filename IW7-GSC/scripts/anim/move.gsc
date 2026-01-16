@@ -59,7 +59,7 @@ end_script() {
   }
 
   if(isDefined(self.var_C3F2)) {
-    self.objective_team = self.var_C3F2;
+    self.grenadeweapon = self.var_C3F2;
     self.var_C3F2 = undefined;
   }
 
@@ -220,11 +220,11 @@ func_BCC6(var_0) {
 }
 
 func_B4EC() {
-  if(self.var_394 == "none") {
+  if(self.weapon == "none") {
     return 0;
   }
 
-  var_0 = weaponclass(self.var_394);
+  var_0 = weaponclass(self.weapon);
   if(!scripts\anim\utility_common::usingriflelikeweapon()) {
     return 0;
   }
@@ -255,8 +255,8 @@ func_FEEB() {
     self.a.var_2274["fire"] = self.var_440C["fire"];
   }
 
-  if(isDefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-    self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand", "single");
+  if(isDefined(self.weapon) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
+    self.a.var_2274["single"] = ::scripts\anim\utility::func_B027("shotgun_stand", "single");
   }
 
   for(;;) {
@@ -611,7 +611,7 @@ func_325C() {
       continue;
     }
 
-    if(!isDefined(self.isnodeoccupied) && !self.precacheleaderboards && isDefined(var_0.team) && isenemyteam(self.team, var_0.team)) {
+    if(!isDefined(self.enemy) && !self.precacheleaderboards && isDefined(var_0.team) && isenemyteam(self.team, var_0.team)) {
       self.var_13D13 = var_0;
       self animcustom(scripts\anim\reactions::func_325E);
       continue;
@@ -654,37 +654,37 @@ func_FA42(var_0, var_1, var_2) {
   var_4 = var_2.type;
   if(var_4 == "Cover Left") {
     var_3["shuffle_start"] = func_7C69(var_0, var_1);
-    var_3["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_left");
-    var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_left");
+    var_3["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_left");
+    var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_left");
   } else if(var_4 == "Cover Right") {
     var_3["shuffle_start"] = func_7C69(var_0, var_1);
-    var_3["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_right");
-    var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_right");
+    var_3["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_cover_right");
+    var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_cover_right");
   } else if(var_4 == "Cover Stand" && var_1.type == var_4) {
     if(var_0) {
-      var_3["shuffle_start"] = scripts\anim\utility::func_B027("shuffle", "shuffle_start_left_stand_to_stand");
-      var_3["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_left_stand_to_stand");
-      var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_left_stand_to_stand");
+      var_3["shuffle_start"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_start_left_stand_to_stand");
+      var_3["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_left_stand_to_stand");
+      var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_left_stand_to_stand");
     } else {
-      var_3["shuffle_start"] = scripts\anim\utility::func_B027("shuffle", "shuffle_start_right_stand_to_stand");
-      var_3["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_right_stand_to_stand");
-      var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_right_stand_to_stand");
+      var_3["shuffle_start"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_start_right_stand_to_stand");
+      var_3["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_right_stand_to_stand");
+      var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_right_stand_to_stand");
     }
   } else if(var_0) {
     var_3["shuffle_start"] = func_7C69(var_0, var_1);
-    var_3["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_left_crouch");
+    var_3["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_left_crouch");
     if(var_4 == "Cover Stand") {
-      var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_stand");
+      var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_stand");
     } else {
-      var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_crouch");
+      var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_left_crouch");
     }
   } else {
     var_3["shuffle_start"] = func_7C69(var_0, var_1);
-    var_3["shuffle"] = scripts\anim\utility::func_B027("shuffle", "shuffle_to_right_crouch");
+    var_3["shuffle"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_to_right_crouch");
     if(var_4 == "Cover Stand") {
-      var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_stand");
+      var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_stand");
     } else {
-      var_3["shuffle_end"] = scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_crouch");
+      var_3["shuffle_end"] = ::scripts\anim\utility::func_B027("shuffle", "shuffle_end_to_right_crouch");
     }
   }
 
@@ -720,12 +720,12 @@ func_BCAD() {
     return;
   }
 
-  if(!isDefined(self.target_getindexoftarget) || !isDefined(var_0) || self.target_getindexoftarget != var_0) {
+  if(!isDefined(self.node) || !isDefined(var_0) || self.node != var_0) {
     return;
   }
 
   var_1 = self.weaponmaxdist;
-  var_2 = self.target_getindexoftarget;
+  var_2 = self.node;
   var_3 = var_2.origin - self.origin;
   if(lengthsquared(var_3) < 1) {
     return;
@@ -751,48 +751,48 @@ func_BCAD() {
   var_8 = scripts\anim\utility::func_1F64("shuffle");
   var_9 = scripts\anim\utility::func_1F64("shuffle_end");
   if(animhasnotetrack(var_7, "finish")) {
-    var_0A = getnotetracktimes(var_7, "finish")[0];
+    var_10 = getnotetracktimes(var_7, "finish")[0];
   } else {
-    var_0A = 1;
+    var_10 = 1;
   }
 
-  var_0B = length(getmovedelta(var_7, 0, var_0A));
-  var_0C = length(getmovedelta(var_8, 0, 1));
-  var_0D = length(getmovedelta(var_9, 0, 1));
-  var_0E = distance(self.origin, var_2.origin);
-  if(var_0E > var_0B) {
+  var_11 = length(getmovedelta(var_7, 0, var_10));
+  var_12 = length(getmovedelta(var_8, 0, 1));
+  var_13 = length(getmovedelta(var_9, 0, 1));
+  var_14 = distance(self.origin, var_2.origin);
+  if(var_14 > var_11) {
     self orientmode("face angle", scripts\asm\shared_utility::getnodeforwardyaw(var_1));
     self func_82EA("shuffle_start", var_7, 1, var_6);
     scripts\anim\shared::donotetracks("shuffle_start");
     self clearanim(var_7, 0.2);
-    var_0E = var_0E - var_0B;
+    var_14 = var_14 - var_11;
     var_6 = 0.2;
   } else {
     self orientmode("face angle", var_2.angles[1]);
   }
 
-  var_0F = 0;
-  if(var_0E > var_0D) {
-    var_0F = 1;
-    var_0E = var_0E - var_0D;
+  var_15 = 0;
+  if(var_14 > var_13) {
+    var_15 = 1;
+    var_14 = var_14 - var_13;
   }
 
   var_10 = getanimlength(var_8);
-  var_11 = var_10 * var_0E / var_0C * 0.9;
+  var_11 = var_10 * var_14 / var_12 * 0.9;
   var_11 = floor(var_11 * 20) * 0.05;
   self func_82E1("shuffle", var_8, 1, var_6);
   scripts\anim\notetracks::donotetracksfortime(var_11, "shuffle");
   for(var_12 = 0; var_12 < 2; var_12++) {
-    var_0E = distance(self.origin, var_2.origin);
-    if(var_0F) {
-      var_0E = var_0E - var_0D;
+    var_14 = distance(self.origin, var_2.origin);
+    if(var_15) {
+      var_14 = var_14 - var_13;
     }
 
-    if(var_0E < 4) {
+    if(var_14 < 4) {
       break;
     }
 
-    var_11 = var_10 * var_0E / var_0C * 0.9;
+    var_11 = var_10 * var_14 / var_12 * 0.9;
     var_11 = floor(var_11 * 20) * 0.05;
     if(var_11 < 0.05) {
       break;
@@ -801,7 +801,7 @@ func_BCAD() {
     scripts\anim\notetracks::donotetracksfortime(var_11, "shuffle");
   }
 
-  if(var_0F) {
+  if(var_15) {
     if(func_BCAE(var_2)) {
       var_6 = 0.2;
     } else {
@@ -850,10 +850,10 @@ func_BCB5(var_0, var_1, var_2) {
   var_8 = vectordot(var_7, var_5) - abs(var_6[1]);
   if(var_8 > 2) {
     var_9 = getnotetracktimes(var_3, "slide_end")[0];
-    var_0A = var_9 - var_4 * getanimlength(var_3);
-    var_0B = int(ceil(var_0A / 0.05));
-    var_0C = var_5 * var_8 / var_0B;
-    thread func_102E9(var_0C, var_0B);
+    var_10 = var_9 - var_4 * getanimlength(var_3);
+    var_11 = int(ceil(var_10 / 0.05));
+    var_12 = var_5 * var_8 / var_11;
+    thread func_102E9(var_12, var_11);
   }
 
   scripts\anim\shared::donotetracks("sideToSide");

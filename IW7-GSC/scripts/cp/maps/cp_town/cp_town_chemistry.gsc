@@ -422,12 +422,12 @@ parse_elements_table() {
     var_7 = tablelookupbyrow(var_0, var_1, 6);
     var_8 = tablelookupbyrow(var_0, var_1, 7);
     var_9 = tablelookupbyrow(var_0, var_1, 8);
-    var_0A = tablelookupbyrow(var_0, var_1, 9);
-    var_0B = tablelookupbyrow(var_0, var_1, 10);
-    var_0C = tablelookupbyrow(var_0, var_1, 11);
-    var_0D = tablelookupbyrow(var_0, var_1, 12);
-    var_0E = tablelookupbyrow(var_0, var_1, 13);
-    var_0F = tablelookupbyrow(var_0, var_1, 14);
+    var_10 = tablelookupbyrow(var_0, var_1, 9);
+    var_11 = tablelookupbyrow(var_0, var_1, 10);
+    var_12 = tablelookupbyrow(var_0, var_1, 11);
+    var_13 = tablelookupbyrow(var_0, var_1, 12);
+    var_14 = tablelookupbyrow(var_0, var_1, 13);
+    var_15 = tablelookupbyrow(var_0, var_1, 14);
     var_10 = tablelookupbyrow(var_0, var_1, 15);
     var_11 = tablelookupbyrow(var_0, var_1, 16);
     var_12 = tablelookupbyrow(var_0, var_1, 17);
@@ -436,12 +436,12 @@ parse_elements_table() {
     var_15 = tablelookupbyrow(var_0, var_1, 32);
     var_16 = tablelookupbyrow(var_0, var_1, 33);
     var_17 = tablelookupbyrow(var_0, var_1, 34);
-    register_element(var_3, var_2, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17);
+    register_element(var_3, var_2, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17);
     var_1++;
   }
 }
 
-register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, param_10, param_11, param_12, param_13, param_14, param_15) {
+register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, param_10, param_11, param_12, param_13, param_14, param_15) {
   var_16 = spawnStruct();
   var_16.omnvar = var_0;
   var_16.displayname = var_2;
@@ -455,15 +455,15 @@ register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
   var_16.valuesets.choicea.pressure = var_8;
   var_16.valuesets.choiceb = spawnStruct();
   var_16.valuesets.choiceb.heat = var_9;
-  var_16.valuesets.choiceb.pressure = var_0A;
+  var_16.valuesets.choiceb.pressure = var_10;
   var_16.valuesets.choicec = spawnStruct();
-  var_16.valuesets.choicec.heat = var_0B;
-  var_16.valuesets.choicec.pressure = var_0C;
+  var_16.valuesets.choicec.heat = var_11;
+  var_16.valuesets.choicec.pressure = var_12;
   var_16.valuesets.choiced = spawnStruct();
-  var_16.valuesets.choiced.heat = var_0D;
-  var_16.valuesets.choiced.pressure = var_0E;
+  var_16.valuesets.choiced.heat = var_13;
+  var_16.valuesets.choiced.pressure = var_14;
   var_16.valuesets.choicee = spawnStruct();
-  var_16.valuesets.choicee.heat = var_0F;
+  var_16.valuesets.choicee.heat = var_15;
   var_16.valuesets.choicee.pressure = param_10;
   var_16.valuesets.choicef = spawnStruct();
   var_16.valuesets.choicef.heat = param_11;
@@ -530,8 +530,8 @@ register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
     var_21 = spawnStruct();
     var_21.origin = (5265, 1637, 387);
     var_21.angles = (10, 184, 0);
-    var_1F = scripts\engine\utility::array_add_safe(var_1F, var_20);
-    var_1F = scripts\engine\utility::array_add_safe(var_1F, var_21);
+    var_1F = scripts\engine\utility::add_to_array(var_1F, var_20);
+    var_1F = scripts\engine\utility::add_to_array(var_1F, var_21);
     foreach(var_1D in var_1F) {
       var_1A = spawn("script_model", var_1D.origin);
       var_1A setModel("tag_origin_chemical");
@@ -656,12 +656,12 @@ watch_for_melee_on_chemical_object() {
     }
 
     playFX(level._effect["sb_quest_item_pickup"], var_3);
-    var_0A = get_chemistry_object_value(self, 0);
-    var_0B = get_chemical_carried_by_player(var_1);
-    if(var_0B == "") {
-      set_chemical_carried_by_player(var_1, var_0A);
+    var_10 = get_chemistry_object_value(self, 0);
+    var_11 = get_chemical_carried_by_player(var_1);
+    if(var_11 == "") {
+      set_chemical_carried_by_player(var_1, var_10);
     } else {
-      set_chemical_carried_by_player(var_1, var_0A);
+      set_chemical_carried_by_player(var_1, var_10);
     }
 
     if(self.model.health < 0) {
@@ -1101,53 +1101,53 @@ reaction_activation(var_0, var_1) {
   wait(0.05);
   playrumbleonposition("artillery_rumble", var_0.origin);
   wait(2);
-  var_0B = "";
-  var_0C = "";
-  var_0D = "";
-  var_0E = "";
-  var_0F = 0;
+  var_11 = "";
+  var_12 = "";
+  var_13 = "";
+  var_14 = "";
+  var_15 = 0;
   var_10 = 0;
   var_11 = 0;
   var_12 = 0;
   foreach(var_25, var_14 in level.compounds) {
     var_15 = var_25;
-    var_0F = 0;
+    var_15 = 0;
     var_10 = 0;
     var_11 = 0;
     var_12 = 0;
-    var_0B = "";
-    var_0C = "";
-    var_0D = "";
-    var_0E = "";
+    var_11 = "";
+    var_12 = "";
+    var_13 = "";
+    var_14 = "";
     if(var_14.parta != "") {
-      var_0B = var_14.parta;
+      var_11 = var_14.parta;
     }
 
     if(var_14.partb != "") {
-      var_0C = var_14.partb;
+      var_12 = var_14.partb;
     }
 
     if(var_14.partc != "") {
-      var_0D = var_14.partc;
+      var_13 = var_14.partc;
     }
 
     if(var_14.partd != "") {
-      var_0E = var_14.partd;
+      var_14 = var_14.partd;
     }
 
-    if(isDefined(var_0B) && var_0B != "") {
+    if(isDefined(var_11) && var_11 != "") {
       foreach(var_17 in level.chemical_containers) {
         if(var_17.interaction.chemical_contained == "") {
           continue;
         }
 
-        if(var_0B == var_17.interaction.chemical_contained) {
-          var_0F = 1;
+        if(var_11 == var_17.interaction.chemical_contained) {
+          var_15 = 1;
           var_17.interaction.checked_in_reaction = 1;
           continue;
         }
       }
-    } else if(isDefined(var_0B) && var_0B == "") {
+    } else if(isDefined(var_11) && var_11 == "") {
       var_18 = 0;
       var_19 = 0;
       foreach(var_17 in level.chemical_containers) {
@@ -1157,7 +1157,7 @@ reaction_activation(var_0, var_1) {
 
         if(var_17.interaction.chemical_contained == "") {
           if(!var_18) {
-            var_0F = 1;
+            var_15 = 1;
             var_17.interaction.checked_in_reaction = 1;
             var_18 = 1;
             continue;
@@ -1166,30 +1166,30 @@ reaction_activation(var_0, var_1) {
           continue;
         }
 
-        var_0F = 0;
+        var_15 = 0;
         continue;
       }
     } else {
-      var_0F = 0;
+      var_15 = 0;
     }
 
-    if(var_0F == 0) {
+    if(var_15 == 0) {
       continue;
     }
 
-    if(isDefined(var_0C) && var_0C != "") {
+    if(isDefined(var_12) && var_12 != "") {
       foreach(var_17 in level.chemical_containers) {
         if(var_17.interaction.chemical_contained == "") {
           continue;
         }
 
-        if(var_0C == var_17.interaction.chemical_contained) {
+        if(var_12 == var_17.interaction.chemical_contained) {
           var_10 = 1;
           var_17.interaction.checked_in_reaction = 1;
           continue;
         }
       }
-    } else if(isDefined(var_0C) && var_0C == "") {
+    } else if(isDefined(var_12) && var_12 == "") {
       var_1C = 0;
       var_1D = 0;
       foreach(var_17 in level.chemical_containers) {
@@ -1219,18 +1219,18 @@ reaction_activation(var_0, var_1) {
       continue;
     }
 
-    if(isDefined(var_0D) && var_0D != "") {
+    if(isDefined(var_13) && var_13 != "") {
       foreach(var_17 in level.chemical_containers) {
         if(var_17.interaction.chemical_contained == "") {
           continue;
         }
 
-        if(var_0D == var_17.interaction.chemical_contained) {
+        if(var_13 == var_17.interaction.chemical_contained) {
           var_11 = 1;
           continue;
         }
       }
-    } else if(isDefined(var_0D) && var_0D == "") {
+    } else if(isDefined(var_13) && var_13 == "") {
       var_20 = 0;
       var_21 = 0;
       foreach(var_17 in level.chemical_containers) {
@@ -1238,7 +1238,7 @@ reaction_activation(var_0, var_1) {
           continue;
         }
 
-        if(scripts\engine\utility::istrue(var_10) && scripts\engine\utility::istrue(var_0F)) {
+        if(scripts\engine\utility::istrue(var_10) && scripts\engine\utility::istrue(var_15)) {
           if(var_17.interaction.chemical_contained == "") {
             if(!var_20) {
               var_11 = 1;
@@ -1261,19 +1261,19 @@ reaction_activation(var_0, var_1) {
       var_11 = 0;
     }
 
-    if(isDefined(var_0E) && var_0E != "") {
+    if(isDefined(var_14) && var_14 != "") {
       foreach(var_17 in level.chemical_containers) {
         if(var_17.interaction.chemical_contained == "") {
           continue;
         }
 
-        if(var_0E == var_17.interaction.chemical_contained) {
+        if(var_14 == var_17.interaction.chemical_contained) {
           var_12 = 1;
           continue;
         }
       }
-    } else if(isDefined(var_0E) && var_0E == "") {
-      if(scripts\engine\utility::istrue(var_10) && scripts\engine\utility::istrue(var_0F) && scripts\engine\utility::istrue(var_11)) {
+    } else if(isDefined(var_14) && var_14 == "") {
+      if(scripts\engine\utility::istrue(var_10) && scripts\engine\utility::istrue(var_15) && scripts\engine\utility::istrue(var_11)) {
         foreach(var_17 in level.chemical_containers) {
           if(scripts\engine\utility::istrue(var_17.interaction.checked_in_reaction)) {
             continue;
@@ -1295,11 +1295,11 @@ reaction_activation(var_0, var_1) {
       var_12 = 0;
     }
 
-    if(var_0F && var_10 && var_11 && var_12) {
-      var_0B = "";
-      var_0C = "";
-      var_0D = "";
-      var_0E = "";
+    if(var_15 && var_10 && var_11 && var_12) {
+      var_11 = "";
+      var_12 = "";
+      var_13 = "";
+      var_14 = "";
       var_2 = var_15;
       level thread clear_check_status_beakers();
       break;
@@ -1756,12 +1756,12 @@ try_play_swap_vfx(var_0, var_1, var_2) {
             continue;
           }
 
-          foreach(var_0B in level.chemical_containers) {
-            foreach(var_0E, var_0D in level.elements) {
-              if(var_4 == var_0E) {
-                if(var_0D.type != "componant" || var_0D.type != "final") {
-                  if(isDefined(var_0B.filled_fx)) {
-                    var_0B.filled_fx delete();
+          foreach(var_11 in level.chemical_containers) {
+            foreach(var_14, var_13 in level.elements) {
+              if(var_4 == var_14) {
+                if(var_13.type != "componant" || var_13.type != "final") {
+                  if(isDefined(var_11.filled_fx)) {
+                    var_11.filled_fx delete();
                   }
                 }
               }

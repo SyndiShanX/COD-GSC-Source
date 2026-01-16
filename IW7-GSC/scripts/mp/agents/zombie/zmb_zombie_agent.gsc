@@ -210,7 +210,7 @@ func_13FAF() {
   return isDefined(self.var_117F7);
 }
 
-agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(var_0) || isDefined(var_1)) {
     if(!isDefined(var_0)) {
       var_0 = var_1;
@@ -237,7 +237,7 @@ agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     }
   }
 
-  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0A, var_0B);
+  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11);
   return 1;
 }
 
@@ -283,7 +283,7 @@ func_389D() {
   return 1;
 }
 
-func_13F9C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+func_13F9C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   self notify("zombiePendingDeath");
   self endon("zombiePendingDeath");
   while(isDefined(self) && isalive(self)) {
@@ -294,7 +294,7 @@ func_13F9C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9,
     }
 
     self.pendingdeath = 0;
-    onzombiedamagefinished(var_0, var_1, self.health + 1, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    onzombiedamagefinished(var_0, var_1, self.health + 1, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 }
 
@@ -331,24 +331,24 @@ isonhumanteam(var_0) {
   return 0;
 }
 
-onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  var_0D = self.health;
-  var_0E = 0;
-  var_0F = !func_13FAF() && var_4 != "MOD_FALLING" && var_5 != "repulsor_zombie_mp" && var_5 != "zombie_water_trap_mp";
-  if(var_0F && scripts\engine\utility::istrue(self.died_poorly)) {
-    var_0F = 0;
+onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = self.health;
+  var_14 = 0;
+  var_15 = !func_13FAF() && var_4 != "MOD_FALLING" && var_5 != "repulsor_zombie_mp" && var_5 != "zombie_water_trap_mp";
+  if(var_15 && scripts\engine\utility::istrue(self.died_poorly)) {
+    var_15 = 0;
   }
 
   if(dying_zapper_death()) {
-    var_0F = 0;
+    var_15 = 0;
   }
 
   if(scripts\engine\utility::istrue(self.is_dancing)) {
-    var_0F = 0;
+    var_15 = 0;
   }
 
-  if(var_0F && isDefined(level.mutilation_perk_func)) {
-    var_0F = [[level.mutilation_perk_func]](var_0F, var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+  if(var_15 && isDefined(level.mutilation_perk_func)) {
+    var_15 = [[level.mutilation_perk_func]](var_15, var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   }
 
   if(self.health > 0) {
@@ -357,9 +357,9 @@ onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     var_10 = 1;
   }
 
-  if(var_0F) {
-    var_0E = func_128A7(var_8, var_5, var_4, var_10, var_1, var_7, var_4, var_0);
-    if(var_0E && isDefined(var_1)) {
+  if(var_15) {
+    var_14 = func_128A7(var_8, var_5, var_4, var_10, var_1, var_7, var_4, var_0);
+    if(var_14 && isDefined(var_1)) {
       var_2 = self.health + 1;
     }
   }
@@ -377,7 +377,7 @@ onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   thread func_C4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   if(!func_389D() && self.health - var_2 <= 0) {
-    thread func_13F9C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0B, var_0C);
+    thread func_13F9C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_11, var_12);
     var_2 = int(max(0, self.health - 1));
   }
 
@@ -387,9 +387,9 @@ onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "pain", 0);
   }
 
-  agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0B, var_0C);
+  agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_11, var_12);
   if(isalive(self)) {
-    if(var_0E && !ispendingdeath()) {
+    if(var_14 && !ispendingdeath()) {
       self suicide();
       return;
     }
@@ -492,8 +492,8 @@ func_128A7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     var_9 = func_7FD6(var_0, var_1, var_2, var_3, var_4, self.var_B8BA, var_7);
     if(var_9 != 0) {
-      var_0A = !scripts\engine\utility::istrue(self.dismember_crawl);
-      var_0B = isDefined(self.var_B8BA) && self.var_B8BA == 0;
+      var_10 = !scripts\engine\utility::istrue(self.dismember_crawl);
+      var_11 = isDefined(self.var_B8BA) && self.var_B8BA == 0;
       if(level.var_4878 < 8 || scripts\engine\utility::istrue(self.dismember_crawl) || var_9 & 12 == 0 || var_9 & 16 != 0 || self.var_B8BA & 3 != 0) {
         if(func_BDFB(self.var_B8BA | var_9, var_1, var_3, var_5, var_6)) {
           if(func_9E51()) {
@@ -568,9 +568,9 @@ func_7FD6(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_9 = 1;
   if(isDefined(level.mutilation_mask_override_func)) {
-    var_0A = [[level.mutilation_mask_override_func]](var_8, var_1, var_2, var_3, var_4, var_5, var_6);
-    if(isDefined(var_0A)) {
-      var_8 = var_0A;
+    var_10 = [[level.mutilation_mask_override_func]](var_8, var_1, var_2, var_3, var_4, var_5, var_6);
+    if(isDefined(var_10)) {
+      var_8 = var_10;
     }
   }
 
@@ -742,30 +742,30 @@ func_7FD7(var_0, var_1, var_2, var_3) {
       for(var_8 = 4; var_8 > 0; var_8--) {
         var_9 = 1 << var_6 % var_8 * 2;
         var_6 = int(var_6 / var_8);
-        var_0A = var_7 % var_9;
-        var_0B = int(var_7 / var_9);
-        var_7 = var_0A + var_0B >> 2 * var_9;
-        var_0C = 1 << var_0B & 3;
-        if(var_0 &var_0C != 0 && isDefined(func_2C18(var_1 | var_4 | var_0C))) {
-          if(randomfloat(1) > func_3C3B(var_0C) * var_3) {
-            var_4 = var_4 | var_0C;
+        var_10 = var_7 % var_9;
+        var_11 = int(var_7 / var_9);
+        var_7 = var_10 + var_11 >> 2 * var_9;
+        var_12 = 1 << var_11 & 3;
+        if(var_0 &var_12 != 0 && isDefined(func_2C18(var_1 | var_4 | var_12))) {
+          if(randomfloat(1) > func_3C3B(var_12) * var_3) {
+            var_4 = var_4 | var_12;
           }
         }
       }
     } else {
       while(var_0 > 0) {
-        var_0C = var_0 & 0 - var_0;
-        if(randomfloat(1) > func_3C3B(var_0C) * var_3) {
-          var_4 = var_4 | var_0C;
+        var_12 = var_0 & 0 - var_0;
+        if(randomfloat(1) > func_3C3B(var_12) * var_3) {
+          var_4 = var_4 | var_12;
         }
 
-        var_0 = var_0 - var_0C;
+        var_0 = var_0 - var_12;
       }
     }
   } else if(var_2 >= 1 || isDefined(func_2C18(var_1 | var_0))) {
-    var_0D = func_3C3B(var_0) * var_3;
-    var_0E = randomfloat(1);
-    if(var_0E > var_0D) {
+    var_13 = func_3C3B(var_0) * var_3;
+    var_14 = randomfloat(1);
+    if(var_14 > var_13) {
       var_4 = var_0;
     }
   }
@@ -1039,9 +1039,9 @@ func_F34B() {
 }
 
 func_C4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  foreach(var_0B in level.var_BDFA) {
-    if(isDefined(var_0B[4])) {
-      self[[var_0B[4]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+  foreach(var_11 in level.var_BDFA) {
+    if(isDefined(var_11[4])) {
+      self[[var_11[4]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     }
   }
 }
@@ -1171,7 +1171,7 @@ func_13F55() {
       }
     }
 
-    scripts\engine\utility::waittill_any_timeout_1(1, "speed_debuffs_changed");
+    scripts\engine\utility::waittill_any_timeout(1, "speed_debuffs_changed");
   }
 }
 
@@ -1407,30 +1407,30 @@ func_10840(var_0) {
 }
 
 func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = self.var_164D[self.asmname].var_4BC0;
-  var_0B = level.asm[self.asmname].states[var_0A];
-  var_0C = scripts\mp\mp_agent::should_do_immediate_ragdoll(self);
+  var_10 = self.var_164D[self.asmname].var_4BC0;
+  var_11 = level.asm[self.asmname].states[var_10];
+  var_12 = scripts\mp\mp_agent::should_do_immediate_ragdoll(self);
   if(isDefined(self.nocorpse)) {
-    var_0C = 0;
+    var_12 = 0;
   }
 
-  var_0D = isDefined(self.ragdollimpactvector);
-  if(scripts\asm\asm_mp::func_2382(self.asmname, var_0B)) {
-    if(!var_0C || !scripts\engine\utility::istrue(self.is_traversing)) {
-      scripts\asm\asm::func_231E(self.asmname, var_0B, var_0A);
+  var_13 = isDefined(self.ragdollimpactvector);
+  if(scripts\asm\asm_mp::func_2382(self.asmname, var_11)) {
+    if(!var_12 || !scripts\engine\utility::istrue(self.is_traversing)) {
+      scripts\asm\asm::func_231E(self.asmname, var_11, var_10);
     }
   }
 
   if(isDefined(self.nocorpse)) {
     if(scripts\cp\utility::is_melee_weapon(var_4)) {
-      var_0E = self getplayerviewmodelfrombody(var_8, 1);
-      var_0E hide(1);
+      var_14 = self getplayerviewmodelfrombody(var_8, 1);
+      var_14 hide(1);
     }
 
     return;
   }
 
-  var_0F = self;
+  var_15 = self;
   if(isDefined(self.has_backpack) && isDefined(level.should_drop_pillage)) {
     if([
         [level.should_drop_pillage]
@@ -1440,11 +1440,11 @@ func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   }
 
   if(isDefined(self.ragdollhitloc)) {
-    self.body = self getplayerviewmodelfrombody(var_8, var_0C);
+    self.body = self getplayerviewmodelfrombody(var_8, var_12);
     self.body.ragdollhitloc = self.ragdollhitloc;
     self.body.ragdollimpactvector = self.ragdollimpactvector;
   } else {
-    self.body = self getplayerviewmodelfrombody(var_8, var_0C);
+    self.body = self getplayerviewmodelfrombody(var_8, var_12);
   }
 
   if(isDefined(self.is_burning) || isDefined(var_1) && isDefined(var_4) && var_4 == "incendiary_ammo_mp") {
@@ -1459,9 +1459,9 @@ func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
     self.body thread func_5774(self.var_CE65, scripts\engine\utility::istrue(self.is_traversing));
   }
 
-  if(scripts\engine\utility::istrue(var_0C)) {
+  if(scripts\engine\utility::istrue(var_12)) {
     scripts\mp\mp_agent::do_immediate_ragdoll(self.body);
-  } else if(scripts\engine\utility::istrue(var_0D)) {
+  } else if(scripts\engine\utility::istrue(var_13)) {
     thread velocityragdoll(self.body, var_6, var_5, var_4, var_0, var_3);
   } else if(!scripts\engine\utility::istrue(self.death_anim_no_ragdoll)) {
     thread scripts\mp\mp_agent::delaystartragdoll(self.body, var_6, var_5, var_4, var_0, var_3);
@@ -1674,32 +1674,32 @@ func_13F9F(var_0, var_1) {
           var_7 = 60;
         }
 
-        var_0A = var_3 getvelocity();
-        var_0A = (var_0A[0], var_0A[1], 0);
-        var_0B = length2d(var_0A);
-        if(var_0B > 0) {
-          var_0C = var_9 * var_7;
-          var_0D = var_0A + var_0C;
-          var_0E = length2d(var_0D);
-          if(vectordot(var_0D, var_0C) < 0) {
-            var_0F = vectorcross((0, 0, 1), var_9);
-            if(vectordot(var_0F, var_0A) > 0) {
-              var_0B = length2d(var_0A);
-              var_0A = var_0F * var_0B;
+        var_10 = var_3 getvelocity();
+        var_10 = (var_10[0], var_10[1], 0);
+        var_11 = length2d(var_10);
+        if(var_11 > 0) {
+          var_12 = var_9 * var_7;
+          var_13 = var_10 + var_12;
+          var_14 = length2d(var_13);
+          if(vectordot(var_13, var_12) < 0) {
+            var_15 = vectorcross((0, 0, 1), var_9);
+            if(vectordot(var_15, var_10) > 0) {
+              var_11 = length2d(var_10);
+              var_10 = var_15 * var_11;
             } else {
-              var_10 = var_0F * -1;
-              var_0B = length2d(var_0A);
-              var_0A = var_10 * var_0B;
+              var_10 = var_15 * -1;
+              var_11 = length2d(var_10);
+              var_10 = var_10 * var_11;
             }
 
-            var_0D = var_0A + var_0C;
-            var_7 = length2d(var_0D);
+            var_13 = var_10 + var_12;
+            var_7 = length2d(var_13);
           } else {
-            if(var_0B > var_7) {
-              var_7 = var_0B;
+            if(var_11 > var_7) {
+              var_7 = var_11;
             }
 
-            var_9 = vectornormalize(var_0D);
+            var_9 = vectornormalize(var_13);
           }
         }
 

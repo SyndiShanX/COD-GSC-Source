@@ -233,7 +233,7 @@ setghosttarget(var_0) {
 getaliveenemies() {
   var_0 = [];
   foreach(var_2 in level.players) {
-    if(var_2.ignoreme || isDefined(var_2.triggerportableradarping) && var_2.triggerportableradarping.ignoreme) {
+    if(var_2.ignoreme || isDefined(var_2.owner) && var_2.owner.ignoreme) {
       continue;
     }
 
@@ -338,8 +338,8 @@ physics_callback_monitor(var_0, var_1) {
   var_0 endon("death");
   var_0 waittill("collision", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   if(isDefined(level.fbd) && isDefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
-    var_0A = var_0 gettagorigin("j_spine4");
-    playFX(level._effect["flying_soul_hit_fail"], var_0A, anglesToForward(var_0.angles), anglestoup(var_0.angles));
+    var_10 = var_0 gettagorigin("j_spine4");
+    playFX(level._effect["flying_soul_hit_fail"], var_10, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   }
 
   fake_ghost_explode(var_0, var_1, getghostimpactexplosionrange());

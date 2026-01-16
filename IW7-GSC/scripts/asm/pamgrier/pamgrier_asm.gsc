@@ -456,16 +456,16 @@ playteleportout(var_0, var_1, var_2, var_3) {
     var_7 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
     var_8 = var_6 getvelocity();
     var_9 = length2d(var_8);
-    var_0A = vectornormalize(var_6.origin - self.origin);
-    self.teleportpos = var_6.origin - var_0A * var_7.teleport_attack_dist_to_target;
+    var_10 = vectornormalize(var_6.origin - self.origin);
+    self.teleportpos = var_6.origin - var_10 * var_7.teleport_attack_dist_to_target;
     if(!isvalidteleportpos(var_6.origin)) {
       if(var_9 == 0) {
-        var_0B = anglesToForward(var_6.angles);
+        var_11 = anglesToForward(var_6.angles);
       } else {
-        var_0B = vectornormalize(var_9) * -1;
+        var_11 = vectornormalize(var_9) * -1;
       }
 
-      self.teleportpos = var_6.origin + var_0B * var_7.teleport_behind_target_dist;
+      self.teleportpos = var_6.origin + var_11 * var_7.teleport_behind_target_dist;
       if(!isvalidteleportpos(var_6.origin)) {
         self.teleportpos = getclosestpointonnavmesh(var_6.origin);
       }

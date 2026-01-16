@@ -443,8 +443,8 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
   var_7 = var_0.entangledmodel;
   var_8 = 1;
   var_9 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 0, 1);
-  var_0A = scripts\common\trace::create_contents(1, 1, 1, 1, 1, 0, 0);
-  var_0B = getcapsulefrommodel(var_7);
+  var_10 = scripts\common\trace::create_contents(1, 1, 1, 1, 1, 0, 0);
+  var_11 = getcapsulefrommodel(var_7);
   var_7 endon("end_entangle_move_to_logic");
   var_7.lasteffecttime = 0;
   if(isDefined(var_7.script_parameters) && var_7.script_parameters == "heavy_helmet") {
@@ -456,12 +456,12 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
   playFXOnTag(level._effect["vfx_item_entagled"], var_7, var_2);
   thread delaykillfx(var_7, var_2, var_0);
   var_0 thread monitorplayerviewangles(var_0, var_7);
-  var_0C = 0;
-  var_0D = 0;
-  for(var_0E = 0; isDefined(var_0) && var_0 getcurrentweapon() == "iw7_entangler2_zm"; var_0E++) {
-    var_0F = gettime();
-    if(var_7.lasteffecttime + 250 <= var_0F) {
-      var_7.lasteffecttime = var_0F;
+  var_12 = 0;
+  var_13 = 0;
+  for(var_14 = 0; isDefined(var_0) && var_0 getcurrentweapon() == "iw7_entangler2_zm"; var_14++) {
+    var_15 = gettime();
+    if(var_7.lasteffecttime + 250 <= var_15) {
+      var_7.lasteffecttime = var_15;
     }
 
     var_5 = 72;
@@ -478,9 +478,9 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
       }
     }
 
-    var_13 = var_0C >= 10;
-    var_14 = var_0C >= 20;
-    var_0D = var_0E >= 5;
+    var_13 = var_12 >= 10;
+    var_14 = var_12 >= 20;
+    var_13 = var_14 >= 5;
     var_15 = scripts\engine\utility::array_combine(level.players, [var_7]);
     var_16 = var_0 getEye();
     var_17 = var_0.origin + (0, 0, 56);
@@ -524,12 +524,12 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
     if(var_8) {
       if(scripts\engine\utility::istrue(var_0.is_off_grid) || scripts\engine\utility::istrue(var_0.isfasttravelling)) {
         var_13 = 0;
-        var_0C = 0;
+        var_12 = 0;
         var_7.origin = var_1F;
       } else if(!isDefined(var_1.entanglemovetofunc)) {
-        if(var_0D) {
+        if(var_13) {
           var_25 = var_7.origin + anglesToForward(vectortoangles(var_0.origin - var_7.origin)) * 12;
-          var_26 = scripts\common\trace::capsule_trace(var_25, var_1F, var_0B[0], var_0B[1], undefined, var_15, var_9, 1);
+          var_26 = scripts\common\trace::capsule_trace(var_25, var_1F, var_11[0], var_11[1], undefined, var_15, var_9, 1);
           var_1F = var_26["shape_position"] - (0, 0, var_26["shape_position"][2]) + (0, 0, var_20);
         }
 
@@ -537,7 +537,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
           var_7.origin = var_1F;
         } else {
           var_7 moveto(var_1F, var_4);
-          var_0 scripts\engine\utility::waittill_any_timeout_1(var_4, "update_item_pos", "delete_equipment");
+          var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
         }
       } else if(isDefined(var_1.entanglemovetofunc)) {
         var_13 = 0;
@@ -548,11 +548,11 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
             var_7.origin = var_1F;
           } else {
             var_7 moveto(var_1F, var_4);
-            var_0 scripts\engine\utility::waittill_any_timeout_1(var_4, "update_item_pos", "delete_equipment");
+            var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
           }
         } else {
           var_15 = scripts\engine\utility::array_combine(level.players, [var_7]);
-          var_26 = scripts\common\trace::capsule_trace(var_1.origin, var_0.origin, var_0B[0], var_0B[1], undefined, var_15, var_9, 24);
+          var_26 = scripts\common\trace::capsule_trace(var_1.origin, var_0.origin, var_11[0], var_11[1], undefined, var_15, var_9, 24);
           var_27 = var_26["shape_position"] + (0, 0, 32);
           var_7.origin = var_27;
         }
@@ -560,14 +560,14 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
         var_7.origin = var_1F;
       } else {
         var_7 moveto(var_1F, var_4);
-        var_0 scripts\engine\utility::waittill_any_timeout_1(var_4, "update_item_pos", "delete_equipment");
+        var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
       }
 
       scripts\engine\utility::waitframe();
       if(var_13) {
         var_25 = var_7.origin + anglesToForward(var_7.angles) * 18;
         var_15 = scripts\engine\utility::array_combine(level.players, [var_7]);
-        var_28 = scripts\common\trace::ray_trace(var_16, var_25 + (0, 0, 16), var_15, var_0A);
+        var_28 = scripts\common\trace::ray_trace(var_16, var_25 + (0, 0, 16), var_15, var_10);
         if(isDefined(var_28["hittype"]) && var_28["hittype"] != "hittype_none") {
           if(var_28["hittype"] == "hittype_entity" && isDefined(var_28["entity"]) && !isplayer(var_28["entity"])) {
             if(var_14) {
@@ -579,19 +579,19 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
             var_0 notify("item_released");
           }
         } else {
-          var_0C = 0;
+          var_12 = 0;
           continue;
         }
       }
     } else if(var_24 >= 8) {
       var_7 moveto(var_1F, var_4);
-      var_0 scripts\engine\utility::waittill_any_timeout_1(var_4, "update_item_pos", "delete_equipment");
+      var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
     } else {
       scripts\engine\utility::waitframe();
       if(var_13) {
         var_25 = var_7.origin + anglesToForward(var_7.angles) * 18;
         var_15 = scripts\engine\utility::array_combine(level.players, [var_7]);
-        var_28 = scripts\common\trace::ray_trace(var_16, var_25 + (0, 0, 16), var_15, var_0A);
+        var_28 = scripts\common\trace::ray_trace(var_16, var_25 + (0, 0, 16), var_15, var_10);
         if(isDefined(var_28["hittype"]) && var_28["hittype"] != "hittype_none") {
           if(var_28["hittype"] == "hittype_entity" && isDefined(var_28["entity"]) && !isplayer(var_28["entity"])) {
             if(var_14) {
@@ -603,19 +603,19 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
             var_0 notify("item_released");
           }
         } else {
-          var_0C = 0;
+          var_12 = 0;
           continue;
         }
       }
     }
 
-    var_0C++;
+    var_12++;
   }
 }
 
 delaykillfx(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_2 scripts\engine\utility::waittill_any_3("disconnect", "end_move_towards_player");
+  var_2 scripts\engine\utility::waittill_any("disconnect", "end_move_towards_player");
   stopFXOnTag(level._effect["vfx_item_entagled"], var_0, var_1);
 }
 
@@ -693,24 +693,24 @@ launchitem(var_0, var_1, var_2) {
   var_5 = var_5 + var_6[1] * anglesToForward(var_7);
   var_5 = var_5 + var_6[2] * anglestoup(var_7);
   var_9 = rotatepointaroundvector(anglestoup(var_7), anglesToForward(var_7), var_8);
-  var_0A = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 0, 1);
-  var_0B = scripts\common\trace::capsule_trace(var_4, var_5 + var_9, 16, 32, undefined, var_3, var_0A, 24);
-  var_0C = var_0B["shape_position"];
-  var_0D = var_5;
-  var_0E = vectornormalize(var_5 - var_0C);
-  var_0E = var_0E * 10000;
+  var_10 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 0, 1);
+  var_11 = scripts\common\trace::capsule_trace(var_4, var_5 + var_9, 16, 32, undefined, var_3, var_10, 24);
+  var_12 = var_11["shape_position"];
+  var_13 = var_5;
+  var_14 = vectornormalize(var_5 - var_12);
+  var_14 = var_14 * 10000;
   if(isDefined(var_1.script_parameters) && var_1.script_parameters == "heavy_helmet") {
-    var_0E = var_0E / 2;
+    var_14 = var_14 / 2;
   }
 
   if(scripts\engine\utility::istrue(var_1.forcerelease)) {
-    var_0F = scripts\engine\utility::drop_to_ground(var_1.origin, 24, -200);
+    var_15 = scripts\engine\utility::drop_to_ground(var_1.origin, 24, -200);
     var_10 = -150;
-    var_0E = trajectorycalculateinitialvelocity(var_0F + (0, 0, 20), var_0F + (0, 0, 20) + (randomintrange(-10, 10), randomintrange(-10, 10), 0), (0, 0, var_10), 2);
+    var_14 = trajectorycalculateinitialvelocity(var_15 + (0, 0, 20), var_15 + (0, 0, 20) + (randomintrange(-10, 10), randomintrange(-10, 10), 0), (0, 0, var_10), 2);
     var_1.forcerelease = undefined;
   }
 
-  var_1 physicslaunchserver(var_0D, var_0E);
+  var_1 physicslaunchserver(var_13, var_14);
   var_1 physics_registerforcollisioncallback();
   if(isDefined(var_1.collisionfunc)) {
     thread[[var_1.collisionfunc]](var_1, var_2, var_0);
@@ -722,28 +722,28 @@ launchitem(var_0, var_1, var_2) {
 
 delaykillitem(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_0 waittill("collision", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-  var_0B = gettime();
-  var_0.soundlastplayed = var_0B;
+  var_0 waittill("collision", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  var_11 = gettime();
+  var_0.soundlastplayed = var_11;
   playsoundatpos(var_0.origin, "weap_axe_throw_impact");
-  var_0C = var_0.origin;
-  for(var_0D = 0; var_0D <= 20; var_0D++) {
-    var_0E = var_0.origin;
-    var_0F = var_0.angles;
-    var_0 scripts\engine\utility::waittill_any_timeout_1(0.1, "collision");
+  var_12 = var_0.origin;
+  for(var_13 = 0; var_13 <= 20; var_13++) {
+    var_14 = var_0.origin;
+    var_15 = var_0.angles;
+    var_0 scripts\engine\utility::waittill_any_timeout(0.1, "collision");
     level notify("entangler_item_collision", var_0.origin);
-    if(distance(var_0E, var_0.origin) < 1 && var_0F == var_0.angles) {
+    if(distance(var_14, var_0.origin) < 1 && var_15 == var_0.angles) {
       break;
     }
 
-    var_0B = gettime();
-    if(var_0.soundlastplayed <= var_0B - 250) {
-      var_0.soundlastplayed = var_0B;
+    var_11 = gettime();
+    if(var_0.soundlastplayed <= var_11 - 250) {
+      var_0.soundlastplayed = var_11;
       playsoundatpos(var_0.origin, "weap_axe_throw_impact");
     }
   }
 
-  if(var_0D >= 20) {
+  if(var_13 >= 20) {
     var_0.forcedrespawn = 1;
   }
 

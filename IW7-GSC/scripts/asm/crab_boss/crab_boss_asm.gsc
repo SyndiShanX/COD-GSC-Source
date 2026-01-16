@@ -242,24 +242,24 @@ trycrabbosssmashattack(var_0, var_1) {
   var_7 = 80;
   var_8 = var_1 gettagorigin(var_0);
   var_9 = bulletTrace(var_8, var_8 + (0, 0, var_2 * -1), 0, var_1)["position"];
-  var_0A = var_1.angles;
+  var_10 = var_1.angles;
   if(distancesquared(var_8, var_9) > var_2 * var_2) {
     return;
   }
 
   earthquake(0.5, 3, var_8, 5000);
-  for(var_0B = 0; var_0B <= var_3; var_0B++) {
-    var_0C = scripts\engine\utility::drop_to_ground(var_1.origin + anglesToForward(var_0A) * var_4 * var_0B, 1000, -3000);
-    if(var_0B == 0) {
-      playFX(level._effect["claw_trail"], var_0C);
+  for(var_11 = 0; var_11 <= var_3; var_11++) {
+    var_12 = scripts\engine\utility::drop_to_ground(var_1.origin + anglesToForward(var_10) * var_4 * var_11, 1000, -3000);
+    if(var_11 == 0) {
+      playFX(level._effect["claw_trail"], var_12);
     } else {
-      playFX(level._effect["claw_trail_sand"], var_0C);
+      playFX(level._effect["claw_trail_sand"], var_12);
     }
 
-    earthquake(0.8, 1, var_0C, var_6);
-    foreach(var_0E in level.players) {
-      if(distancesquared(var_0E.origin, var_0C) < var_6 * var_6) {
-        var_0E dodamage(var_7, var_0C);
+    earthquake(0.8, 1, var_12, var_6);
+    foreach(var_14 in level.players) {
+      if(distancesquared(var_14.origin, var_12) < var_6 * var_6) {
+        var_14 dodamage(var_7, var_12);
       }
     }
 
@@ -479,9 +479,9 @@ dobeamattackposition(var_0, var_1) {
   level notify("stop_lure_beam_sfx");
   playFX(level._effect["crab_boss_beam_impact"], var_1);
   earthquake(0.7, 1, var_1, var_3);
-  foreach(var_0A in level.players) {
-    if(distancesquared(var_0A.origin, var_1) < var_3 * var_3) {
-      var_0A dodamage(var_4, var_1);
+  foreach(var_10 in level.players) {
+    if(distancesquared(var_10.origin, var_1) < var_3 * var_3) {
+      var_10 dodamage(var_4, var_1);
     }
   }
 }
@@ -806,9 +806,9 @@ applyallmotiontowards(var_0, var_1, var_2, var_3) {
 
     var_8 = getmovedelta(var_2, var_6, var_7);
     var_9 = length2d(var_8) * var_3;
-    var_0A = vectornormalize(var_1 - self.origin);
-    var_0B = self.origin + var_0A * var_9;
-    self setorigin(var_0B, 0);
+    var_10 = vectornormalize(var_1 - self.origin);
+    var_11 = self.origin + var_10 * var_9;
+    self setorigin(var_11, 0);
     wait(0.05);
     var_4 = var_4 + 0.05;
   }

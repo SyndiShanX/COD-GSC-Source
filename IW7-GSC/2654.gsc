@@ -336,8 +336,9 @@ process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
       } else if(var_4 == "iw7_knife_zm_crowbar") {
         var_1 processmerit("mt_dlc3_crowbar_kills");
       }
-    } else if(issubstr(var_4, "cutie"))
+    } else if(issubstr(var_4, "cutie")) {
       var_1 processmerit("mt_dlc3_mad_kills");
+    }
 
     if(isDefined(self.agent_type) && self.agent_type == "crab_mini") {
       var_1 processmerit("mt_dlc3_crab_mini");
@@ -431,8 +432,9 @@ processmerit(var_0, var_1, var_2) {
     var_11 = 1;
     var_10 = var_9 - var_8;
     var_9 = var_8;
-  } else
+  } else {
     var_11 = 0;
+  }
 
   if(var_7 < var_9) {
     scripts\cp\cp_hud_util::mt_setprogress(var_0, var_9);

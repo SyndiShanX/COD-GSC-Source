@@ -180,7 +180,7 @@ func_3639(var_0) {
     wait(0.05);
   }
 
-  var_0.var_3508 scripts\engine\utility::waittill_any_3("death", "begin_rodeo", "self_destruct");
+  var_0.var_3508 scripts\engine\utility::waittill_any("death", "begin_rodeo", "self_destruct");
   self delete();
 }
 

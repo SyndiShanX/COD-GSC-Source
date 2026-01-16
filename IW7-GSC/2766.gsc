@@ -11,8 +11,9 @@ init() {
     if(level.hardcoremode) {
       var_0 = level.gametype + " hc";
       setmatchdata("commonMatchData", "gametype", var_0);
-    } else
+    } else {
       setmatchdata("commonMatchData", "gametype", level.gametype);
+    }
 
     setmatchdata("commonMatchData", "buildVersion", getbuildversion());
     setmatchdata("commonMatchData", "buildNumber", getbuildnumber());
@@ -65,8 +66,9 @@ gettimefrommatchstart(var_0) {
     if(var_1 < 0) {
       var_1 = 0;
     }
-  } else
+  } else {
     var_1 = 0;
+  }
 
   return var_1;
 }
@@ -323,8 +325,9 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       if(isDefined(var_1.lastmatchdatakillstreakindex) && var_1.lastmatchdatakillstreakindex != -1) {
         setmatchdata("lives", var_0, "attackerKillstreakIndex", var_1.lastmatchdatakillstreakindex);
       }
-    } else
+    } else {
       setmatchdata("lives", var_0, "attackerKillstreakIndex", -1);
+    }
 
     if(isDefined(level.matchrecording_logevent)) {
       var_18 = gettime();

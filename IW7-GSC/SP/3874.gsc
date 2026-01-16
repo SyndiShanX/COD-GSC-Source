@@ -369,8 +369,8 @@ func_F07A(var_0, var_1, var_2, var_3) {
   var_7 = getrandomnavpoints(var_0, var_3, 64, self);
   if(isDefined(var_7)) {
     foreach(var_9 in var_7) {
-      var_0A = distancesquared(var_9, var_0);
-      if(var_0A < var_5) {
+      var_10 = distancesquared(var_9, var_0);
+      if(var_10 < var_5) {
         continue;
       }
 
@@ -378,10 +378,10 @@ func_F07A(var_0, var_1, var_2, var_3) {
         continue;
       }
 
-      var_0B = spawnStruct();
-      var_0B.origin = var_9;
-      var_0B.var_10EF6 = self;
-      var_6[var_6.size] = var_0B;
+      var_11 = spawnStruct();
+      var_11.origin = var_9;
+      var_11.var_10EF6 = self;
+      var_6[var_6.size] = var_11;
       if(var_6.size >= var_1) {
         break;
       }
@@ -414,28 +414,28 @@ func_7C3B(var_0, var_1, var_2) {
   var_8 = scripts\engine\utility::getstructarray("seek_patrol", "targetname");
   var_6 = scripts\engine\utility::array_combine(var_8, var_6);
   var_6 = sortbydistance(var_6, var_0);
-  foreach(var_0A in var_6) {
-    if(isalive(var_0A.var_10EF6) && var_0A.var_10EF6 != self) {
+  foreach(var_10 in var_6) {
+    if(isalive(var_10.var_10EF6) && var_10.var_10EF6 != self) {
       continue;
     }
 
-    var_0B = distancesquared(var_0A.origin, var_0);
-    if(var_0B < var_5) {
+    var_11 = distancesquared(var_10.origin, var_0);
+    if(var_11 < var_5) {
       continue;
     }
 
-    if(var_0B > var_4) {
+    if(var_11 > var_4) {
       break;
     }
 
-    var_7[var_7.size] = var_0A;
-    var_0A.var_10EF6 = self;
+    var_7[var_7.size] = var_10;
+    var_10.var_10EF6 = self;
   }
 
   if(var_7.size < var_3) {
-    var_0D = func_F079(var_0, var_3 - var_7.size, var_1, var_2);
-    if(isDefined(var_0D) && var_0D.size) {
-      var_7 = scripts\engine\utility::array_combine(var_7, var_0D);
+    var_13 = func_F079(var_0, var_3 - var_7.size, var_1, var_2);
+    if(isDefined(var_13) && var_13.size) {
+      var_7 = scripts\engine\utility::array_combine(var_7, var_13);
     }
   }
 

@@ -43,8 +43,9 @@ callback_playerconnect() {
     self.health = 10000000;
     level.player = self;
     thread scripts\common\createfx::createfxlogic();
-  } else
+  } else {
     kick(self getentitynumber());
+  }
 }
 
 func_player_speed() {

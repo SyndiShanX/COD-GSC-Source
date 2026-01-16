@@ -16,26 +16,26 @@ func_11AF8(var_0, var_1, var_2, var_3, var_4) {
   var_7 = (0, 0, 0);
   var_8 = 1;
   var_9 = 0;
-  var_0A = 0;
-  var_0B = 10;
-  var_0C = (0, 0, 0);
+  var_10 = 0;
+  var_11 = 10;
+  var_12 = (0, 0, 0);
   if(self.type == "dog") {
-    var_0D = 0;
-    self.var_FE9E = self.isnodeoccupied;
+    var_13 = 0;
+    self.var_FE9E = self.enemy;
   } else {
-    var_0D = 1;
-    var_0E = 0;
-    var_0F = 0;
+    var_13 = 1;
+    var_14 = 0;
+    var_15 = 0;
     if(isDefined(self.var_4716)) {
-      var_0E = level.covercrouchleanpitch;
+      var_14 = level.covercrouchleanpitch;
     }
 
     var_10 = self.script;
     if((var_10 == "cover_left" || var_10 == "cover_right") && isDefined(self.a.var_4667) && self.a.var_4667 == "lean") {
-      var_0F = self.covernode.angles[1] - self.angles[1];
+      var_15 = self.covernode.angles[1] - self.angles[1];
     }
 
-    var_0C = (var_0E, var_0F, 0);
+    var_12 = (var_14, var_15, 0);
   }
 
   for(;;) {
@@ -63,7 +63,7 @@ func_11AF8(var_0, var_1, var_2, var_3, var_4) {
       var_16 = self.var_10F8C;
     }
 
-    var_7 = self getrunningforwarddeathanim(var_11, var_15, var_14, var_0C, var_16, opcode::OP_SetNewLocalVariableFieldCached0, var_13);
+    var_7 = self getrunningforwarddeathanim(var_11, var_15, var_14, var_12, var_16, opcode::OP_SetNewLocalVariableFieldCached0, var_13);
     opcode::OP_EvalSelfFieldVariable = var_7[0];
     opcode::OP_Return = var_7[1];
     var_7 = undefined;
@@ -73,34 +73,34 @@ func_11AF8(var_0, var_1, var_2, var_3, var_4) {
       opcode::OP_CallBuiltin2 = opcode::OP_EvalSelfFieldVariable * sin(opcode::OP_CallBuiltin0) + opcode::OP_Return * cos(opcode::OP_CallBuiltin0);
       opcode::OP_EvalSelfFieldVariable = opcode::OP_CallBuiltin1;
       opcode::OP_Return = opcode::OP_CallBuiltin2;
-      opcode::OP_EvalSelfFieldVariable = clamp(opcode::OP_EvalSelfFieldVariable, self.var_368, self.isbot);
+      opcode::OP_EvalSelfFieldVariable = clamp(opcode::OP_EvalSelfFieldVariable, self.upaimlimit, self.downaimlimit);
       opcode::OP_Return = clamp(opcode::OP_Return, self.setdevdvar, self.setmatchdatadef);
     }
 
-    if(var_0A > 0) {
-      var_0A = var_0A - 1;
-      var_0B = max(10, var_0B - 5);
+    if(var_10 > 0) {
+      var_10 = var_10 - 1;
+      var_11 = max(10, var_11 - 5);
     } else if(self.line && self.line != var_9) {
-      var_0A = 2;
-      var_0B = 30;
+      var_10 = 2;
+      var_11 = 30;
     } else {
-      var_0B = 10;
+      var_11 = 10;
     }
 
-    opcode::OP_CallBuiltin3 = squared(var_0B);
+    opcode::OP_CallBuiltin3 = squared(var_11);
     var_9 = self.line;
     opcode::OP_CallBuiltin4 = self.synctransients != "stop" || !var_8;
     if(opcode::OP_CallBuiltin4) {
       opcode::OP_CallBuiltin5 = opcode::OP_Return - var_5;
       if(squared(opcode::OP_CallBuiltin5) > opcode::OP_CallBuiltin3) {
-        opcode::OP_Return = var_5 + clamp(opcode::OP_CallBuiltin5, -1 * var_0B, var_0B);
+        opcode::OP_Return = var_5 + clamp(opcode::OP_CallBuiltin5, -1 * var_11, var_11);
         opcode::OP_Return = clamp(opcode::OP_Return, self.setdevdvar, self.setmatchdatadef);
       }
 
       opcode::OP_CallBuiltin = opcode::OP_EvalSelfFieldVariable - var_6;
       if(squared(opcode::OP_CallBuiltin) > opcode::OP_CallBuiltin3) {
-        opcode::OP_EvalSelfFieldVariable = var_6 + clamp(opcode::OP_CallBuiltin, -1 * var_0B, var_0B);
-        opcode::OP_EvalSelfFieldVariable = clamp(opcode::OP_EvalSelfFieldVariable, self.var_368, self.isbot);
+        opcode::OP_EvalSelfFieldVariable = var_6 + clamp(opcode::OP_CallBuiltin, -1 * var_11, var_11);
+        opcode::OP_EvalSelfFieldVariable = clamp(opcode::OP_EvalSelfFieldVariable, self.upaimlimit, self.downaimlimit);
       }
     }
 
@@ -142,15 +142,15 @@ func_11AFB(var_0) {
 
 func_11AF9(var_0, var_1) {
   if(scripts\anim\utility_common::recentlysawenemy()) {
-    var_2 = self.isnodeoccupied getshootatpos() - self.isnodeoccupied.origin;
-    var_3 = self lastknownpos(self.isnodeoccupied) + var_2;
+    var_2 = self.enemy getshootatpos() - self.enemy.origin;
+    var_3 = self lastknownpos(self.enemy) + var_2;
     return func_11AFC(var_3 - var_0, var_1);
   }
 
   var_4 = 0;
   var_5 = 0;
-  if(isDefined(self.target_getindexoftarget) && isDefined(level.var_9D8E[self.target_getindexoftarget.type]) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 16) {
-    var_5 = angleclamp180(self.target_getindexoftarget.angles[1] - self.angles[1]);
+  if(isDefined(self.node) && isDefined(level.var_9D8E[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16) {
+    var_5 = angleclamp180(self.node.angles[1] - self.angles[1]);
   } else {
     var_6 = self getsafeanimmovedeltapercentage();
     if(isDefined(var_6)) {
@@ -178,7 +178,7 @@ func_11AFC(var_0, var_1) {
   if(isDefined(self.var_10F8C)) {
     var_6 = var_2[1] - self.var_10F8C;
   } else {
-    var_7 = angleclamp180(self.var_EC - self.angles[1]) * 0.5;
+    var_7 = angleclamp180(self.desiredangle - self.angles[1]) * 0.5;
     var_6 = var_2[1] - var_7 + self.angles[1];
   }
 
@@ -192,7 +192,7 @@ func_11AFA(var_0, var_1, var_2) {
       var_1 = 0;
     }
 
-    if(var_0 > self.isbot || var_0 < self.var_368) {
+    if(var_0 > self.downaimlimit || var_0 < self.upaimlimit) {
       var_0 = 0;
     }
   } else if(var_2 && abs(var_1) > level.var_B480 || abs(var_0) > level.var_B47F) {
@@ -205,7 +205,7 @@ func_11AFA(var_0, var_1, var_2) {
       var_1 = clamp(var_1, self.setdevdvar, self.setmatchdatadef);
     }
 
-    var_0 = clamp(var_0, self.var_368, self.isbot);
+    var_0 = clamp(var_0, self.upaimlimit, self.downaimlimit);
   }
 
   return (var_0, var_1, 0);
@@ -215,10 +215,10 @@ func_11AFE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = 0;
   var_8 = 0;
   var_9 = 0;
-  var_0A = 0;
-  var_0B = 0;
+  var_10 = 0;
+  var_11 = 0;
   if(var_6 < 0) {
-    var_0A = var_6 / self.setdevdvar * self.a.var_1A4B;
+    var_10 = var_6 / self.setdevdvar * self.a.var_1A4B;
     var_9 = 1;
   } else if(var_6 > 0) {
     var_8 = var_6 / self.setmatchdatadef * self.a.var_1A4B;
@@ -226,17 +226,17 @@ func_11AFE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(var_5 < 0) {
-    var_0B = var_5 / self.var_368 * self.a.var_1A4B;
+    var_11 = var_5 / self.upaimlimit * self.a.var_1A4B;
     var_9 = 1;
   } else if(var_5 > 0) {
-    var_7 = var_5 / self.isbot * self.a.var_1A4B;
+    var_7 = var_5 / self.downaimlimit * self.a.var_1A4B;
     var_9 = 1;
   }
 
   self func_82AC(var_0, var_7, 0.1, 1, 1);
   self func_82AC(var_1, var_8, 0.1, 1, 1);
-  self func_82AC(var_2, var_0A, 0.1, 1, 1);
-  self func_82AC(var_3, var_0B, 0.1, 1, 1);
+  self func_82AC(var_2, var_10, 0.1, 1, 1);
+  self func_82AC(var_3, var_11, 0.1, 1, 1);
   if(isDefined(var_4)) {
     self func_82AC(var_4, var_9, 0.1, 1, 1);
   }

@@ -213,8 +213,9 @@ clear_debris(var_0, var_1) {
     } else {
       playLoopSound(var_0.origin, "cp_disco_doorbuy_caution_tape");
     }
-  } else
+  } else {
     playLoopSound(var_0.origin, "zmb_clear_barricade");
+  }
 
   scripts\cp\zombies\zombies_spawning::set_adjacent_volume_from_door_struct(var_0);
   scripts\cp\zombies\zombies_spawning::activate_volume_by_name(var_0.script_area);

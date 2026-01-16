@@ -428,7 +428,7 @@ enemybasekillstreakwatcher() {
 }
 
 handleoutlinesforstreaks(var_0) {
-  if(var_0.triggerportableradarping.team == self.team) {
+  if(var_0.owner.team == self.team) {
     return;
   }
 

@@ -377,7 +377,7 @@ is_weapon_valid_primary(var_0) {
 streamweaponsonzonechange(var_0) {
   var_0 endon("disconnect");
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(10, "player_spawned");
+  var_0 scripts\engine\utility::waittill_any_timeout(10, "player_spawned");
   scripts\engine\utility::flag_wait("wall_buy_setup_done");
   var_1 = [];
   var_2 = scripts\engine\utility::getstructarray("interaction", "targetname");
@@ -392,16 +392,16 @@ streamweaponsonzonechange(var_0) {
     var_7 = 0;
     var_8 = 0;
     var_9 = [self.last_stand_pistol];
-    var_0A = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 10, 5000, 0);
-    while(var_7 <= var_6 && var_8 < var_0A.size) {
-      var_0B = scripts\cp\utility::getrawbaseweaponname(var_0A[var_8].script_noteworthy);
-      if(isDefined(var_0.weapon_build_models[var_0B])) {
-        var_0C = var_0.weapon_build_models[var_0B];
+    var_10 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_1, undefined, 10, 5000, 0);
+    while(var_7 <= var_6 && var_8 < var_10.size) {
+      var_11 = scripts\cp\utility::getrawbaseweaponname(var_10[var_8].script_noteworthy);
+      if(isDefined(var_0.weapon_build_models[var_11])) {
+        var_12 = var_0.weapon_build_models[var_11];
       } else {
-        var_0C = var_0A[var_8].script_noteworthy;
+        var_12 = var_10[var_8].script_noteworthy;
       }
 
-      var_9[var_9.size] = var_0C;
+      var_9[var_9.size] = var_12;
       var_9 = scripts\engine\utility::array_remove_duplicates(var_9);
       var_7 = var_9.size;
       var_8++;
@@ -426,7 +426,7 @@ add_cutie_eggs() {
 }
 
 cp_town_event_wave_init() {
-  level.event_funcs["crab_mini"] = scripts\cp\zombies\cp_town_spawning::goon_spawn_event_func;
+  level.event_funcs["crab_mini"] = ::scripts\cp\zombies\cp_town_spawning::goon_spawn_event_func;
   init_town_spawner_locations();
 }
 
@@ -706,7 +706,7 @@ run_pap_machine_logic(var_0) {
 
   var_2 setscriptablepartstate("reels", "on");
   var_2 setscriptablepartstate("door", "open_idle");
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   foreach(var_4 in level.players) {
     if(var_4 != var_0) {
       var_2 hidefromplayer(var_4);
@@ -901,7 +901,7 @@ wait_for_pam_revive(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("revive_success");
   var_0 endon("death");
-  var_2 = var_0.reviveent scripts\engine\utility::waittill_any_timeout_1(var_1, "pg_trigger");
+  var_2 = var_0.reviveent scripts\engine\utility::waittill_any_timeout(var_1, "pg_trigger");
   if(!isDefined(var_2) || var_2 != "pg_trigger") {
     return undefined;
   }
@@ -909,18 +909,18 @@ wait_for_pam_revive(var_0, var_1) {
   return 1;
 }
 
-wait_to_be_revived_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+wait_to_be_revived_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(scripts\engine\utility::istrue(level.the_hoff_revive)) {
     if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
-      if(scripts\engine\utility::istrue(var_0B)) {
+      if(scripts\engine\utility::istrue(var_11)) {
         wait(5);
         scripts\cp\cp_laststand::clear_last_stand_timer(var_0);
         self notify("revive_success");
         return 1;
       }
 
-      var_0C = watchforpamrevive(var_0, var_7);
-      if(scripts\engine\utility::istrue(var_0C)) {
+      var_12 = watchforpamrevive(var_0, var_7);
+      if(scripts\engine\utility::istrue(var_12)) {
         return 1;
       }
 

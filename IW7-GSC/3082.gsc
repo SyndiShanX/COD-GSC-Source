@@ -10,7 +10,7 @@ func_35A6(var_0) {
   lib_0C09::func_97F9();
   lib_0C0B::func_98DD();
   self.var_290A = 0;
-  self.objective_team = "c8_grenade";
+  self.grenadeweapon = "c8_grenade";
   self.meleerangesq = 128;
   self.meleechargedist = 128;
   self.meleechargedistvsplayer = 128;

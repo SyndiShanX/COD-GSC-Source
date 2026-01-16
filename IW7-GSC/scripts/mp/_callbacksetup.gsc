@@ -28,13 +28,13 @@ codecallback_playerdisconnect(var_0) {
   [[level.callbackplayerdisconnect]](var_0);
 }
 
-codecallback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+codecallback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   self endon("disconnect");
   if(isDefined(level.weaponmapfunc)) {
     var_5 = [[level.weaponmapfunc]](var_5, var_0);
   }
 
-  [[level.callbackplayerdamage]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  [[level.callbackplayerdamage]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 func_00B4(var_0, var_1, var_2, var_3) {
@@ -88,24 +88,24 @@ codecallback_playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   [[level.callbackplayerkilled]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-codecallback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+codecallback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(level.weaponmapfunc)) {
     var_5 = [[level.weaponmapfunc]](var_5, var_0);
   }
 
   if(isDefined(self.nullownerdamagefunc)) {
-    var_0C = [[self.nullownerdamagefunc]](var_1);
-    if(isDefined(var_0C) && var_0C) {
+    var_12 = [[self.nullownerdamagefunc]](var_1);
+    if(isDefined(var_12) && var_12) {
       return;
     }
   }
 
   if(isDefined(self.damagecallback)) {
-    self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     return;
   }
 
-  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 codecallback_playerlaststand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {

@@ -18,9 +18,9 @@ func_FAB0() {
 
   level.agent_definition["lumberjack"]["setup_func"] = ::setupagent;
   level.agent_definition["lumberjack"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["lumberjack"]["on_damaged"] = scripts\cp\agents\gametype_zombie::onzombiedamaged;
-  level.agent_funcs["lumberjack"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["lumberjack"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.agent_funcs["lumberjack"]["on_damaged"] = ::scripts\cp\agents\gametype_zombie::onzombiedamaged;
+  level.agent_funcs["lumberjack"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["lumberjack"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.var_1094E["lumberjack"] = ::should_spawn_lumberjack;
 }
 
@@ -39,8 +39,8 @@ delay_eye_glow() {
   self getrandomhovernodesaroundtargetpos(1, 0.1);
 }
 
-onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 }
 
 onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {

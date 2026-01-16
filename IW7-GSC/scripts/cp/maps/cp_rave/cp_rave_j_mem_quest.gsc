@@ -247,21 +247,21 @@ circle_fight_loop_check(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     level.forceravemode = 1;
-    foreach(var_0B in level.players) {
-      if(distancesquared(var_0B.origin, var_7.origin) < var_6) {
-        var_0B.unlimited_rave = 1;
-        level thread scripts\cp\maps\cp_rave\cp_rave::enter_rave_mode(var_0B);
+    foreach(var_11 in level.players) {
+      if(distancesquared(var_11.origin, var_7.origin) < var_6) {
+        var_11.unlimited_rave = 1;
+        level thread scripts\cp\maps\cp_rave\cp_rave::enter_rave_mode(var_11);
       }
     }
 
     start_circle_fight_fx(var_3, var_2);
     level thread spawn_guys_to_fight(var_7, var_2, var_3, var_0);
-    var_0D = 0;
-    var_0E = level scripts\engine\utility::waittill_any_return("speaker_defense_failed", "speaker_defense_completed");
-    if(var_0E == "speaker_defense_completed") {
-      for(var_0F = 0; var_0F < var_3.size; var_0F++) {
-        var_10 = var_3[var_0F];
-        if(var_0F == var_3.size - 1) {
+    var_13 = 0;
+    var_14 = level scripts\engine\utility::waittill_any_return("speaker_defense_failed", "speaker_defense_completed");
+    if(var_14 == "speaker_defense_completed") {
+      for(var_15 = 0; var_15 < var_3.size; var_15++) {
+        var_10 = var_3[var_15];
+        if(var_15 == var_3.size - 1) {
           level.photo_soul = zombie_limb_soul_fly_to_photo(var_10.origin + (0, 0, 10), var_10, 1);
           continue;
         }
@@ -273,25 +273,25 @@ circle_fight_loop_check(var_0, var_1, var_2, var_3, var_4, var_5) {
       level.no_slasher = 1;
       level thread pick_up_charged_photo(var_1, var_4);
       level thread time_out_charged_photo(30);
-      var_0E = level scripts\engine\utility::waittill_any_return("slasher_photo_timeout", "slasher_photo_taken");
-      if(var_0E == "slasher_photo_timeout") {
+      var_14 = level scripts\engine\utility::waittill_any_return("slasher_photo_timeout", "slasher_photo_taken");
+      if(var_14 == "slasher_photo_timeout") {
         level.photo_soul delete();
         level.forceravemode = 0;
-        foreach(var_0B in level.players) {
-          var_0B.unlimited_rave = 0;
-          level thread scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(var_0B);
-          level thread slash_a_perk(var_0B);
+        foreach(var_11 in level.players) {
+          var_11.unlimited_rave = 0;
+          level thread scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(var_11);
+          level thread slash_a_perk(var_11);
         }
 
         show_kev();
-        var_0D = 1;
+        var_13 = 1;
       } else {
         level thread slasher_fight(var_1, var_4, var_5);
         level.forceravemode = 0;
-        var_0E = level scripts\engine\utility::waittill_any_return("slasher_timeout", "slasher_killed");
-        if(var_0E == "slasher_timeout") {
+        var_14 = level scripts\engine\utility::waittill_any_return("slasher_timeout", "slasher_killed");
+        if(var_14 == "slasher_timeout") {
           show_kev();
-          var_0D = 1;
+          var_13 = 1;
           level.slasher setscriptablepartstate("teleport", "hide");
           wait(0.1);
           level.slasher suicide();
@@ -313,16 +313,16 @@ circle_fight_loop_check(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     } else {
       lower_arm_array(var_3, var_2);
-      foreach(var_0B in level.players) {
-        var_0B.unlimited_rave = 0;
-        level thread scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(var_0B);
-        level thread slash_a_perk(var_0B);
+      foreach(var_11 in level.players) {
+        var_11.unlimited_rave = 0;
+        level thread scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(var_11);
+        level thread slash_a_perk(var_11);
       }
 
-      var_0D = 1;
+      var_13 = 1;
     }
 
-    if(var_0D) {
+    if(var_13) {
       level.forceravemode = 0;
       end_circle_fight_fx(var_3, var_2);
       level.no_slasher = 0;
@@ -590,9 +590,9 @@ startspeakereventspawning(var_0) {
 
   if(isDefined(var_2)) {
     if(isDefined(var_2.spawners)) {
-      var_0B = scripts\engine\utility::get_array_of_closest(var_0.origin, var_2.spawners, undefined, 100, 400);
-      foreach(var_0D in var_0B) {
-        var_0D scripts\cp\zombies\zombies_spawning::make_spawner_inactive();
+      var_11 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_2.spawners, undefined, 100, 400);
+      foreach(var_13 in var_11) {
+        var_13 scripts\cp\zombies\zombies_spawning::make_spawner_inactive();
       }
     }
 
@@ -725,10 +725,10 @@ arm_counter(var_0, var_1, var_2) {
   var_8 = 5;
   var_9 = 5;
   for(;;) {
-    level waittill(var_1, var_0A);
+    level waittill(var_1, var_10);
     if(level.circle_arms < 10) {
       level.circle_arms++;
-      level thread play_fx_and_raise_arm(var_0A, var_2, var_0);
+      level thread play_fx_and_raise_arm(var_10, var_2, var_0);
     }
 
     if(level.circle_arms > 9) {

@@ -60,8 +60,9 @@ managelightbarstack() {
     if(self.lightbarstructs.size > 1) {
       var_0 = removetimedoutinstructions(self.lightbarstructs);
       var_1 = scripts\engine\utility::array_sort_with_func(var_0, ::is_higher_priority);
-    } else
+    } else {
       var_1 = self.lightbarstructs;
+    }
 
     if(var_1.size == 0) {
       return;
@@ -93,8 +94,9 @@ managelightbarstack() {
         var_2 notify("executing");
         var_2.executing = 1;
         thread set_lightbar_perm_endon_death(var_2.lbcolor, var_2.pulsetime);
-      } else
+      } else {
         thread set_lightbar_perm(var_2.lbcolor, var_2.pulsetime);
+      }
 
       continue;
     }

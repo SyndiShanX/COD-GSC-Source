@@ -65,7 +65,7 @@ crafting_station_power(var_0) {
   }
 
   if(scripts\engine\utility::istrue(self.requires_power) && isDefined(self.power_area)) {
-    level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
   if(isDefined(self.setminimap)) {
@@ -132,7 +132,7 @@ use_crafting_station(var_0, var_1) {
 
     playsoundatpos(var_0.crafting_fx_spot.origin + (0, 0, -5), "zmb_souvenir_machine_arm_mvmt");
     var_1 setclientomnvar("zombie_souvenir_piece_index", 0);
-    var_0.ingredient_list = scripts\engine\utility::array_add_safe(var_0.ingredient_list, var_1.current_crafting_struct.crafting_model);
+    var_0.ingredient_list = scripts\engine\utility::add_to_array(var_0.ingredient_list, var_1.current_crafting_struct.crafting_model);
     var_1.last_interaction_point = undefined;
     var_1.current_crafting_struct = undefined;
     var_0.available_ingredient_slots--;

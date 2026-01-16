@@ -647,8 +647,9 @@ func_686E(var_0, var_1, var_2) {
         var_7 linkto(self.enemy);
         var_7 thread func_0B76::func_B804();
       }
-    } else
+    } else {
       break;
+    }
 
     var_1--;
     wait 0.3;
@@ -1398,8 +1399,9 @@ func_6869() {
 
     self.var_72CA = 1;
     self.var_50D5 = undefined;
-  } else
+  } else {
     func_6867();
+  }
 }
 
 func_6867() {
@@ -1475,8 +1477,9 @@ func_64DB(var_0, var_1) {
     } else {
       var_6 = 0.03 * level.var_A48E.var_A40A;
     }
-  } else if(var_0)
+  } else if(var_0) {
     var_6 = 0.0;
+  }
   else {
     var_6 = -0.02;
   }
@@ -1643,8 +1646,9 @@ func_64AE() {
   if(isDefined(self.enemy._blackboard) && self.enemy._blackboard.var_C97C) {
     self.enemy.var_13902 = 1;
     self.enemy func_0BDC::func_1990(0);
-  } else
+  } else {
     self.enemy.var_13902 = 0;
+  }
 }
 
 func_64A2() {
@@ -1737,8 +1741,9 @@ func_64B8(var_0) {
       var_4 = level.var_D127.origin + var_3 * var_1;
       self.var_13D10 playSound("enemy_lockon_bullet_impacts");
       level.var_D127 getrandomarmkillstreak(var_2, var_4, self.enemy, self.enemy, "MOD_PROJECTILE", "spaceship_scripted_locked_enemy_bullets");
-    } else
+    } else {
       self.var_13D10 playSound("enemy_lockon_whizby");
+    }
 
     var_0--;
     wait 0.1;

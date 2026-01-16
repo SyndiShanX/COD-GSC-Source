@@ -11,7 +11,7 @@ init_player_characters() {
   register_player_character(5, "no", "fullbody_zmb_hero_elvira_player", "viewmodel_zmb_hero_elvira", undefined, undefined, "p5_", "_p5", "iw7_pap_zm_elvira", "ges_zombies_revive_nerd", 4, "iw7_elviracard_zm", "mus_zombies_elvira", "iw7_loadoutelvira_zm", "iw7_knife_zm_elvira", ::post_elvira_setup_func);
 }
 
-register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F) {
+register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15) {
   var_10 = spawnStruct();
   var_10.body_model = var_2;
   var_10.view_model = var_3;
@@ -21,12 +21,12 @@ register_player_character(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   var_10.vo_suffix = var_7;
   var_10.pap_gesture = var_8;
   var_10.revive_gesture = var_9;
-  var_10.photo_index = var_0A;
-  var_10.fate_card_weapon = var_0B;
-  var_10.intro_music = var_0C;
-  var_10.intro_gesture = var_0D;
-  var_10.melee_weapon = var_0E;
-  var_10.post_setup_func = var_0F;
+  var_10.photo_index = var_10;
+  var_10.fate_card_weapon = var_11;
+  var_10.intro_music = var_12;
+  var_10.intro_gesture = var_13;
+  var_10.melee_weapon = var_14;
+  var_10.post_setup_func = var_15;
   if(!isDefined(level.player_character_info)) {
     level.player_character_info = [];
   }

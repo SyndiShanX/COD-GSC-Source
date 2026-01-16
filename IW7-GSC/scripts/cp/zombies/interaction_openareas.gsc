@@ -141,23 +141,23 @@ func_C61B(var_0, var_1, var_2, var_3) {
     scripts\engine\utility::exploder(var_0.var_ED83);
   }
 
-  var_0B = getEntArray(var_4[0].target, "targetname");
-  foreach(var_0D in var_0B) {
-    if(var_0D.spawnimpulsefield == 1) {
-      var_0D connectpaths();
-      var_0D notsolid();
+  var_11 = getEntArray(var_4[0].target, "targetname");
+  foreach(var_13 in var_11) {
+    if(var_13.spawnimpulsefield == 1) {
+      var_13 connectpaths();
+      var_13 notsolid();
       continue;
     }
 
-    if(var_0D.classname == "script_brushmodel") {
-      var_0D hide();
-      var_0D notsolid();
+    if(var_13.classname == "script_brushmodel") {
+      var_13 hide();
+      var_13 notsolid();
       continue;
     }
 
-    var_0D setscriptablepartstate("default", "hide");
+    var_13 setscriptablepartstate("default", "hide");
     if(should_play_door_purchase_sound()) {
-      var_0D playSound("purchase_generic");
+      var_13 playSound("purchase_generic");
     }
   }
 }
@@ -177,7 +177,7 @@ init_sliding_power_doors() {
 
 sliding_power_door() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
   self.powered_on = 1;

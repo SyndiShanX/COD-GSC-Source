@@ -82,8 +82,8 @@ func_1215(var_0, var_1, var_2) {
   var_7 = 5;
   var_8 = var_5 * var_4 - var_7;
   var_9 = anglestoright(var_3);
-  var_0A = var_9 * var_7 * -1;
-  var_0B = var_9 * var_7;
+  var_10 = var_9 * var_7 * -1;
+  var_11 = var_9 * var_7;
 }
 
 func_E75A(var_0, var_1) {

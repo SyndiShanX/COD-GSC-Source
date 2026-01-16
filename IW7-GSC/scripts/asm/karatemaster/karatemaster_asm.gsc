@@ -62,7 +62,7 @@ setupmeleedistances(var_0, var_1) {
     level.karatemastermeleetimetoimpact[var_1][var_3] = var_9;
   }
 
-  level.karatemastermeleedist[var_1] = scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[var_1], ::distcompare);
+  level.karatemastermeleedist[var_1] = ::scripts\engine\utility::array_sort_with_func(level.karatemastermeleedist[var_1], ::distcompare);
 }
 
 karatemasterinit(var_0, var_1, var_2, var_3) {
@@ -399,16 +399,16 @@ meleenotehandler(var_0, var_1, var_2, var_3) {
       var_8 = self getsafecircleorigin(var_1, var_2);
       var_9 = getfirstattacknotetracktime(var_8);
       if(var_9 > var_3) {
-        var_0A = getmovedelta(var_8, var_3, var_9);
-        var_0B = length2d(var_0A);
-        var_0C = getanimlength(var_8);
-        var_0D = var_9 * var_0C - var_3 * var_0C;
-        var_0E = var_7 getvelocity();
-        var_0F = var_7.origin + var_0E * var_0D;
-        var_10 = distance(var_0F, self.origin);
+        var_10 = getmovedelta(var_8, var_3, var_9);
+        var_11 = length2d(var_10);
+        var_12 = getanimlength(var_8);
+        var_13 = var_9 * var_12 - var_3 * var_12;
+        var_14 = var_7 getvelocity();
+        var_15 = var_7.origin + var_14 * var_13;
+        var_10 = distance(var_15, self.origin);
         var_11 = 1;
-        if(var_10 > var_0B && var_0B > 0) {
-          var_11 = var_10 / var_0B;
+        if(var_10 > var_11 && var_11 > 0) {
+          var_11 = var_10 / var_11;
           if(var_11 > var_6.cmaxmeleeflexscale) {
             var_11 = var_6.cmaxmeleeflexscale;
           }

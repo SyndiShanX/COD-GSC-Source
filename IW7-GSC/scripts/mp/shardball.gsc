@@ -12,8 +12,8 @@ func_FC58() {
 
 func_FC5A() {
   scripts\mp\weapons::makeexplosiveunusable();
-  self.triggerportableradarping func_FC5B(self, 1);
-  self notify("detonateExplosive", self.triggerportableradarping);
+  self.owner func_FC5B(self, 1);
+  self notify("detonateExplosive", self.owner);
 }
 
 func_FC59() {}
@@ -48,8 +48,8 @@ func_FC5B(var_0, var_1) {
 
 func_13B39() {
   var_0 = self.stuckenemyentity;
-  var_1 = self.triggerportableradarping;
-  var_2 = self.triggerportableradarping.team;
+  var_1 = self.owner;
+  var_2 = self.owner.team;
   var_3 = self.weapon_name;
   var_4 = func_7EA7();
   self waittill("explode", var_5);
@@ -84,11 +84,11 @@ func_7EA8(var_0, var_1, var_2, var_3) {
   var_6 = var_4 * var_6;
   var_9 = var_1 + var_6;
   if(!isDefined(var_3) || !var_3) {
-    var_0A = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
-    var_0B = physics_raycast(var_1, var_8, var_0A, undefined, 0, "physicsquery_closest");
-    if(var_0B.size > 0) {
-      var_0C = var_0B[0]["position"];
-      var_9 = var_1 + var_0C / 2;
+    var_10 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
+    var_11 = physics_raycast(var_1, var_8, var_10, undefined, 0, "physicsquery_closest");
+    if(var_11.size > 0) {
+      var_12 = var_11[0]["position"];
+      var_9 = var_1 + var_12 / 2;
     }
   }
 
@@ -130,38 +130,38 @@ func_13B34(var_0, var_1, var_2, var_3, var_4, var_5) {
   self waittill(var_6, var_7);
   playsoundatpos(var_7, "shard_ball_explode_default");
   var_8 = [];
-  foreach(var_0A in level.players) {
-    if(!isDefined(var_0A)) {
+  foreach(var_10 in level.players) {
+    if(!isDefined(var_10)) {
       continue;
     }
 
-    if(!scripts\mp\utility::isreallyalive(var_0A)) {
+    if(!scripts\mp\utility::isreallyalive(var_10)) {
       continue;
     }
 
-    if(var_0A != var_1 && level.teambased && var_1.team != var_0A.team) {
+    if(var_10 != var_1 && level.teambased && var_1.team != var_10.team) {
       continue;
     }
 
-    var_8 = scripts\engine\utility::array_add_safe(var_8, var_0A);
+    var_8 = scripts\engine\utility::add_to_array(var_8, var_10);
   }
 
-  var_0C = var_1 scripts\mp\powerloot::func_7FC4("power_shardBall", 30);
-  var_0D = var_1 scripts\mp\powerloot::func_7FC4("power_shardBall", 300);
-  var_0E = scripts\engine\utility::get_array_of_closest(var_7, var_8, undefined, undefined, var_0D, var_0C);
-  var_0F = 15;
+  var_12 = var_1 scripts\mp\powerloot::func_7FC4("power_shardBall", 30);
+  var_13 = var_1 scripts\mp\powerloot::func_7FC4("power_shardBall", 300);
+  var_14 = scripts\engine\utility::get_array_of_closest(var_7, var_8, undefined, undefined, var_13, var_12);
+  var_15 = 15;
   if(isDefined(var_4)) {
-    var_0F = var_4;
+    var_15 = var_4;
   }
 
-  var_10 = var_1 scripts\mp\powerloot::func_7FC2("power_shardBall", var_0F);
+  var_10 = var_1 scripts\mp\powerloot::func_7FC2("power_shardBall", var_15);
   for(var_11 = 0; var_11 < var_10; var_11++) {
     var_12 = dropscavengerbag(var_7, var_0);
     var_13 = undefined;
-    if(isDefined(var_0E) && var_0E.size > 0) {
-      var_14 = scripts\engine\utility::random(var_0E);
+    if(isDefined(var_14) && var_14.size > 0) {
+      var_14 = scripts\engine\utility::random(var_14);
       var_13 = var_14 gettagorigin("j_mainroot");
-      var_0E = scripts\engine\utility::array_remove(var_0E, var_14);
+      var_14 = scripts\engine\utility::array_remove(var_14, var_14);
     }
 
     var_1 thread func_6D81(var_7, var_12, var_2, var_13, var_5);
@@ -178,8 +178,8 @@ dropscavengerbag(var_0, var_1) {
   var_7 = cos(var_6) * sin(var_5);
   var_8 = sin(var_6) * sin(var_5);
   var_9 = cos(var_5);
-  var_0A = var_7 * var_3 + var_8 * var_4 + var_9 * var_2 / 0.33;
-  return var_0A;
+  var_10 = var_7 * var_3 + var_8 * var_4 + var_9 * var_2 / 0.33;
+  return var_10;
 }
 
 func_6D81(var_0, var_1, var_2, var_3, var_4) {

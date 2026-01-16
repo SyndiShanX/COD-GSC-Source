@@ -560,7 +560,7 @@ spawn_coaster_zombies(var_0, var_1, var_2) {
     var_4 = 1;
   }
 
-  foreach(var_0A, var_6 in var_3) {
+  foreach(var_10, var_6 in var_3) {
     var_6.is_coaster_spawner = 1;
     for(;;) {
       var_7 = var_6 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie", 1);
@@ -585,7 +585,7 @@ spawn_coaster_zombies(var_0, var_1, var_2) {
     var_7 setModel(var_9);
     var_7 thread[[var_1]](var_2);
     var_7 thread delayed_death(15);
-    if(var_4 && var_3.size > 2 && var_0A >= scripts\cp\utility::roundup(var_3.size * 0.65)) {
+    if(var_4 && var_3.size > 2 && var_10 >= scripts\cp\utility::roundup(var_3.size * 0.65)) {
       return;
     }
   }
@@ -696,7 +696,7 @@ chill_scrnfx() {
   self.scrnfx = spawnfxforclient(level._effect["coaster_full_screen"], self getEye(), self);
   wait(0.1);
   triggerfx(self.scrnfx);
-  scripts\engine\utility::waittill_any_timeout_1(5, "last_stand");
+  scripts\engine\utility::waittill_any_timeout(5, "last_stand");
   self.scrnfx delete();
   self.scrnfx = undefined;
 }
@@ -862,8 +862,8 @@ watch_laser_target_damage(var_0) {
   var_1 = scripts\engine\utility::getclosest(self.origin, var_0);
   var_1.trigger endon("target_shot");
   for(;;) {
-    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
-    if(!isDefined(var_3) || !isDefined(var_0B) || !isDefined(var_3.linked_to_coaster)) {
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+    if(!isDefined(var_3) || !isDefined(var_11) || !isDefined(var_3.linked_to_coaster)) {
       continue;
     }
 
@@ -887,21 +887,21 @@ target_wait_for_damage() {
   self setCanDamage(1);
   var_1 = 5;
   for(;;) {
-    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
-    if(!isDefined(var_3) || !isDefined(var_0B) || !isDefined(var_3.linked_to_coaster)) {
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+    if(!isDefined(var_3) || !isDefined(var_11) || !isDefined(var_3.linked_to_coaster)) {
       continue;
     }
 
     self.health = 999999;
-    if(var_0B == "iw7_zm1coaster_zm") {
+    if(var_11 == "iw7_zm1coaster_zm") {
       var_3 setclientomnvar("damage_feedback_kill", 1);
       var_3 setclientomnvar("damage_feedback_notify", gettime());
       var_3.targets_hit++;
       var_3.tickets_earned = var_3.targets_hit * var_1;
       scripts\engine\utility::waitframe();
       var_3 thread scripts\cp\cp_vo::try_to_play_vo("coaster_ride_shot", "zmb_comment_vo", "low", 10, 0, 0, 1, 10);
-      var_0C = var_3.linked_coaster;
-      if(var_0C == level.roller_coasters[0]) {
+      var_12 = var_3.linked_coaster;
+      if(var_12 == level.roller_coasters[0]) {
         setomnvar("zm_coaster_score_p" + var_3.seat + "_c1", var_3.targets_hit);
       } else {
         setomnvar("zm_coaster_score_p" + var_3.seat + "_c2", var_3.targets_hit);

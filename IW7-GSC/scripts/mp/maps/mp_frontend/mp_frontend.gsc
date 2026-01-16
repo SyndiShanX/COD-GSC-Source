@@ -155,8 +155,8 @@ func_12E4A() {
     var_0 = var_1.var_13C27;
   }
 
-  level.var_394.origin = var_0.origin;
-  level.var_394.angles = var_0.angles;
+  level.weapon.origin = var_0.origin;
+  level.weapon.angles = var_0.angles;
   level.var_13BF9.origin = var_0.origin;
   level.var_13BF9.angles = var_0.angles;
   level.var_13BFA.origin = var_0.origin;
@@ -657,9 +657,9 @@ setup_initial_entities() {
   level.loot_box = spawn("script_character", level.var_37A7.box_loc.origin, 0, 0, 5);
   level.loot_box.angles = level.var_37A7.box_loc.angles;
   var_3 = getent("weapon_loc_hq1", "targetname");
-  level.var_394 = spawn("script_weapon", var_3.origin, 0, 0, 0);
-  level.var_394.angles = var_3.angles;
-  level.var_394 setotherent(level.var_3CAD);
+  level.weapon = spawn("script_weapon", var_3.origin, 0, 0, 0);
+  level.weapon.angles = var_3.angles;
+  level.weapon setotherent(level.var_3CAD);
   level.var_13BF9 = spawn("script_weapon", var_3.origin, 0, 0, 1);
   level.var_13BF9.angles = var_3.angles;
   level.var_13BF9 setotherent(level.var_3CAD);

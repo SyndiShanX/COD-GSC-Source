@@ -151,12 +151,12 @@ func_FCAA(var_0) {
   var_0.var_FCBA = undefined;
   var_0 scripts\engine\utility::allow_sprint(1);
   var_0 scripts\engine\utility::allow_stances(1);
-  var_0 scripts\engine\utility::waittill_any_3("shinGuard_crouchPress", "shinGuard_jumpPress", "sprint_begin");
+  var_0 scripts\engine\utility::waittill_any("shinGuard_crouchPress", "shinGuard_jumpPress", "sprint_begin");
   var_0 notify("shinGuard_end");
 }
 
 func_FCAB(var_0, var_1) {
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect", "shinGuard_end", "shinGuard_abort");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect", "shinGuard_end", "shinGuard_abort");
   if(isDefined(var_0)) {
     var_0.var_FCB0 = undefined;
     if(isDefined(var_0.var_FCBA)) {

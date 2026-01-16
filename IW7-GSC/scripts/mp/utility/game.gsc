@@ -775,8 +775,9 @@ _objective_delete(var_0) {
   if(!isDefined(level.reclaimedreservedobjectives)) {
     level.reclaimedreservedobjectives = [];
     level.reclaimedreservedobjectives[0] = var_0;
-  } else
+  } else {
     level.reclaimedreservedobjectives[level.reclaimedreservedobjectives.size] = var_0;
+  }
 }
 
 touchingbadtrigger(var_0) {
@@ -1007,8 +1008,9 @@ attachmentmap_tounique(var_0, var_1) {
     } else if(isDefined(level.attachmentmap_basetounique[var_6]) && isDefined(level.attachmentmap_uniquetobase[var_0]) && isDefined(level.attachmentmap_basetounique[var_6][level.attachmentmap_uniquetobase[var_0]])) {
       var_8 = level.attachmentmap_uniquetobase[var_0];
       return level.attachmentmap_basetounique[var_6][var_8];
-    } else if(isDefined(level.attachmentmap_basetounique[var_3]) && isDefined(level.attachmentmap_basetounique[var_3][var_0]))
+    } else if(isDefined(level.attachmentmap_basetounique[var_3]) && isDefined(level.attachmentmap_basetounique[var_3][var_0])) {
       return level.attachmentmap_basetounique[var_3][var_0];
+    }
     else if(isDefined(level.attachmentmap_basetounique[var_6]) && isDefined(level.attachmentmap_basetounique[var_6][var_0])) {
       return level.attachmentmap_basetounique[var_6][var_0];
     } else if(var_4.size > 3) {
@@ -1590,8 +1592,9 @@ showelem() {
     if(self.bar.alpha != 1) {
       self.bar.alpha = 1;
     }
-  } else if(self.alpha != 1)
+  } else if(self.alpha != 1) {
     self.alpha = 1;
+  }
 }
 
 hideelem() {
@@ -2150,7 +2153,7 @@ removefromcharactersarray() {
 removefromspawnedgrouparray() {
   if(isDefined(self.group_name)) {
     if(isDefined(level.spawned_group) && isDefined(level.spawned_group[self.group_name])) {
-      level.spawned_group[self.group_name] = scripts\engine\utility::array_remove(level.spawned_group[self.group_name], self);
+      level.spawned_group[self.group_name] = ::scripts\engine\utility::array_remove(level.spawned_group[self.group_name], self);
     }
   }
 }
@@ -3846,8 +3849,9 @@ reassign_weapon_name(var_0, var_1) {
           } else {
             var_0 = "iw7_machete_mp_pap2";
           }
-        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3)
+        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3) {
           var_0 = "iw7_machete_mp_pap2";
+        }
 
         break;
       case "iw7_two_headed_axe_mp":
@@ -3865,8 +3869,9 @@ reassign_weapon_name(var_0, var_1) {
           } else {
             var_0 = "iw7_two_headed_axe_mp_pap2";
           }
-        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3)
+        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3) {
           var_0 = "iw7_two_headed_axe_mp_pap2";
+        }
 
         break;
       case "iw7_spiked_bat_mp":
@@ -3884,8 +3889,9 @@ reassign_weapon_name(var_0, var_1) {
           } else {
             var_0 = "iw7_spiked_bat_mp_pap2";
           }
-        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3)
+        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3) {
           var_0 = "iw7_spiked_bat_mp_pap2";
+        }
 
         break;
       case "iw7_golf_club_mp":
@@ -3903,8 +3909,9 @@ reassign_weapon_name(var_0, var_1) {
           } else {
             var_0 = "iw7_golf_club_mp_pap2";
           }
-        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3)
+        } else if(isDefined(self.pap[getrawbaseweaponname(var_0)]) && self.pap[getrawbaseweaponname(var_0)].lvl == 3) {
           var_0 = "iw7_golf_club_mp_pap2";
+        }
 
         break;
       case "iw7_axe_zm":
@@ -4145,8 +4152,9 @@ getweaponrootname(var_0) {
     for(var_2 = 1; var_2 < var_1.size - 1; var_2++) {
       var_0 = var_0 + ("_" + var_1[var_2]);
     }
-  } else if(weapon_is_dlc2_melee(var_0))
+  } else if(weapon_is_dlc2_melee(var_0)) {
     return var_0;
+  }
   else if(var_1[0] == "iw6" || var_1[0] == "iw7") {
     var_0 = var_1[0] + "_" + var_1[1];
   } else if(var_1[0] == "alt") {
@@ -4341,8 +4349,9 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4) {
     if(var_4 != "weapon_sniper" && isDefined(var_3)) {
       var_10 = buildweaponnamereticle(var_10, var_3);
     }
-  } else if(!scripts\cp\cp_weapon::isvalidzombieweapon(var_10 + "_zm"))
+  } else if(!scripts\cp\cp_weapon::isvalidzombieweapon(var_10 + "_zm")) {
     var_10 = var_0 + "_zm";
+  }
   else {
     var_10 = buildweaponnamecamo(var_10, var_2);
     var_10 = buildweaponnamereticle(var_10, var_3);
@@ -4954,8 +4963,9 @@ healthregen(var_0, var_1) {
         } else {
           self.health = int(self.maxhealth * (var_1 + var_2.regenamount));
         }
-      } else
+      } else {
         break;
+      }
     }
 
     scripts\engine\utility::waittill_any_timeout(var_2.waittimebetweenregen, "force_regeneration");
@@ -5005,8 +5015,9 @@ breathingmanager(var_0, var_1) {
       if(!scripts\engine\utility::is_true(self.vo_system_playing_vo)) {
         self playlocalsound("p5_breathing_better");
       }
-    } else if(!scripts\engine\utility::is_true(self.vo_system_playing_vo))
+    } else if(!scripts\engine\utility::is_true(self.vo_system_playing_vo)) {
       self playlocalsound("p3_breathing_better");
+    }
   }
 }
 
@@ -5078,8 +5089,9 @@ playerpainbreathingsound() {
         if(soundexists("Fem_breathing_hurt")) {
           self playlocalsound("Fem_breathing_hurt");
         }
-      } else
+      } else {
         self playlocalsound("breathing_hurt");
+      }
 
       wait 0.784;
       wait(0.1 + randomfloat(0.8));
@@ -5914,8 +5926,9 @@ cangiveandfireoffhand(var_0) {
     } else {
       return 1;
     }
-  } else
+  } else {
     return 1;
+  }
 }
 
 play_interaction_gesture(var_0) {

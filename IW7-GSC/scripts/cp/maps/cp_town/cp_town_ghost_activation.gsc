@@ -79,7 +79,7 @@ find_radiation_extractor_collect_radiation() {
   }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(level.radiation_extraction_interaction);
-  level scripts\engine\utility::waittill_any_3("completed_extraction", "debug_radiation_extractor_collect_radiation");
+  level scripts\engine\utility::waittill_any("completed_extraction", "debug_radiation_extractor_collect_radiation");
   level notify("stop_tick_on_loop");
 }
 
@@ -210,53 +210,53 @@ calculate_cipher_from_current_interaction(var_0, var_1, var_2, var_3, var_4) {
   var_7 = 3;
   var_8 = 4;
   var_9 = 3;
-  var_0A = 6;
-  var_0B = 9;
-  var_0C = 0;
-  var_0D = 0;
-  var_0E = 0;
-  var_0F = level.alphabets[var_1];
+  var_10 = 6;
+  var_11 = 9;
+  var_12 = 0;
+  var_13 = 0;
+  var_14 = 0;
+  var_15 = level.alphabets[var_1];
   if(var_2 == "0") {
-    var_0C = 0;
+    var_12 = 0;
   } else if(var_2 == level.cipherlettera) {
-    var_0C = var_5 * var_9 + level.alphabets[var_2];
+    var_12 = var_5 * var_9 + level.alphabets[var_2];
   } else if(var_2 == level.cipherletterb) {
-    var_0C = var_6 * var_9 + level.alphabets[var_2];
+    var_12 = var_6 * var_9 + level.alphabets[var_2];
   } else if(var_2 == level.cipherletterc) {
-    var_0C = var_7 * var_9 + level.alphabets[var_2];
+    var_12 = var_7 * var_9 + level.alphabets[var_2];
   } else if(var_2 == level.cipherletterd) {
-    var_0C = var_8 * var_9 + level.alphabets[var_2];
+    var_12 = var_8 * var_9 + level.alphabets[var_2];
   }
 
   if(var_3 == "0") {
-    var_0D = 0;
+    var_13 = 0;
   } else if(var_3 == level.cipherlettera) {
-    var_0D = var_5 * var_0A + level.alphabets[var_3];
+    var_13 = var_5 * var_10 + level.alphabets[var_3];
   } else if(var_3 == level.cipherletterb) {
-    var_0D = var_6 * var_0A + level.alphabets[var_3];
+    var_13 = var_6 * var_10 + level.alphabets[var_3];
   } else if(var_3 == level.cipherletterc) {
-    var_0D = var_7 * var_0A + level.alphabets[var_3];
+    var_13 = var_7 * var_10 + level.alphabets[var_3];
   } else if(var_3 == level.cipherletterd) {
-    var_0D = var_8 * var_0A + level.alphabets[var_3];
+    var_13 = var_8 * var_10 + level.alphabets[var_3];
   }
 
   if(var_4 == "0") {
-    var_0E = 0;
+    var_14 = 0;
   } else if(var_4 == level.cipherlettera) {
-    var_0E = var_5 * var_0B + level.alphabets[var_4];
+    var_14 = var_5 * var_11 + level.alphabets[var_4];
   } else if(var_4 == level.cipherletterb) {
-    var_0E = var_6 * var_0B + level.alphabets[var_4];
+    var_14 = var_6 * var_11 + level.alphabets[var_4];
   } else if(var_4 == level.cipherletterc) {
-    var_0E = var_7 * var_0B + level.alphabets[var_4];
+    var_14 = var_7 * var_11 + level.alphabets[var_4];
   } else if(var_4 == level.cipherletterd) {
-    var_0E = var_8 * var_0B + level.alphabets[var_4];
+    var_14 = var_8 * var_11 + level.alphabets[var_4];
   }
 
   var_10 = 0;
-  if(!isDefined(var_0F)) {
-    var_10 = var_0C + var_0D + var_0E;
+  if(!isDefined(var_15)) {
+    var_10 = var_12 + var_13 + var_14;
   } else {
-    var_10 = var_0F + var_0C + var_0D + var_0E;
+    var_10 = var_15 + var_12 + var_13 + var_14;
   }
 
   var_11 = 0;
@@ -321,17 +321,17 @@ calculate_cipher_from_letters_initially(var_0, var_1, var_2, var_3) {
   var_6 = [];
   var_7 = [];
   var_8 = [];
-  foreach(var_0A in var_4) {
-    var_0B = strtok(var_0A, "_");
-    var_5[var_5.size] = var_0B[0];
-    var_6[var_6.size] = var_0B[1];
-    var_7[var_7.size] = var_0B[2];
-    var_8[var_8.size] = var_0B[3];
+  foreach(var_10 in var_4) {
+    var_11 = strtok(var_10, "_");
+    var_5[var_5.size] = var_11[0];
+    var_6[var_6.size] = var_11[1];
+    var_7[var_7.size] = var_11[2];
+    var_8[var_8.size] = var_11[3];
   }
 
-  var_0D = 1;
-  var_0E = 2;
-  var_0F = 3;
+  var_13 = 1;
+  var_14 = 2;
+  var_15 = 3;
   var_10 = 4;
   var_11 = 3;
   var_12 = 6;
@@ -340,98 +340,98 @@ calculate_cipher_from_letters_initially(var_0, var_1, var_2, var_3) {
   var_15 = [];
   var_16 = [];
   var_17 = [];
-  foreach(var_0A in var_5) {
+  foreach(var_10 in var_5) {
     foreach(var_1B, var_1A in level.alphabets) {
-      if(var_0A == var_1B) {
-        var_14[var_14.size] = level.alphabets[var_0A];
+      if(var_10 == var_1B) {
+        var_14[var_14.size] = level.alphabets[var_10];
       }
     }
   }
 
-  foreach(var_0A in var_6) {
-    if(var_0A == "0") {
+  foreach(var_10 in var_6) {
+    if(var_10 == "0") {
       var_15[var_15.size] = 0;
       continue;
     }
 
     foreach(var_1B, var_1A in level.alphabets) {
-      if(var_0A == var_1B) {
-        if(var_0A == var_0) {
-          var_15[var_15.size] = var_0D * var_11 + level.alphabets[var_1B];
+      if(var_10 == var_1B) {
+        if(var_10 == var_0) {
+          var_15[var_15.size] = var_13 * var_11 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_1) {
-          var_15[var_15.size] = var_0E * var_11 + level.alphabets[var_1B];
+        if(var_10 == var_1) {
+          var_15[var_15.size] = var_14 * var_11 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_2) {
-          var_15[var_15.size] = var_0F * var_11 + level.alphabets[var_1B];
+        if(var_10 == var_2) {
+          var_15[var_15.size] = var_15 * var_11 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_3) {
+        if(var_10 == var_3) {
           var_15[var_15.size] = var_10 * var_11 + level.alphabets[var_1B];
         }
       }
     }
   }
 
-  foreach(var_0A in var_7) {
-    if(var_0A == "0") {
+  foreach(var_10 in var_7) {
+    if(var_10 == "0") {
       var_16[var_16.size] = 0;
       continue;
     }
 
     foreach(var_1B, var_1A in level.alphabets) {
-      if(var_0A == var_1B) {
-        if(var_0A == var_0) {
-          var_16[var_16.size] = var_0D * var_12 + level.alphabets[var_1B];
+      if(var_10 == var_1B) {
+        if(var_10 == var_0) {
+          var_16[var_16.size] = var_13 * var_12 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_1) {
-          var_16[var_16.size] = var_0E * var_12 + level.alphabets[var_1B];
+        if(var_10 == var_1) {
+          var_16[var_16.size] = var_14 * var_12 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_2) {
-          var_16[var_16.size] = var_0F * var_12 + level.alphabets[var_1B];
+        if(var_10 == var_2) {
+          var_16[var_16.size] = var_15 * var_12 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_3) {
+        if(var_10 == var_3) {
           var_16[var_16.size] = var_10 * var_12 + level.alphabets[var_1B];
         }
       }
     }
   }
 
-  foreach(var_0A in var_8) {
-    if(var_0A == "0") {
+  foreach(var_10 in var_8) {
+    if(var_10 == "0") {
       var_17[var_17.size] = 0;
       continue;
     }
 
     foreach(var_1B, var_1A in level.alphabets) {
-      if(var_0A == var_1B) {
-        if(var_0A == var_0) {
-          var_17[var_17.size] = var_0D * var_13 + level.alphabets[var_1B];
+      if(var_10 == var_1B) {
+        if(var_10 == var_0) {
+          var_17[var_17.size] = var_13 * var_13 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_1) {
-          var_17[var_17.size] = var_0E * var_13 + level.alphabets[var_1B];
+        if(var_10 == var_1) {
+          var_17[var_17.size] = var_14 * var_13 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_2) {
-          var_17[var_17.size] = var_0F * var_13 + level.alphabets[var_1B];
+        if(var_10 == var_2) {
+          var_17[var_17.size] = var_15 * var_13 + level.alphabets[var_1B];
           continue;
         }
 
-        if(var_0A == var_3) {
+        if(var_10 == var_3) {
           var_17[var_17.size] = var_10 * var_13 + level.alphabets[var_1B];
         }
       }
@@ -698,8 +698,8 @@ watch_for_damage_on_machine() {
     }
 
     if(scripts\engine\utility::istrue(var_1.fired_fov_beam)) {
-      var_0A = getomnvar("zm_num_ghost_n_skull_coin");
-      if(isDefined(var_0A) && var_0A >= 5) {
+      var_10 = getomnvar("zm_num_ghost_n_skull_coin");
+      if(isDefined(var_10) && var_10 >= 5) {
         level notify("machine_hit_successfully");
       } else {
         continue;
@@ -1486,7 +1486,7 @@ collector_activation_func(var_0, var_1) {
 
 last_stand_watcher(var_0) {
   for(;;) {
-    scripts\engine\utility::waittill_any_3("last_stand", "death", "disconnect");
+    scripts\engine\utility::waittill_any("last_stand", "death", "disconnect");
     if(!scripts\engine\utility::istrue(level.picked_up_radiation_collector)) {
       scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
       level.picked_up_radiation_collector = undefined;
@@ -1506,7 +1506,7 @@ pickup_extractor_after_collecting_radiation(var_0) {
 
 last_stand_watcher_extractor_craft(var_0) {
   for(;;) {
-    scripts\engine\utility::waittill_any_3("last_stand", "death", "disconnect");
+    scripts\engine\utility::waittill_any("last_stand", "death", "disconnect");
     level.rad_extractor_owner = undefined;
   }
 }
@@ -1616,7 +1616,7 @@ watch_for_damage_on_cipher_letter(var_0) {
   level endon("game_ended");
   self endon("end_this_thread_for_" + self.name);
   for(;;) {
-    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!var_2 scripts\cp\utility::is_valid_player()) {
       continue;
     }
@@ -1650,10 +1650,10 @@ watch_for_damage_on_cipher_letter(var_0) {
     level.cipher_failures++;
     level thread scripts\engine\utility::play_sound_in_space("purchase_deny", var_4);
     if(level.cipher_failures >= 6) {
-      foreach(var_0C in level.cipher_interactions_structs) {
-        foreach(var_0E in level.players) {
-          scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0C, var_0E);
-          level thread delay_enable_linked_interaction(var_0C, 30, var_0E);
+      foreach(var_12 in level.cipher_interactions_structs) {
+        foreach(var_14 in level.players) {
+          scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_12, var_14);
+          level thread delay_enable_linked_interaction(var_12, 30, var_14);
           level.cipher_failures = 0;
         }
       }
@@ -2252,7 +2252,7 @@ init() {
   var_0 = spawnStruct();
   var_0.timeout = 40;
   var_0.lifespan = 40;
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -2372,7 +2372,7 @@ setcarryingims(var_0, var_1, var_2, var_3) {
 func_49E8(var_0) {
   var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = var_0.angles;
-  var_1.triggerportableradarping = var_0;
+  var_1.owner = var_0;
   var_1.name = "crafted_rad_extractor";
   var_1 hide();
   var_1.carriedmedusa = spawn("script_model", var_1.origin + (0, 0, 25));
@@ -2454,7 +2454,7 @@ func_B545(var_0, var_1, var_2) {
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
   var_2.iscarrying = 0;
-  var_3.triggerportableradarping = var_2;
+  var_3.owner = var_2;
   if(ispointinvolume(var_3.origin, level.pool_placement_volume)) {
     level thread radiation_extractor_after_pool_part(var_3.origin);
     level.pool_extraction_fx = spawnfx(level._effect["pool_radiation"], var_3.origin + (0, 0, 3));
@@ -2473,8 +2473,8 @@ func_B545(var_0, var_1, var_2) {
 
 func_B542() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.carriedmedusa delete();
@@ -2501,13 +2501,13 @@ func_B543(var_0, var_1) {
 
 func_B541(var_0, var_1) {
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.rad_extractor_settings["crafted_rad_extractor"].pow);
+  self sethintstring(level.rad_extractor_settings["crafted_rad_extractor"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
   self setuserange(96);
-  thread medusa_watch_for_player_melee(self.triggerportableradarping);
-  thread func_B53C(self.triggerportableradarping);
+  thread medusa_watch_for_player_melee(self.owner);
+  thread func_B53C(self.owner);
   thread scripts\cp\utility::item_handleownerdisconnect("medusa_handleOwner");
   thread scripts\cp\utility::item_timeout(var_0, level.rad_extractor_settings["crafted_rad_extractor"].timeout);
   thread func_B53D();
@@ -2519,7 +2519,7 @@ medusa_watch_for_player_melee(var_0) {
   self.maxhealth = 5;
   self setCanDamage(1);
   for(;;) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!isplayer(var_2)) {
       continue;
     }
@@ -2622,7 +2622,7 @@ activatefiguredamage(var_0, var_1, var_2) {
   var_2 setCanDamage(1);
   var_2 endon("end_thread_for_" + var_2.model);
   for(;;) {
-    var_2 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+    var_2 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     if(!isplayer(var_4)) {
       continue;
     }
@@ -2692,16 +2692,16 @@ showhiddenfigurestoplayer(var_0, var_1, var_2, var_3) {
   while(gettime() <= var_7 + var_5) {
     var_8 = randomintrange(-200, 200);
     var_9 = randomintrange(-200, 200);
-    var_0A = randomintrange(90, 200);
-    var_3.figure_one_offset = (var_8, var_9, var_0A);
-    var_0B = randomintrange(-200, 200);
-    var_0C = randomintrange(-200, 200);
-    var_0D = randomintrange(90, 200);
-    var_3.figure_two_offset = (var_0B, var_0C, var_0D);
-    var_0E = randomintrange(-200, 200);
-    var_0F = randomintrange(-200, 200);
     var_10 = randomintrange(90, 200);
-    var_3.figure_three_offset = (var_0E, var_0F, var_10);
+    var_3.figure_one_offset = (var_8, var_9, var_10);
+    var_11 = randomintrange(-200, 200);
+    var_12 = randomintrange(-200, 200);
+    var_13 = randomintrange(90, 200);
+    var_3.figure_two_offset = (var_11, var_12, var_13);
+    var_14 = randomintrange(-200, 200);
+    var_15 = randomintrange(-200, 200);
+    var_10 = randomintrange(90, 200);
+    var_3.figure_three_offset = (var_14, var_15, var_10);
     var_11 = randomintrange(-200, 200);
     var_12 = randomintrange(-200, 200);
     var_13 = randomintrange(90, 200);

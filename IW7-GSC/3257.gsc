@@ -48,14 +48,14 @@ escape_spawn_score_func() {
   return scripts\engine\utility::random(var_1);
 }
 
-onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = self;
+onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = self;
   if(var_4 != "MOD_SUICIDE") {
-    if(scripts\mp\mp_agent::is_friendly_damage(var_0C, var_1)) {
+    if(scripts\mp\mp_agent::is_friendly_damage(var_12, var_1)) {
       return;
     }
 
-    if(scripts\mp\mp_agent::is_friendly_damage(var_0C, var_0)) {
+    if(scripts\mp\mp_agent::is_friendly_damage(var_12, var_0)) {
       return;
     }
   }
@@ -64,13 +64,13 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     var_1 = self;
   }
 
-  var_0D = should_do_damage_checks(var_1, var_2, var_4, var_5, var_8, var_0C);
-  if(!var_0D) {
+  var_13 = should_do_damage_checks(var_1, var_2, var_4, var_5, var_8, var_12);
+  if(!var_13) {
     return;
   }
 
-  var_0E = var_4 == "MOD_MELEE";
-  var_0F = isDefined(self.isfrozen) && isDefined(var_5) && !scripts\cp\cp_weapon::isforgefreezeweapon(var_5) || var_4 == "MOD_MELEE";
+  var_14 = var_4 == "MOD_MELEE";
+  var_15 = isDefined(self.isfrozen) && isDefined(var_5) && !scripts\cp\cp_weapon::isforgefreezeweapon(var_5) || var_4 == "MOD_MELEE";
   var_10 = scripts\engine\utility::isbulletdamage(var_4);
   var_11 = isDefined(var_1) && isplayer(var_1);
   var_12 = scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
@@ -79,14 +79,14 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_15 = scripts\engine\utility::istrue(level.insta_kill);
   var_16 = var_12 && var_10 && var_1 scripts\cp\utility::is_consumable_active("headshot_explosion");
   var_17 = var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE_SPLASH";
-  var_18 = var_0E && var_1 scripts\cp\utility::is_consumable_active("increased_melee_damage");
+  var_18 = var_14 && var_1 scripts\cp\utility::is_consumable_active("increased_melee_damage");
   var_19 = 0;
-  if(!var_0E && var_11 && !isDefined(var_1.linked_to_coaster) && var_1 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade")) {
+  if(!var_14 && var_11 && !isDefined(var_1.linked_to_coaster) && var_1 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade")) {
     var_19 = var_1 scripts\cp\utility::coop_getweaponclass(var_5) == "weapon_sniper";
   }
 
   var_1A = scripts\engine\utility::istrue(level.explosive_touch) && isDefined(var_4) && var_4 == "MOD_UNKNOWN";
-  var_1B = var_14 || var_15 || var_1A || var_0F || var_13 || var_16 || var_18 || var_19;
+  var_1B = var_14 || var_15 || var_1A || var_15 || var_13 || var_16 || var_18 || var_19;
   if(var_10) {
     var_1 notify("weapon_hit_enemy", self, var_1);
   }
@@ -95,7 +95,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   if(scripts\cp\powers\coop_armageddon::isfirstarmageddonmeteorhit(var_5)) {
     thread scripts\cp\powers\coop_armageddon::fling_zombie_from_meteor(var_0.origin, var_6, var_7);
     return;
-  } else if(isDefined(var_5) && scripts\cp\cp_weapon::isforgefreezeweapon(var_5) && !var_0E) {
+  } else if(isDefined(var_5) && scripts\cp\cp_weapon::isforgefreezeweapon(var_5) && !var_14) {
     if(!var_1C) {
       self.isfrozen = 1;
       thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
@@ -113,7 +113,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     var_1D = level.wave_num;
     var_1E = is_grenade(var_5, var_4);
     var_1F = scripts\engine\utility::istrue(self.is_burning) && !var_10;
-    var_20 = var_0E && var_1 scripts\cp\utility::is_consumable_active("shock_melee_upgrade");
+    var_20 = var_14 && var_1 scripts\cp\utility::is_consumable_active("shock_melee_upgrade");
     var_21 = var_12 && var_1 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
     var_22 = var_10 && var_1 scripts\cp\utility::is_consumable_active("bonus_damage_on_last_bullets");
     var_23 = var_10 && var_1 scripts\cp\utility::is_consumable_active("damage_booster_upgrade");
@@ -122,7 +122,7 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     var_26 = var_11 && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack");
     var_27 = is_axe_weapon(var_5);
     if(isDefined(var_2) && isDefined(var_8) && !var_15 && var_10) {
-      var_28 = scripts\cp\zombies\zombie_armor::process_damage_to_armor(var_0C, var_1, var_2, var_8, var_7);
+      var_28 = scripts\cp\zombies\zombie_armor::process_damage_to_armor(var_12, var_1, var_2, var_8, var_7);
       if(var_28 <= 0) {
         return;
       }
@@ -131,9 +131,9 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     }
 
     var_2 = initial_weapon_scale(undefined, var_1, var_2, undefined, var_4, var_5, undefined, undefined, var_8, undefined, undefined, undefined);
-    shotgun_scaling(var_1, var_0C, var_5);
+    shotgun_scaling(var_1, var_12, var_5);
     if(var_11) {
-      if(var_0E) {
+      if(var_14) {
         var_2 = int(var_2 * var_1 scripts\cp\perks\perk_utility::perk_getmeleescalar());
         if(var_26) {
           var_2 = var_2 + 1500;
@@ -190,11 +190,11 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
   var_2 = int(min(var_2, self.maxhealth));
   scripts\cp\zombies\zombies_gamescore::update_agent_damage_performance(var_1, var_2, var_4);
-  scripts\cp\cp_agent_utils::process_damage_rewards(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0C);
-  scripts\cp\cp_agent_utils::process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0C);
+  scripts\cp\cp_agent_utils::process_damage_rewards(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_12);
+  scripts\cp\cp_agent_utils::process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_12);
   scripts\cp\cp_agent_utils::store_attacker_info(var_1, var_2);
-  scripts\cp\zombies\zombies_weapons::special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
-  var_0C[[level.agent_funcs[var_0C.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0A, var_0B);
+  scripts\cp\zombies\zombies_weapons::special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  var_12[[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11);
 }
 
 should_do_damage_checks(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -358,7 +358,7 @@ give_attacker_kill_rewards(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(!isplayer(var_0) && !isDefined(var_0.triggerportableradarping) || !isplayer(var_0.triggerportableradarping)) {
+  if(!isplayer(var_0) && !isDefined(var_0.owner) || !isplayer(var_0.owner)) {
     return;
   }
 
@@ -368,8 +368,8 @@ give_attacker_kill_rewards(var_0, var_1, var_2, var_3) {
   }
 
   var_5 = 0;
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0 = var_0.triggerportableradarping;
+  if(isDefined(var_0.owner)) {
+    var_0 = var_0.owner;
     var_5 = 1;
   }
 
@@ -471,12 +471,12 @@ shotgun_scaling(var_0, var_1, var_2) {
   }
 }
 
-initial_weapon_scale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  if(!can_scale_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B)) {
+initial_weapon_scale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  if(!can_scale_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11)) {
     return var_2;
   }
 
-  var_2 = scale_ww_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  var_2 = scale_ww_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   if(isDefined(var_4) && var_4 == "MOD_MELEE") {
     if(!is_axe_weapon(var_5)) {
       var_2 = 150;
@@ -504,9 +504,9 @@ is_axe_weapon(var_0) {
   return 0;
 }
 
-scale_ww_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = scripts\cp\utility::getrawbaseweaponname(var_5);
-  switch (var_0C) {
+scale_ww_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = scripts\cp\utility::getrawbaseweaponname(var_5);
+  switch (var_12) {
     case "shredder":
     case "headcutter":
     case "facemelter":
@@ -518,7 +518,7 @@ scale_ww_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   return var_2;
 }
 
-can_scale_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+can_scale_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(!isDefined(var_1)) {
     return 0;
   }
@@ -619,37 +619,37 @@ eligible_for_reward(var_0, var_1, var_2, var_3) {
   return 0;
 }
 
-onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  var_0D = scripts\cp\utility::is_trap(var_0);
+onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = scripts\cp\utility::is_trap(var_0);
   if((isDefined(var_1) && isDefined(var_4) && scripts\engine\utility::isbulletdamage(var_4) || scripts\cp\utility::player_has_special_ammo(var_1, "combined_ammo") && var_4 == "MOD_EXPLOSIVE_BULLET") || var_5 == "poison_ammo_mp") {
-    if(isplayer(var_1) || isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-      if(!var_0D) {
+    if(isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner)) {
+      if(!var_13) {
         var_1 check_for_special_damage(self, var_0, var_3, var_5, var_4);
       }
     }
   }
 
-  var_0E = 10 * level.cash_scalar;
+  var_14 = 10 * level.cash_scalar;
   if(isDefined(var_1)) {
     if(isDefined(var_1.perk_data) && var_1.perk_data["damagemod"].bullet_damage_scalar == 2) {
-      var_0E = var_0E * 2;
+      var_14 = var_14 * 2;
     }
 
     if(eligible_for_reward(var_1, var_4, var_5, self)) {
       if(var_1 scripts\cp\utility::is_consumable_active("hit_reward_upgrade")) {
         var_1 scripts\cp\utility::notify_used_consumable("hit_reward_upgrade");
-        var_0E = var_0E * 5;
+        var_14 = var_14 * 5;
       }
 
-      var_1 scripts\cp\cp_persistence::give_player_currency(var_0E, "large", var_8);
+      var_1 scripts\cp\cp_persistence::give_player_currency(var_14, "large", var_8);
     }
   }
 
   if(isDefined(var_8) && scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1)) {
     if(var_1 scripts\cp\utility::is_consumable_active("armor_after_headshot")) {
-      var_0F = 25;
+      var_15 = 25;
       if(isDefined(var_1.bodyarmorhp)) {
-        var_0F = int(var_1.bodyarmorhp + 25);
+        var_15 = int(var_1.bodyarmorhp + 25);
       }
 
       var_1 notify("enable_armor");
@@ -867,7 +867,7 @@ attack_nearby_player() {
 break_barrier_from_entrance(var_0) {
   self.curmeleetarget = var_0.window_attack_ent;
   scripts\asm\asm_bb::bb_requestmelee(self.curmeleetarget);
-  scripts\engine\utility::waittill_any_3("attack_hit", "attack_miss");
+  scripts\engine\utility::waittill_any("attack_hit", "attack_miss");
   scripts\cp\zombies\zombie_entrances::remove_barrier_from_entrance(var_0);
   if(!scripts\cp\zombies\zombie_entrances::entrance_has_barriers(var_0)) {
     if(isDefined(var_0.window_attack_ent)) {
@@ -965,9 +965,9 @@ zombies_should_mutilate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       return 1;
     }
 
-    var_0A = getweaponbasename(var_5);
-    if(isDefined(var_0A)) {
-      switch (var_0A) {
+    var_10 = getweaponbasename(var_5);
+    if(isDefined(var_10)) {
+      switch (var_10) {
         case "iw7_m8_zm":
         case "iw7_kbs_zm":
         case "iw7_chargeshot_zm":
@@ -985,7 +985,7 @@ zombies_should_mutilate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
 is_limb(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
-    if(isDefined(var_3.triggerportableradarping)) {
+    if(isDefined(var_3.owner)) {
       if(var_3.var_9F == "script_vehicle") {
         return 0;
       }

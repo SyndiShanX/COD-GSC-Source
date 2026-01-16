@@ -180,23 +180,23 @@ func_111A9() {
       }
 
       var_3 = 0;
-      foreach(var_0C, var_5 in self.var_164D) {
+      foreach(var_12, var_5 in self.var_164D) {
         var_6 = var_5.var_4BC0;
-        var_7 = level.asm[var_0C].states[var_6];
+        var_7 = level.asm[var_12].states[var_6];
         if(!isDefined(var_7.var_C87F)) {
           continue;
         }
 
-        var_8 = level.asm[var_0C].states[var_7.var_C87F];
-        scripts\asm\asm::func_2388(var_0C, var_6, var_7, var_7.var_116FB);
+        var_8 = level.asm[var_12].states[var_7.var_C87F];
+        scripts\asm\asm::func_2388(var_12, var_6, var_7, var_7.var_116FB);
         var_9 = var_7.var_C87F;
         if(isDefined(var_8.var_C94B) && var_8.var_C94B) {
-          var_0A = scripts\asm\asm::func_2310(var_0C, var_7.var_C87F, 1);
-          var_9 = var_0A[0];
-          var_0B = var_0A[1];
+          var_10 = scripts\asm\asm::func_2310(var_12, var_7.var_C87F, 1);
+          var_9 = var_10[0];
+          var_11 = var_10[1];
         }
 
-        scripts\asm\asm::func_238A(var_0C, var_9, 0.05, undefined, undefined, var_7.var_C87C);
+        scripts\asm\asm::func_238A(var_12, var_9, 0.05, undefined, undefined, var_7.var_C87C);
         var_3 = 1;
       }
 
@@ -213,15 +213,15 @@ func_237F(var_0) {
       var_1 = 1024;
       if(scripts\engine\utility::actor_is3d()) {
         var_2 = self.angles;
-        if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_1) {
-          var_2 = scripts\asm\shared_utility::getnodeforwardangles(self.target_getindexoftarget);
+        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
+          var_2 = scripts\asm\shared_utility::getnodeforwardangles(self.node);
         }
 
         self orientmode("face angle 3d", var_2);
       } else {
         var_3 = self.angles[1];
-        if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_1) {
-          var_3 = scripts\asm\shared_utility::getnodeforwardyaw(self.target_getindexoftarget);
+        if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
+          var_3 = scripts\asm\shared_utility::getnodeforwardyaw(self.node);
         }
 
         self orientmode("face angle", var_3);
@@ -283,13 +283,13 @@ func_2326(var_0, var_1, var_2, var_3, var_4) {
   var_7 = undefined;
   foreach(var_9 in var_6) {
     scripts\asm\asm::asm_fireevent(var_1, var_9);
-    var_0A = scripts\anim\notetracks::handlenotetrack(var_9, var_5, var_2, var_3);
-    if(!isDefined(var_0A)) {
-      var_0A = func_2344(var_0, var_9, var_1);
+    var_10 = scripts\anim\notetracks::handlenotetrack(var_9, var_5, var_2, var_3);
+    if(!isDefined(var_10)) {
+      var_10 = func_2344(var_0, var_9, var_1);
     }
 
-    if(isDefined(var_0A)) {
-      var_7 = var_0A;
+    if(isDefined(var_10)) {
+      var_7 = var_10;
     }
   }
 
@@ -699,12 +699,12 @@ func_235E(var_0, var_1, var_2, var_3) {
     return undefined;
   }
 
-  foreach(var_0A in var_4) {
-    if(var_7 < 0 || getsubstr(var_0A, 0, var_7) == var_2) {
+  foreach(var_10 in var_4) {
+    if(var_7 < 0 || getsubstr(var_10, 0, var_7) == var_2) {
       var_5 = var_5 + 1;
-      var_0B = 1 / var_5;
-      if(randomfloat(1) <= var_0B) {
-        var_6 = var_0A;
+      var_11 = 1 / var_5;
+      if(randomfloat(1) <= var_11) {
+        var_6 = var_10;
       }
     }
   }
@@ -827,44 +827,44 @@ func_235F(var_0, var_1, var_2, var_3, var_4) {
   var_7 = undefined;
   var_8 = scripts\asm\asm::func_2341(var_0, var_1);
   var_9 = 0.2;
-  var_0A = isDefined(var_4) && var_4;
+  var_10 = isDefined(var_4) && var_4;
   for(;;) {
-    var_0B = asm_getallanimsforstate(var_0, var_1);
+    var_11 = asm_getallanimsforstate(var_0, var_1);
     if(isDefined(var_4) && var_4) {
       var_3 = scripts\asm\asm::asm_getmoveplaybackrate();
       self func_84F1(var_3);
     }
 
-    if(isDefined(var_7) && var_7 != var_0B) {
+    if(isDefined(var_7) && var_7 != var_11) {
       self clearanim(var_7, var_2);
     }
 
-    if(self func_8103(var_0B) > 0) {
-      self func_82E1(var_1, var_0B, 1, var_2, var_3);
+    if(self func_8103(var_11) > 0) {
+      self func_82E1(var_1, var_11, 1, var_2, var_3);
     } else {
-      self func_82EA(var_1, var_0B, 1, var_2, var_3);
+      self func_82EA(var_1, var_11, 1, var_2, var_3);
     }
 
-    func_2369(var_0, var_1, var_0B);
-    var_0C = getanimlength(var_0B);
-    if(var_0C <= 0.05) {
+    func_2369(var_0, var_1, var_11);
+    var_12 = getanimlength(var_11);
+    if(var_12 <= 0.05) {
       return;
     }
 
-    var_0D = undefined;
-    var_0E = var_3;
-    while(!isDefined(var_0D)) {
-      var_0D = func_2323(var_0, var_1, var_9, var_8);
-      if(!isDefined(var_0D) && var_0A) {
+    var_13 = undefined;
+    var_14 = var_3;
+    while(!isDefined(var_13)) {
+      var_13 = func_2323(var_0, var_1, var_9, var_8);
+      if(!isDefined(var_13) && var_10) {
         var_3 = scripts\asm\asm::asm_getmoveplaybackrate();
-        if(var_3 != var_0E) {
+        if(var_3 != var_14) {
           self func_84F1(var_3);
-          self func_82B1(var_0B, var_3);
+          self func_82B1(var_11, var_3);
         }
       }
     }
 
-    var_7 = var_0B;
+    var_7 = var_11;
   }
 }
 
@@ -977,24 +977,24 @@ func_2377(var_0) {
   }
 
   if(isDefined(var_0["up"])) {
-    self.var_368 = var_0["up"];
+    self.upaimlimit = var_0["up"];
   } else if(scripts\engine\utility::actor_is3d()) {
-    self.var_368 = -65;
+    self.upaimlimit = -65;
   } else {
-    self.var_368 = -45;
+    self.upaimlimit = -45;
   }
 
   if(isDefined(var_0["down"])) {
-    self.isbot = var_0["down"];
+    self.downaimlimit = var_0["down"];
     return;
   }
 
   if(scripts\engine\utility::actor_is3d()) {
-    self.isbot = 65;
+    self.downaimlimit = 65;
     return;
   }
 
-  self.isbot = 45;
+  self.downaimlimit = 45;
 }
 
 asm_generichandler(var_0, var_1) {
@@ -1033,7 +1033,7 @@ func_237D(var_0, var_1) {
 }
 
 func_2380(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = scripts\engine\utility::weaponclass(self.var_394);
+  var_5 = scripts\engine\utility::weaponclass(self.weapon);
   if(var_5 == "none") {
     return;
   }
@@ -1141,7 +1141,7 @@ func_2381(var_0, var_1) {
 func_2313(var_0, var_1) {
   self endon("death");
   self endon("StopCleanupAimKnobs");
-  scripts\engine\utility::waittill_any_timeout_1(var_1, var_0 + "_finished");
+  scripts\engine\utility::waittill_any_timeout(var_1, var_0 + "_finished");
   func_2311();
 }
 

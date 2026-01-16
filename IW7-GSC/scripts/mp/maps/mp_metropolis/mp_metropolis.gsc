@@ -55,18 +55,18 @@ fix_collision() {
   var_9 = spawn("script_model", (-2192, 452, 184));
   var_9.angles = (0, 0, -14.0003);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_0A = getent("player32x32x128", "targetname");
-  var_0B = spawn("script_model", (-2600, -680, 344));
-  var_0B.angles = (0, 0, 0);
-  var_0B clonebrushmodeltoscriptmodel(var_0A);
-  var_0C = getent("clip128x128x8", "targetname");
-  var_0D = spawn("script_model", (-52, 2032, 64));
-  var_0D.angles = (0, 0, -99.4002);
-  var_0D clonebrushmodeltoscriptmodel(var_0C);
-  var_0E = getent("player64x64x256", "targetname");
-  var_0F = spawn("script_model", (-176, -1716, 372));
-  var_0F.angles = (0, 0, 0);
-  var_0F clonebrushmodeltoscriptmodel(var_0E);
+  var_10 = getent("player32x32x128", "targetname");
+  var_11 = spawn("script_model", (-2600, -680, 344));
+  var_11.angles = (0, 0, 0);
+  var_11 clonebrushmodeltoscriptmodel(var_10);
+  var_12 = getent("clip128x128x8", "targetname");
+  var_13 = spawn("script_model", (-52, 2032, 64));
+  var_13.angles = (0, 0, -99.4002);
+  var_13 clonebrushmodeltoscriptmodel(var_12);
+  var_14 = getent("player64x64x256", "targetname");
+  var_15 = spawn("script_model", (-176, -1716, 372));
+  var_15.angles = (0, 0, 0);
+  var_15 clonebrushmodeltoscriptmodel(var_14);
   var_10 = getent("player256x256x8", "targetname");
   var_11 = spawn("script_model", (443, 528, 19));
   var_11.angles = (30, 0, 0);
@@ -447,7 +447,7 @@ spawn_ball_allowed_trigger() {
   var_7 = spawn("trigger_radius", (30, -1250, 150), 0, 140, 400);
   var_8 = spawn("trigger_radius", (-140, -1450, 250), 0, 300, 400);
   var_9 = spawn("trigger_radius", (-1947, 16, 254), 0, 150, 400);
-  var_0A = spawn("trigger_radius", (-2351, 200, 364), 0, 700, 400);
+  var_10 = spawn("trigger_radius", (-2351, 200, 364), 0, 700, 400);
   level.ballallowedtriggers = getEntArray("uplinkAllowedOOB", "targetname");
   level.ballallowedtriggers[level.ballallowedtriggers.size] = var_0;
   level.ballallowedtriggers[level.ballallowedtriggers.size] = var_1;
@@ -459,7 +459,7 @@ spawn_ball_allowed_trigger() {
   level.ballallowedtriggers[level.ballallowedtriggers.size] = var_7;
   level.ballallowedtriggers[level.ballallowedtriggers.size] = var_8;
   level.ballallowedtriggers[level.ballallowedtriggers.size] = var_9;
-  level.ballallowedtriggers[level.ballallowedtriggers.size] = var_0A;
+  level.ballallowedtriggers[level.ballallowedtriggers.size] = var_10;
 }
 
 spawn_oob_trigger() {

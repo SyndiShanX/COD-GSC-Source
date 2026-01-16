@@ -62,7 +62,7 @@ init_crafting_pieces() {
 
     var_2.part_location_struct = scripts\engine\utility::getstruct(var_2.target, "targetname");
     var_2.part_model = var_2.part_location_struct.script_parameters;
-    level.crafting_pieces[var_3[0]][var_3[1]] = scripts\engine\utility::array_add_safe(level.crafting_pieces[var_3[0]][var_3[1]], var_2);
+    level.crafting_pieces[var_3[0]][var_3[1]] = ::scripts\engine\utility::add_to_array(level.crafting_pieces[var_3[0]][var_3[1]], var_2);
   }
 
   spawn_crafting_pieces("chem", "beaker", "clamp", "burner");
@@ -215,7 +215,7 @@ use_crafting_station(var_0, var_1) {
             var_8.angles = var_8.angles + (0, -100, 0);
           }
 
-          var_0.added_parts = scripts\engine\utility::array_add_safe(var_0.added_parts, var_8);
+          var_0.added_parts = scripts\engine\utility::add_to_array(var_0.added_parts, var_8);
           var_1 playlocalsound("town_crafting_placement");
           playFX(level._effect["generic_pickup"], var_7.origin);
         }
@@ -228,8 +228,8 @@ use_crafting_station(var_0, var_1) {
       var_0.parts_added++;
       if(var_0.parts_added == 3) {
         if(isDefined(var_0.added_parts)) {
-          foreach(var_0B in var_0.added_parts) {
-            var_0B delete();
+          foreach(var_11 in var_0.added_parts) {
+            var_11 delete();
           }
         }
 
@@ -308,9 +308,9 @@ use_crafting_station_chem_set(var_0, var_1) {
         var_7.model show();
       }
 
-      foreach(var_0A in level.chemical_compounds_created) {
-        playFX(level._effect["generic_pickup"], var_0A.interaction.origin);
-        var_0A.interaction.model show();
+      foreach(var_10 in level.chemical_compounds_created) {
+        playFX(level._effect["generic_pickup"], var_10.interaction.origin);
+        var_10.interaction.model show();
       }
 
       level scripts\cp\utility::set_completed_quest_mark(3);
@@ -322,7 +322,7 @@ use_crafting_station_chem_set(var_0, var_1) {
     return;
   }
 
-  var_0B playlocalsound("perk_machine_deny");
+  var_11 playlocalsound("perk_machine_deny");
 }
 
 give_chem_item_debug(var_0, var_1) {
@@ -397,7 +397,7 @@ pickup_crafting_piece(var_0, var_1) {
       level.chem_pieces = [];
     }
 
-    level.chem_pieces = scripts\engine\utility::array_add_safe(level.chem_pieces, var_0.name);
+    level.chem_pieces = scripts\engine\utility::add_to_array(level.chem_pieces, var_0.name);
     var_2 = 0;
     switch (var_0.name) {
       case "chem_beaker":

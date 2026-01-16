@@ -194,8 +194,9 @@ func_10E0A(var_0, var_1, var_2) {
   if(var_3 != "success") {
     var_0 notify("death");
     return 0;
-  } else if(!isDefined(var_0))
+  } else if(!isDefined(var_0)) {
     return 0;
+  }
 
   scripts\mp\utility\game::freezecontrolswrapper(0);
   var_0.playerlinked = 1;
@@ -650,8 +651,9 @@ vanguard_in_range() {
     } else {
       return 1;
     }
-  } else if(distance2dsquared(self.origin, level.mapcenter) < level.var_13183 && self.origin[2] < level.var_13180)
+  } else if(distance2dsquared(self.origin, level.mapcenter) < level.var_13183 && self.origin[2] < level.var_13180) {
     return 1;
+  }
 
   return 0;
 }

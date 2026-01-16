@@ -14,7 +14,7 @@ init() {
   level.var_C73F["escort_airdrop"].var_113F0 = "tag_turret_attach";
   level.var_C73F["escort_airdrop"].var_DA71 = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
   level.var_C73F["escort_airdrop"].name = &"KILLSTREAKS_ESCORT_AIRDROP";
-  level.var_C73F["escort_airdrop"].var_39B = "osprey_minigun_mp";
+  level.var_C73F["escort_airdrop"].weaponinfo = "osprey_minigun_mp";
   level.var_C73F["escort_airdrop"].helitype = "osprey";
   level.var_C73F["escort_airdrop"].droptype = "airdrop_escort";
   level.var_C73F["escort_airdrop"].maxhealth = level.var_8D73 * 2;
@@ -28,7 +28,7 @@ init() {
   level.var_C73F["osprey_gunner"].var_113F0 = "tag_turret_attach";
   level.var_C73F["osprey_gunner"].var_DA71 = &"KILLSTREAKS_DEFEND_AIRDROP_PACKAGES";
   level.var_C73F["osprey_gunner"].name = &"KILLSTREAKS_OSPREY_GUNNER";
-  level.var_C73F["osprey_gunner"].var_39B = "osprey_player_minigun_mp";
+  level.var_C73F["osprey_gunner"].weaponinfo = "osprey_player_minigun_mp";
   level.var_C73F["osprey_gunner"].helitype = "osprey_gunner";
   level.var_C73F["osprey_gunner"].droptype = "airdrop_osprey_gunner";
   level.var_C73F["osprey_gunner"].maxhealth = level.var_8D73 * 2;
@@ -51,8 +51,8 @@ init() {
   }
 
   level.var_1A6F = [];
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("escort_airdrop", ::tryuseescortairdrop);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("osprey_gunner", ::func_128F3);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("escort_airdrop", ::tryuseescortairdrop);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("osprey_gunner", ::func_128F3);
 }
 
 tryuseescortairdrop(var_0, var_1) {
@@ -106,14 +106,14 @@ func_6CE4(var_0, var_1, var_2, var_3) {
   var_7 = var_6.origin[2];
   var_8 = level.var_8D96[randomint(level.var_8D96.size)];
   var_9 = var_8.origin;
-  var_0A = (var_1[0], var_1[1], var_7);
-  var_0B = var_1 + anglesToForward(var_4) * var_5;
-  var_0C = vectortoangles(var_0A - var_9);
-  var_0D = var_1;
+  var_10 = (var_1[0], var_1[1], var_7);
+  var_11 = var_1 + anglesToForward(var_4) * var_5;
+  var_12 = vectortoangles(var_10 - var_9);
+  var_13 = var_1;
   var_1 = (var_1[0], var_1[1], var_7);
-  var_0E = func_4983(self, var_0, var_9, var_0C, var_1, var_3);
+  var_14 = func_4983(self, var_0, var_9, var_12, var_1, var_3);
   var_9 = var_8;
-  func_130E3(var_0, var_0E, var_9, var_0A, var_0B, var_7, var_0D);
+  func_130E3(var_0, var_14, var_9, var_10, var_11, var_7, var_13);
 }
 
 func_6CDF(var_0, var_1, var_2, var_3) {
@@ -124,13 +124,13 @@ func_6CDF(var_0, var_1, var_2, var_3) {
   var_7 = var_6.origin[2];
   var_8 = level.var_8D96[randomint(level.var_8D96.size)];
   var_9 = var_8.origin;
-  var_0A = (var_1[0], var_1[1], var_7);
-  var_0B = var_1 + anglesToForward(var_4) * var_5;
-  var_0C = vectortoangles(var_0A - var_9);
+  var_10 = (var_1[0], var_1[1], var_7);
+  var_11 = var_1 + anglesToForward(var_4) * var_5;
+  var_12 = vectortoangles(var_10 - var_9);
   var_1 = (var_1[0], var_1[1], var_7);
-  var_0D = func_4983(self, var_0, var_9, var_0C, var_1, var_3);
+  var_13 = func_4983(self, var_0, var_9, var_12, var_1, var_3);
   var_9 = var_8;
-  func_130B6(var_0, var_0D, var_9, var_0A, var_0B, var_7);
+  func_130B6(var_0, var_13, var_9, var_10, var_11, var_7);
 }
 
 func_11089() {
@@ -159,7 +159,7 @@ func_F1AD(var_0, var_1, var_2, var_3, var_4) {
   self waittill("confirm_location", var_7, var_8);
   scripts\mp\utility::stoplocationselection(0);
   scripts\mp\utility::setusingremote(var_1);
-  var_9 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(var_1);
+  var_9 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_1);
   if(var_9 != "success") {
     if(var_9 != "disconnect") {
       scripts\mp\utility::clearusingremote();
@@ -188,7 +188,7 @@ func_1012E(var_0, var_1, var_2, var_3) {
   var_4 settext(var_2);
   self.locationobjectives = [];
   for(var_5 = 0; var_5 < var_3; var_5++) {
-    self.locationobjectives[var_5] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.locationobjectives[var_5] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
     if(self.locationobjectives[var_5] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_5], "invisible", (0, 0, 0));
       scripts\mp\objidpoolmanager::minimap_objective_position(self.locationobjectives[var_5], level.var_1A6F[level.script][var_5]["origin"]);
@@ -203,7 +203,7 @@ func_1012E(var_0, var_1, var_2, var_3) {
     }
   }
 
-  scripts\engine\utility::waittill_any_3("cancel_location", "picked_location", "stop_location_selection");
+  scripts\engine\utility::waittill_any("cancel_location", "picked_location", "stop_location_selection");
   var_4 scripts\mp\hud_util::destroyelem();
   for(var_5 = 0; var_5 < var_3; var_5++) {
     scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_5]);
@@ -223,7 +223,7 @@ func_4983(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.lifeid = var_1;
   var_6.team = var_0.pers["team"];
   var_6.pers["team"] = var_0.pers["team"];
-  var_6.triggerportableradarping = var_0;
+  var_6.owner = var_0;
   var_6 setotherent(var_0);
   var_6.maxhealth = level.var_C73F[var_5].maxhealth;
   var_6.zoffset = (0, 0, 0);
@@ -517,21 +517,21 @@ func_7DFC(var_0) {
       break;
 
     case "mp_overwatch":
-      var_0A = level.spawnpoints;
-      var_0B = var_0A[0];
-      var_0C = var_0A[0];
-      foreach(var_0E in var_0A) {
-        if(var_0E.origin[2] < var_0B.origin[2]) {
-          var_0B = var_0E;
+      var_10 = level.spawnpoints;
+      var_11 = var_10[0];
+      var_12 = var_10[0];
+      foreach(var_14 in var_10) {
+        if(var_14.origin[2] < var_11.origin[2]) {
+          var_11 = var_14;
         }
 
-        if(var_0E.origin[2] > var_0C.origin[2]) {
-          var_0C = var_0E;
+        if(var_14.origin[2] > var_12.origin[2]) {
+          var_12 = var_14;
         }
       }
 
-      if(var_3 < var_0B.origin[2] - 100) {
-        self.var_2A95 = var_0C.origin[2] + 900;
+      if(var_3 < var_11.origin[2] - 100) {
+        self.var_2A95 = var_12.origin[2] + 900;
       }
       break;
   }
@@ -553,25 +553,25 @@ func_1AE6(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = self.angles[0];
   self.timeout = level.var_C73F[self.var_C740].timeout;
   self setvehgoalpos(var_2, 1);
-  var_0A = gettime();
+  var_10 = gettime();
   self waittill("goal");
-  var_0B = gettime() - var_0A * 0.001;
-  self.timeout = self.timeout - var_0B;
+  var_11 = gettime() - var_10 * 0.001;
+  self.timeout = self.timeout - var_11;
   thread func_1AEE();
-  var_0C = var_2 * (1, 1, 0);
-  var_0C = var_0C + (0, 0, self.var_2A95);
+  var_12 = var_2 * (1, 1, 0);
+  var_12 = var_12 + (0, 0, self.var_2A95);
   self vehicle_setspeed(25, 10, 10);
   self givelastonteamwarning(20, 10, 10, 0.3);
-  self setvehgoalpos(var_0C, 1);
-  var_0A = gettime();
+  self setvehgoalpos(var_12, 1);
+  var_10 = gettime();
   self waittill("goal");
-  var_0B = gettime() - var_0A * 0.001;
-  self.timeout = self.timeout - var_0B;
+  var_11 = gettime() - var_10 * 0.001;
+  self.timeout = self.timeout - var_11;
   self sethoverparams(65, 50, 50);
-  func_C73E(1, level.var_C73F[self.var_C740].var_113F0, var_0C);
+  func_C73E(1, level.var_C73F[self.var_C740].var_113F0, var_12);
   thread func_A663(var_5);
   if(isDefined(var_0)) {
-    var_0 scripts\engine\utility::waittill_any_timeout_1(self.timeout, "disconnect");
+    var_0 scripts\engine\utility::waittill_any_timeout(self.timeout, "disconnect");
   }
 
   self waittill("leaving");
@@ -606,7 +606,7 @@ func_A663(var_0) {
         continue;
       }
 
-      if(!self.triggerportableradarping scripts\mp\utility::isenemy(var_3)) {
+      if(!self.owner scripts\mp\utility::isenemy(var_3)) {
         continue;
       }
 
@@ -686,36 +686,36 @@ func_1AE7(var_0, var_1, var_2, var_3, var_4) {
   self setvehgoalpos(var_2, 1);
   var_9 = gettime();
   self waittill("goal");
-  var_0A = gettime() - var_9 * 0.001;
-  self.timeout = self.timeout - var_0A;
+  var_10 = gettime() - var_9 * 0.001;
+  self.timeout = self.timeout - var_10;
   thread func_1AEE();
-  var_0B = var_2 * (1, 1, 0);
-  var_0B = var_0B + (0, 0, self.var_2A95);
+  var_11 = var_2 * (1, 1, 0);
+  var_11 = var_11 + (0, 0, self.var_2A95);
   self vehicle_setspeed(25, 10, 10);
   self givelastonteamwarning(20, 10, 10, 0.3);
-  self setvehgoalpos(var_0B, 1);
+  self setvehgoalpos(var_11, 1);
   var_9 = gettime();
   self waittill("goal");
-  var_0A = gettime() - var_9 * 0.001;
-  self.timeout = self.timeout - var_0A;
-  func_C73D(1, level.var_C73F[self.var_C740].var_113F0, var_0B);
-  var_0C = 1;
+  var_10 = gettime() - var_9 * 0.001;
+  self.timeout = self.timeout - var_10;
+  func_C73D(1, level.var_C73F[self.var_C740].var_113F0, var_11);
+  var_12 = 1;
   if(isDefined(var_0)) {
-    var_0 scripts\engine\utility::waittill_any_timeout_1(var_0C, "disconnect");
+    var_0 scripts\engine\utility::waittill_any_timeout(var_12, "disconnect");
   }
 
-  self.timeout = self.timeout - var_0C;
+  self.timeout = self.timeout - var_12;
   self setvehgoalpos(var_2, 1);
   var_9 = gettime();
   self waittill("goal");
-  var_0A = gettime() - var_9 * 0.001;
-  self.timeout = self.timeout - var_0A;
-  var_0D = getEntArray("heli_attack_area", "targetname");
-  var_0E = level.heli_loop_nodes[randomint(level.heli_loop_nodes.size)];
-  if(var_0D.size) {
-    thread scripts\mp\killstreaks\_helicopter::func_8D55(var_0D);
+  var_10 = gettime() - var_9 * 0.001;
+  self.timeout = self.timeout - var_10;
+  var_13 = getEntArray("heli_attack_area", "targetname");
+  var_14 = level.heli_loop_nodes[randomint(level.heli_loop_nodes.size)];
+  if(var_13.size) {
+    thread scripts\mp\killstreaks\_helicopter::func_8D55(var_13);
   } else {
-    thread scripts\mp\killstreaks\_helicopter::heli_fly_loop_path(var_0E);
+    thread scripts\mp\killstreaks\_helicopter::heli_fly_loop_path(var_14);
   }
 
   self waittill("leaving");

@@ -552,19 +552,19 @@ getrandomattachments(var_0) {
       var_3[var_3.size] = var_9;
     }
 
-    var_0A = scripts\mp\utility::getweapongroup(var_0["name"]);
-    if(var_0A == "weapon_dmr" || var_0A == "weapon_sniper" || var_4 == "iw7_ripper") {
-      var_0B = 0;
-      foreach(var_0D in var_2) {
-        if(scripts\mp\utility::getattachmenttype(var_0D) == "rail") {
-          var_0B = 1;
+    var_10 = scripts\mp\utility::getweapongroup(var_0["name"]);
+    if(var_10 == "weapon_dmr" || var_10 == "weapon_sniper" || var_4 == "iw7_ripper") {
+      var_11 = 0;
+      foreach(var_13 in var_2) {
+        if(scripts\mp\utility::getattachmenttype(var_13) == "rail") {
+          var_11 = 1;
           break;
         }
       }
 
-      if(!var_0B && var_0["name"] != "iw7_m1_mp") {
-        var_0F = strtok(var_4, "_")[1];
-        var_3[var_3.size] = var_0F + "scope";
+      if(!var_11 && var_0["name"] != "iw7_m1_mp") {
+        var_15 = strtok(var_4, "_")[1];
+        var_3[var_3.size] = var_15 + "scope";
       }
     }
 

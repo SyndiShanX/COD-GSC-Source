@@ -228,7 +228,7 @@ func_C032(var_0, var_1) {
 
 func_C033(var_0, var_1) {
   var_0 endon("processed_node" + var_1);
-  scripts\engine\utility::waittill_any_3("death", "newpath", "node_wait_terminated");
+  scripts\engine\utility::waittill_any("death", "newpath", "node_wait_terminated");
   var_0 scripts\sp\utility::func_65DD(var_1, 1);
 }
 
@@ -591,15 +591,15 @@ func_8DA3(var_0, var_1, var_2) {
     var_9 = undefined;
   }
 
-  var_0A = isDefined(var_0.var_EED2) && var_0.var_EED2;
-  var_0B = isDefined(var_0.var_EEFB);
-  var_0C = isDefined(var_0.var_EDA0) && !scripts\engine\utility::flag(var_0.var_EDA0);
-  var_0D = !isDefined(var_0.target);
-  var_0E = isDefined(var_0.script_delay);
+  var_10 = isDefined(var_0.var_EED2) && var_0.var_EED2;
+  var_11 = isDefined(var_0.var_EEFB);
+  var_12 = isDefined(var_0.var_EDA0) && !scripts\engine\utility::flag(var_0.var_EDA0);
+  var_13 = !isDefined(var_0.target);
+  var_14 = isDefined(var_0.script_delay);
   if(isDefined(var_0.angles)) {
-    var_0F = var_0.angles[1];
+    var_15 = var_0.angles[1];
   } else {
-    var_0F = 0;
+    var_15 = 0;
   }
 
   if(self.health <= 0) {
@@ -615,10 +615,10 @@ func_8DA3(var_0, var_1, var_2) {
     var_10 = (var_10[0], var_10[1], self.heliheightoverride);
   }
 
-  self globtouched(var_10, var_7, var_8, var_9, var_0.var_EDD0, var_0.script_anglevehicle, var_0F, var_6, var_0E, var_0A, var_0B, var_0C, var_0D);
+  self globtouched(var_10, var_7, var_8, var_9, var_0.var_EDD0, var_0.script_anglevehicle, var_15, var_6, var_14, var_10, var_11, var_12, var_13);
   if(isDefined(var_0.fgetarg)) {
     self setneargoalnotifydist(var_0.fgetarg);
-    scripts\engine\utility::waittill_any_3("near_goal", "goal");
+    scripts\engine\utility::waittill_any("near_goal", "goal");
   } else {
     self waittill("goal");
   }

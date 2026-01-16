@@ -151,24 +151,24 @@ onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
   scripts\mp\gametypes\common::onnormaldeath(var_0, var_1, var_2, var_3, var_4);
   if(level.aonrules > 0) {
     if(var_1 scripts\mp\utility::_hasperk("passive_aon_perks")) {
-      var_1 thread scripts\mp\perks\_weaponpassives::func_8974(var_1, var_0);
+      var_1 thread scripts\mp\perks\weaponpassives::func_8974(var_1, var_0);
     }
   }
 
   var_5 = 0;
   foreach(var_7 in level.players) {
-    if(isDefined(var_7.destroynavrepulsor) && var_7.destroynavrepulsor > var_5) {
-      var_5 = var_7.destroynavrepulsor;
+    if(isDefined(var_7.score) && var_7.score > var_5) {
+      var_5 = var_7.score;
     }
   }
 
   if(!level.didhalfscorevoboost) {
-    if(var_1.destroynavrepulsor >= int(level.scorelimit * level.currentround - level.scorelimit / 2)) {
+    if(var_1.score >= int(level.scorelimit * level.currentround - level.scorelimit / 2)) {
       thread dohalftimevo(var_1);
     }
   }
 
-  if(var_1.destroynavrepulsor == level.scorelimit - 2) {
+  if(var_1.score == level.scorelimit - 2) {
     level.kick_afk_check = 1;
   }
 
@@ -227,7 +227,7 @@ dohalftimevo(var_0) {
 }
 
 compare_player_score(var_0, var_1) {
-  return var_0.destroynavrepulsor >= var_1.destroynavrepulsor;
+  return var_0.score >= var_1.score;
 }
 
 onspawnfinished() {
@@ -566,33 +566,33 @@ use_gesture_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(var_9.size == 0) {
       thread gesturedumbfirekillwatcher(var_8);
       self setclientomnvar("ui_gesture_reticle", 1);
-      var_0A = getdumbfirepos(self);
+      var_10 = getdumbfirepos(self);
       if(var_0 == "ges_plyr_gesture049") {
-        firejackalmissiles(undefined, 1, var_0A);
+        firejackalmissiles(undefined, 1, var_10);
       } else if(var_0 == "ges_plyr_gesture040") {
-        self.projectile = scripts\mp\utility::_magicbullet("iw7_blackholegun_mp", self gettagorigin("j_wrist_le"), var_0A, self);
+        self.projectile = scripts\mp\utility::_magicbullet("iw7_blackholegun_mp", self gettagorigin("j_wrist_le"), var_10, self);
         self.gesturekill = 1;
         incrementgestureindex(var_8);
       } else if(var_0 == "ges_plyr_gesture010") {
-        scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_0A, self);
+        scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_10, self);
       } else if(var_0 == "ges_plyr_gesture038" || var_0 == "ges_plyr_gesture053") {
-        self radiusdamage(var_0A + (0, 0, 40), 256, 150, 100, self, "MOD_IMPACT", "cluster_grenade_mp");
-        playFX(level.gesture_explode, var_0A + (0, 0, 40));
-        playsoundatpos(var_0A, "frag_grenade_explode");
+        self radiusdamage(var_10 + (0, 0, 40), 256, 150, 100, self, "MOD_IMPACT", "cluster_grenade_mp");
+        playFX(level.gesture_explode, var_10 + (0, 0, 40));
+        playsoundatpos(var_10, "frag_grenade_explode");
       }
     } else {
       self setclientomnvar("ui_gesture_reticle", 2);
-      foreach(var_0C in var_9) {
+      foreach(var_12 in var_9) {
         if(var_0 == "ges_plyr_gesture049") {
-          firejackalmissiles(var_0C, 1);
+          firejackalmissiles(var_12, 1);
         } else if(var_0 == "ges_plyr_gesture040") {
-          self.projectile = scripts\mp\utility::_magicbullet("iw7_blackholegun_mp", self gettagorigin("j_wrist_le"), var_0C gettagorigin("j_spine4"), self);
-          self.projectile missile_settargetent(var_0C, var_0C gettargetoffset());
+          self.projectile = scripts\mp\utility::_magicbullet("iw7_blackholegun_mp", self gettagorigin("j_wrist_le"), var_12 gettagorigin("j_spine4"), self);
+          self.projectile missile_settargetent(var_12, var_12 gettargetoffset());
         } else if(var_0 == "ges_plyr_gesture010") {
-          scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_0C gettagorigin("j_spine4"), self);
-          thread dogesturedamage(var_0C, "iw7_atomizer_mp", var_0, 1);
+          scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_12 gettagorigin("j_spine4"), self);
+          thread dogesturedamage(var_12, "iw7_atomizer_mp", var_0, 1);
         } else {
-          thread dogesturedamage(var_0C, "iw7_g18_mpr_aon_fixed", var_0, 1);
+          thread dogesturedamage(var_12, "iw7_g18_mpr_aon_fixed", var_0, 1);
         }
 
         self.gesturekill = 1;
@@ -611,22 +611,22 @@ use_gesture_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(var_9.size == 0) {
       thread gesturedumbfirekillwatcher(var_8);
       self setclientomnvar("ui_gesture_reticle", 1);
-      var_0A = getdumbfirepos(self);
+      var_10 = getdumbfirepos(self);
       if(var_0 == "ges_plyr_gesture049") {
-        firejackalmissiles(undefined, 2, var_0A);
+        firejackalmissiles(undefined, 2, var_10);
       } else if(var_0 == "ges_plyr_gesture010") {
-        scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_0A, self);
+        scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_10, self);
       }
     } else {
       self setclientomnvar("ui_gesture_reticle", 2);
-      foreach(var_0C in var_9) {
+      foreach(var_12 in var_9) {
         if(var_0 == "ges_plyr_gesture049") {
-          firejackalmissiles(var_0C, 2);
+          firejackalmissiles(var_12, 2);
         } else if(var_0 == "ges_plyr_gesture010") {
-          scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_0C gettagorigin("j_spine4"), self);
-          thread dogesturedamage(var_0C, "iw7_atomizer_mp", var_0, 2);
+          scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_12 gettagorigin("j_spine4"), self);
+          thread dogesturedamage(var_12, "iw7_atomizer_mp", var_0, 2);
         } else {
-          thread dogesturedamage(var_0C, "iw7_g18_mpr_aon_fixed", var_0, 2);
+          thread dogesturedamage(var_12, "iw7_g18_mpr_aon_fixed", var_0, 2);
         }
 
         self.gesturekill = 1;
@@ -645,17 +645,17 @@ use_gesture_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(var_9.size == 0) {
       thread gesturedumbfirekillwatcher(var_8);
       self setclientomnvar("ui_gesture_reticle", 1);
-      var_0A = getdumbfirepos(self);
+      var_10 = getdumbfirepos(self);
       if(var_0 == "ges_plyr_gesture049") {
-        firejackalmissiles(undefined, 3, var_0A);
+        firejackalmissiles(undefined, 3, var_10);
       }
     } else {
       self setclientomnvar("ui_gesture_reticle", 2);
-      foreach(var_0C in var_9) {
+      foreach(var_12 in var_9) {
         if(var_0 == "ges_plyr_gesture049") {
-          firejackalmissiles(var_0C, 3);
+          firejackalmissiles(var_12, 3);
         } else {
-          thread dogesturedamage(var_0C, "iw7_g18_mpr_aon_fixed", var_0, 3);
+          thread dogesturedamage(var_12, "iw7_g18_mpr_aon_fixed", var_0, 3);
         }
 
         self.gesturekill = 1;
@@ -675,8 +675,8 @@ use_gesture_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       self setclientomnvar("ui_gesture_reticle", 1);
     } else {
       self setclientomnvar("ui_gesture_reticle", 2);
-      foreach(var_0C in var_9) {
-        thread dogesturedamage(var_0C, "iw7_g18_mpr_aon_fixed", var_0, 4);
+      foreach(var_12 in var_9) {
+        thread dogesturedamage(var_12, "iw7_g18_mpr_aon_fixed", var_0, 4);
         self.gesturekill = 1;
         incrementgestureindex(var_8);
       }
@@ -721,10 +721,10 @@ firejackalmissiles(var_0, var_1, var_2) {
     var_7 = var_3 gettagorigin("j_spine4");
     var_8 = var_2 gettagorigin("j_spineupper");
     var_9 = var_1 getEye();
-    var_0A = scripts\mp\utility::_magicbullet("iw7_lockon_mp", var_4, var_7, self);
-    var_0A missile_settargetent(var_0, var_0 gettargetoffset());
-    var_0B = scripts\mp\utility::_magicbullet("iw7_lockon_mp", var_5, var_8, self);
-    var_0B missile_settargetent(var_0, var_0 gettargetoffset());
+    var_10 = scripts\mp\utility::_magicbullet("iw7_lockon_mp", var_4, var_7, self);
+    var_10 missile_settargetent(var_0, var_0 gettargetoffset());
+    var_11 = scripts\mp\utility::_magicbullet("iw7_lockon_mp", var_5, var_8, self);
+    var_11 missile_settargetent(var_0, var_0 gettargetoffset());
   }
 
   if(var_1 == 3) {
@@ -853,71 +853,71 @@ get_enemies_within_fov(var_0, var_1, var_2) {
     var_9 = var_0;
   }
 
-  foreach(var_0B in var_5) {
-    if(!scripts\mp\utility::isreallyalive(var_0B)) {
+  foreach(var_11 in var_5) {
+    if(!scripts\mp\utility::isreallyalive(var_11)) {
       continue;
     }
 
-    var_0C = var_0B.origin;
-    var_0D = distance2d(self.origin, var_0C);
-    if(var_0D < 100) {
+    var_12 = var_11.origin;
+    var_13 = distance2d(self.origin, var_12);
+    if(var_13 < 100) {
       var_9 = 120;
     }
 
-    var_0E = 0;
-    var_0F = 0;
+    var_14 = 0;
+    var_15 = 0;
     var_10 = 0;
     var_11 = 0;
     var_12 = 0;
     var_13 = 0;
     var_14 = [];
     var_14[var_14.size] = self;
-    var_14[var_14.size] = var_0B;
+    var_14[var_14.size] = var_11;
     var_15 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_player", "physicscontents_actor", "physicscontents_itemclip"];
     var_16 = physics_createcontents(var_15);
-    var_17 = self worldpointinreticle_circle(var_0B getEye(), 65, var_9);
+    var_17 = self worldpointinreticle_circle(var_11 getEye(), 65, var_9);
     if(var_17) {
       var_17 = 0;
-      if(scripts\common\trace::ray_trace_passed(self getEye(), var_0B getEye(), var_14, var_16)) {
+      if(scripts\common\trace::ray_trace_passed(self getEye(), var_11 getEye(), var_14, var_16)) {
         var_17 = 1;
       }
     }
 
     if(!var_17) {
-      var_17 = self worldpointinreticle_circle(var_0B.origin, 65, var_9);
+      var_17 = self worldpointinreticle_circle(var_11.origin, 65, var_9);
       if(var_17) {
         var_17 = 0;
-        if(scripts\common\trace::ray_trace_passed(self getEye(), var_0B.origin, var_14, var_16)) {
+        if(scripts\common\trace::ray_trace_passed(self getEye(), var_11.origin, var_14, var_16)) {
           var_17 = 1;
         }
       }
     }
 
     if(!var_17) {
-      var_17 = self worldpointinreticle_circle(var_0B gettagorigin("j_spinelower"), 65, var_9);
+      var_17 = self worldpointinreticle_circle(var_11 gettagorigin("j_spinelower"), 65, var_9);
       if(var_17) {
         var_17 = 0;
-        if(scripts\common\trace::ray_trace_passed(self getEye(), var_0B gettagorigin("j_spinelower"), var_14, var_16)) {
+        if(scripts\common\trace::ray_trace_passed(self getEye(), var_11 gettagorigin("j_spinelower"), var_14, var_16)) {
           var_17 = 1;
         }
       }
     }
 
     if(!var_17) {
-      var_17 = self worldpointinreticle_circle(var_0B gettagorigin("j_elbow_le"), 65, var_9);
+      var_17 = self worldpointinreticle_circle(var_11 gettagorigin("j_elbow_le"), 65, var_9);
       if(var_17) {
         var_17 = 0;
-        if(scripts\common\trace::ray_trace_passed(self getEye(), var_0B gettagorigin("j_elbow_le"), var_14, var_16)) {
+        if(scripts\common\trace::ray_trace_passed(self getEye(), var_11 gettagorigin("j_elbow_le"), var_14, var_16)) {
           var_17 = 1;
         }
       }
     }
 
     if(!var_17) {
-      var_17 = self worldpointinreticle_circle(var_0B gettagorigin("j_elbow_ri"), 65, var_9);
+      var_17 = self worldpointinreticle_circle(var_11 gettagorigin("j_elbow_ri"), 65, var_9);
       if(var_17) {
         var_17 = 0;
-        if(scripts\common\trace::ray_trace_passed(self getEye(), var_0B gettagorigin("j_elbow_ri"), var_14, var_16)) {
+        if(scripts\common\trace::ray_trace_passed(self getEye(), var_11 gettagorigin("j_elbow_ri"), var_14, var_16)) {
           var_17 = 1;
         }
       }
@@ -925,18 +925,18 @@ get_enemies_within_fov(var_0, var_1, var_2) {
 
     if(var_17) {
       if(isDefined(var_1)) {
-        var_0D = distance2d(self.origin, var_0C);
-        if(var_0D < var_1) {
-          var_0E = 1;
+        var_13 = distance2d(self.origin, var_12);
+        if(var_13 < var_1) {
+          var_14 = 1;
         }
       } else {
-        var_0E = 1;
+        var_14 = 1;
       }
     }
 
-    if(var_0E && var_3.size < var_2) {
-      var_3[var_3.size] = var_0B;
-      var_5 = scripts\engine\utility::array_remove(var_5, var_0B);
+    if(var_14 && var_3.size < var_2) {
+      var_3[var_3.size] = var_11;
+      var_5 = scripts\engine\utility::array_remove(var_5, var_11);
     }
 
     if(var_3.size >= var_2) {
@@ -990,8 +990,8 @@ func_8114(var_0) {
 
   self setsuit(var_0 + "_classic");
   if(scripts\mp\utility::istrue(level.supportdoublejump_MAYBE)) {
-    self goalflag(0, 200);
-    self goal_type(0, 1800);
+    self energy_setrestorerate(0, 200);
+    self energy_setresttimems(0, 1800);
   }
 }
 

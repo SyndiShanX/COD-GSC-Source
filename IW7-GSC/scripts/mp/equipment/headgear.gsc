@@ -34,7 +34,7 @@ func_8C6F(var_0, var_1) {
   self.var_8BF8 = 1;
   var_2 = level.powers["power_headgear"].var_5FF3;
   scripts\mp\gamescore::trackbuffassist(var_0, self, "power_headgear");
-  thread scripts\mp\killstreaks\_emp_common::func_5AA9();
+  thread scripts\mp\killstreaks\emp_common::func_5AA9();
   var_3 = "j_spinelower";
   if(var_1) {
     self iprintlnbold("HEADGEAR APPLIED");
@@ -67,7 +67,7 @@ func_8C70(var_0) {
   var_1 = [];
   var_2 = [];
   for(var_3 = 0; var_3 < 5; var_3++) {
-    var_1[var_3] = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 36));
+    var_1[var_3] = ::scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 36));
     var_2[var_3] = spawn("script_model", var_1[var_3].origin);
     var_2[var_3] linkto(var_1[var_3]);
   }
@@ -90,12 +90,12 @@ func_8C70(var_0) {
   }
 
   wait(3);
-  foreach(var_0B in var_2) {
-    var_0B delete();
+  foreach(var_11 in var_2) {
+    var_11 delete();
   }
 
-  foreach(var_0E in var_1) {
-    var_0E delete();
+  foreach(var_14 in var_1) {
+    var_14 delete();
   }
 }
 

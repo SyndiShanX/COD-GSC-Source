@@ -31,27 +31,27 @@ killenemiesinfov() {
   physicsexplosionsphere(var_6, var_3, 1, 2.5);
   var_7 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_8 = scripts\engine\utility::get_array_of_closest(self.origin, var_7, undefined, var_2);
-  foreach(var_0A in var_8) {
-    if(func_9C0D(var_0A)) {
+  foreach(var_10 in var_8) {
+    if(func_9C0D(var_10)) {
       continue;
     }
 
-    var_0B = 0;
-    var_0C = var_0A.origin;
-    var_0D = scripts\engine\utility::within_fov(self getEye(), self.angles, var_0C + (0, 0, 30), var_0);
-    if(var_0D) {
-      var_0E = distance2d(self.origin, var_0C);
-      if(var_0E < var_2) {
-        var_0B = 1;
+    var_11 = 0;
+    var_12 = var_10.origin;
+    var_13 = scripts\engine\utility::within_fov(self getEye(), self.angles, var_12 + (0, 0, 30), var_0);
+    if(var_13) {
+      var_14 = distance2d(self.origin, var_12);
+      if(var_14 < var_2) {
+        var_11 = 1;
       }
     }
 
-    if(var_0B) {
-      var_1 = var_0A.maxhealth;
+    if(var_11) {
+      var_1 = var_10.maxhealth;
       var_4 = anglesToForward(self.angles);
-      var_0F = vectornormalize(var_4) * -100;
-      var_0A setvelocity(vectornormalize(var_0A.origin - self.origin + var_0F) * 800 + (0, 0, 300));
-      var_0A killrepulsorvictim(self, var_1, var_0C, self.origin);
+      var_15 = vectornormalize(var_4) * -100;
+      var_10 setvelocity(vectornormalize(var_10.origin - self.origin + var_15) * 800 + (0, 0, 300));
+      var_10 killrepulsorvictim(self, var_1, var_12, self.origin);
     }
   }
 }

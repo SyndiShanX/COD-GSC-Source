@@ -317,8 +317,9 @@ func_FA4E(var_0, var_1, var_2, var_3, var_4, var_5) {
       default:
         var_8 thread func_0BB6::func_129DD();
     }
-  } else
+  } else {
     var_8 thread func_0BB6::func_129DD();
+  }
 
   var_8 scripts\sp\utility::func_F40A("enemy", 0);
 }
@@ -627,8 +628,9 @@ func_A1BD(var_0, var_1) {
     var_2 = self gettagorigin(self.var_284C[self.var_284B]) + (0, 0, 100);
     var_3 = self gettagangles(self.var_284C[self.var_284B]);
     thread func_0BB6::func_6D51(var_2, var_3, self.var_284C[self.var_284B], 1);
-  } else
+  } else {
     magicbullet("magic_spaceship_30mm_projectile_fake", var_2, var_4 + (0, 0, randomfloatrange(-100, 100)));
+  }
 
   self.var_284B = (self.var_284B + 1) % self.var_284C.size;
 }
@@ -689,8 +691,9 @@ func_E20A(var_0) {
     if(level.var_C072 < 0) {
       level.var_C072 = 0;
     }
-  } else
+  } else {
     level.var_C072 = 0;
+  }
 }
 
 func_13796(var_0, var_1, var_2) {
@@ -807,8 +810,9 @@ func_A294(var_0) {
       } else {
         _target_setshader(var_0, "veh_jackal_target");
       }
-    } else
+    } else {
       _target_setshader(var_0, "veh_jackal_target");
+    }
 
     wait 0.15;
   }

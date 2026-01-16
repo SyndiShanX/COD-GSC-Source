@@ -56,8 +56,9 @@ bt_nativeexecaction(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     var_6 = [[var_3]]();
     var_4 = [[var_1]](var_2, var_6);
-  } else
+  } else {
     var_4 = [[var_1]](var_2);
+  }
 
   if(!isDefined(var_4)) {
     return 3;

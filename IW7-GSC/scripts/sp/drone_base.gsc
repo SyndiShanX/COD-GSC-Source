@@ -114,7 +114,7 @@ func_5C3A() {
 
   var_0 = self.target;
   var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
-  var_0B = var_1;
+  var_11 = var_1;
   var_3 = [];
   for(;;) {
     var_1 = var_4;
@@ -148,14 +148,14 @@ func_5C3A() {
       }
 
       if(isDefined(var_1.fgetarg)) {
-        var_0E = var_2[var_0B.var_336];
-        var_0F = var_2[var_1.var_336];
-        var_10 = var_0E + var_0F * 0.5;
+        var_14 = var_2[var_11.var_336];
+        var_15 = var_2[var_1.var_336];
+        var_10 = var_14 + var_15 * 0.5;
         var_1.angles = vectortoangles(var_10);
       }
 
       var_5 = 1;
-      var_0B = var_1;
+      var_11 = var_1;
       var_1 = var_7;
     }
 

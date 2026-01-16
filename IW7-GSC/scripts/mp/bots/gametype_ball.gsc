@@ -124,11 +124,11 @@ func_2D12() {
       if(isDefined(self.carryobject)) {
         self botsetflag("disable_attack", 1);
         var_2 = 0;
-        if(isDefined(self.isnodeoccupied)) {
-          var_2 = distancesquared(self.isnodeoccupied.origin, self.origin);
+        if(isDefined(self.enemy)) {
+          var_2 = distancesquared(self.enemy.origin, self.origin);
         }
 
-        if(isDefined(self.isnodeoccupied) && var_2 < 9216) {
+        if(isDefined(self.enemy) && var_2 < 9216) {
           self botsetflag("disable_attack", 0);
           self botsetflag("prefer_melee", 1);
         } else {
@@ -172,13 +172,13 @@ func_2D12() {
 
           if(gettime() > var_1) {
             var_1 = gettime() + randomintrange(500, 1000);
-            if(isDefined(self.isnodeoccupied)) {
-              if(self botcanseeentity(self.isnodeoccupied)) {
+            if(isDefined(self.enemy)) {
+              if(self botcanseeentity(self.enemy)) {
                 var_8 = anglesToForward(self.angles);
-                var_9 = self.isnodeoccupied.origin - self.origin;
-                var_0A = vectornormalize((var_9[0], var_9[1], 0));
-                var_0B = vectordot(var_8, var_0A);
-                if(var_0B > 0.707) {
+                var_9 = self.enemy.origin - self.origin;
+                var_10 = vectornormalize((var_9[0], var_9[1], 0));
+                var_11 = vectordot(var_8, var_10);
+                if(var_11 > 0.707) {
                   if(var_2 < -7936 && var_2 > 9216) {
                     bot_throw_ball();
                   }
@@ -190,14 +190,14 @@ func_2D12() {
       } else {
         self botsetflag("disable_attack", 0);
         self botsetflag("prefer_melee", 0);
-        var_0C = bot_get_available_ball();
-        if(!isDefined(var_0C)) {
-          var_0D = bot_get_ball_carrier();
-          if(isDefined(var_0D) && var_0D != self) {
+        var_12 = bot_get_available_ball();
+        if(!isDefined(var_12)) {
+          var_13 = bot_get_ball_carrier();
+          if(isDefined(var_13) && var_13 != self) {
             initialize_ball_role();
           }
         } else {
-          self botsetscriptgoal(var_0D.curorigin, 16, "objective");
+          self botsetscriptgoal(var_13.curorigin, 16, "objective");
           continue;
         }
       }
@@ -208,18 +208,18 @@ func_2D12() {
     if(self.role == "attacker") {
       self botsetflag("disable_attack", 0);
       self botsetflag("prefer_melee", 0);
-      var_0C = bot_get_available_ball();
-      if(!isDefined(var_0C)) {
-        var_0D = bot_get_ball_carrier();
-        if(isDefined(var_0D)) {
-          if(!scripts\mp\bots\_bots_util::bot_is_guarding_player(var_0D)) {
-            scripts\mp\bots\_bots_strategy::bot_guard_player(var_0D, level.bodyguard_radius);
+      var_12 = bot_get_available_ball();
+      if(!isDefined(var_12)) {
+        var_13 = bot_get_ball_carrier();
+        if(isDefined(var_13)) {
+          if(!scripts\mp\bots\_bots_util::bot_is_guarding_player(var_13)) {
+            scripts\mp\bots\_bots_strategy::bot_guard_player(var_13, level.bodyguard_radius);
           }
         }
-      } else if(!scripts\engine\utility::istrue(var_0C.isresetting) && !scripts\engine\utility::istrue(var_0C.in_goal)) {
-        var_0E = getclosestpointonnavmesh(var_0C.curorigin);
-        if(!scripts\mp\bots\_bots_util::bot_is_defending_point(var_0E)) {
-          scripts\mp\bots\_bots_strategy::bot_protect_point(var_0E, level.protect_radius);
+      } else if(!scripts\engine\utility::istrue(var_12.isresetting) && !scripts\engine\utility::istrue(var_12.in_goal)) {
+        var_14 = getclosestpointonnavmesh(var_12.curorigin);
+        if(!scripts\mp\bots\_bots_util::bot_is_defending_point(var_14)) {
+          scripts\mp\bots\_bots_strategy::bot_protect_point(var_14, level.protect_radius);
         }
       }
 
@@ -229,8 +229,8 @@ func_2D12() {
     if(self.role == "defender") {
       self botsetflag("disable_attack", 0);
       self botsetflag("prefer_melee", 0);
-      var_0F = level.ball_goals[self.team];
-      var_3 = var_0F.origin;
+      var_15 = level.ball_goals[self.team];
+      var_3 = var_15.origin;
       if(!scripts\mp\bots\_bots_util::bot_is_defending_point(var_3)) {
         scripts\mp\bots\_bots_strategy::bot_protect_point(var_3, level.protect_radius);
       }
@@ -271,9 +271,9 @@ initialize_ball_role() {
   if(var_4 == "stationary") {
     if(var_1.size >= var_3) {
       var_5 = 0;
-      foreach(var_0A in var_1) {
-        if(isai(var_0A) && level.bot_personality_type[var_0A.personality] == "active") {
-          var_0A.role = undefined;
+      foreach(var_10 in var_1) {
+        if(isai(var_10) && level.bot_personality_type[var_10.personality] == "active") {
+          var_10.role = undefined;
           var_5 = 1;
           break;
         }
@@ -309,14 +309,14 @@ func_2D11() {
       if(var_6.size > var_4) {
         var_8 = [];
         var_9 = 0;
-        foreach(var_0B in var_6) {
-          if(isai(var_0B)) {
-            if(level.bot_personality_type[var_0B.personality] == "stationary") {
-              var_0B ball_set_role("defender");
+        foreach(var_11 in var_6) {
+          if(isai(var_11)) {
+            if(level.bot_personality_type[var_11.personality] == "stationary") {
+              var_11 ball_set_role("defender");
               var_9 = 1;
               break;
             } else {
-              var_8 = scripts\engine\utility::array_add(var_8, var_0B);
+              var_8 = scripts\engine\utility::array_add(var_8, var_11);
             }
           }
         }
@@ -327,22 +327,22 @@ func_2D11() {
       }
 
       if(var_7.size > var_5) {
-        var_0D = [];
-        var_0E = 0;
+        var_13 = [];
+        var_14 = 0;
         foreach(var_10 in var_7) {
           if(isai(var_10)) {
             if(level.bot_personality_type[var_10.personality] == "active") {
               var_10 ball_set_role("attacker");
-              var_0E = 1;
+              var_14 = 1;
               break;
             } else {
-              var_0D = scripts\engine\utility::array_add(var_0D, var_10);
+              var_13 = scripts\engine\utility::array_add(var_13, var_10);
             }
           }
         }
 
-        if(!var_0E && var_0D.size > 0) {
-          scripts\engine\utility::random(var_0D) ball_set_role("attacker");
+        if(!var_14 && var_13.size > 0) {
+          scripts\engine\utility::random(var_13) ball_set_role("attacker");
         }
       }
 

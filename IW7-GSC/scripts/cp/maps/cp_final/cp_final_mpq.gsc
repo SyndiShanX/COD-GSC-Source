@@ -96,22 +96,22 @@ updateneilheadangles(var_0, var_1, var_2) {
         }
       }
 
-      var_0A = scripts\engine\utility::getclosest(var_2.origin, level.allslidingdoors, 96);
-      if(isDefined(var_0A)) {
-        if(scripts\engine\utility::istrue(var_0A.var_4284)) {
-          var_0B = anglesToForward(var_0.angles);
-          var_0C = 0;
-          if(!var_0C && vectordot(vectornormalize(var_6 - var_0.origin), var_0B) > 0.75 && vectordot(vectornormalize(var_0A.origin - var_0.origin), var_0B) > 0.75) {
+      var_10 = scripts\engine\utility::getclosest(var_2.origin, level.allslidingdoors, 96);
+      if(isDefined(var_10)) {
+        if(scripts\engine\utility::istrue(var_10.var_4284)) {
+          var_11 = anglesToForward(var_0.angles);
+          var_12 = 0;
+          if(!var_12 && vectordot(vectornormalize(var_6 - var_0.origin), var_11) > 0.75 && vectordot(vectornormalize(var_10.origin - var_0.origin), var_11) > 0.75) {
             if(distance(var_0.origin, var_6) > distance(var_0.origin, var_2.origin)) {
-              if(scripts\engine\utility::istrue(var_0A.var_4284)) {
-                var_0D = scripts\engine\utility::getstructarray(var_0A.script_noteworthy, "script_noteworthy");
-                foreach(var_0F in var_0D) {
-                  if(var_0F.target == var_0F.target) {
-                    var_0F.nointeraction = undefined;
+              if(scripts\engine\utility::istrue(var_10.var_4284)) {
+                var_13 = scripts\engine\utility::getstructarray(var_10.script_noteworthy, "script_noteworthy");
+                foreach(var_15 in var_13) {
+                  if(var_15.target == var_15.target) {
+                    var_15.nointeraction = undefined;
                   }
                 }
 
-                thread[[level.interactions[var_0A.script_noteworthy].activation_func]](var_0A, undefined);
+                thread[[level.interactions[var_10.script_noteworthy].activation_func]](var_10, undefined);
               }
             }
           }
@@ -310,7 +310,7 @@ playeractivatedbossfight(var_0, var_1) {
     return;
   }
 
-  var_1 scripts\engine\utility::waittill_any_timeout_1(2, "left_hidden_room_early", "kicked_out", "last_stand");
+  var_1 scripts\engine\utility::waittill_any_timeout(2, "left_hidden_room_early", "kicked_out", "last_stand");
   if(scripts\engine\utility::array_contains(var_0.var_127C9, var_1)) {
     var_0.var_127C9 = scripts\engine\utility::array_remove(var_0.var_127C9, var_1);
   }
@@ -351,7 +351,7 @@ playventfx(var_0) {
     playFX(var_1, var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
     wait(0.5);
     thread checkfornearbydisk(var_0);
-    level scripts\engine\utility::waittill_any_timeout_1(var_2 - 0.5, "vent_fx");
+    level scripts\engine\utility::waittill_any_timeout(var_2 - 0.5, "vent_fx");
   }
 }
 
@@ -795,10 +795,10 @@ deactivateneil() {
   }
 
   var_3 = scripts\engine\utility::ter_op(level.players[0] scripts\cp\utility::isplayingsolo() || level.only_one_player, int(240), int(180));
-  var_4 = level scripts\engine\utility::waittill_any_timeout_1(var_3 - 5, "makeNeilEvil");
+  var_4 = level scripts\engine\utility::waittill_any_timeout(var_3 - 5, "makeNeilEvil");
   setneilstate("straight");
   if(isDefined(var_4) && var_4 != "makeNeilEvil") {
-    level scripts\engine\utility::waittill_any_timeout_1(5, "makeNeilEvil");
+    level scripts\engine\utility::waittill_any_timeout(5, "makeNeilEvil");
   }
 
   scripts\engine\utility::flag_clear("disable_evil_neil");
@@ -960,14 +960,14 @@ buildpath(var_0, var_1, var_2) {
     var_4 = sortbydistance(var_4, var_3[var_3.size - 1]);
     var_8 = [];
     var_9 = undefined;
-    foreach(var_0B in var_4) {
-      if(var_5 && var_0B == var_4[0] || var_0B == var_6) {
+    foreach(var_11 in var_4) {
+      if(var_5 && var_11 == var_4[0] || var_11 == var_6) {
         continue;
       }
 
-      var_8 = var_0 findpath(var_3[var_3.size - 1], var_0B.origin, 1, 1);
-      if(distance2dsquared(var_0B.origin, var_8[var_8.size - 1]) <= 4096) {
-        var_9 = var_0B;
+      var_8 = var_0 findpath(var_3[var_3.size - 1], var_11.origin, 1, 1);
+      if(distance2dsquared(var_11.origin, var_8[var_8.size - 1]) <= 4096) {
+        var_9 = var_11;
         break;
       }
     }
@@ -985,9 +985,9 @@ buildpath(var_0, var_1, var_2) {
     if(isDefined(var_9.target)) {
       var_8 = [];
       var_8[var_8.size] = var_9.origin;
-      var_0D = scripts\engine\utility::getstruct(var_9.target, "targetname");
-      if(isstruct(var_0D)) {
-        var_8[var_8.size] = var_0D.origin;
+      var_13 = scripts\engine\utility::getstruct(var_9.target, "targetname");
+      if(isstruct(var_13)) {
+        var_8[var_8.size] = var_13.origin;
         var_3 = scripts\engine\utility::array_combine(var_3, var_8);
       } else {
         return var_3;
@@ -1009,12 +1009,12 @@ assignbuttonindex(var_0, var_1) {
   var_7 = [];
   var_8 = [];
   var_9 = [];
-  var_0A = [];
-  var_0B = [];
-  var_0C = [];
-  var_0D = [];
-  var_0E = [];
-  var_0F = [];
+  var_10 = [];
+  var_11 = [];
+  var_12 = [];
+  var_13 = [];
+  var_14 = [];
+  var_15 = [];
   var_10 = [];
   var_11 = [];
   var_12 = [];
@@ -1041,9 +1041,9 @@ assignbuttonindex(var_0, var_1) {
         var_5[var_5.size] = var_1D;
         var_6[var_6.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1056,9 +1056,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_13[var_13.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1071,9 +1071,9 @@ assignbuttonindex(var_0, var_1) {
         var_6[var_6.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_13[var_13.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1086,9 +1086,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_5[var_5.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_13[var_13.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1101,9 +1101,9 @@ assignbuttonindex(var_0, var_1) {
         var_6[var_6.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_14[var_14.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1116,9 +1116,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_5[var_5.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_14[var_14.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1131,9 +1131,9 @@ assignbuttonindex(var_0, var_1) {
         var_5[var_5.size] = var_1D;
         var_6[var_6.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_14[var_14.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1146,9 +1146,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_14[var_14.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1161,9 +1161,9 @@ assignbuttonindex(var_0, var_1) {
         var_6[var_6.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_13[var_13.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1176,9 +1176,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_5[var_5.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_13[var_13.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1191,9 +1191,9 @@ assignbuttonindex(var_0, var_1) {
         var_5[var_5.size] = var_1D;
         var_6[var_6.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_13[var_13.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1206,9 +1206,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0A[var_0A.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
-        var_0F[var_0F.size] = var_1D;
+        var_10[var_10.size] = var_1D;
+        var_14[var_14.size] = var_1D;
+        var_15[var_15.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_13[var_13.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1221,9 +1221,9 @@ assignbuttonindex(var_0, var_1) {
         var_5[var_5.size] = var_1D;
         var_6[var_6.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_13[var_13.size] = var_1D;
+        var_14[var_14.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1236,9 +1236,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0D[var_0D.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_13[var_13.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1251,9 +1251,9 @@ assignbuttonindex(var_0, var_1) {
         var_6[var_6.size] = var_1D;
         var_7[var_7.size] = var_1D;
         var_9[var_9.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_14[var_14.size] = var_1D;
         var_10[var_10.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_14[var_14.size] = var_1D;
@@ -1266,9 +1266,9 @@ assignbuttonindex(var_0, var_1) {
         var_4[var_4.size] = var_1D;
         var_5[var_5.size] = var_1D;
         var_8[var_8.size] = var_1D;
-        var_0B[var_0B.size] = var_1D;
-        var_0C[var_0C.size] = var_1D;
-        var_0E[var_0E.size] = var_1D;
+        var_11[var_11.size] = var_1D;
+        var_12[var_12.size] = var_1D;
+        var_14[var_14.size] = var_1D;
         var_11[var_11.size] = var_1D;
         var_12[var_12.size] = var_1D;
         var_16[var_16.size] = var_1D;
@@ -1285,12 +1285,12 @@ assignbuttonindex(var_0, var_1) {
   var_1.group4 = var_7;
   var_1.group5 = var_8;
   var_1.group6 = var_9;
-  var_1.group7 = var_0A;
-  var_1.group8 = var_0B;
-  var_1.group9 = var_0C;
-  var_1.group10 = var_0D;
-  var_1.group11 = var_0E;
-  var_1.group12 = var_0F;
+  var_1.group7 = var_10;
+  var_1.group8 = var_11;
+  var_1.group9 = var_12;
+  var_1.group10 = var_13;
+  var_1.group11 = var_14;
+  var_1.group12 = var_15;
   var_1.group13 = var_10;
   var_1.group14 = var_11;
   var_1.group15 = var_12;
@@ -1814,7 +1814,7 @@ diskcustomcollisionfunc(var_0, var_1, var_2) {
   for(var_4 = 0; var_4 <= 100; var_4++) {
     var_5 = var_0.origin;
     var_6 = var_0.angles;
-    var_0 scripts\engine\utility::waittill_any_timeout_1(0.1, "collision");
+    var_0 scripts\engine\utility::waittill_any_timeout(0.1, "collision");
     level notify("entangler_item_collision", var_0.origin);
     if(distance(var_5, var_0.origin) < 1 && var_6 == var_0.angles) {
       break;
@@ -2420,59 +2420,59 @@ completefusepuzzle() {
     }
   }
 
-  foreach(var_0C, var_0A in level.correctneilpuzzleanswer) {
-    var_0B = "disk_slot_" + var_0C + 1;
-    switch (int(var_0A)) {
+  foreach(var_12, var_10 in level.correctneilpuzzleanswer) {
+    var_11 = "disk_slot_" + var_12 + 1;
+    switch (int(var_10)) {
       case 1:
-        level.neil_console setscriptablepartstate(var_0B, "disk01");
+        level.neil_console setscriptablepartstate(var_11, "disk01");
         break;
 
       case 2:
-        level.neil_console setscriptablepartstate(var_0B, "disk02");
+        level.neil_console setscriptablepartstate(var_11, "disk02");
         break;
 
       case 3:
-        level.neil_console setscriptablepartstate(var_0B, "disk03");
+        level.neil_console setscriptablepartstate(var_11, "disk03");
         break;
 
       case 4:
-        level.neil_console setscriptablepartstate(var_0B, "disk04");
+        level.neil_console setscriptablepartstate(var_11, "disk04");
         break;
 
       case 5:
-        level.neil_console setscriptablepartstate(var_0B, "disk05");
+        level.neil_console setscriptablepartstate(var_11, "disk05");
         break;
 
       case 6:
-        level.neil_console setscriptablepartstate(var_0B, "disk06");
+        level.neil_console setscriptablepartstate(var_11, "disk06");
         break;
 
       case 7:
-        level.neil_console setscriptablepartstate(var_0B, "disk07");
+        level.neil_console setscriptablepartstate(var_11, "disk07");
         break;
 
       case 8:
-        level.neil_console setscriptablepartstate(var_0B, "disk08");
+        level.neil_console setscriptablepartstate(var_11, "disk08");
         break;
 
       case 9:
-        level.neil_console setscriptablepartstate(var_0B, "disk09");
+        level.neil_console setscriptablepartstate(var_11, "disk09");
         break;
 
       case 10:
-        level.neil_console setscriptablepartstate(var_0B, "disk10");
+        level.neil_console setscriptablepartstate(var_11, "disk10");
         break;
 
       case 11:
-        level.neil_console setscriptablepartstate(var_0B, "disk11");
+        level.neil_console setscriptablepartstate(var_11, "disk11");
         break;
 
       case 12:
-        level.neil_console setscriptablepartstate(var_0B, "disk12");
+        level.neil_console setscriptablepartstate(var_11, "disk12");
         break;
     }
 
-    level.insertedpieces[level.insertedpieces.size] = var_0A;
+    level.insertedpieces[level.insertedpieces.size] = var_10;
   }
 }
 
@@ -2608,16 +2608,16 @@ play_hidden_song(var_0, var_1, var_2) {
     scripts\engine\utility::play_sound_in_space("zmb_jukebox_on", var_0);
     var_8 = spawn("script_origin", var_0);
     var_9 = "ee";
-    var_0A = 1;
+    var_10 = 1;
     foreach(var_4 in level.players) {
       var_4 scripts\cp\cp_persistence::give_player_xp(2000, 1);
     }
 
     var_8 playLoopSound(var_1);
     var_8 thread scripts\cp\zombies\zombie_jukebox::earlyendon(var_8);
-    var_0D = lookupsoundlength(var_1) / 1000;
+    var_13 = lookupsoundlength(var_1) / 1000;
     if(!isDefined(var_2)) {
-      level scripts\engine\utility::waittill_any_timeout_1(var_0D, "skip_song");
+      level scripts\engine\utility::waittill_any_timeout(var_13, "skip_song");
     } else {
       level waittill("game_ended");
       var_8 stoploopsound();
@@ -2697,7 +2697,7 @@ incrementbridgequest(var_0, var_1) {
     var_0[0] hide();
   }
 
-  level.bridgepiecesfound = scripts\engine\utility::array_add_safe(level.bridgepiecesfound, var_2);
+  level.bridgepiecesfound = scripts\engine\utility::add_to_array(level.bridgepiecesfound, var_2);
   var_3 = level.bridgepiecesfound.size;
   scripts\cp\utility::set_quest_icon(6 + var_3);
   setomnvar("zm_scrap_count", var_3);
@@ -3242,9 +3242,9 @@ waittoreactivate() {
   level endon("makeNeilEvil");
   level endon("deactivateNeil");
   var_0 = randomintrange(45, 60);
-  level scripts\engine\utility::waittill_any_timeout_1(var_0 - 5, "makeNeilEvil");
+  level scripts\engine\utility::waittill_any_timeout(var_0 - 5, "makeNeilEvil");
   setneilstate("straight");
-  level scripts\engine\utility::waittill_any_timeout_1(5, "makeNeilEvil");
+  level scripts\engine\utility::waittill_any_timeout(5, "makeNeilEvil");
 }
 
 activatedoorsastraps() {

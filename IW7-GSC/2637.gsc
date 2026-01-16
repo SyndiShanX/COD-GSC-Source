@@ -156,15 +156,17 @@ activate_new_challenge(var_0) {
     if(isDefined(var_2)) {
       level.challenge_data[var_0].goal = var_2;
       level.current_challenge_scalar = var_2;
-    } else
+    } else {
       level.current_challenge_scalar = -1;
+    }
 
     func_56AD(var_0, 1, var_2);
     func_F31A(var_0);
     level.current_challenge_pre_challenge = 0;
     var_1[[var_1.var_1609]]();
-  } else
+  } else {
     var_1[[var_1.var_6ACB]]();
+  }
 }
 
 func_7897(var_0) {
@@ -198,8 +200,9 @@ func_56AD(var_0, var_1, var_2) {
       if(isDefined(var_2)) {
         var_5 setclientomnvar("ui_intel_challenge_scalar", var_2);
         var_5 setclientomnvar("ui_intel_progress_max", var_2);
-      } else
+      } else {
         var_5 setclientomnvar("ui_intel_challenge_scalar", -1);
+      }
 
       var_5 setclientomnvar("ui_intel_prechallenge", 1);
       var_5 setclientomnvar("ui_intel_active_index", int(var_3));

@@ -429,28 +429,28 @@ registeratminteractions() {
 }
 
 levelinteractionregistration(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = spawnStruct();
-  var_0A.name = var_1;
-  var_0A.hint_func = var_4;
-  var_0A.spend_type = var_2;
-  var_0A.tutorial = var_3;
-  var_0A.activation_func = var_5;
-  var_0A.enabled = 1;
-  var_0A.disable_guided_interactions = var_0;
+  var_10 = spawnStruct();
+  var_10.name = var_1;
+  var_10.hint_func = var_4;
+  var_10.spend_type = var_2;
+  var_10.tutorial = var_3;
+  var_10.activation_func = var_5;
+  var_10.enabled = 1;
+  var_10.disable_guided_interactions = var_0;
   if(!isDefined(var_6)) {
     var_6 = 0;
   }
 
-  var_0A.cost = var_6;
+  var_10.cost = var_6;
   if(isDefined(var_7)) {
-    var_0A.requires_power = var_7;
+    var_10.requires_power = var_7;
   } else {
-    var_0A.requires_power = 0;
+    var_10.requires_power = 0;
   }
 
-  var_0A.init_func = var_8;
-  var_0A.can_use_override_func = var_9;
-  level.interactions[var_1] = var_0A;
+  var_10.init_func = var_8;
+  var_10.can_use_override_func = var_9;
+  level.interactions[var_1] = var_10;
 }
 
 blankusefunc(var_0, var_1) {}
@@ -624,11 +624,11 @@ use_sasquatch_func(var_0, var_1) {
     var_8 = scripts\engine\utility::getstruct(var_0.target, "targetname");
     var_9 = var_8.origin;
     generic_place_gesture_and_fx(var_1, var_9);
-    var_0A = spawn("script_model", var_9);
-    var_0A.var_336 = "fuses_to_power";
-    var_0A.angles = var_8.angles;
-    var_0A setModel("cp_final_alien_fuse_combined");
-    level.fuse_in_hand = var_0A;
+    var_10 = spawn("script_model", var_9);
+    var_10.var_336 = "fuses_to_power";
+    var_10.angles = var_8.angles;
+    var_10 setModel("cp_final_alien_fuse_combined");
+    level.fuse_in_hand = var_10;
     check_for_charge_fuse_sequence(var_0, var_1);
   }
 }
@@ -805,7 +805,7 @@ slidingdoorhint(var_0, var_1) {
 openslidingdoor(var_0, var_1) {
   level endon("game_ended");
   if(scripts\engine\utility::istrue(var_0.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", var_0.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
     var_0.powered_on = 1;
   }
 
@@ -846,13 +846,13 @@ openslidingdoor(var_0, var_1) {
     }
   }
 
-  var_0C = getEntArray(var_0.target, "targetname");
-  foreach(var_0E in var_0C) {
-    if(isDefined(var_0E.classname) && var_0E.classname == "script_brushmodel") {
+  var_12 = getEntArray(var_0.target, "targetname");
+  foreach(var_14 in var_12) {
+    if(isDefined(var_14.classname) && var_14.classname == "script_brushmodel") {
       continue;
     }
 
-    var_0E setscriptablepartstate("door", "open");
+    var_14 setscriptablepartstate("door", "open");
   }
 
   foreach(var_4 in var_2) {
@@ -862,10 +862,10 @@ openslidingdoor(var_0, var_1) {
   }
 
   wait(0.4);
-  foreach(var_0E in var_0C) {
-    if(isDefined(var_0E.classname) && var_0E.classname == "script_brushmodel") {
-      var_0E connectpaths();
-      var_0E notsolid();
+  foreach(var_14 in var_12) {
+    if(isDefined(var_14.classname) && var_14.classname == "script_brushmodel") {
+      var_14 connectpaths();
+      var_14 notsolid();
     }
   }
 
@@ -905,29 +905,29 @@ closeslidingdoor(var_0, var_1) {
     var_4.var_42AF = 1;
   }
 
-  var_0B = getEntArray(var_0.target, "targetname");
-  foreach(var_0D in var_0B) {
-    if(isDefined(var_0D.classname) && var_0D.classname == "script_brushmodel") {
+  var_11 = getEntArray(var_0.target, "targetname");
+  foreach(var_13 in var_11) {
+    if(isDefined(var_13.classname) && var_13.classname == "script_brushmodel") {
       if(scripts\engine\utility::istrue(var_0.player_opened)) {
-        var_0D connectpaths();
+        var_13 connectpaths();
       } else {
-        var_0D disconnectpaths();
+        var_13 disconnectpaths();
       }
 
-      var_0D solid();
+      var_13 solid();
       continue;
     }
 
-    var_0D setscriptablepartstate("door", "close");
+    var_13 setscriptablepartstate("door", "close");
   }
 
   wait(0.3);
   if(isDefined(var_6)) {
-    var_0F = vectornormalize(var_6.origin - var_0.origin);
+    var_15 = vectornormalize(var_6.origin - var_0.origin);
     var_10 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.characters, undefined, undefined, 40, 0);
     var_11 = var_0.doors[0].origin;
     foreach(var_13 in var_10) {
-      if(vectordot(vectornormalize(var_6.origin - var_0.origin), var_0F) > 0.75) {
+      if(vectordot(vectornormalize(var_6.origin - var_0.origin), var_15) > 0.75) {
         if(distance(var_0.origin, var_6.origin) > distance(var_13.origin, var_0.origin)) {
           if(distance(var_11, var_13.origin) <= 16) {
             var_14 = scripts\engine\utility::getclosest(var_13.origin, [var_6, var_0]);

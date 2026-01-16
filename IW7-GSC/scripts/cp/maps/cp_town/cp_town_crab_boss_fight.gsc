@@ -727,16 +727,16 @@ setupplayerloadouts() {
     var_8 = randomint(var_1.size);
     var_9 = randomint(var_0.size);
     var_4 takeweapon(var_4 scripts\cp\utility::getvalidtakeweapon());
-    var_0A = scripts\cp\utility::getrawbaseweaponname(var_1[var_8]);
-    if(isDefined(var_4.weapon_build_models[var_0A])) {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_0A]);
+    var_10 = scripts\cp\utility::getrawbaseweaponname(var_1[var_8]);
+    if(isDefined(var_4.weapon_build_models[var_10])) {
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_10]);
     } else {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_8]);
     }
 
-    var_0B = scripts\cp\utility::getrawbaseweaponname(var_0[var_9]);
-    if(isDefined(var_4.weapon_build_models[var_0B])) {
-      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_0B]);
+    var_11 = scripts\cp\utility::getrawbaseweaponname(var_0[var_9]);
+    if(isDefined(var_4.weapon_build_models[var_11])) {
+      scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_4.weapon_build_models[var_11]);
     } else {
       scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_4, var_1[var_8]);
     }
@@ -781,8 +781,8 @@ open_sesame(var_0) {
     wait(0.1);
   }
 
-  var_0B = getEntArray("chi_door", "targetname");
-  foreach(var_9 in var_0B) {
+  var_11 = getEntArray("chi_door", "targetname");
+  foreach(var_9 in var_11) {
     var_9.physics_capsulecast notify("damage", undefined, "open_sesame");
     wait(0.1);
   }
@@ -791,8 +791,8 @@ open_sesame(var_0) {
   level.kepler_donations = 3;
   level.triton_donations = 3;
   if(isDefined(level.team_killdoors)) {
-    foreach(var_0F in level.team_killdoors) {
-      var_0F scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
+    foreach(var_15 in level.team_killdoors) {
+      var_15 scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
     }
   }
 

@@ -51,8 +51,9 @@ giveplayerscore(var_0, var_1) {
         if(level.roundscorelimit > 1 && var_3.pers["score"] >= level.roundscorelimit) {
           return;
         }
-      } else if(level.roundscorelimit > 1 && var_3.pers["score"] >= level.roundscorelimit)
+      } else if(level.roundscorelimit > 1 && var_3.pers["score"] >= level.roundscorelimit) {
         return;
+      }
     }
   }
 
@@ -489,8 +490,9 @@ processassist_regularmp(var_0, var_1, var_2) {
 
     thread scripts\mp\utility\game::givestreakpointswithtext("assistMarked", var_1, var_7);
     giveplayerscore("assist", var_9);
-  } else if(isDefined(var_5) && scripts\mp\utility\game::func_2287(var_5, scripts\mp\utility\game::getuniqueid()))
+  } else if(isDefined(var_5) && scripts\mp\utility\game::func_2287(var_5, scripts\mp\utility\game::getuniqueid())) {
     thread scripts\mp\utility\game::givestreakpointswithtext("assistPing", var_1, undefined);
+  }
   else {
     if(var_2) {
       var_7 = var_9 + var_9;
@@ -593,7 +595,7 @@ func_11ACF(var_0, var_1, var_2, var_3) {
 
 func_8BE1(var_0, var_1) {
   if(isDefined(var_0.debuffedbyplayers[var_1])) {
-    var_0.debuffedbyplayers[var_1] = scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
+    var_0.debuffedbyplayers[var_1] = ::scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
     return var_0.debuffedbyplayers[var_1].size > 0;
   }
 
@@ -602,7 +604,7 @@ func_8BE1(var_0, var_1) {
 
 getdebuffattackersbyweapon(var_0, var_1) {
   if(isDefined(var_0.debuffedbyplayers[var_1])) {
-    var_0.debuffedbyplayers[var_1] = scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
+    var_0.debuffedbyplayers[var_1] = ::scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
 
     if(var_0.debuffedbyplayers[var_1].size > 0) {
       return var_0.debuffedbyplayers[var_1];

@@ -56,8 +56,9 @@ updateeveryframe(var_0) {
       if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
       }
-    } else
+    } else {
       self.enemyreacquiredtime = undefined;
+    }
   } else {
     self.lastenemysighttime = 0;
     self.lastenemysightpos = undefined;
@@ -322,16 +323,18 @@ chillin_tick(var_0) {
     if(findplayertorevive()) {
       self.desiredaction = "revive_player";
       return anim.success;
-    } else
+    } else {
       self.nextrevivetime = var_2 + 1000;
+    }
   }
 
   if(var_2 > self.nextattacktime) {
     if(shoultryteleportattack() && findpamteleporttarget(1)) {
       self.desiredaction = "teleport_attack";
       return anim.success;
-    } else
+    } else {
       self.nextattacktime = var_2 + 500;
+    }
   }
 
   return anim.running;
@@ -432,10 +435,12 @@ reviveplayer_end(var_0) {
       } else {
         self.nextrevivetime = gettime() + var_1.min_time_between_revivals;
       }
-    } else
+    } else {
       self.forcenextrevivetime = gettime() + var_1.max_time_to_attack_targets_when_player_needs_revive_ms;
-  } else
+    }
+  } else {
     self.nextrevivetime = gettime() + var_1.min_time_between_revivals;
+  }
 
   self.reviveplayer = undefined;
   self.reviveanimindex = undefined;
@@ -457,8 +462,9 @@ melee_begin(var_0) {
     } else {
       self.bmovingmelee = 1;
     }
-  } else
+  } else {
     self clearpath();
+  }
 
   self.curmeleetarget = var_2;
   scripts\aitypes\ratking\bt_state_api::asm_wait_state_setup(var_0, var_1, var_1);
@@ -534,8 +540,9 @@ trymeleeattacks(var_0) {
     if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       return 0;
     }
-  } else if(var_0 > self.meleeradiusbasesq)
+  } else if(var_0 > self.meleeradiusbasesq) {
     return 0;
+  }
 
   self.desiredaction = "melee_attack";
   return 1;

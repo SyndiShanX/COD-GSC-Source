@@ -122,7 +122,7 @@ func_A652(var_0, var_1, var_2, var_3) {
       self.var_3247++;
       if(self.var_3247 >= 2) {
         if(scripts\mp\utility::_hasperk("passive_collat_streak")) {
-          var_4 = scripts\mp\perks\_weaponpassives::getpassivevalue("passive_collat_streak");
+          var_4 = scripts\mp\perks\weaponpassives::getpassivevalue("passive_collat_streak");
           self[[var_4]]();
         }
       }
@@ -178,14 +178,14 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
   level.numkills++;
   self.damagedplayers[var_6] = undefined;
   func_3E24(var_2, var_3);
-  var_0A = scripts\mp\utility::getweapongroup(var_2);
-  var_0B = scripts\mp\utility::getweaponrootname(var_2);
+  var_10 = scripts\mp\utility::getweapongroup(var_2);
+  var_11 = scripts\mp\utility::getweaponrootname(var_2);
   if(!scripts\mp\utility::iskillstreakweapon(var_2) && !scripts\mp\utility::isjuggernaut() && !scripts\mp\utility::_hasperk("specialty_explosivebullets")) {
     if(var_2 == "none") {
       return 0;
     }
 
-    if(var_0A == "weapon_sniper" && var_3 != "MOD_MELEE" && gettime() == var_1.attackerdata[self.guid].firsttimedamaged && !issubstr(var_2, "iw7_longshot_mp") && scripts\mp\weapons::isaltmodeweapon(var_2)) {
+    if(var_10 == "weapon_sniper" && var_3 != "MOD_MELEE" && gettime() == var_1.attackerdata[self.guid].firsttimedamaged && !issubstr(var_2, "iw7_longshot_mp") && scripts\mp\weapons::isaltmodeweapon(var_2)) {
       if(!isDefined(self.pers["oneShotKills"])) {
         self.pers["oneShotKills"] = 1;
       } else {
@@ -196,22 +196,22 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
       thread scripts\mp\awards::givemidmatchaward("one_shot_kill");
     }
 
-    if(var_0A == "weapon_shotgun" && var_3 != "MOD_MELEE" && gettime() == var_1.attackerdata[self.guid].firsttimedamaged) {
+    if(var_10 == "weapon_shotgun" && var_3 != "MOD_MELEE" && gettime() == var_1.attackerdata[self.guid].firsttimedamaged) {
       self.modifiers["oneshotkill_shotgun"] = 1;
     }
 
     if(var_3 == "MOD_MELEE" && var_2 != "iw7_reaperblade_mp") {
-      if(var_0A != "weapon_melee") {
+      if(var_10 != "weapon_melee") {
         thread scripts\mp\awards::givemidmatchaward("gun_butt");
       }
 
-      if(var_0B == "iw7_fists") {
+      if(var_11 == "iw7_fists") {
         thread scripts\mp\awards::givemidmatchaward("fist_kill");
       }
     }
 
-    var_0C = var_1 func_854D();
-    if(var_0C == "frag_grenade_mp" || var_0C == "cluster_grenade_mp") {
+    var_12 = var_1 func_854D();
+    if(var_12 == "frag_grenade_mp" || var_12 == "cluster_grenade_mp") {
       self.modifiers["cooking"] = 1;
     }
 
@@ -240,13 +240,13 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(!scripts\mp\utility::isreallyalive(self) && isDefined(self.deathtime)) {
-      var_0D = gettime() - self.deathtime;
-      if(var_0D < 1500 && var_0D > 0) {
+      var_13 = gettime() - self.deathtime;
+      if(var_13 < 1500 && var_13 > 0) {
         func_D6F7(var_0, var_1, var_2);
       }
 
       if(scripts\mp\utility::issimultaneouskillenabled()) {
-        if(var_0D == 0 && isDefined(self.sethalfresparticles) && self.sethalfresparticles == var_1) {
+        if(var_13 == 0 && isDefined(self.sethalfresparticles) && self.sethalfresparticles == var_1) {
           thread scripts\mp\awards::givemidmatchaward("simultaneous_kill", undefined, undefined, 1);
           var_1 thread scripts\mp\awards::givemidmatchaward("simultaneous_kill", undefined, undefined, 1);
           thread events_playertracksimultaneouskill();
@@ -261,12 +261,12 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     }
 
-    foreach(var_10, var_0F in var_1.damagedplayers) {
+    foreach(var_10, var_15 in var_1.damagedplayers) {
       if(var_10 == self.guid) {
         continue;
       }
 
-      if(level.teambased && var_8 - var_0F < 1750) {
+      if(level.teambased && var_8 - var_15 < 1750) {
         func_5082(var_0, var_2, var_3, var_1);
       }
     }
@@ -291,7 +291,7 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(isbackkill(self, var_1, var_3)) {
-      if(var_0B == "iw7_knife") {
+      if(var_11 == "iw7_knife") {
         thread scripts\mp\awards::givemidmatchaward("backstab");
       }
 
@@ -329,7 +329,7 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
           }
         }
       }
-    } else if(var_0A == "weapon_projectile") {
+    } else if(var_10 == "weapon_projectile") {
       if(isDefined(var_5) && isDefined(var_5.adsfire)) {
         if(var_5.adsfire) {
           self.modifiers["ads"] = 1;
@@ -381,7 +381,7 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(isDefined(var_1.var_A6AB)) {
       foreach(var_1A, var_18 in var_1.var_A6AB) {
-        var_19 = var_1A - var_1.destroynavrepulsor;
+        var_19 = var_1A - var_1.score;
         if(var_19 > 0 && var_19 < 100) {
           func_32FA(var_0, var_1, var_2, var_3, var_1);
         }
@@ -413,7 +413,7 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(level.teambased) {
       var_1B = 0;
       foreach(var_1D in level.teamlist[scripts\mp\utility::getotherteam(self.team)]) {
-        if(var_1D.destroynavrepulsor > 0) {
+        if(var_1D.score > 0) {
           var_1B = 1;
           break;
         }
@@ -428,7 +428,7 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
     } else {
       var_1B = 0;
       foreach(var_1D in level.players) {
-        if(var_1D.destroynavrepulsor > 0) {
+        if(var_1D.score > 0) {
           var_1B = 1;
           break;
         }
@@ -596,20 +596,20 @@ func_3E50(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_0A = 0;
+  var_10 = 0;
   if(isDefined(var_5)) {
     switch (var_5) {
       case "super_amplify":
         if(var_4 == 1) {
           var_8 = "super_combatfocus_kill";
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
       case "super_overdrive":
         if(var_4 == 1) {
           var_8 = "super_overdrive_kill";
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
@@ -617,7 +617,7 @@ func_3E50(var_0, var_1, var_2, var_3) {
         if(var_4 == 1) {
           var_8 = "super_bullcharge_kill";
           level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_perk_charge", undefined, 0.75);
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
@@ -625,7 +625,7 @@ func_3E50(var_0, var_1, var_2, var_3) {
         if(var_4 == 1) {
           var_8 = "super_armorup_kill";
           level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_perk_armor", undefined, 0.75);
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
@@ -633,14 +633,14 @@ func_3E50(var_0, var_1, var_2, var_3) {
         if(var_4 == 1) {
           var_8 = "super_reaper_kill";
           level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_perk_reaper", undefined, 0.75);
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
       case "super_rewind":
         if(var_4 == 1 || isDefined(var_6.var_A986) && gettime() < var_6.var_A986 + 3000) {
           var_8 = "super_rewind_kill";
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
@@ -648,14 +648,14 @@ func_3E50(var_0, var_1, var_2, var_3) {
         if(var_4 == 1 || isDefined(var_6.var_A986) && gettime() < var_6.var_A986 + 3000) {
           var_8 = "super_phaseshift_kill";
           level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_killfirm_shift", undefined, 0.75);
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
       case "super_teleport":
         if(var_4 == 1 || isDefined(var_6.var_A986) && gettime() < var_6.var_A986 + 3000) {
           var_8 = "super_teleport_kill";
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
@@ -663,7 +663,7 @@ func_3E50(var_0, var_1, var_2, var_3) {
         if(var_2 == "micro_turret_gun_mp") {
           var_8 = "super_microturret_kill";
           level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_perk_turret_kill", undefined, 0.75);
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
@@ -671,21 +671,21 @@ func_3E50(var_0, var_1, var_2, var_3) {
         if(var_4 == 1 || isDefined(var_6.var_A986) && gettime() < var_6.var_A986 + 2000) {
           var_8 = "super_invisible_kill";
           level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_perk_stealth", undefined, 0.75);
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
       case "super_visionpulse":
         if(scripts\mp\supers\super_visionpulse::func_9EF9(var_0)) {
           var_8 = "super_wallhack_kill";
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
       case "super_kineticpulse":
         if(scripts\mp\equipment\kinetic_pulse::isplayertaggedbykineticpulse(var_0)) {
           var_8 = "super_kineticpulse_kill";
-          var_0A = 1;
+          var_10 = 1;
         }
         break;
 
@@ -693,7 +693,7 @@ func_3E50(var_0, var_1, var_2, var_3) {
         break;
     }
 
-    if(var_0A) {
+    if(var_10) {
       thread superkill(var_5, var_3);
       scripts\mp\supers::combatrecordsuperkill(var_5);
       if(isDefined(var_8)) {
@@ -810,7 +810,7 @@ killedkillstreak(var_0, var_1) {
 }
 
 func_9CAE(var_0, var_1) {
-  return var_0.destroynavrepulsor > var_1.destroynavrepulsor;
+  return var_0.score > var_1.score;
 }
 
 func_9E84(var_0, var_1, var_2, var_3, var_4) {

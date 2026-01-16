@@ -1,7 +1,7 @@
-/*******************************************************
- * Decompiled by Bog and Edited by SyndiShanX
- * Script: scripts\mp\perks\_perk_rearguard_shield.gsc
-*******************************************************/
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
+ * Script: scripts\mp\perks\perk_rearguard.gsc
+***********************************************/
 
 func_E814() {
   if(!isDefined(self.hasrearguardshield)) {
@@ -25,6 +25,7 @@ func_13A34(var_0) {
   var_0 endon("disconnect");
   var_0 endon("remove_rearguard");
   self endon("death");
+
   if(level.hardcoremode) {
     var_1 = 10;
   } else {
@@ -32,7 +33,7 @@ func_13A34(var_0) {
   }
 
   while(var_0.var_FC96 < var_1) {
-    wait(0.05);
+    wait 0.05;
   }
 
   func_E168("damaged", var_0);
@@ -54,6 +55,7 @@ func_D415(var_0) {
 func_E168(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
+
   if(isDefined(var_1) && scripts\mp\utility::istrue(var_1.hasrearguardshield) && var_0 == "damaged") {
     var_1 detachshieldmodel("weapon_rearguard_shield_wm_mp", "tag_shield_back");
   }

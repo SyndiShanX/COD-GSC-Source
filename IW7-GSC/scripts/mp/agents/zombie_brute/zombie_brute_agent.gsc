@@ -159,16 +159,16 @@ func_AEB0() {
   level._effect["laser_muzzle_flash"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_brute_lensf.vfx");
 }
 
-func_3110(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = 25;
-  var_0D = var_0C * var_0C;
-  var_0E = self gettagorigin("tag_eye");
-  var_0F = (var_8 == "head" || var_8 == "helmet" || var_8 == "neck") && var_4 != "MOD_MELEE" && var_4 != "MOD_IMPACT" && var_4 != "MOD_CRUSH";
-  if(!var_0F && var_8 == "torso_upper" && self.helmetlocation == "hand" && distancesquared(var_6, var_0E) < var_0D) {
-    var_0F = 1;
+func_3110(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = 25;
+  var_13 = var_12 * var_12;
+  var_14 = self gettagorigin("tag_eye");
+  var_15 = (var_8 == "head" || var_8 == "helmet" || var_8 == "neck") && var_4 != "MOD_MELEE" && var_4 != "MOD_IMPACT" && var_4 != "MOD_CRUSH";
+  if(!var_15 && var_8 == "torso_upper" && self.helmetlocation == "hand" && distancesquared(var_6, var_14) < var_13) {
+    var_15 = 1;
   }
 
-  if(var_0F) {
+  if(var_15) {
     var_2 = scale_ww_damage(var_2, var_5);
     var_10 = var_2 / 3;
     if(isDefined(var_5) && var_5 == "zmb_imsprojectile_mp" || var_5 == "zmb_fireworksprojectile_mp") {
@@ -274,7 +274,7 @@ func_3112() {
   }
 }
 
-func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   if(!isDefined(self.var_8E09)) {
     self.var_8E09 = 0;
   }
@@ -282,7 +282,7 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   if(self.croc_chomp) {
     var_2 = 1;
   } else if(var_8 == "head" || var_2 > 1) {
-    var_0D = "standard";
+    var_13 = "standard";
     if(self.helmetlocation == "head") {
       if(!isDefined(self.var_8DDE)) {
         self.var_8DDE = 0;
@@ -291,17 +291,17 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       self notify("helmet_damage");
       var_2 = 0;
     } else {
-      var_0D = "hitcritical";
+      var_13 = "hitcritical";
       if(self.var_8E09 < 2) {
         thread func_DB25(5);
       }
     }
 
     if(isplayer(var_1)) {
-      var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_0D, undefined, var_2);
+      var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_2);
     }
   } else if(var_8 == "helmet") {
-    var_0D = "standard";
+    var_13 = "standard";
     if(self.helmetlocation == "head") {
       if(!isDefined(self.var_8DDE)) {
         self.var_8DDE = 0;
@@ -309,7 +309,7 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
       self notify("helmet_damage");
       if(isplayer(var_1)) {
-        var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_0D, undefined, var_2);
+        var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_2);
       }
 
       var_2 = 0;
@@ -320,7 +320,7 @@ func_C4D0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_2 = 0;
   }
 
-  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+  scripts\mp\mp_agent::default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 }
 
 brute_killed_vo(var_0) {
@@ -345,10 +345,10 @@ func_C4D1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  var_0A = 400;
-  foreach(var_0C in level.players) {
-    var_0C scripts\cp\cp_persistence::give_player_currency(var_0A);
-    var_0C scripts\cp\zombies\achievement::update_achievement("THE_BIGGER_THEY_ARE", 1);
+  var_10 = 400;
+  foreach(var_12 in level.players) {
+    var_12 scripts\cp\cp_persistence::give_player_currency(var_10);
+    var_12 scripts\cp\zombies\achievement::update_achievement("THE_BIGGER_THEY_ARE", 1);
   }
 }
 
@@ -399,32 +399,32 @@ func_311E(var_0, var_1) {
           var_7 = 60;
         }
 
-        var_0A = var_3 getvelocity();
-        var_0A = (var_0A[0], var_0A[1], 0);
-        var_0B = length2d(var_0A);
-        if(var_0B > 0) {
-          var_0C = var_9 * var_7;
-          var_0D = var_0A + var_0C;
-          var_0E = length2d(var_0D);
-          if(vectordot(var_0D, var_0C) < 0) {
-            var_0F = vectorcross((0, 0, 1), var_9);
-            if(vectordot(var_0F, var_0A) > 0) {
-              var_0B = length2d(var_0A);
-              var_0A = var_0F * var_0B;
+        var_10 = var_3 getvelocity();
+        var_10 = (var_10[0], var_10[1], 0);
+        var_11 = length2d(var_10);
+        if(var_11 > 0) {
+          var_12 = var_9 * var_7;
+          var_13 = var_10 + var_12;
+          var_14 = length2d(var_13);
+          if(vectordot(var_13, var_12) < 0) {
+            var_15 = vectorcross((0, 0, 1), var_9);
+            if(vectordot(var_15, var_10) > 0) {
+              var_11 = length2d(var_10);
+              var_10 = var_15 * var_11;
             } else {
-              var_10 = var_0F * -1;
-              var_0B = length2d(var_0A);
-              var_0A = var_10 * var_0B;
+              var_10 = var_15 * -1;
+              var_11 = length2d(var_10);
+              var_10 = var_10 * var_11;
             }
 
-            var_0D = var_0A + var_0C;
-            var_7 = length2d(var_0D);
+            var_13 = var_10 + var_12;
+            var_7 = length2d(var_13);
           } else {
-            if(var_0B > var_7) {
-              var_7 = var_0B;
+            if(var_11 > var_7) {
+              var_7 = var_11;
             }
 
-            var_9 = vectornormalize(var_0D);
+            var_9 = vectornormalize(var_13);
           }
         }
 

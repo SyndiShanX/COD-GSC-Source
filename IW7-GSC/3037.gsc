@@ -683,8 +683,9 @@ func_A274(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     var_9 = vectornormalize(var_0.origin - var_5);
     var_8.angles = vectortoangles(var_9);
-  } else
+  } else {
     var_8.angles = self.angles;
+  }
 
   if(isDefined(self.var_B83B)) {
     var_10 = self.var_B83B;

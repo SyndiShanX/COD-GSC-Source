@@ -68,8 +68,9 @@ wander_tick(var_0) {
     var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
     var_2.var_13845 = gettime() + randomintrange(var_3.wander_min_wait_time_ms, var_3.wander_max_wait_time_ms);
     return anim.running;
-  } else if(gettime() < var_2.var_13845)
+  } else if(gettime() < var_2.var_13845) {
     return anim.running;
+  }
 
   var_4 = findrandomnavpoint();
 

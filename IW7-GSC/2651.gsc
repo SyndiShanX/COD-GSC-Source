@@ -46,16 +46,18 @@ dropintolaststand(var_0, var_1) {
     } else {
       waitinspectator(var_0, var_1);
     }
-  } else if(debugafterlifearcadeenabled())
+  } else if(debugafterlifearcadeenabled()) {
     waitinspectator(var_0, var_1);
+  }
   else if(maydolaststand(var_1, var_0)) {
     var_3 = waitinlaststand(var_0, var_1);
 
     if(!var_3) {
       waitinspectator(var_0, var_1);
     }
-  } else
+  } else {
     waitinspectator(var_0, var_1);
+  }
 
   self notify("revive");
   level notify("revive_success", self);
@@ -298,8 +300,9 @@ waitinlaststand(var_0, var_1, var_2) {
       wait 5;
       return 1;
     }
-  } else
+  } else {
     var_2 = undefined;
+  }
 
   if(!var_1) {
     thread playdeathsoundinlaststand(var_3);
@@ -312,8 +315,9 @@ waitinlaststand(var_0, var_1, var_2) {
       } else {
         set_last_stand_timer(self, 5);
       }
-    } else
+    } else {
       set_last_stand_timer(self, var_3);
+    }
   }
 
   if(scripts\cp\utility::isplayingsolo() || level.only_one_player && !isDefined(level.the_hoff_revive)) {
@@ -487,8 +491,9 @@ laststandwaittillrevivebyteammate(var_0, var_1) {
           if(var_2.vo_prefix == "p1_") {
             var_0 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand_sally", "town_comment_vo");
           }
-        } else
+        } else {
           var_0 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
+        }
       }
 
       if(var_0 scripts\cp\utility::is_consumable_active("faster_revive_upgrade")) {

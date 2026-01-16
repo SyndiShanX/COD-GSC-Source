@@ -22,7 +22,7 @@ init() {
 func_48CD(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
   var_0 = int(var_0);
-  var_5.var_394 = var_1;
+  var_5.weapon = var_1;
   if(var_4 != "") {
     var_5.var_EC13 = var_4;
   }
@@ -52,8 +52,8 @@ func_C906() {
     var_6 = tablelookupbyrow(var_1, var_0, 5);
     var_7 = scripts\cp\utility::getrawbaseweaponname(var_3);
     var_8 = strtok(var_4, " ");
-    foreach(var_0A in var_8) {
-      switch (var_0A) {
+    foreach(var_10 in var_8) {
+      switch (var_10) {
         case "craft":
           level.var_47AD[var_7] = var_3;
           break;
@@ -69,7 +69,7 @@ func_C906() {
 
         case "wall":
         case "tickets":
-          func_48CD(var_2, var_3, var_7, var_0A, var_6);
+          func_48CD(var_2, var_3, var_7, var_10, var_6);
           break;
       }
     }
@@ -107,33 +107,33 @@ func_FA1D(var_0) {
     }
 
     var_9 = "none";
-    var_0A = "none";
-    var_0B = "none";
-    var_0C = -1;
+    var_10 = "none";
+    var_11 = "none";
+    var_12 = -1;
     if(isDefined(var_8)) {
-      var_0D = tablelookup(var_6, var_1, var_7, var_3);
-      var_0E = tablelookup(var_6, var_1, var_7, var_4);
-      var_0F = [];
-      if(isDefined(var_0D) && var_0D != "") {
-        var_10 = scripts\cp\cp_relics::func_7D6C(var_0, var_0D);
+      var_13 = tablelookup(var_6, var_1, var_7, var_3);
+      var_14 = tablelookup(var_6, var_1, var_7, var_4);
+      var_15 = [];
+      if(isDefined(var_13) && var_13 != "") {
+        var_10 = scripts\cp\cp_relics::func_7D6C(var_0, var_13);
         if(var_10.size > 0) {
-          var_0.var_13C38[var_0D] = var_10;
+          var_0.var_13C38[var_13] = var_10;
         }
 
         for(var_11 = 0; var_11 < var_5; var_11++) {
-          var_12 = var_0 getplayerdata("cp", "zombiePlayerLoadout", "zombiePlayerWeaponModels", var_0D, "attachment", var_11);
+          var_12 = var_0 getplayerdata("cp", "zombiePlayerLoadout", "zombiePlayerWeaponModels", var_13, "attachment", var_11);
           if(isDefined(var_12) && var_12 != "none") {
-            var_0F[var_0F.size] = var_12;
+            var_15[var_15.size] = var_12;
           }
         }
 
-        var_9 = scripts\cp\utility::getweaponcamo(var_0D);
-        var_0A = scripts\cp\utility::getweaponcosmeticattachment(var_0D);
-        var_0B = scripts\cp\utility::getweaponreticle(var_0D);
-        var_0C = scripts\cp\utility::getweaponpaintjobid(var_0D);
+        var_9 = scripts\cp\utility::getweaponcamo(var_13);
+        var_10 = scripts\cp\utility::getweaponcosmeticattachment(var_13);
+        var_11 = scripts\cp\utility::getweaponreticle(var_13);
+        var_12 = scripts\cp\utility::getweaponpaintjobid(var_13);
       }
 
-      var_0.weapon_build_models[var_8] = scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_0E), var_0F, var_9, var_0B, scripts\cp\utility::get_weapon_variant_id(var_0, var_0E), self getentitynumber(), self.clientid, var_0C, var_0A);
+      var_0.weapon_build_models[var_8] = ::scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_14), var_15, var_9, var_11, scripts\cp\utility::get_weapon_variant_id(var_0, var_14), self getentitynumber(), self.clientid, var_12, var_10);
       if(var_8 == "g18") {
         var_0 loadweaponsforplayer([var_0.weapon_build_models[var_8]], 1);
       }
@@ -191,13 +191,13 @@ func_23DA() {
         }
 
         var_8 = scripts\engine\utility::getstructarray(var_7.target, "target");
-        foreach(var_0A in var_8) {
-          if(var_0A == var_7) {
+        foreach(var_10 in var_8) {
+          if(var_10 == var_7) {
             continue;
           }
 
-          var_0A.already_used = 1;
-          var_0A.parent_struct = var_7;
+          var_10.already_used = 1;
+          var_10.parent_struct = var_7;
         }
       }
     }
@@ -207,20 +207,20 @@ func_23DA() {
     wait(0.05);
   }
 
-  var_0D = sortbydistance(var_4, level.players[0].origin);
-  foreach(var_0F in var_0D) {
-    var_0F.script_noteworthy = strtok(var_0F.script_noteworthy, "+")[0];
-    var_10 = var_0F.script_noteworthy;
-    var_11 = scripts\cp\utility::getrawbaseweaponname(var_0F.script_noteworthy);
+  var_13 = sortbydistance(var_4, level.players[0].origin);
+  foreach(var_15 in var_13) {
+    var_15.script_noteworthy = strtok(var_15.script_noteworthy, "+")[0];
+    var_10 = var_15.script_noteworthy;
+    var_11 = scripts\cp\utility::getrawbaseweaponname(var_15.script_noteworthy);
     var_12 = undefined;
     if(!isDefined(level.var_138A1[var_11])) {
-      var_0F.disabled = 1;
+      var_15.disabled = 1;
       continue;
     }
 
-    if(!scripts\engine\utility::istrue(var_0F.already_used)) {
-      if(isDefined(var_0F.target)) {
-        var_13 = scripts\engine\utility::getstruct(var_0F.target, "targetname");
+    if(!scripts\engine\utility::istrue(var_15.already_used)) {
+      if(isDefined(var_15.target)) {
+        var_13 = scripts\engine\utility::getstruct(var_15.target, "targetname");
         var_14 = var_13.origin;
         var_15 = var_13.angles;
       } else {
@@ -236,11 +236,11 @@ func_23DA() {
       }
 
       if(isDefined(var_12)) {
-        var_0F.trigger = spawn("script_weapon", var_14, 0, 0, var_12);
+        var_15.trigger = spawn("script_weapon", var_14, 0, 0, var_12);
       } else {
         var_16 = (0, 0, 0);
         var_17 = (0, 0, 0);
-        if(issubstr(var_0F.script_noteworthy, "forgefreeze")) {
+        if(issubstr(var_15.script_noteworthy, "forgefreeze")) {
           var_16 = (3.25, -18, 9.75);
           var_17 = (0, 0, -90);
         }
@@ -249,27 +249,27 @@ func_23DA() {
           var_15 = var_15 + var_17;
         }
 
-        var_0F.trigger = spawn("script_model", var_14 + var_16);
+        var_15.trigger = spawn("script_model", var_14 + var_16);
         if(isDefined(var_10)) {
-          var_0F.trigger setModel(level.var_138A1[var_11].model);
+          var_15.trigger setModel(level.var_138A1[var_11].model);
         } else {
-          var_0F.trigger setModel("tag_origin");
+          var_15.trigger setModel("tag_origin");
         }
       }
 
       if(isDefined(var_15)) {
-        var_0F.trigger.angles = var_15;
+        var_15.trigger.angles = var_15;
       }
 
-      var_0F.trigger thread func_16F5(var_0F, var_0F.trigger, var_10, var_11);
-      level.var_138CB[level.var_138CB.size] = var_0F.trigger;
-    } else if(isDefined(var_0F.parent_struct.trigger)) {
-      var_0F.trigger = var_0F.parent_struct.trigger;
+      var_15.trigger thread func_16F5(var_15, var_15.trigger, var_10, var_11);
+      level.var_138CB[level.var_138CB.size] = var_15.trigger;
+    } else if(isDefined(var_15.parent_struct.trigger)) {
+      var_15.trigger = var_15.parent_struct.trigger;
     } else {
-      var_0F thread applyparentstructvalues(var_0F);
+      var_15 thread applyparentstructvalues(var_15);
     }
 
-    var_0F.var_394 = var_10;
+    var_15.weapon = var_10;
   }
 
   scripts\engine\utility::flag_set("wall_buy_setup_done");
@@ -352,7 +352,7 @@ settenthstimer(var_0) {
   var_7 = self getweaponslistprimaries();
   var_8 = self getweaponslistprimaries().size;
   var_9 = 3;
-  var_0A = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
+  var_10 = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
   if(var_0.script_noteworthy == "iw7_forgefreeze_zm") {
     level.magic_weapons["forgefreeze"] = "iw7_forgefreeze_zm+forgefreezealtfire";
     var_1 = 1;
@@ -370,17 +370,17 @@ settenthstimer(var_0) {
   }
 
   if(!scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
-    var_0B = scripts\cp\utility::getvalidtakeweapon();
-    self.curr_weap = var_0B;
-    if(isDefined(var_0B)) {
+    var_11 = scripts\cp\utility::getvalidtakeweapon();
+    self.curr_weap = var_11;
+    if(isDefined(var_11)) {
       var_2 = 1;
-      var_0C = scripts\cp\utility::getrawbaseweaponname(var_0B);
+      var_12 = scripts\cp\utility::getrawbaseweaponname(var_11);
       if(scripts\cp\utility::has_special_weapon() && var_8 < var_9 + 1) {
         var_2 = 0;
       }
 
-      foreach(var_0E in var_7) {
-        if(scripts\cp\utility::isstrstart(var_0E, "alt_")) {
+      foreach(var_14 in var_7) {
+        if(scripts\cp\utility::isstrstart(var_14, "alt_")) {
           var_9++;
         }
       }
@@ -394,20 +394,20 @@ settenthstimer(var_0) {
       }
 
       if(var_2) {
-        if(isDefined(self.pap[var_0C])) {
-          self.pap[var_0C] = undefined;
+        if(isDefined(self.pap[var_12])) {
+          self.pap[var_12] = undefined;
           self notify("weapon_level_changed");
         }
 
         thread scripts\cp\cp_interaction::play_weapon_purchase_vo(var_0, self);
-        self takeweapon(var_0B);
+        self takeweapon(var_11);
       }
     }
 
-    if(isDefined(self.weapon_build_models[var_0A])) {
-      var_4 = self.weapon_build_models[var_0A];
+    if(isDefined(self.weapon_build_models[var_10])) {
+      var_4 = self.weapon_build_models[var_10];
     } else {
-      var_4 = var_0.var_394;
+      var_4 = var_0.weapon;
     }
 
     if(scripts\cp\utility::is_consumable_active("wall_power")) {
@@ -420,13 +420,13 @@ settenthstimer(var_0) {
           var_6 = level.pap_1_camo;
         }
       } else {
-        if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_0A)) {
+        if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_10)) {
           var_6 = undefined;
         } else if(isDefined(level.pap_1_camo)) {
           var_6 = level.pap_1_camo;
         }
 
-        switch (var_0A) {
+        switch (var_10) {
           case "dischord":
             var_6 = "camo20";
             break;
@@ -483,7 +483,7 @@ settenthstimer(var_0) {
       scripts\cp\utility::take_fists_weapon(self);
       var_13 = spawnStruct();
       var_13.lvl = 1;
-      self.pap[var_0A] = var_13;
+      self.pap[var_10] = var_13;
     }
 
     if(var_1) {
@@ -502,14 +502,14 @@ settenthstimer(var_0) {
     }
   } else {
     self.purchasing_ammo = 1;
-    var_0A = undefined;
+    var_10 = undefined;
     var_14 = self getweaponslistall();
     var_15 = self getcurrentweapon();
     var_16 = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
     var_17 = undefined;
     foreach(var_19 in var_14) {
-      var_0A = scripts\cp\utility::getrawbaseweaponname(var_19);
-      if(var_0A == var_16) {
+      var_10 = scripts\cp\utility::getrawbaseweaponname(var_19);
+      if(var_10 == var_16) {
         var_17 = var_19;
         break;
       }

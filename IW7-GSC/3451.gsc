@@ -61,7 +61,7 @@ bot_get_ambush_trap_item(var_0, var_1, var_2) {
 
   foreach(var_6 in var_4) {
     var_3["purpose"] = var_6;
-    var_3["item_action"] = scripts\mp\bots\bots_util::bot_get_grenade_for_purpose(var_6);
+    var_3["item_action"] = ::scripts\mp\bots\bots_util::bot_get_grenade_for_purpose(var_6);
 
     if(isDefined(var_3["item_action"])) {
       return var_3;
@@ -314,9 +314,9 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
       self.defend_entrance_index = self.name + " " + gettime();
 
       foreach(var_8 in self.defense_override_watch_nodes) {
-        var_8.prone_visible_from[self.defend_entrance_index] = scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "prone");
+        var_8.prone_visible_from[self.defend_entrance_index] = ::scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "prone");
         wait 0.05;
-        var_8.crouch_visible_from[self.defend_entrance_index] = scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "crouch");
+        var_8.crouch_visible_from[self.defend_entrance_index] = ::scripts\mp\bots\bots_util::entrance_visible_from(var_8.origin, scripts\mp\bots\bots_util::defend_valid_center(), "crouch");
         wait 0.05;
       }
     }
@@ -412,8 +412,9 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
     } else if(isDefined(self.defense_force_next_node_goal)) {
       self.cur_defend_node = self.defense_force_next_node_goal;
       self.defense_force_next_node_goal = undefined;
-    } else
+    } else {
       self[[var_17]]();
+    }
 
     self botclearscriptgoal();
     var_24 = "";
@@ -436,8 +437,9 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
         }
 
         self botsetscriptgoal(self.cur_defend_point_override, 0, var_4, var_27);
-      } else if(!isDefined(self.cur_defend_angle_override))
+      } else if(!isDefined(self.cur_defend_angle_override)) {
         self botsetscriptgoalnode(self.cur_defend_node, var_4);
+      }
       else {
         self botsetscriptgoalnode(self.cur_defend_node, var_4, self.cur_defend_angle_override[1]);
       }
@@ -561,8 +563,9 @@ should_start_cautious_approach_default(var_0) {
   } else if(self botpursuingscriptgoal() && distancesquared(self.origin, self.bot_defending_center) < var_2) {
     var_3 = self botgetpathdist();
     return 0 <= var_3 && var_3 <= var_1;
-  } else
+  } else {
     return 0;
+  }
 }
 
 setup_investigate_location(var_0, var_1) {
@@ -613,8 +616,9 @@ defense_cautious_approach() {
     if(var_3 >= 0.5) {
       var_3 = 0.0;
 
-      if([[level.bot_funcs["should_start_cautious_approach"]]](0))
+      if([[level.bot_funcs["should_start_cautious_approach"]]](0)) {
         var_2 = 0;
+      }
     }
   }
 
@@ -1260,8 +1264,9 @@ find_defend_node_capture() {
     }
 
     self.cur_defend_node = var_1;
-  } else if(isDefined(var_0))
+  } else if(isDefined(var_0)) {
     bot_handle_no_valid_defense_node(var_0, undefined);
+  }
   else {
     bot_handle_no_valid_defense_node(undefined, scripts\mp\bots\bots_util::defend_valid_center());
   }
@@ -1281,8 +1286,9 @@ find_defend_node_capture_zone() {
     }
 
     self.cur_defend_node = var_1;
-  } else if(isDefined(var_0))
+  } else if(isDefined(var_0)) {
     bot_handle_no_valid_defense_node(var_0, undefined);
+  }
   else {
     bot_handle_no_valid_defense_node(undefined, scripts\mp\bots\bots_util::defend_valid_center());
   }
@@ -1295,8 +1301,9 @@ find_defend_node_protect() {
     var_1 = vectornormalize(scripts\mp\bots\bots_util::defend_valid_center() - var_0.origin);
     self.cur_defend_angle_override = vectortoangles(var_1);
     self.cur_defend_node = var_0;
-  } else
+  } else {
     bot_handle_no_valid_defense_node(scripts\mp\bots\bots_util::defend_valid_center(), undefined);
+  }
 }
 
 find_defend_node_bodyguard() {
@@ -1525,8 +1532,9 @@ bot_has_tactical_goal(var_0, var_1) {
     }
 
     return 0;
-  } else
+  } else {
     return self.tactical_goals.size > 0;
+  }
 }
 
 bot_abort_tactical_goal(var_0, var_1) {

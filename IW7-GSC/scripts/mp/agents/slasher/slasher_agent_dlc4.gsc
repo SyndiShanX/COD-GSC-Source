@@ -20,7 +20,7 @@ func_FAB0() {
     level.damage_feedback_overrride = [];
   }
 
-  level.damage_feedback_overrride["slasher"] = scripts\cp\maps\cp_final\cp_final_damage::slasher_processdamagefeedback;
+  level.damage_feedback_overrride["slasher"] = ::scripts\cp\maps\cp_final\cp_final_damage::slasher_processdamagefeedback;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
   }
@@ -38,14 +38,14 @@ calculateslasherhealth() {
   return 30000;
 }
 
-onslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = var_2;
+onslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = var_2;
   var_2 = min(var_2, 300);
   if(isDefined(self.nodamagescale)) {
-    var_2 = var_0C;
+    var_2 = var_12;
   }
 
-  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 onslasherkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -56,9 +56,9 @@ onslasherkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   var_9 = 1000;
-  foreach(var_0B in level.players) {
-    if(var_0B scripts\cp\utility::is_valid_player()) {
-      var_0B scripts\cp\cp_persistence::give_player_currency(var_9);
+  foreach(var_11 in level.players) {
+    if(var_11 scripts\cp\utility::is_valid_player()) {
+      var_11 scripts\cp\cp_persistence::give_player_currency(var_9);
     }
   }
 

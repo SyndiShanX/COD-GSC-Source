@@ -233,8 +233,8 @@ func_F2D6() {
 
 func_F46B() {
   level endon("camera_position_requested");
-  if(isDefined(level.var_394)) {
-    level.var_394 delete();
+  if(isDefined(level.weapon)) {
+    level.weapon delete();
   }
 
   frontendscenecamerafade(0, 0.2);
@@ -257,10 +257,10 @@ func_F61A() {
     level.var_3CAD = spawn("script_character", (0, 0, 0), 0, 0, 0);
   }
 
-  level.var_394 = spawn("script_weapon", getent("weapon_loc", "targetname").origin, 0, 0, 0);
+  level.weapon = spawn("script_weapon", getent("weapon_loc", "targetname").origin, 0, 0, 0);
   self.opened_weapon_select = 1;
-  level.var_394.angles = getent("weapon_loc", "targetname").angles;
-  level.var_394 setotherent(level.var_3CAD);
+  level.weapon.angles = getent("weapon_loc", "targetname").angles;
+  level.weapon setotherent(level.var_3CAD);
   frontendscenecamerafov(65);
   func_F522("player_weapon_cam");
 }

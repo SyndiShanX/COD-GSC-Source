@@ -61,8 +61,9 @@ func_C0E1(var_0, var_1, var_2, var_3, var_4, var_5) {
         continue;
       }
       var_23 = ["start"];
-    } else
+    } else {
       var_0 waittill(var_1, var_23);
+    }
 
     if(!isarray(var_23)) {
       var_23 = [var_23];
@@ -659,8 +660,9 @@ func_1173F(var_0) {
         return;
       }
     }
-  } else
+  } else {
     var_0.var_10E51 = 1;
+  }
 
   var_0.var_A8F6 = var_0.var_4B9E;
 }

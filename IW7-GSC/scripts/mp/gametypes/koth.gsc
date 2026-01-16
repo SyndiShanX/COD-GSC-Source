@@ -245,36 +245,36 @@ getnextzone() {
     }
 
     level.prevzonelist[level.prevzonelist.size] = level.prevzoneindex;
-    var_0A = 0.7;
-    var_0B = 0.3;
-    var_0C = undefined;
-    var_0D = undefined;
-    for(var_0E = 0; var_0E < level.zones.size; var_0E++) {
-      var_0F = 0;
+    var_10 = 0.7;
+    var_11 = 0.3;
+    var_12 = undefined;
+    var_13 = undefined;
+    for(var_14 = 0; var_14 < level.zones.size; var_14++) {
+      var_15 = 0;
       foreach(var_11 in level.prevzonelist) {
-        if(var_0E == var_11) {
-          var_0F = 1;
+        if(var_14 == var_11) {
+          var_15 = 1;
           break;
         }
       }
 
-      if(var_0F) {
+      if(var_15) {
         continue;
       }
 
-      var_13 = level.zones[var_0E];
+      var_13 = level.zones[var_14];
       var_14 = distance2dsquared(var_13.gameobject.curorigin, var_9["allies"]);
       var_15 = distance2dsquared(var_13.gameobject.curorigin, var_9["axis"]);
       var_16 = distance2dsquared(var_13.gameobject.curorigin, level.zone.gameobject.curorigin);
-      var_17 = var_14 + var_15 * var_0A + var_16 * var_0B;
-      if(!isDefined(var_0D) || var_17 > var_0D) {
-        var_0D = var_17;
-        var_0C = var_0E;
+      var_17 = var_14 + var_15 * var_10 + var_16 * var_11;
+      if(!isDefined(var_13) || var_17 > var_13) {
+        var_13 = var_17;
+        var_12 = var_14;
       }
     }
 
-    var_13 = level.zones[var_0C];
-    level.prevzoneindex = var_0C;
+    var_13 = level.zones[var_12];
+    level.prevzoneindex = var_12;
   } else {
     var_18 = level.prevzoneindex + 1 % level.zones.size;
     var_13 = level.zones[var_18];
@@ -447,17 +447,17 @@ initspawns() {
       }
     }
 
-    var_0A = 0;
-    var_0B = var_5.classname == "mp_koth_spawn";
-    var_0C = var_5.classname == "mp_koth_spawn_secondary";
-    if(var_0B || var_0C) {
+    var_10 = 0;
+    var_11 = var_5.classname == "mp_koth_spawn";
+    var_12 = var_5.classname == "mp_koth_spawn_secondary";
+    if(var_11 || var_12) {
       if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy != "") {
-        var_0A = 1;
-        var_0D = strtok(var_5.script_noteworthy, " ");
-        foreach(var_8 in var_0D) {
+        var_10 = 1;
+        var_13 = strtok(var_5.script_noteworthy, " ");
+        foreach(var_8 in var_13) {
           if(!postshipmodifiedzones(var_8)) {
             var_2 = var_0[var_8];
-            if(var_0B) {
+            if(var_11) {
               var_2.spawnpoints[var_2.spawnpoints.size] = var_5;
               continue;
             }
@@ -468,9 +468,9 @@ initspawns() {
       }
     }
 
-    if(!var_0A) {
+    if(!var_10) {
       foreach(var_2 in level.zones) {
-        if(var_0B) {
+        if(var_11) {
           var_2.spawnpoints[var_2.spawnpoints.size] = var_5;
           continue;
         }
@@ -777,8 +777,8 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     return;
   }
 
-  var_0A = level.zone.gameobject.ownerteam;
-  if(!isDefined(var_0A)) {
+  var_10 = level.zone.gameobject.ownerteam;
+  if(!isDefined(var_10)) {
     return;
   }
 
@@ -786,19 +786,19 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     return;
   }
 
-  var_0B = self;
-  var_0C = 0;
-  var_0D = var_1.team;
+  var_11 = self;
+  var_12 = 0;
+  var_13 = var_1.team;
   if(level.zonecapturetime > 0 && var_1 istouching(level.zone.gameobject.trigger)) {
-    if(var_0A != var_0D) {
-      var_0C = 1;
+    if(var_10 != var_13) {
+      var_12 = 1;
     }
   }
 
-  if(var_0D != var_0A) {
-    if(var_0B istouching(level.zone.gameobject.trigger)) {
+  if(var_13 != var_10) {
+    if(var_11 istouching(level.zone.gameobject.trigger)) {
       var_1.lastkilltime = gettime();
-      if(var_0C) {
+      if(var_12) {
         var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
       }
 
@@ -811,7 +811,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   }
 
   if(var_1 istouching(level.zone.gameobject.trigger)) {
-    if(var_0C) {
+    if(var_12) {
       var_1 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
     }
 
@@ -826,8 +826,8 @@ give_capture_credit(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   level.lastcaptime = gettime();
   var_4 = level.zone.gameobject scripts\mp\gameobjects::getearliestclaimplayer();
-  if(isDefined(var_4.triggerportableradarping)) {
-    var_4 = var_4.triggerportableradarping;
+  if(isDefined(var_4.owner)) {
+    var_4 = var_4.owner;
   }
 
   if(isplayer(var_4)) {

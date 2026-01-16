@@ -51,15 +51,15 @@ func_5EC8(var_0, var_1, var_2) {
           var_8 = var_8 - 360;
         }
 
-        var_0A = sin(var_8) * 0.5 + 0.5 * 0.3;
+        var_10 = sin(var_8) * 0.5 + 0.5 * 0.3;
       } else {
-        var_0A = scripts\sp\math::func_C097(0, var_3, self.var_BCC9);
+        var_10 = scripts\sp\math::func_C097(0, var_3, self.var_BCC9);
       }
 
-      var_6 = var_6 + var_0A - var_6 * var_5;
-      var_0B = 1 - var_6;
+      var_6 = var_6 + var_10 - var_6 * var_5;
+      var_11 = 1 - var_6;
       self give_attacker_kill_rewards(var_0, var_6, var_4, 1);
-      self give_attacker_kill_rewards(var_1, var_0B, var_4, 1);
+      self give_attacker_kill_rewards(var_1, var_11, var_4, 1);
     }
 
     wait(var_4);
@@ -144,7 +144,7 @@ func_FA5F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_9.maxheight = var_5;
   if(!isDefined(var_6)) {
-    var_0A = undefined;
+    var_10 = undefined;
   }
 
   var_9.var_6630 = var_6;
@@ -154,7 +154,7 @@ func_FA5F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_9.var_4C94 = var_7;
   if(!isDefined(var_8)) {
-    var_0B = undefined;
+    var_11 = undefined;
   }
 
   var_9.var_596F = var_8;
@@ -301,13 +301,13 @@ func_CE62(var_0, var_1) {
 
   var_9 = self.script_team + "_dropship_thrust_" + var_1;
   self.var_11856 = var_9;
-  foreach(var_0B in var_2.var_113EE) {
+  foreach(var_11 in var_2.var_113EE) {
     if(isDefined(var_8)) {
-      self thread[[var_8]](var_9, var_0B, var_0);
+      self thread[[var_8]](var_9, var_11, var_0);
       continue;
     }
 
-    thread scripts\sp\utility::func_75C4(var_9, var_0B);
+    thread scripts\sp\utility::func_75C4(var_9, var_11);
   }
 
   var_2.on = 1;
@@ -371,9 +371,9 @@ func_1185D(var_0, var_1, var_2) {
         var_7 = self gettagorigin(var_1);
         var_8 = bulletTrace(var_7, var_7 + var_6, 0, self);
         var_9 = var_8["position"];
-        var_0A = var_9 - level.player.origin;
-        var_0B = var_8["normal"];
-        playFX(scripts\engine\utility::getfx(var_5), var_9, var_0B, var_0A);
+        var_10 = var_9 - level.player.origin;
+        var_11 = var_8["normal"];
+        playFX(scripts\engine\utility::getfx(var_5), var_9, var_11, var_10);
       }
     }
 
@@ -563,27 +563,27 @@ func_5DEC(var_0, var_1, var_2) {
     }
 
     if(var_3 == 0) {
-      var_0A = "fast";
+      var_10 = "fast";
     } else if(var_4 == 1) {
-      var_0A = "med";
+      var_10 = "med";
     } else {
-      var_0A = "slow";
+      var_10 = "slow";
     }
 
     if(var_1 == 0) {
-      var_0B = "close";
+      var_11 = "close";
     } else if(var_2 == 1) {
-      var_0B = "mid";
+      var_11 = "mid";
     } else if(var_2 == 2) {
-      var_0B = "far";
+      var_11 = "far";
     } else {
       return undefined;
     }
 
     if(scripts\engine\utility::player_is_in_jackal()) {
-      var_0C = var_0 + "_" + var_0A + "_" + var_0B;
+      var_12 = var_0 + "_" + var_10 + "_" + var_11;
     } else {
-      var_0C = var_1 + "_" + var_0B + "_" + var_0C + "_grnd";
+      var_12 = var_1 + "_" + var_11 + "_" + var_12 + "_grnd";
     }
 
     if(var_1 == 0) {
@@ -592,7 +592,7 @@ func_5DEC(var_0, var_1, var_2) {
       self.audio.var_7007 = 1;
     }
 
-    return var_0C;
+    return var_12;
   }
 
   return undefined;

@@ -116,7 +116,7 @@ func_4D87() {
 }
 
 func_4D89(var_0, var_1) {
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect", "dash_finished");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect", "dash_finished");
   scripts\engine\utility::waitframe();
   if(isDefined(var_1)) {
     var_1 delete();

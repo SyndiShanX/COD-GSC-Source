@@ -40,12 +40,12 @@ func_FAB0() {
 
   level.agent_definition["generic_zombie"]["setup_func"] = ::setupagent;
   level.agent_definition["generic_zombie"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
-  level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["generic_zombie"]["on_damaged"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
+  level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["generic_zombie"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
   level.agent_funcs["generic_zombie"]["on_damaged_finished"] = ::onzombiedamagefinished;
   level.agent_funcs["generic_zombie"]["on_killed"] = ::onzombiekilled;
-  level.movemodefunc["generic_zombie"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.movemodefunc["generic_zombie"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
   level.soldier_models = ["zombie_dlc3_male_soldier_02", "zombie_dlc3_male_soldier_03", "zombie_dlc3_male_soldier_04"];
 }
 
@@ -91,8 +91,8 @@ dopiranhatrapdeath() {
   scripts\asm\asm::asm_setstate("piranha_trap");
 }
 
-onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 }
 
 onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {

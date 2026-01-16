@@ -28,7 +28,7 @@ func_2A35() {
   self endon("death");
   var_0 = 0.35;
   for(;;) {
-    scripts\engine\utility::waittill_any_3("weapon_change", "weapon_dropped");
+    scripts\engine\utility::waittill_any("weapon_change", "weapon_dropped");
     if(issubstr(level.player getcurrentweapon(), "iw7_steeldragon")) {
       scripts\engine\utility::waitframe();
       self allowfire(0);
@@ -239,33 +239,33 @@ func_28C6(var_0, var_1, var_2, var_3, var_4) {
     var_9 = var_9 + var_7 * -1;
   }
 
-  var_0A = undefined;
+  var_10 = undefined;
   if(isDefined(var_2)) {
-    var_0A = var_2;
+    var_10 = var_2;
   } else {
-    var_0A = var_9 + var_5 * 99999;
+    var_10 = var_9 + var_5 * 99999;
   }
 
-  var_0B = scripts\common\trace::ray_trace(var_9, var_0A, level.player);
-  var_0C = var_0B;
-  var_0A = var_0B["position"];
-  var_0D = 20;
-  var_0E = distance2d(var_9, var_0A);
-  var_0F = int(var_0E / var_0D);
-  if(var_0F > 100) {
-    var_0F = 100;
+  var_11 = scripts\common\trace::ray_trace(var_9, var_10, level.player);
+  var_12 = var_11;
+  var_10 = var_11["position"];
+  var_13 = 20;
+  var_14 = distance2d(var_9, var_10);
+  var_15 = int(var_14 / var_13);
+  if(var_15 > 100) {
+    var_15 = 100;
   }
 
   var_10 = var_8;
-  for(var_11 = 0; var_11 < var_0F; var_11++) {
-    var_0B = bulletTrace(var_9, var_0A, 1, level.player);
-    if(distance2d(var_10, var_0B["position"]) < var_0D) {
+  for(var_11 = 0; var_11 < var_15; var_11++) {
+    var_11 = bulletTrace(var_9, var_10, 1, level.player);
+    if(distance2d(var_10, var_11["position"]) < var_13) {
       break;
     }
 
-    var_0A = var_0B["position"];
-    var_12 = vectornormalize(var_0A - var_9);
-    var_10 = var_10 + var_12 * var_0D;
+    var_10 = var_11["position"];
+    var_12 = vectornormalize(var_10 - var_9);
+    var_10 = var_10 + var_12 * var_13;
     if(level.player.var_4BDD >= 500) {
       continue;
     }
@@ -274,9 +274,9 @@ func_28C6(var_0, var_1, var_2, var_3, var_4) {
     playFX(scripts\engine\utility::getfx("beam_rifle_beam"), var_10);
   }
 
-  if(distance2d(var_0A, level.player.origin) > 56) {
-    if(isDefined(var_0B["entity"]) && isDefined(var_0B["entity"].var_9D77)) {
-      var_0B["entity"] notify("damage", 96, level.player, undefined, undefined, undefined, undefined, undefined, "j_head", undefined, "iw7_steeldragon");
+  if(distance2d(var_10, level.player.origin) > 56) {
+    if(isDefined(var_11["entity"]) && isDefined(var_11["entity"].var_9D77)) {
+      var_11["entity"] notify("damage", 96, level.player, undefined, undefined, undefined, undefined, undefined, "j_head", undefined, "iw7_steeldragon");
     }
 
     var_13 = 75;
@@ -284,22 +284,22 @@ func_28C6(var_0, var_1, var_2, var_3, var_4) {
       var_13 = var_4;
     }
 
-    radiusdamage(var_0B["position"], 56, var_13, var_13, level.player, "MOD_EXPLOSIVE", "iw7_steeldragon");
+    radiusdamage(var_11["position"], 56, var_13, var_13, level.player, "MOD_EXPLOSIVE", "iw7_steeldragon");
   }
 
-  if(isDefined(var_0B["surfacetype"]) && level.player.var_4BDD < 500) {
-    var_14 = vectortoangles(var_0C["normal"]);
-    playFX(scripts\engine\utility::getfx("beam_rifle_decal"), var_0C["position"], anglesToForward(var_14), anglestoup(var_14));
-    if(isDefined(var_0B["entity"]) || var_0B["surfacetype"] == "surftype_default") {
+  if(isDefined(var_11["surfacetype"]) && level.player.var_4BDD < 500) {
+    var_14 = vectortoangles(var_12["normal"]);
+    playFX(scripts\engine\utility::getfx("beam_rifle_decal"), var_12["position"], anglesToForward(var_14), anglestoup(var_14));
+    if(isDefined(var_11["entity"]) || var_11["surfacetype"] == "surftype_default") {
       if(!isDefined(var_3)) {
         level.var_EFFE = 0.75;
       }
 
-      if(isDefined(var_0B["entity"])) {
+      if(isDefined(var_11["entity"])) {
         return;
       }
 
-      playFX(scripts\engine\utility::getfx("beam_rifle_smoke"), var_0C["position"]);
+      playFX(scripts\engine\utility::getfx("beam_rifle_smoke"), var_12["position"]);
       return;
     }
 
@@ -308,7 +308,7 @@ func_28C6(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(scripts\engine\utility::cointoss()) {
-      playFX(scripts\engine\utility::getfx("beam_rifle_smoke"), var_0C["position"]);
+      playFX(scripts\engine\utility::getfx("beam_rifle_smoke"), var_12["position"]);
       return;
     }
 

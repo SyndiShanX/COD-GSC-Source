@@ -70,15 +70,15 @@ func_1063F(var_0) {
       var_7 = var_8;
     } else {
       var_9 = (isDefined(var_4.var_EECE) || isDefined(var_4.var_EED1)) && scripts\engine\utility::flag("stealth_enabled") && !scripts\engine\utility::flag("stealth_spotted");
-      var_0A = var_4;
+      var_10 = var_4;
       if(isDefined(var_4.var_EEB6)) {
-        var_0A = lib_0B77::func_7C86(var_4, 1);
+        var_10 = lib_0B77::func_7C86(var_4, 1);
       }
 
       if(isDefined(var_4.var_EDB3) || var_2) {
-        var_7 = var_0A func_8393(var_9);
+        var_7 = var_10 func_8393(var_9);
       } else {
-        var_7 = var_0A dospawn(var_9);
+        var_7 = var_10 dospawn(var_9);
       }
 
       if(isDefined(var_4.var_EEB6)) {
@@ -170,19 +170,19 @@ func_10805(var_0) {
       }
     }
 
-    var_0B = func_1063F(var_2);
-    for(var_0C = 0; var_0C < var_4.size; var_0C++) {
-      if(isDefined(var_0B[var_0C])) {
-        var_0B[var_0C].var_EEC9 = var_4[var_0C];
+    var_11 = func_1063F(var_2);
+    for(var_12 = 0; var_12 < var_4.size; var_12++) {
+      if(isDefined(var_11[var_12])) {
+        var_11[var_12].var_EEC9 = var_4[var_12];
       }
     }
 
-    var_0B = func_1041B(var_0B);
-    foreach(var_0E in var_0B) {
-      thread scripts\sp\vehicle_aianim::func_8739(var_0E);
+    var_11 = func_1041B(var_11);
+    foreach(var_14 in var_11) {
+      thread scripts\sp\vehicle_aianim::func_8739(var_14);
     }
 
-    return var_0B;
+    return var_11;
   }
 
   return spawn_group();
@@ -306,12 +306,12 @@ func_131F6(var_0) {
   var_0 thread func_5636();
   var_0 thread scripts\sp\vehicle_paths::beginlocationselection();
   if(isDefined(level.var_9334)) {
-    var_0B = level.var_9334;
+    var_11 = level.var_9334;
   } else {
-    var_0B = 0;
+    var_11 = 0;
   }
 
-  if(var_0 func_8BFC() && !var_0B) {
+  if(var_0 func_8BFC() && !var_11) {
     var_0 thread func_1A93();
   }
 
@@ -436,14 +436,14 @@ func_131FA() {
 
     var_8 = func_13233(self.model, var_1, var_2);
     var_9 = self.origin;
-    var_0A = undefined;
+    var_10 = undefined;
     if(isDefined(var_1)) {
-      var_0A = self.origin - var_1.origin;
-      var_0A = vectornormalize(var_0A);
+      var_10 = self.origin - var_1.origin;
+      var_10 = vectornormalize(var_10);
     }
 
     thread func_A5CC(self.classname);
-    thread func_12FB(self.model, var_8, var_0A);
+    thread func_12FB(self.model, var_8, var_10);
     if(self.var_9F == "script_vehicle") {
       thread func_A5EE(self.classname);
     }
@@ -968,9 +968,9 @@ func_1446(var_0) {
   if(isDefined(var_8)) {
     var_1 = [];
     var_9 = scripts\sp\vehicle_aianim::func_7D2F();
-    foreach(var_0B in self.var_E4FB) {
-      if(isDefined(var_9[var_0B.var_1321D])) {
-        var_1[var_1.size] = var_0B;
+    foreach(var_11 in self.var_E4FB) {
+      if(isDefined(var_9[var_11.var_1321D])) {
+        var_1[var_1.size] = var_11;
       }
     }
   }
@@ -1019,7 +1019,7 @@ func_8DAB(var_0, var_1) {
     self setneargoalnotifydist(var_2.fgetarg);
     self setvehgoalpos(var_2.origin, 0);
     thread func_8DA9(var_2.origin, var_6);
-    scripts\engine\utility::waittill_any_3("goal", "near_goal");
+    scripts\engine\utility::waittill_any("goal", "near_goal");
     func_8DAC(var_2);
   } else {
     var_7 = (var_2.origin[0], var_2.origin[1], self.origin[2] + var_4);
@@ -1034,7 +1034,7 @@ func_8DAB(var_0, var_1) {
     thread func_8DA9(var_7, 40);
     var_8 = "blank";
     while(var_8 != "death") {
-      var_8 = scripts\engine\utility::waittill_any_3("goal", "near_goal", "death");
+      var_8 = scripts\engine\utility::waittill_any("goal", "near_goal", "death");
       if(!isDefined(var_8) && !isDefined(self)) {
         var_2.claimed = undefined;
         self notify("crash_done");
@@ -1065,7 +1065,7 @@ func_8DAC(var_0) {
 
     self setneargoalnotifydist(var_1);
     self setvehgoalpos(var_0.origin, 0);
-    scripts\engine\utility::waittill_any_3("goal", "near_goal");
+    scripts\engine\utility::waittill_any("goal", "near_goal");
   }
 }
 
@@ -1340,7 +1340,7 @@ func_B03F(var_0, var_1, var_2) {
 
 func_4E05(var_0) {
   thread scripts\sp\utility::play_loop_sound_on_tag(var_0, undefined, 0, 1);
-  scripts\engine\utility::waittill_any_3("fire_extinguish", "stop_crash_loop_sound");
+  scripts\engine\utility::waittill_any("fire_extinguish", "stop_crash_loop_sound");
   if(!isDefined(self)) {
     return;
   }
@@ -1679,24 +1679,24 @@ func_1A93(var_0) {
         continue;
       }
 
-      var_0A = var_7["position"];
-      var_0B = var_7["normal"];
-      var_8 = vectordot(var_0A - var_4.origin, var_0B);
-      var_0C = var_4.origin + (0, 0, var_8);
-      var_0D = var_0A - var_0C;
+      var_10 = var_7["position"];
+      var_11 = var_7["normal"];
+      var_8 = vectordot(var_10 - var_4.origin, var_11);
+      var_12 = var_4.origin + (0, 0, var_8);
+      var_13 = var_10 - var_12;
       if(isDefined(self.var_126F4)) {
-        var_0D = var_0A - level.player.origin;
+        var_13 = var_10 - level.player.origin;
       }
 
       if(vectordot(var_7["normal"], (0, 0, 1)) == -1) {
         continue;
       }
 
-      if(length(var_0D) < 1) {
-        var_0D = var_4.angles + (0, 180, 0);
+      if(length(var_13) < 1) {
+        var_13 = var_4.angles + (0, 180, 0);
       }
 
-      playFX(var_9, var_0A, var_0B, var_0D);
+      playFX(var_9, var_10, var_11, var_13);
     }
   }
 }
@@ -1886,10 +1886,10 @@ func_B6B7() {
     }
   }
 
-  foreach(var_0B, var_7 in self.mgturret) {
-    var_0A = level.vehicle.var_116CE.mgturret[var_0][var_0B].var_5041;
-    if(isDefined(var_0A)) {
-      var_7 func_12A29(var_0A);
+  foreach(var_11, var_7 in self.mgturret) {
+    var_10 = level.vehicle.var_116CE.mgturret[var_0][var_11].var_5041;
+    if(isDefined(var_10)) {
+      var_7 func_12A29(var_10);
     }
   }
 
@@ -2268,8 +2268,8 @@ func_740E() {
   var_2 = undefined;
   while(self.health > 0) {
     self waittill("damage", var_3, var_0, var_4, var_5, var_1, var_6, var_7, var_8, var_9, var_2);
-    foreach(var_0B in self.var_4CF5) {
-      thread[[var_0B]](var_3, var_0, var_4, var_5, var_1, var_6, var_7);
+    foreach(var_11 in self.var_4CF5) {
+      thread[[var_11]](var_3, var_0, var_4, var_5, var_1, var_6, var_7);
     }
 
     if(isDefined(var_0)) {

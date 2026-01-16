@@ -4,15 +4,15 @@
 *******************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("agent", ::tryusesquadmate);
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("recon_agent", ::tryusereconsquadmate);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("agent", ::tryusesquadmate);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("recon_agent", ::tryusereconsquadmate);
 }
 
 setup_callbacks() {
   level.agent_funcs["squadmate"] = level.agent_funcs["player"];
   level.agent_funcs["squadmate"]["think"] = ::squadmate_agent_think;
   level.agent_funcs["squadmate"]["on_killed"] = ::on_agent_squadmate_killed;
-  level.agent_funcs["squadmate"]["on_damaged"] = scripts\mp\agents\_agents::on_agent_player_damaged;
+  level.agent_funcs["squadmate"]["on_damaged"] = ::scripts\mp\agents\_agents::on_agent_player_damaged;
   level.agent_funcs["squadmate"]["gametype_update"] = ::no_gametype_update;
 }
 
@@ -62,12 +62,12 @@ usesquadmate(var_0) {
     var_4 thread finishreconagentloadout();
     var_4 thread scripts\mp\class::giveloadout(self.pers["team"], "reconAgent", 0);
     var_4 scripts\mp\agents\_agent_common::set_agent_health(250);
-    var_4 scripts\mp\perks\_perkfunctions::setlightarmor();
+    var_4 scripts\mp\perks\perkfunctions::setlightarmor();
     var_4 setModel("mp_fullbody_synaptic_1");
     var_4 detach(var_4.headmodel);
     var_4.headmodel = undefined;
   } else {
-    var_4 scripts\mp\perks\_perkfunctions::setlightarmor();
+    var_4 scripts\mp\perks\perkfunctions::setlightarmor();
   }
 
   var_4 scripts\mp\utility::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
@@ -79,7 +79,7 @@ finishreconagentloadout() {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("giveLoadout");
-  scripts\mp\perks\_perkfunctions::setlightarmor();
+  scripts\mp\perks\perkfunctions::setlightarmor();
   scripts\mp\utility::giveperk("specialty_quickswap");
   scripts\mp\utility::giveperk("specialty_regenfaster");
   self getpassivestruct("minInaccuracy", 1.5 * self botgetdifficultysetting("minInaccuracy"));
@@ -109,8 +109,8 @@ squadmate_agent_think() {
     self botsetflag("prefer_shield_out", 1);
     var_0 = self[[scripts\mp\agents\agent_utility::agentfunc("gametype_update")]]();
     if(!var_0) {
-      if(!scripts\mp\bots\_bots_util::bot_is_guarding_player(self.triggerportableradarping)) {
-        scripts\mp\bots\_bots_strategy::bot_guard_player(self.triggerportableradarping, 350);
+      if(!scripts\mp\bots\_bots_util::bot_is_guarding_player(self.owner)) {
+        scripts\mp\bots\_bots_strategy::bot_guard_player(self.owner, 350);
       }
     }
 
@@ -120,8 +120,8 @@ squadmate_agent_think() {
 
 on_agent_squadmate_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   scripts\mp\agents\_agents::on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
-  if(isplayer(var_1) && isDefined(self.triggerportableradarping) && var_1 != self.triggerportableradarping) {
-    self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("squad_killed");
+  if(isplayer(var_1) && isDefined(self.owner) && var_1 != self.owner) {
+    self.owner scripts\mp\utility::leaderdialogonplayer("squad_killed");
     scripts\mp\damage::onkillstreakkilled("squad_mate", var_1, var_4, var_3, var_2, "destroyed_squad_mate");
   }
 

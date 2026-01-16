@@ -60,7 +60,7 @@ zombie_behind_vo() {
     var_7 = 1;
     if(isDefined(var_5)) {
       foreach(var_9 in var_5) {
-        if(!isDefined(var_9) || !isDefined(var_9.agent_type) || !isDefined(var_9.isnodeoccupied) || var_9.isnodeoccupied != self) {
+        if(!isDefined(var_9) || !isDefined(var_9.agent_type) || !isDefined(var_9.enemy) || var_9.enemy != self) {
           continue;
         }
 
@@ -68,38 +68,38 @@ zombie_behind_vo() {
           continue;
         }
 
-        var_0A = 200;
+        var_10 = 200;
         if(isDefined(var_9.asm.cur_move_mode)) {
-          var_0B = var_9.asm.cur_move_mode;
+          var_11 = var_9.asm.cur_move_mode;
         } else {
-          var_0B = var_9.synctransients;
+          var_11 = var_9.synctransients;
         }
 
-        var_0C = "walk_front_grunt";
-        var_0D = "walk_behind_grunt";
-        switch (var_0B) {
+        var_12 = "walk_front_grunt";
+        var_13 = "walk_behind_grunt";
+        switch (var_11) {
           case "slow_walk":
-            var_0A = var_0;
+            var_10 = var_0;
             break;
 
           case "walk":
-            var_0A = var_1;
+            var_10 = var_1;
             break;
 
           case "run":
-            var_0A = var_2;
-            var_0C = "run_front_grunt";
-            var_0D = "run_behind_grunt";
+            var_10 = var_2;
+            var_12 = "run_front_grunt";
+            var_13 = "run_behind_grunt";
             break;
 
           case "sprint":
-            var_0A = var_3;
-            var_0C = "sprint_front_grunt";
-            var_0D = "sprint_behind_grunt";
+            var_10 = var_3;
+            var_12 = "sprint_front_grunt";
+            var_13 = "sprint_behind_grunt";
             break;
         }
 
-        var_6 = play_vo_on_dist(var_9, var_0A, var_0C, var_0D);
+        var_6 = play_vo_on_dist(var_9, var_10, var_12, var_13);
       }
     }
 
@@ -239,12 +239,12 @@ func_13F10() {
   var_0 = self.voprefix == level.var_13F24;
   var_1 = "walk_front_grunt";
   for(;;) {
-    var_2 = scripts\engine\utility::waittill_any_timeout_1(6, "attack_hit", "attack_miss");
+    var_2 = scripts\engine\utility::waittill_any_timeout(6, "attack_hit", "attack_miss");
     var_3 = undefined;
-    if(!isDefined(self.isnodeoccupied)) {
+    if(!isDefined(self.enemy)) {
       var_4 = level.players[0];
     } else {
-      var_4 = self.isnodeoccupied;
+      var_4 = self.enemy;
     }
 
     if(isDefined(self.asm.cur_move_mode)) {

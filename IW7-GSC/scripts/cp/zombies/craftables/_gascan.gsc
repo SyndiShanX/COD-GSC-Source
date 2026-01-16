@@ -170,7 +170,7 @@ waitrestoreperks() {
 func_49CD(var_0) {
   var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = var_0.angles;
-  var_1.triggerportableradarping = var_0;
+  var_1.owner = var_0;
   var_1.name = "crafted_gascan";
   var_1.carriedgascan = spawn("script_model", var_1.origin);
   var_1.carriedgascan.angles = var_0.angles;
@@ -274,18 +274,18 @@ func_76C2() {
   self endon("damage_monitor");
   var_0 = 9216;
   for(;;) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-    if(isplayer(var_2) && isDefined(var_0A) && var_5 != "MOD_MELEE") {
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    if(isplayer(var_2) && isDefined(var_10) && var_5 != "MOD_MELEE") {
       self notify("gas_spot_damaged");
-      foreach(var_0C in level.var_38B3) {
-        if(var_0C == self) {
+      foreach(var_12 in level.var_38B3) {
+        if(var_12 == self) {
           continue;
         }
 
-        if(distancesquared(var_0C.origin, self.origin) > var_0) {
+        if(distancesquared(var_12.origin, self.origin) > var_0) {
           continue;
         } else {
-          var_0C notify("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+          var_12 notify("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
         }
       }
 
@@ -303,7 +303,7 @@ func_76C0(var_0, var_1) {
   triggerfx(self.fx);
   self.var_4D27 = spawn("trigger_radius", self.origin, 1, 64, 32);
   self.var_4D27.var_336 = "kindlepops_trig";
-  self.var_4D27.triggerportableradarping = var_1;
+  self.var_4D27.owner = var_1;
   thread func_76C1();
   while(gettime() < var_0) {
     wait(0.1);
@@ -368,7 +368,7 @@ func_1070D(var_0, var_1) {
 
   var_3 setCanDamage(1);
   var_3.health = 10000;
-  var_3.triggerportableradarping = var_0;
+  var_3.owner = var_0;
   var_3.name = "crafted_gascan";
   var_0.itemtype = var_3.name;
   level.var_38B3[level.var_38B3.size] = var_3;
@@ -378,8 +378,8 @@ func_1070D(var_0, var_1) {
 
 func_76C9() {
   self.carriedby getrigindexfromarchetyperef();
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.carriedgascan delete();

@@ -56,7 +56,7 @@ init_sliding_power_doors() {
 
 sliding_power_door() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
   self.powered_on = 1;

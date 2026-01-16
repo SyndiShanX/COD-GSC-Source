@@ -18,8 +18,8 @@ func_FAB0() {
 
   level.agent_definition["karatemaster"]["setup_func"] = ::setupagent;
   level.agent_definition["karatemaster"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["karatemaster"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["karatemaster"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.agent_funcs["karatemaster"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["karatemaster"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.agent_funcs["karatemaster"]["on_damaged"] = ::func_C4E0;
   level.agent_funcs["karatemaster"]["on_damaged_finished"] = ::ondamagefinished;
   level.agent_funcs["karatemaster"]["on_killed"] = level.var_C4BE;
@@ -141,8 +141,8 @@ setupagent() {
   self.var_B601 = 45;
   self.var_504E = 55;
   self.var_129AF = 55;
-  self.var_368 = -60;
-  self.isbot = 60;
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
   self.ground_pound_damage = 50;
   self.footstepdetectdist = 2500;
   self.footstepdetectdistwalk = 2500;
@@ -213,17 +213,17 @@ cleardamageaccumulator() {
   self.damageaccumulator.lastdamagetime = 0;
 }
 
-ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   accumulatedamage(var_2, var_7);
-  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+  scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
 }
 
-func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+func_C4E0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(scripts\engine\utility::istrue(self.ishidden)) {
     return;
   }
 
-  [[level.on_zombie_damaged_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  [[level.on_zombie_damaged_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 should_spawn_karatemaster() {

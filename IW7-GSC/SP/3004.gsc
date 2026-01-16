@@ -98,27 +98,27 @@ init_location() {
     }
 
     self.var_4D94.var_9A62 = [];
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior", "tag_connect");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_cockpit_dash", "TAG_COCKPIT_DASH");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_LE");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_RI");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_screens", "TAG_COCKPIT_SCREENS");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_rear", "TAG_PROPS_REAR");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_cockpit", "TAG_PROPS_COCKPIT");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_metal_beams_rear", "TAG_METAL_BEAMS_REAR");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_le", "TAG_SEAT_BAYS_LE");
-    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_ri", "TAG_SEAT_BAYS_RI");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior", "tag_connect");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_cockpit_dash", "TAG_COCKPIT_DASH");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_LE");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat", "TAG_PILOT_SEAT_RI");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_screens", "TAG_COCKPIT_SCREENS");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_rear", "TAG_PROPS_REAR");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_cockpit", "TAG_PROPS_COCKPIT");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_metal_beams_rear", "TAG_METAL_BEAMS_REAR");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_le", "TAG_SEAT_BAYS_LE");
+    self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = ::scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_ri", "TAG_SEAT_BAYS_RI");
     self.var_4D94.parts = [];
     self.var_4D94.parts["straps"] = [];
     foreach(var_6 in ["TAG_CARABINER_HANDLE_LE_1", "TAG_CARABINER_HANDLE_LE_2", "TAG_CARABINER_HANDLE_RI_1", "TAG_CARABINER_HANDLE_RI_2"]) {
-      var_0A = self gettagorigin(var_6);
-      var_0B = spawn("script_model", var_0A);
-      var_0B setModel("veh_mil_air_un_dropship_hero_interior_carabiner_handle");
-      var_0B.var_1FBD = var_0B scripts\engine\utility::spawn_tag_origin();
-      var_0B.physics_setgravitydynentscalar = var_6;
-      self.var_4D94.parts["straps"][self.var_4D94.parts["straps"].size] = var_0B;
-      var_0B.var_1FBD linkto(self, var_6, (0, 0, 0), (0, 0, 0));
-      var_0B linkto(var_0B.var_1FBD, "tag_origin", (0, 0, 0), (0, 0, 0));
+      var_10 = self gettagorigin(var_6);
+      var_11 = spawn("script_model", var_10);
+      var_11 setModel("veh_mil_air_un_dropship_hero_interior_carabiner_handle");
+      var_11.var_1FBD = var_11 scripts\engine\utility::spawn_tag_origin();
+      var_11.physics_setgravitydynentscalar = var_6;
+      self.var_4D94.parts["straps"][self.var_4D94.parts["straps"].size] = var_11;
+      var_11.var_1FBD linkto(self, var_6, (0, 0, 0), (0, 0, 0));
+      var_11 linkto(var_11.var_1FBD, "tag_origin", (0, 0, 0), (0, 0, 0));
     }
   } else {
     self attach("veh_mil_air_un_dropship_periph_interior");

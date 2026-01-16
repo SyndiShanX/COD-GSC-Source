@@ -49,14 +49,16 @@ func_3E49(var_0) {
         return anim.failure;
       }
     }
-  } else
+  } else {
     self.var_3123 = undefined;
+  }
 
   if(isDefined(self.var_EF7E)) {
     self scragentsetgoalradius(self.var_EF7E);
     var_3 = self.var_EF7E;
-  } else
+  } else {
     var_3 = 4;
+  }
 
   if(isDefined(self.var_EF7D)) {
     self func_8484();
@@ -67,8 +69,9 @@ func_3E49(var_0) {
     if(var_4 > var_3 * var_3) {
       self func_8484();
       self scragentsetgoalentity(self.var_EF7A);
-    } else
+    } else {
       return anim.failure;
+    }
   } else if(isDefined(self.var_EF7C)) {
     self func_8484();
     self scragentsetgoalnode(self.var_EF7C);
@@ -197,8 +200,9 @@ func_3DE6(var_0) {
     if(self.last_enemy_seen != self.enemy) {
       self.last_enemy_sight_time = -99;
     }
-  } else
+  } else {
     self.last_enemy_sight_time = -99;
+  }
 
   var_2 = 1;
   var_3 = self cansee(self.enemy);
@@ -332,8 +336,9 @@ updatetarget(var_0) {
       if(!self canshoot(var_1)) {
         var_1 = getdefaultenemychestpos();
       }
-    } else
+    } else {
       var_1 = getdefaultenemychestpos();
+    }
 
     self.lookposition = var_1;
   } else {
@@ -363,8 +368,9 @@ func_3401(var_0) {
   } else if(isDefined(self.goodshootpos)) {
     var_1.pos = self.goodshootpos;
     var_1.ent = undefined;
-  } else
+  } else {
     return anim.success;
+  }
 
   if(!isDefined(var_1.objective)) {
     var_1.objective = "normal";
@@ -381,8 +387,9 @@ func_3401(var_0) {
 
     scripts\aitypes\combat::func_3EF8(var_1);
     self.bt.m_bfiring = 1;
-  } else
+  } else {
     self.bt.m_bfiring = 0;
+  }
 
   if(!isDefined(var_1.pos) && !isDefined(var_1.ent)) {
     return anim.success;

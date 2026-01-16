@@ -105,17 +105,17 @@ func_4A29(var_0, var_1) {
   var_3.carriervisible = 0;
   var_3.visibleteam = "none";
   foreach(var_5 in level.teamnamelist) {
-    var_3.teamobjids[var_5] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_3.teamobjids[var_5] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_3.teamobjids[var_5] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_3.teamobjids[var_5], "invisible", var_3.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_3.teamobjids[var_5], var_5);
     }
 
-    var_3.objpoints[var_5] = scripts\mp\objpoints::func_4A23("objpoint_" + var_5 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
+    var_3.objpoints[var_5] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_5 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
     var_3.objpoints[var_5].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_6 = "mlg_" + var_5;
-      var_3.objpoints[var_6] = scripts\mp\objpoints::func_4A23("objpoint_" + var_6 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
+      var_3.objpoints[var_6] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_6 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
       var_3.objpoints[var_6].alpha = 0;
     }
   }
@@ -188,17 +188,17 @@ createcarryobject(var_0, var_1, var_2, var_3) {
   var_4.objidpingenemy = 0;
   var_4.objidpingfriendly = 0;
   foreach(var_7 in level.teamnamelist) {
-    var_4.teamobjids[var_7] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_7] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_4.teamobjids[var_7] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_7], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_7], var_7);
     }
 
-    var_4.objpoints[var_7] = scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+    var_4.objpoints[var_7] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
     var_4.objpoints[var_7].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_8 = "mlg_" + var_7;
-      var_4.objpoints[var_8] = scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+      var_4.objpoints[var_8] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
       var_4.objpoints[var_8].alpha = 0;
     }
   }
@@ -232,9 +232,9 @@ createcarryobject(var_0, var_1, var_2, var_3) {
     var_4.touchlist["neutral"] = [];
     var_4.numtouching["none"] = 0;
     var_4.touchlist["none"] = [];
-    foreach(var_0B in level.teamnamelist) {
-      var_4.numtouching[var_0B] = 0;
-      var_4.touchlist[var_0B] = [];
+    foreach(var_11 in level.teamnamelist) {
+      var_4.numtouching[var_11] = 0;
+      var_4.touchlist[var_11] = [];
     }
 
     var_4.claimteam = "none";
@@ -488,7 +488,7 @@ func_CB44(var_0) {
 }
 
 setpickedup(var_0) {
-  if(isai(var_0) && isDefined(var_0.triggerportableradarping)) {
+  if(isai(var_0) && isDefined(var_0.owner)) {
     return;
   }
 
@@ -815,21 +815,21 @@ setdropped(var_0) {
   }
 
   var_9 = var_4 + (0, 0, var_5);
-  var_0A = var_4 - (0, 0, var_6);
-  var_0B = scripts\common\trace::create_contents(0, 1, 1, 0, 0, 1, 1);
-  var_0C = [];
-  var_0C[0] = self.visuals[0];
-  var_0C[1] = self.carrier;
+  var_10 = var_4 - (0, 0, var_6);
+  var_11 = scripts\common\trace::create_contents(0, 1, 1, 0, 0, 1, 1);
+  var_12 = [];
+  var_12[0] = self.visuals[0];
+  var_12[1] = self.carrier;
   if(isDefined(self.carrier) && self.carrier.team != "spectator") {
     if(level.gametype != "ctf") {
-      var_0D = scripts\common\trace::capsule_trace(var_9, var_0A, 8, 16, (0, 0, 0), var_0C, var_0B, 0);
+      var_13 = scripts\common\trace::capsule_trace(var_9, var_10, 8, 16, (0, 0, 0), var_12, var_11, 0);
     } else {
-      var_0D = scripts\common\trace::capsule_trace(var_0A, var_0B, 2, 4, (0, 0, 0), var_0D, var_0C, 0);
+      var_13 = scripts\common\trace::capsule_trace(var_10, var_11, 2, 4, (0, 0, 0), var_13, var_12, 0);
     }
   } else {
-    var_0D = scripts\common\trace::ray_trace(self.safeorigin + (0, 0, 20), self.safeorigin - (0, 0, 20), var_0D, var_0C, 0);
-    if(isplayer(var_0D["entity"])) {
-      var_0D["entity"] = undefined;
+    var_13 = scripts\common\trace::ray_trace(self.safeorigin + (0, 0, 20), self.safeorigin - (0, 0, 20), var_13, var_12, 0);
+    if(isplayer(var_13["entity"])) {
+      var_13["entity"] = undefined;
     }
   }
 
@@ -839,15 +839,15 @@ setdropped(var_0) {
 
   var_10 = self.carrier;
   var_11 = 0;
-  if(isDefined(var_0D)) {
+  if(isDefined(var_13)) {
     var_12 = randomfloat(360);
-    var_13 = var_0D["position"];
+    var_13 = var_13["position"];
     if(isDefined(self.visualgroundoffset)) {
       var_13 = var_13 + self.visualgroundoffset;
     }
 
     var_14 = (cos(var_12), sin(var_12), 0);
-    var_14 = vectornormalize(var_14 - var_0D["normal"] * vectordot(var_14, var_0D["normal"]));
+    var_14 = vectornormalize(var_14 - var_13["normal"] * vectordot(var_14, var_13["normal"]));
     var_15 = 0;
     if(level.gametype == "ctf" || isbombmode()) {
       if(self.carrier touchingarbitraryuptrigger() && var_7[2] < 0) {
@@ -879,11 +879,11 @@ setdropped(var_0) {
     self.trigger.origin = var_13 + (0, 0, var_15);
     self.curorigin = self.trigger.origin;
     var_18 = undefined;
-    if(!isplayer(var_0D["entity"]) || !isbot(var_0D["entity"]) || !isagent(var_0D["entity"])) {
-      var_18 = var_0D["entity"];
+    if(!isplayer(var_13["entity"]) || !isbot(var_13["entity"]) || !isagent(var_13["entity"])) {
+      var_18 = var_13["entity"];
     }
 
-    if(isDefined(var_18) && isDefined(var_18.triggerportableradarping)) {
+    if(isDefined(var_18) && isDefined(var_18.owner)) {
       var_19 = var_18 getlinkedparent();
       if(isDefined(var_19)) {
         var_18 = var_19;
@@ -1137,17 +1137,17 @@ createuseobject(var_0, var_1, var_2, var_3) {
   var_4.offset3d = var_3;
   var_4.var_4465 = [];
   foreach(var_7 in level.teamnamelist) {
-    var_4.teamobjids[var_7] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_7] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
     if(var_4.teamobjids[var_7] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_7], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_7], var_7);
     }
 
-    var_4.objpoints[var_7] = scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+    var_4.objpoints[var_7] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
     var_4.objpoints[var_7].alpha = 0;
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_8 = "mlg_" + var_7;
-      var_4.objpoints[var_8] = scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+      var_4.objpoints[var_8] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
       var_4.objpoints[var_8].alpha = 0;
     }
   }
@@ -1173,9 +1173,9 @@ createuseobject(var_0, var_1, var_2, var_3) {
     var_4.touchlist["neutral"] = [];
     var_4.numtouching["none"] = 0;
     var_4.touchlist["none"] = [];
-    foreach(var_0B in level.teamnamelist) {
-      var_4.numtouching[var_0B] = 0;
-      var_4.touchlist[var_0B] = [];
+    foreach(var_11 in level.teamnamelist) {
+      var_4.numtouching[var_11] = 0;
+      var_4.touchlist[var_11] = [];
     }
 
     var_4.userate = 0;

@@ -192,19 +192,19 @@ func_8394(var_0, var_1, var_2) {
   var_7 = getplayerweaponrankxp(var_3, "cp");
   var_8 = var_6 + var_7;
   var_9 = getweaponrankforxp(var_8);
-  var_0A = getweaponmaxrankxp(var_3);
-  var_0B = var_0A - var_7;
-  var_0C = var_6 + var_2;
-  if(var_0C > var_0B) {
-    var_0C = var_0B;
+  var_10 = getweaponmaxrankxp(var_3);
+  var_11 = var_10 - var_7;
+  var_12 = var_6 + var_2;
+  if(var_12 > var_11) {
+    var_12 = var_11;
   }
 
-  var_0D = var_0C + var_7;
-  var_0E = getmaxweaponrankforrootweapon(var_3);
-  var_0F = self getplayerdata("common", "sharedProgression", "weaponLevel", var_3, "prestige");
-  var_10 = int(min(getweaponrankforxp(var_0D), var_0E));
-  scripts\mp\analyticslog::logevent_givempweaponxp(var_0, var_0F, var_10, var_2, var_1);
-  self setplayerdata("common", "sharedProgression", "weaponLevel", var_3, "mpXP", var_0C);
+  var_13 = var_12 + var_7;
+  var_14 = getmaxweaponrankforrootweapon(var_3);
+  var_15 = self getplayerdata("common", "sharedProgression", "weaponLevel", var_3, "prestige");
+  var_10 = int(min(getweaponrankforxp(var_13), var_14));
+  scripts\mp\analyticslog::logevent_givempweaponxp(var_0, var_15, var_10, var_2, var_1);
+  self setplayerdata("common", "sharedProgression", "weaponLevel", var_3, "mpXP", var_12);
   var_11 = getweaponvariantindex(var_0);
   scripts\mp\matchdata::func_AFDC(var_3, "xp", var_2, var_11);
   if(var_9 < var_10) {

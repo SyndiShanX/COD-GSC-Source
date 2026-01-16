@@ -11,7 +11,7 @@ init() {
   precachempanim("juggernaut_carepackage");
   setairdropcratecollision("airdrop_crate");
   setairdropcratecollision("care_package");
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("dronedrop", ::func_1AA2, undefined, undefined, ::tryuseairdrop, undefined, ::func_1A9F);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("dronedrop", ::func_1AA2, undefined, undefined, ::tryuseairdrop, undefined, ::func_1A9F);
   var_0 = ["passive_bomb_trap", "passive_decreased_cost", "passive_increased_cost", "passive_reroll", "passive_high_roller", "passive_low_roller"];
   scripts\mp\killstreak_loot::func_DF07("dronedrop", var_0);
   level.numdropcrates = 0;
@@ -278,7 +278,7 @@ func_1AA1(var_0, var_1, var_2) {
 
 func_1A9E(var_0, var_1) {
   var_1 thread airdropdetonateonstuck();
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   var_0.var_1AA0 = var_0.streakname;
   scripts\mp\utility::incrementfauxvehiclecount();
   thread func_4FC3();
@@ -293,7 +293,7 @@ airdropmarkeractivate(var_0, var_1) {
   self notify("airDropMarkerActivate");
   self endon("airDropMarkerActivate");
   self waittill("explode", var_2);
-  var_3 = self.triggerportableradarping;
+  var_3 = self.owner;
   if(!isDefined(var_3)) {
     return;
   }
@@ -512,10 +512,10 @@ createairdropcrate(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.id = "care_package";
   var_6 give_player_tickets(1);
   if(isDefined(var_0)) {
-    var_6.triggerportableradarping = var_0;
+    var_6.owner = var_0;
     var_6 setotherent(var_0);
   } else {
-    var_6.triggerportableradarping = undefined;
+    var_6.owner = undefined;
   }
 
   var_6.cratetype = var_2;
@@ -595,9 +595,9 @@ cratesetupforuse(var_0, var_1, var_2, var_3) {
   }
 
   if(scripts\mp\utility::istrue(var_2)) {
-    thread watchcratereroll(self.triggerportableradarping);
-    thread watchcratererollcommand(self.triggerportableradarping);
-    thread fakererollcratesetupforuse(self.triggerportableradarping, var_3);
+    thread watchcratereroll(self.owner);
+    thread watchcratererollcommand(self.owner);
+    thread fakererollcratesetupforuse(self.owner, var_3);
   }
 
   var_4 = "icon_minimap_drone_package_friendly";
@@ -622,8 +622,8 @@ cratesetupforuse(var_0, var_1, var_2, var_3) {
   var_9 = undefined;
   if(level.teambased) {
     var_9 = scripts\mp\entityheadicons::setheadicon(self.team, var_1, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
-  } else if(isDefined(self.triggerportableradarping)) {
-    var_9 = scripts\mp\entityheadicons::setheadicon(self.triggerportableradarping, var_1, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+  } else if(isDefined(self.owner)) {
+    var_9 = scripts\mp\entityheadicons::setheadicon(self.owner, var_1, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   }
 
   if(isDefined(var_9)) {
@@ -702,8 +702,8 @@ watchcratereroll(var_0) {
   var_5 = undefined;
   if(level.teambased) {
     var_5 = scripts\mp\entityheadicons::setheadicon(self.team, var_4, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
-  } else if(isDefined(self.triggerportableradarping)) {
-    var_5 = scripts\mp\entityheadicons::setheadicon(self.triggerportableradarping, var_4, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
+  } else if(isDefined(self.owner)) {
+    var_5 = scripts\mp\entityheadicons::setheadicon(self.owner, var_4, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   }
 
   if(isDefined(var_5)) {
@@ -782,11 +782,11 @@ createobjective(var_0, var_1, var_2, var_3, var_4) {
   scripts\mp\objidpoolmanager::minimap_objective_state(var_5, "active");
   scripts\mp\objidpoolmanager::minimap_objective_icon(var_5, var_0);
   if(isDefined(var_1)) {
-    if(!level.teambased && isDefined(self.triggerportableradarping)) {
+    if(!level.teambased && isDefined(self.owner)) {
       if(scripts\mp\utility::istrue(var_2)) {
-        scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_5, self.triggerportableradarping getentitynumber());
+        scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_5, self.owner getentitynumber());
       } else {
-        scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_5, self.triggerportableradarping getentitynumber());
+        scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_5, self.owner getentitynumber());
       }
     } else {
       scripts\mp\objidpoolmanager::minimap_objective_team(var_5, var_1);
@@ -835,17 +835,17 @@ setusablebyteam(var_0) {
       continue;
     }
 
-    if(issubstr(self.cratetype, "trap") && scripts\mp\utility::istrue(level.teambased) && var_2.team == self.triggerportableradarping.team) {
+    if(issubstr(self.cratetype, "trap") && scripts\mp\utility::istrue(level.teambased) && var_2.team == self.owner.team) {
       self disableplayeruse(var_2);
       continue;
     }
 
-    if(issubstr(self.cratetype, "trap") && !scripts\mp\utility::istrue(level.teambased) && var_2 == self.triggerportableradarping) {
+    if(issubstr(self.cratetype, "trap") && !scripts\mp\utility::istrue(level.teambased) && var_2 == self.owner) {
       self disableplayeruse(var_2);
       continue;
     }
 
-    if(issubstr(self.droptype, "reroll") && var_2 != self.triggerportableradarping) {
+    if(issubstr(self.droptype, "reroll") && var_2 != self.owner) {
       self disableplayeruse(var_2);
       continue;
     }
@@ -877,34 +877,34 @@ setusablebyotherteams(var_0) {
 
 dropthecrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = [];
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   if(!isDefined(var_4)) {
     if(isDefined(var_7)) {
-      var_0A = undefined;
-      var_0B = undefined;
-      for(var_0C = 0; var_0C < 100; var_0C++) {
-        var_0B = getcratetypefordroptype(var_1);
-        var_0A = 0;
-        for(var_0D = 0; var_0D < var_7.size; var_0D++) {
-          if(var_0B == var_7[var_0D]) {
-            var_0A = 1;
+      var_10 = undefined;
+      var_11 = undefined;
+      for(var_12 = 0; var_12 < 100; var_12++) {
+        var_11 = getcratetypefordroptype(var_1);
+        var_10 = 0;
+        for(var_13 = 0; var_13 < var_7.size; var_13++) {
+          if(var_11 == var_7[var_13]) {
+            var_10 = 1;
             break;
           }
         }
 
-        if(var_0A == 0) {
+        if(var_10 == 0) {
           break;
         }
       }
 
-      if(var_0A == 1) {
-        var_0B = getcratetypefordroptype(var_1);
+      if(var_10 == 1) {
+        var_11 = getcratetypefordroptype(var_1);
       }
     } else {
-      var_0B = getcratetypefordroptype(var_2);
+      var_11 = getcratetypefordroptype(var_2);
     }
   } else {
-    var_0B = var_5;
+    var_11 = var_5;
   }
 
   var_6 = (0, 0, 0);
@@ -912,7 +912,7 @@ dropthecrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_6 = (randomint(5), randomint(5), randomint(5));
   }
 
-  var_9 = createairdropcrate(self.triggerportableradarping, var_1, var_0B, var_5, var_0);
+  var_9 = createairdropcrate(self.owner, var_1, var_11, var_5, var_0);
   switch (var_1) {
     case "nuke_drop":
     case "airdrop_mega":
@@ -934,14 +934,14 @@ dropthecrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   var_9.angles = (0, 0, 0);
   var_9 show();
-  var_0E = self.var_37A;
-  if(issubstr(var_0B, "juggernaut")) {
+  var_14 = self.var_37A;
+  if(issubstr(var_11, "juggernaut")) {
     var_6 = (0, 0, 0);
   }
 
-  thread waitfordropcratemsg(var_9, var_6, var_1, var_0B);
+  thread waitfordropcratemsg(var_9, var_6, var_1, var_11);
   var_9.droppingtoground = 1;
-  return var_0B;
+  return var_11;
 }
 
 killplayerfromcrate_dodamage(var_0) {
@@ -1039,8 +1039,8 @@ waitfordropcratemsg(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_0.killcament unlink();
     var_8 = bulletTrace(var_0.origin, var_0.origin + (0, 0, -10000), 0, var_0);
     var_9 = distance(var_0.origin, var_8["position"]);
-    var_0A = var_9 / 800;
-    var_0.killcament moveto(var_8["position"] + (0, 0, 300) + (var_7, 0, 0), var_0A);
+    var_10 = var_9 / 800;
+    var_0.killcament moveto(var_8["position"] + (0, 0, 300) + (var_7, 0, 0), var_10);
   }
 }
 
@@ -1061,7 +1061,7 @@ physicswaiter(var_0, var_1, var_2, var_3, var_4) {
   func_136A7();
   self.droppingtoground = 0;
   self thread[[level.cratetypes[var_0][var_1].func]](var_0);
-  level thread droptimeout(self, self.triggerportableradarping, var_1);
+  level thread droptimeout(self, self.owner, var_1);
   var_5 = spawnStruct();
   var_5.endonstring = "restarting_physics";
   var_5.deathoverridecallback = ::airdrop_override_death_moving_platform;
@@ -1076,7 +1076,7 @@ physicswaiter(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  if(isDefined(self.triggerportableradarping) && abs(self.origin[2] - self.triggerportableradarping.origin[2]) > 3000) {
+  if(isDefined(self.owner) && abs(self.origin[2] - self.owner.origin[2]) > 3000) {
     deletecrateold();
   }
 }
@@ -1178,27 +1178,27 @@ func_581F(var_0, var_1, var_2, var_3, var_4) {
   var_8 = getpathstart(var_7, var_2);
   var_9 = getpathend(var_7, var_2);
   var_7 = var_7 + anglesToForward((0, var_2, 0)) * -50;
-  var_0A = func_5CC7(var_0, var_8, var_7, var_3, var_1, var_4);
-  var_0B = undefined;
-  var_0C = 999999;
-  var_0D = scripts\common\trace::ray_trace(var_5, var_5 + (0, 0, 10000), level.characters, scripts\common\trace::create_contents(0, 1, 0, 1, 0, 1, 0));
-  var_0E = undefined;
-  var_0F = 0;
-  if(var_0D["hittype"] == "hittype_none") {
-    var_0E = var_5 * (1, 1, 0) + (0, 0, var_6);
-    var_0F = 1;
+  var_10 = func_5CC7(var_0, var_8, var_7, var_3, var_1, var_4);
+  var_11 = undefined;
+  var_12 = 999999;
+  var_13 = scripts\common\trace::ray_trace(var_5, var_5 + (0, 0, 10000), level.characters, scripts\common\trace::create_contents(0, 1, 0, 1, 0, 1, 0));
+  var_14 = undefined;
+  var_15 = 0;
+  if(var_13["hittype"] == "hittype_none") {
+    var_14 = var_5 * (1, 1, 0) + (0, 0, var_6);
+    var_15 = 1;
   } else {
     if(isDefined(level.carepackagedropnodes) && level.carepackagedropnodes.size > 0) {
       foreach(var_11 in level.carepackagedropnodes) {
         var_12 = distance(var_11.origin, var_5);
-        if(var_12 < var_0C) {
-          var_0B = var_11;
-          var_0C = var_12;
+        if(var_12 < var_12) {
+          var_11 = var_11;
+          var_12 = var_12;
         }
       }
     }
 
-    var_0E = var_0B.origin * (1, 1, 0) + (0, 0, var_6);
+    var_14 = var_11.origin * (1, 1, 0) + (0, 0, var_6);
   }
 
   var_14 = "";
@@ -1216,10 +1216,10 @@ func_581F(var_0, var_1, var_2, var_3, var_4) {
     level thread scripts\mp\utility::teamplayercardsplash(var_15, var_0);
   }
 
-  var_0A setvehgoalpos(var_0E, 1);
-  var_0A setscriptablepartstate("lights", "idle");
-  var_0A setscriptablepartstate("thrusters", "fly", 0);
-  var_0A thread func_13A04(var_0E, var_5, var_0F);
+  var_10 setvehgoalpos(var_14, 1);
+  var_10 setscriptablepartstate("lights", "idle");
+  var_10 setscriptablepartstate("thrusters", "fly", 0);
+  var_10 thread func_13A04(var_14, var_5, var_15);
 }
 
 func_5CC7(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -1254,7 +1254,7 @@ func_5CC7(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_9.maxhealth = 100;
-  var_9.triggerportableradarping = var_0;
+  var_9.owner = var_0;
   var_9.team = var_0.team;
   var_9.isairdrop = 1;
   var_9 setmaxpitchroll(35, 35);
@@ -1269,17 +1269,17 @@ func_5CC7(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9.streakinfo = var_5;
   var_9.helitype = "dronedrop";
   var_9 scripts\mp\killstreaks\_utility::func_1843(var_9.helitype, "Killstreak_Air", var_0, 1);
-  var_0A = getcratetypefordroptype(var_3);
-  var_0B = var_9 createairdropcrate(var_0, var_3, var_0A, var_9.origin);
-  var_0B linkto(var_9, "tag_origin", (0, 0, 5), (0, 0, 0));
-  var_0B.streakinfo = var_5;
-  var_9.var_5D26 = var_0B;
+  var_10 = getcratetypefordroptype(var_3);
+  var_11 = var_9 createairdropcrate(var_0, var_3, var_10, var_9.origin);
+  var_11 linkto(var_9, "tag_origin", (0, 0, 5), (0, 0, 0));
+  var_11.streakinfo = var_5;
+  var_9.var_5D26 = var_11;
   var_9 thread watchtimeout(60);
-  var_9 thread func_13A01(var_0B, var_3, var_0A, var_4);
+  var_9 thread func_13A01(var_11, var_3, var_10, var_4);
   var_9 thread scripts\mp\killstreaks\_helicopter::heli_damage_monitor("dronedrop", undefined, 1);
   var_9 thread watchempdamage();
   if(var_3 == "dronedrop_trap") {
-    var_9 thread watchownerdisconnect(var_0B, var_4);
+    var_9 thread watchownerdisconnect(var_11, var_4);
   }
 
   var_9 setscriptablepartstate("dust", "active", 0);
@@ -1315,7 +1315,7 @@ func_13A01(var_0, var_1, var_2, var_3) {
 
   var_0 thread handlenavobstacle();
   func_5CAC();
-  scripts\mp\utility::printgameaction("killstreak ended - dronedrop", self.triggerportableradarping);
+  scripts\mp\utility::printgameaction("killstreak ended - dronedrop", self.owner);
 }
 
 handlenavobstacle() {
@@ -1341,7 +1341,7 @@ watchempdamage() {
   for(;;) {
     self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
     if(isDefined(var_3) && var_3 == "concussion_grenade_mp") {
-      if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+      if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
         var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
       }
     }
@@ -1352,7 +1352,7 @@ watchempdamage() {
 
 watchownerdisconnect(var_0, var_1) {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   if(isDefined(var_1.var_1349C)) {
     var_1.var_1349C delete();
   }
@@ -1385,38 +1385,38 @@ func_13A04(var_0, var_1, var_2) {
       var_7 = scripts\common\trace::create_solid_ai_contents();
       var_8 = scripts\common\trace::ray_trace(self.origin, self.origin - (0, 0, 500), self, var_7);
       var_9 = getclosestpointonnavmesh(var_8["position"], self);
-      var_5 = self.triggerportableradarping findpath(var_9, var_1);
-      self.triggerportableradarping iprintlnbold("3D Nav Volume is not present, using 2D path instead");
+      var_5 = self.owner findpath(var_9, var_1);
+      self.owner iprintlnbold("3D Nav Volume is not present, using 2D path instead");
     }
   } else {
     var_5 = [var_1 + (0, 0, 12)];
   }
 
-  var_0A = 0;
-  var_0B = self.origin;
-  foreach(var_10, var_0D in var_5) {
+  var_10 = 0;
+  var_11 = self.origin;
+  foreach(var_10, var_13 in var_5) {
     if(var_10 == var_5.size - 1) {
-      var_0A = 1;
+      var_10 = 1;
     }
 
-    if(var_0A) {
-      var_0E = var_4;
+    if(var_10) {
+      var_14 = var_4;
     } else {
-      var_0E = var_3;
+      var_14 = var_3;
     }
 
-    var_0F = 50;
-    self setneargoalnotifydist(var_0F);
-    var_0B = var_0D;
-    if(!var_0A) {
-      thread func_BA1C(var_0D + var_0E, var_5[var_10 + 1] + var_0E);
+    var_15 = 50;
+    self setneargoalnotifydist(var_15);
+    var_11 = var_13;
+    if(!var_10) {
+      thread func_BA1C(var_13 + var_14, var_5[var_10 + 1] + var_14);
     } else {
-      thread func_BA1D(var_0D + var_0E);
+      thread func_BA1D(var_13 + var_14);
     }
 
     self setscriptablepartstate("thrusters", "navigate", 0);
-    self setvehgoalpos(var_0D + var_0E, var_0A);
-    if(!var_0A || scripts\mp\utility::istrue(var_2)) {
+    self setvehgoalpos(var_13 + var_14, var_10);
+    if(!var_10 || scripts\mp\utility::istrue(var_2)) {
       self waittill("near_goal");
       continue;
     }
@@ -1604,33 +1604,33 @@ doflyby(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
   }
 
-  var_0A = var_1 * (1, 1, 0) + (0, 0, var_6);
-  var_0B = getpathstart(var_0A, var_2);
-  var_0C = getpathend(var_0A, var_2);
-  var_0A = var_0A + anglesToForward((0, var_2, 0)) * -50;
-  var_0D = helisetup(var_0, var_0B, var_0A);
+  var_10 = var_1 * (1, 1, 0) + (0, 0, var_6);
+  var_11 = getpathstart(var_10, var_2);
+  var_12 = getpathend(var_10, var_2);
+  var_10 = var_10 + anglesToForward((0, var_2, 0)) * -50;
+  var_13 = helisetup(var_0, var_11, var_10);
   if(isDefined(level.highlightairdrop) && level.highlightairdrop) {
-    var_0D hudoutlineenable(3, 0, 0);
+    var_13 hudoutlineenable(3, 0, 0);
   }
 
-  var_0D endon("death");
-  var_0D thread func_4FC2();
-  var_0D.droptype = var_3;
-  var_0D setvehgoalpos(var_0A, 1);
-  var_0D thread dropthecrate(var_1, var_3, var_6, 0, var_5, var_0B);
+  var_13 endon("death");
+  var_13 thread func_4FC2();
+  var_13.droptype = var_3;
+  var_13 setvehgoalpos(var_10, 1);
+  var_13 thread dropthecrate(var_1, var_3, var_6, 0, var_5, var_11);
   wait(2);
-  var_0D vehicle_setspeed(75, 40);
-  var_0D givelastonteamwarning(180, 180, 180, 0.3);
-  var_0D waittill("goal");
+  var_13 vehicle_setspeed(75, 40);
+  var_13 givelastonteamwarning(180, 180, 180, 0.3);
+  var_13 waittill("goal");
   wait(0.1);
-  var_0D notify("drop_crate");
-  var_0D setvehgoalpos(var_0C, 1);
-  var_0D vehicle_setspeed(300, 75);
-  var_0D.var_AB32 = 1;
-  var_0D waittill("goal");
-  var_0D notify("leaving");
-  var_0D notify("delete");
-  var_0D delete();
+  var_13 notify("drop_crate");
+  var_13 setvehgoalpos(var_12, 1);
+  var_13 vehicle_setspeed(300, 75);
+  var_13.var_AB32 = 1;
+  var_13 waittill("goal");
+  var_13 notify("leaving");
+  var_13 notify("delete");
+  var_13 delete();
 }
 
 func_4FC2() {
@@ -1657,24 +1657,24 @@ doc130flyby(var_0, var_1, var_2, var_3) {
   var_8 = getflyheightoffset(var_1);
   var_9 = var_1 + anglesToForward(var_7) * -1 * var_4;
   var_9 = var_9 * (1, 1, 0) + (0, 0, var_8);
-  var_0A = var_1 + anglesToForward(var_7) * var_4;
-  var_0A = var_0A * (1, 1, 0) + (0, 0, var_8);
-  var_0B = length(var_9 - var_0A);
-  var_0C = var_0B / var_5;
-  var_0D = c130setup(var_0, var_9, var_0A);
-  var_0D.var_37A = var_5;
-  var_0D.droptype = var_3;
-  var_0D playLoopSound("veh_ac130_dist_loop");
-  var_0D.angles = var_7;
-  var_0E = anglesToForward(var_7);
-  var_0D moveto(var_0A, var_0C, 0, 0);
-  var_0F = distance2d(var_0D.origin, var_1);
+  var_10 = var_1 + anglesToForward(var_7) * var_4;
+  var_10 = var_10 * (1, 1, 0) + (0, 0, var_8);
+  var_11 = length(var_9 - var_10);
+  var_12 = var_11 / var_5;
+  var_13 = c130setup(var_0, var_9, var_10);
+  var_13.var_37A = var_5;
+  var_13.droptype = var_3;
+  var_13 playLoopSound("veh_ac130_dist_loop");
+  var_13.angles = var_7;
+  var_14 = anglesToForward(var_7);
+  var_13 moveto(var_10, var_12, 0, 0);
+  var_15 = distance2d(var_13.origin, var_1);
   var_10 = 0;
   for(;;) {
-    var_11 = distance2d(var_0D.origin, var_1);
-    if(var_11 < var_0F) {
-      var_0F = var_11;
-    } else if(var_11 > var_0F) {
+    var_11 = distance2d(var_13.origin, var_1);
+    if(var_11 < var_15) {
+      var_15 = var_11;
+    } else if(var_11 > var_15) {
       break;
     }
 
@@ -1683,7 +1683,7 @@ doc130flyby(var_0, var_1, var_2, var_3) {
     } else if(var_11 < 768) {
       scripts\mp\shellshock::_earthquake(0.15, 1.5, var_1, 1500);
       if(!var_10) {
-        var_0D playSound("veh_ac130_sonic_boom");
+        var_13 playSound("veh_ac130_sonic_boom");
         var_10 = 1;
       }
     }
@@ -1693,13 +1693,13 @@ doc130flyby(var_0, var_1, var_2, var_3) {
 
   wait(0.05);
   var_12 = (0, 0, 0);
-  var_13[0] = var_0D thread dropthecrate(var_1, var_3, var_8, 0, undefined, var_9, var_12);
+  var_13[0] = var_13 thread dropthecrate(var_1, var_3, var_8, 0, undefined, var_9, var_12);
   wait(0.05);
-  var_0D notify("drop_crate");
+  var_13 notify("drop_crate");
   var_14 = var_1 + anglesToForward(var_7) * var_4 * 1.5;
-  var_0D moveto(var_14, var_0C / 2, 0, 0);
+  var_13 moveto(var_14, var_12 / 2, 0, 0);
   wait(6);
-  var_0D delete();
+  var_13 delete();
 }
 
 domegac130flyby(var_0, var_1, var_2, var_3, var_4) {
@@ -1712,24 +1712,24 @@ domegac130flyby(var_0, var_1, var_2, var_3, var_4) {
     var_1 = var_1 + var_9 * var_4;
   }
 
-  var_0A = getflyheightoffset(var_1);
-  var_0B = var_1 + anglesToForward(var_8) * -1 * var_5;
-  var_0B = var_0B * (1, 1, 0) + (0, 0, var_0A);
-  var_0C = var_1 + anglesToForward(var_8) * var_5;
-  var_0C = var_0C * (1, 1, 0) + (0, 0, var_0A);
-  var_0D = length(var_0B - var_0C);
-  var_0E = var_0D / var_6;
-  var_0F = c130setup(var_0, var_0B, var_0C);
-  var_0F.var_37A = var_6;
-  var_0F.droptype = var_3;
-  var_0F playLoopSound("veh_ac130_dist_loop");
-  var_0F.angles = var_8;
+  var_10 = getflyheightoffset(var_1);
+  var_11 = var_1 + anglesToForward(var_8) * -1 * var_5;
+  var_11 = var_11 * (1, 1, 0) + (0, 0, var_10);
+  var_12 = var_1 + anglesToForward(var_8) * var_5;
+  var_12 = var_12 * (1, 1, 0) + (0, 0, var_10);
+  var_13 = length(var_11 - var_12);
+  var_14 = var_13 / var_6;
+  var_15 = c130setup(var_0, var_11, var_12);
+  var_15.var_37A = var_6;
+  var_15.droptype = var_3;
+  var_15 playLoopSound("veh_ac130_dist_loop");
+  var_15.angles = var_8;
   var_9 = anglesToForward(var_8);
-  var_0F moveto(var_0C, var_0E, 0, 0);
-  var_10 = distance2d(var_0F.origin, var_1);
+  var_15 moveto(var_12, var_14, 0, 0);
+  var_10 = distance2d(var_15.origin, var_1);
   var_11 = 0;
   for(;;) {
-    var_12 = distance2d(var_0F.origin, var_1);
+    var_12 = distance2d(var_15.origin, var_1);
     if(var_12 < var_10) {
       var_10 = var_12;
     } else if(var_12 > var_10) {
@@ -1741,7 +1741,7 @@ domegac130flyby(var_0, var_1, var_2, var_3, var_4) {
     } else if(var_12 < 768) {
       scripts\mp\shellshock::_earthquake(0.15, 1.5, var_1, 1500);
       if(!var_11) {
-        var_0F playSound("veh_ac130_sonic_boom");
+        var_15 playSound("veh_ac130_sonic_boom");
         var_11 = 1;
       }
     }
@@ -1750,23 +1750,23 @@ domegac130flyby(var_0, var_1, var_2, var_3, var_4) {
   }
 
   wait(0.05);
-  var_13[0] = var_0F thread dropthecrate(var_1, var_3, var_0A, 0, undefined, var_0B);
+  var_13[0] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11);
   wait(0.05);
-  var_0F notify("drop_crate");
+  var_15 notify("drop_crate");
   wait(0.05);
-  var_13[1] = var_0F thread dropthecrate(var_1, var_3, var_0A, 0, undefined, var_0B, undefined, var_13);
+  var_13[1] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11, undefined, var_13);
   wait(0.05);
-  var_0F notify("drop_crate");
+  var_15 notify("drop_crate");
   wait(0.05);
-  var_13[2] = var_0F thread dropthecrate(var_1, var_3, var_0A, 0, undefined, var_0B, undefined, var_13);
+  var_13[2] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11, undefined, var_13);
   wait(0.05);
-  var_0F notify("drop_crate");
+  var_15 notify("drop_crate");
   wait(0.05);
-  var_13[3] = var_0F thread dropthecrate(var_1, var_3, var_0A, 0, undefined, var_0B, undefined, var_13);
+  var_13[3] = var_15 thread dropthecrate(var_1, var_3, var_10, 0, undefined, var_11, undefined, var_13);
   wait(0.05);
-  var_0F notify("drop_crate");
+  var_15 notify("drop_crate");
   wait(4);
-  var_0F delete();
+  var_15 delete();
 }
 
 dropnuke(var_0, var_1, var_2) {
@@ -1779,22 +1779,22 @@ dropnuke(var_0, var_1, var_2) {
   var_8 = var_8 * (1, 1, 0) + (0, 0, var_7);
   var_9 = var_0 + anglesToForward(var_6) * var_3;
   var_9 = var_9 * (1, 1, 0) + (0, 0, var_7);
-  var_0A = length(var_8 - var_9);
-  var_0B = var_0A / var_4;
-  var_0C = c130setup(var_1, var_8, var_9);
-  var_0C.var_37A = var_4;
-  var_0C.droptype = var_2;
-  var_0C playLoopSound("veh_ac130_dist_loop");
-  var_0C.angles = var_6;
-  var_0D = anglesToForward(var_6);
-  var_0C moveto(var_9, var_0B, 0, 0);
-  var_0E = 0;
-  var_0F = distance2d(var_0C.origin, var_0);
+  var_10 = length(var_8 - var_9);
+  var_11 = var_10 / var_4;
+  var_12 = c130setup(var_1, var_8, var_9);
+  var_12.var_37A = var_4;
+  var_12.droptype = var_2;
+  var_12 playLoopSound("veh_ac130_dist_loop");
+  var_12.angles = var_6;
+  var_13 = anglesToForward(var_6);
+  var_12 moveto(var_9, var_11, 0, 0);
+  var_14 = 0;
+  var_15 = distance2d(var_12.origin, var_0);
   for(;;) {
-    var_10 = distance2d(var_0C.origin, var_0);
-    if(var_10 < var_0F) {
-      var_0F = var_10;
-    } else if(var_10 > var_0F) {
+    var_10 = distance2d(var_12.origin, var_0);
+    if(var_10 < var_15) {
+      var_15 = var_10;
+    } else if(var_10 > var_15) {
       break;
     }
 
@@ -1802,20 +1802,20 @@ dropnuke(var_0, var_1, var_2) {
       break;
     } else if(var_10 < 768) {
       scripts\mp\shellshock::_earthquake(0.15, 1.5, var_0, 1500);
-      if(!var_0E) {
-        var_0C playSound("veh_ac130_sonic_boom");
-        var_0E = 1;
+      if(!var_14) {
+        var_12 playSound("veh_ac130_sonic_boom");
+        var_14 = 1;
       }
     }
 
     wait(0.05);
   }
 
-  var_0C thread dropthecrate(var_0, var_2, var_7, 0, "nuke", var_8);
+  var_12 thread dropthecrate(var_0, var_2, var_7, 0, "nuke", var_8);
   wait(0.05);
-  var_0C notify("drop_crate");
+  var_12 notify("drop_crate");
   wait(4);
-  var_0C delete();
+  var_12 delete();
 }
 
 stoploopafter(var_0) {
@@ -1846,7 +1846,7 @@ c130setup(var_0, var_1, var_2) {
     return;
   }
 
-  var_4.triggerportableradarping = var_0;
+  var_4.owner = var_0;
   var_4.team = var_0.team;
   level.c130 = var_4;
   return var_4;
@@ -1865,7 +1865,7 @@ helisetup(var_0, var_1, var_2) {
   }
 
   var_5.maxhealth = 500;
-  var_5.triggerportableradarping = var_0;
+  var_5.owner = var_0;
   var_5.team = var_0.team;
   var_5.isairdrop = 1;
   var_5 thread watchtimeout();
@@ -1895,7 +1895,7 @@ watchtimeout(var_0) {
 }
 
 heli_existence() {
-  scripts\engine\utility::waittill_any_3("crashing", "leaving");
+  scripts\engine\utility::waittill_any("crashing", "leaving");
   self notify("helicopter_gone");
 }
 
@@ -1960,7 +1960,7 @@ crateothercapturethink(var_0, var_1) {
 
   while(isDefined(self)) {
     var_2 waittill("trigger", var_4);
-    if(isDefined(self.triggerportableradarping) && var_4 == self.triggerportableradarping) {
+    if(isDefined(self.owner) && var_4 == self.owner) {
       continue;
     }
 
@@ -2004,7 +2004,7 @@ crateownercapturethink(var_0) {
   self endon("restarting_physics");
   while(isDefined(self)) {
     self waittill("trigger", var_1);
-    if(isDefined(self.triggerportableradarping) && var_1 != self.triggerportableradarping) {
+    if(isDefined(self.owner) && var_1 != self.owner) {
       continue;
     }
 
@@ -2131,8 +2131,8 @@ killstreakcratethink(var_0) {
       var_4.ui_securing = undefined;
     }
 
-    if(isDefined(self.triggerportableradarping)) {
-      if(var_4 == self.triggerportableradarping) {
+    if(isDefined(self.owner)) {
+      if(var_4 == self.owner) {
         var_4 thread scripts\mp\missions::func_D991("ch_scorestreak_uses_dronepackage");
       } else if(!level.teambased || var_4.team != self.team) {
         switch (var_0) {
@@ -2168,8 +2168,8 @@ killstreakcratethink(var_0) {
             break;
         }
       } else if(level.gametype != "grnd") {
-        self.triggerportableradarping thread scripts\mp\awards::givemidmatchaward("ss_use_dronedrop");
-        self.triggerportableradarping thread scripts\mp\missions::func_D991("ch_package_share");
+        self.owner thread scripts\mp\awards::givemidmatchaward("ss_use_dronedrop");
+        self.owner thread scripts\mp\missions::func_D991("ch_package_share");
       }
     }
 
@@ -2181,16 +2181,16 @@ killstreakcratethink(var_0) {
 
     if(isDefined(var_5)) {
       var_6 = scripts\mp\killstreak_loot::getpassiveperk(var_5);
-      var_4 thread scripts\mp\killstreaks\_killstreaks::awardkillstreak(self.cratetype, self.triggerportableradarping, var_6, var_5);
+      var_4 thread scripts\mp\killstreaks\killstreaks::awardkillstreak(self.cratetype, self.owner, var_6, var_5);
       var_7 = scripts\mp\killstreak_loot::getrarityforlootitem(var_5);
       var_8 = self.cratetype + "_" + var_7;
       var_4 scripts\mp\hud_message::showkillstreaksplash(var_8, undefined, 1);
     } else {
-      var_4 thread scripts\mp\killstreaks\_killstreaks::givekillstreak(self.cratetype, 0, 0, self.triggerportableradarping);
+      var_4 thread scripts\mp\killstreaks\killstreaks::givekillstreak(self.cratetype, 0, 0, self.owner);
       var_4 scripts\mp\hud_message::showkillstreaksplash(self.cratetype, undefined, 1);
     }
 
-    if(scripts\mp\killstreaks\_killstreaks::getstreakcost(self.cratetype) > 1000) {
+    if(scripts\mp\killstreaks\killstreaks::getstreakcost(self.cratetype) > 1000) {
       var_4 thread scripts\mp\missions::func_D991("ch_dronepackage_jackpot");
     }
 
@@ -2201,8 +2201,8 @@ killstreakcratethink(var_0) {
 killstreakbombcratethink(var_0) {
   self endon("restarting_physics");
   self endon("death");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping endon("disconnect");
+  if(isDefined(self.owner)) {
+    self.owner endon("disconnect");
   }
 
   var_1 = [ &"KILLSTREAKS_HINTS_SENTRY_SHOCK_PICKUP", &"KILLSTREAKS_HINTS_JACKAL_PICKUP", &"KILLSTREAKS_HINTS_THOR_PICKUP", &"KILLSTREAKS_HINTS_RC8_PICKUP", &"KILLSTREAKS_HINTS_MINI_JACKAL_PICKUP"];
@@ -2231,7 +2231,7 @@ killstreakbombcratethink(var_0) {
   }
 
   var_4 playlocalsound("ammo_crate_use");
-  var_5 = self.triggerportableradarping scripts\mp\utility::_launchgrenade("dummy_spike_mp", self.origin, self.origin, 2);
+  var_5 = self.owner scripts\mp\utility::_launchgrenade("dummy_spike_mp", self.origin, self.origin, 2);
   if(!isDefined(var_5.weapon_name)) {
     var_5.weapon_name = "dummy_spike_mp";
   }
@@ -2248,8 +2248,8 @@ killstreakbombcratethink(var_0) {
   playFX(scripts\engine\utility::getfx("crate_explode"), self.origin);
   playsoundatpos(self.origin, "mp_equip_destroyed");
   scripts\mp\shellshock::func_22FF(1, 0.7, 800);
-  if(isDefined(self.triggerportableradarping)) {
-    self radiusdamage(self.origin, 256, 200, 100, self.triggerportableradarping, "MOD_EXPLOSIVE", "jackal_fast_cannon_mp");
+  if(isDefined(self.owner)) {
+    self radiusdamage(self.origin, 256, 200, 100, self.owner, "MOD_EXPLOSIVE", "jackal_fast_cannon_mp");
   }
 
   deletecrateold();
@@ -2257,13 +2257,13 @@ killstreakbombcratethink(var_0) {
 
 cratewatchownerdisconnect() {
   self endon("death");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   deletecrateold();
 }
 
 cratewatchgameover() {
   self endon("death");
-  level scripts\engine\utility::waittill_any_3("bro_shot_start", "game_ended");
+  level scripts\engine\utility::waittill_any("bro_shot_start", "game_ended");
   if(isDefined(self)) {
     deletecrateold();
   }
@@ -2271,7 +2271,7 @@ cratewatchgameover() {
 
 dronewatchgameover() {
   self endon("death");
-  level scripts\engine\utility::waittill_any_3("bro_shot_start", "game_ended");
+  level scripts\engine\utility::waittill_any("bro_shot_start", "game_ended");
   if(isDefined(self)) {
     self notify("death");
   }
@@ -2284,7 +2284,7 @@ nukecratethink(var_0) {
   thread nukecapturethink();
   for(;;) {
     self waittill("captured", var_1);
-    var_1 thread scripts\mp\killstreaks\_killstreaks::func_729F(self.cratetype);
+    var_1 thread scripts\mp\killstreaks\killstreaks::func_729F(self.cratetype);
     level notify("nukeCaptured", var_1);
     if(isDefined(level.gtnw) && level.gtnw) {
       var_1.capturednuke = 1;
@@ -2303,7 +2303,7 @@ juggernautcratethink(var_0) {
   thread crateownercapturethink();
   for(;;) {
     self waittill("captured", var_1);
-    if(isDefined(self.triggerportableradarping) && var_1 != self.triggerportableradarping) {
+    if(isDefined(self.owner) && var_1 != self.owner) {
       if(!level.teambased || var_1.team != self.team) {
         if(self.cratetype == "airdrop_juggernaut_maniac") {
           var_1 thread hijacknotify(self, "maniac");
@@ -2313,11 +2313,11 @@ juggernautcratethink(var_0) {
           var_1 thread hijacknotify(self, "juggernaut");
         }
       } else if(self.cratetype == "airdrop_juggernaut_maniac") {
-        self.triggerportableradarping scripts\mp\hud_message::showsplash("giveaway_juggernaut_maniac", undefined, var_1);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut_maniac", undefined, var_1);
       } else if(scripts\mp\utility::isstrstart(self.cratetype, "juggernaut_")) {
-        self.triggerportableradarping scripts\mp\hud_message::showsplash("giveaway_" + self.cratetype, undefined, var_1);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_" + self.cratetype, undefined, var_1);
       } else {
-        self.triggerportableradarping scripts\mp\hud_message::showsplash("giveaway_juggernaut", undefined, var_1);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut", undefined, var_1);
       }
     }
 
@@ -2355,7 +2355,7 @@ sentrycratethink(var_0) {
   thread crateownercapturethink();
   for(;;) {
     self waittill("captured", var_1);
-    if(isDefined(self.triggerportableradarping) && var_1 != self.triggerportableradarping) {
+    if(isDefined(self.owner) && var_1 != self.owner) {
       if(!level.teambased || var_1.team != self.team) {
         if(issubstr(var_0, "airdrop_sentry")) {
           var_1 thread hijacknotify(self, "sentry");
@@ -2363,8 +2363,8 @@ sentrycratethink(var_0) {
           var_1 thread hijacknotify(self, "emergency_airdrop");
         }
       } else {
-        self.triggerportableradarping thread scripts\mp\utility::giveunifiedpoints("killstreak_giveaway", undefined, int(scripts\mp\killstreaks\_killstreaks::getstreakcost("sentry") / 10) * 50);
-        self.triggerportableradarping scripts\mp\hud_message::showsplash("giveaway_sentry", undefined, var_1);
+        self.owner thread scripts\mp\utility::giveunifiedpoints("killstreak_giveaway", undefined, int(scripts\mp\killstreaks\killstreaks::getstreakcost("sentry") / 10) * 50);
+        self.owner scripts\mp\hud_message::showsplash("giveaway_sentry", undefined, var_1);
       }
     }
 
@@ -2414,12 +2414,12 @@ deletecrateold() {
 
 sentryusetracker() {
   if(!scripts\mp\killstreaks\_autosentry::givesentry("sentry_minigun", 0, 0)) {
-    scripts\mp\killstreaks\_killstreaks::givekillstreak("sentry");
+    scripts\mp\killstreaks\killstreaks::givekillstreak("sentry");
   }
 }
 
 hijacknotify(var_0, var_1) {
-  self notify("hijacker", var_1, var_0.triggerportableradarping);
+  self notify("hijacker", var_1, var_0.owner);
 }
 
 refillammo(var_0) {
@@ -2555,7 +2555,7 @@ throw_linked_care_packages(var_0, var_1, var_2, var_3) {
 }
 
 spawn_new_care_package(var_0, var_1, var_2) {
-  var_3 = var_0.triggerportableradarping;
+  var_3 = var_0.owner;
   var_4 = var_0.droptype;
   var_5 = var_0.cratetype;
   var_6 = var_0.origin;
@@ -2565,9 +2565,9 @@ spawn_new_care_package(var_0, var_1, var_2) {
   var_7 thread[[level.cratetypes[var_7.droptype][var_7.cratetype].func]](var_7.droptype);
   scripts\engine\utility::waitframe();
   var_7 physicslaunchserver(var_7.origin, var_2);
-  if(isbot(var_7.triggerportableradarping)) {
+  if(isbot(var_7.owner)) {
     wait(0.1);
-    var_7.triggerportableradarping notify("new_crate_to_take");
+    var_7.owner notify("new_crate_to_take");
   }
 }
 

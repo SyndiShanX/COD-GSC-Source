@@ -50,8 +50,9 @@ func_D9AB() {
         setclientmatchdata("axisTTB", scripts\engine\utility::ter_op("axis" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"]));
         var_11 = game["timeToBeatTeam"];
       }
-    } else if(var_5 == var_6)
+    } else if(var_5 == var_6) {
       var_11 = "tied";
+    }
     else if(var_5 > var_6) {
       var_11 = "allies";
     } else {

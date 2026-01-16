@@ -44,7 +44,7 @@ func_4F69(var_0) {
   self.var_1E2B = undefined;
   for(;;) {
     if(isDefined(self.var_FED1)) {
-      if(!isDefined(self.isnodeoccupied)) {
+      if(!isDefined(self.enemy)) {
         self.var_FECF = self.var_FED1;
         self.var_FED1 = undefined;
         func_13696();
@@ -54,7 +54,7 @@ func_4F69(var_0) {
     }
 
     var_5 = undefined;
-    if(self.var_394 == "none") {
+    if(self.weapon == "none") {
       func_C064();
     } else if(scripts\anim\utility_common::usingrocketlauncher()) {
       var_5 = func_E778();
@@ -111,7 +111,7 @@ func_C064() {
 }
 
 func_100A4() {
-  return !scripts\anim\utility_common::isasniper() && !scripts\anim\utility_common::isshotgun(self.var_394);
+  return !scripts\anim\utility_common::isasniper() && !scripts\anim\utility_common::isshotgun(self.weapon);
 }
 
 func_E503() {
@@ -125,7 +125,7 @@ func_E503() {
       return "retry";
     }
 
-    if(!isDefined(self.isnodeoccupied)) {
+    if(!isDefined(self.enemy)) {
       func_8C4D();
       return;
     }
@@ -187,7 +187,7 @@ func_E502(var_0) {
 }
 
 func_7DB9() {
-  if(isDefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied)) {
+  if(isDefined(self.enemy) && self cansee(self.enemy)) {
     func_F83F();
     return;
   }
@@ -198,16 +198,16 @@ func_7DB9() {
       var_0 = self.covernode.angles;
     } else if(isDefined(self.var_1E2C)) {
       var_0 = self.var_1E2C.angles;
-    } else if(isDefined(self.isnodeoccupied)) {
-      var_0 = vectortoangles(self lastknownpos(self.isnodeoccupied) - self.origin);
+    } else if(isDefined(self.enemy)) {
+      var_0 = vectortoangles(self lastknownpos(self.enemy) - self.origin);
     } else {
       var_0 = self.angles;
     }
   }
 
   var_1 = 1024;
-  if(isDefined(self.isnodeoccupied)) {
-    var_1 = distance(self.origin, self.isnodeoccupied.origin);
+  if(isDefined(self.enemy)) {
+    var_1 = distance(self.origin, self.enemy.origin);
   }
 
   var_2 = self getEye() + anglesToForward(var_0) * var_1;
@@ -232,7 +232,7 @@ func_E501() {
     }
 
     var_0 = scripts\anim\utility_common::cansuppressenemy();
-    if(self.var_FECA == "suppress" || self.team == "allies" && !isDefined(self.isnodeoccupied) && !var_0) {
+    if(self.var_FECA == "suppress" || self.team == "allies" && !isDefined(self.enemy) && !var_0) {
       func_E504(var_0);
     } else {
       func_E502(var_0);
@@ -271,7 +271,7 @@ func_E778() {
 func_CBE2() {
   if(self.var_FECA == "normal") {
     if(!scripts\anim\utility_common::shouldshootenemyent()) {
-      if(!isDefined(self.isnodeoccupied)) {
+      if(!isDefined(self.enemy)) {
         func_8C4D();
         return;
       }
@@ -308,14 +308,14 @@ func_CBE2() {
 }
 
 func_B376() {
-  if(isDefined(self.isnodeoccupied) && !self.var_3C60 && self.script != "combat") {
-    if(isai(self.isnodeoccupied) && isDefined(self.isnodeoccupied.script) && self.isnodeoccupied.script == "cover_stand" || self.isnodeoccupied.script == "cover_crouch") {
-      if(isDefined(self.isnodeoccupied.a.var_4727) && self.isnodeoccupied.a.var_4727 == "hide") {
+  if(isDefined(self.enemy) && !self.var_3C60 && self.script != "combat") {
+    if(isai(self.enemy) && isDefined(self.enemy.script) && self.enemy.script == "cover_stand" || self.enemy.script == "cover_crouch") {
+      if(isDefined(self.enemy.a.var_4727) && self.enemy.a.var_4727 == "hide") {
         return;
       }
     }
 
-    self.var_46A6 = self.isnodeoccupied.origin;
+    self.var_46A6 = self.enemy.origin;
   }
 }
 
@@ -324,7 +324,7 @@ func_13A46() {
   self endon("stop_deciding_how_to_shoot");
   for(;;) {
     self waittill("suppression");
-    if(self.testbrushedgesforgrapple > self.suppressionthreshold) {
+    if(self.suppressionmeter > self.suppressionthreshold) {
       if(func_DD7D()) {
         self notify("return_to_cover");
         self.var_1006D = 1;
@@ -338,7 +338,7 @@ func_DD7D() {
     return 0;
   }
 
-  if(!isDefined(self.isnodeoccupied) || !self getpersstat(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy) || !self cansee(self.enemy)) {
     return 1;
   }
 
@@ -346,7 +346,7 @@ func_DD7D() {
     return 0;
   }
 
-  if(isplayer(self.isnodeoccupied) && self.isnodeoccupied.health < self.isnodeoccupied.maxhealth * 0.5) {
+  if(isplayer(self.enemy) && self.enemy.health < self.enemy.maxhealth * 0.5) {
     if(gettime() < self.var_4740 + 3000) {
       return 0;
     }
@@ -357,7 +357,7 @@ func_DD7D() {
 
 func_E883() {
   self endon("death");
-  scripts\engine\utility::waittill_any_3("killanimscript", "stop_deciding_how_to_shoot");
+  scripts\engine\utility::waittill_any("killanimscript", "stop_deciding_how_to_shoot");
   self.a.laseron = 0;
   scripts\anim\shared::updatelaserstatus();
 }
@@ -375,7 +375,7 @@ func_3DFB(var_0, var_1) {
 }
 
 func_F83F() {
-  self.var_FE9E = self.isnodeoccupied;
+  self.var_FE9E = self.enemy;
   self.var_FECF = self.var_FE9E getshootatpos();
 }
 
@@ -394,11 +394,11 @@ func_8C4D() {
 }
 
 func_FFC6() {
-  return level.var_7683 == 3 && isplayer(self.isnodeoccupied);
+  return level.var_7683 == 3 && isplayer(self.enemy);
 }
 
 func_F842() {
-  if(isDefined(self.var_FE9E.isnodeoccupied) && isDefined(self.var_FE9E.isnodeoccupied.physics_setgravityragdollscalar)) {
+  if(isDefined(self.var_FE9E.enemy) && isDefined(self.var_FE9E.enemy.physics_setgravityragdollscalar)) {
     return func_F840("single", 0);
   }
 
@@ -406,7 +406,7 @@ func_F842() {
     return func_F840("single", 0);
   }
 
-  if(scripts\anim\utility_common::isshotgun(self.var_394)) {
+  if(scripts\anim\utility_common::isshotgun(self.weapon)) {
     if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
       return func_F840("single", 0);
     } else {
@@ -414,11 +414,11 @@ func_F842() {
     }
   }
 
-  if(weaponclass(self.var_394) == "grenade") {
+  if(weaponclass(self.weapon) == "grenade") {
     return func_F840("single", 0);
   }
 
-  if(weaponburstcount(self.var_394) > 0) {
+  if(weaponburstcount(self.weapon) > 0) {
     return func_F840("burst", 0);
   }
 
@@ -427,7 +427,7 @@ func_F842() {
   }
 
   var_0 = distancesquared(self getshootatpos(), self.var_FECF);
-  var_1 = weaponclass(self.var_394) == "mg";
+  var_1 = weaponclass(self.weapon) == "mg";
   if(self.assertmsg && var_1) {
     return func_F840("full", 0);
   }
@@ -439,7 +439,7 @@ func_F842() {
       return func_F840("full", 0);
     }
   } else if(var_0 < 810000 || func_FFC6()) {
-    if(weaponissemiauto(self.var_394) || func_FFF6()) {
+    if(weaponissemiauto(self.weapon) || func_FFF6()) {
       return func_F840("semi", 1);
     } else {
       return func_F840("burst", 1);
@@ -457,7 +457,7 @@ func_F842() {
 
 func_F841() {
   var_0 = distancesquared(self getshootatpos(), self.var_FECF);
-  if(weaponissemiauto(self.var_394)) {
+  if(weaponissemiauto(self.weapon)) {
     if(var_0 < 2560000) {
       return func_F840("semi", 0);
     }
@@ -465,7 +465,7 @@ func_F841() {
     return func_F840("single", 0);
   }
 
-  if(weaponclass(self.var_394) == "mg") {
+  if(weaponclass(self.weapon) == "mg") {
     return func_F840("full", 0);
   }
 
@@ -486,7 +486,7 @@ func_F840(var_0, var_1) {
 }
 
 func_FFF6() {
-  if(weaponclass(self.var_394) != "rifle") {
+  if(weaponclass(self.weapon) != "rifle") {
     return 0;
   }
 
@@ -519,15 +519,15 @@ func_103A7() {
     return;
   }
 
-  if(!isalive(self.isnodeoccupied)) {
+  if(!isalive(self.enemy)) {
     return;
   }
 
   var_0 = scripts\engine\utility::getfx("sniper_glint");
   wait(0.2);
   for(;;) {
-    if(self.var_394 == self.primaryweapon && scripts\anim\combat_utility::func_D285()) {
-      if(distancesquared(self.origin, self.isnodeoccupied.origin) > 65536) {
+    if(self.weapon == self.primaryweapon && scripts\anim\combat_utility::func_D285()) {
+      if(distancesquared(self.origin, self.enemy.origin) > 65536) {
         playFXOnTag(var_0, self, "tag_flash");
       }
 

@@ -66,17 +66,17 @@ calculatefactorscore(var_0, var_1, var_2, var_3) {
   if(isDefined(var_5)) {
     if(!isDefined(var_3)) {}
 
-    var_0D = [[var_4]](var_0, var_3);
+    var_13 = [[var_4]](var_0, var_3);
   } else {
-    var_0D = [[var_5]](var_1);
+    var_13 = [[var_5]](var_1);
   }
 
-  var_0D = clamp(var_0D, 0, 100);
-  var_0D = var_0D * var_2;
+  var_13 = clamp(var_13, 0, 100);
+  var_13 = var_13 * var_2;
   var_0.var_11A3A = var_0.var_11A3A + 100 * var_2;
-  var_0.var_A9E9[self.team] = var_0.var_A9E9[self.team] + var_0D;
-  var_0.totalscore = var_0.totalscore + var_0D;
-  return var_0D;
+  var_0.var_A9E9[self.team] = var_0.var_A9E9[self.team] + var_13;
+  var_0.totalscore = var_0.totalscore + var_13;
+  return var_13;
 }
 
 critical_factor(var_0, var_1) {
@@ -138,12 +138,12 @@ isexplosivedangeroustoplayer(var_0) {
   }
 
   var_1 = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    if(var_0 == self.triggerportableradarping) {
+  if(isDefined(self.owner)) {
+    if(var_0 == self.owner) {
       return 1;
     }
 
-    var_1 = self.triggerportableradarping.team;
+    var_1 = self.owner.team;
   }
 
   if(isDefined(var_1)) {
@@ -200,7 +200,7 @@ func_26AE(var_0) {
   var_1 = [];
   var_2 = [];
   if(level.teambased) {
-    var_1[0] = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
     var_1[var_1.size] = "all";
   }
@@ -386,21 +386,21 @@ updatefrontlineposition() {
     var_0.midpoint = var_9;
   }
 
-  var_0A = var_9 - var_0.midpoint;
-  var_0B = length2d(var_0A);
-  var_0C = min(var_0B, 200 * var_2);
-  if(var_0C > 0) {
-    var_0A = var_0A * var_0C / var_0B;
-    var_0.midpoint = var_0.midpoint + var_0A;
+  var_10 = var_9 - var_0.midpoint;
+  var_11 = length2d(var_10);
+  var_12 = min(var_11, 200 * var_2);
+  if(var_12 > 0) {
+    var_10 = var_10 * var_12 / var_11;
+    var_0.midpoint = var_0.midpoint + var_10;
   }
 
-  var_0D = anglesToForward((0, var_0.teamdiffyaw, 0));
-  var_0E = level.spawnpoints;
-  var_0E = scripts\mp\spawnscoring::checkdynamicspawns(var_0E);
-  foreach(var_10 in var_0E) {
+  var_13 = anglesToForward((0, var_0.teamdiffyaw, 0));
+  var_14 = level.spawnpoints;
+  var_14 = scripts\mp\spawnscoring::checkdynamicspawns(var_14);
+  foreach(var_10 in var_14) {
     var_11 = undefined;
     var_12 = var_0.midpoint - var_10.origin;
-    var_13 = vectordot(var_12, var_0D);
+    var_13 = vectordot(var_12, var_13);
     if(var_13 > 0) {
       var_11 = "allies";
       var_10.var_7450 = var_11;
@@ -566,7 +566,7 @@ func_26B4(var_0) {
   var_1 = [];
   var_2 = [];
   if(level.teambased) {
-    var_1[0] = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
     var_1[var_1.size] = "all";
   }
@@ -596,11 +596,11 @@ func_26B4(var_0) {
     var_9 = var_9 + var_0.totalplayers[var_4];
   }
 
-  var_0C = var_8 / var_9;
-  var_0C = min(var_0C, 7290000);
-  var_0D = var_0C / 7290000;
-  var_0.analytics.enemyaveragedist = var_0C;
-  return var_0D * 100;
+  var_12 = var_8 / var_9;
+  var_12 = min(var_12, 7290000);
+  var_13 = var_12 / 7290000;
+  var_0.analytics.enemyaveragedist = var_12;
+  return var_13 * 100;
 }
 
 func_26B5(var_0) {
@@ -624,7 +624,7 @@ func_26AF(var_0) {
   var_1 = [];
   var_2 = [];
   if(level.teambased) {
-    var_1[0] = scripts\mp\gameobjects::getenemyteam(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::getenemyteam(self.team);
   } else {
     var_1[var_1.size] = "all";
   }

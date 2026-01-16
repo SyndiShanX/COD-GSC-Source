@@ -337,8 +337,9 @@ func_5C83(var_0) {
   if(level.teambased) {
     var_2 = scripts\mp\utility\game::getotherteam(var_1);
     thread func_6165(var_2, var_0);
-  } else
+  } else {
     thread func_6164(var_0);
+  }
 
   var_0 scripts\mp\matchdata::logkillstreakevent("jammer", self.origin);
   level notify("emp_used");

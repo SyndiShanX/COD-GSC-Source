@@ -104,17 +104,17 @@ bot_infect_ai_director_update() {
 
           if(gettime() >= var_3.last_infected_hiding_time + 5000) {
             var_3.last_infected_hiding_time = gettime();
-            var_0A = distancesquared(var_3.origin, var_3.last_infected_hiding_loc);
+            var_10 = distancesquared(var_3.origin, var_3.last_infected_hiding_loc);
             var_3.last_infected_hiding_loc = var_3.origin;
-            if(var_0A < 90000) {
+            if(var_10 < 90000) {
               var_3.var_118DA = var_3.var_118DA + 5000;
               if(var_3.var_118DA >= 20000) {
-                var_0B = scripts\engine\utility::get_array_of_closest(var_3.origin, var_0);
-                foreach(var_0D in var_0B) {
-                  if(isbot(var_0D)) {
-                    var_0E = var_0D botgetscriptgoaltype();
-                    if(var_0E != "tactical" && var_0E != "critical") {
-                      var_0D thread hunt_human(var_3);
+                var_11 = scripts\engine\utility::get_array_of_closest(var_3.origin, var_0);
+                foreach(var_13 in var_11) {
+                  if(isbot(var_13)) {
+                    var_14 = var_13 botgetscriptgoaltype();
+                    if(var_14 != "tactical" && var_14 != "critical") {
+                      var_13 thread hunt_human(var_3);
                       break;
                     }
                   }
@@ -158,19 +158,19 @@ bot_infect_retrieve_knife() {
     self botsetflag("path_traverse_wait", 1);
     for(;;) {
       if(self hasweapon("throwingknife_mp")) {
-        if(scripts\mp\utility::isgameparticipant(self.isnodeoccupied)) {
+        if(scripts\mp\utility::isgameparticipant(self.enemy)) {
           var_1 = gettime();
-          if(!isDefined(self.melee_enemy) || self.melee_enemy != self.isnodeoccupied) {
-            self.melee_enemy = self.isnodeoccupied;
-            self.melee_enemy_node = self.isnodeoccupied getnearestnode();
+          if(!isDefined(self.melee_enemy) || self.melee_enemy != self.enemy) {
+            self.melee_enemy = self.enemy;
+            self.melee_enemy_node = self.enemy getnearestnode();
             self.melee_enemy_new_node_time = var_1;
           } else {
             var_2 = squared(self botgetdifficultysetting("meleeDist"));
-            if(distancesquared(self.isnodeoccupied.origin, self.origin) <= var_2) {
+            if(distancesquared(self.enemy.origin, self.origin) <= var_2) {
               self.can_melee_enemy_time = var_1;
             }
 
-            var_3 = self.isnodeoccupied getnearestnode();
+            var_3 = self.enemy getnearestnode();
             var_4 = self getnearestnode();
             if(!isDefined(self.melee_enemy_node) || self.melee_enemy_node != var_3) {
               self.melee_enemy_new_node_time = var_1;
@@ -187,8 +187,8 @@ bot_infect_retrieve_knife() {
             if(self.can_melee_enemy_time + 3000 < var_1) {
               if(self.melee_self_new_node_time + 3000 < var_1) {
                 if(self.melee_enemy_new_node_time + 3000 < var_1) {
-                  if(bot_infect_angle_too_steep_for_knife_throw(self.origin, self.isnodeoccupied.origin)) {
-                    scripts\mp\bots\_bots_util::bot_queued_process("find_node_can_see_ent", ::bot_infect_find_node_can_see_ent, self.isnodeoccupied, self.melee_self_node);
+                  if(bot_infect_angle_too_steep_for_knife_throw(self.origin, self.enemy.origin)) {
+                    scripts\mp\bots\_bots_util::bot_queued_process("find_node_can_see_ent", ::bot_infect_find_node_can_see_ent, self.enemy, self.melee_self_node);
                   }
 
                   if(!self getrunningforwardpainanim("throwingknife_mp")) {
@@ -247,8 +247,8 @@ bot_infect_find_node_can_see_ent(var_0, var_1) {
       }
 
       if(sighttracepassed(var_8, var_9, 0, self, var_0)) {
-        var_0A = vectortoyaw(var_9 - var_8);
-        self botsetscriptgoalnode(var_6, "critical", var_0A);
+        var_10 = vectortoyaw(var_9 - var_8);
+        self botsetscriptgoalnode(var_6, "critical", var_10);
         scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail(3);
         return;
       }

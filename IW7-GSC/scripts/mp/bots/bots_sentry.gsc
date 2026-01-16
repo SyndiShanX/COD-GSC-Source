@@ -13,7 +13,7 @@ bot_killstreak_sentry(var_0, var_1, var_2, var_3) {
     wait(1);
   }
 
-  if(isDefined(self.isnodeoccupied) && self.isnodeoccupied.health > 0 && self botcanseeentity(self.isnodeoccupied)) {
+  if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy)) {
     return 1;
   }
 
@@ -46,7 +46,7 @@ bot_sentry_add_goal(var_0, var_1, var_2, var_3) {
     var_5.should_abort = ::bot_sentry_should_abort;
     var_5.action_thread = ::bot_sentry_activate;
     self.placingitemstreakname = var_0.streakname;
-    scripts\mp\bots\_bots_strategy::bot_new_tactical_goal("sentry_placement", var_4.target_getindexoftarget.origin, 0, var_5);
+    scripts\mp\bots\_bots_strategy::bot_new_tactical_goal("sentry_placement", var_4.node.origin, 0, var_5);
   }
 }
 
@@ -54,7 +54,7 @@ bot_sentry_should_abort(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  if(isDefined(self.isnodeoccupied) && self.isnodeoccupied.health > 0 && self botcanseeentity(self.isnodeoccupied)) {
+  if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy)) {
     return 1;
   }
 
@@ -69,7 +69,7 @@ bot_sentry_cancel_failsafe() {
   self endon("bot_sentry_ensure_exit");
   level endon("game_ended");
   for(;;) {
-    if(isDefined(self.isnodeoccupied) && self.isnodeoccupied.health > 0 && self botcanseeentity(self.isnodeoccupied)) {
+    if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy)) {
       thread bot_sentry_cancel();
     }
 
@@ -89,11 +89,11 @@ bot_sentry_path_thread(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(isDefined(var_0.object) && isDefined(var_0.object.var_394)) {
-    if(distance2d(self.origin, var_0.object.target_getindexoftarget.origin) < 400) {
+  while(isDefined(var_0.object) && isDefined(var_0.object.weapon)) {
+    if(distance2d(self.origin, var_0.object.node.origin) < 400) {
       thread scripts\mp\bots\_bots_util::bot_force_stance_for_time("stand", 5);
       thread bot_sentry_cancel_failsafe();
-      scripts\mp\bots\_bots_killstreaks::bot_switch_to_killstreak_weapon(var_0.object.killstreak_info, var_0.object.killstreaks_array, var_0.object.var_394);
+      scripts\mp\bots\_bots_killstreaks::bot_switch_to_killstreak_weapon(var_0.object.killstreak_info, var_0.object.killstreaks_array, var_0.object.weapon);
       return;
     }
 
@@ -156,14 +156,14 @@ bot_sentry_choose_placement(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_7)) {
     var_4 = spawnStruct();
-    var_4.target_getindexoftarget = var_7;
+    var_4.node = var_7;
     if(var_1 != var_7.origin && var_2 != "hide_nonlethal") {
       var_4.yaw = vectortoyaw(var_1 - var_7.origin);
     } else {
       var_4.yaw = undefined;
     }
 
-    var_4.var_394 = var_0.var_394;
+    var_4.weapon = var_0.weapon;
     var_4.killstreak_info = var_0;
     var_4.killstreaks_array = var_3;
   }
@@ -203,19 +203,19 @@ bot_sentry_activate(var_0) {
       var_7[1] = var_6 + 135;
       var_7[2] = var_6 - 135;
       var_8 = 1000;
-      foreach(var_0A in var_7) {
-        var_0B = playerphysicstrace(var_0.object.target_getindexoftarget.origin, var_0.object.target_getindexoftarget.origin + anglesToForward((0, var_0A + 180, 0)) * 100);
-        var_0C = distance2d(var_0B, var_0.object.target_getindexoftarget.origin);
-        if(var_0C < var_8) {
-          var_8 = var_0C;
-          self botsetscriptmove(var_0A, var_4);
-          self botlookatpoint(var_0.object.target_getindexoftarget.origin, var_4, "script_forced");
+      foreach(var_10 in var_7) {
+        var_11 = playerphysicstrace(var_0.object.node.origin, var_0.object.node.origin + anglesToForward((0, var_10 + 180, 0)) * 100);
+        var_12 = distance2d(var_11, var_0.object.node.origin);
+        if(var_12 < var_8) {
+          var_8 = var_12;
+          self botsetscriptmove(var_10, var_4);
+          self botlookatpoint(var_0.object.node.origin, var_4, "script_forced");
         }
       }
 
       while(!var_3 && isDefined(var_2) && !var_2.canbeplaced) {
-        var_0E = float(gettime() - var_5) / 1000;
-        if(!var_2.canbeplaced && var_0E > var_4) {
+        var_14 = float(gettime() - var_5) / 1000;
+        if(!var_2.canbeplaced && var_14 > var_4) {
           var_3 = 1;
           self.sentry_place_delay = gettime() + 30000;
         }

@@ -33,7 +33,7 @@ init() {
     level.var_10E4E[var_4] = var_5;
     var_5.id = var_3;
     var_5.ref = var_4;
-    var_5.var_394 = func_DD68(var_3, 1);
+    var_5.weapon = func_DD68(var_3, 1);
     var_5.cooldown = func_DD68(var_3, var_2, 1);
     var_5.var_EC3E = func_DD68(var_3, 3, 1);
     var_5.var_5F36 = func_DD68(var_3, var_0, 1);
@@ -60,7 +60,7 @@ init() {
       level.var_2EFC[var_5.archetype][level.var_2EFC[var_5.archetype].size] = var_4;
     }
 
-    if(!isDefined(var_5.var_394)) {
+    if(!isDefined(var_5.weapon)) {
       level.var_10E4E[var_4] = undefined;
     }
 
@@ -86,8 +86,8 @@ init() {
       func_1831(var_5.useweapon, var_4, var_5);
     }
 
-    if(var_5.var_394 == "<default>") {
-      var_5.var_394 = "super_default_mp";
+    if(var_5.weapon == "<default>") {
+      var_5.weapon = "super_default_mp";
     }
 
     if(isDefined(var_5.func_8487)) {
@@ -216,10 +216,10 @@ stopridingvehicle(var_0, var_1) {
 
   func_E276(var_5);
   if(func_1125C()) {
-    scripts\mp\utility::_giveweapon(var_2.var_394);
+    scripts\mp\utility::_giveweapon(var_2.weapon);
     var_7 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-    self setweaponammoclip(var_2.var_394, var_7);
-    self assignweaponoffhandspecial(var_2.var_394);
+    self setweaponammoclip(var_2.weapon, var_7);
+    self assignweaponoffhandspecial(var_2.weapon);
   } else {
     thread func_13B6D();
   }
@@ -247,7 +247,7 @@ clearsuper(var_0) {
 
   self clearoffhandspecial();
   if(isDefined(var_1)) {
-    scripts\mp\utility::_takeweapon(var_1.staticdata.var_394);
+    scripts\mp\utility::_takeweapon(var_1.staticdata.weapon);
   }
 
   if(getdvarint("com_codcasterEnabled", 0) == 1) {
@@ -271,7 +271,7 @@ func_E276(var_0) {
   }
 
   self setclientomnvar("ui_super_state", 1);
-  self setweaponammoclip(var_1.staticdata.var_394, 0);
+  self setweaponammoclip(var_1.staticdata.weapon, 0);
   func_11257();
 }
 
@@ -384,7 +384,7 @@ func_89F0() {
 
 func_11258() {
   var_0 = getcurrentsuper();
-  self setweaponammoclip(var_0.staticdata.var_394, 1);
+  self setweaponammoclip(var_0.staticdata.weapon, 1);
   self setclientomnvar("ui_super_state", 2);
   self playlocalsound("mp_super_ready");
   self notify("super_ready");
@@ -408,7 +408,7 @@ func_13A6F() {
   for(;;) {
     self waittill("special_weapon_fired", var_0);
     if(scripts\mp\utility::isreallyalive(self)) {
-      if(var_0 != getcurrentsuper().staticdata.var_394) {
+      if(var_0 != getcurrentsuper().staticdata.weapon) {
         continue;
       }
 
@@ -466,7 +466,7 @@ func_2A79() {
         thread func_11371();
       }
 
-      self setweaponammoclip(var_1.staticdata.var_394, 1);
+      self setweaponammoclip(var_1.staticdata.weapon, 1);
     }
   }
 
@@ -712,7 +712,7 @@ func_110C4() {
   }
 
   if(issuperinuse()) {
-    self.pers["superCooldownTime"] = scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().var_461E, 0);
+    self.pers["superCooldownTime"] = ::scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().var_461E, 0);
     return;
   }
 
@@ -1057,7 +1057,7 @@ unstowsuperweapon() {
 
 modifysuperequipmentdamage(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_3;
-  if(isDefined(self.triggerportableradarping) && isDefined(var_0) && var_0 == self.triggerportableradarping) {
+  if(isDefined(self.owner) && isDefined(var_0) && var_0 == self.owner) {
     var_5 = int(ceil(var_3 * 0.5));
   }
 
@@ -1099,7 +1099,7 @@ func_13B6D() {
   stoprumble();
   thread func_411B();
   func_13B6E();
-  var_0 = getcurrentsuper().staticdata.var_394;
+  var_0 = getcurrentsuper().staticdata.weapon;
   var_1 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
   scripts\mp\utility::_giveweapon(var_0);
   self setweaponammoclip(var_0, var_1);
@@ -1162,11 +1162,11 @@ func_1125C() {
 
 givesuperweapon(var_0) {
   if(func_1125C()) {
-    if(!self hasweapon(var_0.staticdata.var_394)) {
+    if(!self hasweapon(var_0.staticdata.weapon)) {
       var_1 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
-      scripts\mp\utility::_giveweapon(var_0.staticdata.var_394);
-      self setweaponammoclip(var_0.staticdata.var_394, var_1);
-      self assignweaponoffhandspecial(var_0.staticdata.var_394);
+      scripts\mp\utility::_giveweapon(var_0.staticdata.weapon);
+      self setweaponammoclip(var_0.staticdata.weapon, var_1);
+      self assignweaponoffhandspecial(var_0.staticdata.weapon);
       return;
     }
 

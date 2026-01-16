@@ -763,15 +763,15 @@ ufo_damage_monitor(var_0) {
   var_0.fake_health = 3000;
   var_0 setCanDamage(1);
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-    if(isDefined(var_0A)) {
-      if(weapon_can_damage_ufo(var_0A)) {
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    if(isDefined(var_10)) {
+      if(weapon_can_damage_ufo(var_10)) {
         break;
       } else if(isDefined(var_2) && isplayer(var_2)) {
-        var_0B = gettime();
-        if(!isDefined(var_2.previous_weapon_too_weak_for_ufo_time) || var_0B - var_2.previous_weapon_too_weak_for_ufo_time / 1000 > 3) {
+        var_11 = gettime();
+        if(!isDefined(var_2.previous_weapon_too_weak_for_ufo_time) || var_11 - var_2.previous_weapon_too_weak_for_ufo_time / 1000 > 3) {
           var_2 scripts\cp\cp_vo::try_to_play_vo("nag_ufo_shoot", "zmb_comment_vo", "high", 100, 0, 0, 1, 100);
-          var_2.previous_weapon_too_weak_for_ufo_time = var_0B;
+          var_2.previous_weapon_too_weak_for_ufo_time = var_11;
         }
       }
     }
@@ -787,8 +787,8 @@ ufo_damage_monitor(var_0) {
   level thread pausespawningfortime();
   level thread destroy_ufo_vo();
   if(isDefined(var_0.turrets)) {
-    foreach(var_0D in var_0.turrets) {
-      var_0D delete();
+    foreach(var_13 in var_0.turrets) {
+      var_13 delete();
     }
   }
 
@@ -840,13 +840,13 @@ create_alien_fuse(var_0, var_1) {
   var_3 setModel("park_alien_gray_fuse");
   var_3.angles = var_0 gettagangles(var_1);
   var_3 linkto(var_0, var_1, (0, 0, 0), var_2);
-  var_3.triggerportableradarping = var_0;
+  var_3.owner = var_0;
   var_3.tag_name = var_1;
   return var_3;
 }
 
 remove_alien_fuse(var_0, var_1) {
-  var_1.triggerportableradarping.available_fuse = scripts\engine\utility::array_remove(var_1.triggerportableradarping.available_fuse, var_1);
+  var_1.owner.available_fuse = scripts\engine\utility::array_remove(var_1.owner.available_fuse, var_1);
   if(isDefined(var_1)) {
     var_1 delete();
   }
@@ -1105,7 +1105,7 @@ ufo_turret_fire_monitor(var_0) {
     var_1 = get_ufo_turret_target();
     if(isDefined(var_1)) {
       var_0 settargetentity(var_1);
-      var_2 = scripts\engine\utility::waittill_any_timeout_1(2, "turret_on_target");
+      var_2 = scripts\engine\utility::waittill_any_timeout(2, "turret_on_target");
       if(var_2 == "turret_on_target") {
         var_3 = randomintrange(30, 45);
         for(var_4 = 0; var_4 < var_3; var_4++) {
@@ -1476,9 +1476,9 @@ spaceland_powernode_damage_monitor() {
   var_0 = getent("main_gate_powernode_damage_trigger", "targetname");
   var_0 setCanDamage(1);
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-    var_0B = get_power_node_struct(var_4);
-    if(!isDefined(var_0B)) {
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    var_11 = get_power_node_struct(var_4);
+    if(!isDefined(var_11)) {
       if(randomint(100) > 85) {
         scripts\cp\cp_vo::try_to_play_vo_on_all_players("nag_ufo_signfail");
       }
@@ -1486,20 +1486,20 @@ spaceland_powernode_damage_monitor() {
       continue;
     }
 
-    if(scripts\engine\utility::istrue(var_0B.is_activated)) {
+    if(scripts\engine\utility::istrue(var_11.is_activated)) {
       continue;
     }
 
-    if(can_charge_power_nodes(var_0A, var_2)) {
-      change_gate_light_color(var_0B);
-      var_0B.is_activated = 1;
-      var_0C = var_0B.origin;
-      playsoundatpos(var_0C, "zmb_ufo_spaceland_sign_charge");
+    if(can_charge_power_nodes(var_10, var_2)) {
+      change_gate_light_color(var_11);
+      var_11.is_activated = 1;
+      var_12 = var_11.origin;
+      playsoundatpos(var_12, "zmb_ufo_spaceland_sign_charge");
       level thread play_trigger_wmd_vo();
-      if(should_play_arc_vfx(var_0B)) {
-        var_0D = scripts\engine\utility::getstruct(var_0B.target, "targetname");
-        var_0E = var_0D.origin;
-        level thread play_arc_vfx_between_points("powernode_arc_small", var_0C, var_0E, "spaceland_arc_fired");
+      if(should_play_arc_vfx(var_11)) {
+        var_13 = scripts\engine\utility::getstruct(var_11.target, "targetname");
+        var_14 = var_13.origin;
+        level thread play_arc_vfx_between_points("powernode_arc_small", var_12, var_14, "spaceland_arc_fired");
       }
 
       if(all_power_nodes_are_activated()) {
@@ -1568,7 +1568,7 @@ play_arc_vfx_between_points(var_0, var_1, var_2, var_3) {
   triggerfx(var_5);
   for(;;) {
     playfxbetweenpoints(scripts\engine\utility::getfx(var_0), var_1, vectortoangles(var_1 - var_2), var_2);
-    var_7 = scripts\engine\utility::waittill_any_timeout_1(1, var_3);
+    var_7 = scripts\engine\utility::waittill_any_timeout(1, var_3);
     if(var_7 == var_3) {
       break;
     }
@@ -1602,10 +1602,10 @@ trigger_wmd() {
   var_7 = scripts\engine\utility::getstruct("main_gate_powernode_1", "targetname");
   var_8 = scripts\engine\utility::getstruct("main_gate_powernode_2", "targetname");
   var_9 = scripts\engine\utility::getstruct("main_gate_powernode_3", "targetname");
-  var_0A = scripts\engine\utility::getstruct("main_gate_powernode_4", "targetname");
-  var_0B = scripts\engine\utility::getstruct("main_gate_powernode_5", "targetname");
+  var_10 = scripts\engine\utility::getstruct("main_gate_powernode_4", "targetname");
+  var_11 = scripts\engine\utility::getstruct("main_gate_powernode_5", "targetname");
   level thread play_arc_vfx_between_points("powernode_arc_medium", var_8.origin, var_0, "spaceland_arc_fired");
-  level thread play_arc_vfx_between_points("powernode_arc_medium", var_0A.origin, var_1, "spaceland_arc_fired");
+  level thread play_arc_vfx_between_points("powernode_arc_medium", var_10.origin, var_1, "spaceland_arc_fired");
   level thread play_arc_vfx_between_points("powernode_arc_medium", var_9.origin, var_2, "spaceland_arc_fired");
   level thread play_arc_vfx_between_points("powernode_arc_medium", var_0, var_2, "spaceland_arc_fired");
   level thread play_arc_vfx_between_points("powernode_arc_medium", var_1, var_2, "spaceland_arc_fired");
@@ -1617,8 +1617,8 @@ trigger_wmd() {
   var_7.is_activated = 0;
   var_8.is_activated = 0;
   var_9.is_activated = 0;
-  var_0A.is_activated = 0;
-  var_0B.is_activated = 0;
+  var_10.is_activated = 0;
+  var_11.is_activated = 0;
   scripts\engine\utility::exploder(90);
   wait(2);
   playsoundatpos(var_5, "zmb_ufo_spaceland_sign_wmd");

@@ -29,23 +29,23 @@ getflightpath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   var_8 = var_8 + (0, 0, var_4);
   var_9 = var_9 + (0, 0, var_4);
-  var_0A = length(var_8 - var_9);
-  var_0B = var_0A / var_5;
-  var_0A = abs(0.5 * var_0A + var_6);
-  var_0C = var_0A / var_5;
-  var_0D["startPoint"] = var_8;
-  var_0D["endPoint"] = var_9;
-  var_0D["attackTime"] = var_0C;
-  var_0D["flyTime"] = var_0B;
-  return var_0D;
+  var_10 = length(var_8 - var_9);
+  var_11 = var_10 / var_5;
+  var_10 = abs(0.5 * var_10 + var_6);
+  var_12 = var_10 / var_5;
+  var_13["startPoint"] = var_8;
+  var_13["endPoint"] = var_9;
+  var_13["attackTime"] = var_12;
+  var_13["flyTime"] = var_11;
+  return var_13;
 }
 
 doflyby(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = planespawn(var_0, var_1, var_3, var_7, var_8);
   var_9 endon("death");
-  var_0A = 150;
-  var_0B = var_4 + (randomfloat(2) - 1 * var_0A, randomfloat(2) - 1 * var_0A, 0);
-  var_9 planemove(var_0B, var_6, var_5, var_8);
+  var_10 = 150;
+  var_11 = var_4 + (randomfloat(2) - 1 * var_10, randomfloat(2) - 1 * var_10, 0);
+  var_9 planemove(var_11, var_6, var_5, var_8);
   var_9 planecleanup();
 }
 
@@ -64,7 +64,7 @@ planespawn(var_0, var_1, var_2, var_3, var_4) {
   var_8.angles = vectortoangles(var_3);
   var_8.lifeid = var_0;
   var_8.streakname = var_4;
-  var_8.triggerportableradarping = var_1;
+  var_8.owner = var_1;
   var_8 setModel(var_7.var_B923[var_1.team]);
   if(isDefined(var_7.compassiconfriendly)) {
     var_8 setobjectiveicons(var_7.compassiconfriendly, var_7.compassiconenemy);
@@ -86,7 +86,7 @@ planemove(var_0, var_1, var_2, var_3) {
   var_4 = level.planeconfigs[var_3];
   self moveto(var_0, var_1, 0, 0);
   if(isDefined(var_4.onattackdelegate)) {
-    self thread[[var_4.onattackdelegate]](var_0, var_1, var_2, self.triggerportableradarping, var_3);
+    self thread[[var_4.onattackdelegate]](var_0, var_1, var_2, self.owner, var_3);
   }
 
   if(isDefined(var_4.sonicboomsfx)) {
@@ -109,7 +109,7 @@ planemove(var_0, var_1, var_2, var_3) {
 planecleanup() {
   var_0 = level.planeconfigs[self.streakname];
   if(isDefined(var_0.onflybycompletedelegate)) {
-    thread[[var_0.onflybycompletedelegate]](self.triggerportableradarping, self, self.streakname);
+    thread[[var_0.onflybycompletedelegate]](self.owner, self, self.streakname);
   }
 
   if(isDefined(self.friendlyteamid)) {
@@ -129,7 +129,7 @@ planecleanup() {
 handleemp(var_0) {
   self endon("death");
   for(;;) {
-    if(var_0 scripts\mp\killstreaks\_emp_common::isemped()) {
+    if(var_0 scripts\mp\killstreaks\emp_common::isemped()) {
       self notify("death");
       return;
     }
@@ -288,7 +288,7 @@ setobjectiveicons(var_0, var_1) {
     return;
   }
 
-  var_4 = self.triggerportableradarping getentitynumber();
+  var_4 = self.owner getentitynumber();
   if(var_2 != -1) {
     scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_2, var_4);
   }

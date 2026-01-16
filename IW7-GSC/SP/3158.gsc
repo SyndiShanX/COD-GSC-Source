@@ -122,7 +122,7 @@ func_C185(var_0, var_1, var_2, var_3) {
 }
 
 func_10078(var_0, var_1, var_2, var_3) {
-  return scripts\anim\utility_common::usingmg() || isDefined(self func_8164());
+  return scripts\anim\utility_common::usingmg() || isDefined(self getturret());
 }
 
 func_FEDA(var_0, var_1, var_2, var_3) {
@@ -142,7 +142,7 @@ func_3DFB(var_0, var_1) {
 }
 
 func_5AAC(var_0) {
-  var_1 = self func_8164();
+  var_1 = self getturret();
   var_1 func_8398();
   var_1 endon("death");
   var_1 endon("turretstatechange");
@@ -178,7 +178,7 @@ func_FE70(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   func_FE89();
   var_4 = func_FE64();
-  if(isDefined(self func_8164())) {
+  if(isDefined(self getturret())) {
     func_5AAC(var_4);
   } else {
     func_5AAB(var_0, var_1, var_2, var_4);
@@ -242,7 +242,7 @@ func_FE5C(var_0, var_1, var_2, var_3) {
   childthread func_FE84(var_4, var_5, var_3);
   self endon(var_4);
   var_6 = animhasnotetrack(var_2, "fire");
-  var_7 = weaponclass(self.var_394) == "rocketlauncher";
+  var_7 = weaponclass(self.weapon) == "rocketlauncher";
   if(var_6) {
     var_8 = getnotetracktimes(var_2, "fire");
     if(var_8.size == 1 && var_8[0] == 0) {
@@ -251,11 +251,11 @@ func_FE5C(var_0, var_1, var_2, var_3) {
   }
 
   var_9 = 0;
-  var_0A = self.asm.shootparams.var_FF0B;
-  var_0B = var_0A == 1 || self.asm.shootparams.var_1119D == "semi";
-  var_0C = isplayer(self.isnodeoccupied) && self.isnodeoccupied scripts\sp\utility::func_65DB("player_is_invulnerable");
-  var_0D = scripts\anim\utility_common::weapon_pump_action_shotgun();
-  while(var_9 < var_0A && var_0A > 0) {
+  var_10 = self.asm.shootparams.var_FF0B;
+  var_11 = var_10 == 1 || self.asm.shootparams.var_1119D == "semi";
+  var_12 = isplayer(self.enemy) && self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable");
+  var_13 = scripts\anim\utility_common::weapon_pump_action_shotgun();
+  while(var_9 < var_10 && var_10 > 0) {
     if(var_6) {
       self waittillmatch("fire", var_1);
     }
@@ -264,8 +264,8 @@ func_FE5C(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    shootatshootentorpos(var_0B);
-    if(var_0C) {
+    shootatshootentorpos(var_11);
+    if(var_12) {
       if(randomint(3) == 0) {
         self.bulletsinclip--;
       }
@@ -278,15 +278,15 @@ func_FE5C(var_0, var_1, var_2, var_3) {
     }
 
     var_9++;
-    if(var_0D) {
+    if(var_13) {
       childthread func_FE7D(var_1);
     }
 
-    if(self.asm.shootparams.var_6B92 && var_9 == var_0A) {
+    if(self.asm.shootparams.var_6B92 && var_9 == var_10) {
       break;
     }
 
-    if(!var_6 || var_0A == 1 && self.asm.shootparams.var_1119D == "single") {
+    if(!var_6 || var_10 == 1 && self.asm.shootparams.var_1119D == "single") {
       self waittillmatch("end", var_1);
     }
   }
@@ -296,7 +296,7 @@ func_FE5C(var_0, var_1, var_2, var_3) {
 
 shootatshootentorpos(var_0) {
   if(isDefined(self.asm.shootparams.ent)) {
-    if(isDefined(self.isnodeoccupied) && self.asm.shootparams.ent == self.isnodeoccupied) {
+    if(isDefined(self.enemy) && self.asm.shootparams.ent == self.enemy) {
       self[[level.shootenemywrapper_func]](var_0);
       return;
     }
@@ -406,7 +406,7 @@ func_7E13() {
 }
 
 func_7E12() {
-  if(scripts\sp\mgturret::func_130FD() || weaponclass(self.var_394) == "mg") {
+  if(scripts\sp\mgturret::func_130FD() || weaponclass(self.weapon) == "mg") {
     return func_7E13();
   }
 

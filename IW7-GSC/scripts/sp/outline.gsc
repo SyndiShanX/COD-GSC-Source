@@ -117,8 +117,8 @@ func_9194(var_0) {
     if(level.var_91AA[var_0].var_6631.size == 0) {
       var_8 = 0;
       if(isDefined(level.var_91AA[var_0].var_3E65) && level.var_91AA[var_0].var_3E65.size > 0) {
-        foreach(var_0A in level.var_91AA[var_0].var_3E65) {
-          if(level.var_91AA[var_0A].var_6631.size > 0) {
+        foreach(var_10 in level.var_91AA[var_0].var_3E65) {
+          if(level.var_91AA[var_10].var_6631.size > 0) {
             var_8 = 1;
             break;
           }
@@ -137,9 +137,9 @@ func_9194(var_0) {
   }
 
   if(isDefined(level.var_91AA[var_1].var_C8F5) && level.var_91AB == level.var_91AA[var_1].var_C8F5) {
-    var_0C = level.var_91AA[var_1].var_C8F5;
+    var_12 = level.var_91AA[var_1].var_C8F5;
     if(isDefined(var_2)) {
-      func_11DA(self, var_0C);
+      func_11DA(self, var_12);
     }
 
     if(level.var_91AA[var_1].var_6631.size == 0) {
@@ -256,9 +256,9 @@ func_1251(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = func_12AA(var_5, 1);
   var_7 = 0;
   for(var_8 = 0; var_8 < var_6.size; var_8++) {
-    foreach(var_0A in level.var_91AA[var_6[var_8]].var_6631) {
-      if(var_0A.ent == var_0) {
-        var_0 hudoutlineenable(var_0A.var_4395, var_0A.var_5259, var_0A.var_6C0F, var_0A.var_10F87);
+    foreach(var_10 in level.var_91AA[var_6[var_8]].var_6631) {
+      if(var_10.ent == var_0) {
+        var_0 hudoutlineenable(var_10.var_4395, var_10.var_5259, var_10.var_6C0F, var_10.var_10F87);
         var_7 = 1;
         break;
       }
@@ -409,7 +409,7 @@ func_9195(var_0, var_1) {
   }
 
   self endon(var_0 + "hudoutline_disable");
-  scripts\engine\utility::waittill_any_3("death", "entitydeleted");
+  scripts\engine\utility::waittill_any("death", "entitydeleted");
   thread func_9194(var_0);
 }
 

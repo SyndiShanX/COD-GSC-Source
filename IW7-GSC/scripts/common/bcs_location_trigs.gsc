@@ -60,7 +60,7 @@ add_bcs_location_mapping(var_0, var_1) {
     return;
   }
 
-  level.bcs_location_mappings[var_9] = var_0A;
+  level.bcs_location_mappings[var_9] = var_10;
 }
 
 bcs_location_trigger_mapping() {

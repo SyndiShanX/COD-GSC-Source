@@ -42,39 +42,39 @@ laughing_clown(var_0, var_1) {
     }
   }
 
-  var_0B = randomfloatrange(1, 2);
-  var_0C = 1;
-  var_0D = 0;
-  var_0E = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 2);
-  var_0F = spawn("script_model", var_0E);
+  var_11 = randomfloatrange(1, 2);
+  var_12 = 1;
+  var_13 = 0;
+  var_14 = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 2);
+  var_15 = spawn("script_model", var_14);
   scripts\engine\utility::waitframe();
-  var_0F playSound("arcade_blackhole_ball_release");
-  var_0E = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 2);
-  var_0F setModel("zmb_arcade_game_ball_small");
-  var_0F.origin = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 1) + (0, 0, 0.1);
+  var_15 playSound("arcade_blackhole_ball_release");
+  var_14 = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 2);
+  var_15 setModel("zmb_arcade_game_ball_small");
+  var_15.origin = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 1) + (0, 0, 0.1);
   if(var_3) {
-    var_0F.origin = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 3) + (0, 0, 0.2);
+    var_15.origin = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 3) + (0, 0, 0.2);
   }
 
-  var_0F physicslaunchserver(var_0E, vectornormalize(anglesToForward(var_6.angles)) * 65);
+  var_15 physicslaunchserver(var_14, vectornormalize(anglesToForward(var_6.angles)) * 65);
   var_10 = undefined;
   var_11 = 0;
   for(;;) {
-    var_12 = var_0F.origin;
+    var_12 = var_15.origin;
     wait(0.5);
     var_13 = scripts\engine\utility::getstructarray(var_6.target, "targetname");
-    var_10 = scripts\engine\utility::getclosest(var_0F.origin, var_13, 3);
+    var_10 = scripts\engine\utility::getclosest(var_15.origin, var_13, 3);
     if(isDefined(var_10)) {
       break;
     }
 
-    if(distancesquared(var_12, var_0F.origin) < 0.05) {
-      var_0F physicslaunchserver(var_0F.origin + (randomintrange(20, 35), randomintrange(20, 35), 0), vectornormalize(anglesToForward(var_6.angles)) * 5);
+    if(distancesquared(var_12, var_15.origin) < 0.05) {
+      var_15 physicslaunchserver(var_15.origin + (randomintrange(20, 35), randomintrange(20, 35), 0), vectornormalize(anglesToForward(var_6.angles)) * 5);
     }
 
     var_11++;
     if(var_11 >= 5) {
-      var_0F delete();
+      var_15 delete();
       scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
       return;
     }
@@ -153,7 +153,7 @@ laughing_clown(var_0, var_1) {
   }
 
   wait(1);
-  var_0F delete();
+  var_15 delete();
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
 }
 
@@ -245,7 +245,7 @@ func_9655() {
 func_42D6(var_0, var_1) {
   self endon("stop_laughingclown");
   if(scripts\engine\utility::istrue(var_1)) {
-    level scripts\engine\utility::waittill_any_3("power_on", var_0.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
   }
 
   self rotateyaw(-30, 0.75);
@@ -255,7 +255,7 @@ func_42D6(var_0, var_1) {
     var_4 = var_2 - var_3;
     self playSound("arcade_blackhole_mvmt");
     if(scripts\engine\utility::istrue(var_1) && var_0.powered_on == 0) {
-      level scripts\engine\utility::waittill_any_3("power_on", var_0.power_area + " power_on");
+      level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
     } else {
       self waittill("rotatedone");
     }

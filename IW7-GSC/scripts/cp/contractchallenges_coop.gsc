@@ -88,17 +88,17 @@ contractkills(var_0) {
   self endon("game_ended");
   for(;;) {
     self waittill("kill_event_buffered", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    var_0A = 0;
-    var_0B = scripts\cp\utility::getweaponclass(var_5);
-    var_0C = getdvar("ui_mapname");
-    var_0D = scripts\engine\utility::isbulletdamage(var_4);
-    var_0E = isDefined(var_5) && var_5 == "iw7_dischorddummy_zm" || var_5 == "iw7_facemelterdummy_zm" || var_5 == "iw7_headcutterdummy_zm" || var_5 == "iw7_shredderdummy_zm";
-    var_0F = issubstr(var_5, "venomx");
+    var_10 = 0;
+    var_11 = scripts\cp\utility::getweaponclass(var_5);
+    var_12 = getdvar("ui_mapname");
+    var_13 = scripts\engine\utility::isbulletdamage(var_4);
+    var_14 = isDefined(var_5) && var_5 == "iw7_dischorddummy_zm" || var_5 == "iw7_facemelterdummy_zm" || var_5 == "iw7_headcutterdummy_zm" || var_5 == "iw7_shredderdummy_zm";
+    var_15 = issubstr(var_5, "venomx");
     var_10 = issubstr(var_5, "longshot");
     var_11 = issubstr(var_5, "m8");
-    var_12 = var_0D && scripts\cp\utility::isheadshot(var_5, var_7, var_4, var_2) && !var_0F;
-    if(isDefined(var_1.triggerportableradarping)) {
-      var_13 = var_2 scripts\cp\utility::is_trap(var_1, var_5) && var_1.triggerportableradarping == var_2;
+    var_12 = var_13 && scripts\cp\utility::isheadshot(var_5, var_7, var_4, var_2) && !var_15;
+    if(isDefined(var_1.owner)) {
+      var_13 = var_2 scripts\cp\utility::is_trap(var_1, var_5) && var_1.owner == var_2;
     } else {
       var_13 = var_2 scripts\cp\utility::is_trap(var_1, var_5);
     }
@@ -114,311 +114,311 @@ contractkills(var_0) {
 
     switch (var_0.ref) {
       case "con_kills":
-        var_0A = 1;
+        var_10 = 1;
         break;
 
       case "con_kills_head_zmb":
-        if(scripts\engine\utility::istrue(var_12) && var_0C == "cp_zmb") {
-          var_0A = 1;
+        if(scripts\engine\utility::istrue(var_12) && var_12 == "cp_zmb") {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_head_rave":
-        if(scripts\engine\utility::istrue(var_12) && var_0C == "cp_rave") {
-          var_0A = 1;
+        if(scripts\engine\utility::istrue(var_12) && var_12 == "cp_rave") {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_head_disco":
-        if(scripts\engine\utility::istrue(var_12) && var_0C == "cp_disco") {
-          var_0A = 1;
+        if(scripts\engine\utility::istrue(var_12) && var_12 == "cp_disco") {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_head_town":
-        if(scripts\engine\utility::istrue(var_12) && var_0C == "cp_town") {
-          var_0A = 1;
+        if(scripts\engine\utility::istrue(var_12) && var_12 == "cp_town") {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_head_final":
-        if(scripts\engine\utility::istrue(var_12) && var_0C == "cp_final") {
-          var_0A = 1;
+        if(scripts\engine\utility::istrue(var_12) && var_12 == "cp_final") {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_AR":
-        if(var_4 != "MOD_MELEE" && var_0B == "weapon_assault") {
-          var_0A = 1;
-        } else if(var_4 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_11 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
-          var_0A = 1;
+        if(var_4 != "MOD_MELEE" && var_11 == "weapon_assault") {
+          var_10 = 1;
+        } else if(var_4 != "MOD_MELEE" && var_11 == "weapon_sniper" && var_11 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_LMG":
-        if(var_4 != "MOD_MELEE" && var_0B == "weapon_lmg") {
-          var_0A = 1;
+        if(var_4 != "MOD_MELEE" && var_11 == "weapon_lmg") {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_SG":
-        if(var_4 != "MOD_MELEE" && var_0B == "weapon_shotgun" && !var_10) {
-          var_0A = 1;
-        } else if(var_4 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_10 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
-          var_0A = 1;
+        if(var_4 != "MOD_MELEE" && var_11 == "weapon_shotgun" && !var_10) {
+          var_10 = 1;
+        } else if(var_4 != "MOD_MELEE" && var_11 == "weapon_sniper" && var_10 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_Sniper":
-        if(var_4 != "MOD_MELEE" && var_0B == "weapon_sniper" && !var_10 && !var_11) {
-          var_0A = 1;
-        } else if(var_4 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_10 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
-          var_0A = 1;
-        } else if(var_4 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_11 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
-          var_0A = 1;
+        if(var_4 != "MOD_MELEE" && var_11 == "weapon_sniper" && !var_10 && !var_11) {
+          var_10 = 1;
+        } else if(var_4 != "MOD_MELEE" && var_11 == "weapon_sniper" && var_10 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
+          var_10 = 1;
+        } else if(var_4 != "MOD_MELEE" && var_11 == "weapon_sniper" && var_11 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_5)) {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_SMG":
-        if(var_4 != "MOD_MELEE" && var_0B == "weapon_smg") {
-          var_0A = 1;
+        if(var_4 != "MOD_MELEE" && var_11 == "weapon_smg") {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_Pistol":
-        if(var_4 != "MOD_MELEE" && var_0B == "weapon_pistol") {
-          var_0A = 1;
-        } else if(var_0E) {
-          var_0A = 1;
+        if(var_4 != "MOD_MELEE" && var_11 == "weapon_pistol") {
+          var_10 = 1;
+        } else if(var_14) {
+          var_10 = 1;
         }
         break;
 
       case "con_kills_explosive":
-        var_0A = var_14;
+        var_10 = var_14;
         break;
 
       case "con_kills_golf_rave":
-        if(var_0C == "cp_rave") {
+        if(var_12 == "cp_rave") {
           if(var_5 == "iw7_golf_club_mp" || var_5 == "iw7_golf_club_mp_pap1" || var_5 == "iw7_golf_club_mp_pap2") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_bat_rave":
-        if(var_0C == "cp_rave") {
+        if(var_12 == "cp_rave") {
           if(var_5 == "iw7_spiked_bat_mp" || var_5 == "iw7_spiked_bat_mp_pap1" || var_5 == "iw7_spiked_bat_mp_pap2") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_axe_rave":
-        if(var_0C == "cp_rave") {
+        if(var_12 == "cp_rave") {
           if(var_5 == "iw7_two_headed_axe_mp" || var_5 == "iw7_two_headed_axe_mp_pap1" || var_5 == "iw7_two_headed_axe_mp_pap2") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_machete_rave":
-        if(var_0C == "cp_rave") {
+        if(var_12 == "cp_rave") {
           if(var_5 == "iw7_machete_mp" || var_5 == "iw7_machete_mp_pap1" || var_5 == "iw7_machete_mp_pap2") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_cleaver_town":
-        if(var_0C == "cp_town") {
+        if(var_12 == "cp_town") {
           if(var_5 == "iw7_knife_zm_cleaver") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_crowbar_town":
-        if(var_0C == "cp_town") {
+        if(var_12 == "cp_town") {
           if(var_5 == "iw7_knife_zm_crowbar") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_axe_zmb":
-        if(var_0C == "cp_zmb") {
+        if(var_12 == "cp_zmb") {
           if(var_5 == "iw7_axe_zm" || getweaponbasename(var_5) == "iw7_axe_zm_pap1" || getweaponbasename(var_5) == "iw7_axe_zm_pap2") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_entangler_kills_final":
-        if(var_0C == "cp_final") {
+        if(var_12 == "cp_final") {
           if(isDefined(var_5) && var_5 == "iw7_entangler2_zm" || var_5 == "ghost_grenade_launcher") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_venomx_kills_final":
-        if(var_0C == "cp_final") {
-          if(var_0F) {
-            var_0A = 1;
+        if(var_12 == "cp_final") {
+          if(var_15) {
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_dragon_disco":
-        if(var_0C == "cp_disco") {
+        if(var_12 == "cp_disco") {
           if(scripts\engine\utility::istrue(var_2.kung_fu_mode) && !scripts\cp\cp_merits::is_crafted_trap_damage(var_5)) {
             if(var_2.kungfu_style == "dragon") {
-              var_0A = 1;
+              var_10 = 1;
             }
           }
         }
         break;
 
       case "con_kills_tiger_disco":
-        if(var_0C == "cp_disco") {
+        if(var_12 == "cp_disco") {
           if(scripts\engine\utility::istrue(var_2.kung_fu_mode) && !scripts\cp\cp_merits::is_crafted_trap_damage(var_5)) {
             if(var_2.kungfu_style == "tiger") {
-              var_0A = 1;
+              var_10 = 1;
             }
           }
         }
         break;
 
       case "con_kills_snake_disco":
-        if(var_0C == "cp_disco") {
+        if(var_12 == "cp_disco") {
           if(scripts\engine\utility::istrue(var_2.kung_fu_mode) && !scripts\cp\cp_merits::is_crafted_trap_damage(var_5)) {
             if(var_2.kungfu_style == "snake") {
-              var_0A = 1;
+              var_10 = 1;
             }
           }
         }
         break;
 
       case "con_kills_crane_disco":
-        if(var_0C == "cp_disco") {
+        if(var_12 == "cp_disco") {
           if(scripts\engine\utility::istrue(var_2.kung_fu_mode) && !scripts\cp\cp_merits::is_crafted_trap_damage(var_5)) {
             if(var_2.kungfu_style == "crane") {
-              var_0A = 1;
+              var_10 = 1;
             }
           }
         }
         break;
 
       case "con_kills_clowns_zmb":
-        if(var_0C == "cp_zmb") {
+        if(var_12 == "cp_zmb") {
           if(isDefined(var_9) && var_9 == "zombie_clown") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_sasquatch_rave":
-        if(var_0C == "cp_rave") {
+        if(var_12 == "cp_rave") {
           if(isDefined(var_9) && var_9 == "zombie_sasquatch") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_skaters_disco":
-        if(var_0C == "cp_disco") {
+        if(var_12 == "cp_disco") {
           if(isDefined(var_9) && var_9 == "skater") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_kills_crogs_town":
-        if(var_0C == "cp_town") {
+        if(var_12 == "cp_town") {
           if(isDefined(var_9) && var_9 == "crab_mini") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_special_kills_final":
-        if(var_0C == "cp_final") {
+        if(var_12 == "cp_final") {
           if(isDefined(var_9) && var_9 == "karatemaster" || var_9 == "zombie_clown" || var_9 == "slasher") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_goon_kills_final":
-        if(var_0C == "cp_final") {
+        if(var_12 == "cp_final") {
           if(isDefined(var_9) && var_9 == "alien_goon") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_phantom_kills_final":
-        if(var_0C == "cp_final") {
+        if(var_12 == "cp_final") {
           if(isDefined(var_9) && var_9 == "alien_phantom") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_trap_kills_zmb":
-        if(var_0C == "cp_zmb") {
+        if(var_12 == "cp_zmb") {
           if(scripts\engine\utility::istrue(var_13)) {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_trap_kills_rave":
-        if(var_0C == "cp_rave") {
+        if(var_12 == "cp_rave") {
           if(scripts\engine\utility::istrue(var_13)) {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_trap_kills_disco":
-        if(var_0C == "cp_disco") {
+        if(var_12 == "cp_disco") {
           if(scripts\engine\utility::istrue(var_13)) {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_trap_kills_town":
-        if(var_0C == "cp_town") {
+        if(var_12 == "cp_town") {
           if(var_5 == "iw7_electrictrap_zm") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_trap_kills_final":
-        if(var_0C == "cp_final") {
+        if(var_12 == "cp_final") {
           if(scripts\engine\utility::istrue(var_13)) {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
 
       case "con_crafted_kills_town":
-        if(var_0C == "cp_town") {
+        if(var_12 == "cp_town") {
           if(isDefined(var_2.var_20) && var_2.var_20 == "allies") {
-            var_0A = 1;
+            var_10 = 1;
           }
 
           if(var_5 == "iw7_fantrap_zm") {
-            var_0A = 1;
+            var_10 = 1;
           }
         }
         break;
     }
 
-    if(var_0A) {
+    if(var_10) {
       scripts\cp\contracts_coop::updatecontractprogress(var_0);
     }
   }

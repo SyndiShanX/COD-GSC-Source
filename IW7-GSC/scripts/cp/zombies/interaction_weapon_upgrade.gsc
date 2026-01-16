@@ -14,7 +14,7 @@ init_all_weapon_upgrades() {
 
 init_upgrade_weapon() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
   var_0 = getent("pap_machine", "targetname");
@@ -79,14 +79,14 @@ weapon_upgrade(var_0, var_1) {
   }
 
   if(var_4 < level.pap_max) {
-    var_0A = scripts\engine\utility::getstruct(var_0.target, "targetname");
-    var_0B = vectornormalize(anglesToForward(var_1.angles)) * 16;
+    var_10 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_11 = vectornormalize(anglesToForward(var_1.angles)) * 16;
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
-    var_0C = var_1 getweaponslistprimaries();
+    var_12 = var_1 getweaponslistprimaries();
     var_1 scripts\cp\cp_merits::processmerit("mt_upgrade_weapons");
-    foreach(var_0E in var_0C) {
-      if(!issubstr(var_2, var_0E) && !scripts\cp\utility::isstrstart(var_0E, "alt_") && !issubstr(var_0E, "knife")) {
-        var_5 = var_0E;
+    foreach(var_14 in var_12) {
+      if(!issubstr(var_2, var_14) && !scripts\cp\utility::isstrstart(var_14, "alt_") && !issubstr(var_14, "knife")) {
+        var_5 = var_14;
         break;
       }
     }
@@ -212,9 +212,9 @@ weapon_upgrade(var_0, var_1) {
     var_18 = var_1 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_2, var_7, var_15, undefined, var_8);
     var_19 = var_1 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_2, var_7, var_11, undefined, var_8);
     if(var_9) {
-      var_1A = spawn("script_weapon", var_1 getEye() + var_0B, 0, 0, var_10);
+      var_1A = spawn("script_weapon", var_1 getEye() + var_11, 0, 0, var_10);
     } else {
-      var_1A = spawn("script_weapon", var_2 getEye() + var_0C, 0, 0, var_3);
+      var_1A = spawn("script_weapon", var_2 getEye() + var_12, 0, 0, var_3);
     }
 
     var_1A.angles = var_0.angles;
@@ -226,10 +226,10 @@ weapon_upgrade(var_0, var_1) {
     var_1 thread playpapgesture(var_1, var_1.pap_gesture, var_5, var_2, var_10);
     var_1.paping_weapon = var_2;
     var_1D = getpos1offset(var_3);
-    var_1A moveto(var_0A.origin + var_1D, 0.75);
-    var_1A rotateto(var_0A.angles, 0.75);
+    var_1A moveto(var_10.origin + var_1D, 0.75);
+    var_1A rotateto(var_10.angles, 0.75);
     var_1A waittill("movedone");
-    var_1A moveto(var_0A.origin + var_1B, 0.25);
+    var_1A moveto(var_10.origin + var_1B, 0.25);
     var_1A waittill("movedone");
     var_1C playSound("zmb_packapunch_machine_on");
     var_1C setscriptablepartstate("door", "close");
@@ -264,7 +264,7 @@ weapon_upgrade(var_0, var_1) {
     }
 
     var_1A thread wait_for_player_to_take_weapon(var_19, var_6, var_4);
-    var_1A scripts\engine\utility::waittill_any_timeout_1(30, "weapon_taken");
+    var_1A scripts\engine\utility::waittill_any_timeout(30, "weapon_taken");
     var_1 notify("weapon_purchased");
     var_1.paping_weapon = undefined;
     var_1A delete();
@@ -462,15 +462,15 @@ wait_for_player_to_take_weapon(var_0, var_1, var_2) {
 
   if(should_take_players_current_weapon(var_3)) {
     var_9 = var_3 getcurrentweapon();
-    var_0A = scripts\cp\utility::getrawbaseweaponname(var_9);
+    var_10 = scripts\cp\utility::getrawbaseweaponname(var_9);
     var_3 takeweapon(var_9);
   }
 
   self notify("weapon_taken");
   var_0 = var_3 scripts\cp\utility::_giveweapon(var_0, undefined, undefined, 0);
   var_3 givemaxammo(var_0);
-  var_0B = var_3 getweaponslistprimaries();
-  foreach(var_6 in var_0B) {
+  var_11 = var_3 getweaponslistprimaries();
+  foreach(var_6 in var_11) {
     if(issubstr(var_6, var_0)) {
       if(scripts\cp\utility::isaltmodeweapon(var_6)) {
         var_4 = getweaponbasename(var_6);
@@ -641,19 +641,19 @@ func_12F72(var_0, var_1, var_2) {
 
       var_8 = getweaponattachments(var_1);
       if(issubstr(var_1, "g18_z")) {
-        foreach(var_0A in var_8) {
-          if(issubstr(var_0A, "akimbo")) {
-            var_8 = scripts\engine\utility::array_remove(var_8, var_0A);
+        foreach(var_10 in var_8) {
+          if(issubstr(var_10, "akimbo")) {
+            var_8 = scripts\engine\utility::array_remove(var_8, var_10);
           }
         }
       }
 
-      var_0C = var_0 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, var_7, var_8, undefined, var_4);
-      var_0C = var_0 scripts\cp\utility::_giveweapon(var_0C, undefined, undefined, 1);
+      var_12 = var_0 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_1, var_7, var_8, undefined, var_4);
+      var_12 = var_0 scripts\cp\utility::_giveweapon(var_12, undefined, undefined, 1);
       var_0.pap[var_3].lvl++;
       var_0 notify("weapon_level_changed");
-      var_0 givemaxammo(var_0C);
-      return var_0C;
+      var_0 givemaxammo(var_12);
+      return var_12;
     }
   }
 

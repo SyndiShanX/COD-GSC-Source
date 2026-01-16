@@ -65,15 +65,15 @@ endgame(var_0, var_1) {
   }
 
   setomnvarforallclients("post_game_state", 0);
-  var_0B = func_FF5E(var_1);
-  if(isDefined(var_0B)) {
+  var_11 = func_FF5E(var_1);
+  if(isDefined(var_11)) {
     if(isDefined(level.var_ADDF)) {
       [
         [level.var_ADDF]
       ](var_1);
     }
 
-    func_ADDE(var_0B);
+    func_ADDE(var_11);
     return;
   }
 
@@ -91,14 +91,14 @@ endgame(var_0, var_1) {
   setomnvarforallclients("post_game_state", 2);
   func_56DA(var_0, var_1);
   setomnvarforallclients("post_game_state", 1);
-  var_0E = scripts\cp\cp_globallogic::spawnintermission;
+  var_14 = scripts\cp\cp_globallogic::spawnintermission;
   if(isDefined(level.var_4C58)) {
-    var_0E = level.var_4C58;
+    var_14 = level.var_4C58;
   }
 
   if(!scripts\cp\utility::is_codxp()) {
     foreach(var_4 in level.players) {
-      var_4 thread[[var_0E]](var_1);
+      var_4 thread[[var_14]](var_1);
     }
   }
 
@@ -298,7 +298,7 @@ func_FF5E(var_0) {
 
 func_ADDE(var_0) {
   func_A5D7();
-  level scripts\engine\utility::waittill_any_timeout_1(15, "intermission_over");
+  level scripts\engine\utility::waittill_any_timeout(15, "intermission_over");
   setdvar("ui_mapname", var_0);
   setdvar("g_gametype", "aliens");
   var_1 = "map " + var_0;

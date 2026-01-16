@@ -102,7 +102,7 @@ func_166B(var_0, var_1) {
   var_4 = var_2["hotzoneStart"];
   var_5 = var_2["hotzoneDuration"];
   thread func_1669(var_3, var_4, var_5);
-  scripts\engine\utility::waittill_any_timeout_1(var_2["totalTime"] * 0.001, "activeReloadEvent");
+  scripts\engine\utility::waittill_any_timeout(var_2["totalTime"] * 0.001, "activeReloadEvent");
   self notify("activeReloadEvent");
   var_6 = gettime() - self.var_165F;
   if(var_6 < var_4 - 0) {

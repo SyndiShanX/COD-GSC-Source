@@ -191,10 +191,12 @@ func_AC09(var_0, var_1) {
           }
 
           var_0.var_B8AC = [];
-        } else
+        } else {
           break;
-      } else if(var_15)
+        }
+      } else if(var_15) {
         func_AC19(var_3, self, var_0.var_B8AC);
+      }
     }
 
     var_0.origin = var_2;
@@ -216,8 +218,9 @@ func_AC17(var_0) {
   if(level.var_A876.size) {
     var_1 = level.var_A876[0];
     level.var_A876 = scripts\engine\utility::array_remove(level.var_A876, var_1);
-  } else
+  } else {
     var_1 = spawn("script_origin", var_0.origin);
+  }
 
   level.var_A875[level.var_A875.size] = var_1;
   level thread func_AC14(var_1, var_0);
@@ -263,7 +266,7 @@ func_AC11(var_0, var_1) {
 func_AC0C(var_0, var_1, var_2) {
   var_1 endon("death");
   var_0 waittill("death");
-  var_1.var_AC03[var_2] = scripts\engine\utility::array_remove(var_1.var_AC03[var_2], var_0);
+  var_1.var_AC03[var_2] = ::scripts\engine\utility::array_remove(var_1.var_AC03[var_2], var_0);
 
   if(var_1.var_AC03[var_2].size == 0) {
     var_1.var_AC03[var_2] = undefined;

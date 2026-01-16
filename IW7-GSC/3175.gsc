@@ -111,11 +111,11 @@ func_6A71(var_0, var_1) {
   self endon(var_0 + "_finished");
   for(;;) {
     var_2 = level.player;
-    if(isDefined(self.isnodeoccupied)) {
-      var_2 = self.isnodeoccupied;
+    if(isDefined(self.enemy)) {
+      var_2 = self.enemy;
     }
 
-    if(issentient(var_2) && self getpersstat(var_2)) {
+    if(issentient(var_2) && self cansee(var_2)) {
       var_3 = var_2.origin - self.origin;
       var_3 = vectornormalize((var_3[0], var_3[1], 0));
       var_4 = vectortoangles(var_3);

@@ -25,7 +25,7 @@ init() {
   var_0.vodestroyed = undefined;
   var_0.killcamoffset = (-800, 0, 200);
   level.planeconfigs["air_superiority"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("air_superiority", ::onuse);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("air_superiority", ::onuse);
   level.teamairdenied["axis"] = 0;
   level.teamairdenied["allies"] = 0;
 }
@@ -71,10 +71,10 @@ dooneflyby(var_0, var_1, var_2, var_3, var_4) {
 
 func_24D8(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
-  self.triggerportableradarping endon("killstreak_disowned");
+  self.owner endon("killstreak_disowned");
   level endon("game_ended");
   wait(var_2);
-  var_5 = func_6CAA(self.triggerportableradarping, self.team);
+  var_5 = func_6CAA(self.owner, self.team);
   var_6 = level.planeconfigs[var_4];
   var_7 = var_6.var_C23A;
   for(var_8 = var_5.size - 1; var_8 >= 0 && var_7 > 0; var_8--) {
@@ -139,8 +139,8 @@ fireattarget(var_0) {
   }
 
   var_1 = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    var_1 = self.triggerportableradarping;
+  if(isDefined(self.owner)) {
+    var_1 = self.owner;
   }
 
   var_2 = 384 * anglesToForward(self.angles);
@@ -178,15 +178,15 @@ func_10DC4(var_0, var_1, var_2) {
 }
 
 func_52CA(var_0, var_1) {
-  scripts\mp\killstreaks\_killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.helis);
-  scripts\mp\killstreaks\_killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.littlebirds);
-  scripts\mp\killstreaks\_killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.heli_pilot);
+  scripts\mp\killstreaks\killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.helis);
+  scripts\mp\killstreaks\killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.littlebirds);
+  scripts\mp\killstreaks\killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.heli_pilot);
   if(isDefined(level.lbsniper)) {
     var_2 = [];
     var_2[0] = level.lbsniper;
-    scripts\mp\killstreaks\_killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", var_2);
+    scripts\mp\killstreaks\killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", var_2);
   }
 
-  scripts\mp\killstreaks\_killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.remote_uav);
-  scripts\mp\killstreaks\_killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.planes);
+  scripts\mp\killstreaks\killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.remote_uav);
+  scripts\mp\killstreaks\killstreaks::func_532A(var_0, var_1, "aamissile_projectile_mp", level.planes);
 }

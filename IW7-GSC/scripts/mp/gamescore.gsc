@@ -63,8 +63,8 @@ giveplayerscore(var_0, var_1) {
   }
 
   var_3 = self;
-  if(isDefined(self.triggerportableradarping) && !isbot(self)) {
-    var_3 = self.triggerportableradarping;
+  if(isDefined(self.owner) && !isbot(self)) {
+    var_3 = self.owner;
   }
 
   if(!isplayer(var_3)) {
@@ -86,8 +86,8 @@ giveplayerscore(var_0, var_1) {
     var_3.pers["score"] = -536;
   }
 
-  var_3.destroynavrepulsor = var_3.pers["score"];
-  var_6 = var_3.destroynavrepulsor;
+  var_3.score = var_3.pers["score"];
+  var_6 = var_3.score;
   var_3 scripts\mp\persistence::statsetchild("round", "score", var_6);
   var_3 scripts\mp\gamelogic::checkplayerscorelimitsoon();
   thread scripts\mp\gamelogic::checkscorelimit();
@@ -110,7 +110,7 @@ _setplayerscore(var_0, var_1) {
   }
 
   var_0.pers["score"] = var_1;
-  var_0.destroynavrepulsor = var_0.pers["score"];
+  var_0.score = var_0.pers["score"];
   thread scripts\mp\gamelogic::checkscorelimit();
 }
 
@@ -124,7 +124,7 @@ _getplayerscore(var_0) {
 
 checkffascorejip() {
   if(level.roundscorelimit > 0) {
-    var_0 = self.destroynavrepulsor / level.roundscorelimit * 100;
+    var_0 = self.score / level.roundscorelimit * 100;
     if(var_0 > level.var_EC3F) {
       setnojipscore(1);
       level.nojip = 1;
@@ -352,7 +352,7 @@ updateplacement() {
 
   for(var_4 = 1; var_4 < var_0.size; var_4++) {
     var_2 = var_0[var_4];
-    var_5 = var_2.destroynavrepulsor;
+    var_5 = var_2.score;
     for(var_6 = var_4 - 1; var_6 >= 0 && func_7E06(var_2, var_0[var_6]) == var_2; var_6--) {
       var_0[var_6 + 1] = var_0[var_6];
     }
@@ -369,11 +369,11 @@ updateplacement() {
 }
 
 func_7E06(var_0, var_1) {
-  if(var_0.destroynavrepulsor > var_1.destroynavrepulsor) {
+  if(var_0.score > var_1.score) {
     return var_0;
   }
 
-  if(var_1.destroynavrepulsor > var_0.destroynavrepulsor) {
+  if(var_1.score > var_0.score) {
     return var_1;
   }
 
@@ -476,8 +476,8 @@ processassist_regularmp(var_0, var_1, var_2) {
     thread scripts\mp\utility::giveunifiedpoints("assist_ffa", var_1, var_7);
   } else if(scripts\mp\utility::_hasperk("specialty_mark_targets") && isDefined(var_4) && scripts\engine\utility::array_contains(var_4, self)) {
     if(var_2) {
-      var_0A = scripts\mp\rank::getscoreinfovalue("assistMarked");
-      var_7 = var_9 + var_0A;
+      var_10 = scripts\mp\rank::getscoreinfovalue("assistMarked");
+      var_7 = var_9 + var_10;
     }
 
     thread scripts\mp\utility::givestreakpointswithtext("assistMarked", var_1, var_7);
@@ -493,16 +493,16 @@ processassist_regularmp(var_0, var_1, var_2) {
   }
 
   if(level.teambased) {
-    foreach(var_0C in level.players) {
-      if(self.team != var_0C.team || self == var_0C) {
+    foreach(var_12 in level.players) {
+      if(self.team != var_12.team || self == var_12) {
         continue;
       }
 
-      if(!scripts\mp\utility::isreallyalive(var_0C)) {
+      if(!scripts\mp\utility::isreallyalive(var_12)) {
         continue;
       }
 
-      if(distancesquared(self.origin, var_0C.origin) < 90000) {
+      if(distancesquared(self.origin, var_12.origin) < 90000) {
         self.modifiers["buddy_kill"] = 1;
         break;
       }
@@ -589,7 +589,7 @@ func_11ACF(var_0, var_1, var_2, var_3) {
 
 func_8BE1(var_0, var_1) {
   if(isDefined(var_0.debuffedbyplayers[var_1])) {
-    var_0.debuffedbyplayers[var_1] = scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
+    var_0.debuffedbyplayers[var_1] = ::scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
     return var_0.debuffedbyplayers[var_1].size > 0;
   }
 
@@ -598,7 +598,7 @@ func_8BE1(var_0, var_1) {
 
 getdebuffattackersbyweapon(var_0, var_1) {
   if(isDefined(var_0.debuffedbyplayers[var_1])) {
-    var_0.debuffedbyplayers[var_1] = scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
+    var_0.debuffedbyplayers[var_1] = ::scripts\engine\utility::array_removeundefined(var_0.debuffedbyplayers[var_1]);
     if(var_0.debuffedbyplayers[var_1].size > 0) {
       return var_0.debuffedbyplayers[var_1];
     }

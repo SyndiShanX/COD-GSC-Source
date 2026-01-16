@@ -42,7 +42,7 @@ playerhealthregen() {
   var_1 = 0;
   thread func_D368(self.maxhealth * 0.55);
   for(;;) {
-    scripts\engine\utility::waittill_any_3("damage", "force_regen", "force_regeneration");
+    scripts\engine\utility::waittill_any("damage", "force_regen", "force_regeneration");
     if(self.health <= 0) {
       return;
     }

@@ -5,11 +5,11 @@
 
 func_2E53() {
   level.var_2D1C = [];
-  level.var_2D1C["power_domeshield"] = scripts\mp\bots\bots_power_reaper::func_8995;
+  level.var_2D1C["power_domeshield"] = ::scripts\mp\bots\bots_power_reaper::func_8995;
   level.var_2D1C["power_overCharge"] = ::func_5234;
   level.var_2D1C["power_adrenaline"] = ::func_5234;
   level.var_2D1C["power_deployableCover"] = ::func_8991;
-  level.var_2D1C["power_rewind"] = scripts\mp\bots\bots_power_rewind::func_89DC;
+  level.var_2D1C["power_rewind"] = ::scripts\mp\bots\bots_power_rewind::func_89DC;
   level.var_2D1C["power_adrenaline"] = ::func_5234;
   level.var_2D1C["power_multiVisor"] = ::func_5234;
   level.var_2D1C["power_blinkKnife"] = ::func_897E;
@@ -35,20 +35,20 @@ func_2D5A() {
       var_0 = 0;
     }
 
-    if(isDefined(self.isnodeoccupied)) {
+    if(isDefined(self.enemy)) {
       var_1 = self getEye();
-      var_2 = self.isnodeoccupied getEye();
+      var_2 = self.enemy getEye();
       var_3 = bulletTrace(var_1, var_2, 0, self);
       var_4 = var_3["entity"];
       if(!isDefined(var_4) || !isDefined(var_4.var_2B0E)) {
         continue;
       }
 
-      if(!isDefined(var_4.triggerportableradarping)) {
+      if(!isDefined(var_4.owner)) {
         continue;
       }
 
-      if(var_4.triggerportableradarping.team == self.team) {
+      if(var_4.owner.team == self.team) {
         self botsetflag("disable_attack", 1);
         var_0 = 1;
         continue;
@@ -105,18 +105,18 @@ func_5234(var_0, var_1) {
   self endon("disconnect");
   self endon("powers_cleanUp");
   for(;;) {
-    while(!isDefined(self.isnodeoccupied) || !isalive(self.isnodeoccupied)) {
+    while(!isDefined(self.enemy) || !isalive(self.enemy)) {
       wait(0.1);
     }
 
-    if(!self botcanseeentity(self.isnodeoccupied)) {
+    if(!self botcanseeentity(self.enemy)) {
       wait(0.1);
       continue;
     }
 
     var_2 = 0;
     var_3 = 1400;
-    var_4 = distance(self.origin, self.isnodeoccupied.origin);
+    var_4 = distance(self.origin, self.enemy.origin);
     if(self func_8520()) {
       var_2 = 700;
     }
@@ -148,11 +148,11 @@ func_897E(var_0, var_1) {
 }
 
 func_8BEE() {
-  if(!isalive(self) || !isDefined(self.isnodeoccupied)) {
+  if(!isalive(self) || !isDefined(self.enemy)) {
     return 0;
   }
 
-  if(self botcanseeentity(self.isnodeoccupied) && self func_8520()) {
+  if(self botcanseeentity(self.enemy) && self func_8520()) {
     return 1;
   }
 
@@ -214,8 +214,8 @@ useprompt(var_0, var_1, var_2, var_3) {
     }
 
     if(func_8BEE() || func_9D7E()) {
-      if(isDefined(self.isnodeoccupied)) {
-        var_5 = distance(self.origin, self.isnodeoccupied.origin);
+      if(isDefined(self.enemy)) {
+        var_5 = distance(self.origin, self.enemy.origin);
         if(var_5 < var_2) {
           wait(0.25);
           continue;
@@ -240,8 +240,8 @@ usequickrope(var_0, var_1, var_2, var_3, var_4) {
 
   for(;;) {
     self waittill("damage");
-    if(isDefined(self.isnodeoccupied)) {
-      var_5 = distancesquared(self.origin, self.isnodeoccupied.origin);
+    if(isDefined(self.enemy)) {
+      var_5 = distancesquared(self.origin, self.enemy.origin);
       if(var_5 < var_2 * var_2) {
         continue;
       }

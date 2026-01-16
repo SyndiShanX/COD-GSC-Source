@@ -205,7 +205,7 @@ func_103CD() {
     self func_82AC(scripts\anim\utility::func_1F64("add_aim_backright_center"), var_2, var_0);
     self func_82AC(scripts\anim\utility::func_1F64("add_aim_backright_left"), var_3, var_0);
     self func_82AC(scripts\anim\utility::func_1F64("add_aim_backright_right"), var_4, var_0);
-    if(isplayer(self.isnodeoccupied)) {
+    if(isplayer(self.enemy)) {
       self func_83CE();
     }
 
@@ -308,16 +308,16 @@ func_103C4() {
 }
 
 func_103DE() {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     self.var_FE9E = undefined;
     self.var_FECF = undefined;
     self.var_FED7 = "none";
     return;
   }
 
-  self.var_FE9E = self.isnodeoccupied;
-  self.var_FECF = self.isnodeoccupied getshootatpos();
-  var_0 = distancesquared(self.origin, self.isnodeoccupied.origin);
+  self.var_FE9E = self.enemy;
+  self.var_FECF = self.enemy getshootatpos();
+  var_0 = distancesquared(self.origin, self.enemy.origin);
   if(var_0 < 1000000) {
     self.var_FED7 = "full";
   } else if(var_0 < 4000000) {
@@ -326,7 +326,7 @@ func_103DE() {
     self.var_FED7 = "single";
   }
 
-  if(isDefined(self.isnodeoccupied.vehicle)) {
+  if(isDefined(self.enemy.vehicle)) {
     var_1 = 0.5;
     var_2 = self.var_FE9E.vehicle;
     var_3 = self.var_E500;
@@ -471,17 +471,17 @@ func_103D9() {
     if(var_4) {
       var_4 = 0;
     } else {
-      var_0A = var_3 - var_2;
-      if(abs(var_0A) > var_1) {
-        var_3 = var_2 + var_1 * scripts\engine\utility::sign(var_0A);
+      var_10 = var_3 - var_2;
+      if(abs(var_10) > var_1) {
+        var_3 = var_2 + var_1 * scripts\engine\utility::sign(var_10);
       }
     }
 
     var_2 = var_3;
-    var_0B = min(max(var_3, 0), 90) / 90 * self.a.var_1A4B;
-    var_0C = min(max(0 - var_3, 0), 90) / 90 * self.a.var_1A4B;
-    self func_82AC( % sm_aim_4, var_0B, var_0);
-    self func_82AC( % sm_aim_6, var_0C, var_0);
+    var_11 = min(max(var_3, 0), 90) / 90 * self.a.var_1A4B;
+    var_12 = min(max(0 - var_3, 0), 90) / 90 * self.a.var_1A4B;
+    self func_82AC( % sm_aim_4, var_11, var_0);
+    self func_82AC( % sm_aim_6, var_12, var_0);
     wait(0.05);
   }
 }
@@ -501,21 +501,21 @@ func_103DA() {
   for(;;) {
     scripts\anim\track::func_93E2();
     var_9 = (self.origin[0], self.origin[1], self getEye()[2]);
-    var_0A = self.var_FECF;
+    var_10 = self.var_FECF;
     if(isDefined(self.var_FE9E)) {
-      var_0A = self.var_FE9E getshootatpos();
+      var_10 = self.var_FE9E getshootatpos();
     }
 
-    if(!isDefined(var_0A)) {
+    if(!isDefined(var_10)) {
       var_7 = 0;
-      var_0B = self getsafeanimmovedeltapercentage();
-      if(isDefined(var_0B)) {
-        var_7 = angleclamp180(var_0B[1] - self.angles[1]);
+      var_11 = self getsafeanimmovedeltapercentage();
+      if(isDefined(var_11)) {
+        var_7 = angleclamp180(var_11[1] - self.angles[1]);
       }
     } else {
-      var_0C = var_0A - var_9;
-      var_0D = vectortoangles(var_0C);
-      var_7 = var_0D[1] - self.angles[1];
+      var_12 = var_10 - var_9;
+      var_13 = vectortoangles(var_12);
+      var_7 = var_13[1] - self.angles[1];
       var_7 = angleclamp180(var_7);
     }
 
@@ -534,17 +534,17 @@ func_103DA() {
         var_7 = 179;
       }
 
-      var_0E = var_7 - var_6;
-      var_0F = var_2 - var_1 * abs(var_0E) / 180 + var_1;
+      var_14 = var_7 - var_6;
+      var_15 = var_2 - var_1 * abs(var_14) / 180 + var_1;
       if(isDefined(self.var_10FB2)) {
-        var_0F = var_3;
+        var_15 = var_3;
         if(abs(var_6) < 45) {
           self notify("start_blending_reload");
         }
       }
 
-      if(abs(var_0E) > var_0F) {
-        var_7 = var_6 + var_0F * scripts\engine\utility::sign(var_0E);
+      if(abs(var_14) > var_15) {
+        var_7 = var_6 + var_15 * scripts\engine\utility::sign(var_14);
       }
     }
 
@@ -661,7 +661,7 @@ func_103D3(var_0) {
   self.a.var_2274["idle"] = level.var_EC85["snowmobile"][var_0]["idle"];
   self.a.var_2274["drive"] = level.var_EC85["snowmobile"][var_0]["drive"];
   self.a.var_2274["fire"] = level.var_EC85["snowmobile"][var_0]["fire"];
-  self.a.var_2274["single"] = scripts\anim\utility::func_2274(level.var_EC85["snowmobile"][var_0]["single"]);
+  self.a.var_2274["single"] = ::scripts\anim\utility::func_2274(level.var_EC85["snowmobile"][var_0]["single"]);
   self.a.var_2274["burst2"] = level.var_EC85["snowmobile"][var_0]["fire"];
   self.a.var_2274["burst3"] = level.var_EC85["snowmobile"][var_0]["fire"];
   self.a.var_2274["burst4"] = level.var_EC85["snowmobile"][var_0]["fire"];

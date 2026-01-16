@@ -54,14 +54,14 @@ func_6CB1() {
     var_7[var_7.size] = var_5;
   }
 
-  var_0A = undefined;
+  var_10 = undefined;
   foreach(var_5 in var_7) {
-    if(!isDefined(var_0A) || var_5.totalscore > var_0A.totalscore) {
-      var_0A = var_5;
+    if(!isDefined(var_10) || var_5.totalscore > var_10.totalscore) {
+      var_10 = var_5;
     }
   }
 
-  return var_0A;
+  return var_10;
 }
 
 scorebuddyspawn(var_0) {

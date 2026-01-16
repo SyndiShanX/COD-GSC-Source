@@ -52,8 +52,9 @@ enter_afterlife_arcade(var_0) {
   if(var_0.first_time_in_arcade) {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("spawn_arcade_first", "zmb_comment_vo", "highest", 15, 0, 0, 1, 50);
     var_0.first_time_in_arcade = 0;
-  } else
+  } else {
     var_0 thread scripts\cp\cp_vo::try_to_play_vo("spawn_arcade", "zmb_comment_vo", "high", 15, 0, 0, 1, 50);
+  }
 
   var_0 reset_soul_power(var_0);
   var_0 thread player_exit_afterlife_monitor(var_0);
@@ -218,8 +219,9 @@ choose_vo_based_on_type(var_0, var_1) {
         var_1 = var_4[3];
         continue;
       }
-    } else
+    } else {
       return var_2;
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -632,8 +634,9 @@ get_self_revive_door_hint(var_0, var_1) {
     } else {
       return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NEED_SELFREVIVE_TOKEN";
     }
-  } else
+  } else {
     return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_MORE_SELF_REVIVES";
+  }
 }
 
 give_self_revive_token(var_0) {

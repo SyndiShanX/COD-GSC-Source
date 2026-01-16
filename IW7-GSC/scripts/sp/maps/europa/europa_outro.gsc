@@ -193,9 +193,9 @@ func_EBEA() {
   level.player getrawbaseweaponname(0.2, 0.2);
   level.player givefriendlyperks(5, 5, 5, 5, 1);
   level.player playerlinktodelta(level.player.var_E505, "tag_player", 1, 0, 0, 0, 0, 1);
-  var_0A = getdvarint("skip_outro_fadeup");
+  var_10 = getdvarint("skip_outro_fadeup");
   var_9 scripts\sp\anim::func_1EC1(var_1, "outro");
-  if(!var_0A) {
+  if(!var_10) {
     wait(1);
   }
 
@@ -280,10 +280,10 @@ func_584C() {
         continue;
       }
 
-      var_0A = func_77D9(var_9, var_4, var_3);
-      if(var_0A > var_5) {
+      var_10 = func_77D9(var_9, var_4, var_3);
+      if(var_10 > var_5) {
         var_7 = var_9;
-        var_5 = var_0A;
+        var_5 = var_10;
       }
     }
 
@@ -354,9 +354,9 @@ func_F4B0(var_0, var_1, var_2) {
     var_9 = var_0;
   }
 
-  var_0A = var_8 * var_5;
-  var_0B = var_9 + 150;
-  scripts\sp\art::func_583F(var_0A, var_8, var_3, var_9, var_0B, var_4, var_1);
+  var_10 = var_8 * var_5;
+  var_11 = var_9 + 150;
+  scripts\sp\art::func_583F(var_10, var_8, var_3, var_9, var_11, var_4, var_1);
 }
 
 func_D20A(var_0) {
@@ -470,19 +470,19 @@ func_5E0B() {
   var_8 = 20;
   for(;;) {
     var_9 = randomfloatrange(var_3, var_4);
-    var_0A = randomfloatrange(var_5, var_6);
-    var_0B = randomfloatrange(var_7, var_8);
-    var_0C = var_0 + (var_9, var_0A, var_0B);
-    var_0D = randomfloatrange(var_1, var_2);
-    self moveto(var_0C, var_0D, var_0D * 0.5, var_0D * 0.5);
-    wait(var_0D);
+    var_10 = randomfloatrange(var_5, var_6);
+    var_11 = randomfloatrange(var_7, var_8);
+    var_12 = var_0 + (var_9, var_10, var_11);
+    var_13 = randomfloatrange(var_1, var_2);
+    self moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    wait(var_13);
     var_9 = randomfloatrange(var_3, var_4);
-    var_0A = randomfloatrange(var_5, var_6);
-    var_0B = randomfloatrange(var_7, var_8) * -1;
-    var_0C = var_0 + (var_9, var_0A, var_0B);
-    var_0D = randomfloatrange(var_1, var_2);
-    self moveto(var_0C, var_0D, var_0D * 0.5, var_0D * 0.5);
-    wait(var_0D);
+    var_10 = randomfloatrange(var_5, var_6);
+    var_11 = randomfloatrange(var_7, var_8) * -1;
+    var_12 = var_0 + (var_9, var_10, var_11);
+    var_13 = randomfloatrange(var_1, var_2);
+    self moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    wait(var_13);
   }
 }
 
@@ -519,16 +519,16 @@ func_5E0E() {
     var_7 = randomfloatrange(var_5, var_6);
     var_8 = randomfloatrange(0, var_4);
     var_9 = var_2 * -1;
-    var_0A = var_8 + var_9;
-    self rotateyaw(var_0A, var_7, var_7 * 0.5, var_7 * 0.5);
-    var_2 = var_0A;
+    var_10 = var_8 + var_9;
+    self rotateyaw(var_10, var_7, var_7 * 0.5, var_7 * 0.5);
+    var_2 = var_10;
     wait(var_7);
     var_7 = randomfloatrange(var_5, var_6);
     var_8 = randomfloatrange(var_3, 0);
     var_9 = var_2 * -1;
-    var_0A = var_8 + var_9;
-    self rotateyaw(var_0A, var_7, var_7 * 0.5, var_7 * 0.5);
-    var_2 = var_0A;
+    var_10 = var_8 + var_9;
+    self rotateyaw(var_10, var_7, var_7 * 0.5, var_7 * 0.5);
+    var_2 = var_10;
     wait(var_7);
   }
 }

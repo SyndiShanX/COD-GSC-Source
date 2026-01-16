@@ -71,7 +71,7 @@ setupspinningblades() {
     var_4 waittill("trigger", var_5);
     if(isDefined(var_5)) {
       if(isDefined(var_5.streakname) && var_5.streakname == "remote_c8") {
-        var_5 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_5.triggerportableradarping, var_4, var_5.triggerportableradarping.team, var_4.origin, "MOD_MELEE", "bombproj_mp");
+        var_5 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_5.owner, var_4, var_5.owner.team, var_4.origin, "MOD_MELEE", "bombproj_mp");
         continue;
       }
 
@@ -201,59 +201,59 @@ barreldropperloop(var_0, var_1, var_2, var_3) {
     var_7 = level.var_1655;
     var_3 scripts\engine\utility::trigger_on(var_3.var_336, "targetname");
     var_8 = scripts\engine\utility::array_combine(var_6, var_7);
-    foreach(var_0A in var_6) {
-      if(!var_0A isinphase() && !isDefined(var_0A.isrewinding) && var_0A.isrewinding == 1) {
-        if(var_0A.team == var_5 && var_0A istouching(var_3)) {
-          var_0A suicide();
+    foreach(var_10 in var_6) {
+      if(!var_10 isinphase() && !isDefined(var_10.isrewinding) && var_10.isrewinding == 1) {
+        if(var_10.team == var_5 && var_10 istouching(var_3)) {
+          var_10 suicide();
           continue;
         }
 
-        if(var_0A istouching(var_3)) {
+        if(var_10 istouching(var_3)) {
           if(isDefined(var_4)) {
-            var_0A dodamage(1000, var_3.explosionloc, var_4, var_3);
+            var_10 dodamage(1000, var_3.explosionloc, var_4, var_3);
             continue;
           }
 
-          var_0A suicide();
+          var_10 suicide();
         }
       }
     }
 
     if(isDefined(var_7)) {
-      foreach(var_0D in var_7) {
-        if(var_0D istouching(var_3)) {
-          if(var_0D.streakname == "minijackal") {
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+      foreach(var_13 in var_7) {
+        if(var_13 istouching(var_3)) {
+          if(var_13.streakname == "minijackal") {
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
             continue;
           }
 
-          if(var_0D.streakname == "venom") {
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
+          if(var_13.streakname == "venom") {
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
             continue;
           }
 
-          if(var_0D.streakname == "sentry_shock") {
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
+          if(var_13.streakname == "sentry_shock") {
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
             scripts\engine\utility::waitframe();
-            var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_0D.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
+            var_13 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000, var_4, var_3, var_13.team, var_3.origin, "MOD_MELEE", "bombproj_mp");
           }
         }
       }
     }
 
-    var_0F = scripts\mp\perks\_perkfunctions::func_7D96();
-    if(isDefined(var_0F)) {
-      foreach(var_11 in var_0F) {
+    var_15 = scripts\mp\perks\perkfunctions::func_7D96();
+    if(isDefined(var_15)) {
+      foreach(var_11 in var_15) {
         if(var_11 istouching(var_3)) {
           var_11 scripts\mp\killstreaks\_utility::dodamagetokillstreak(1000, var_4, var_3, var_11.team, var_3.origin, "MOD_EXPLOSIVE", "bombproj_mp");
         }
@@ -357,7 +357,7 @@ burninatortriggerwatch(var_0) {
 burninantordestroyequipment(var_0, var_1) {
   while(var_0.flameon) {
     var_2 = level.var_1655;
-    var_3 = scripts\mp\perks\_perkfunctions::func_7D96();
+    var_3 = scripts\mp\perks\perkfunctions::func_7D96();
     if(isDefined(var_3)) {
       foreach(var_5 in var_3) {
         if(var_5 istouching(var_0)) {

@@ -45,8 +45,8 @@ bot_siege_manager_think() {
 
     foreach(var_6, var_9 in var_3) {
       if(var_9 >= 2) {
-        var_0A = scripts\mp\utility::getotherteam(var_6);
-        level.siege_bot_team_need_flags[var_0A] = 1;
+        var_10 = scripts\mp\utility::getotherteam(var_6);
+        level.siege_bot_team_need_flags[var_10] = 1;
       }
     }
 

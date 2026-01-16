@@ -230,12 +230,12 @@ tdef() {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = self;
-  var_0B = var_1.origin;
-  var_0C = 0;
+  var_10 = self;
+  var_11 = var_1.origin;
+  var_12 = 0;
   if(isDefined(var_0)) {
-    var_0B = var_0.origin;
-    var_0C = var_0 == var_1;
+    var_11 = var_0.origin;
+    var_12 = var_0 == var_1;
   }
 
   if(isDefined(self.carryobject) && isDefined(self.carryobject.passtargetoutlineid) && isDefined(self.carryobject.passtargetent)) {
@@ -251,18 +251,18 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   }
 
   if(isDefined(level.ball.carrier)) {
-    if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != var_0A.pers["team"]) {
-      if(isDefined(var_1.ball_carried) && var_0C) {
+    if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != var_10.pers["team"]) {
+      if(isDefined(var_1.ball_carried) && var_12) {
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
-      } else if(isDefined(var_0A.ball_carried)) {
+      } else if(isDefined(var_10.ball_carried)) {
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_carrier");
         thread scripts\mp\matchdata::loginitialstats(var_9, "carrying");
         scripts\mp\gametypes\obj_ball::updatetimers("neutral", 1, 0);
       }
 
       if(var_1.pers["team"] == level.ball.ownerteam && var_1 != level.ball.carrier) {
-        var_0D = distancesquared(level.ball.carrier.origin, var_0B);
-        if(var_0D < 90000) {
+        var_13 = distancesquared(level.ball.carrier.origin, var_11);
+        if(var_13 < 90000) {
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
           var_1 scripts\mp\utility::incperstat("defends", 1);
           var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
@@ -378,11 +378,11 @@ onplayerspawned(var_0) {
 getsettdefsuit() {
   if(scripts\mp\utility::istrue(self.tdefsuit)) {
     if(scripts\mp\utility::_hasperk("specialty_afterburner")) {
-      self goalflag(0, scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(), 600, 2000));
-      self goal_type(0, scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(), 750, 650));
+      self energy_setrestorerate(0, scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(), 600, 2000));
+      self energy_setresttimems(0, scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(), 750, 650));
     } else {
-      self goalflag(0, 400);
-      self goal_type(0, 900);
+      self energy_setrestorerate(0, 400);
+      self energy_setresttimems(0, 900);
     }
 
     self.tdefsuit = 0;
@@ -390,11 +390,11 @@ getsettdefsuit() {
   }
 
   if(scripts\mp\utility::_hasperk("specialty_afterburner")) {
-    self goalflag(0, 250);
-    self goal_type(0, 1350);
+    self energy_setrestorerate(0, 250);
+    self energy_setresttimems(0, 1350);
   } else {
-    self goalflag(0, 200);
-    self goal_type(0, 1800);
+    self energy_setrestorerate(0, 200);
+    self energy_setresttimems(0, 1800);
   }
 
   self.tdefsuit = 1;

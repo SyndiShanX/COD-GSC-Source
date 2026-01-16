@@ -588,7 +588,7 @@ func_12636(var_0, var_1) {
   level.the_hoff.scripted_mode = 0;
   level.the_hoff thread func_1176D();
   var_4 = 120 + 60 * level.var_3C16;
-  level.the_hoff scripts\engine\utility::waittill_any_timeout_1(var_4, "death");
+  level.the_hoff scripts\engine\utility::waittill_any_timeout(var_4, "death");
   level.the_hoff_revive = undefined;
   level notify("hoff_death");
   if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
@@ -606,7 +606,7 @@ func_12636(var_0, var_1) {
     level.the_hoff scripts\mp\agents\c6\c6_agent::func_F835(var_5, 6);
     level.the_hoff.disablearrivals = 1;
     level.the_hoff.precacheleaderboards = 1;
-    level.the_hoff scripts\engine\utility::waittill_any_timeout_1(150, "scriptedGoal_reached");
+    level.the_hoff scripts\engine\utility::waittill_any_timeout(150, "scriptedGoal_reached");
     level.neil.upper_body scriptmodelplayanim("IW7_cp_zom_n31l_intro_enter", 1);
     wait(0.75);
     level.neil.upper_body thread func_A6E2();
@@ -751,12 +751,12 @@ func_1176D() {
 }
 
 func_1176F() {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     func_83FF();
     return;
   }
 
-  if(self getpersstat(self.isnodeoccupied)) {
+  if(self cansee(self.enemy)) {
     self.scripted_mode = 0;
     return;
   }
@@ -899,8 +899,8 @@ func_51CE(var_0) {
       }
 
       if(var_3 istouching(var_0)) {
-        if(isDefined(var_3.triggerportableradarping) && var_3.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
-          var_3.triggerportableradarping playlocalsound("ww_magicbox_laughter");
+        if(isDefined(var_3.owner) && var_3.owner scripts\cp\utility::is_valid_player(1)) {
+          var_3.owner playlocalsound("ww_magicbox_laughter");
         }
 
         var_3 notify("detonateExplosive");
@@ -1583,8 +1583,8 @@ func_BECE() {
 
     foreach(var_6 in var_4) {
       if(distance2dsquared(self.origin, var_6.origin) < var_1) {
-        if(isDefined(var_6.triggerportableradarping) && var_6.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
-          var_6.triggerportableradarping playlocalsound("ww_magicbox_laughter");
+        if(isDefined(var_6.owner) && var_6.owner scripts\cp\utility::is_valid_player(1)) {
+          var_6.owner playlocalsound("ww_magicbox_laughter");
         }
 
         var_6 notify("detonateExplosive");

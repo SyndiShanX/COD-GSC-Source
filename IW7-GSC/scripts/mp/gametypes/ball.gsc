@@ -735,7 +735,7 @@ scorefrozentimer() {
 
 dogoalreset() {
   self.useobject ball_waypoint_reset();
-  level scripts\engine\utility::waittill_any_timeout_1(10, "goal_ready");
+  level scripts\engine\utility::waittill_any_timeout(10, "goal_ready");
   self.useobject goal_waypoint();
 }
 
@@ -802,49 +802,49 @@ ball_play_fx_joined_team() {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = self;
-  var_0B = 0;
-  if(!isDefined(var_1) || !isDefined(var_1.team) || !isDefined(var_0A) || !isDefined(var_0A.team)) {
+  var_10 = self;
+  var_11 = 0;
+  if(!isDefined(var_1) || !isDefined(var_1.team) || !isDefined(var_10) || !isDefined(var_10.team)) {
     return;
   }
 
-  if(var_1 == var_0A) {
+  if(var_1 == var_10) {
     return;
   }
 
-  if(var_1.team == var_0A.team) {
+  if(var_1.team == var_10.team) {
     return;
   }
 
-  var_0C = var_1.origin;
-  var_0D = 0;
+  var_12 = var_1.origin;
+  var_13 = 0;
   if(isDefined(var_0)) {
-    var_0C = var_0.origin;
-    var_0D = var_0 == var_1;
+    var_12 = var_0.origin;
+    var_13 = var_0 == var_1;
   }
 
-  if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != var_0A.pers["team"]) {
-    if(isDefined(var_1.ball_carried) && var_0D) {
+  if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != var_10.pers["team"]) {
+    if(isDefined(var_1.ball_carried) && var_13) {
       var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
-      var_0B = 1;
+      var_11 = 1;
     }
 
-    if(isDefined(var_0A.ball_carried)) {
+    if(isDefined(var_10.ball_carried)) {
       var_1 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_carrier");
       var_1 scripts\mp\utility::incperstat("defends", 1);
       var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
       thread scripts\mp\matchdata::loginitialstats(var_9, "carrying");
       scripts\mp\gametypes\obj_ball::updatetimers("neutral", 1, 0);
-      var_0B = 1;
+      var_11 = 1;
     }
   }
 
-  if(!var_0B) {
-    var_0E = 0;
+  if(!var_11) {
+    var_14 = 0;
     foreach(var_10 in level.balls) {
-      var_0E = distsquaredcheck(var_0C, var_0A.origin, var_10.curorigin);
-      if(var_0E && var_1.team != var_0A.team) {
-        if(var_10.ownerteam == var_0A.team) {
+      var_14 = distsquaredcheck(var_12, var_10.origin, var_10.curorigin);
+      if(var_14 && var_1.team != var_10.team) {
+        if(var_10.ownerteam == var_10.team) {
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
         } else if(var_10.ownerteam == var_1.team) {
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
@@ -854,11 +854,11 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
       }
     }
 
-    if(!var_0E) {
+    if(!var_14) {
       foreach(var_15, var_13 in level.ball_goals) {
-        var_14 = distsquaredcheck(var_0C, var_0A.origin, var_13.trigger.origin);
+        var_14 = distsquaredcheck(var_12, var_10.origin, var_13.trigger.origin);
         if(var_14) {
-          if(var_15 == var_0A.team) {
+          if(var_15 == var_10.team) {
             var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
             continue;
           }

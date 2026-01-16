@@ -65,11 +65,11 @@ bb_isincombat() {
 }
 
 bb_isweaponclass(var_0, var_1, var_2, var_3) {
-  return scripts\engine\utility::weaponclass(self.var_394) == var_3;
+  return scripts\engine\utility::weaponclass(self.weapon) == var_3;
 }
 
 bb_shoulddroprocketlauncher(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::weaponclass(self.var_394) != "rocketlauncher") {
+  if(scripts\engine\utility::weaponclass(self.weapon) != "rocketlauncher") {
     return 0;
   }
 
@@ -227,7 +227,7 @@ func_2985() {
       return 0;
     }
 
-    if(isDefined(self._blackboard.shootparams.target) && isDefined(self.isnodeoccupied) && self.isnodeoccupied == self._blackboard.shootparams.target) {
+    if(isDefined(self._blackboard.shootparams.target) && isDefined(self.enemy) && self.enemy == self._blackboard.shootparams.target) {
       return scripts\engine\utility::func_9DA3();
     }
   }
@@ -313,7 +313,7 @@ func_296F(var_0) {
 }
 
 bb_hasshufflenode(var_0, var_1, var_2, var_3) {
-  return isDefined(self._blackboard.shufflenode) && isDefined(self.target_getindexoftarget) && self._blackboard.shufflenode == self.target_getindexoftarget && distancesquared(self.target_getindexoftarget.origin, self.origin) > 16;
+  return isDefined(self._blackboard.shufflenode) && isDefined(self.node) && self._blackboard.shufflenode == self.node && distancesquared(self.node.origin, self.origin) > 16;
 }
 
 func_2936(var_0, var_1, var_2, var_3) {
@@ -321,15 +321,15 @@ func_2936(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return 0;
   }
 
-  if(self._blackboard.shufflenode != self.target_getindexoftarget) {
+  if(self._blackboard.shufflenode != self.node) {
     return 0;
   }
 
-  if(distancesquared(self.target_getindexoftarget.origin, self.origin) <= 16) {
+  if(distancesquared(self.node.origin, self.origin) <= 16) {
     return 0;
   }
 
@@ -513,7 +513,7 @@ bb_getrequestedwhizby() {
 bb_isfrantic() {
   var_0 = bb_getcovernode();
   if(!isDefined(var_0)) {
-    var_0 = self.target_getindexoftarget;
+    var_0 = self.node;
   }
 
   var_1 = isDefined(var_0) && var_0.type == "Conceal Crouch" || var_0.type == "Conceal Stand";

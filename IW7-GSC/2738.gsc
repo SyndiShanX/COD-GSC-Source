@@ -63,8 +63,9 @@ givegesture(var_0) {
         } else {
           var_2 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "ges_plyr_gesture050", "ges_plyr_gesture052");
         }
-      } else
+      } else {
         var_2 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "ges_plyr_gesture050", "ges_plyr_gesture052");
+      }
 
       thread gesture_coinflipthink(var_2);
       var_0 = var_2;

@@ -230,10 +230,10 @@ func_1271() {
   var_7 = 0;
   var_8 = 0;
   var_9 = [];
-  var_0A = "";
-  var_0B = "";
-  var_0C = "";
-  var_0D = "";
+  var_10 = "";
+  var_11 = "";
+  var_12 = "";
+  var_13 = "";
   for(;;) {
     waittillframeend;
     level.player.var_AA2B = level.player.var_1180B;
@@ -250,91 +250,91 @@ func_1271() {
     func_142E(var_9, var_0);
     var_9 = level.player getweaponslistoffhands();
     var_9 = func_1270(var_9);
-    var_0A = "";
-    var_0B = "";
-    var_0E = 0;
-    var_0F = 0;
+    var_10 = "";
+    var_11 = "";
+    var_14 = 0;
+    var_15 = 0;
     var_10 = 0;
     var_11 = 0;
     for(var_12 = 0; var_12 < var_9.size; var_12++) {
       if(func_12F5(var_9[var_12])) {
-        var_0A = var_9[var_12];
+        var_10 = var_9[var_12];
       }
 
       if(func_12F1(var_9[var_12])) {
-        var_0B = var_9[var_12];
+        var_11 = var_9[var_12];
       }
     }
 
-    var_0C = level.player.var_110BD;
-    var_0D = level.player.var_110BA;
-    level.player.curobjid = var_0A;
-    level.player.var_4B21 = var_0B;
-    if(var_0A != var_1) {
-      var_0E = 1;
-      level.player notify("primary_equipment_change", var_0A);
+    var_12 = level.player.var_110BD;
+    var_13 = level.player.var_110BA;
+    level.player.curobjid = var_10;
+    level.player.var_4B21 = var_11;
+    if(var_10 != var_1) {
+      var_14 = 1;
+      level.player notify("primary_equipment_change", var_10);
     }
 
-    if(var_0B != var_2) {
-      var_0F = 1;
-      level.player notify("secondary_equipment_change", var_0B);
+    if(var_11 != var_2) {
+      var_15 = 1;
+      level.player notify("secondary_equipment_change", var_11);
     }
 
-    if(var_0C != var_5) {
+    if(var_12 != var_5) {
       var_10 = 1;
-      level.player notify("stored_primary_equipment_change", var_0C);
+      level.player notify("stored_primary_equipment_change", var_12);
     }
 
-    if(var_0D != var_6) {
+    if(var_13 != var_6) {
       var_11 = 1;
-      level.player notify("stored_secondary_equipment_change", var_0D);
+      level.player notify("stored_secondary_equipment_change", var_13);
     }
 
-    if(var_0E == 1 || var_0F == 1) {
+    if(var_14 == 1 || var_15 == 1) {
       level.player notify("equipment_change");
     }
 
-    if(var_0A == "") {
+    if(var_10 == "") {
       func_11A6();
     } else {
-      var_13 = level.player getrunningforwardpainanim(var_0A);
-      if(var_0E == 0 && var_13 != var_3) {
+      var_13 = level.player getrunningforwardpainanim(var_10);
+      if(var_14 == 0 && var_13 != var_3) {
         level.player notify("offhand_ammo");
         var_3 = var_13;
       }
 
-      func_1434(var_0A, var_13, var_0E);
+      func_1434(var_10, var_13, var_14);
     }
 
-    if(var_0B == "") {
+    if(var_11 == "") {
       func_11A5();
     } else {
-      var_13 = level.player getrunningforwardpainanim(var_0B);
-      if(var_0F == 0 && var_13 != var_4) {
+      var_13 = level.player getrunningforwardpainanim(var_11);
+      if(var_15 == 0 && var_13 != var_4) {
         level.player notify("item_ammo");
         var_4 = var_13;
       }
 
-      func_1433(var_0B, var_13, var_0F);
+      func_1433(var_11, var_13, var_15);
     }
 
-    if(var_0C == "") {
+    if(var_12 == "") {
       func_11A8();
     } else {
-      func_1436(var_0C, level.player.var_110BE, var_10);
+      func_1436(var_12, level.player.var_110BE, var_10);
     }
 
-    if(var_0D == "") {
+    if(var_13 == "") {
       func_11A7();
     } else {
-      func_1435(var_0D, level.player.var_110BB, var_11);
+      func_1435(var_13, level.player.var_110BB, var_11);
     }
 
     var_0 = var_9;
-    var_1 = var_0A;
-    var_2 = var_0B;
-    var_5 = var_0C;
-    var_6 = var_0D;
+    var_1 = var_10;
+    var_2 = var_11;
+    var_5 = var_12;
+    var_6 = var_13;
     wait(0.05);
   }
 }
@@ -395,38 +395,38 @@ func_142E(var_0, var_1) {
     }
   }
 
-  var_0A = undefined;
-  var_0B = undefined;
+  var_10 = undefined;
+  var_11 = undefined;
   foreach(var_8 in var_1) {
     if(!scripts\engine\utility::array_contains(var_0, var_8)) {
       continue;
     }
 
     if(func_12F5(var_8)) {
-      var_0A = var_8;
+      var_10 = var_8;
       continue;
     }
 
     if(func_12F1(var_8)) {
-      var_0B = var_8;
+      var_11 = var_8;
     }
   }
 
   if(var_2.size > 0) {
-    if(isDefined(var_0A) && level.player.var_110C0) {
+    if(isDefined(var_10) && level.player.var_110C0) {
       if(level.player.var_110BD == "") {
-        level.player.var_110BE = level.player getrunningforwardpainanim(var_0A);
-        level.player.var_110BD = var_0A;
-        level.player takeweapon(var_0A);
+        level.player.var_110BE = level.player getrunningforwardpainanim(var_10);
+        level.player.var_110BD = var_10;
+        level.player takeweapon(var_10);
       } else if(var_2[0] == level.player.var_110BD) {
-        level.player.var_110BE = level.player getrunningforwardpainanim(var_0A);
-        level.player.var_110BD = var_0A;
-        level.player takeweapon(var_0A);
+        level.player.var_110BE = level.player getrunningforwardpainanim(var_10);
+        level.player.var_110BD = var_10;
+        level.player takeweapon(var_10);
       }
 
-      level.player takeweapon(var_0A);
-    } else if(isDefined(var_0A)) {
-      level.player takeweapon(var_0A);
+      level.player takeweapon(var_10);
+    } else if(isDefined(var_10)) {
+      level.player takeweapon(var_10);
     }
 
     level.player func_844D();
@@ -443,20 +443,20 @@ func_142E(var_0, var_1) {
   }
 
   if(var_3.size > 0) {
-    if(isDefined(var_0B) && level.player.var_110C0) {
+    if(isDefined(var_11) && level.player.var_110C0) {
       if(level.player.var_110BA == "") {
-        level.player.var_110BB = level.player getrunningforwardpainanim(var_0B);
-        level.player.var_110BA = var_0B;
-        level.player takeweapon(var_0B);
+        level.player.var_110BB = level.player getrunningforwardpainanim(var_11);
+        level.player.var_110BA = var_11;
+        level.player takeweapon(var_11);
       } else if(var_3[0] == level.player.var_110BA) {
-        level.player.var_110BB = level.player getrunningforwardpainanim(var_0B);
-        level.player.var_110BA = var_0B;
-        level.player takeweapon(var_0B);
+        level.player.var_110BB = level.player getrunningforwardpainanim(var_11);
+        level.player.var_110BA = var_11;
+        level.player takeweapon(var_11);
       }
 
-      level.player takeweapon(var_0B);
-    } else if(isDefined(var_0B)) {
-      level.player takeweapon(var_0B);
+      level.player takeweapon(var_11);
+    } else if(isDefined(var_11)) {
+      level.player takeweapon(var_11);
     }
 
     level.player gonevo();
@@ -577,7 +577,7 @@ func_13FF() {
   thread func_12E3();
   thread func_11A0();
   for(;;) {
-    scripts\engine\utility::waittill_any_3("weapon_fired", "aim", "melee", "reload_start", "stand", "weapon_change", "weapon_swap", "hide_hud_omnvar_changed");
+    scripts\engine\utility::waittill_any("weapon_fired", "aim", "melee", "reload_start", "stand", "weapon_change", "weapon_swap", "hide_hud_omnvar_changed");
     func_1401();
   }
 }
@@ -585,7 +585,7 @@ func_13FF() {
 func_1400() {
   self endon("death");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("equipment_change", "current_primary_ammo", "offhand_ammo", "item_ammo", "sprint_begin", "offhandshield_retract");
+    scripts\engine\utility::waittill_any("equipment_change", "current_primary_ammo", "offhand_ammo", "item_ammo", "sprint_begin", "offhandshield_retract");
     func_1401();
   }
 }

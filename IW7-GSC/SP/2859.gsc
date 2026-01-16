@@ -32,19 +32,19 @@ func_6B44() {
   }
 
   if(!isDefined(level.var_6B46["allies"])) {
-    level.var_6B46["allies"] = scripts\sp\utility::func_1115A();
+    level.var_6B46["allies"] = ::scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6B46["axis"])) {
-    level.var_6B46["axis"] = scripts\sp\utility::func_1115A();
+    level.var_6B46["axis"] = ::scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6B46["team3"])) {
-    level.var_6B46["team3"] = scripts\sp\utility::func_1115A();
+    level.var_6B46["team3"] = ::scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6B46["neutral"])) {
-    level.var_6B46["neutral"] = scripts\sp\utility::func_1115A();
+    level.var_6B46["neutral"] = ::scripts\sp\utility::func_1115A();
   }
 
   if(!isDefined(level.var_6A65)) {
@@ -91,8 +91,8 @@ func_6B16() {
   level notify("new_fakeactor");
   self.var_EDB3 = undefined;
   self.magicbullet = 0;
-  self.var_368 = -45;
-  self.isbot = 45;
+  self.upaimlimit = -45;
+  self.downaimlimit = 45;
   self.setdevdvar = -45;
   self.setmatchdatadef = 45;
   self.var_2894 = 1;
@@ -176,7 +176,7 @@ func_174C(var_0, var_1, var_2, var_3, var_4) {
   level.var_6A65[var_0][var_5]["stateName"] = var_1;
   level.var_6A65[var_0][var_5]["thinkFunc"] = var_2;
   level.var_6A65[var_0][var_5]["changeFunc"] = var_3;
-  level.var_6A65[var_0] = scripts\engine\utility::array_sort_with_func(level.var_6A65[var_0], ::is_higher_priority);
+  level.var_6A65[var_0] = ::scripts\engine\utility::array_sort_with_func(level.var_6A65[var_0], ::is_higher_priority);
 }
 
 func_E092(var_0, var_1) {
@@ -242,7 +242,7 @@ func_B282() {
   thread func_DD7E();
   self waittill("make_real_ai");
   scripts\sp\utility::func_1101B();
-  var_0 = self.var_394;
+  var_0 = self.weapon;
   var_1 = "";
   if(isDefined(self.var_4B94) && isDefined(self.var_4B94.target)) {
     var_1 = self.var_4B94.target;
@@ -594,23 +594,23 @@ func_BC82() {
   }
 
   var_9 = 0;
-  var_0A = undefined;
+  var_10 = undefined;
   if(func_FF2F()) {
-    var_0B = 0;
-    foreach(var_0D in self.var_C039) {
-      if(var_0B) {
-        var_0A = var_0D["origin"];
+    var_11 = 0;
+    foreach(var_13 in self.var_C039) {
+      if(var_11) {
+        var_10 = var_13["origin"];
         break;
       }
 
-      if(var_0D["dist"] > 0) {
-        var_0B = 1;
+      if(var_13["dist"] > 0) {
+        var_11 = 1;
       }
     }
 
-    if(isDefined(var_0A)) {
-      var_0F = func_79A4(var_0A);
-      func_CE00(var_0F);
+    if(isDefined(var_10)) {
+      var_15 = func_79A4(var_10);
+      func_CE00(var_15);
     }
   }
 
@@ -629,7 +629,7 @@ func_BC82() {
       var_15 = invertangles(var_14);
       var_16 = combineangles(var_8["angles"], var_15);
       var_17 = var_8["origin"] - rotatevector(var_13, var_16);
-      var_8["anim_node"] = scripts\engine\utility::spawn_script_origin(var_17, var_16);
+      var_8["anim_node"] = ::scripts\engine\utility::spawn_script_origin(var_17, var_16);
       func_174D(var_8["anim_node"]);
       var_8["origin"] = var_17;
       var_8["angles"] = var_16;
@@ -713,7 +713,7 @@ func_BC82() {
           self notify("stop_running_anim");
           func_CE00(var_9, undefined, undefined, undefined, var_6["anim_node"], 0);
           var_6["anim_node"] delete();
-          func_F2C3([var_0A]);
+          func_F2C3([var_10]);
         } else {
           self.angles = var_6["angles"];
           func_F2C3(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B1F());
@@ -954,10 +954,10 @@ func_6D53(var_0) {
   self endon("death");
   childthread func_1A2E();
   wait(0.25);
-  var_1 = weaponclipsize(self.var_394);
-  var_2 = weaponfiretime(self.var_394);
-  var_3 = weaponburstcount(self.var_394);
-  var_4 = weaponclass(self.var_394);
+  var_1 = weaponclipsize(self.weapon);
+  var_2 = weaponfiretime(self.weapon);
+  var_3 = weaponburstcount(self.weapon);
+  var_4 = weaponclass(self.weapon);
   var_5 = var_1;
   if(var_4 == "sniper") {
     var_5 = 5;
@@ -972,20 +972,20 @@ func_6D53(var_0) {
       var_8 = anglesToForward(var_7);
       var_9 = var_6 + var_8 * 1000;
       if(isDefined(self.var_1A2C)) {
-        var_0A = scripts\common\trace::ray_trace(var_6, var_9, self);
-        if(isDefined(var_0A["entity"]) && var_0A["entity"] == self.var_1A2C) {
-          var_0B = func_77C8();
-          if(randomfloat(1) > var_0B) {
-            var_0C = self.var_1A2C physics_getcharactercollisioncapsule();
-            var_0D = anglestoup(self.var_1A2C.angles);
-            var_0E = randomfloatrange(0, var_0C["half_height"] * 2);
-            var_0F = anglestoright(self.var_1A2C.angles);
-            var_10 = var_0C["radius"] * randomfloatrange(1, 2);
+        var_10 = scripts\common\trace::ray_trace(var_6, var_9, self);
+        if(isDefined(var_10["entity"]) && var_10["entity"] == self.var_1A2C) {
+          var_11 = func_77C8();
+          if(randomfloat(1) > var_11) {
+            var_12 = self.var_1A2C physics_getcharactercollisioncapsule();
+            var_13 = anglestoup(self.var_1A2C.angles);
+            var_14 = randomfloatrange(0, var_12["half_height"] * 2);
+            var_15 = anglestoright(self.var_1A2C.angles);
+            var_10 = var_12["radius"] * randomfloatrange(1, 2);
             if(scripts\engine\utility::cointoss()) {
               var_10 = var_10 * -1;
             }
 
-            var_11 = self.var_1A2C.origin + var_0D * var_0E + var_0F * var_10;
+            var_11 = self.var_1A2C.origin + var_13 * var_14 + var_15 * var_10;
             var_8 = vectornormalize(var_11 - var_6);
             var_9 = var_6 + var_8 * 1000;
           }
@@ -993,9 +993,9 @@ func_6D53(var_0) {
       }
 
       if(func_FF81()) {
-        magicbullet(self.var_394, var_6, var_9);
+        magicbullet(self.weapon, var_6, var_9);
       } else {
-        func_6ADC(self.var_394, var_6, var_9, self.var_C01E);
+        func_6ADC(self.weapon, var_6, var_9, self.var_C01E);
       }
 
       self func_82AB(var_0, 1, 0.2, 1);
@@ -1015,7 +1015,7 @@ func_77C8(var_0) {
   }
 
   var_3 = distance(self.origin, self.var_1A2C.origin);
-  var_4 = getaccuracyfraction(self.var_394, var_3, isplayer(self.var_1A2C));
+  var_4 = getaccuracyfraction(self.weapon, var_3, isplayer(self.var_1A2C));
   var_5 = "stand";
   if(isplayer(self.var_1A2C)) {
     var_5 = self.var_1A2C getstance();
@@ -1037,8 +1037,8 @@ func_77C8(var_0) {
   } else if(isai(self.var_1A2C)) {}
 
   var_9 = 0.75;
-  var_0A = var_1 * var_2 * var_4 * var_6 * var_7 * var_9;
-  return var_0A;
+  var_10 = var_1 * var_2 * var_4 * var_6 * var_7 * var_9;
+  return var_10;
 }
 
 func_6ADC(var_0, var_1, var_2, var_3) {
@@ -1093,39 +1093,39 @@ func_1A2E() {
     var_7 = func_7CDD(self.var_1A2C);
     var_8 = scripts\sp\utility::func_13DCC(var_7) - scripts\sp\utility::func_13DCC(var_6);
     var_9 = vectortoangles(var_8);
-    var_0A = angleclamp180(var_9[0]);
-    var_0B = angleclamp180(var_9[1]);
-    if(var_0A < self.var_368 || var_0A > self.isbot || var_0B < self.setdevdvar || var_0B > self.setmatchdatadef) {
+    var_10 = angleclamp180(var_9[0]);
+    var_11 = angleclamp180(var_9[1]);
+    if(var_10 < self.upaimlimit || var_10 > self.downaimlimit || var_11 < self.setdevdvar || var_11 > self.setmatchdatadef) {
       func_F5BF(0);
-      var_0A = 0;
-      var_0B = 0;
+      var_10 = 0;
+      var_11 = 0;
     } else {
       func_F5BF(1);
     }
 
     if(getdvar("debug_fakeactor") == "1") {
-      var_0C = self gettagangles("tag_origin");
-      scripts\engine\utility::draw_angles(var_0C, self gettagorigin("tag_origin"));
+      var_12 = self gettagangles("tag_origin");
+      scripts\engine\utility::draw_angles(var_12, self gettagorigin("tag_origin"));
     }
 
     if(!var_5) {
-      var_0D = var_0B - var_3;
-      if(abs(var_0D) > var_2) {
-        var_0B = var_3 + clamp(var_0D, -1 * var_2, var_2);
+      var_13 = var_11 - var_3;
+      if(abs(var_13) > var_2) {
+        var_11 = var_3 + clamp(var_13, -1 * var_2, var_2);
       }
 
-      var_0E = var_0A - var_4;
-      if(abs(var_0E) > var_2) {
-        var_0A = var_4 + clamp(var_0E, -1 * var_2, var_2);
+      var_14 = var_10 - var_4;
+      if(abs(var_14) > var_2) {
+        var_10 = var_4 + clamp(var_14, -1 * var_2, var_2);
       }
     }
 
-    var_0A = clamp(var_0A, self.var_368, self.isbot);
-    var_0B = clamp(var_0B, self.setdevdvar, self.setmatchdatadef);
+    var_10 = clamp(var_10, self.upaimlimit, self.downaimlimit);
+    var_11 = clamp(var_11, self.setdevdvar, self.setmatchdatadef);
     var_5 = 0;
-    var_3 = var_0B;
-    var_4 = var_0A;
-    func_1A31(self.var_1EA4["aim_2"], self.var_1EA4["aim_4"], self.var_1EA4["aim_6"], self.var_1EA4["aim_8"], var_0A, var_0B);
+    var_3 = var_11;
+    var_4 = var_10;
+    func_1A31(self.var_1EA4["aim_2"], self.var_1EA4["aim_4"], self.var_1EA4["aim_6"], self.var_1EA4["aim_8"], var_10, var_11);
     wait(0.05);
   }
 }
@@ -1638,11 +1638,11 @@ func_4E22() {
 }
 
 func_5D16() {
-  var_0 = getweaponmodel(self.var_394);
+  var_0 = getweaponmodel(self.weapon);
   if(isDefined(var_0) && var_0 != "") {
     self detach(var_0, "tag_weapon_right");
     if(!isDefined(self.var_C05C)) {
-      var_1 = spawn("weapon_" + self.var_394, self gettagorigin("tag_weapon_right"));
+      var_1 = spawn("weapon_" + self.weapon, self gettagorigin("tag_weapon_right"));
       var_1.angles = self gettagangles("tag_weapon_right");
       func_ACDC(var_1);
     }
@@ -1770,9 +1770,9 @@ func_CE00(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_9 = "stop anim";
   }
 
-  var_0A = getanimlength(var_0) - var_5;
-  if(var_5 > 0 && var_0A > 0) {
-    scripts\sp\utility::func_137A3("fakeactor_anim", var_9, var_0A);
+  var_10 = getanimlength(var_0) - var_5;
+  if(var_5 > 0 && var_10 > 0) {
+    scripts\sp\utility::func_137A3("fakeactor_anim", var_9, var_10);
     return;
   }
 
@@ -1885,14 +1885,14 @@ func_1A31(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(var_4 < 0) {
-    var_8 = var_4 / self.var_368 * var_7;
+    var_8 = var_4 / self.upaimlimit * var_7;
     self func_82AC(var_0, 0, var_6, 1, 1);
     self func_82AC(var_3, var_8, var_6, 1, 1);
     return;
   }
 
   if(var_4 > 0) {
-    var_8 = var_4 / self.isbot * var_7;
+    var_8 = var_4 / self.downaimlimit * var_7;
     self func_82AC(var_0, var_8, var_6, 1, 1);
     self func_82AC(var_3, 0, var_6, 1, 1);
   }

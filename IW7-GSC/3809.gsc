@@ -26,8 +26,9 @@ func_E3D8(var_0) {
   if(!isDefined(var_0)) {
     var_0 = "_ignore_last_sparam";
     var_1 = level.var_FD6E.var_E35D;
-  } else
+  } else {
     var_1 = level.var_FD6E.var_E35D;
+  }
 
   var_2 = func_0EFB::func_7CC1("return_crane_a_airlockstart", "script_noteworthy", var_0);
 
@@ -302,8 +303,9 @@ func_E3CE(var_0, var_1, var_2, var_3) {
     level.var_E35D.var_A2E8[var_0].var_3FFD setanimknob( % shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0.45);
     level.var_E35D.var_A2E8[var_0].var_3FFD scripts\engine\utility::delaycall(var_1, ::stoploopsound);
     level.var_E35D.var_A2E8[var_0].var_3FFD scripts\engine\utility::delaycall(var_1, ::playsound, "scn_ship_titan_jackal_lower_plr_stop_lr");
-  } else
+  } else {
     level.var_E35D.var_A2E8[var_0].var_3FFD setanimknob( % shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0.45);
+  }
 }
 
 func_E3CD(var_0, var_1, var_2, var_3) {

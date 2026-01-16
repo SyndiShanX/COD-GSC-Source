@@ -150,10 +150,12 @@ func_257D(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       level.player func_82C0(var_3, var_4);
       wait 2;
       level.player clearclienttriggeraudiozone(2);
-    } else
+    } else {
       level.player clearclienttriggeraudiozone(var_4);
-  } else
+    }
+  } else {
     level.player clearclienttriggeraudiozone();
+  }
 }
 
 func_2AE8(var_0, var_1, var_2) {
@@ -238,10 +240,12 @@ func_257B(var_0, var_1, var_2, var_3, var_4) {
       level.player func_82C0(var_1, var_2);
       wait 2;
       level.player clearclienttriggeraudiozone(2);
-    } else
+    } else {
       level.player clearclienttriggeraudiozone(var_2);
-  } else
+    }
+  } else {
     level.player clearclienttriggeraudiozone();
+  }
 }
 
 func_9785() {

@@ -53,18 +53,18 @@ fix_collision() {
   var_9 = spawn("script_model", (-1035.5, -1622.5, 387));
   var_9.angles = (360, 55.1, -90);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_0A = getent("player256x256x8", "targetname");
-  var_0B = spawn("script_model", (-1569.5, -1171.5, 387));
-  var_0B.angles = (360, 34.6, -90);
-  var_0B clonebrushmodeltoscriptmodel(var_0A);
-  var_0C = getent("player256x256x256", "targetname");
-  var_0D = spawn("script_model", (-576, 336, 800));
-  var_0D.angles = (0, 0, 0);
-  var_0D clonebrushmodeltoscriptmodel(var_0C);
-  var_0E = getent("player32x32x128", "targetname");
-  var_0F = spawn("script_model", (1250, -28, -50));
-  var_0F.angles = (270, 180, 180);
-  var_0F clonebrushmodeltoscriptmodel(var_0E);
+  var_10 = getent("player256x256x8", "targetname");
+  var_11 = spawn("script_model", (-1569.5, -1171.5, 387));
+  var_11.angles = (360, 34.6, -90);
+  var_11 clonebrushmodeltoscriptmodel(var_10);
+  var_12 = getent("player256x256x256", "targetname");
+  var_13 = spawn("script_model", (-576, 336, 800));
+  var_13.angles = (0, 0, 0);
+  var_13 clonebrushmodeltoscriptmodel(var_12);
+  var_14 = getent("player32x32x128", "targetname");
+  var_15 = spawn("script_model", (1250, -28, -50));
+  var_15.angles = (270, 180, 180);
+  var_15 clonebrushmodeltoscriptmodel(var_14);
 }
 
 runmodespecifictriggers() {

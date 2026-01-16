@@ -6,7 +6,7 @@
 init() {
   level._effect["rc8_malfunction"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_rc8_glitch_out.vfx");
   level._effect["rc8_explode"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_rc8_dest_exp.vfx");
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("remote_c8", ::func_128F7);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_c8", ::func_128F7);
   var_0 = ["passive_increased_speed", "passive_decreased_duration", "passive_energy_machgun", "passive_boosters", "passive_speed_duration"];
   scripts\mp\killstreak_loot::func_DF07("remote_c8", var_0);
 }
@@ -51,7 +51,7 @@ func_DCF5(var_0, var_1, var_2, var_3, var_4, var_5) {
 func_DCFB() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   var_0 = scripts\common\trace::create_contents(0, 1, 1, 1, 1, 1, 1);
   self waittill("rc8_launched");
@@ -108,7 +108,7 @@ startmidairdamage(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("on_ground");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   for(;;) {
     self.midairdamage setscriptablepartstate("air_damage", var_0, 0);
@@ -120,7 +120,7 @@ startmidairdamage(var_0) {
 rc8_watchvoice() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   var_0 = undefined;
   var_1 = undefined;
@@ -137,9 +137,9 @@ rc8_watchvoice() {
     var_0 = var_3;
     var_1 = gettime();
     wait(var_2);
-    if(isDefined(self.triggerportableradarping.var_4BE1) && self.triggerportableradarping.var_4BE1 == "MANUAL") {
-      self playsoundtoteam(var_3, "allies", self.triggerportableradarping);
-      self playsoundtoteam(var_3, "axis", self.triggerportableradarping);
+    if(isDefined(self.owner.var_4BE1) && self.owner.var_4BE1 == "MANUAL") {
+      self playsoundtoteam(var_3, "allies", self.owner);
+      self playsoundtoteam(var_3, "axis", self.owner);
       continue;
     }
 
@@ -151,7 +151,7 @@ rc8_watchvoice() {
 rc8_watchhostmigration() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   for(;;) {
     level waittill("host_migration_begin");
@@ -168,7 +168,7 @@ rc8_watchhostmigration() {
 rc8_watchupdateuav() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   for(;;) {
     level waittill("uav_update");
@@ -222,9 +222,9 @@ rc8_updateteamuavstatus(var_0, var_1) {
 
   if(var_7 <= var_5) {
     self func_85A4(0);
-    self.cylinder = 0;
-    if(isDefined(self.createprintchannel) && self.createprintchannel == "constant_radar") {
-      self.createprintchannel = "normal_radar";
+    self.radarshowenemydirection = 0;
+    if(isDefined(self.radarmode) && self.radarmode == "constant_radar") {
+      self.radarmode = "normal_radar";
     }
 
     self setclientomnvar("ui_show_hardcore_minimap", 0);
@@ -232,7 +232,7 @@ rc8_updateteamuavstatus(var_0, var_1) {
   }
 
   scripts\mp\killstreaks\_uav::setradarmode(var_7, var_6, var_4);
-  self.cylinder = var_7 >= var_4;
+  self.radarshowenemydirection = var_7 >= var_4;
   self func_85A4(1);
   self setclientomnvar("ui_show_hardcore_minimap", 1);
 }
@@ -242,14 +242,14 @@ rc8_updateplayersuavstatus(var_0) {
   var_2 = getuavstrengthmax();
   var_3 = getuavstrengthlevelshowenemydirectional();
   var_4 = getuavstrengthlevelshowenemyfastsweep();
-  var_5 = level.activeuavs[self.triggerportableradarping.guid + "_radarStrength"];
+  var_5 = level.activeuavs[self.owner.guid + "_radarStrength"];
   foreach(var_7 in level.players) {
-    if(var_7 == self.triggerportableradarping) {
+    if(var_7 == self.owner) {
       continue;
     }
 
     var_8 = level.var_164F[var_7.guid];
-    if(var_8 > 0 && !self.triggerportableradarping scripts\mp\utility::_hasperk("specialty_empimmune")) {
+    if(var_8 > 0 && !self.owner scripts\mp\utility::_hasperk("specialty_empimmune")) {
       var_5 = var_1;
       break;
     }
@@ -270,9 +270,9 @@ rc8_updateplayersuavstatus(var_0) {
 
   if(var_5 <= getuavstrengthlevelneutral()) {
     self func_85A4(0);
-    self.cylinder = 0;
-    if(isDefined(self.createprintchannel) && self.createprintchannel == "constant_radar") {
-      self.createprintchannel = "normal_radar";
+    self.radarshowenemydirection = 0;
+    if(isDefined(self.radarmode) && self.radarmode == "constant_radar") {
+      self.radarmode = "normal_radar";
     }
 
     self setclientomnvar("ui_show_hardcore_minimap", 0);
@@ -280,7 +280,7 @@ rc8_updateplayersuavstatus(var_0) {
   }
 
   scripts\mp\killstreaks\_uav::setradarmode(var_5, var_4, var_3);
-  self.cylinder = var_5 >= var_3;
+  self.radarshowenemydirection = var_5 >= var_3;
   self func_85A4(1);
   self setclientomnvar("ui_show_hardcore_minimap", 1);
 }
@@ -288,27 +288,27 @@ rc8_updateplayersuavstatus(var_0) {
 rc8_watchupdatecranked() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
-  if(isDefined(self.triggerportableradarping.cranked) && isDefined(self.triggerportableradarping.cranked_end_time)) {
-    self setclientomnvar("ui_cranked_bomb_timer_end_milliseconds", self.triggerportableradarping.cranked_end_time);
+  if(isDefined(self.owner.cranked) && isDefined(self.owner.cranked_end_time)) {
+    self setclientomnvar("ui_cranked_bomb_timer_end_milliseconds", self.owner.cranked_end_time);
   }
 
   for(;;) {
-    self.triggerportableradarping scripts\engine\utility::waittill_any_3("watchBombTimer", "stop_cranked");
-    if(!isDefined(self.triggerportableradarping.cranked_end_time)) {
+    self.owner scripts\engine\utility::waittill_any("watchBombTimer", "stop_cranked");
+    if(!isDefined(self.owner.cranked_end_time)) {
       self setclientomnvar("ui_cranked_bomb_timer_end_milliseconds", 0);
       continue;
     }
 
-    self setclientomnvar("ui_cranked_bomb_timer_end_milliseconds", self.triggerportableradarping.cranked_end_time);
+    self setclientomnvar("ui_cranked_bomb_timer_end_milliseconds", self.owner.cranked_end_time);
   }
 }
 
 func_DCFA() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   var_0 = self.health;
   var_1 = 0;
@@ -343,7 +343,7 @@ func_DCFA() {
 func_DCF7() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   while(!isDefined(self.mainweapon)) {
     wait(0.25);
@@ -352,8 +352,8 @@ func_DCF7() {
   var_0 = self getweaponammoclip(self.mainweapon);
   for(;;) {
     self waittill("weapon_fired", var_1);
-    if(isDefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied)) {
-      level thread scripts\mp\battlechatter_mp::saytoself(self.isnodeoccupied, "plr_killstreak_target");
+    if(isDefined(self.enemy) && isplayer(self.enemy)) {
+      level thread scripts\mp\battlechatter_mp::saytoself(self.enemy, "plr_killstreak_target");
     }
 
     if(scripts\mp\utility::istrue(self.var_19)) {
@@ -371,8 +371,8 @@ func_DCF8(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   while(isDefined(var_0) && isalive(var_0)) {
-    if(isDefined(self.isnodeoccupied)) {
-      var_0 = self.isnodeoccupied;
+    if(isDefined(self.enemy)) {
+      var_0 = self.enemy;
     }
 
     if(self botcanseeentity(var_0)) {
@@ -408,7 +408,7 @@ func_DCF8(var_0) {
 func_DCF6() {
   var_0 = [];
   foreach(var_2 in level.players) {
-    if(var_2.ignoreme || isDefined(var_2.triggerportableradarping) && var_2.triggerportableradarping.ignoreme) {
+    if(var_2.ignoreme || isDefined(var_2.owner) && var_2.owner.ignoreme) {
       continue;
     }
 
@@ -442,16 +442,16 @@ func_DCF6() {
 func_DCF9() {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   for(;;) {
     if(scripts\mp\utility::istrue(self.var_19)) {
       thread playvoice(1, "vox_c8_seeking");
     }
 
-    if(isDefined(self.isnodeoccupied) && isalive(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && !self.isnodeoccupied func_8181("specialty_blindeye")) {
-      if(!self botcanseeentity(self.isnodeoccupied)) {
-        func_DCF8(self.isnodeoccupied);
+    if(isDefined(self.enemy) && isalive(self.enemy) && isplayer(self.enemy) && !self.enemy func_8181("specialty_blindeye")) {
+      if(!self botcanseeentity(self.enemy)) {
+        func_DCF8(self.enemy);
       }
     } else {
       var_0 = func_DCF6();
@@ -466,8 +466,8 @@ func_DCF9() {
 
 func_DCF3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {}
 
-func_DCF2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = isDefined(var_1) && isDefined(self.triggerportableradarping) && self.triggerportableradarping == var_1;
+func_DCF2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = isDefined(var_1) && isDefined(self.owner) && self.owner == var_1;
   if(isDefined(level.weaponmapfunc)) {
     var_5 = [[level.weaponmapfunc]](var_5, var_0);
   }
@@ -476,31 +476,31 @@ func_DCF2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     return;
   }
 
-  var_0D = 0;
-  if(self.triggerportableradarping.var_FC96) {
-    var_0D = self.triggerportableradarping.var_FC96;
+  var_13 = 0;
+  if(self.owner.var_FC96) {
+    var_13 = self.owner.var_FC96;
   }
 
   if(!scripts\mp\utility::istrue(self.var_19)) {
     var_2 = var_2 / 2;
   }
 
-  scripts\mp\damage::callback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
-  var_0E = self.triggerportableradarping.var_FC96 - var_0D;
-  if(var_0E > 0) {
-    self.triggerportableradarping thread scripts\mp\missions::func_D991("ch_rc8_shield", var_0E);
+  scripts\mp\damage::callback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  var_14 = self.owner.var_FC96 - var_13;
+  if(var_14 > 0) {
+    self.owner thread scripts\mp\missions::func_D991("ch_rc8_shield", var_14);
   }
 
-  scripts\mp\damage::logattackerkillstreak(self, var_2, var_1, var_7, var_6, var_4, var_0A, undefined, var_0B, var_3, var_5);
+  scripts\mp\damage::logattackerkillstreak(self, var_2, var_1, var_7, var_6, var_4, var_10, undefined, var_11, var_3, var_5);
   scripts\mp\damage::onkillstreakdamaged("remote_c8", var_1, var_5, var_2);
-  scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_5, self, var_4);
+  scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_5, self, var_4);
 }
 
 rc8_manageboostfx() {
   self endon("death");
   self endon("disconnect");
   self endon("owner_disconnect");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
   self notify("scriptableBoostFxManager");
   self endon("scriptableBoostFxManager");
@@ -527,8 +527,8 @@ no_gametype_update() {
 func_128F7(var_0) {
   var_1 = checkrc8available(1);
   if(!var_1) {
-    if(isDefined(var_0.var_394) && var_0.var_394 != "none") {
-      self notify("killstreak_finished_with_weapon_" + var_0.var_394);
+    if(isDefined(var_0.weapon) && var_0.weapon != "none") {
+      self notify("killstreak_finished_with_weapon_" + var_0.weapon);
     }
 
     return 0;
@@ -609,8 +609,8 @@ func_6CC3(var_0, var_1, var_2) {
 
   var_8 = scripts\common\trace::create_contents(0, 1, 0, 0, 0, 0, 0);
   foreach(var_6 in var_4) {
-    var_0A = scripts\common\trace::ray_trace(var_6.origin, var_6.origin + (0, 0, var_2), level.characters, var_8);
-    if(var_0A["hittype"] == "hittype_none") {
+    var_10 = scripts\common\trace::ray_trace(var_6.origin, var_6.origin + (0, 0, var_2), level.characters, var_8);
+    if(var_10["hittype"] == "hittype_none") {
       var_3 = var_6.origin;
       break;
     }
@@ -660,25 +660,25 @@ func_10D8D(var_0, var_1) {
   thread func_13998(var_9, var_1, var_6);
   thread watchgameover(var_9);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(3.5);
-  var_0A = spawn("script_model", var_2);
-  var_0A setModel("veh_mil_lnd_ca_droppod_c8_mp");
-  var_0A moveto(var_3, 2.65, 0, 0);
-  var_0A setscriptablepartstate("pod", "fall", 0);
-  thread func_13A0B(var_0A);
-  var_0A thread watchreachpoddestination(var_3);
-  var_9 linkto(var_0A, "tag_origin");
+  var_10 = spawn("script_model", var_2);
+  var_10 setModel("veh_mil_lnd_ca_droppod_c8_mp");
+  var_10 moveto(var_3, 2.65, 0, 0);
+  var_10 setscriptablepartstate("pod", "fall", 0);
+  thread func_13A0B(var_10);
+  var_10 thread watchreachpoddestination(var_3);
+  var_9 linkto(var_10, "tag_origin");
   var_9.killstreaktype = var_0.streakname;
   var_9.var_165A = var_0.streakname;
   var_9.streakname = var_0.streakname;
   var_9.streakinfo = var_0;
-  var_9.triggerportableradarping = self;
+  var_9.owner = self;
   var_9.var_5F6F = undefined;
   var_9.var_FC99 = 1;
   var_9 setotherent(self);
   var_9 setentityowner(self);
   var_9 thread scripts\mp\killstreaks\_agent_killstreak::finishreconagentloadout();
-  var_0B = 2800;
-  var_9 scripts\mp\agents\_agent_common::set_agent_health(var_0B);
+  var_11 = 2800;
+  var_9 scripts\mp\agents\_agent_common::set_agent_health(var_11);
   var_9.var_ED75 = 60;
   var_9.mainweapon = "iw7_chargeshot_c8_mp";
   if(scripts\mp\killstreaks\_utility::func_A69F(var_9.streakinfo, "passive_energy_machgun")) {
@@ -724,21 +724,21 @@ func_10D8D(var_0, var_1) {
   var_9 scripts\mp\utility::giveperk("specialty_blindeye");
   var_9 scripts\mp\damage::resetattackerlist();
   var_9 notify("rc8_launched");
-  var_0A waittill("explode", var_0C);
+  var_10 waittill("explode", var_12);
   if(isDefined(var_6)) {
     var_6 setscriptablepartstate("laser_target", "neutral");
     var_6 setscriptablepartstate("pod", "explode");
   }
 
-  if(isDefined(var_0A)) {
-    var_0A delete();
+  if(isDefined(var_10)) {
+    var_10 delete();
   }
 
   if(isDefined(var_1.var_1349C)) {
     var_1.var_1349C delete();
   }
 
-  var_9.origin = var_0C;
+  var_9.origin = var_12;
   var_9 showallparts();
   var_9.midairdamage.killcament unlink();
   var_9.midairdamage.killcament linkto(var_9, "j_helmet");
@@ -1026,7 +1026,7 @@ func_13AD7(var_0) {
 func_13AE2(var_0) {
   self endon("destroyed_rc8");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3("joined_team", "disconnect", "joined_spectators");
+  scripts\engine\utility::waittill_any("joined_team", "disconnect", "joined_spectators");
   self notify("destroyed_rc8", 1);
 }
 
@@ -1087,7 +1087,7 @@ func_13996() {
     }
 
     if(isDefined(var_6) && var_6 == "concussion_grenade_mp") {
-      if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_2))) {
+      if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_2))) {
         var_2 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
       }
     }
@@ -1157,22 +1157,22 @@ func_D51B(var_0, var_1, var_2) {
   rc8_disable_attack(1);
   self botsetflag("ads_shield", 0);
   if(scripts\mp\utility::istrue(var_0)) {
-    if(isDefined(self.triggerportableradarping)) {
-      if(isDefined(self.triggerportableradarping.var_4BE1) && self.triggerportableradarping.var_4BE1 == "MANUAL") {
-        self.triggerportableradarping notify("stop_manual_rc8");
+    if(isDefined(self.owner)) {
+      if(isDefined(self.owner.var_4BE1) && self.owner.var_4BE1 == "MANUAL") {
+        self.owner notify("stop_manual_rc8");
       }
     }
   } else {
     self.var_5F6F = 1;
     var_3 = 3;
-    if(isDefined(self.triggerportableradarping)) {
-      if(isDefined(self.triggerportableradarping.var_4BE1) && self.triggerportableradarping.var_4BE1 == "MANUAL") {
-        self.triggerportableradarping notify("stop_manual_rc8");
+    if(isDefined(self.owner)) {
+      if(isDefined(self.owner.var_4BE1) && self.owner.var_4BE1 == "MANUAL") {
+        self.owner notify("stop_manual_rc8");
         scripts\engine\utility::waitframe();
       }
 
-      self.triggerportableradarping.var_4BE1 = undefined;
-      var_4 = self.triggerportableradarping scripts\mp\utility::_launchgrenade("dummy_spike_mp", self.origin, self.origin, var_3);
+      self.owner.var_4BE1 = undefined;
+      var_4 = self.owner scripts\mp\utility::_launchgrenade("dummy_spike_mp", self.origin, self.origin, var_3);
       if(!isDefined(var_4.weapon_name)) {
         var_4.weapon_name = "dummy_spike_mp";
       }
@@ -1195,8 +1195,8 @@ func_D51B(var_0, var_1, var_2) {
   self.loadoutarchetype = undefined;
   self.nocorpse = 1;
   if(!scripts\mp\utility::istrue(var_0)) {
-    if(isDefined(self.triggerportableradarping)) {
-      self radiusdamage(self.origin, 256, 200, 100, self.triggerportableradarping, "MOD_EXPLOSIVE", self.mainweapon);
+    if(isDefined(self.owner)) {
+      self radiusdamage(self.origin, 256, 200, 100, self.owner, "MOD_EXPLOSIVE", self.mainweapon);
     }
 
     self suicide();
@@ -1204,7 +1204,7 @@ func_D51B(var_0, var_1, var_2) {
 
   reset_rc8_functionality();
   scripts\mp\agents\agent_utility::deactivateagent();
-  scripts\mp\utility::printgameaction("killstreak ended - remote_c8", self.triggerportableradarping);
+  scripts\mp\utility::printgameaction("killstreak ended - remote_c8", self.owner);
 }
 
 func_FBF1(var_0) {
@@ -1219,15 +1219,15 @@ func_13ACD(var_0) {
   self endon("destroyed_rc8");
   var_1 = 100;
   for(;;) {
-    var_0 waittill("victim_damaged", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    var_0 waittill("victim_damaged", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     if(var_3 == var_0 && var_2 != var_0 && var_6 == "MOD_MELEE") {
       if(isplayer(var_2)) {
-        var_0C = anglesToForward(var_0 getplayerangles());
-        var_0D = var_0.origin;
-        var_0E = var_0 gettagorigin("c8_shield_le") + (0, 0, 20) + var_0C * 200;
-        var_0F = vectornormalize(var_0E - var_0D);
+        var_12 = anglesToForward(var_0 getplayerangles());
+        var_13 = var_0.origin;
+        var_14 = var_0 gettagorigin("c8_shield_le") + (0, 0, 20) + var_12 * 200;
+        var_15 = vectornormalize(var_14 - var_13);
         var_1 = var_2.health + 1;
-        var_2 func_84DC(var_0F, 700);
+        var_2 func_84DC(var_15, 700);
         var_2 playSound("rc8_melee_hit");
         wait(0.05);
       } else {
@@ -1255,7 +1255,7 @@ func_13B0C(var_0) {
 func_511F(var_0) {
   self endon("death");
   self endon("disconnect");
-  self.triggerportableradarping endon("destroyed_rc8");
+  self.owner endon("destroyed_rc8");
   level endon("game_ended");
   wait(var_0);
   self.var_FC99 = undefined;

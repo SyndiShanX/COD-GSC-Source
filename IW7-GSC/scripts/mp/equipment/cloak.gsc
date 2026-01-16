@@ -601,8 +601,8 @@ disableforcethirdpersonwhenfollowing(var_0, var_1, var_2) {
   var_8 = vectordot(var_4 * -1, var_7);
   var_9 = vectordot(var_5, var_4);
   var_9 = clamp(var_9, -1, 1);
-  var_0A = acos(var_9);
-  var_3.var_E72A = var_0A;
+  var_10 = acos(var_9);
+  var_3.var_E72A = var_10;
   var_3.var_DA69 = var_8;
   return var_3;
 }

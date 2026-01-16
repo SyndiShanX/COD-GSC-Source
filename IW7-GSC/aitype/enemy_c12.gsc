@@ -11,7 +11,7 @@ main() {
   self.subclass = "C12";
   self.accuracy = 0.2;
   self.health = 10000;
-  self.objective_team = "";
+  self.grenadeweapon = "";
   self.objective_state = 0;
   self.secondaryweapon = "iw7_c12gatling";
   self.var_101B4 = "";
@@ -22,7 +22,7 @@ main() {
     self func_82DB(768, 1024);
   }
 
-  self.var_394 = "iw7_c12rocket";
+  self.weapon = "iw7_c12rocket";
   lib_04B2::main();
 }
 

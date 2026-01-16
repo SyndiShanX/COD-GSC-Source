@@ -31,7 +31,7 @@ func_5268(var_0) {
 func_5269() {
   self endon("death");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("grenade_fire", "weapon_change");
+  scripts\engine\utility::waittill_any("grenade_fire", "weapon_change");
   scripts\engine\utility::allow_usability(1);
 }
 
@@ -46,7 +46,7 @@ func_526D(var_0, var_1, var_2) {
   }
 
   if(isalive(self)) {
-    var_3.triggerportableradarping = self;
+    var_3.owner = self;
     var_3.var_39C = var_1;
     self.marker = var_3;
     thread func_526A(var_0, var_3, var_2);
@@ -80,7 +80,7 @@ func_526B(var_0) {
 
 func_526A(var_0, var_1, var_2) {
   var_1 waittill("missile_stuck", var_3);
-  if(isDefined(var_1.triggerportableradarping)) {
+  if(isDefined(var_1.owner)) {
     self thread[[var_2]](var_0, var_1);
   }
 

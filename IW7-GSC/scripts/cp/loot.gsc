@@ -140,14 +140,14 @@ read_loot_table() {
       break;
     }
 
-    var_0A = table_look_up(var_0, var_1, 3);
-    if(!isDefined(level._effect[var_0A])) {
-      level._effect[var_0A] = loadfx(var_0A);
+    var_10 = table_look_up(var_0, var_1, 3);
+    if(!isDefined(level._effect[var_10])) {
+      level._effect[var_10] = loadfx(var_10);
     }
 
-    level.loot_fx[var_9] = var_0A;
-    var_0B = table_look_up(var_0, var_1, 1);
-    level.loot_id[var_9] = var_0B;
+    level.loot_fx[var_9] = var_10;
+    var_11 = table_look_up(var_0, var_1, 1);
+    level.loot_id[var_9] = var_11;
   }
 
   for(var_1 = 101; var_1 <= 150; var_1++) {
@@ -156,12 +156,12 @@ read_loot_table() {
       break;
     }
 
-    var_0C = table_look_up(var_0, var_1, 4);
-    if(scripts\cp\utility::is_empty_string(var_0C)) {
+    var_12 = table_look_up(var_0, var_1, 4);
+    if(scripts\cp\utility::is_empty_string(var_12)) {
       continue;
     }
 
-    level.loot_icon[var_9] = var_0C;
+    level.loot_icon[var_9] = var_12;
   }
 }
 
@@ -205,9 +205,9 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, var_4, ca
   }
 
   var_7.content = powerup_id;
-  var_0B = get_loot_fx(var_7);
-  var_7.fxname = var_0B;
-  var_0C = (0, 0, 0);
+  var_11 = get_loot_fx(var_7);
+  var_7.fxname = var_11;
+  var_12 = (0, 0, 0);
   if(isDefined(from_consumable) && from_consumable scripts\cp\utility::is_consumable_active("more_power_up_drops")) {
     from_consumable scripts\cp\utility::notify_used_consumable("more_power_up_drops");
   }
@@ -229,16 +229,16 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, var_4, ca
       var_7.fnffx = spawnfx(level._effect["powerup_additive_fx"], location + (0, 0, -10));
     }
 
-    var_7.fx = spawnfx(scripts\engine\utility::getfx(var_0B), location);
-    if(isDefined(var_0C)) {
-      var_7.fx.angles = var_0C;
+    var_7.fx = spawnfx(scripts\engine\utility::getfx(var_11), location);
+    if(isDefined(var_12)) {
+      var_7.fx.angles = var_12;
     }
   }
 
   if(isDefined(from_consumable)) {
-    var_7.triggerportableradarping = from_consumable;
+    var_7.owner = from_consumable;
   } else {
-    var_7.triggerportableradarping = level.players[0];
+    var_7.owner = level.players[0];
   }
 
   var_7 notify("activate");
@@ -255,9 +255,9 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, var_4, ca
 
   var_7 thread loot_pick_up_monitor(var_7);
   var_7 thread loot_think(var_7);
-  var_0D = get_index_for_powerup(powerup_id);
-  if(isDefined(var_0D) && scripts\engine\utility::istrue(can_despawn)) {
-    update_power_up_drop_time(var_0D);
+  var_13 = get_index_for_powerup(powerup_id);
+  if(isDefined(var_13) && scripts\engine\utility::istrue(can_despawn)) {
+    update_power_up_drop_time(var_13);
   }
 
   level thread cleanuppowerup(var_7);
@@ -299,7 +299,7 @@ moveeffecttoclosestplayer(var_0) {
 }
 
 cleanuppowerup(var_0) {
-  var_0 scripts\engine\utility::waittill_any_timeout_1(get_loot_time_out(), "picked_up");
+  var_0 scripts\engine\utility::waittill_any_timeout(get_loot_time_out(), "picked_up");
   if(scripts\engine\utility::istrue(var_0.fnf_consumable_active)) {
     playFX(level._effect["pickup_fnfmod"], var_0.origin + (0, 0, 50));
   } else {
@@ -410,9 +410,9 @@ get_loot_fx(var_0) {
 
 loot_think(var_0) {
   var_0 endon("loot_deleted");
-  var_1 = var_0 scripts\engine\utility::waittill_any_timeout_1(get_loot_time_out(), "picked_up");
+  var_1 = var_0 scripts\engine\utility::waittill_any_timeout(get_loot_time_out(), "picked_up");
   if(var_1 == "picked_up") {
-    thread process_loot_content(var_0.triggerportableradarping, var_0.content, var_0, 1);
+    thread process_loot_content(var_0.owner, var_0.content, var_0, 1);
   }
 }
 
@@ -675,10 +675,10 @@ choose_powerup(var_0, var_1, var_2) {
   }
 
   var_9 = level.allowed_powerups[get_loot_index_based_on_weights(var_0)];
-  var_0A = level.loot_info[var_0]["contents"][var_9]["value"];
+  var_10 = level.loot_info[var_0]["contents"][var_9]["value"];
   level.allowed_powerups = undefined;
   level.last_loot_drop = var_9;
-  return var_0A;
+  return var_10;
 }
 
 get_loot_index_based_on_weights(var_0) {
@@ -843,7 +843,7 @@ remove_explosive_touch_on_death(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("explosive_armor_removed");
-  var_0 scripts\engine\utility::waittill_any_3("death", "last_stand");
+  var_0 scripts\engine\utility::waittill_any("death", "last_stand");
   var_0.has_explosive_armor = undefined;
   var_0 setscriptablepartstate("exp_touch", "neutral", 0);
   var_0 notify("explosive_armor_removed");
@@ -853,7 +853,7 @@ deactivate_explosive_armor(var_0, var_1) {
   level endon("disconnect");
   level endon("game_ended");
   var_1 = var_1 - 5.5;
-  scripts\engine\utility::waittill_any_timeout_1(var_1, "deactivated" + var_0);
+  scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0);
   level notify("deactivated" + var_0);
   wait(5.5);
   scripts\engine\utility::flag_clear("explosive_armor");
@@ -952,7 +952,7 @@ outline_all_enemies(var_0) {
 deactivate_outline_enemies(var_0, var_1) {
   level endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_1(var_1, "deactivated" + var_0);
+  scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0);
   level notify("deactivated" + var_0);
   foreach(var_3 in level.players) {
     var_3.has_outline_on = undefined;
@@ -997,7 +997,7 @@ apply_infinite_grenade_effects(var_0) {
 deactivate_infinite_grenade(var_0, var_1) {
   level endon("disconnect");
   level endon("game_ended");
-  var_2 = scripts\engine\utility::waittill_any_timeout_1(var_1, "deactivated" + var_0, "activated" + var_0);
+  var_2 = scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0, "activated" + var_0);
   if(var_2 != "activated" + var_0) {
     level.active_power_ups["infinite_grenades"] = 0;
     level notify("deactivated" + var_0);
@@ -1040,7 +1040,7 @@ apply_infinite_ammo_effects(var_0) {
 deactivate_infinite_ammo(var_0, var_1) {
   level endon("disconnect");
   level endon("game_ended");
-  var_2 = scripts\engine\utility::waittill_any_timeout_1(var_1, "deactivated" + var_0, "activated" + var_0);
+  var_2 = scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0, "activated" + var_0);
   if(var_2 != "activated" + var_0) {
     level.active_power_ups["infinite_ammo"] = 0;
     level.infinite_ammo = undefined;
@@ -1106,7 +1106,7 @@ additional_ability_hint(var_0, var_1) {
 deactivate_left_power(var_0, var_1, var_2, var_3) {
   level endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_1(var_0, "deactivated" + var_3);
+  scripts\engine\utility::waittill_any_timeout(var_0, "deactivated" + var_3);
   self.has_left_power = undefined;
   self.additional_ability_hint_display = undefined;
   level.secondary_power = undefined;
@@ -1184,7 +1184,7 @@ apply_instakill_effects(var_0) {
 deactivate_instakill(var_0, var_1) {
   level endon("game_ended");
   level endon("activated" + var_0);
-  scripts\engine\utility::waittill_any_timeout_1(var_1, "deactivated" + var_0);
+  scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0);
   level notify("deactivated" + var_0);
   foreach(var_3 in level.players) {
     var_3.instakill = undefined;
@@ -1225,7 +1225,7 @@ apply_double_money_effects(var_0) {
 deactivate_scaled_cash(var_0, var_1, var_2) {
   level endon("disconnect");
   level endon("game_ended");
-  var_3 = scripts\engine\utility::waittill_any_timeout_1(var_1, "deactivated" + var_0, "activated" + var_0);
+  var_3 = scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0, "activated" + var_0);
   if(var_3 != "activated" + var_0) {
     level notify("deactivated" + var_0);
     level.cash_scalar = 1;
@@ -1270,11 +1270,11 @@ get_fx_points(var_0, var_1, var_2, var_3, var_4) {
         var_8.angles = (0, 0, 0);
       }
 
-      var_0A = scripts\engine\utility::spawn_tag_origin(var_8.origin, var_8.angles);
-      var_0A show();
-      var_0A.origin = var_8.origin;
-      var_0A.angles = var_8.angles;
-      var_5[var_5.size] = var_0A;
+      var_10 = scripts\engine\utility::spawn_tag_origin(var_8.origin, var_8.angles);
+      var_10 show();
+      var_10.origin = var_8.origin;
+      var_10.angles = var_8.angles;
+      var_5[var_5.size] = var_10;
       if(isDefined(var_3)) {
         if(var_5.size >= var_3) {
           break;
@@ -1309,23 +1309,23 @@ kill_closest_enemies(var_0, var_1) {
     var_9 = 400 * level.cash_scalar;
   }
 
-  foreach(var_0B in var_8) {
-    if(is_immune_against_nuke(var_0B)) {
+  foreach(var_11 in var_8) {
+    if(is_immune_against_nuke(var_11)) {
       continue;
     }
 
     if(scripts\engine\utility::istrue(level.forced_nuke)) {
-      var_0B.died_poorly = 1;
-      var_0B.died_poorly_health = var_0B.health;
+      var_11.died_poorly = 1;
+      var_11.died_poorly_health = var_11.health;
     }
 
-    if(scripts\engine\utility::istrue(var_0B.isfrozen)) {
-      var_0B dodamage(var_0B.health + 100, var_0B.origin);
+    if(scripts\engine\utility::istrue(var_11.isfrozen)) {
+      var_11 dodamage(var_11.health + 100, var_11.origin);
     } else {
-      var_0B.precacheleaderboards = 1;
-      var_0B.is_burning = 1;
-      var_0B.nocorpse = undefined;
-      var_0B thread kill_selected_enemy(1);
+      var_11.precacheleaderboards = 1;
+      var_11.is_burning = 1;
+      var_11.nocorpse = undefined;
+      var_11 thread kill_selected_enemy(1);
     }
 
     wait(0.1);
@@ -1443,11 +1443,11 @@ hide_power_icon(var_0, var_1, var_2, var_3) {
   var_0 = var_0 - var_4;
   self setclientomnvarbit("zm_active_powerup_animation", var_2 - 1, 0);
   if(var_0 > 0) {
-    level scripts\engine\utility::waittill_any_timeout_1(var_0, "deactivated" + var_1);
+    level scripts\engine\utility::waittill_any_timeout(var_0, "deactivated" + var_1);
     self setclientomnvarbit("zm_active_powerup_animation", var_2 - 1, 1);
   }
 
-  level scripts\engine\utility::waittill_any_timeout_1(var_4, "deactivated" + var_1);
+  level scripts\engine\utility::waittill_any_timeout(var_4, "deactivated" + var_1);
   level notify("power_up_deactivated");
   if(isDefined(self.powerupicons[var_1])) {
     self.powerupicons[var_1] = undefined;

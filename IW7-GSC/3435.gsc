@@ -41,7 +41,7 @@ createentityeventdata(var_0, var_1, var_2) {
   var_6 = func_7E95(var_2);
   var_5 func_8594();
   var_5 setModel(var_6);
-  var_5.triggerportableradarping = var_0;
+  var_5.owner = var_0;
   var_5.team = var_0.team;
   var_5.type = var_2;
   var_5 hidefromplayer(var_0);
@@ -162,11 +162,11 @@ func_13A1C(var_0) {
       if(var_1.team != var_0.team) {
         continue;
       }
-    } else if(var_1 != var_0.triggerportableradarping) {
+    } else if(var_1 != var_0.owner) {
       continue;
     }
 
-    if(var_0.type == "equipment" && var_1 != var_0.triggerportableradarping) {
+    if(var_0.type == "equipment" && var_1 != var_0.owner) {
       continue;
     }
 
@@ -191,7 +191,7 @@ func_13A1C(var_0) {
 setvehiclelookattext(var_0) {
   if(var_0.type == "battery") {
     thread scripts\mp\rank::scoreeventpopup("battery_pack");
-    scripts\mp\equipment\battery::func_E83B(var_0.triggerportableradarping);
+    scripts\mp\equipment\battery::func_E83B(var_0.owner);
     return;
   }
 
@@ -199,7 +199,7 @@ setvehiclelookattext(var_0) {
     thread scripts\mp\rank::scoreeventpopup("scorestreak_pack");
     var_1 = scripts\mp\rank::getscoreinfovalue("scorestreak_pack");
     thread scripts\mp\rank::scorepointspopup(var_1);
-    scripts\mp\killstreaks\_killstreaks::func_83A7("scorestreak_pack", var_1);
+    scripts\mp\killstreaks\killstreaks::func_83A7("scorestreak_pack", var_1);
     return;
   }
 

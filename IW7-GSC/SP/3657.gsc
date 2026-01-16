@@ -108,7 +108,7 @@ func_F34E(var_0) {
   }
 }
 
-func_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+func_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   self endon("death");
   if(!isDefined(self.var_77C1)) {
     self.var_77C1 = spawnStruct();
@@ -213,7 +213,7 @@ func_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     scripts\engine\utility::allow_doublejump(0);
   }
 
-  if(isDefined(var_0A) && var_0A == 1) {
+  if(isDefined(var_10) && var_10 == 1) {
     if(!isDefined(self.var_77C1.var_E2F1)) {
       self.var_77C1.var_E2F1 = 0;
     }
@@ -222,7 +222,7 @@ func_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     scripts\engine\utility::allow_melee(0);
   }
 
-  if(isDefined(var_0B) && var_0B == 1) {
+  if(isDefined(var_11) && var_11 == 1) {
     if(!isDefined(self.var_77C1.var_E2F2)) {
       self.var_77C1.var_E2F2 = 0;
     }
@@ -231,11 +231,11 @@ func_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     scripts\engine\utility::allow_offhand_weapons(0);
   }
 
-  if(isDefined(var_0C)) {
-    wait(var_0C);
+  if(isDefined(var_12)) {
+    wait(var_12);
   } else {
-    self waittill("gesture_stopped", var_0D);
-    if(var_0D != var_0) {
+    self waittill("gesture_stopped", var_13);
+    if(var_13 != var_0) {
       for(;;) {
         if(!self isgestureplaying(var_0)) {
           break;
@@ -247,10 +247,10 @@ func_D092(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   self notify(var_0 + "gesture_stopped_internal");
-  func_D093(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  func_D093(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
-func_D093(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
+func_D093(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(!isDefined(self.var_77C1)) {
     self.var_77C1 = spawnStruct();
   }
@@ -308,7 +308,7 @@ func_D093(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     scripts\engine\utility::allow_melee(1);
   }
 
-  if(isDefined(var_0A) && var_0A == 1) {
+  if(isDefined(var_10) && var_10 == 1) {
     scripts\engine\utility::allow_offhand_weapons(1);
   }
 }

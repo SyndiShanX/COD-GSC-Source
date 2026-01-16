@@ -10,12 +10,12 @@ init() {
   level.aamissilelaunchhorz = 30000;
   level.aamissilelaunchtargetdist = 1500;
   level.rockets = [];
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("aamissile", ::tryuseaamissile);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("aamissile", ::tryuseaamissile);
 }
 
 tryuseaamissile(var_0, var_1) {
   scripts\mp\utility::setusingremote("aamissile");
-  var_2 = scripts\mp\killstreaks\_killstreaks::initridekillstreak();
+  var_2 = scripts\mp\killstreaks\killstreaks::initridekillstreak();
   if(var_2 != "success") {
     if(var_2 != "disconnect") {
       scripts\mp\utility::clearusingremote();
@@ -71,15 +71,15 @@ aa_missile_fire(var_0, var_1) {
 
   var_8 = anglesToForward(var_1.angles);
   var_9 = var_1.origin + var_3 + var_8 * var_4 * -1;
-  var_0A = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_9, var_7, var_1);
-  if(!isDefined(var_0A)) {
+  var_10 = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_9, var_7, var_1);
+  if(!isDefined(var_10)) {
     var_1 scripts\mp\utility::clearusingremote();
     return;
   }
 
-  var_0A.lifeid = var_0;
-  var_0A.type = "remote";
-  missileeyes(var_1, var_0A);
+  var_10.lifeid = var_0;
+  var_10.type = "remote";
+  missileeyes(var_1, var_10);
 }
 
 missileeyes(var_0, var_1) {
@@ -151,7 +151,7 @@ staticeffect(var_0) {
 player_cleanuponteamchange(var_0) {
   var_0 endon("death");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+  scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   if(self.team != "spectator") {
     self thermalvisionfofoverlayoff();
     self controlsunlink();

@@ -31,8 +31,8 @@ func_13901() {
 
 func_DEBD(var_0, var_1, var_2, var_3) {
   var_4 = self;
-  if(isDefined(self.triggerportableradarping)) {
-    var_4 = self.triggerportableradarping;
+  if(isDefined(self.owner)) {
+    var_4 = self.owner;
   }
 
   if(!isplayer(var_4)) {

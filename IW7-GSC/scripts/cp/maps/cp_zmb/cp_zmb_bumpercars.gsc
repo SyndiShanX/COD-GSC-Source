@@ -195,8 +195,8 @@ kill_zombies() {
     var_1 = getEntArray("placed_transponder", "script_noteworthy");
     foreach(var_3 in var_1) {
       if(var_0 == var_3) {
-        if(isDefined(var_3.triggerportableradarping) && var_3.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
-          var_3.triggerportableradarping scripts\cp\cp_weapon::placeequipmentfailed(var_0.weapon_name, 1, var_0.origin);
+        if(isDefined(var_3.owner) && var_3.owner scripts\cp\utility::is_valid_player(1)) {
+          var_3.owner scripts\cp\cp_weapon::placeequipmentfailed(var_0.weapon_name, 1, var_0.origin);
         }
 
         var_3 notify("detonateExplosive");

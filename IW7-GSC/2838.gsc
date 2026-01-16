@@ -153,8 +153,9 @@ func_4763(var_0, var_1, var_2, var_3) {
     var_5 = spawnfx(level.var_7649["coverwall_expand_vr"], var_0, anglesToForward(var_1), anglestoup(var_1));
     triggerfx(var_5);
     var_4.var_132AA[var_4.var_132AA.size] = var_5;
-  } else
+  } else {
     playFX(level.var_7649["coverwall_expand"], var_0, anglesToForward(var_1), anglestoup(var_1));
+  }
 
   var_4.owner = self;
   var_3 thread func_475E(35);

@@ -24,14 +24,14 @@ turnstile_damage_listener() {
   self setCanDamage(1);
   var_0 = undefined;
   for(;;) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-    if(isDefined(var_0A)) {
-      if(var_0A == "iw7_entangler2_zm") {
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    if(isDefined(var_10)) {
+      if(var_10 == "iw7_entangler2_zm") {
         var_2.has_turnstile = 1;
         var_0 = var_2;
         level.turnstile_piece = spawn("script_model", var_4);
-        var_0B = "cp_final_subway_turnstyle_arm";
-        level.turnstile_piece setModel(var_0B);
+        var_11 = "cp_final_subway_turnstyle_arm";
+        level.turnstile_piece setModel(var_11);
         var_0.entangledmodel = level.turnstile_piece;
         break;
       }
@@ -39,10 +39,10 @@ turnstile_damage_listener() {
   }
 
   self setModel("cp_disco_subway_turnstyle_missing_arm");
-  var_0C = spawnStruct();
+  var_12 = spawnStruct();
   level.turnstile_piece.collisionfunc = ::check_turnstile_collision;
   level.turnstile_piece thread turnstile_check();
-  scripts\cp\crafted_entangler::entangleitem(var_0, var_0C, level.turnstile_piece);
+  scripts\cp\crafted_entangler::entangleitem(var_0, var_12, level.turnstile_piece);
 }
 
 check_turnstile_collision(var_0, var_1, var_2) {

@@ -19,7 +19,7 @@ portalgeneratorused(var_0) {
   var_3 setModel("prop_mp_speed_strip_temp");
   var_3.angles = var_0.angles;
   var_3.team = self.team;
-  var_3.triggerportableradarping = self;
+  var_3.owner = self;
   var_3 thread func_D684(self);
   var_3 thread func_D68C();
   var_3 thread func_D685(self);
@@ -42,8 +42,8 @@ func_D684(var_0) {
 }
 
 func_D686(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
-    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
+  if(isDefined(self.owner) && var_0 != self.owner) {
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
     var_0 notify("destroyed_equipment");
   }
 
@@ -163,7 +163,7 @@ func_6979() {
 }
 
 func_13B14(var_0, var_1) {
-  var_0 scripts\engine\utility::waittill_any_timeout_1(var_1, "death");
+  var_0 scripts\engine\utility::waittill_any_timeout(var_1, "death");
   scripts\mp\objidpoolmanager::returnminimapid(self.objid);
   self.var_D682 delete();
   self delete();

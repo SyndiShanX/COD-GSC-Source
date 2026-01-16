@@ -19,10 +19,10 @@ func_FAB0() {
 
   level.agent_definition["crab_mini"]["setup_func"] = ::setupagent;
   level.agent_definition["crab_mini"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["crab_mini"]["on_damaged"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
-  level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["crab_mini"]["gametype_on_killed"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
-  level.agent_funcs["crab_mini"]["on_damaged_finished"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["crab_mini"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
+  level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["crab_mini"]["gametype_on_killed"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
+  level.agent_funcs["crab_mini"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
   level.agent_funcs["crab_mini"]["on_killed"] = ::onkilled;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
@@ -33,7 +33,7 @@ func_FAB0() {
     level.damage_feedback_overrride = [];
   }
 
-  level.damage_feedback_overrride["crab_mini"] = scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
+  level.damage_feedback_overrride["crab_mini"] = ::scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
   if(!isDefined(level.special_zombie_damage_func)) {
     level.special_zombie_damage_func = [];
   }
@@ -147,8 +147,8 @@ setupagent() {
   self.var_B601 = 45;
   self.var_504E = 55;
   self.var_129AF = 55;
-  self.var_368 = -60;
-  self.isbot = 60;
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
   self.ground_pound_damage = 50;
   self.footstepdetectdist = 2500;
   self.footstepdetectdistwalk = 2500;
@@ -258,7 +258,7 @@ iscrabministuck() {
   return isDefined(self.bisstuck) && self.bisstuck;
 }
 
-crab_mini_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+crab_mini_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(level.insta_kill) && level.insta_kill) {
     return self.health;
   }
@@ -268,11 +268,11 @@ crab_mini_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
   }
 
   if(isDefined(var_7)) {
-    var_0C = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
-    var_0D = anglesToForward(self.angles) * -1;
-    var_0E = vectordot(var_0D, var_7);
-    if(var_0E > var_0C.reduce_damage_dot) {
-      var_2 = var_2 * var_0C.reduce_damage_pct;
+    var_12 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
+    var_13 = anglesToForward(self.angles) * -1;
+    var_14 = vectordot(var_13, var_7);
+    if(var_14 > var_12.reduce_damage_dot) {
+      var_2 = var_2 * var_12.reduce_damage_pct;
       self.armor_hit = 1;
     }
   }

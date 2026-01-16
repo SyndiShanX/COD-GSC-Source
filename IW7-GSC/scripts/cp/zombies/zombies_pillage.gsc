@@ -420,7 +420,7 @@ func_831A(var_0) {
     }
   }
 
-  var_3 = self.pillageinfo.randomintrange.var_394;
+  var_3 = self.pillageinfo.randomintrange.weapon;
   var_4 = scripts\cp\utility::getrawbaseweaponname(var_3);
   var_0.itempicked = var_4;
   var_0 giveweapon(var_3);
@@ -438,7 +438,7 @@ func_831A(var_0) {
 
 func_5135(var_0) {
   thread func_13971();
-  var_1 = scripts\engine\utility::waittill_any_timeout_1(60, "stop_pillage_spot_think", "all_players_searched", "redistributed_pillage_spots");
+  var_1 = scripts\engine\utility::waittill_any_timeout(60, "stop_pillage_spot_think", "all_players_searched", "redistributed_pillage_spots");
   var_2 = var_1 != "redistributed_pillage_spots";
   self.var_A032 = var_0.model;
   thread func_5189(var_0, var_2);
@@ -452,7 +452,7 @@ func_10D4C() {
 func_13971() {
   self endon("all_players_searched");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("picked_up", "swapped");
+    scripts\engine\utility::waittill_any("picked_up", "swapped");
     self.var_F073++;
     wait(0.25);
     if(self.var_F073 >= level.players.size) {
@@ -743,7 +743,7 @@ func_100F2(var_0) {
   self.var_1304A = scripts\cp\utility::createprimaryprogressbartext(0, 25, var_1, var_2);
   self.var_1304A settext(var_0);
   self.var_1304A setpulsefx(50, 2000, 800);
-  scripts\engine\utility::waittill_any_timeout_1(3, "death");
+  scripts\engine\utility::waittill_any_timeout(3, "death");
   self.var_1304A scripts\cp\utility::destroyelem();
   self.var_1304A = undefined;
 }
@@ -1089,9 +1089,9 @@ func_10798(var_0, var_1, var_2) {
   }
 
   for(;;) {
-    var_0A = var_7.origin;
+    var_10 = var_7.origin;
     wait(0.25);
-    if(distance(var_0A, var_7.origin) < 8) {
+    if(distance(var_10, var_7.origin) < 8) {
       break;
     }
   }
@@ -1099,7 +1099,7 @@ func_10798(var_0, var_1, var_2) {
   if(ispointonnavmesh(var_7.origin)) {
     level.var_A8F5 = gettime();
     level.var_BF51 = level.var_A8F5 + randomintrange(level.var_CB5D, level.var_CB5C);
-    var_0B = func_4934(var_7);
+    var_11 = func_4934(var_7);
     return;
   }
 
@@ -1132,7 +1132,7 @@ func_4934(var_0) {
     triggerfx(var_3);
     scripts\engine\utility::waitframe();
     var_2 setModel("crafting_battery_single_01");
-    var_1 scripts\engine\utility::waittill_any_timeout_1(60, "all_players_searched");
+    var_1 scripts\engine\utility::waittill_any_timeout(60, "all_players_searched");
     if(isDefined(var_2)) {
       var_2 delete();
     }
@@ -1144,12 +1144,12 @@ func_4934(var_0) {
     var_3 = spawnfx(level._effect["pillage_box"], var_1.origin);
     scripts\engine\utility::waitframe();
     triggerfx(var_3);
-    var_1 scripts\engine\utility::waittill_any_timeout_1(60, "all_players_searched");
+    var_1 scripts\engine\utility::waittill_any_timeout(60, "all_players_searched");
     if(isDefined(var_3)) {
       var_3 delete();
     }
   } else {
-    var_1 scripts\engine\utility::waittill_any_timeout_1(60, "all_players_searched");
+    var_1 scripts\engine\utility::waittill_any_timeout(60, "all_players_searched");
   }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_1);

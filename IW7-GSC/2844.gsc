@@ -43,8 +43,9 @@ func_7997(var_0, var_1) {
         } else {
           var_6 = "vehicle_spawners";
         }
-      } else if(isDefined(var_5.var_49BD))
+      } else if(isDefined(var_5.var_49BD)) {
         var_6 = var_5.classname + " CREATEFX";
+      }
       else if(!isDefined(var_5.code_classname)) {} else if(var_5.code_classname == "script_model") {
         if(var_5.model == "tag_origin") {
           var_6 = "script_model TAG_ORIGIN";

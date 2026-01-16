@@ -9,7 +9,7 @@ blackholegrenadeinit() {
 
 blackholeminetrigger() {
   scripts\cp\cp_weapon::makeexplosiveunusable();
-  self.triggerportableradarping blackholegrenadeused(self, 1);
+  self.owner blackholegrenadeused(self, 1);
 }
 
 blackholemineexplode() {}
@@ -49,7 +49,7 @@ func_2B3E(var_0) {
   var_0 endon("death");
   thread func_13A55(var_0);
   var_1 = spawn("script_model", var_0.origin);
-  var_1 setotherent(var_0.triggerportableradarping);
+  var_1 setotherent(var_0.owner);
   var_1 setModel("prop_mp_black_hole_grenade_scr");
   var_1 give_player_tickets(1);
   var_1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
@@ -162,7 +162,7 @@ grabclosestzombies(var_0, var_1) {
   var_3 thread cleanuponparentdeath(var_0);
   while(isDefined(var_3)) {
     var_3 waittill("trigger", var_4);
-    if(!scripts\cp\utility::isreallyalive(var_4) || !isDefined(var_0.triggerportableradarping)) {
+    if(!scripts\cp\utility::isreallyalive(var_4) || !isDefined(var_0.owner)) {
       continue;
     }
 
@@ -174,7 +174,7 @@ grabclosestzombies(var_0, var_1) {
       continue;
     }
 
-    if(var_0.triggerportableradarping == var_4) {
+    if(var_0.owner == var_4) {
       continue;
     }
 
@@ -236,13 +236,13 @@ suck_zombie(var_0, var_1, var_2) {
   playFX(level._effect["blackhole_trap_death"], self.origin, anglesToForward((-90, 0, 0)), anglestoup((-90, 0, 0)));
   self.anchor delete();
   self.disable_armor = 1;
-  self dodamage(self.health + 1000, var_1.origin, var_1.triggerportableradarping, var_1, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
+  self dodamage(self.health + 1000, var_1.origin, var_1.owner, var_1, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
 }
 
 killzombieongrenadedeath(var_0) {
   self endon("death");
   var_1 = var_0.origin;
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_0 waittill("death");
   self.nocorpse = 1;
   self.precacheleaderboards = 1;
@@ -264,11 +264,11 @@ func_13A58(var_0) {
   var_2 thread cleanuponparentdeath(var_0);
   while(isDefined(var_2)) {
     var_2 waittill("trigger", var_3);
-    if(!scripts\cp\utility::isreallyalive(var_3) || !isDefined(var_0.triggerportableradarping)) {
+    if(!scripts\cp\utility::isreallyalive(var_3) || !isDefined(var_0.owner)) {
       continue;
     }
 
-    if(var_0.triggerportableradarping == var_3) {
+    if(var_0.owner == var_3) {
       continue;
     }
 
@@ -278,7 +278,7 @@ func_13A58(var_0) {
 
     if(!var_3 func_9FAF(var_0)) {
       var_3 thread func_11AD5(var_0);
-      var_3 dodamage(int(0.34 * var_3.maxhealth), var_0.origin, var_0.triggerportableradarping, var_0, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
+      var_3 dodamage(int(0.34 * var_3.maxhealth), var_0.origin, var_0.owner, var_0, "MOD_EXPLOSIVE", "blackhole_grenade_mp");
     }
   }
 }
@@ -293,12 +293,12 @@ func_10834(var_0, var_1, var_2) {
   var_0 hide(1);
   var_3 = spawn("script_model", var_1);
   var_3.angles = var_2;
-  var_3 setotherent(var_0.triggerportableradarping);
-  var_3 setentityowner(var_0.triggerportableradarping);
+  var_3 setotherent(var_0.owner);
+  var_3 setentityowner(var_0.owner);
   var_3 setModel("black_hole_projector_wm");
   var_3 linkto(var_0);
   var_3.objective_position = var_0;
-  var_3.triggerportableradarping = var_0.triggerportableradarping;
+  var_3.owner = var_0.owner;
   var_3 thread cleanuponparentdeath(var_0);
   var_3 thread func_13A5E();
   return var_3;
@@ -307,7 +307,7 @@ func_10834(var_0, var_1, var_2) {
 func_10835(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_1);
   var_3.angles = var_2;
-  var_3 setotherent(var_0.triggerportableradarping);
+  var_3 setotherent(var_0.owner);
   var_3 setentityowner(var_0);
   var_3 setModel("prop_mp_black_hole_grenade_scr");
   var_3 linkto(var_0);
@@ -320,7 +320,7 @@ func_13A5E() {
 }
 
 func_DA65(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 

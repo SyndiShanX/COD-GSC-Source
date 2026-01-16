@@ -465,8 +465,9 @@ func_8DD1() {
     func_137AB("near_goal", "goal", 5);
     var_8 = var_1.origin;
     var_8 = var_8 + (0, 0, 1500);
-  } else if(var_1.origin[2] > self.origin[2])
+  } else if(var_1.origin[2] > self.origin[2]) {
     var_8 = var_1.origin;
+  }
   else {
     var_8 = var_1.origin * (1, 1, 0);
     var_8 = var_8 + (0, 0, self.origin[2]);
@@ -699,8 +700,9 @@ func_8DB4(var_0) {
     } else if(var_10 == 2 && isDefined(var_2) && scripts\mp\utility\game::attackerishittingteam(var_2, self.owner)) {
       radiusdamage(self.owner.origin, 200, 2600, 2600, var_2);
       radiusdamage(self.owner.origin, 200, 2600, 2600);
-    } else
+    } else {
       radiusdamage(self.owner.origin, 200, 2600, 2600);
+    }
 
     self.owner.onhelisniper = 0;
     self.owner.var_8DD6 = undefined;
@@ -776,8 +778,9 @@ setturrettargetvec() {
       self.owner getraidspawnpoint();
       self.owner scripts\mp\utility\game::setrecoilscale(0, 100);
       self.owner givemaxammo("iw6_gm6helisnipe_mp_gm6scope");
-    } else
+    } else {
       return;
+    }
 
     wait 0.05;
   }

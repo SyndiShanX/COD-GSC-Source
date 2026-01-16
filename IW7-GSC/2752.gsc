@@ -273,16 +273,18 @@ teamoutcomenotify(var_0, var_1, var_2) {
     }
 
     var_0 = "allies";
-  } else if(self ismlgspectator())
+  } else if(self ismlgspectator()) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["spectator"]);
+  }
   else if(isDefined(self.pers["team"]) && var_0 == var_3) {
     if(var_1 && !scripts\mp\utility\game::waslastround()) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_win"]);
     } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
     }
-  } else if(var_1 && !scripts\mp\utility\game::waslastround())
+  } else if(var_1 && !scripts\mp\utility\game::waslastround()) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["round_loss"]);
+  }
   else {
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
 
@@ -335,8 +337,9 @@ func_C752(var_0, var_1) {
     } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
     }
-  } else if(isDefined(var_3) && self == var_3 || isDefined(var_4) && self == var_4 || isDefined(var_5) && self == var_5)
+  } else if(isDefined(var_3) && self == var_3 || isDefined(var_4) && self == var_4 || isDefined(var_5) && self == var_5) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
+  }
   else {
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
 

@@ -24,7 +24,7 @@ func_6134() {
   var_3 = 0;
   var_4 = 0;
   for(;;) {
-    self waittill("damage", var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E);
+    self waittill("damage", var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
     if(isDefined(var_6) && isai(var_6)) {
       continue;
     }
@@ -33,7 +33,7 @@ func_6134() {
       continue;
     }
 
-    if(isDefined(var_0E) && scripts\engine\utility::weaponclass(var_0E) == "sniper") {
+    if(isDefined(var_14) && scripts\engine\utility::weaponclass(var_14) == "sniper") {
       var_5 = 999999;
       var_0 = 0;
     }
@@ -62,8 +62,8 @@ func_6134() {
         self.var_C528 = 1;
       }
 
-      var_0F = var_2 / 50;
-      var_0 = var_0 * var_0F;
+      var_15 = var_2 / 50;
+      var_0 = var_0 * var_15;
       thread lib_0E1D::func_2835(var_0);
     }
 
@@ -152,11 +152,11 @@ func_6135() {
   }
 
   playFX(scripts\engine\utility::getfx("battery_explosion"), self.origin);
-  foreach(var_0A in self.var_109DB) {
-    killfxontag(scripts\engine\utility::getfx("impact_shock"), var_0A, "tag_origin");
+  foreach(var_10 in self.var_109DB) {
+    killfxontag(scripts\engine\utility::getfx("impact_shock"), var_10, "tag_origin");
     scripts\engine\utility::waitframe();
-    if(isDefined(var_0A)) {
-      var_0A delete();
+    if(isDefined(var_10)) {
+      var_10 delete();
     }
   }
 

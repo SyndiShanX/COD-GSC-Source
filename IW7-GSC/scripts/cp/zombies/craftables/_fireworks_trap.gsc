@@ -6,11 +6,11 @@
 init() {
   level.var_6DA3 = [];
   var_0 = spawnStruct();
-  var_0.var_39B = "zmb_fireworksprojectile_mp";
+  var_0.weaponinfo = "zmb_fireworksprojectile_mp";
   var_0.modelbase = "park_fireworks_trap";
   var_0.modelplacement = "park_fireworks_trap_good";
   var_0.modelplacementfailed = "park_fireworks_trap_bad";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -133,7 +133,7 @@ func_48EB(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.var_6DA4 = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_ims";
   var_2.carried_fireworks_trap = spawn("script_model", var_2.origin);
   var_2.carried_fireworks_trap.angles = var_1.angles;
@@ -146,14 +146,14 @@ func_48EB(var_0, var_1) {
 }
 
 func_48EA(var_0, var_1) {
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_3 = var_0.var_6DA4;
   var_4 = spawn("script_model", var_0.origin + (0, 0, 1));
   var_4 setModel(level.var_6DA3[var_3].modelbase);
   var_4.var_EB9C = 3;
   var_4.angles = var_0.angles;
   var_4.var_6DA4 = var_3;
-  var_4.triggerportableradarping = var_2;
+  var_4.owner = var_2;
   var_4 setotherent(var_2);
   var_4.team = var_2.team;
   var_4.name = "crafted_ims";
@@ -239,14 +239,14 @@ func_6DA2(var_0) {
   }
 
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.firstplacement = undefined;
   var_1 = func_48EA(self, var_0);
   var_1.isplaced = 1;
-  var_1 thread func_9367(self.triggerportableradarping);
+  var_1 thread func_9367(self.owner);
   self playSound("ims_plant");
   self notify("placed");
   var_1 thread func_6D9E();
@@ -315,9 +315,9 @@ func_9371(var_0) {
 func_6D9E() {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_6DA3[self.var_6DA4].pow);
+  self sethintstring(level.var_6DA3[self.var_6DA4].hintstring);
   scripts\cp\utility::addtotraplist();
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
   self makeusable();
   self setusefov(120);
@@ -399,12 +399,12 @@ func_6D9C() {
     self waittill("firework_exploded");
     self setscriptablepartstate("firework", "off");
     wait(self.config.var_DDAC);
-    if(!isDefined(self.triggerportableradarping)) {
+    if(!isDefined(self.owner)) {
       break;
     }
   }
 
-  if(isDefined(self.carriedby) && isDefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping) {
+  if(isDefined(self.carriedby) && isDefined(self.owner) && self.carriedby == self.owner) {
     return;
   }
 
@@ -417,8 +417,8 @@ func_AA75(var_0, var_1) {
   var_2 setModel(self.config.var_6A03);
   var_2.angles = self.angles;
   var_2 setscriptablepartstate("rocket", "launch");
-  var_3 = self.config.var_39B;
-  var_4 = self.triggerportableradarping;
+  var_3 = self.config.weaponinfo;
+  var_4 = self.owner;
   var_2 moveto(self.var_2514 + self.origin, self.var_2528, self.var_2528 * 0.5, 0);
   var_2 waittill("movedone");
   var_2 setscriptablepartstate("rocket", "explode");

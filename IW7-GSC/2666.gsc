@@ -596,8 +596,9 @@ func_FF79(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(self)) {
     if(isDefined(level.var_18E8)) {
-      if(![[level.var_18E8]](var_0))
+      if(![[level.var_18E8]](var_0)) {
         return 0;
+      }
     }
   }
 
@@ -651,8 +652,9 @@ func_FF79(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     } else {
       return 0;
     }
-  } else
+  } else {
     return 1;
+  }
 }
 
 func_788D(var_0) {
@@ -752,8 +754,9 @@ func_1783(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(func_9D15()) {
       func_9A85();
     }
-  } else
+  } else {
     func_1777(var_7, var_1);
+  }
 
   if(!func_9D15()) {
     func_C14E();

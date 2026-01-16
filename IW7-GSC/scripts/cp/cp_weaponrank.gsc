@@ -88,17 +88,17 @@ give_player_weapon_xp(var_0, var_1, var_2) {
   var_7 = get_max_weapon_rank_for_root_weapon(var_1);
   var_8 = get_weapon_max_rank_xp(var_1);
   var_9 = var_8 - var_4;
-  var_0A = var_3 + var_2;
-  if(var_0A > var_9) {
-    var_0A = var_9;
+  var_10 = var_3 + var_2;
+  if(var_10 > var_9) {
+    var_10 = var_9;
   }
 
-  var_0B = var_0A + var_4;
-  var_0C = var_0 getplayerdata("common", "sharedProgression", "weaponLevel", var_1, "prestige");
-  var_0D = int(min(get_weapon_rank_for_xp(var_0B), var_7));
-  var_0 setplayerdata("common", "sharedProgression", "weaponLevel", var_1, "cpXP", var_0A);
-  if(var_6 < var_0D) {
-    var_0 scripts\cp\cp_hud_message::showsplash("ranked_up_weapon_" + var_1, var_0D + 1);
+  var_11 = var_10 + var_4;
+  var_12 = var_0 getplayerdata("common", "sharedProgression", "weaponLevel", var_1, "prestige");
+  var_13 = int(min(get_weapon_rank_for_xp(var_11), var_7));
+  var_0 setplayerdata("common", "sharedProgression", "weaponLevel", var_1, "cpXP", var_10);
+  if(var_6 < var_13) {
+    var_0 scripts\cp\cp_hud_message::showsplash("ranked_up_weapon_" + var_1, var_13 + 1);
   }
 }
 

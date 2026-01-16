@@ -65,8 +65,9 @@ func_7A7A(var_0, var_1, var_2, var_3) {
 
     var_5 = var_5 * var_3;
     var_5 = var_5 * var_0;
-  } else
+  } else {
     var_5 = (0, 0, 0);
+  }
 
   return var_2.origin + var_4 + var_5;
 }

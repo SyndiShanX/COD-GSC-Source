@@ -193,7 +193,7 @@ onplayerspawned() {
   for(;;) {
     self waittill("spawned_player");
     if(isai(self)) {
-      self.pers["rankxp"] = scripts\mp\utility::get_rank_xp_for_bot();
+      self.pers["rankxp"] = ::scripts\mp\utility::get_rank_xp_for_bot();
     } else if(!level.rankedmatch) {
       self.pers["rankxp"] = 0;
     }
@@ -229,7 +229,7 @@ playerupdaterank() {
 func_C575() {
   self endon("disconnect");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("giveLoadout", "changed_kit");
+    scripts\engine\utility::waittill_any("giveLoadout", "changed_kit");
     if(issubstr(self.class, "custom")) {
       if(!level.rankedmatch) {
         self.pers["rankxp"] = 0;
@@ -246,8 +246,8 @@ func_C575() {
 
 giverankxp(var_0, var_1, var_2) {
   self endon("disconnect");
-  if(isDefined(self.triggerportableradarping) && !isbot(self)) {
-    self.triggerportableradarping giverankxp(var_0, var_1, var_2);
+  if(isDefined(self.owner) && !isbot(self)) {
+    self.owner giverankxp(var_0, var_1, var_2);
     return;
   }
 
@@ -301,8 +301,8 @@ giverankxp(var_0, var_1, var_2) {
 
   func_DDF7(var_0, var_1, var_7);
   var_9 = detachshieldmodel();
-  var_0A = getrank();
-  thread scripts\mp\analyticslog::logevent_giveplayerxp(var_9, var_0A, var_1, var_0);
+  var_10 = getrank();
+  thread scripts\mp\analyticslog::logevent_giveplayerxp(var_9, var_10, var_1, var_0);
 }
 
 func_DDF7(var_0, var_1, var_2) {
@@ -456,8 +456,8 @@ flushscoreeventpopupqueueonspawn() {
 }
 
 scoreeventpopup(var_0) {
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping scoreeventpopup(var_0);
+  if(isDefined(self.owner)) {
+    self.owner scoreeventpopup(var_0);
   }
 
   if(!isplayer(self)) {

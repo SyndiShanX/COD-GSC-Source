@@ -47,8 +47,9 @@ func_128FE(var_0, var_1) {
     scripts\mp\matchdata::logkillstreakevent("remote_tank", self.origin);
     thread scripts\mp\utility\game::teamplayercardsplash("used_remote_tank", self);
     func_1146D("remote_tank");
-  } else
+  } else {
     scripts\mp\utility::decrementfauxvehiclecount();
+  }
 
   self.iscarrying = 0;
   return var_3;
@@ -771,8 +772,9 @@ func_114D7() {
         var_2 = 0;
         var_1++;
       }
-    } else if(self.damagetaken >= self.maxhealth * (var_0 * var_1))
+    } else if(self.damagetaken >= self.maxhealth * (var_0 * var_1)) {
       var_1++;
+    }
 
     wait 0.05;
   }

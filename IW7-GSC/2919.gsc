@@ -248,8 +248,9 @@ func_DBC0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(!isDefined(var_6)) {
       var_6 = 1;
     }
-  } else if(isDefined(var_1) && isenemyteam(var_1, self.team) || isDefined(var_0 func_DBC7()) && isenemyteam(var_0 func_DBC7(), self.team))
+  } else if(isDefined(var_1) && isenemyteam(var_1, self.team) || isDefined(var_0 func_DBC7()) && isenemyteam(var_0 func_DBC7(), self.team)) {
     var_7 = "hud_radar_friendly";
+  }
 
   if(isDefined(var_3)) {
     var_8 = var_3;

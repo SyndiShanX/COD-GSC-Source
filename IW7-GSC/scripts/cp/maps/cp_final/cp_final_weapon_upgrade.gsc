@@ -20,7 +20,7 @@ init_all_weapon_upgrades() {
 
 init_upgrade_weapon() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
   var_0 = getent("pap_machine", "targetname");
@@ -66,9 +66,9 @@ weapon_upgrade(var_0, var_1) {
   var_7 = var_4 scripts\cp\cp_weapon::get_weapon_level(var_6);
   var_8 = undefined;
   var_9 = get_player_fists_weapon(var_4);
-  var_0A = "none";
-  var_0B = undefined;
-  var_0C = 0;
+  var_10 = "none";
+  var_11 = undefined;
+  var_12 = 0;
   if(!can_use_pap_machine(var_6)) {
     return;
   }
@@ -79,36 +79,36 @@ weapon_upgrade(var_0, var_1) {
 
   if(var_4 can_upgrade(var_5)) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
-    var_0D = scripts\engine\utility::getstruct(var_3.target, "targetname");
-    var_0E = vectornormalize(anglesToForward(var_4.angles)) * 16;
+    var_13 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+    var_14 = vectornormalize(anglesToForward(var_4.angles)) * 16;
     var_7 = int(var_7);
     var_7++;
-    var_0F = var_5;
+    var_15 = var_5;
     var_10 = validate_current_weapon(var_7, var_6, var_5);
     var_8 = get_pap_offhand_weapon(var_4, var_5);
-    var_0B = get_pap_camo(var_7, var_6, var_5);
-    var_0C = should_use_old_model(var_7, var_6, var_5);
+    var_11 = get_pap_camo(var_7, var_6, var_5);
+    var_12 = should_use_old_model(var_7, var_6, var_5);
     process_pap_stat_logging(var_6, var_4);
     thread play_pap_vo(var_4);
-    var_0A = return_pap_attachment(var_4, var_7, var_6, var_5);
-    if(isDefined(var_0A) && var_0A == "replace_me") {
-      var_0A = undefined;
+    var_10 = return_pap_attachment(var_4, var_7, var_6, var_5);
+    if(isDefined(var_10) && var_10 == "replace_me") {
+      var_10 = undefined;
     }
 
     var_11 = filter_current_weapon_attachments(var_5);
     var_12 = remove_invalid_wm_attachments(var_11);
     var_5 = var_4 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_10, undefined, var_12);
-    var_13 = var_4 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_10, var_0A, var_12, undefined, var_0B);
-    var_14 = var_4 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_10, var_0A, var_11, undefined, var_0B);
-    if(var_0C) {
-      var_15 = spawn("script_weapon", var_4 getEye() + var_0E, 0, 0, var_0F);
+    var_13 = var_4 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_10, var_10, var_12, undefined, var_11);
+    var_14 = var_4 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_10, var_10, var_11, undefined, var_11);
+    if(var_12) {
+      var_15 = spawn("script_weapon", var_4 getEye() + var_14, 0, 0, var_15);
     } else {
-      var_15 = spawn("script_weapon", var_5 getEye() + var_0F, 0, 0, var_6);
+      var_15 = spawn("script_weapon", var_5 getEye() + var_15, 0, 0, var_6);
     }
 
     var_15.angles = var_3.angles;
-    if(var_0C) {
-      var_16 = disco_getoffsetfrombaseweaponname(var_0F);
+    if(var_12) {
+      var_16 = disco_getoffsetfrombaseweaponname(var_15);
     } else {
       var_16 = disco_getoffsetfrombaseweaponname(var_15);
     }
@@ -116,19 +116,19 @@ weapon_upgrade(var_0, var_1) {
     level thread releasemachineonplayerdisconnect(var_4, var_15, var_3);
     level notify("pap_used", var_4, var_7, var_14);
     var_15 makeunusable();
-    var_4 thread disco_playpapgesture(var_4, var_4.pap_gesture, var_8, var_5, var_0F);
+    var_4 thread disco_playpapgesture(var_4, var_4.pap_gesture, var_8, var_5, var_15);
     var_4.paping_weapon = var_5;
-    if(var_0C) {
-      var_17 = getangleoffset(var_0F, var_0D);
+    if(var_12) {
+      var_17 = getangleoffset(var_15, var_13);
     } else {
-      var_17 = getangleoffset(var_15, var_0E);
+      var_17 = getangleoffset(var_15, var_14);
     }
 
     var_18 = scripts\cp\zombies\interaction_weapon_upgrade::getpos1offset(var_6);
-    var_15 moveto(var_0D.origin + var_18, 0.75);
+    var_15 moveto(var_13.origin + var_18, 0.75);
     var_15 rotateto(var_17, 0.75);
     var_15 waittill("movedone");
-    var_15 moveto(var_0D.origin + var_16, 0.25);
+    var_15 moveto(var_13.origin + var_16, 0.25);
     var_15 waittill("movedone");
     update_level_pap_machines("door", "close", undefined, undefined, "zmb_packapunch_machine_on");
     wait(0.75);
@@ -156,7 +156,7 @@ weapon_upgrade(var_0, var_1) {
         var_14 disableplayeruse(var_19);
       }
 
-      if(var_0F == "iw7_venomx_zm_pap2") {
+      if(var_15 == "iw7_venomx_zm_pap2") {
         var_3 scripts\cp\zombies\achievement::update_achievement("ENCRYPT_DECRYPT", 1);
       }
 
@@ -164,7 +164,7 @@ weapon_upgrade(var_0, var_1) {
     }
 
     var_15 thread wait_for_player_to_take_weapon(var_14, var_9, var_7);
-    var_15 scripts\engine\utility::waittill_any_timeout_1(30, "weapon_taken");
+    var_15 scripts\engine\utility::waittill_any_timeout(30, "weapon_taken");
     var_4 notify("weapon_purchased");
     var_4.paping_weapon = undefined;
     var_4 scripts\cp\cp_interaction::refresh_interaction();
@@ -209,7 +209,7 @@ wait_for_player_to_take_weapon(var_0, var_1, var_2) {
 
   if(scripts\cp\zombies\interaction_weapon_upgrade::should_take_players_current_weapon(var_3)) {
     var_9 = var_3 getcurrentweapon();
-    var_0A = scripts\cp\utility::getrawbaseweaponname(var_9);
+    var_10 = scripts\cp\utility::getrawbaseweaponname(var_9);
     var_3 takeweapon(var_9);
   }
 
@@ -222,8 +222,8 @@ wait_for_player_to_take_weapon(var_0, var_1, var_2) {
   }
 
   var_3 givemaxammo(var_0);
-  var_0B = var_3 getweaponslistprimaries();
-  foreach(var_6 in var_0B) {
+  var_11 = var_3 getweaponslistprimaries();
+  foreach(var_6 in var_11) {
     if(issubstr(var_6, var_0)) {
       if(scripts\cp\utility::isaltmodeweapon(var_6)) {
         var_4 = getweaponbasename(var_6);

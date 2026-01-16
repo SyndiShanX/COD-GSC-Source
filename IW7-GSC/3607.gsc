@@ -117,7 +117,7 @@ func_DD99() {
     scripts\mp\utility::removeperk("specialty_rush");
   }
 
-  self goal_radius(0, 400);
+  self energy_setenergy(0, 400);
 }
 
 reaper_restorerigperks() {
@@ -136,7 +136,7 @@ reaper_restorerigperks() {
     self.restorerush = undefined;
   }
 
-  self goal_radius(0, 50);
+  self energy_setenergy(0, 50);
 }
 
 func_DD94() {

@@ -71,11 +71,11 @@ func_BE55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       var_9 = var_8 * 0.2;
-      var_0A = var_8 * 0.5;
-      var_0B = var_8 * 0.175;
-      var_0C = var_0 - var_1;
-      var_0D = var_1 + anglesToForward(vectortoangles(var_0C)) * var_9;
-      var_0E = var_1 + anglesToForward(vectortoangles(var_0C)) * var_0A;
+      var_10 = var_8 * 0.5;
+      var_11 = var_8 * 0.175;
+      var_12 = var_0 - var_1;
+      var_13 = var_1 + anglesToForward(vectortoangles(var_12)) * var_9;
+      var_14 = var_1 + anglesToForward(vectortoangles(var_12)) * var_10;
       return;
     }
   }

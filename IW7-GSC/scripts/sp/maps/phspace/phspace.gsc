@@ -172,8 +172,9 @@ func_CAE4() {
     scripts\sp\maps\phspace\phspace_launch::func_1050B();
     thread func_0F0E::func_F901();
     thread scripts\sp\maps\phspace\phspace_battle::func_CF9B();
-  } else
+  } else {
     thread scripts\sp\maps\pearlharbor\pearlharbor_util::func_48BF();
+  }
 
   var_4 = getent("tower_left_door", "targetname");
   var_5 = getent("tower_right_door", "targetname");

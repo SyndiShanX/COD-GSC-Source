@@ -37,7 +37,7 @@ func_CE0B(var_0, var_1) {
   }
 
   var_1.pre_arcade_game_weapon = var_1 scripts\cp\zombies\arcade_game_utility::saveplayerpregameweapon(var_1);
-  var_2 = var_0.var_394;
+  var_2 = var_0.weapon;
   var_1.var_7654 = var_2;
   var_1 giveweapon(var_2);
   var_1 switchtoweapon(var_2);
@@ -147,7 +147,7 @@ func_10D1F(var_0) {
     }
 
     if(func_7B34(var_0) < 3) {
-      var_0 scripts\engine\utility::waittill_any_timeout_1(1.5, "target_sign_deactivated");
+      var_0 scripts\engine\utility::waittill_any_timeout(1.5, "target_sign_deactivated");
       continue;
     }
 
@@ -209,10 +209,10 @@ func_FEB5(var_0, var_1) {
   var_1 endon("death");
   func_61E9(var_1);
   for(;;) {
-    var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     var_1 playSound("shooting_gallery_moving_sign_hit");
     var_1.health = 999999;
-    if(func_9F4E(var_0B)) {
+    if(func_9F4E(var_11)) {
       func_5515(var_1);
       func_56D0(var_3, 25, var_0);
       func_12D92(var_3, 25);
@@ -226,9 +226,9 @@ func_FEB5(var_0, var_1) {
 func_FEC0(var_0, var_1, var_2) {
   var_0 endon("shooting_gallery_game_over");
   for(;;) {
-    var_1 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+    var_1 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     var_1.health = 999999;
-    if(func_9F4E(var_0C)) {
+    if(func_9F4E(var_12)) {
       break;
     }
   }
@@ -488,7 +488,7 @@ func_FEBC(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   var_2 endon("arcade_game_over_for_player");
   var_2 thread func_12E3D(var_2, var_3);
-  var_4 = var_2 scripts\engine\utility::waittill_any_timeout_1(var_3, "disconnect", "last_stand", "shooting_gallery_player_gets_away", "spawned", "no_shot_left");
+  var_4 = var_2 scripts\engine\utility::waittill_any_timeout(var_3, "disconnect", "last_stand", "shooting_gallery_player_gets_away", "spawned", "no_shot_left");
   func_6961(var_0, var_1, var_2);
 }
 
@@ -667,8 +667,8 @@ func_CC05(var_0, var_1) {
     var_0.model = var_2[var_1];
   }
 
-  if(!isDefined(var_0.var_394)) {
-    var_0.var_394 = var_3[var_1];
+  if(!isDefined(var_0.weapon)) {
+    var_0.weapon = var_3[var_1];
   }
 
   var_0.var_13C2C setModel(var_0.model);
@@ -749,7 +749,7 @@ func_5555(var_0) {
         var_3.out_of_order = 1;
       }
 
-      level scripts\engine\utility::waittill_any_3("regular_wave_starting", "event_wave_starting");
+      level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
       foreach(var_3 in var_1) {
         var_3.out_of_order = 0;
       }

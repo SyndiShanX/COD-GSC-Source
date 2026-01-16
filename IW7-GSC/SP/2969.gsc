@@ -70,8 +70,8 @@ func_126EF(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = anglesToForward(var_7);
   var_9 = self gettagorigin(var_2);
   if(var_4) {
-    var_0A = self gettagorigin(var_5);
-    var_9 = var_9 + var_0A / 2;
+    var_10 = self gettagorigin(var_5);
+    var_9 = var_9 + var_10 / 2;
   }
 
   playFX(var_6, var_9, anglestoup(var_7), var_8 * var_1);

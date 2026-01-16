@@ -126,8 +126,9 @@ updateslashereveryframe(var_0) {
       if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
       }
-    } else
+    } else {
       self.enemyreacquiredtime = undefined;
+    }
   } else {
     self.lastenemysighttime = 0;
     self.lastenemysightpos = undefined;
@@ -246,8 +247,9 @@ melee_begin(var_0) {
     } else {
       self.bmovingmelee = 1;
     }
-  } else
+  } else {
     self clearpath();
+  }
 
   self.curmeleetarget = var_2;
   scripts\aitypes\slasher\bt_state_api::asm_wait_state_setup(var_0, var_1, var_1);
@@ -521,8 +523,9 @@ sawbladeattack_tick(var_0) {
     if(tryblock()) {
       return anim.failure;
     }
-  } else
+  } else {
     return anim.failure;
+  }
 
   scripts\aitypes\slasher\bt_state_api::btstate_tickstates(var_0);
 
@@ -650,8 +653,9 @@ trytaunt(var_0) {
     if(randomint(100) < var_1.taunt_chance) {
       self.desiredaction = "taunt";
       return 1;
-    } else
+    } else {
       self.nexttaunttime = gettime() + randomintrange(var_1.min_taunt_interval, var_1.max_taunt_interval);
+    }
   }
 
   return 0;
@@ -671,8 +675,9 @@ trysummon(var_0) {
   if(randomint(100) < var_1.summon_chance) {
     self.desiredaction = "summon";
     return 1;
-  } else
+  } else {
     self.nextsummontime = gettime() + randomintrange(var_1.min_summon_interval, var_1.max_summon_interval);
+  }
 
   return 0;
 }
@@ -700,8 +705,9 @@ tryblock() {
       self.desiredaction = "block";
       self.damageaccumulator.accumulateddamage = 0;
       return 1;
-    } else
+    } else {
       self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage - var_0.need_to_block_damage_threshold / 2;
+    }
   }
 
   return 0;
@@ -890,8 +896,9 @@ trymeleeattacks(var_0) {
     if(var_0 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       var_3 = 1;
     }
-  } else if(var_0 > self.meleeradiusbasesq)
+  } else if(var_0 > self.meleeradiusbasesq) {
     var_3 = 1;
+  }
 
   if(var_3) {
     return 0;

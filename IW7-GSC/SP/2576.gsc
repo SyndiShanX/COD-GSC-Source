@@ -67,7 +67,7 @@ ismeleevalid(var_0, var_1) {
     }
 
     if(isDefined(self.unittype) && self.unittype == "seeker") {
-      if(!isplayer(self.triggerportableradarping) && !lib_0F3D::func_B575(self.unittype)) {
+      if(!isplayer(self.owner) && !lib_0F3D::func_B575(self.unittype)) {
         return 0;
       }
     } else {
@@ -85,7 +85,7 @@ ismeleevalid(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(self.var_A985) && self.isnodeoccupied == self.var_A985 && gettime() <= self.var_BF90) {
+  if(isDefined(self.var_A985) && self.enemy == self.var_A985 && gettime() <= self.var_BF90) {
     return 0;
   }
 

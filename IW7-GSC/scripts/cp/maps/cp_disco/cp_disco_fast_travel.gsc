@@ -43,8 +43,8 @@ trigger_when_player_close_by() {
   self.teleport_door setCanRadiusDamage(1);
   self.teleport_door.health = 10000000;
   for(;;) {
-    self.teleport_door waittill("damage", var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E);
-    if(is_shuriken(var_0E)) {
+    self.teleport_door waittill("damage", var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
+    if(is_shuriken(var_14)) {
       break;
     }
 
@@ -61,8 +61,8 @@ trigger_when_player_close_by() {
     self.teleport_door_symbol hide();
   }
 
-  var_0F = scripts\engine\utility::getstructarray("chi_door_fast_travel_portal_spot", "targetname");
-  self.portal_spot = scripts\engine\utility::getclosest(self.origin, var_0F, 500);
+  var_15 = scripts\engine\utility::getstructarray("chi_door_fast_travel_portal_spot", "targetname");
+  self.portal_spot = scripts\engine\utility::getclosest(self.origin, var_15, 500);
   self.portal_scriptable = spawn("script_model", self.portal_spot.origin + (0, 0, 53));
   self.portal_scriptable setModel("tag_origin_chi_portal");
   self.portal_scriptable.angles = self.angles;

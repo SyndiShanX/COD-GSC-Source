@@ -439,8 +439,8 @@ play_hidden_song(var_0, var_1) {
 
     var_7 playLoopSound(var_1);
     var_7 thread scripts\cp\zombies\zombie_jukebox::earlyendon(var_7);
-    var_0C = lookupsoundlength(var_1) / 1000;
-    level scripts\engine\utility::waittill_any_timeout_1(var_0C, "skip_song");
+    var_12 = lookupsoundlength(var_1) / 1000;
+    level scripts\engine\utility::waittill_any_timeout(var_12, "skip_song");
     var_7 stoploopsound();
     var_7 delete();
   } else {
@@ -531,8 +531,8 @@ wait_for_player_approach(var_0) {
     }
 
     var_4 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_4.origin, var_4.angles);
-    var_0A = getanimlength( % iw7_cp_slasher_walk_forward_01);
-    wait(var_0A);
+    var_10 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+    wait(var_10);
     var_4 delete();
   }
 }
@@ -1026,27 +1026,27 @@ b_man_head_tracking() {
   var_8 = (2284, -2407, 128);
   for(;;) {
     var_9 = 0;
-    var_0A = undefined;
-    var_0B = var_0 get_valid_statue_enemy(var_5, var_6, var_7, var_8);
-    if(var_0B.size < 1) {
-      var_0C = sortbydistance(level.players, var_0.og_origin);
-      var_0D = 0;
-      foreach(var_0F in var_0C) {
-        if(scripts\cp\maps\cp_rave\cp_rave_memory_quests::is_in_box(var_5, var_6, var_7, var_8, var_0F.origin)) {
-          var_4 = var_0F.origin;
-          var_0D = 1;
+    var_10 = undefined;
+    var_11 = var_0 get_valid_statue_enemy(var_5, var_6, var_7, var_8);
+    if(var_11.size < 1) {
+      var_12 = sortbydistance(level.players, var_0.og_origin);
+      var_13 = 0;
+      foreach(var_15 in var_12) {
+        if(scripts\cp\maps\cp_rave\cp_rave_memory_quests::is_in_box(var_5, var_6, var_7, var_8, var_15.origin)) {
+          var_4 = var_15.origin;
+          var_13 = 1;
           break;
         }
       }
 
-      if(!var_0D) {
+      if(!var_13) {
         var_4 = undefined;
       }
-    } else if(var_0B.size >= 1) {
-      var_4 = var_0B[0].origin;
-      foreach(var_12 in var_0B) {
+    } else if(var_11.size >= 1) {
+      var_4 = var_11[0].origin;
+      foreach(var_12 in var_11) {
         if(var_12.health < 0.4 * var_12.maxhealth) {
-          var_0A = var_12;
+          var_10 = var_12;
           var_4 = var_12.origin;
           break;
         }
@@ -1058,8 +1058,8 @@ b_man_head_tracking() {
     if(isDefined(var_4)) {
       var_0 rotateto(vectortoangles(var_4 - var_0.og_origin) + (var_1, var_2, var_3), 0.25);
       wait(0.25);
-      if(isDefined(var_0A)) {
-        var_0 laser_eye_kill_target(var_0A);
+      if(isDefined(var_10)) {
+        var_0 laser_eye_kill_target(var_10);
       }
 
       continue;
@@ -1137,20 +1137,20 @@ get_valid_statue_enemy(var_0, var_1, var_2, var_3) {
   var_7 = [];
   var_8 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_9 = scripts\engine\utility::get_array_of_closest(self.origin, var_8, undefined, 24, var_5, 1);
-  foreach(var_0B in var_9) {
-    if(scripts\engine\utility::istrue(var_0B.died_poorly)) {
+  foreach(var_11 in var_9) {
+    if(scripts\engine\utility::istrue(var_11.died_poorly)) {
       continue;
     }
 
-    var_0C = 0;
-    var_0D = var_0B.origin;
-    var_0E = scripts\cp\maps\cp_rave\cp_rave_memory_quests::is_in_box(var_0, var_1, var_2, var_3, var_0B.origin);
-    if(var_0E) {
-      var_0C = 1;
+    var_12 = 0;
+    var_13 = var_11.origin;
+    var_14 = scripts\cp\maps\cp_rave\cp_rave_memory_quests::is_in_box(var_0, var_1, var_2, var_3, var_11.origin);
+    if(var_14) {
+      var_12 = 1;
     }
 
-    if(var_0C && var_7.size < var_4) {
-      var_7[var_7.size] = var_0B;
+    if(var_12 && var_7.size < var_4) {
+      var_7[var_7.size] = var_11;
     }
   }
 
@@ -1195,13 +1195,13 @@ toy_animal_statue_end_pos(var_0, var_1) {
       var_1 notify("harpoon_quest_completed", level.animal_statue_weapons[var_0.name]);
       var_1 switchtoweapon(level.animal_statue_weapons[var_0.name]);
       var_9 = scripts\engine\utility::getstructarray("animal_statue_end_pos", "script_noteworthy");
-      foreach(var_0B in var_9) {
-        if(var_0B.name != var_0.name) {
+      foreach(var_11 in var_9) {
+        if(var_11.name != var_0.name) {
           continue;
         }
 
-        if(isDefined(var_0B.model)) {
-          var_0B.model thread cleanup_toy(var_0B);
+        if(isDefined(var_11.model)) {
+          var_11.model thread cleanup_toy(var_11);
         }
       }
 
@@ -1215,24 +1215,24 @@ toy_animal_statue_end_pos(var_0, var_1) {
   if(!scripts\engine\utility::flag(var_0.name + "_toy_placed")) {
     scripts\engine\utility::flag_set(var_0.name + "_toy_placed");
     var_9 = scripts\engine\utility::getstructarray("animal_statue_end_pos", "script_noteworthy");
-    var_0D = [];
-    foreach(var_0B in var_9) {
-      if(var_0B.name != var_0.name) {
+    var_13 = [];
+    foreach(var_11 in var_9) {
+      if(var_11.name != var_0.name) {
         continue;
       } else {
-        var_0F = spawn("script_model", var_0B.origin);
-        var_0F.angles = var_0B.angles;
-        var_0F setModel("tag_origin_toy_statues");
-        var_0F setscriptablepartstate("events", "place");
-        var_0F setscriptablepartstate("toy_model", var_0.name);
-        var_0B.model = var_0F;
-        var_0D[var_0D.size] = var_0B.model;
+        var_15 = spawn("script_model", var_11.origin);
+        var_15.angles = var_11.angles;
+        var_15 setModel("tag_origin_toy_statues");
+        var_15 setscriptablepartstate("events", "place");
+        var_15 setscriptablepartstate("toy_model", var_0.name);
+        var_11.model = var_15;
+        var_13[var_13.size] = var_11.model;
       }
     }
 
     var_0 thread watch_for_quest_complete(var_0);
     foreach(var_1 in level.players) {
-      var_1 thread watch_for_kills_with_correct_weapon(var_0, var_1, var_0D);
+      var_1 thread watch_for_kills_with_correct_weapon(var_0, var_1, var_13);
     }
   }
 }
@@ -1246,8 +1246,8 @@ watch_for_kills_with_correct_weapon(var_0, var_1, var_2) {
     var_1 waittill("zombie_killed", var_4, var_5, var_6, var_7);
     var_8 = getweaponbasename(var_6);
     if(var_8 == "iw7_harpoon_zm") {
-      foreach(var_0A in var_2) {
-        if(distancesquared(var_1.origin, var_0A.origin) <= 562500) {
+      foreach(var_10 in var_2) {
+        if(distancesquared(var_1.origin, var_10.origin) <= 562500) {
           level.animal_statue_kills[var_0.name]++;
           break;
         }
@@ -1290,8 +1290,8 @@ rave_processenemykilledfunc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
   if(isplayer(var_1) && !scripts\engine\utility::istrue(var_1.has_rave_dust) && !isDefined(var_1.rave_dust_pouch)) {
     if((isDefined(var_1.setculldist) && var_1.setculldist % 20 == 0) || scripts\engine\utility::istrue(var_1.should_drop_pouch)) {
       var_1.should_drop_pouch = 1;
-      var_0A = getclosestpointonnavmesh(var_9);
-      if(!scripts\cp\loot::is_in_active_volume(var_0A)) {
+      var_10 = getclosestpointonnavmesh(var_9);
+      if(!scripts\cp\loot::is_in_active_volume(var_10)) {
         return;
       }
 
@@ -1299,15 +1299,15 @@ rave_processenemykilledfunc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
         var_1.rave_dust_pouch delete();
       }
 
-      var_1.rave_dust_pouch = spawn("script_model", var_0A + (0, 0, 40));
+      var_1.rave_dust_pouch = spawn("script_model", var_10 + (0, 0, 40));
       var_1.rave_dust_pouch setModel("zmb_pouch");
-      foreach(var_0C in level.players) {
-        if(var_0C == var_1) {
-          var_1.rave_dust_pouch showtoplayer(var_0C);
+      foreach(var_12 in level.players) {
+        if(var_12 == var_1) {
+          var_1.rave_dust_pouch showtoplayer(var_12);
           continue;
         }
 
-        var_1.rave_dust_pouch hidefromplayer(var_0C);
+        var_1.rave_dust_pouch hidefromplayer(var_12);
       }
 
       level thread show_rave_dust_pickup(var_1, var_1.rave_dust_pouch);
@@ -1505,7 +1505,7 @@ run_slasher_saw_logic(var_0) {
       var_0 notify("weapon_fired", "iw7_slasher_zm");
     }
 
-    var_7 = var_0 scripts\engine\utility::waittill_any_timeout_1(0.1, "slasher_weapon_hit_zombie");
+    var_7 = var_0 scripts\engine\utility::waittill_any_timeout(0.1, "slasher_weapon_hit_zombie");
     if(isDefined(var_7) && var_7 == "slasher_weapon_hit_zombie") {
       var_1 = 80;
       continue;
@@ -1533,7 +1533,7 @@ axe_fl(var_0) {
   var_0 thread watchplayermelee(var_0, "melee_weapon", "two_headed_axe");
   for(;;) {
     var_0 waittill("flourish");
-    var_1 = var_0 scripts\engine\utility::waittill_any_timeout_1(0.25, "flourish");
+    var_1 = var_0 scripts\engine\utility::waittill_any_timeout(0.25, "flourish");
     if(!isDefined(var_1) || var_1 != "flourish") {
       continue;
     }
@@ -1555,7 +1555,7 @@ golf_fl(var_0) {
   var_0 thread watchplayermelee(var_0, "melee_weapon", "golf_club");
   for(;;) {
     var_0 waittill("flourish");
-    var_1 = var_0 scripts\engine\utility::waittill_any_timeout_1(0.25, "flourish");
+    var_1 = var_0 scripts\engine\utility::waittill_any_timeout(0.25, "flourish");
     if(!isDefined(var_1) || var_1 != "flourish") {
       continue;
     }
@@ -1577,7 +1577,7 @@ bat_fl(var_0) {
   var_0 thread watchplayermelee(var_0, "melee_weapon", "spiked_bat");
   for(;;) {
     var_0 waittill("flourish");
-    var_1 = var_0 scripts\engine\utility::waittill_any_timeout_1(0.25, "flourish");
+    var_1 = var_0 scripts\engine\utility::waittill_any_timeout(0.25, "flourish");
     if(!isDefined(var_1) || var_1 != "flourish") {
       continue;
     }
@@ -1599,7 +1599,7 @@ machete_fl(var_0) {
   var_0 thread watchplayermelee(var_0, "melee_weapon", "machete");
   for(;;) {
     var_0 waittill("flourish");
-    var_1 = var_0 scripts\engine\utility::waittill_any_timeout_1(0.25, "flourish");
+    var_1 = var_0 scripts\engine\utility::waittill_any_timeout(0.25, "flourish");
     if(!isDefined(var_1) || var_1 != "flourish") {
       continue;
     }
@@ -1929,9 +1929,9 @@ wait_for_pre_game_period() {
   level thread setupmemoryquestitems();
   level thread init_boat_and_pap_quest_structs();
   level thread scripts\cp\maps\cp_rave\cp_rave_memory_quests::set_up_ring_quest_interactions();
-  level.agent_funcs["generic_zombie"]["on_damaged"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
-  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
-  level.agent_funcs["slasher"]["on_damaged"] = scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["on_damaged"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
+  level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
+  level.agent_funcs["slasher"]["on_damaged"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
 }
 
 init_magic_wheel() {
@@ -2405,7 +2405,7 @@ run_pap_machine_logic(var_0) {
 
   var_2 setscriptablepartstate("reels", "on");
   var_2 setscriptablepartstate("door", "open_idle");
-  var_2.triggerportableradarping = var_0;
+  var_2.owner = var_0;
   foreach(var_4 in level.players) {
     if(var_4 != var_0) {
       var_2 hidefromplayer(var_4);
@@ -2525,43 +2525,43 @@ moveraveentstostructs(var_0) {
     foreach(var_8 in var_6) {
       var_9 = 0;
       if(var_8 hasplayerentattached(var_0, var_8)) {
-        var_0A = getattachedpersonalent(var_0, var_8);
-        if(isDefined(var_0A)) {
+        var_10 = getattachedpersonalent(var_0, var_8);
+        if(isDefined(var_10)) {
           if(var_5) {
             if(scripts\engine\utility::istrue(var_0.rave_mode)) {
               if(isDefined(var_8.script_noteworthy) && isDefined(level.rave_mode_activation_funcs[var_8.script_noteworthy])) {
                 var_9 = 1;
-                var_0A[[level.rave_mode_activation_funcs[var_8.script_noteworthy]]](var_0A, var_8, 0, var_0);
+                var_10[[level.rave_mode_activation_funcs[var_8.script_noteworthy]]](var_10, var_8, 0, var_0);
               } else if(isDefined(var_8.rave_model)) {
-                var_0A setModel(var_8.rave_model);
+                var_10 setModel(var_8.rave_model);
               } else {
-                var_0A setModel(scripts\engine\utility::random(var_1));
+                var_10 setModel(scripts\engine\utility::random(var_1));
               }
             } else if(isDefined(var_8.script_noteworthy) && isDefined(level.normal_mode_activation_funcs[var_8.script_noteworthy])) {
               var_9 = 1;
-              var_0A[[level.normal_mode_activation_funcs[var_8.script_noteworthy]]](var_0A, var_8, 0, var_0);
+              var_10[[level.normal_mode_activation_funcs[var_8.script_noteworthy]]](var_10, var_8, 0, var_0);
             } else if(isDefined(var_8.normal_model)) {
-              var_0A setModel(var_8.normal_model);
+              var_10 setModel(var_8.normal_model);
             } else {
-              var_0A setModel(scripts\engine\utility::random(var_2));
+              var_10 setModel(scripts\engine\utility::random(var_2));
             }
           } else if(scripts\engine\utility::istrue(var_0.rave_mode)) {
             if(isDefined(var_8.script_noteworthy) && isDefined(level.rave_mode_activation_funcs[var_8.script_noteworthy])) {
               var_9 = 1;
-              var_0A[[level.rave_mode_activation_funcs[var_8.script_noteworthy]]](var_0A, var_8, 1, var_0);
+              var_10[[level.rave_mode_activation_funcs[var_8.script_noteworthy]]](var_10, var_8, 1, var_0);
             }
           } else if(isDefined(var_8.script_noteworthy) && isDefined(level.normal_mode_activation_funcs[var_8.script_noteworthy])) {
             var_9 = 1;
-            var_0A[[level.normal_mode_activation_funcs[var_8.script_noteworthy]]](var_0A, var_8, 1, var_0);
+            var_10[[level.normal_mode_activation_funcs[var_8.script_noteworthy]]](var_10, var_8, 1, var_0);
           }
 
           if(!var_9) {
             if(scripts\engine\utility::istrue(var_0.rave_mode)) {
               if(isDefined(var_8.current_rave_state) && isDefined(var_8.current_rave_part)) {
-                var_0A setscriptablepartstate(var_8.current_rave_part, var_8.current_rave_state);
+                var_10 setscriptablepartstate(var_8.current_rave_part, var_8.current_rave_state);
               }
             } else if(isDefined(var_8.current_normal_state) && isDefined(var_8.current_normal_part)) {
-              var_0A setscriptablepartstate(var_8.current_normal_part, var_8.current_normal_state);
+              var_10 setscriptablepartstate(var_8.current_normal_part, var_8.current_normal_state);
             }
           }
         }
@@ -2569,48 +2569,48 @@ moveraveentstostructs(var_0) {
         continue;
       }
 
-      var_0A = getunclaimedpersonalent(var_0, var_6);
-      if(isDefined(var_0A)) {
-        var_8.currentlyownedby[var_0.name] = var_0A;
-        var_0A.claimed = 1;
-        var_0A.used = 1;
-        var_0A dontinterpolate();
-        var_0A.origin = var_8.origin;
+      var_10 = getunclaimedpersonalent(var_0, var_6);
+      if(isDefined(var_10)) {
+        var_8.currentlyownedby[var_0.name] = var_10;
+        var_10.claimed = 1;
+        var_10.used = 1;
+        var_10 dontinterpolate();
+        var_10.origin = var_8.origin;
         if(isDefined(var_8.angles)) {
-          var_0A.angles = var_8.angles;
+          var_10.angles = var_8.angles;
         } else {
-          var_0A.angles = (0, 0, 0);
+          var_10.angles = (0, 0, 0);
         }
 
         if(scripts\engine\utility::istrue(var_0.rave_mode)) {
           if(isDefined(var_8.script_noteworthy) && isDefined(level.rave_mode_activation_funcs[var_8.script_noteworthy])) {
             var_9 = 1;
-            var_0A[[level.rave_mode_activation_funcs[var_8.script_noteworthy]]](var_0A, var_8, 0, var_0);
+            var_10[[level.rave_mode_activation_funcs[var_8.script_noteworthy]]](var_10, var_8, 0, var_0);
           } else if(isDefined(var_8.rave_model)) {
-            var_0A setModel(var_8.rave_model);
+            var_10 setModel(var_8.rave_model);
           } else {
-            var_0A setModel(scripts\engine\utility::random(var_1));
+            var_10 setModel(scripts\engine\utility::random(var_1));
           }
         } else if(isDefined(var_8.script_noteworthy) && isDefined(level.normal_mode_activation_funcs[var_8.script_noteworthy])) {
           var_9 = 1;
-          var_0A[[level.normal_mode_activation_funcs[var_8.script_noteworthy]]](var_0A, var_8, 0, var_0);
+          var_10[[level.normal_mode_activation_funcs[var_8.script_noteworthy]]](var_10, var_8, 0, var_0);
         } else if(isDefined(var_8.normal_model)) {
-          var_0A setModel(var_8.normal_model);
+          var_10 setModel(var_8.normal_model);
         } else {
-          var_0A setModel(scripts\engine\utility::random(var_2));
+          var_10 setModel(scripts\engine\utility::random(var_2));
         }
 
         if(!var_9) {
           if(scripts\engine\utility::istrue(var_0.rave_mode)) {
             if(isDefined(var_8.current_rave_state) && isDefined(var_8.current_rave_part)) {
-              var_0A setscriptablepartstate(var_8.current_rave_part, var_8.current_rave_state);
+              var_10 setscriptablepartstate(var_8.current_rave_part, var_8.current_rave_state);
             }
           } else if(isDefined(var_8.current_normal_state) && isDefined(var_8.current_normal_part)) {
-            var_0A setscriptablepartstate(var_8.current_normal_part, var_8.current_normal_state);
+            var_10 setscriptablepartstate(var_8.current_normal_part, var_8.current_normal_state);
           }
         }
 
-        adjustmodelvis(var_0, var_0A);
+        adjustmodelvis(var_0, var_10);
       }
     }
 
@@ -3266,26 +3266,26 @@ spawn_ground_pound_flowers(var_0) {
   var_7 = -1 * vectornormalize(var_6) * 50;
   var_8 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_detail", "physicscontents_vehicleclip", "physicscontents_vehicle", "physicscontents_canshootclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
   var_9 = [];
-  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_4, 32, -100);
-  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_5, 32, -100);
-  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_6, 32, -100);
-  var_9[var_9.size] = scripts\engine\utility::drop_to_ground(var_1 + var_7, 32, -100);
-  var_0A = [];
-  foreach(var_0C in var_9) {
-    var_0D = scripts\common\trace::ray_trace(var_3, var_0C, var_0, var_8);
-    var_0E = scripts\engine\utility::drop_to_ground(var_0D["position"], 32, -2000);
-    var_0A[var_0A.size] = var_0E;
+  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_4, 32, -100);
+  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_5, 32, -100);
+  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_6, 32, -100);
+  var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_7, 32, -100);
+  var_10 = [];
+  foreach(var_12 in var_9) {
+    var_13 = scripts\common\trace::ray_trace(var_3, var_12, var_0, var_8);
+    var_14 = scripts\engine\utility::drop_to_ground(var_13["position"], 32, -2000);
+    var_10[var_10.size] = var_14;
   }
 
   var_10 = [];
-  foreach(var_12 in var_0A) {
-    var_0D = scripts\common\trace::ray_trace(var_12 + (0, 0, 32), var_12, var_0, var_8);
-    var_13 = var_0D["normal"];
+  foreach(var_12 in var_10) {
+    var_13 = scripts\common\trace::ray_trace(var_12 + (0, 0, 32), var_12, var_0, var_8);
+    var_13 = var_13["normal"];
     var_10[var_10.size] = vectortoangles(vectornormalize(var_13 + (-90, 0, 0)));
   }
 
-  for(var_15 = 0; var_15 < var_0A.size; var_15++) {
-    var_16 = spawn("script_model", var_0A[var_15]);
+  for(var_15 = 0; var_15 < var_10.size; var_15++) {
+    var_16 = spawn("script_model", var_10[var_15]);
     var_16 setModel("foliage_flowers_blue_patch_iw6");
     var_16.angles = var_10[var_15];
     var_16 thread delete_flowers_after_timeout();
@@ -3399,7 +3399,7 @@ slasher_audio_monitor() {
   thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix, undefined, 1);
   self.playing_stumble = 0;
   for(;;) {
-    var_0 = scripts\engine\utility::waittill_any_timeout_1(6, "attack_hit", "taunt", "attack_charge", "attack_shoot");
+    var_0 = scripts\engine\utility::waittill_any_timeout(6, "attack_hit", "taunt", "attack_charge", "attack_shoot");
     switch (var_0) {
       case "attack_hit":
         level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "attack_melee", 0);
@@ -3662,7 +3662,7 @@ unset_rave_knockback(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   for(;;) {
-    level scripts\engine\utility::waittill_any_3("rave_mode_empty", "player_entered_rave", "player_exited_rave");
+    level scripts\engine\utility::waittill_any("rave_mode_empty", "player_entered_rave", "player_exited_rave");
     if(scripts\engine\utility::istrue(var_0.rave_mode)) {
       continue;
     } else {
@@ -3705,7 +3705,7 @@ update_rave_effect_visibility(var_0) {
       var_0 hidefromplayer(var_2);
     }
 
-    level scripts\engine\utility::waittill_any_3("player_exited_rave", "player_entered_rave");
+    level scripts\engine\utility::waittill_any("player_exited_rave", "player_entered_rave");
   }
 }
 
@@ -4139,13 +4139,13 @@ setup_generic_zombie_model_list() {
   level.generic_zombie_model_list = ["zombie_male_outfit_dlc1_1", "zombie_male_outfit_dlc1_1_2", "zombie_male_outfit_dlc1_1_3", "zombie_male_outfit_dlc1_1_4", "zombie_male_outfit_dlc1_1_5", "zombie_male_outfit_dlc1_1_6", "zombie_male_outfit_dlc1_2", "zombie_male_outfit_dlc1_2_2", "zombie_male_outfit_dlc1_2_3", "zombie_male_outfit_dlc1_2_4", "zombie_male_outfit_dlc1_2_5", "zombie_male_outfit_dlc1_2_6", "zombie_male_outfit_dlc1_3", "zombie_male_outfit_dlc1_3_2", "zombie_male_outfit_dlc1_3_3", "zombie_male_outfit_dlc1_3_4", "zombie_male_outfit_dlc1_3_5", "zombie_male_outfit_dlc1_3_6", "zombie_male_outfit_dlc1_4", "zombie_male_outfit_dlc1_4_2", "zombie_male_outfit_dlc1_4_3", "zombie_male_outfit_dlc1_5", "zombie_male_outfit_dlc1_5_2", "zombie_male_outfit_dlc1_5_3", "zombie_male_outfit_dlc1_6", "zombie_male_outfit_dlc1_6_2", "zombie_male_outfit_dlc1_6_3", "zombie_male_outfit_dlc1_7", "zombie_male_outfit_dlc1_7_2", "zombie_male_outfit_dlc1_7_3", "zombie_female_outfit_dlc1_1", "zombie_female_outfit_dlc1_1_2", "zombie_female_outfit_dlc1_1_3", "zombie_female_outfit_dlc1_2", "zombie_female_outfit_dlc1_2_2", "zombie_female_outfit_dlc1_2_3", "zombie_female_outfit_dlc1_3", "zombie_female_outfit_dlc1_3_2", "zombie_female_outfit_dlc1_3_3", "zombie_female_outfit_dlc1_4", "zombie_female_outfit_dlc1_4_2", "zombie_female_outfit_dlc1_4_3", "zombie_female_outfit_dlc1_5", "zombie_female_outfit_dlc1_5_2", "zombie_female_outfit_dlc1_5_3", "zombie_female_outfit_dlc1_6", "zombie_female_outfit_dlc1_6_2", "zombie_female_outfit_dlc1_6_3"];
 }
 
-cp_rave_onzombiedamage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+cp_rave_onzombiedamage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   return var_2;
 }
 
-cp_rave_lethaldamage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+cp_rave_lethaldamage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(var_5) && issubstr(var_5, "cos_092") && isDefined(var_1) && isplayer(var_1)) {
-    playheadshotexplosioneffects(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    playheadshotexplosioneffects(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 }
 
@@ -4389,22 +4389,22 @@ checkenemiesinfov(var_0, var_1, var_2) {
   var_6 = scripts\engine\utility::get_array_of_closest(self.origin, var_5, undefined, 24, var_1, 1);
   foreach(var_8 in var_6) {
     var_9 = anglesToForward(self.angles);
-    var_0A = vectornormalize(var_9) * -35;
-    var_0B = 0;
-    var_0C = var_8.origin;
-    var_0D = scripts\engine\utility::within_fov(self getEye() + var_0A, self.angles, var_0C + (0, 0, 30), var_3);
-    if(var_0D) {
+    var_10 = vectornormalize(var_9) * -35;
+    var_11 = 0;
+    var_12 = var_8.origin;
+    var_13 = scripts\engine\utility::within_fov(self getEye() + var_10, self.angles, var_12 + (0, 0, 30), var_3);
+    if(var_13) {
       if(isDefined(var_1)) {
-        var_0E = distance2d(self.origin, var_0C);
-        if(var_0E < var_1) {
-          var_0B = 1;
+        var_14 = distance2d(self.origin, var_12);
+        if(var_14 < var_1) {
+          var_11 = 1;
         }
       } else {
-        var_0B = 1;
+        var_11 = 1;
       }
     }
 
-    if(var_0B && var_4.size < var_2) {
+    if(var_11 && var_4.size < var_2) {
       var_4[var_4.size] = var_8;
     }
   }
@@ -4427,7 +4427,7 @@ unsetraveboom(var_0) {
   self notify(var_0 + "_removed");
 }
 
-playheadshotexplosioneffects(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+playheadshotexplosioneffects(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(scripts\mp\agents\zombie\zmb_zombie_agent::dying_zapper_death()) {
     return;
   }
@@ -4468,7 +4468,7 @@ showonscreenbloodeffects() {
   self notify("turn_on_screen_blood_on");
   self endon("turn_on_screen_blood_on");
   self setscriptablepartstate("on_screen_blood", "on");
-  scripts\engine\utility::waittill_any_timeout_1(2, "death", "last_stand");
+  scripts\engine\utility::waittill_any_timeout(2, "death", "last_stand");
   self setscriptablepartstate("on_screen_blood", "neutral");
 }
 
@@ -4635,8 +4635,8 @@ watchforblueboltactivation(var_0, var_1) {
         var_7 = var_4 getweaponammoclip(var_5);
         var_8 = var_6 - var_7 / var_6;
         var_9 = max(1045 * var_8, 10);
-        var_0A = max(128 * var_8, 48);
-        var_4 thread scripts\cp\zombies\zombies_perk_machines::create_zap_ring(var_0A, var_9);
+        var_10 = max(128 * var_8, 48);
+        var_4 thread scripts\cp\zombies\zombies_perk_machines::create_zap_ring(var_10, var_9);
       }
     }
   }
@@ -4844,7 +4844,7 @@ cp_rave_should_run_event(var_0) {
 
 cp_rave_event_wave_init() {
   level.event_funcs["team_rave_mode"] = ::team_rave_event_func;
-  level.event_funcs["sasquatch_wave"] = scripts\cp\zombies\cp_rave_spawning::goon_spawn_event_func;
+  level.event_funcs["sasquatch_wave"] = ::scripts\cp\zombies\cp_rave_spawning::goon_spawn_event_func;
   init_rave_spawner_locations();
 }
 
@@ -5102,31 +5102,31 @@ rave_add_attachment_to_weapon(var_0, var_1) {
     var_9 = var_2 scripts\cp\utility::getweaponcamo(var_5);
   }
 
-  var_0A = var_1 scripts\cp\utility::getweaponpaintjobid(var_4);
-  foreach(var_0C in var_3) {
-    if(issubstr(var_0C, "cos_")) {
-      var_3 = scripts\engine\utility::array_remove(var_3, var_0C);
+  var_10 = var_1 scripts\cp\utility::getweaponpaintjobid(var_4);
+  foreach(var_12 in var_3) {
+    if(issubstr(var_12, "cos_")) {
+      var_3 = scripts\engine\utility::array_remove(var_3, var_12);
     }
   }
 
-  var_0E = scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_2), var_3, var_9, var_5, scripts\cp\utility::get_weapon_variant_id(var_1, var_2), var_1 getentitynumber(), var_1.clientid, var_0A, var_0);
-  if(isDefined(var_0E)) {
+  var_14 = scripts\cp\utility::mpbuildweaponname(scripts\cp\utility::getweaponrootname(var_2), var_3, var_9, var_5, scripts\cp\utility::get_weapon_variant_id(var_1, var_2), var_1 getentitynumber(), var_1.clientid, var_10, var_0);
+  if(isDefined(var_14)) {
     var_1 takeweapon(var_2);
-    var_1 scripts\cp\utility::_giveweapon(var_0E, undefined, undefined, 1);
-    var_1 switchtoweapon(var_0E);
-    var_1 setweaponammoclip(var_0E, var_7, "right");
-    var_1 setweaponammostock(var_0E, var_8);
+    var_1 scripts\cp\utility::_giveweapon(var_14, undefined, undefined, 1);
+    var_1 switchtoweapon(var_14);
+    var_1 setweaponammoclip(var_14, var_7, "right");
+    var_1 setweaponammostock(var_14, var_8);
     if(isDefined(var_6)) {
-      var_1 setweaponammoclip(var_0E, var_6, "left");
+      var_1 setweaponammoclip(var_14, var_6, "left");
     }
   }
 
   foreach(var_10 in var_1 getweaponslistall()) {
     var_3 = getweaponattachments(var_10);
-    foreach(var_0C in var_3) {
-      if(issubstr(var_0C, "cos_")) {
-        if(isDefined(level.rave_charm_attachment_perks[var_0C])) {
-          var_1 giveraveperk(level.rave_charm_attachment_perks[var_0C], var_0C);
+    foreach(var_12 in var_3) {
+      if(issubstr(var_12, "cos_")) {
+        if(isDefined(level.rave_charm_attachment_perks[var_12])) {
+          var_1 giveraveperk(level.rave_charm_attachment_perks[var_12], var_12);
         }
       }
     }
@@ -5601,17 +5601,17 @@ give_harpoon_weapon(var_0, var_1) {
   thread watch_for_weapon_removed(var_0, self);
   if(!scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
     self notify("weapon_purchased");
-    var_0A = scripts\cp\utility::getvalidtakeweapon();
-    self.curr_weap = var_0A;
-    if(isDefined(var_0A)) {
+    var_10 = scripts\cp\utility::getvalidtakeweapon();
+    self.curr_weap = var_10;
+    if(isDefined(var_10)) {
       var_2 = 1;
-      var_0B = scripts\cp\utility::getrawbaseweaponname(var_0A);
+      var_11 = scripts\cp\utility::getrawbaseweaponname(var_10);
       if(scripts\cp\utility::has_special_weapon() && var_6 < var_7 + 1) {
         var_2 = 0;
       }
 
-      foreach(var_0D in var_5) {
-        if(scripts\cp\utility::isstrstart(var_0D, "alt_")) {
+      foreach(var_13 in var_5) {
+        if(scripts\cp\utility::isstrstart(var_13, "alt_")) {
           var_7++;
         }
       }
@@ -5625,24 +5625,24 @@ give_harpoon_weapon(var_0, var_1) {
       }
 
       if(var_2) {
-        if(isDefined(self.pap[var_0B])) {
-          self.pap[var_0B] = undefined;
+        if(isDefined(self.pap[var_11])) {
+          self.pap[var_11] = undefined;
           self notify("weapon_level_changed");
         }
 
         thread scripts\cp\cp_interaction::play_weapon_purchase_vo(var_0, self);
-        self takeweapon(var_0A);
+        self takeweapon(var_10);
       }
     }
 
     if(isDefined(self.weapon_build_models[var_8])) {
       var_3 = self.weapon_build_models[var_8];
     } else {
-      var_3 = var_0.var_394;
+      var_3 = var_0.weapon;
     }
 
-    var_0F = getweaponattachments(var_3);
-    var_10 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_3, undefined, var_0F);
+    var_15 = getweaponattachments(var_3);
+    var_10 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_3, undefined, var_15);
     var_10 = scripts\cp\utility::_giveweapon(var_10, undefined, undefined, var_9);
     self.itempicked = var_10;
     level.transactionid = randomint(100);
@@ -5732,18 +5732,18 @@ cp_rave_give_weapon(var_0, var_1) {
   }
 
   if(!scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
-    var_0A = scripts\cp\utility::getvalidtakeweapon();
-    self.curr_weap = var_0A;
-    if(isDefined(var_0A)) {
+    var_10 = scripts\cp\utility::getvalidtakeweapon();
+    self.curr_weap = var_10;
+    if(isDefined(var_10)) {
       self notify("weapon_purchased");
       var_2 = 1;
-      var_0B = scripts\cp\utility::getrawbaseweaponname(var_0A);
+      var_11 = scripts\cp\utility::getrawbaseweaponname(var_10);
       if(scripts\cp\utility::has_special_weapon() && var_6 < var_7 + 1) {
         var_2 = 0;
       }
 
-      foreach(var_0D in var_5) {
-        if(scripts\cp\utility::isstrstart(var_0D, "alt_")) {
+      foreach(var_13 in var_5) {
+        if(scripts\cp\utility::isstrstart(var_13, "alt_")) {
           var_7++;
         }
       }
@@ -5757,27 +5757,27 @@ cp_rave_give_weapon(var_0, var_1) {
       }
 
       if(var_2) {
-        if(isDefined(self.pap[var_0B])) {
-          self.pap[var_0B] = undefined;
+        if(isDefined(self.pap[var_11])) {
+          self.pap[var_11] = undefined;
           self notify("weapon_level_changed");
         }
 
         thread scripts\cp\cp_interaction::play_weapon_purchase_vo(var_0, self);
-        self takeweapon(var_0A);
+        self takeweapon(var_10);
       }
     }
 
     if(isDefined(self.weapon_build_models[var_8])) {
       var_3 = self.weapon_build_models[var_8];
     } else {
-      var_3 = var_0.var_394;
+      var_3 = var_0.weapon;
     }
 
     if(scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::can_upgrade(var_3) && scripts\cp\utility::is_consumable_active("wall_power")) {
       self notify("weapon_purchased");
       var_4 = scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::get_pap_camo(2, var_8, var_3);
-      var_0F = scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::return_pap_attachment(var_1, 2, var_8, var_3);
-      if(isDefined(var_0F) && var_0F != "replace_me") {
+      var_15 = scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::return_pap_attachment(var_1, 2, var_8, var_3);
+      if(isDefined(var_15) && var_15 != "replace_me") {
         var_10 = scripts\engine\utility::array_combine(getweaponattachments(var_3), ["pap1"]);
       } else {
         var_10 = getweaponattachments(var_3);
@@ -5941,7 +5941,7 @@ wait_for_weapon_removed(var_0, var_1) {
       break;
     }
 
-    var_1 scripts\engine\utility::waittill_any_3("weapon_purchased", "mule_munchies_sold");
+    var_1 scripts\engine\utility::waittill_any("weapon_purchased", "mule_munchies_sold");
     var_2 = 0;
     var_3 = var_1 getweaponslistall();
     foreach(var_5 in var_3) {
@@ -6620,7 +6620,7 @@ kick_for_inactivity(var_0) {
         break;
       }
 
-      var_5 = scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_4, "inputReceived", "currency_earned");
+      var_5 = scripts\engine\utility::waittill_any_timeout_no_endon_death(var_4, "inputReceived", "currency_earned");
       if(gettime() - var_1 < 30000) {
         continue;
       }
@@ -6675,7 +6675,7 @@ check_for_movement() {
 
 add_to_kick_queue(var_0) {
   if(!scripts\engine\utility::exist_in_array_MAYBE(level.kick_player_queue, var_0)) {
-    level.kick_player_queue = scripts\engine\utility::array_add_safe(level.kick_player_queue, var_0);
+    level.kick_player_queue = scripts\engine\utility::add_to_array(level.kick_player_queue, var_0);
   }
 }
 

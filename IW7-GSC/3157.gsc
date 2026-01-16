@@ -49,10 +49,10 @@ choosedemeanoranimwithoverridevariants(var_0, var_1, var_2) {
 
   if(!scripts\asm\asm::asm_hasalias(var_1, var_3)) {
     var_5 = [];
-    var_5[0] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "trans_to_one_hand_run");
-    var_5[1] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "one_hand_run");
-    var_5[2] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "trans_to_two_hand_run");
-    var_5[3] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "two_hand_run");
+    var_5[0] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "trans_to_one_hand_run");
+    var_5[1] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "one_hand_run");
+    var_5[2] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "trans_to_two_hand_run");
+    var_5[3] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "two_hand_run");
     return var_5;
   }
 
@@ -298,8 +298,9 @@ func_7FF2(var_0, var_1, var_2) {
     } else if(var_2 == "A" || var_2 == "full" || var_2 == "right" || var_2 == "left") {
       var_3 = anim.var_7363[var_0];
     }
-  } else if(var_2 == "lean")
+  } else if(var_2 == "lean") {
     var_3 = anim.var_C04E[var_0];
+  }
 
   if(isDefined(var_3)) {
     var_4 = getnodeyawfromoffsettable(var_3, var_1, undefined);
@@ -353,8 +354,9 @@ choosestrongdamagedeath(var_0, var_1, var_2) {
     } else {
       var_3 = "default";
     }
-  } else if(self.damageyaw < 0)
+  } else if(self.damageyaw < 0) {
     var_3 = "right";
+  }
   else {
     var_3 = "left";
   }
@@ -406,8 +408,9 @@ randomizepassthroughchildren(var_0, var_1, var_2, var_3) {
         var_4.transitions[0] = var_4.transitions[1];
         var_4.transitions[1] = var_5;
       }
-    } else
+    } else {
       var_4.transitions = scripts\engine\utility::array_randomize(var_4.transitions);
+    }
   }
 
   return 1;

@@ -138,7 +138,7 @@ func_DAB0() {
 
     if(!var_4 && isDefined(level.var_10E6D.var_DAB3) && level.var_10E6D.var_DAB3 > 0) {
       var_7 = squared(level.var_10E6D.var_DAB3);
-      if(var_5 < var_7 && self getpersstat(var_3, 0)) {
+      if(var_5 < var_7 && self cansee(var_3, 0)) {
         var_4 = 1;
       }
     }
@@ -304,7 +304,7 @@ func_F5C9() {
   }
 
   lib_0F22::func_9B25();
-  var_0 = self.isnodeoccupied;
+  var_0 = self.enemy;
   if(isDefined(var_0)) {
     level.var_10E6D.group.var_10A9B[self.var_EED1] = var_0;
     if(isDefined(var_0.var_10E6D)) {
@@ -428,8 +428,8 @@ func_3DAF(var_0, var_1, var_2) {
 
 func_6847(var_0) {
   var_0.var_9B22 = var_0.origin;
-  if(isDefined(self.isnodeoccupied) && isDefined(var_0.issplitscreen) && var_0.issplitscreen == self.isnodeoccupied) {
-    var_0.var_9B22 = self lastknownpos(self.isnodeoccupied);
+  if(isDefined(self.enemy) && isDefined(var_0.issplitscreen) && var_0.issplitscreen == self.enemy) {
+    var_0.var_9B22 = self lastknownpos(self.enemy);
   } else if(isDefined(var_0.issplitscreen) && var_0.var_12AE9 == "bulletwhizby") {
     var_0.var_9B22 = var_0.issplitscreen.origin;
   }
@@ -585,7 +585,7 @@ func_6808(var_0) {
 
   self.var_10E6D.beginusegas = "combat";
   func_F299("attack");
-  if(issentient(var_0.issplitscreen) && !isDefined(self.isnodeoccupied)) {
+  if(issentient(var_0.issplitscreen) && !isDefined(self.enemy)) {
     self getenemyinfo(var_0.issplitscreen);
     lib_0F26::func_117D4("spotted");
   }

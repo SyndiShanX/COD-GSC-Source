@@ -11,7 +11,7 @@ main() {
   self.subclass = "regular";
   self.accuracy = 0.2;
   self.health = 150;
-  self.objective_team = lib_0A2F::func_7BEB();
+  self.grenadeweapon = lib_0A2F::func_7BEB();
   self.objective_state = 1;
   self.secondaryweapon = "";
   self.var_101B4 = lib_0A2F::func_7BEC("pistol");
@@ -22,7 +22,7 @@ main() {
     self func_82DB(768, 1024);
   }
 
-  self.var_394 = lib_0A2F::func_7BEC("rifle");
+  self.weapon = lib_0A2F::func_7BEC("rifle");
   var_0 = undefined;
   var_1 = ["character_un_jackal_pilots", "character_un_jackal_pilots", "character_un_jackal_pilots_pt2"];
   switch (scripts\code\character::get_random_character(3, var_0, var_1)) {

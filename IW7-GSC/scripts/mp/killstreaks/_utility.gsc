@@ -56,7 +56,7 @@ func_1843(var_0, var_1, var_2, var_3, var_4) {
     if(level.teambased) {
       if(scripts\mp\utility::func_9F2C(var_0)) {
         foreach(var_9 in level.players) {
-          if(var_9.team == self.team && var_9 != self.triggerportableradarping) {
+          if(var_9.team == self.team && var_9 != self.owner) {
             var_6 = scripts\mp\utility::outlineenableforplayer(self, "cyan", var_9, 0, 0, "lowest");
           }
 
@@ -79,8 +79,8 @@ func_1843(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_1) && var_1 != "") {
-    var_0B = getkillstreaknomeleetarget(var_0);
-    scripts\mp\sentientpoolmanager::registersentient(var_1, var_2, var_0B, var_4);
+    var_11 = getkillstreaknomeleetarget(var_0);
+    scripts\mp\sentientpoolmanager::registersentient(var_1, var_2, var_11, var_4);
   }
 
   thread scripts\mp\missions::func_A691(var_0);
@@ -124,7 +124,7 @@ func_1863(var_0) {
     return;
   }
 
-  level.uavmodels[self.triggerportableradarping.guid + "_" + gettime()] = self;
+  level.uavmodels[self.owner.guid + "_" + gettime()] = self;
 }
 
 func_115CF(var_0) {
@@ -177,7 +177,7 @@ func_E121(var_0) {
 
   if(level.teambased) {
     var_1 = self.team;
-    level.uavmodels[var_1] = scripts\engine\utility::array_removeundefined(level.uavmodels[var_1]);
+    level.uavmodels[var_1] = ::scripts\engine\utility::array_removeundefined(level.uavmodels[var_1]);
   } else {
     level.uavmodels = scripts\engine\utility::array_removeundefined(level.uavmodels);
   }
@@ -280,7 +280,7 @@ func_1862(var_0) {
 }
 
 func_E120(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "carried");
+  scripts\engine\utility::waittill_any("death", "carried");
   level.turrets[var_0] = undefined;
   func_E0FD(var_0);
 }
@@ -294,7 +294,7 @@ func_184A(var_0) {
 }
 
 func_E105(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "carried");
+  scripts\engine\utility::waittill_any("death", "carried");
   level.var_5228[var_0] = undefined;
   func_E0FD(var_0);
 }
@@ -359,7 +359,7 @@ func_20D8(var_0) {
 
 func_20CF(var_0, var_1) {
   var_2 = self.team;
-  var_3 = self.triggerportableradarping;
+  var_3 = self.owner;
   var_4 = undefined;
   var_5 = undefined;
   if(!scripts\mp\utility::isreallyalive(var_0) || var_0.team == "spectator") {
@@ -384,7 +384,7 @@ func_20CF(var_0, var_1) {
       }
     }
 
-    var_6 = scripts\mp\utility::outlineenableforplayer(var_0, var_4, self.triggerportableradarping, 1, 1, "killstreak");
+    var_6 = scripts\mp\utility::outlineenableforplayer(var_0, var_4, self.owner, 1, 1, "killstreak");
     thread func_13ADD(var_6, var_0, var_1);
     thread func_13ADE(var_6, var_0, var_1);
   }
@@ -401,7 +401,7 @@ func_13ADD(var_0, var_1, var_2) {
 func_13ADE(var_0, var_1, var_2) {
   self endon(var_2);
   level endon("game_ended");
-  var_1 scripts\engine\utility::waittill_any_3("death", "disconnect");
+  var_1 scripts\engine\utility::waittill_any("death", "disconnect");
   scripts\mp\utility::outlinedisable(var_0, var_1);
 }
 
@@ -409,18 +409,18 @@ getmodifiedantikillstreakdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
   var_3 = scripts\mp\damage::handleshotgundamage(var_1, var_2, var_3);
   var_3 = scripts\mp\damage::handleapdamage(var_1, var_2, var_3, var_0);
   var_9 = scripts\mp\weapons::isaltmodeweapon(var_1);
-  var_0A = 0;
+  var_10 = 0;
   if(scripts\mp\utility::istrue(var_9)) {
-    var_0B = scripts\mp\utility::getweaponattachmentsbasenames(var_1);
-    foreach(var_0D in var_0B) {
-      if(var_0D == "gl") {
-        var_0A = 1;
+    var_11 = scripts\mp\utility::getweaponattachmentsbasenames(var_1);
+    foreach(var_13 in var_11) {
+      if(var_13 == "gl") {
+        var_10 = 1;
         break;
       }
     }
   }
 
-  var_0F = undefined;
+  var_15 = undefined;
   var_10 = scripts\mp\utility::getweaponbasedsmokegrenadecount(var_1);
   if(var_2 != "MOD_MELEE") {
     switch (var_10) {
@@ -428,7 +428,7 @@ getmodifiedantikillstreakdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
       case "kineticpulse_emp_mp":
       case "super_trophy_mp":
         self.largeprojectiledamage = 1;
-        var_0F = var_5;
+        var_15 = var_5;
         break;
 
       case "iw7_venomx_mp":
@@ -440,14 +440,14 @@ getmodifiedantikillstreakdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
       case "drone_hive_projectile_mp":
       case "emp_grenade_mp":
         self.largeprojectiledamage = 1;
-        var_0F = var_6;
+        var_15 = var_6;
         break;
 
       case "iw7_tacburst_mpl":
       case "iw7_tacburst_mp":
-        if(scripts\mp\utility::istrue(var_0A)) {
+        if(scripts\mp\utility::istrue(var_10)) {
           self.largeprojectiledamage = 1;
-          var_0F = var_6;
+          var_15 = var_6;
         }
         break;
 
@@ -461,14 +461,14 @@ getmodifiedantikillstreakdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
       case "wristrocket_mp":
       case "c4_mp":
         self.largeprojectiledamage = 0;
-        var_0F = var_7;
+        var_15 = var_7;
         break;
 
       case "iw7_mp28_mpl":
       case "iw7_arclassic_mp":
-        if(scripts\mp\utility::istrue(var_0A)) {
+        if(scripts\mp\utility::istrue(var_10)) {
           self.largeprojectiledamage = 0;
-          var_0F = var_7;
+          var_15 = var_7;
         }
         break;
     }
@@ -486,16 +486,16 @@ getmodifiedantikillstreakdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
     self.largeprojectiledamage = var_8;
   }
 
-  if(isDefined(var_0F) && isDefined(var_2) && var_2 == "MOD_EXPLOSIVE" || var_2 == "MOD_EXPLOSIVE_BULLET" || var_2 == "MOD_PROJECTILE" || var_2 == "MOD_PROJECTILE_SPLASH" || var_2 == "MOD_GRENADE") {
-    var_3 = ceil(var_4 / var_0F);
+  if(isDefined(var_15) && isDefined(var_2) && var_2 == "MOD_EXPLOSIVE" || var_2 == "MOD_EXPLOSIVE_BULLET" || var_2 == "MOD_PROJECTILE" || var_2 == "MOD_PROJECTILE_SPLASH" || var_2 == "MOD_GRENADE") {
+    var_3 = ceil(var_4 / var_15);
   }
 
   if(isDefined(var_0)) {
-    if(isDefined(var_0.triggerportableradarping)) {
-      var_0 = var_0.triggerportableradarping;
+    if(isDefined(var_0.owner)) {
+      var_0 = var_0.owner;
     }
 
-    if(var_0 == self.triggerportableradarping) {
+    if(var_0 == self.owner) {
       var_3 = ceil(var_3 / 2);
     }
   }
@@ -553,18 +553,18 @@ isexplosiveantikillstreakweapon(var_0) {
 }
 
 func_C1D3(var_0) {
-  return isDefined(var_0) && var_0 == self.triggerportableradarping;
+  return isDefined(var_0) && var_0 == self.owner;
 }
 
 dodamagetokillstreak(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = (0, 0, 0);
   var_8 = (0, 0, 0);
   var_9 = (0, 0, 0);
-  var_0A = (0, 0, 0);
-  var_0B = "";
-  var_0C = "";
-  var_0D = "";
-  var_0E = undefined;
+  var_10 = (0, 0, 0);
+  var_11 = "";
+  var_12 = "";
+  var_13 = "";
+  var_14 = undefined;
   if(isDefined(var_3)) {
     if(level.teambased) {
       if(!scripts\mp\utility::func_9FE7(var_1, var_3, self)) {
@@ -580,7 +580,7 @@ dodamagetokillstreak(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return;
   }
 
-  self notify("damage", var_0, var_1, var_7, var_8, var_5, var_0B, var_0C, var_0D, var_0E, var_6, var_4, var_9, var_0A, var_2);
+  self notify("damage", var_0, var_1, var_7, var_8, var_5, var_11, var_12, var_13, var_14, var_6, var_4, var_9, var_10, var_2);
 }
 
 func_FAE4(var_0, var_1) {
@@ -592,7 +592,7 @@ func_FAE4(var_0, var_1) {
 }
 
 func_139B5(var_0, var_1, var_2) {
-  var_3 = self.triggerportableradarping;
+  var_3 = self.owner;
   var_3 endon("disconnect");
   var_4 = self;
   if(scripts\mp\utility::func_9EF0(self)) {
@@ -626,8 +626,8 @@ func_139B5(var_0, var_1, var_2) {
 
 func_13B85(var_0) {
   var_1 = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    var_1 = self.triggerportableradarping;
+  if(isDefined(self.owner)) {
+    var_1 = self.owner;
   }
 
   var_2 = self;
@@ -647,7 +647,7 @@ func_13B85(var_0) {
 }
 
 func_13B84(var_0, var_1, var_2) {
-  var_3 = self.triggerportableradarping;
+  var_3 = self.owner;
   var_3 endon("disconnect");
   var_4 = self;
   if(scripts\mp\utility::func_9EF0(self)) {
@@ -790,8 +790,8 @@ func_9D28(var_0) {
 
 getplayerkillstreakcombatmode(var_0) {
   var_1 = "NONE";
-  if(isDefined(var_0.triggerportableradarping) && isDefined(var_0.triggerportableradarping.var_4BE1)) {
-    var_1 = var_0.triggerportableradarping.var_4BE1;
+  if(isDefined(var_0.owner) && isDefined(var_0.owner.var_4BE1)) {
+    var_1 = var_0.owner.var_4BE1;
   }
 
   return var_1;
@@ -841,7 +841,7 @@ watchhostmigrationlifetime(var_0, var_1, var_2) {
   if(isDefined(self.var_DCFC) && getplayerkillstreakcombatmode(self.var_DCFC) == "MANUAL") {
     self.var_DCFC setclientomnvar("ui_remote_c8_countdown", var_7);
   } else if(isDefined(self.streakname) && scripts\mp\utility::func_9F2C(self.streakname)) {
-    self.triggerportableradarping setclientomnvar("ui_killstreak_countdown", var_7);
+    self.owner setclientomnvar("ui_killstreak_countdown", var_7);
   }
 
   self[[var_2]](var_5);

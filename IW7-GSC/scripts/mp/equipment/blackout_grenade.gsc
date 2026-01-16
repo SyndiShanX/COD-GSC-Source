@@ -257,10 +257,10 @@ monitoroverlay() {
   var_7 = self.useoverlay2;
   var_8 = self.overlay2delay;
   var_9 = self.overlay2inalpha;
-  var_0A = self.overlay2indur;
-  var_0B = self.overlay2dur;
-  var_0C = self.overlay2outalpha;
-  var_0D = self.overlay2outdur;
+  var_10 = self.overlay2indur;
+  var_11 = self.overlay2dur;
+  var_12 = self.overlay2outalpha;
+  var_13 = self.overlay2outdur;
   var_1 fadeovertime(var_3);
   var_1.alpha = var_2;
   wait(var_3 + var_4);
@@ -268,11 +268,11 @@ monitoroverlay() {
   var_1.alpha = var_5;
   if(var_7) {
     wait(var_6 + var_8);
-    var_1 fadeovertime(var_0A);
+    var_1 fadeovertime(var_10);
     var_1.alpha = var_9;
-    wait(var_0A + var_0B);
-    var_1 fadeovertime(var_0D);
-    var_1.alpha = var_0C;
+    wait(var_10 + var_11);
+    var_1 fadeovertime(var_13);
+    var_1.alpha = var_12;
   }
 }
 
@@ -295,13 +295,13 @@ monitorshock() {
 
 monitorvictimdeathdisconnect() {
   self endon("blackoutEnded");
-  self.victim scripts\engine\utility::waittill_any_3("death", "disconnect");
+  self.victim scripts\engine\utility::waittill_any("death", "disconnect");
   thread func_6310(1, 0, 0);
 }
 
 monitorgameended() {
   self endon("blackoutEnded");
-  level scripts\engine\utility::waittill_any_3("game_ended", "round_end_finished");
+  level scripts\engine\utility::waittill_any("game_ended", "round_end_finished");
   thread func_6310(0, 1, 1);
 }
 
@@ -350,7 +350,7 @@ func_13151(var_0, var_1) {
   }
 
   if(scripts\mp\utility::_hasperk("specialty_stun_resistance")) {
-    scripts\mp\perks\_perkfunctions::applystunresistence(var_0, self);
+    scripts\mp\perks\perkfunctions::applystunresistence(var_0, self);
     return 0;
   }
 

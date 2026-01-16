@@ -22,7 +22,7 @@ func_13436() {
   self endon("death");
   for(;;) {
     scripts\sp\utility::func_65E3("stealth_enabled");
-    self.setturretnode = func_7938();
+    self.maxvisibledist = func_7938();
     wait(0.05);
   }
 }
@@ -71,7 +71,7 @@ func_10EE3(var_0) {
     scripts\engine\utility::flag_waitopen("stealth_spotted");
     var_1 = -1;
     var_2 = undefined;
-    if(self getweaponrankinfominxp() > 0.3) {
+    if(self playerads() > 0.3) {
       var_3 = self getEye();
       var_4 = anglesToForward(self getplayerangles());
       var_5 = getaiarray();
@@ -86,11 +86,11 @@ func_10EE3(var_0) {
           var_9 = var_7 getEye();
         }
 
-        var_0A = vectornormalize(var_9 - var_3);
-        var_0B = vectordot(var_4, var_0A);
-        if(var_0B > 0.99 && var_0B > var_1) {
+        var_10 = vectornormalize(var_9 - var_3);
+        var_11 = vectordot(var_4, var_10);
+        if(var_11 > 0.99 && var_11 > var_1) {
           if(sighttracepassed(var_9, var_3, 0, undefined)) {
-            var_1 = var_0B;
+            var_1 = var_11;
             var_2 = var_7;
           }
         }
@@ -100,7 +100,7 @@ func_10EE3(var_0) {
         thread func_10EE0("aim", var_2);
       }
 
-      foreach(var_8, var_0E in self.var_10E6D.var_10EDF) {
+      foreach(var_8, var_14 in self.var_10E6D.var_10EDF) {
         if(!isDefined(self.var_10E6D.var_10EDF[var_8])) {
           self.var_10E6D.var_10EDF[var_8] = undefined;
         }

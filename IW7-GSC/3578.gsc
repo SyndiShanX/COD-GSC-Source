@@ -12,8 +12,8 @@ init() {
 
 giveplayeraccessory() {
   self.var_CC58 = [];
-  self.var_CC58[0] = scripts\engine\utility::spawn_tag_origin();
-  self.var_CC58[1] = scripts\engine\utility::spawn_tag_origin();
+  self.var_CC58[0] = ::scripts\engine\utility::spawn_tag_origin();
+  self.var_CC58[1] = ::scripts\engine\utility::spawn_tag_origin();
   self.var_C243 = 0;
 }
 
@@ -89,11 +89,11 @@ func_BCD5(var_0, var_1, var_2) {
     if(!var_7 || !var_9) {
       var_1.origin = var_5;
       var_1.var_115F6 = 0;
-      var_0A = scripts\engine\utility::randomvector(1);
-      var_0B = vectortoangles(var_0A);
-      var_0C = anglesToForward(var_0B);
-      var_0D = var_5 + var_0C * randomintrange(64, 128);
-      var_1 moveto(var_0D, 0.1);
+      var_10 = scripts\engine\utility::randomvector(1);
+      var_11 = vectortoangles(var_10);
+      var_12 = anglesToForward(var_11);
+      var_13 = var_5 + var_12 * randomintrange(64, 128);
+      var_1 moveto(var_13, 0.1);
       wait(0.1);
       continue;
     }

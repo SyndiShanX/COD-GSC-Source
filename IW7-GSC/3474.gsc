@@ -88,8 +88,9 @@ onusedeployable(var_0) {
 
     scripts\mp\missions::processchallenge("ch_guninabox");
     level.var_5226 = randomintrange(var_1.var_B7A5, var_1.var_B7A5 + 1);
-  } else
+  } else {
     startpath(self);
+  }
 }
 
 func_C4CF(var_0) {

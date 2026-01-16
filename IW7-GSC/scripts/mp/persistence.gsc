@@ -426,18 +426,18 @@ func_12F5E() {
   func_CA73(var_1, var_8);
   var_3 = getweaponattachments(var_0);
   foreach(var_5 in var_3) {
-    var_0A = scripts\mp\utility::attachmentmap_tobase(var_5);
-    if(!scripts\mp\utility::func_2490(var_0A)) {
+    var_10 = scripts\mp\utility::attachmentmap_tobase(var_5);
+    if(!scripts\mp\utility::func_2490(var_10)) {
       continue;
     }
 
-    switch (var_0A) {
+    switch (var_10) {
       case "gl":
       case "shotgun":
         break;
     }
 
-    func_CA72(var_0A);
+    func_CA72(var_10);
   }
 
   persclear_stats();

@@ -81,7 +81,7 @@ func_ABFD(var_0, var_1) {
       return;
     }
 
-    var_0A = randomfloatrange(0.4, 0.7);
+    var_10 = randomfloatrange(0.4, 0.7);
     if(self.origin[2] > var_0.var_10DD9[2] + var_7) {
       var_6 = randomintrange(var_9, 0);
     } else if(self.origin[2] < var_0.var_10DD9[2] - var_7) {
@@ -90,17 +90,17 @@ func_ABFD(var_0, var_1) {
       var_6 = randomintrange(var_9, var_8);
     }
 
-    var_0B = var_0A / 6;
+    var_11 = var_10 / 6;
     if(var_6 > 0) {
-      var_0C = scripts\common\trace::player_trace_passed(self.origin, self.origin + (0, 0, var_6), self.angles, self, var_3, 12);
-      if(var_0C) {
-        var_0 movez(var_6, var_0A, var_0B, var_0B);
+      var_12 = scripts\common\trace::player_trace_passed(self.origin, self.origin + (0, 0, var_6), self.angles, self, var_3, 12);
+      if(var_12) {
+        var_0 movez(var_6, var_10, var_11, var_11);
       }
     } else if(var_4[2] + 34 < self.origin[2] + var_6) {
-      var_0 movez(var_6, var_0A, var_0B, var_0B);
+      var_0 movez(var_6, var_10, var_11, var_11);
     }
 
-    wait(var_0A);
+    wait(var_10);
   }
 }
 
@@ -154,7 +154,7 @@ func_853F() {
 
 codemoverequested() {
   self endon("gravWave_end");
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "game_ended");
+  scripts\engine\utility::waittill_any("death", "disconnect", "game_ended");
   thread func_853F();
 }
 

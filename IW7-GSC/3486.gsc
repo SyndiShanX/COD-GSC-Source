@@ -413,8 +413,9 @@ fireontarget(var_0, var_1) {
   for(;;) {
     if(isreadytofire(var_0)) {
       break;
-    } else
+    } else {
       wait 0.25;
+    }
   }
 
   self setturrettargetent(self.besttarget, (0, 0, 50));
@@ -548,8 +549,9 @@ func_13B77(var_0) {
         thread func_2FC0();
         return;
       }
-    } else
+    } else {
       var_1 = undefined;
+    }
 
     wait 0.25;
   }
@@ -584,8 +586,9 @@ func_8B5D() {
       if(!isDefined(level.chopper.var_C084) || isDefined(level.chopper.var_C084) && !level.chopper.var_C084) {
         thread func_6591(level.chopper);
         return;
-      } else
+      } else {
         func_2737(1);
+      }
     }
 
     if(isDefined(level.littlebirds)) {
@@ -604,8 +607,9 @@ func_8B5D() {
         if(isDefined(var_1[var_5])) {
           var_0[var_0.size] = var_1[var_5];
         }
-      } else
+      } else {
         continue;
+      }
 
       wait 0.05;
     }

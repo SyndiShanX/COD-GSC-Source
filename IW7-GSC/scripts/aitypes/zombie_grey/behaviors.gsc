@@ -602,8 +602,9 @@ process_stop_regen_health_action(var_0) {
   if(var_0.num_of_times_stop_regen_health == 1) {
     var_0.health_regen_minimum = int(var_0.maxhealth * 0.33);
     var_0.should_regen_summon = 1;
-  } else if(var_0.num_of_times_stop_regen_health >= 2)
+  } else if(var_0.num_of_times_stop_regen_health >= 2) {
     var_0.can_do_health_regen = 0;
+  }
 }
 
 meet_recent_damage_threshold_check(var_0) {

@@ -88,7 +88,7 @@ func_73B1(var_0) {
     }
 
     if(isDefined(level.var_740D)) {
-      if(isDefined(var_2) && isDefined(var_2.triggerportableradarping) && var_2.triggerportableradarping == level.player) {
+      if(isDefined(var_2) && isDefined(var_2.owner) && var_2.owner == level.player) {
         var_8 = 1;
       }
     }
@@ -121,17 +121,17 @@ func_73B1(var_0) {
       continue;
     }
 
-    var_0A = var_0.team == level.player.team;
-    var_0B = undefined;
+    var_10 = var_0.team == level.player.team;
+    var_11 = undefined;
     if(isDefined(var_0.type) && var_0.type == "civilian") {
-      var_0B = 1;
+      var_11 = 1;
     } else {
-      var_0B = issubstr(var_0.classname, "civilian");
+      var_11 = issubstr(var_0.classname, "civilian");
     }
 
-    var_0C = var_1 == -1;
-    if(!var_0A && !var_0B) {
-      if(var_0C) {
+    var_12 = var_1 == -1;
+    if(!var_10 && !var_11) {
+      if(var_12) {
         level.player.var_C929 = level.player.var_C929 + level.friendlyfire["enemy_kill_points"];
         func_C92A();
         return;
@@ -152,7 +152,7 @@ func_73B1(var_0) {
       continue;
     }
 
-    if(var_0C) {
+    if(var_12) {
       if(isDefined(var_0.var_738F)) {
         level.player.var_C929 = level.player.var_C929 + var_0.var_738F;
       } else {
@@ -164,7 +164,7 @@ func_73B1(var_0) {
 
     func_C92A();
     if(func_3DA1(var_0, var_5) && func_EB68()) {
-      if(var_0C) {
+      if(var_12) {
         return;
       } else {
         continue;
@@ -178,7 +178,7 @@ func_73B1(var_0) {
       continue;
     }
 
-    func_73AE(var_0B);
+    func_73AE(var_11);
   }
 }
 

@@ -138,7 +138,7 @@ candorangeattack(var_0) {
     return level.failure;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return level.failure;
   }
 
@@ -149,14 +149,14 @@ candorangeattack(var_0) {
   }
 
   var_1 = anglesToForward(self.angles);
-  var_2 = self.isnodeoccupied.origin - self.origin;
+  var_2 = self.enemy.origin - self.origin;
   var_2 = (var_2[0], var_2[1], 0);
   var_2 = vectornormalize(var_2);
   if(vectordot(var_1, var_2) < 0) {
     return level.failure;
   }
 
-  if(!self getpersstat(self.isnodeoccupied)) {
+  if(!self cansee(self.enemy)) {
     return level.failure;
   }
 
@@ -220,7 +220,7 @@ process_rangeattack(var_0) {
     return level.failure;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return level.success;
   }
 
@@ -233,14 +233,14 @@ process_rangeattack(var_0) {
   }
 
   var_1 = anglesToForward(self.angles);
-  var_2 = self.isnodeoccupied.origin - self.origin;
+  var_2 = self.enemy.origin - self.origin;
   var_2 = (var_2[0], var_2[1], 0);
   var_2 = vectornormalize(var_2);
   if(vectordot(var_1, var_2) < 0) {
     return level.failure;
   }
 
-  if(!self getpersstat(self.isnodeoccupied)) {
+  if(!self cansee(self.enemy)) {
     return level.failure;
   }
 
@@ -263,7 +263,7 @@ canseethroughfoliage(var_0) {
     }
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return level.failure;
   }
 
@@ -282,7 +282,7 @@ canseethroughfoliage(var_0) {
     return level.failure;
   }
 
-  var_2 = distancesquared(self.isnodeoccupied.origin, self.origin);
+  var_2 = distancesquared(self.enemy.origin, self.origin);
   if(var_2 > 562500) {
     return level.failure;
   }
@@ -291,15 +291,15 @@ canseethroughfoliage(var_0) {
     return level.failure;
   }
 
-  if(!self getpersstat(self.isnodeoccupied)) {
+  if(!self cansee(self.enemy)) {
     self.last_enemy_seen_time = undefined;
     return level.failure;
   }
 
   var_3 = gettime();
-  if(!isDefined(self.last_enemy_seen_time) || !isDefined(self.last_enemy_seen) || self.last_enemy_seen != self.isnodeoccupied) {
+  if(!isDefined(self.last_enemy_seen_time) || !isDefined(self.last_enemy_seen) || self.last_enemy_seen != self.enemy) {
     self.last_enemy_seen_time = var_3;
-    self.last_enemy_seen = self.isnodeoccupied;
+    self.last_enemy_seen = self.enemy;
     return level.failure;
   }
 
@@ -322,11 +322,11 @@ canseethroughfoliage(var_0) {
     var_6[var_6.size] = self.helmet;
   }
 
-  var_0A = self.isnodeoccupied getsecondspassed();
-  var_0B = physics_spherecast(self gettagorigin("tag_eye"), var_0A, 10, var_4, var_6, "physicsquery_closest");
-  if(isDefined(var_0B) && var_0B.size > 0) {
-    if(isDefined(var_0B[0]["hittype"]) && var_0B[0]["hittype"] == "hittype_entity") {
-      if(var_0B[0]["entity"] == self.isnodeoccupied) {
+  var_10 = self.enemy getsecondspassed();
+  var_11 = physics_spherecast(self gettagorigin("tag_eye"), var_10, 10, var_4, var_6, "physicsquery_closest");
+  if(isDefined(var_11) && var_11.size > 0) {
+    if(isDefined(var_11[0]["hittype"]) && var_11[0]["hittype"] == "hittype_entity") {
+      if(var_11[0]["entity"] == self.enemy) {
         return level.success;
       }
     }
@@ -339,12 +339,12 @@ canseethroughfoliage(var_0) {
 init_laserattack(var_0) {
   self.blaserattack = 1;
   self.laserattackstarttime = undefined;
-  self.laserenemy = self.isnodeoccupied;
+  self.laserenemy = self.enemy;
   self.laserfailsafetime = gettime() + 3000;
 }
 
 process_laserattack(var_0) {
-  if(!isDefined(self.laserenemy) || !isDefined(self.isnodeoccupied) || self.isnodeoccupied != self.laserenemy) {
+  if(!isDefined(self.laserenemy) || !isDefined(self.enemy) || self.enemy != self.laserenemy) {
     return level.failure;
   }
 

@@ -215,8 +215,9 @@ addstartspawnpoints(var_0, var_1) {
       }
       var_3[var_3.size] = var_2[var_4];
     }
-  } else
+  } else {
     var_3 = var_2;
+  }
 
   if(!var_3.size) {
     if(!scripts\mp\utility\game::istrue(var_1)) {}
@@ -703,8 +704,9 @@ func_AFDA(var_0) {
         } else if(var_3) {
           var_1 = 2;
         }
-      } else
+      } else {
         var_1 = scripts\engine\utility::ter_op(var_0.var_74BC["all"] == 0, 0, 3);
+      }
 
       if(!isDefined(var_0.var_AFBB) || var_0.var_AFBB != var_1) {
         [[level.matchrecording_logevent]](var_0.logid, "allies", "SPAWN_ENTITY", var_0.origin[0], var_0.origin[1], gettime(), var_1);
@@ -754,8 +756,9 @@ clearspawnpointsightdata(var_0) {
     foreach(var_2 in level.teamnamelist) {
       func_41E6(var_0, var_2);
     }
-  } else
+  } else {
     func_41E6(var_0, "all");
+  }
 }
 
 func_FADD(var_0) {}
@@ -765,8 +768,9 @@ clearspawnpointdistancedata(var_0) {
     foreach(var_2 in level.teamnamelist) {
       func_41E5(var_0, var_2);
     }
-  } else
+  } else {
     func_41E5(var_0, "all");
+  }
 }
 
 func_41E6(var_0, var_1) {

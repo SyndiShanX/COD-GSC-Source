@@ -79,75 +79,75 @@ lightarmor_unset(var_0) {
   var_0 notify("remove_light_armor");
 }
 
-lightarmor_modifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
-  var_0B = 0;
-  var_0C = 0;
-  var_0D = var_0.lightarmorhp;
-  if(!isDefined(var_0A)) {
-    var_0A = 1;
+lightarmor_modifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = 0;
+  var_12 = 0;
+  var_13 = var_0.lightarmorhp;
+  if(!isDefined(var_10)) {
+    var_10 = 1;
   }
 
-  if(!var_0B) {
+  if(!var_11) {
     if(var_4 == "MOD_FALLING" || var_4 == "MOD_MELEE") {
-      var_0B = 1;
+      var_11 = 1;
     }
   }
 
-  if(!var_0B) {
+  if(!var_11) {
     if(scripts\engine\utility::isbulletdamage(var_4) && scripts\mp\utility::isheadshot(var_5, var_8, var_4, var_1)) {
-      var_0B = 1;
+      var_11 = 1;
     }
   }
 
-  if(!var_0B) {
+  if(!var_11) {
     if(var_4 == "MOD_IMPACT") {
       if(scripts\mp\weapons::func_9FA9(var_5) || scripts\mp\weapons::isaxeweapon(var_5)) {
-        var_0B = 1;
+        var_11 = 1;
       }
     }
   }
 
-  if(!var_0B) {
+  if(!var_11) {
     if(isexplosivedamagemod(var_4)) {
       if(isDefined(var_9) && isDefined(var_9.stuckenemyentity) && var_9.stuckenemyentity == var_0) {
-        var_0B = 1;
+        var_11 = 1;
       }
     }
   }
 
-  if(!var_0B) {
+  if(!var_11) {
     if(scripts\mp\utility::issuperdamagesource(var_5)) {
-      var_0B = 1;
+      var_11 = 1;
     }
   }
 
-  if(!var_0B) {
-    var_0C = min(var_2 + var_3, var_0.lightarmorhp);
-    var_0D = var_0D - var_2 + var_3;
-    if(!var_0A) {
+  if(!var_11) {
+    var_12 = min(var_2 + var_3, var_0.lightarmorhp);
+    var_13 = var_13 - var_2 + var_3;
+    if(!var_10) {
       var_0.lightarmorhp = var_0.lightarmorhp - var_2 + var_3;
     }
 
     var_2 = 0;
     var_3 = 0;
-    if(var_0D <= 0) {
-      var_2 = abs(var_0D);
+    if(var_13 <= 0) {
+      var_2 = abs(var_13);
       var_3 = 0;
-      if(!var_0A) {
+      if(!var_10) {
         lightarmor_unset(var_0);
       }
     }
   }
 
-  if(!var_0A) {
+  if(!var_10) {
     lightarmor_updatehud(self);
   }
 
-  if(var_0C > 0 && var_2 == 0) {
+  if(var_12 > 0 && var_2 == 0) {
     var_2 = 1;
   }
 
-  return [var_0C, var_2, var_3];
+  return [var_12, var_2, var_3];
 }
 
 lightarmor_lightarmor_disabled(var_0) {

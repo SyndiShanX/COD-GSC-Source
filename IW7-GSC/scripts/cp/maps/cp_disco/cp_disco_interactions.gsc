@@ -246,28 +246,28 @@ register_crafting_interactions() {
 }
 
 disco_register_interaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = spawnStruct();
-  var_0A.name = var_1;
-  var_0A.hint_func = var_4;
-  var_0A.spend_type = var_2;
-  var_0A.tutorial = var_3;
-  var_0A.activation_func = var_5;
-  var_0A.enabled = 1;
-  var_0A.disable_guided_interactions = var_0;
+  var_10 = spawnStruct();
+  var_10.name = var_1;
+  var_10.hint_func = var_4;
+  var_10.spend_type = var_2;
+  var_10.tutorial = var_3;
+  var_10.activation_func = var_5;
+  var_10.enabled = 1;
+  var_10.disable_guided_interactions = var_0;
   if(!isDefined(var_6)) {
     var_6 = 0;
   }
 
-  var_0A.cost = var_6;
+  var_10.cost = var_6;
   if(isDefined(var_7)) {
-    var_0A.requires_power = var_7;
+    var_10.requires_power = var_7;
   } else {
-    var_0A.requires_power = 0;
+    var_10.requires_power = 0;
   }
 
-  var_0A.init_func = var_8;
-  var_0A.can_use_override_func = var_9;
-  level.interactions[var_1] = var_0A;
+  var_10.init_func = var_8;
+  var_10.can_use_override_func = var_9;
+  level.interactions[var_1] = var_10;
 }
 
 init_pivot_power_doors() {
@@ -279,7 +279,7 @@ init_pivot_power_doors() {
 
 pivot_power_door() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
   self.powered_on = 1;
@@ -331,7 +331,7 @@ init_sliding_power_doors() {
 
 sliding_power_door() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+    level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
   self.powered_on = 1;
@@ -607,7 +607,7 @@ watch_for_damage_on_clock(var_0) {
   self endon("death");
   self endon("last_stand");
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!isplayer(var_2) && !isagent(var_2)) {
       var_0.health = var_0.maxhealth;
       continue;
@@ -671,7 +671,7 @@ reset_clocks_on_failure(var_0) {
   var_0 endon("death");
   var_0 notify("ended_on_successful_teleport");
   for(;;) {
-    scripts\engine\utility::waittill_any_3("rewind_power_finished", "remove_rewind_ability", "rewind_activated", "rat_king_fight_started", "last_stand");
+    scripts\engine\utility::waittill_any("rewind_power_finished", "remove_rewind_ability", "rewind_activated", "rat_king_fight_started", "last_stand");
     if(var_0.clocks_destroyed != 3) {
       foreach(var_2 in var_0.array_of_clocks) {
         var_2.health = 5;
@@ -719,7 +719,7 @@ init_memory_tv() {
         var_5 setModel("cp_disco_tv_crt_01_off");
         var_5.angles = var_4.angles;
         var_4.model = var_5;
-        var_4.triggerportableradarping = "p1_";
+        var_4.owner = "p1_";
         break;
 
       case "tv_pointd":
@@ -727,7 +727,7 @@ init_memory_tv() {
         var_5 setModel("cp_disco_tv_crt_01_off");
         var_5.angles = var_4.angles;
         var_4.model = var_5;
-        var_4.triggerportableradarping = "p2_";
+        var_4.owner = "p2_";
         break;
 
       case "tv_andre":
@@ -735,7 +735,7 @@ init_memory_tv() {
         var_5 setModel("cp_disco_tv_crt_01_off");
         var_5.angles = var_4.angles;
         var_4.model = var_5;
-        var_4.triggerportableradarping = "p3_";
+        var_4.owner = "p3_";
         break;
 
       case "tv_aj":
@@ -743,7 +743,7 @@ init_memory_tv() {
         var_5 setModel("cp_disco_tv_crt_01_off");
         var_5.angles = var_4.angles;
         var_4.model = var_5;
-        var_4.triggerportableradarping = "p4_";
+        var_4.owner = "p4_";
         break;
 
       default:
@@ -869,7 +869,7 @@ use_memory_tv_object(var_0, var_1) {
 
   if(!isDefined(var_1.tv_model)) {
     foreach(var_8 in level.tv_modelsarray) {
-      if(var_8.triggerportableradarping == var_1.vo_prefix) {
+      if(var_8.owner == var_1.vo_prefix) {
         var_1.tv_model = var_8;
       }
     }
@@ -893,8 +893,8 @@ use_memory_tv_object(var_0, var_1) {
       return;
     }
 
-    var_0A = randomint(6);
-    switch (var_0A) {
+    var_10 = randomint(6);
+    switch (var_10) {
       case 0:
         var_2 = 0;
         var_3 = "yeti";
@@ -954,7 +954,7 @@ use_memory_tv_object(var_0, var_1) {
 delay_tv_interaction(var_0, var_1, var_2) {
   var_2 endon("disconnect");
   scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(var_0, var_2);
-  level scripts\engine\utility::waittill_any_timeout_1(var_1, "tv_quest_complete");
+  level scripts\engine\utility::waittill_any_timeout(var_1, "tv_quest_complete");
   scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_0, var_2);
 }
 
@@ -1142,7 +1142,7 @@ skeleton_arrival_cowbell(var_0) {
   var_1 = (0, 0, -11);
   var_2 = spawnfx(level._effect["superslasher_summon_zombie_portal"], var_0 + var_1, (0, 0, 1), (1, 0, 0));
   triggerfx(var_2);
-  scripts\engine\utility::waittill_any_3("death", "intro_vignette_done");
+  scripts\engine\utility::waittill_any("death", "intro_vignette_done");
   var_2 delete();
 }
 
@@ -1339,7 +1339,7 @@ player_clock_tick_sfx(var_0) {
   var_1 = spawn("script_origin", var_0.origin);
   var_1 linkto(var_0);
   var_1 playLoopSound("quest_rewind_clock_tick_long");
-  var_0 scripts\engine\utility::waittill_any_3("stop_clock_sfx", "objects_reset_q2", "objects_reset_q3", "part_1_VO_done", "part_2_VO_done", "part_3_VO_done", "backstory_quest_complete", "clocks_reset");
+  var_0 scripts\engine\utility::waittill_any("stop_clock_sfx", "objects_reset_q2", "objects_reset_q3", "part_1_VO_done", "part_2_VO_done", "part_3_VO_done", "backstory_quest_complete", "clocks_reset");
   var_1 stoploopsound();
   var_1 delete();
 }
@@ -1763,7 +1763,7 @@ watch_for_damage_on_struct(var_0) {
   var_0 endon("last_stand");
   thread reset_on_failure(var_0);
   for(;;) {
-    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!isplayer(var_2) && !isagent(var_2)) {
       continue;
     }
@@ -1795,8 +1795,8 @@ watch_for_damage_on_struct(var_0) {
     }
 
     if(var_2.objects_array_sequence["part1"].size == 2) {
-      foreach(var_0C in var_2.objects_array_sequence["part1"]) {
-        var_0C playfx_and_shatter(var_2);
+      foreach(var_12 in var_2.objects_array_sequence["part1"]) {
+        var_12 playfx_and_shatter(var_2);
       }
 
       var_2 playlocalsound("zmb_ui_earn_tickets");
@@ -1961,7 +1961,7 @@ activatememquestmodel(var_0, var_1, var_2) {
   var_0.model setCanDamage(1);
   var_3 = getcurrentquestfromstruct(var_0, var_1);
   for(;;) {
-    var_0.model waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D);
+    var_0.model waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
     if(!isplayer(var_5)) {
       continue;
     }
@@ -2028,8 +2028,8 @@ activatememquestmodel(var_0, var_1, var_2) {
         var_5 notify("part_three_complete");
       }
 
-      foreach(var_0F in var_5.objects_array_sequence[var_3]) {
-        var_0F playfx_and_shatter(var_5);
+      foreach(var_15 in var_5.objects_array_sequence[var_3]) {
+        var_15 playfx_and_shatter(var_5);
       }
     }
   }
@@ -2401,7 +2401,7 @@ watch_for_damage_on_struct_q2(var_0) {
   var_0 endon("objects_reset_q2");
   var_0 endon("delete_previous_thread");
   for(;;) {
-    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!isplayer(var_2) && !isagent(var_2)) {
       continue;
     }
@@ -2438,8 +2438,8 @@ watch_for_damage_on_struct_q2(var_0) {
     }
 
     if(var_2.objects_array_sequence["quest_2"].size == 2) {
-      foreach(var_0C in var_2.objects_array_sequence["quest_2"]) {
-        var_0C playfx_and_shatter(var_2);
+      foreach(var_12 in var_2.objects_array_sequence["quest_2"]) {
+        var_12 playfx_and_shatter(var_2);
       }
 
       var_2 playlocalsound("zmb_ui_earn_tickets");
@@ -2636,7 +2636,7 @@ watch_for_damage_on_struct_q3(var_0) {
   var_0 endon("delete_previous_thread");
   thread reset_on_failure_q3(var_0);
   for(;;) {
-    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self.model waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(!isplayer(var_2) && !isagent(var_2)) {
       continue;
     }
@@ -2670,8 +2670,8 @@ watch_for_damage_on_struct_q3(var_0) {
     }
 
     if(var_2.objects_array_sequence["quest_3"].size == 2) {
-      foreach(var_0C in var_2.objects_array_sequence["quest_3"]) {
-        var_0C playfx_and_shatter(var_2);
+      foreach(var_12 in var_2.objects_array_sequence["quest_3"]) {
+        var_12 playfx_and_shatter(var_2);
       }
 
       var_2 playlocalsound("zmb_ui_earn_tickets");
@@ -3191,27 +3191,27 @@ runrewind(var_0) {
   self playanimscriptevent("power_active", "rewind");
   var_8 = var_2 / var_3 * 0.05;
   var_9 = var_2 / var_8;
-  var_0A = var_3 / var_9;
-  self lerpviewangleclamp(var_3, var_0A, 0, 0, 0, 0, 0);
+  var_10 = var_3 / var_9;
+  self lerpviewangleclamp(var_3, var_10, 0, 0, 0, 0, 0);
   thread play_fx_rewind(var_3);
-  for(var_0B = self.rewindorigins.size - 1; var_0B >= 0; var_0B--) {
-    var_0C = self.rewindorigins[var_0B];
-    var_0D = var_0B + self.rewindpositionstartindex;
-    var_0E = self.rewindorigins[var_0D];
-    var_0F = self.rewindangles[var_0D];
+  for(var_11 = self.rewindorigins.size - 1; var_11 >= 0; var_11--) {
+    var_12 = self.rewindorigins[var_11];
+    var_13 = var_11 + self.rewindpositionstartindex;
+    var_14 = self.rewindorigins[var_13];
+    var_15 = self.rewindangles[var_13];
     scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
-    thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(var_0A);
-    if(!isDefined(var_0E)) {
-      var_0E = self.rewindorigins[self.rewindorigins.size - 1];
+    thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(var_10);
+    if(!isDefined(var_14)) {
+      var_14 = self.rewindorigins[self.rewindorigins.size - 1];
     }
 
-    if(isDefined(var_0C)) {
-      self.rewindmover.origin = vectorlerp(var_0C, var_0E, 0.05);
+    if(isDefined(var_12)) {
+      self.rewindmover.origin = vectorlerp(var_12, var_14, 0.05);
     } else {
-      self.rewindmover.origin = var_0E;
+      self.rewindmover.origin = var_14;
     }
 
-    wait(var_0A);
+    wait(var_10);
   }
 
   thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(self);
@@ -3411,7 +3411,7 @@ init_fan_trap() {
 }
 
 sewer_fan_power_handler() {
-  level scripts\engine\utility::waittill_any_3("power_on", self.power_area + " power_on");
+  level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   self.powered_on = 1;
   foreach(var_1 in level.sewer_fan_switches) {
     var_1 setModel("mp_frag_button_on_green");

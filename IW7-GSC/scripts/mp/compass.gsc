@@ -20,14 +20,14 @@ setupminimap(var_0) {
       var_8 = var_4;
       var_9 = var_3;
     } else {
-      var_0A = vecscale(var_8, vectordot(var_7, var_8));
-      var_8 = var_4 - var_0A;
-      var_9 = var_3 + var_0A;
+      var_10 = vecscale(var_8, vectordot(var_7, var_8));
+      var_8 = var_4 - var_10;
+      var_9 = var_3 + var_10;
     }
   } else if(vectordot(var_7, var_8) > 0) {
-    var_0A = vecscale(var_8, vectordot(var_7, var_8));
-    var_8 = var_3 + var_0A;
-    var_9 = var_4 - var_0A;
+    var_10 = vecscale(var_8, vectordot(var_7, var_8));
+    var_8 = var_3 + var_10;
+    var_9 = var_4 - var_10;
   } else {
     var_8 = var_5;
     var_9 = var_5;
@@ -39,19 +39,19 @@ setupminimap(var_0) {
   }
 
   if(var_1 > 0) {
-    var_0B = vectordot(var_8 - var_9, var_6);
-    var_0C = vectordot(var_8 - var_9, var_7);
-    var_0D = var_0C / var_0B;
-    if(var_0D < var_1) {
-      var_0E = var_1 / var_0D;
-      var_0F = vecscale(var_7, var_0C * var_0E - 1 * 0.5);
+    var_11 = vectordot(var_8 - var_9, var_6);
+    var_12 = vectordot(var_8 - var_9, var_7);
+    var_13 = var_12 / var_11;
+    if(var_13 < var_1) {
+      var_14 = var_1 / var_13;
+      var_15 = vecscale(var_7, var_12 * var_14 - 1 * 0.5);
     } else {
-      var_0E = var_0F / var_3;
-      var_0F = vecscale(var_7, var_0C * var_0F - 1 * 0.5);
+      var_14 = var_15 / var_3;
+      var_15 = vecscale(var_7, var_12 * var_15 - 1 * 0.5);
     }
 
-    var_8 = var_8 + var_0F;
-    var_9 = var_9 - var_0F;
+    var_8 = var_8 + var_15;
+    var_9 = var_9 - var_15;
   }
 
   level.mapsize = vectordot(var_8 - var_9, var_6);

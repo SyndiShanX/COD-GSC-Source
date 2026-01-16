@@ -220,7 +220,7 @@ turn_off_machine_after_uses(var_0, var_1) {
       if(var_3 >= var_4) {
         self.out_of_order = 1;
         var_2 = 0;
-        level scripts\engine\utility::waittill_any_3("regular_wave_starting", "event_wave_starting");
+        level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
       }
 
       foreach(var_6 in level.players) {

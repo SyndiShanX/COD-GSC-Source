@@ -172,10 +172,10 @@ applyallmotiontowardsdesireddir(var_0, var_1, var_2, var_3) {
     var_7 = var_6.nodes[var_6.desirednode].origin;
     var_8 = var_4 / var_5;
     var_9 = var_4 + 0.05 / var_5;
-    var_0A = 0;
+    var_10 = 0;
     if(var_9 > 1) {
       if(var_3) {
-        var_0A = length2d(getmovedelta(var_1, var_8, 1)) * var_2;
+        var_10 = length2d(getmovedelta(var_1, var_8, 1)) * var_2;
         var_4 = 0;
         var_8 = 0;
         var_9 = var_9 - 1;
@@ -184,10 +184,10 @@ applyallmotiontowardsdesireddir(var_0, var_1, var_2, var_3) {
       }
     }
 
-    var_0B = getmovedelta(var_1, var_8, var_9);
-    var_0A = var_0A + length2d(var_0B) * var_2;
-    var_0C = self.origin + self._blackboard.desireddir * var_0A;
-    self setorigin(var_0C - (0, 0, 1), 0);
+    var_11 = getmovedelta(var_1, var_8, var_9);
+    var_10 = var_10 + length2d(var_11) * var_2;
+    var_12 = self.origin + self._blackboard.desireddir * var_10;
+    self setorigin(var_12 - (0, 0, 1), 0);
     wait(0.05);
     var_4 = var_4 + 0.05;
   }
@@ -411,11 +411,11 @@ handleclapprojectile() {
   }
 
   level.rockwall_forming = undefined;
-  var_0A = createnavobstaclebybounds(var_8.origin, (2000, 64, 200), var_7.angles);
+  var_10 = createnavobstaclebybounds(var_8.origin, (2000, 64, 200), var_7.angles);
   wait(0.15);
   var_7 delete();
   wait(10);
-  destroynavobstacle(var_0A);
+  destroynavobstacle(var_10);
   var_8 unlink();
   var_8.origin = var_8.origin + (0, 0, -200);
   self.claponarena = 0;
@@ -642,8 +642,8 @@ throwmeteor(var_0, var_1, var_2) {
     }
   }
 
-  foreach(var_0C in level.players) {
-    var_7[var_7.size] = var_0C;
+  foreach(var_12 in level.players) {
+    var_7[var_7.size] = var_12;
   }
 
   while(var_4[0] > -40) {
@@ -654,13 +654,13 @@ throwmeteor(var_0, var_1, var_2) {
     }
   }
 
-  var_0E = magicbullet(var_3.throw_weapon, var_2 + var_5, var_2, self);
-  var_0E playLoopSound("cp_final_meph_asteroid_lp_01");
+  var_14 = magicbullet(var_3.throw_weapon, var_2 + var_5, var_2, self);
+  var_14 playLoopSound("cp_final_meph_asteroid_lp_01");
   level thread play_asteroid_tellsfx(var_2);
-  var_0E waittill("death");
-  playsoundatpos(var_0E.origin, "cp_final_meph_asteroid_explo");
-  earthquake(0.55, 1, var_0E.origin, 1200);
-  playrumbleonposition("artillery_rumble", var_0E.origin);
+  var_14 waittill("death");
+  playsoundatpos(var_14.origin, "cp_final_meph_asteroid_explo");
+  earthquake(0.55, 1, var_14.origin, 1200);
+  playrumbleonposition("artillery_rumble", var_14.origin);
 }
 
 play_asteroid_tellsfx(var_0) {
@@ -750,10 +750,10 @@ playgroundvulland(var_0, var_1, var_2, var_3) {
   var_7 = min(level.players.size * var_4.zombies_per_person, var_6 - var_5.size);
   for(var_8 = 0; var_8 < var_7; var_8++) {
     var_9 = 1 * var_8 * 360 / var_7;
-    var_0A = self.arenacenter[0] + cos(var_9) * var_4.zombies_summon_radius;
-    var_0B = self.arenacenter[1] + sin(var_9) * var_4.zombies_summon_radius;
-    var_0C = (var_0A, var_0B, self.arenacenter[2]);
-    spawnzombie("skeleton", var_0C);
+    var_10 = self.arenacenter[0] + cos(var_9) * var_4.zombies_summon_radius;
+    var_11 = self.arenacenter[1] + sin(var_9) * var_4.zombies_summon_radius;
+    var_12 = (var_10, var_11, self.arenacenter[2]);
+    spawnzombie("skeleton", var_12);
   }
 
   lib_0F3C::func_CEA8(var_0, var_1, var_2, var_3);
@@ -1033,20 +1033,20 @@ createarmageddon() {
     var_7 = sqrt(randomfloat(1)) * var_0.meteor_target_radius;
     var_8 = randomfloat(360);
     var_9 = self.arenacenter[0] + var_7 * cos(var_8);
-    var_0A = self.arenacenter[1] + var_7 * sin(var_8);
-    var_0B = (var_9, var_0A, self.arenacenter[2]);
-    var_0C = distance2dsquared(var_0B, (-13165, 74, -46));
-    var_0D = distance2dsquared(var_0B, (-13263, -767, -46));
-    if(var_0C > var_1 && var_0D > var_1) {
-      magicbullet("iw7_dlc4eclipse_mp", (-17910.3, 966.038, 5116), var_0B);
+    var_10 = self.arenacenter[1] + var_7 * sin(var_8);
+    var_11 = (var_9, var_10, self.arenacenter[2]);
+    var_12 = distance2dsquared(var_11, (-13165, 74, -46));
+    var_13 = distance2dsquared(var_11, (-13263, -767, -46));
+    if(var_12 > var_1 && var_13 > var_1) {
+      magicbullet("iw7_dlc4eclipse_mp", (-17910.3, 966.038, 5116), var_11);
     }
 
     wait(randomfloatrange(var_5, var_6));
   }
 
-  foreach(var_0F in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
-    if(var_0F.agent_type != "dlc4_boss") {
-      var_0F dodamage(var_0F.health * 10, self.arenacenter);
+  foreach(var_15 in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
+    if(var_15.agent_type != "dlc4_boss") {
+      var_15 dodamage(var_15.health * 10, self.arenacenter);
     }
   }
 

@@ -20,7 +20,7 @@ func_28EC() {
   for(;;) {
     self waittill("sprint_slide_begin");
     func_28E2();
-    scripts\engine\utility::waittill_any_timeout_1(0.45, "sprint_slide_end");
+    scripts\engine\utility::waittill_any_timeout(0.45, "sprint_slide_end");
     thread func_28E5();
   }
 }
@@ -60,50 +60,50 @@ func_28ED() {
       var_5 = var_2 * -20;
       var_6 = var_4;
       var_7 = var_5 + var_2 * 38;
-      var_0A = physics_raycast(self getEye(), self.origin + var_4 + var_7, var_8, undefined, 0, "physicsquery_closest");
-      if(isDefined(var_0A) && var_0A.size > 0) {
-        var_4 = var_3 * vectordot(var_0A[0]["position"] - self.origin, var_3);
+      var_10 = physics_raycast(self getEye(), self.origin + var_4 + var_7, var_8, undefined, 0, "physicsquery_closest");
+      if(isDefined(var_10) && var_10.size > 0) {
+        var_4 = var_3 * vectordot(var_10[0]["position"] - self.origin, var_3);
         var_4 = var_4 - var_3 * 3;
         var_6 = var_4;
       }
     }
 
-    var_0B = undefined;
+    var_11 = undefined;
     if(level.teambased) {
-      var_0B = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
+      var_11 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
     } else {
-      var_0B = level.characters;
+      var_11 = level.characters;
     }
 
-    foreach(var_0D in var_0B) {
-      if(!isDefined(var_0D) || var_0D == self || !scripts\mp\utility::isreallyalive(var_0D)) {
+    foreach(var_13 in var_11) {
+      if(!isDefined(var_13) || var_13 == self || !scripts\mp\utility::isreallyalive(var_13)) {
         continue;
       }
 
-      if(func_28EA(var_0D)) {
+      if(func_28EA(var_13)) {
         continue;
       }
 
-      if(!scripts\mp\utility::func_D64A(5184, 76, self.origin + var_4 + var_5, var_2, var_0D gettagorigin("j_mainroot"))) {
+      if(!scripts\mp\utility::func_D64A(5184, 76, self.origin + var_4 + var_5, var_2, var_13 gettagorigin("j_mainroot"))) {
         continue;
       }
 
-      if(func_28E8(var_0D, var_3)) {
+      if(func_28E8(var_13, var_3)) {
         continue;
       }
 
-      if(func_28E9(var_0D, self.origin + var_6)) {
+      if(func_28E9(var_13, self.origin + var_6)) {
         continue;
       }
 
-      if(func_28E7(var_0D, self.origin + var_6 + var_7, var_8)) {
+      if(func_28E7(var_13, self.origin + var_6 + var_7, var_8)) {
         continue;
       }
 
-      func_28F5(var_0D);
-      func_28E3(var_0D);
-      if(scripts\mp\utility::isreallyalive(var_0D)) {
-        func_28EB(var_0D, var_3);
+      func_28F5(var_13);
+      func_28E3(var_13);
+      if(scripts\mp\utility::isreallyalive(var_13)) {
+        func_28EB(var_13, var_3);
       }
     }
 
@@ -170,7 +170,7 @@ func_28F5(var_0) {
 func_28E3(var_0) {
   var_1 = 65;
   if(scripts\mp\utility::_hasperk("specialty_battleslide_offense")) {
-    var_1 = scripts\mp\perks\_perkfunctions::getbattleslideoffensedamage();
+    var_1 = scripts\mp\perks\perkfunctions::getbattleslideoffensedamage();
   }
 
   if(var_1 >= self.health) {

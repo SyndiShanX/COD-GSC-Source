@@ -28,20 +28,20 @@ init_agent(var_0) {
     }
 
     var_6 = [];
-    foreach(var_0B, var_8 in var_1) {
+    foreach(var_11, var_8 in var_1) {
       var_9 = tablelookupbyrow(var_0, var_4, var_8);
       if(var_9 == "0") {
         var_9 = 0;
       } else if(int(var_9) != 0) {
-        var_0A = var_9 + "";
-        if(issubstr(var_0A, ".")) {
+        var_10 = var_9 + "";
+        if(issubstr(var_10, ".")) {
           var_9 = float(var_9);
         } else {
           var_9 = int(var_9);
         }
       }
 
-      var_6[var_0B] = var_9;
+      var_6[var_11] = var_9;
     }
 
     level.agent_definition[var_5] = var_6;
@@ -60,7 +60,7 @@ func_F8ED() {
 }
 
 func_FAFA(var_0) {
-  self.var_394 = var_0;
+  self.weapon = var_0;
   self giveweapon(var_0);
   self setspawnweapon(var_0);
   self.bulletsinclip = weaponclipsize(var_0);
@@ -163,7 +163,7 @@ spawn_scripted_agent(var_0, var_1, var_2, var_3) {
     var_5 = 50;
   }
 
-  var_0 giveplaceable(var_2, var_3, level.agent_definition[var_1]["animclass"], var_4, var_5);
+  var_0 spawnagent(var_2, var_3, level.agent_definition[var_1]["animclass"], var_4, var_5);
   var_0.var_18F4 = var_5;
   var_0.var_18F9 = var_4;
   return var_0;
@@ -171,7 +171,7 @@ spawn_scripted_agent(var_0, var_1, var_2, var_3) {
 
 spawn_regular_agent(var_0, var_1, var_2) {
   var_0.is_scripted_agent = 0;
-  var_0 giveplaceable(var_1, var_2);
+  var_0 spawnagent(var_1, var_2);
   return var_0;
 }
 
@@ -335,7 +335,7 @@ set_agent_team(var_0, var_1) {
   self.team = var_0;
   self.var_20 = var_0;
   self.pers["team"] = var_0;
-  self.triggerportableradarping = var_1;
+  self.owner = var_1;
   self setotherent(var_1);
   self setentityowner(var_1);
 }
@@ -384,7 +384,7 @@ is_friendly_damage(var_0, var_1) {
       return 1;
     }
 
-    if(isDefined(var_1.triggerportableradarping) && isDefined(var_1.triggerportableradarping.team) && var_1.triggerportableradarping.team == var_0.team) {
+    if(isDefined(var_1.owner) && isDefined(var_1.owner.team) && var_1.owner.team == var_0.team) {
       return 1;
     }
   }
@@ -392,26 +392,26 @@ is_friendly_damage(var_0, var_1) {
   return 0;
 }
 
-default_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = self;
-  var_0D = level.agent_funcs[self.agent_type]["gametype_on_damaged"];
-  if(isDefined(var_0D)) {
-    [[var_0D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+default_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = self;
+  var_13 = level.agent_funcs[self.agent_type]["gametype_on_damaged"];
+  if(isDefined(var_13)) {
+    [[var_13]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 
-  if(is_friendly_damage(var_0C, var_0)) {
+  if(is_friendly_damage(var_12, var_0)) {
     return;
   }
 
-  var_0C[[level.agent_funcs[var_0C.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0A, var_0B);
+  var_12[[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11);
 }
 
-default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  var_0D = self.health;
+default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = self.health;
   if(isDefined(var_7)) {
-    var_0E = vectortoyaw(var_7);
-    var_0F = self.angles[1];
-    self.var_E3 = angleclamp180(var_0E - var_0F);
+    var_14 = vectortoyaw(var_7);
+    var_15 = self.angles[1];
+    self.var_E3 = angleclamp180(var_14 - var_15);
   } else {
     self.var_E3 = 0;
   }
@@ -423,8 +423,8 @@ default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   self.var_E1 = var_2;
   self.var_E2 = var_5;
   self.var_4D62 = var_6;
-  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0B, var_0C);
-  if(self.health > 0 && self.health < var_0D) {
+  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_11, var_12);
+  if(self.health > 0 && self.health < var_13) {
     self notify("pain");
   }
 
@@ -433,7 +433,7 @@ default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     if(isDefined(var_10)) {
       [
         [var_10]
-      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     }
   }
 }
@@ -550,17 +550,17 @@ activateagent() {
 }
 
 on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = self.var_164D[self.asmname].var_4BC0;
-  var_0B = level.asm[self.asmname].states[var_0A];
-  if(scripts\asm\asm_mp::func_2382(self.asmname, var_0B)) {
-    scripts\asm\asm::func_231E(self.asmname, var_0B, var_0A);
+  var_10 = self.var_164D[self.asmname].var_4BC0;
+  var_11 = level.asm[self.asmname].states[var_10];
+  if(scripts\asm\asm_mp::func_2382(self.asmname, var_11)) {
+    scripts\asm\asm::func_231E(self.asmname, var_11, var_10);
   }
 
   if(isDefined(self.nocorpse)) {
     return;
   }
 
-  var_0C = self;
+  var_12 = self;
   self.body = self getplayerviewmodelfrombody(var_8);
   if(should_do_immediate_ragdoll(self)) {
     do_immediate_ragdoll(self.body);
@@ -610,17 +610,17 @@ delaystartragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_6 = var_0 func_8112();
-  var_0A = 0.35;
+  var_10 = 0.35;
   if(animhasnotetrack(var_6, "start_ragdoll")) {
-    var_0B = getnotetracktimes(var_6, "start_ragdoll");
-    if(isDefined(var_0B)) {
-      var_0A = var_0B[0];
+    var_11 = getnotetracktimes(var_6, "start_ragdoll");
+    if(isDefined(var_11)) {
+      var_10 = var_11[0];
     }
   }
 
-  var_0C = var_0A * getanimlength(var_6) - 0.2;
-  if(var_0C > 0) {
-    wait(var_0C);
+  var_12 = var_10 * getanimlength(var_6) - 0.2;
+  if(var_12 > 0) {
+    wait(var_12);
   }
 
   if(isDefined(var_0)) {

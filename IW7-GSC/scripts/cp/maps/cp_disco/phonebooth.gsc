@@ -316,23 +316,23 @@ init_phone() {
   }
 
   if(isDefined(level.players)) {
-    foreach(var_0C in level.players) {
+    foreach(var_12 in level.players) {
       if(isDefined(self.keypad_frame)) {
-        self.keypad_frame hidefromplayer(var_0C);
+        self.keypad_frame hidefromplayer(var_12);
       }
     }
   }
 
   if(scripts\engine\utility::istrue(self.requires_power)) {
-    var_0E = undefined;
+    var_14 = undefined;
     if(isDefined(self.script_area)) {
-      var_0E = self.script_area;
+      var_14 = self.script_area;
     } else {
-      var_0E = scripts\cp\cp_interaction::get_area_for_power(self);
+      var_14 = scripts\cp\cp_interaction::get_area_for_power(self);
     }
 
-    if(isDefined(var_0E)) {
-      level scripts\engine\utility::waittill_any_3("power_on", var_0E + " power_on");
+    if(isDefined(var_14)) {
+      level scripts\engine\utility::waittill_any("power_on", var_14 + " power_on");
     }
   }
 
@@ -459,20 +459,20 @@ use_phonebooth(var_0, var_1) {
 
     var_1 clear_phone_omnvars_for_player();
     var_1 setclientomnvar("zm_ui_dialpad_ent", var_0.keypad_frame);
-    foreach(var_0B in var_0.keypad_buttons) {
-      if(!isDefined(var_0B.model)) {
-        var_0C = spawn("script_model", var_0B.keypos);
-        var_0C setModel(var_0B.stopfxontag);
-        var_0C.origin = var_0B.keypos;
-        var_0C.angles = var_0B.keyang;
-        var_0B.model = var_0C;
+    foreach(var_11 in var_0.keypad_buttons) {
+      if(!isDefined(var_11.model)) {
+        var_12 = spawn("script_model", var_11.keypos);
+        var_12 setModel(var_11.stopfxontag);
+        var_12.origin = var_11.keypos;
+        var_12.angles = var_11.keyang;
+        var_11.model = var_12;
         foreach(var_3 in level.players) {
           if(var_3 == var_1) {
-            var_0B.model showtoplayer(var_3);
+            var_11.model showtoplayer(var_3);
             continue;
           }
 
-          var_0B.model hidefromplayer(var_3);
+          var_11.model hidefromplayer(var_3);
         }
       }
     }
@@ -480,7 +480,7 @@ use_phonebooth(var_0, var_1) {
     var_10 = use_phone_keypad(var_0, var_1, var_6);
     if(isDefined(var_1)) {
       var_1 thread snd_phone_outro(var_10);
-      var_1 scripts\engine\utility::waittill_any_3("exit_phonebooth", "phone_outro_end");
+      var_1 scripts\engine\utility::waittill_any("exit_phonebooth", "phone_outro_end");
     }
 
     if(isDefined(var_1)) {
@@ -488,13 +488,13 @@ use_phonebooth(var_0, var_1) {
     }
 
     wait(0.1);
-    foreach(var_0B in var_0.keypad_buttons) {
-      if(isDefined(var_0B.model)) {
+    foreach(var_11 in var_0.keypad_buttons) {
+      if(isDefined(var_11.model)) {
         if(isDefined(var_1)) {
-          scripts\cp\cp_outline::disable_outline_for_player(var_0B.model, var_1);
+          scripts\cp\cp_outline::disable_outline_for_player(var_11.model, var_1);
         }
 
-        var_0B.model delete();
+        var_11.model delete();
       }
     }
 
@@ -599,30 +599,30 @@ use_phone_keypad(var_0, var_1, var_2) {
   var_8 = undefined;
   var_9 = 0;
   for(;;) {
-    var_0A = undefined;
+    var_10 = undefined;
     var_1 childthread phone_exit_timeout();
     var_1 waittill("use_button_pressed");
     if(!var_1 scripts\cp\utility::is_valid_player()) {
       return;
     }
 
-    var_0B = anglesToForward(var_1 getplayerangles());
-    foreach(var_0D in var_0.keypad_buttons) {
-      var_0E = vectordot(var_0B, var_0D.vdronestrikeheight);
-      if(var_0E > 0.999) {
+    var_11 = anglesToForward(var_1 getplayerangles());
+    foreach(var_13 in var_0.keypad_buttons) {
+      var_14 = vectordot(var_11, var_13.vdronestrikeheight);
+      if(var_14 > 0.999) {
         var_1 notify("dialed");
         var_1 notify("stop_delay_thread");
         var_1 thread stoplocalsound_phone("receiver_pickup");
-        var_0A = var_0D.keyname;
-        var_0F = var_0D.keyvalue;
-        var_1 thread playlocalsound_phone(var_0A);
+        var_10 = var_13.keyname;
+        var_15 = var_13.keyvalue;
+        var_1 thread playlocalsound_phone(var_10);
         if(isDefined(var_8)) {
-          var_8 = var_8 + var_0A;
+          var_8 = var_8 + var_10;
         } else {
-          var_8 = var_0A;
+          var_8 = var_10;
         }
 
-        var_7[var_9] = var_0F;
+        var_7[var_9] = var_15;
         var_9++;
         break;
       }
@@ -644,8 +644,8 @@ use_phone_keypad(var_0, var_1, var_2) {
       }
     }
 
-    if(isDefined(var_0A)) {
-      var_1 stoplocalsound_phone(var_0A);
+    if(isDefined(var_10)) {
+      var_1 stoplocalsound_phone(var_10);
     } else {
       continue;
     }
@@ -871,7 +871,7 @@ phone_puzzle_call(var_0, var_1) {
     var_1 notifyonplayercommand("exit_phonebooth", "+breath_sprint");
     var_1 notifyonplayercommand("exit_phonebooth", "+frag");
     var_1 notifyonplayercommand("exit_phonebooth", "+smoke");
-    var_1 scripts\engine\utility::waittill_any_3("exit_phonebooth", "morse_ended");
+    var_1 scripts\engine\utility::waittill_any("exit_phonebooth", "morse_ended");
     wait(0.1);
     var_1 scripts\engine\utility::allow_prone(1);
     var_1 scripts\engine\utility::allow_crouch(1);

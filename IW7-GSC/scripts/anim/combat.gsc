@@ -27,8 +27,8 @@ main() {
   [[self.exception["exposed"]]]();
   scripts\anim\utility::func_9832("combat");
   self.a.var_22F5 = undefined;
-  if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Ambush" && self getweaponassetfromrootweapon(self.target_getindexoftarget)) {
-    self.var_1E2C = self.target_getindexoftarget;
+  if(isDefined(self.node) && self.node.type == "Ambush" && self getweaponassetfromrootweapon(self.node)) {
+    self.var_1E2C = self.node;
   }
 
   transitiontocombat();
@@ -57,7 +57,7 @@ func_5859() {
   }
 
   if(self func_81B1() && self.weaponstartammo == "move" && self.a.pose == "stand" && !isDefined(self.var_55EF)) {
-    if(isDefined(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) < squared(128)) {
+    if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < squared(128)) {
       return;
     }
 
@@ -83,7 +83,7 @@ transitiontocombat() {
     return;
   }
 
-  if(isDefined(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) < 262144) {
+  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 262144) {
     return;
   }
 
@@ -141,8 +141,8 @@ func_F337(var_0) {
   }
 
   if(scripts\engine\utility::actor_is3d()) {
-    self.var_368 = -65;
-    self.isbot = 65;
+    self.upaimlimit = -65;
+    self.downaimlimit = 65;
     self.setdevdvar = -56;
     self.setmatchdatadef = 56;
   }
@@ -151,8 +151,8 @@ func_F337(var_0) {
 func_F296() {
   func_F337();
   if(self.a.pose == "stand" && !scripts\engine\utility::actor_is3d()) {
-    self.var_368 = -45;
-    self.isbot = 45;
+    self.upaimlimit = -45;
+    self.downaimlimit = 45;
   }
 
   self.var_129AF = self.var_504E;
@@ -204,7 +204,7 @@ func_7E71(var_0) {
       return "stand";
     }
 
-    if(isDefined(self.isnodeoccupied) && !self getpersstat(self.isnodeoccupied) || !self canshootenemy() && sighttracepassed(self.origin + (0, 0, 64), self.isnodeoccupied getshootatpos(), 0, undefined)) {
+    if(isDefined(self.enemy) && !self cansee(self.enemy) || !self canshootenemy() && sighttracepassed(self.origin + (0, 0, 64), self.enemy getshootatpos(), 0, undefined)) {
       self.a.var_5956 = gettime() + 3000;
       return "stand";
     }
@@ -271,7 +271,7 @@ func_10062(var_0) {
       return 1;
     }
 
-    if(self.var_BC == "ambush_nodes_only" && !isDefined(self.isnodeoccupied) || !self getpersstat(self.isnodeoccupied)) {
+    if(self.var_BC == "ambush_nodes_only" && !isDefined(self.enemy) || !self cansee(self.enemy)) {
       return 1;
     }
   }
@@ -285,7 +285,7 @@ func_DB34() {
 
 func_6A15() {
   if(isDefined(self.heat) && self getwatcheddvar()) {
-    self ghost_target_position(self.target_remove, self.target_getindexoftarget.angles);
+    self ghost_target_position(self.target_remove, self.node.angles);
   }
 }
 
@@ -380,7 +380,7 @@ func_6A13() {
 }
 
 func_6A1C() {
-  if(!isDefined(self.isnodeoccupied) || !self getpersstat(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy) || !self cansee(self.enemy)) {
     self endon("enemy");
     self endon("shoot_behavior_change");
     wait(0.2 + randomfloat(0.1));
@@ -392,7 +392,7 @@ func_6A1C() {
 }
 
 func_10B70() {
-  if(isDefined(self.isnodeoccupied) && !self getpersstat(self.isnodeoccupied) || !self canshootenemy() && sighttracepassed(self.origin + (0, 0, 64), self.isnodeoccupied getshootatpos(), 0, undefined)) {
+  if(isDefined(self.enemy) && !self cansee(self.enemy) || !self canshootenemy() && sighttracepassed(self.origin + (0, 0, 64), self.enemy getshootatpos(), 0, undefined)) {
     self.a.var_5956 = gettime() + 3000;
     transitionto("stand");
     return 1;
@@ -476,20 +476,20 @@ func_392C() {
     }
   }
 
-  if(isDefined(self.target_getindexoftarget) && isDefined(level.var_9D8E[self.target_getindexoftarget.type])) {
-    var_1 = angleclamp180(self.angles[1] - self.target_getindexoftarget.angles[1]);
+  if(isDefined(self.node) && isDefined(level.var_9D8E[self.node.type])) {
+    var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
     if(func_129B2(var_1)) {
       return 1;
     }
-  } else if((isDefined(self.isnodeoccupied) && self seerecently(self.isnodeoccupied, 2)) || var_0 > self.a.var_EF87 + 1200) {
+  } else if((isDefined(self.enemy) && self seerecently(self.enemy, 2)) || var_0 > self.a.var_EF87 + 1200) {
     var_1 = undefined;
     var_2 = self getsafeanimmovedeltapercentage();
     if(isDefined(var_2)) {
       var_1 = angleclamp180(self.angles[1] - var_2[1]);
-    } else if(isDefined(self.target_getindexoftarget)) {
-      var_1 = angleclamp180(self.angles[1] - self.target_getindexoftarget.angles[1]);
-    } else if(isDefined(self.isnodeoccupied)) {
-      var_2 = vectortoangles(self lastknownpos(self.isnodeoccupied) - self.origin);
+    } else if(isDefined(self.node)) {
+      var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
+    } else if(isDefined(self.enemy)) {
+      var_2 = vectortoangles(self lastknownpos(self.enemy) - self.origin);
       var_1 = angleclamp180(self.angles[1] - var_2[1]);
     }
 
@@ -497,7 +497,7 @@ func_392C() {
       return 1;
     }
   } else if(isDefined(self.heat) && self func_8213()) {
-    var_1 = angleclamp180(self.angles[1] - self.target_getindexoftarget.angles[1]);
+    var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
     if(func_129B2(var_1)) {
       return 1;
     }
@@ -638,14 +638,14 @@ func_5AC8(var_0, var_1) {
   var_2 = isDefined(self.var_FECF);
   var_3 = 1;
   var_4 = 0.2;
-  var_5 = isDefined(self.isnodeoccupied) && !isDefined(self.var_129B3) && self seerecently(self.isnodeoccupied, 2) && distancesquared(self.isnodeoccupied.origin, self.origin) < 262144;
+  var_5 = isDefined(self.enemy) && !isDefined(self.var_129B3) && self seerecently(self.enemy, 2) && distancesquared(self.enemy.origin, self.origin) < 262144;
   if(self.a.var_EF87 + 500 > gettime()) {
     var_4 = 0.25;
     if(var_5) {
       thread func_6A6F();
     }
   } else if(var_5) {
-    var_6 = 1 - distance(self.isnodeoccupied.origin, self.origin) / 512;
+    var_6 = 1 - distance(self.enemy.origin, self.origin) / 512;
     var_3 = 1 + var_6 * 1;
     if(var_3 > 2) {
       var_4 = 0.05;
@@ -671,7 +671,7 @@ func_5AC8(var_0, var_1) {
   var_9 = scripts\anim\utility::func_1F64(var_8);
   if(isDefined(self.var_129B3)) {
     self animmode("angle deltas", 0);
-  } else if(isDefined(self.target_getindexoftarget) && isDefined(level.var_9D8D[self.target_getindexoftarget.type]) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 256) {
+  } else if(isDefined(self.node) && isDefined(level.var_9D8D[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
     self animmode("angle deltas", 0);
   } else if(func_9D43(var_9)) {
     func_E246();
@@ -794,7 +794,7 @@ func_453F() {
     }
   }
 
-  if(isDefined(self.isnodeoccupied) && func_1289C(self.isnodeoccupied, self.var_B781)) {
+  if(isDefined(self.enemy) && func_1289C(self.enemy, self.var_B781)) {
     return 1;
   }
 
@@ -813,13 +813,13 @@ func_1289C(var_0, var_1) {
   }
 
   var_3 = var_0.origin;
-  if(!self getpersstat(var_0)) {
-    if(isDefined(self.isnodeoccupied) && var_0 == self.isnodeoccupied && isDefined(self.var_FECF)) {
+  if(!self cansee(var_0)) {
+    if(isDefined(self.enemy) && var_0 == self.enemy && isDefined(self.var_FECF)) {
       var_3 = self.var_FECF;
     }
   }
 
-  if(!self getpersstat(var_0)) {
+  if(!self cansee(var_0)) {
     var_1 = 100;
   }
 
@@ -905,14 +905,14 @@ transitionto(var_0) {
       self endon("shoot_behavior_change");
       for(;;) {
         wait(0.2 + randomfloat(0.3));
-        if(isDefined(self.isnodeoccupied)) {
-          if(isplayer(self.isnodeoccupied)) {
+        if(isDefined(self.enemy)) {
+          if(isplayer(self.enemy)) {
             var_0 = -25536;
           } else {
             var_0 = 10000;
           }
 
-          if(distancesquared(self.isnodeoccupied.origin, self.origin) < var_0) {
+          if(distancesquared(self.enemy.origin, self.origin) < var_0) {
             if(shouldmelee()) {
               domelee();
             }
@@ -930,7 +930,7 @@ transitionto(var_0) {
         return;
       }
 
-      if(isplayer(self.isnodeoccupied)) {}
+      if(isplayer(self.enemy)) {}
     }
 
     func_6A19(var_0) {
@@ -949,7 +949,7 @@ transitionto(var_0) {
 
       thread func_A57F();
       self.var_6CDB = 0;
-      if(weaponclass(self.var_394) == "pistol") {
+      if(weaponclass(self.weapon) == "pistol") {
         self orientmode("face default");
       }
 
@@ -976,7 +976,7 @@ transitionto(var_0) {
       }
 
       var_2 = 1;
-      if(!scripts\anim\utility_common::isusingsidearm() && !scripts\anim\utility_common::isshotgun(self.var_394) && isDefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied) && distancesquared(self.isnodeoccupied.origin, self.origin) < 1048576) {
+      if(!scripts\anim\utility_common::isusingsidearm() && !scripts\anim\utility_common::isshotgun(self.weapon) && isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576) {
         var_2 = 1.2;
       }
 
@@ -994,7 +994,7 @@ transitionto(var_0) {
       self endon("abort_reload");
       self endon("killanimscript");
       for(;;) {
-        if(isDefined(self.var_FE9E) && self getpersstat(self.var_FE9E)) {
+        if(isDefined(self.var_FE9E) && self cansee(self.var_FE9E)) {
           break;
         }
 
@@ -1146,7 +1146,7 @@ transitionto(var_0) {
       self.a.var_6A1A = 0;
       for(;;) {
         wait(0.2);
-        if(isDefined(self.isnodeoccupied) && !self seerecently(self.isnodeoccupied, 2)) {
+        if(isDefined(self.enemy) && !self seerecently(self.enemy, 2)) {
           if(self.var_BC == "ambush" || self.var_BC == "ambush_nodes_only") {
             continue;
           }
@@ -1161,7 +1161,7 @@ transitionto(var_0) {
         return;
       }
 
-      if(!isDefined(self.isnodeoccupied)) {
+      if(!isDefined(self.enemy)) {
         self.var_DD23 = 0;
         return;
       }
@@ -1171,14 +1171,14 @@ transitionto(var_0) {
         return;
       }
 
-      if(isDefined(self.var_D895) && self.var_D895 != self.isnodeoccupied) {
+      if(isDefined(self.var_D895) && self.var_D895 != self.enemy) {
         self.var_DD23 = 0;
         self.var_D895 = undefined;
         return;
       }
 
-      self.var_D895 = self.isnodeoccupied;
-      if(self getpersstat(self.isnodeoccupied) && self canshootenemy()) {
+      self.var_D895 = self.enemy;
+      if(self cansee(self.enemy) && self canshootenemy()) {
         self.var_DD23 = 0;
         return;
       }
@@ -1189,7 +1189,7 @@ transitionto(var_0) {
       }
 
       if(!isDefined(self.var_DD24) || !self.var_DD24) {
-        var_0 = vectornormalize(self.isnodeoccupied.origin - self.origin);
+        var_0 = vectornormalize(self.enemy.origin - self.origin);
         var_1 = anglesToForward(self.angles);
         if(vectordot(var_0, var_1) < 0.5) {
           self.var_DD23 = 0;
@@ -1197,7 +1197,7 @@ transitionto(var_0) {
         }
       }
 
-      if(self.a.var_6A1A && scripts\anim\utility_common::needtoreload(0.25) && self.isnodeoccupied.health > self.isnodeoccupied.maxhealth * 0.5) {
+      if(self.a.var_6A1A && scripts\anim\utility_common::needtoreload(0.25) && self.enemy.health > self.enemy.maxhealth * 0.5) {
         self.var_DD23 = 0;
         return;
       }
@@ -1235,7 +1235,7 @@ transitionto(var_0) {
           break;
 
         case 4:
-          if(!self getpersstat(self.isnodeoccupied) || !self canshootenemy()) {
+          if(!self cansee(self.enemy) || !self canshootenemy()) {
             self func_80EC();
           }
           break;

@@ -406,7 +406,7 @@ afterlife_enable_player_interaction(var_0) {
 
 afterlife_release_player_interaction_trigger() {
   var_0 = self.interaction_trigger;
-  scripts\engine\utility::waittill_any_3("player_exit_afterlife", "spawned", "disconnect");
+  scripts\engine\utility::waittill_any("player_exit_afterlife", "spawned", "disconnect");
   var_0.in_use = 0;
 }
 
@@ -529,7 +529,7 @@ update_player_revives_every_ten_waves(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   for(var_1 = 0; var_1 < 2; var_1++) {
-    level scripts\engine\utility::waittill_any_3("regular_wave_starting", "event_wave_starting");
+    level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
     if(var_0 scripts\cp\utility::isplayingsolo() || level.only_one_player) {
       continue;
     } else {

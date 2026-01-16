@@ -293,22 +293,22 @@ func_12FFA(var_0, var_1, var_2) {
   foreach(var_7 in var_1.var_13C25) {
     var_8 = scripts\cp\utility::getbaseweaponname(var_7);
     var_9 = 0;
-    foreach(var_0B in var_4) {
-      var_0C = scripts\cp\utility::getbaseweaponname(var_0B);
-      if(var_0C == var_8 || issubstr(var_0C, var_8)) {
+    foreach(var_11 in var_4) {
+      var_12 = scripts\cp\utility::getbaseweaponname(var_11);
+      if(var_12 == var_8 || issubstr(var_12, var_8)) {
         var_9 = 1;
         break;
       }
     }
 
     if(!var_9) {
-      var_0E = var_7;
-      var_0F = scripts\cp\utility::getrawbaseweaponname(var_7);
-      if(isDefined(var_0.weapon_build_models[var_0F])) {
-        var_0E = var_0.weapon_build_models[var_0F];
+      var_14 = var_7;
+      var_15 = scripts\cp\utility::getrawbaseweaponname(var_7);
+      if(isDefined(var_0.weapon_build_models[var_15])) {
+        var_14 = var_0.weapon_build_models[var_15];
       }
 
-      var_5[var_5.size] = var_0E;
+      var_5[var_5.size] = var_14;
     }
   }
 
@@ -335,8 +335,8 @@ func_12FFA(var_0, var_1, var_2) {
 
       level.var_B162 = 0;
       wait(0.5);
-      if(isDefined(var_1.var_394)) {
-        var_1.var_394 delete();
+      if(isDefined(var_1.weapon)) {
+        var_1.weapon delete();
       }
 
       func_BC3F();
@@ -364,12 +364,12 @@ func_12FFA(var_0, var_1, var_2) {
 }
 
 func_13D00(var_0) {
-  while(!isDefined(var_0.var_394)) {
+  while(!isDefined(var_0.weapon)) {
     wait(0.05);
   }
 
   while(var_0.var_10A05) {
-    var_1 = var_0.var_394.scriptmodelplayanim;
+    var_1 = var_0.weapon.scriptmodelplayanim;
     wait(0.05);
   }
 }
@@ -548,37 +548,37 @@ func_1010C(var_0, var_1) {
   level.currentweaponlist = var_5;
   loadworldweapons(var_5);
   var_9 = -1;
-  var_0A = 0;
-  var_0B = scripts\engine\utility::getclosest(var_0.origin, scripts\engine\utility::getstructarray("wheel_fx_spot", "targetname"));
-  var_0.var_394 = undefined;
+  var_10 = 0;
+  var_11 = scripts\engine\utility::getclosest(var_0.origin, scripts\engine\utility::getstructarray("wheel_fx_spot", "targetname"));
+  var_0.weapon = undefined;
   while(var_0.var_10A05) {
     wait(var_0.var_E74D);
     var_0 playSound("zmb_wheel_spin_tick");
     var_9++;
-    if(isDefined(var_0.var_394)) {
-      var_0.var_394 setmoverweapon(var_5[var_9]);
+    if(isDefined(var_0.weapon)) {
+      var_0.weapon setmoverweapon(var_5[var_9]);
     } else {
-      var_0.var_394 = spawn("script_weapon", var_0B.origin, 0, 0, var_5[var_9]);
-      if(isDefined(var_0B.angles)) {
-        var_0.var_394.angles = var_0B.angles;
+      var_0.weapon = spawn("script_weapon", var_11.origin, 0, 0, var_5[var_9]);
+      if(isDefined(var_11.angles)) {
+        var_0.weapon.angles = var_11.angles;
       } else {
-        var_0.var_394.angles = (0, 0, 0);
+        var_0.weapon.angles = (0, 0, 0);
       }
     }
 
-    var_0.var_394.scriptmodelplayanim = var_5[var_9];
+    var_0.weapon.scriptmodelplayanim = var_5[var_9];
     if(var_9 >= var_5.size - 1) {
       var_9 = -1;
     }
 
-    var_0A++;
+    var_10++;
   }
 
-  var_0.var_394.scriptmodelplayanim = var_0.var_13C25[var_4];
+  var_0.weapon.scriptmodelplayanim = var_0.var_13C25[var_4];
   if((isDefined(var_1) && isplayer(var_1) && scripts\engine\utility::istrue(level.magic_wheel_upgraded_pap1)) || scripts\engine\utility::istrue(level.magic_wheel_upgraded_pap2)) {
-    var_0.var_394 setmoverweapon(get_weapon_with_new_camo(var_1, var_0.var_394.scriptmodelplayanim, get_camo_for_upgraded_weapon(getweaponbasename(var_0.var_394.scriptmodelplayanim), var_1)));
+    var_0.weapon setmoverweapon(get_weapon_with_new_camo(var_1, var_0.weapon.scriptmodelplayanim, get_camo_for_upgraded_weapon(getweaponbasename(var_0.weapon.scriptmodelplayanim), var_1)));
   } else {
-    var_0.var_394 setmoverweapon(var_0.var_394.scriptmodelplayanim);
+    var_0.weapon setmoverweapon(var_0.weapon.scriptmodelplayanim);
   }
 
   level.activewheels--;
@@ -591,25 +591,25 @@ func_1010C(var_0, var_1) {
     level.currentweaponlist = [];
   }
 
-  var_0E = scripts\cp\zombies\interaction_weapon_upgrade::getoffsetfrombaseweaponname(var_0.var_13C25[var_4]);
-  var_0.var_394.origin = var_0B.origin + var_0E;
+  var_14 = scripts\cp\zombies\interaction_weapon_upgrade::getoffsetfrombaseweaponname(var_0.var_13C25[var_4]);
+  var_0.weapon.origin = var_11.origin + var_14;
   playsoundatpos(var_0.origin, "zmb_wheel_spin_end");
   if(!isDefined(var_0.fire_sale_spin) && !scripts\engine\utility::flag_exist("fire_sale") || !scripts\engine\utility::flag("fire_sale")) {
     level.var_13D01++;
-    var_0F = randomint(100);
+    var_15 = randomint(100);
     if(scripts\engine\utility::istrue(level.meph_fight_started)) {
       level.var_13D01 = 0;
     }
 
     if(level.var_13D01 == 7) {
-      var_0F = 100;
+      var_15 = 100;
     }
 
-    if(var_0F > 50 && level.var_13D01 > 4) {
+    if(var_15 > 50 && level.var_13D01 > 4) {
       level.var_B162 = 1;
-      var_10 = var_0.var_394.origin;
-      if(isDefined(var_0.var_394)) {
-        var_0.var_394 delete();
+      var_10 = var_0.weapon.origin;
+      if(isDefined(var_0.weapon)) {
+        var_0.weapon delete();
       }
 
       var_11 = spawn("script_model", var_10);
@@ -632,19 +632,19 @@ func_1010C(var_0, var_1) {
   }
 
   var_2.fire_sale_spin = undefined;
-  var_2.var_394 makeusable();
+  var_2.weapon makeusable();
   foreach(var_13 in level.players) {
     if(var_13 == var_4) {
-      var_2.var_394 enableplayeruse(var_13);
+      var_2.weapon enableplayeruse(var_13);
       continue;
     }
 
-    var_2.var_394 disableplayeruse(var_13);
+    var_2.weapon disableplayeruse(var_13);
   }
 
-  var_2.var_394 thread wait_for_player_to_take_weapon(var_2);
-  var_2.var_394 scripts\engine\utility::waittill_any_timeout_1(12, "weapon_taken");
-  var_2.var_394 delete();
+  var_2.weapon thread wait_for_player_to_take_weapon(var_2);
+  var_2.weapon scripts\engine\utility::waittill_any_timeout(12, "weapon_taken");
+  var_2.weapon delete();
   if(scripts\engine\utility::array_contains(var_2.var_13C25, "iw7_nunchucks_zm")) {
     var_2.var_13C25 = scripts\engine\utility::array_remove(var_2.var_13C25, "iw7_nunchucks_zm");
   } else if(scripts\engine\utility::array_contains(var_2.var_13C25, "iw7_nunchucks_zm_pap2")) {
@@ -1081,7 +1081,7 @@ func_10C4D(var_0, var_1, var_2) {
 
 func_4DB4(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_3 = scripts\engine\utility::waittill_any_timeout_1(var_1, "deactivated" + var_0, "activated" + var_0);
+  var_3 = scripts\engine\utility::waittill_any_timeout(var_1, "deactivated" + var_0, "activated" + var_0);
   if(var_3 != "activated" + var_0) {
     level.active_power_ups["fire_sale"] = 0;
     scripts\engine\utility::flag_clear("fire_sale");
@@ -1111,19 +1111,19 @@ func_4DB4(var_0, var_1, var_2) {
     }
 
     level notify("deactivated" + var_0);
-    var_0A = 1;
-    while(var_0A) {
-      var_0B = 0;
+    var_10 = 1;
+    while(var_10) {
+      var_11 = 0;
       foreach(var_8 in level.players) {
         if(scripts\engine\utility::istrue(var_8.var_13103)) {
           wait(0.25);
-          var_0B = 1;
+          var_11 = 1;
           continue;
         }
       }
 
-      if(!var_0B) {
-        var_0A = 0;
+      if(!var_11) {
+        var_10 = 0;
       }
     }
 
@@ -1133,6 +1133,6 @@ func_4DB4(var_0, var_1, var_2) {
 
 func_50DA(var_0) {
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_3("ready", "weapon_taken");
+  var_0 scripts\engine\utility::waittill_any("ready", "weapon_taken");
   func_8E95(var_0);
 }

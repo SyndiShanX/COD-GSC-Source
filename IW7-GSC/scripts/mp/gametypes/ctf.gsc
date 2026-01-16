@@ -207,39 +207,39 @@ assignteamspawns() {
     var_6 = var_5 - var_4;
     var_7 = length2d(var_6);
     foreach(var_9 in var_0) {
-      var_0A = (var_9.origin[0], var_9.origin[1], 0);
-      var_0B = var_0A - var_4;
-      var_0C = vectordot(var_0B, var_6);
-      var_0D = var_0C / var_7 * var_7;
-      if(var_0D < 0.33) {
+      var_10 = (var_9.origin[0], var_9.origin[1], 0);
+      var_11 = var_10 - var_4;
+      var_12 = vectordot(var_11, var_6);
+      var_13 = var_12 / var_7 * var_7;
+      if(var_13 < 0.33) {
         var_9.teambase = var_2.ownerteam;
         level.teamspawnpoints[var_9.teambase][level.teamspawnpoints[var_9.teambase].size] = var_9;
         continue;
       }
 
-      if(var_0D > 0.67) {
+      if(var_13 > 0.67) {
         var_9.teambase = var_3.ownerteam;
         level.teamspawnpoints[var_9.teambase][level.teamspawnpoints[var_9.teambase].size] = var_9;
         continue;
       }
 
-      var_0E = undefined;
-      var_0F = undefined;
+      var_14 = undefined;
+      var_15 = undefined;
       if(var_1) {
-        var_0E = getpathdist(var_9.origin, var_2.curorigin, 999999);
+        var_14 = getpathdist(var_9.origin, var_2.curorigin, 999999);
       }
 
-      if(isDefined(var_0E) && var_0E != -1) {
-        var_0F = getpathdist(var_9.origin, var_3.curorigin, 999999);
+      if(isDefined(var_14) && var_14 != -1) {
+        var_15 = getpathdist(var_9.origin, var_3.curorigin, 999999);
       }
 
-      if(!isDefined(var_0F) || var_0F == -1) {
-        var_0E = distance2d(var_2.curorigin, var_9.origin);
-        var_0F = distance2d(var_3.curorigin, var_9.origin);
+      if(!isDefined(var_15) || var_15 == -1) {
+        var_14 = distance2d(var_2.curorigin, var_9.origin);
+        var_15 = distance2d(var_3.curorigin, var_9.origin);
       }
 
-      var_10 = max(var_0E, var_0F);
-      var_11 = min(var_0E, var_0F);
+      var_10 = max(var_14, var_15);
+      var_11 = min(var_14, var_15);
       var_12 = var_11 / var_10;
       if(var_12 > 0.5) {
         level.teamspawnpoints["neutral"][level.teamspawnpoints["neutral"].size] = var_9;
@@ -566,13 +566,13 @@ createteamflag(var_0, var_1) {
 
   var_8.oldradius = var_3.fgetarg;
   var_9 = var_3.origin + (0, 0, 32);
-  var_0A = var_3.origin + (0, 0, -32);
-  var_0B = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
-  var_0C = [];
-  var_0D = scripts\common\trace::ray_trace(var_9, var_0A, var_0C, var_0B);
+  var_10 = var_3.origin + (0, 0, -32);
+  var_11 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
+  var_12 = [];
+  var_13 = scripts\common\trace::ray_trace(var_9, var_10, var_12, var_11);
   var_8.baseeffectpos = var_8.visuals[0].origin;
-  var_0E = anglestoup(var_8.visuals[0].angles);
-  var_8.baseeffectforward = anglesToForward(var_0E);
+  var_14 = anglestoup(var_8.visuals[0].angles);
+  var_8.baseeffectforward = anglesToForward(var_14);
   level.teamflagbases[var_0] = createteamflagbase(var_0, var_8);
   return var_8;
 }
@@ -622,11 +622,11 @@ createcapzone(var_0, var_1) {
   var_7 = var_3.origin + (0, 0, 32);
   var_8 = var_3.origin + (0, 0, -32);
   var_9 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
-  var_0A = [];
-  var_0B = scripts\common\trace::ray_trace(var_7, var_8, var_0A, var_9);
-  var_0C = vectortoangles(var_0B["normal"]);
-  var_0D = anglesToForward(var_0C);
-  var_0E = anglestoright(var_0C);
+  var_10 = [];
+  var_11 = scripts\common\trace::ray_trace(var_7, var_8, var_10, var_9);
+  var_12 = vectortoangles(var_11["normal"]);
+  var_13 = anglesToForward(var_12);
+  var_14 = anglestoright(var_12);
   return var_6;
 }
 
@@ -931,7 +931,7 @@ applyflagcarrierclass() {
 
   self.pers["gamemodeLoadout"] = level.ctf_loadouts[self.team];
   if(isDefined(self.setspawnpoint)) {
-    scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
+    scripts\mp\perks\perkfunctions::deleteti(self.setspawnpoint);
   }
 
   var_0 = spawn("script_model", self.origin);
@@ -981,7 +981,7 @@ superabilitywatcher() {
 
       case "super_teleport":
       case "super_rewind":
-        scripts\engine\utility::waittill_any_3("teleport_success", "rewind_success");
+        scripts\engine\utility::waittill_any("teleport_success", "rewind_success");
         var_2.ftldrop = 1;
         var_2 thread scripts\mp\gameobjects::setdropped();
         break;
@@ -1021,7 +1021,7 @@ removeflagcarrierclass() {
 
   self.pers["gamemodeLoadout"] = undefined;
   if(isDefined(self.setspawnpoint)) {
-    scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
+    scripts\mp\perks\perkfunctions::deleteti(self.setspawnpoint);
   }
 
   var_0 = spawn("script_model", self.origin);
@@ -1037,23 +1037,23 @@ removeflagcarrierclass() {
 oncantuse(var_0) {}
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = 0;
-  var_0B = var_1.origin;
-  var_0C = 0;
+  var_10 = 0;
+  var_11 = var_1.origin;
+  var_12 = 0;
   if(isDefined(var_0)) {
-    var_0B = var_0.origin;
-    var_0C = var_0 == var_1;
+    var_11 = var_0.origin;
+    var_12 = var_0 == var_1;
   }
 
   if(isDefined(var_1) && isplayer(var_1) && var_1.pers["team"] != self.pers["team"]) {
-    if(isDefined(var_1.carryflag) && var_0C) {
+    if(isDefined(var_1.carryflag) && var_12) {
       var_1 thread scripts\mp\awards::givemidmatchaward("mode_ctf_kill_with_flag");
-      var_0A = 1;
+      var_10 = 1;
     }
 
     if(isDefined(self.carryflag)) {
-      var_0D = distancesquared(self.origin, level.capzones[self.team].trigger.origin);
-      if(var_0D < 90000) {
+      var_13 = distancesquared(self.origin, level.capzones[self.team].trigger.origin);
+      if(var_13 < 90000) {
         level.closecapturekiller[var_1.team] = var_1;
       } else {
         level.closecapturekiller[var_1.team] = undefined;
@@ -1064,28 +1064,28 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
       var_1 scripts\mp\utility::incperstat("defends", 1);
       var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
       thread scripts\mp\matchdata::loginitialstats(var_9, "carrying");
-      var_0A = 1;
+      var_10 = 1;
     }
 
-    if(!var_0A) {
-      var_0E = 0;
-      var_0F = 0;
+    if(!var_10) {
+      var_14 = 0;
+      var_15 = 0;
       foreach(var_11 in level.teamflags) {
-        var_12 = distsquaredcheck(var_0B, self.origin, var_11.curorigin);
+        var_12 = distsquaredcheck(var_11, self.origin, var_11.curorigin);
         if(var_12) {
           if(var_11.ownerteam == self.team) {
-            var_0E = 1;
+            var_14 = 1;
             continue;
           }
 
-          var_0F = 1;
+          var_15 = 1;
         }
       }
 
-      if(var_0E) {
+      if(var_14) {
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
         thread scripts\mp\matchdata::loginitialstats(var_9, "defending");
-      } else if(var_0F) {
+      } else if(var_15) {
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
         var_1 scripts\mp\utility::incperstat("defends", 1);
         var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
@@ -1122,11 +1122,11 @@ detachflag() {
 
 setspecialloadouts() {
   if(isusingmatchrulesdata() && getmatchrulesdata("defaultClasses", "axis", 5, "class", "inUse")) {
-    level.ctf_loadouts["axis"] = scripts\mp\utility::getmatchrulesspecialclass("axis", 5);
+    level.ctf_loadouts["axis"] = ::scripts\mp\utility::getmatchrulesspecialclass("axis", 5);
   }
 
   if(isusingmatchrulesdata() && getmatchrulesdata("defaultClasses", "allies", 5, "class", "inUse")) {
-    level.ctf_loadouts["allies"] = scripts\mp\utility::getmatchrulesspecialclass("allies", 5);
+    level.ctf_loadouts["allies"] = ::scripts\mp\utility::getmatchrulesspecialclass("allies", 5);
   }
 }
 
@@ -1239,10 +1239,10 @@ placeflag() {
       var_7 = var_3.origin + (0, 0, -32);
       var_8 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
       var_9 = [];
-      var_0A = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
-      var_5.baseeffectpos = var_0A["position"];
-      var_0B = vectortoangles(var_0A["normal"]);
-      var_5.baseeffectforward = anglesToForward(var_0B);
+      var_10 = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
+      var_5.baseeffectpos = var_10["position"];
+      var_11 = vectortoangles(var_10["normal"]);
+      var_5.baseeffectforward = anglesToForward(var_11);
       level.teamflagbases[var_1] = createteamflagbase(var_1, var_5);
       if(var_1 == "allies") {
         if(game["switchedsides"]) {
@@ -1261,36 +1261,36 @@ placeflag() {
       var_3.no_moving_platfrom_unlink = 1;
       var_3.linktoenabledflag = 1;
       var_3.baseorigin = var_3.origin;
-      var_0C = scripts\mp\gameobjects::createuseobject(var_1, var_3, var_4, (0, 0, 115));
-      var_0C scripts\mp\gameobjects::allowuse("friendly");
-      var_0C scripts\mp\gameobjects::setvisibleteam("any");
-      var_0C scripts\mp\gameobjects::set2dicon("friendly", level.icondefendflag2d);
-      var_0C scripts\mp\gameobjects::set3dicon("friendly", level.icondefendflag3d);
-      var_0C scripts\mp\gameobjects::set2dicon("enemy", level.iconcaptureflag2d);
-      var_0C scripts\mp\gameobjects::set3dicon("enemy", level.iconcaptureflag3d);
-      var_0C scripts\mp\gameobjects::setusetime(0);
-      var_0C scripts\mp\gameobjects::setkeyobject(level.teamflags[scripts\mp\utility::getotherteam(var_1)]);
+      var_12 = scripts\mp\gameobjects::createuseobject(var_1, var_3, var_4, (0, 0, 115));
+      var_12 scripts\mp\gameobjects::allowuse("friendly");
+      var_12 scripts\mp\gameobjects::setvisibleteam("any");
+      var_12 scripts\mp\gameobjects::set2dicon("friendly", level.icondefendflag2d);
+      var_12 scripts\mp\gameobjects::set3dicon("friendly", level.icondefendflag3d);
+      var_12 scripts\mp\gameobjects::set2dicon("enemy", level.iconcaptureflag2d);
+      var_12 scripts\mp\gameobjects::set3dicon("enemy", level.iconcaptureflag3d);
+      var_12 scripts\mp\gameobjects::setusetime(0);
+      var_12 scripts\mp\gameobjects::setkeyobject(level.teamflags[scripts\mp\utility::getotherteam(var_1)]);
       level.capzones[level.otherteam[var_1]] scripts\mp\gameobjects::setkeyobject(var_5);
-      var_0C.onuse = ::onuse;
-      var_0C.oncantuse = ::oncantuse;
+      var_12.onuse = ::onuse;
+      var_12.oncantuse = ::oncantuse;
       var_6 = var_3.origin + (0, 0, 32);
       var_7 = var_3.origin + (0, 0, -32);
       var_8 = scripts\common\trace::create_contents(1, 1, 1, 1, 0, 1, 1);
       var_9 = [];
-      var_0A = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
-      var_0B = vectortoangles(var_0A["normal"]);
-      var_0D = anglesToForward(var_0B);
-      var_0E = anglestoright(var_0B);
+      var_10 = scripts\common\trace::ray_trace(var_6, var_7, var_9, var_8);
+      var_11 = vectortoangles(var_10["normal"]);
+      var_13 = anglesToForward(var_11);
+      var_14 = anglestoright(var_11);
       if(var_1 == "allies") {
         if(game["switchedsides"]) {
-          level.capzones[game["defenders"]] = var_0C;
+          level.capzones[game["defenders"]] = var_12;
         } else {
-          level.capzones[game["attackers"]] = var_0C;
+          level.capzones[game["attackers"]] = var_12;
         }
       } else if(game["switchedsides"]) {
-        level.capzones[game["attackers"]] = var_0C;
+        level.capzones[game["attackers"]] = var_12;
       } else {
-        level.capzones[game["defenders"]] = var_0C;
+        level.capzones[game["defenders"]] = var_12;
       }
 
       setdynamicdvar("scr_devPlaceDomFlag", "");

@@ -193,37 +193,37 @@ drop_points_on_path(var_0, var_1, var_2) {
       var_0 = var_7[var_7.size - 1] + (0, 0, 30);
     }
 
-    var_0A = var_0 + var_5 * var_4;
-    var_0A = scripts\engine\utility::drop_to_ground(var_0A, 30, -5000);
-    if(!navisstraightlinereachable(var_0, var_0A)) {
-      var_0B = getclosestpointonnavmesh(var_0A);
-      if(distancesquared(var_0B, var_0A) < 10000) {
-        var_0A = var_0B;
+    var_10 = var_0 + var_5 * var_4;
+    var_10 = scripts\engine\utility::drop_to_ground(var_10, 30, -5000);
+    if(!navisstraightlinereachable(var_0, var_10)) {
+      var_11 = getclosestpointonnavmesh(var_10);
+      if(distancesquared(var_11, var_10) < 10000) {
+        var_10 = var_11;
       }
     }
 
-    var_0A = var_0A + (0, 0, 10);
-    if(!is_point_in_valid_place(var_0A, self)) {
+    var_10 = var_10 + (0, 0, 10);
+    if(!is_point_in_valid_place(var_10, self)) {
       var_9 = 1;
     }
 
     if(var_7.size > 0) {
-      var_0C = var_0A[2];
-      var_0D = var_7[var_7.size - 1][2];
-      if(var_0C > var_0D + 100) {
+      var_12 = var_10[2];
+      var_13 = var_7[var_7.size - 1][2];
+      if(var_12 > var_13 + 100) {
         var_9 = 1;
       }
 
-      var_0E = var_0D - var_0C;
-      if(var_0E > 1000) {
+      var_14 = var_13 - var_12;
+      if(var_14 > 1000) {
         var_9 = 1;
-      } else if(var_0E > 100) {
-        var_0A = (var_0A[0], var_0A[1], var_0C + var_0D / 2);
+      } else if(var_14 > 100) {
+        var_10 = (var_10[0], var_10[1], var_12 + var_13 / 2);
       }
     }
 
     if(!var_9) {
-      var_7[var_7.size] = var_0A;
+      var_7[var_7.size] = var_10;
     }
 
     scripts\engine\utility::waitframe();

@@ -42,7 +42,7 @@ func_139BF(var_0, var_1) {
 
 func_139BC() {
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   self.var_FC99 = undefined;
   self.var_3255 = undefined;
   self.var_3254 = undefined;
@@ -149,7 +149,7 @@ func_3259(var_0, var_1, var_2) {
   var_1 thread func_10A10(self.var_E749, 4, 1, 1);
   var_2 thread func_10A10(self.var_E749, 4, 1, 1);
   for(;;) {
-    self waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D);
+    self waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
     playFX(scripts\engine\utility::getfx("bulletstorm_shield_hit"), var_7);
     playsoundatpos(var_7, "bs_shield_impact");
     var_5 scripts\mp\damagefeedback::updatedamagefeedback(var_3);
@@ -197,7 +197,7 @@ func_139BB(var_0, var_1, var_2, var_3) {}
 
 func_139B8(var_0) {
   self endon("stop_bulletstorm");
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect");
   self notify("stop_bulletstorm", 1);
 }
 
@@ -367,9 +367,9 @@ getcustomizationhead(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_8[var_8.size] = "physicscontents_glass";
       var_8[var_8.size] = "physicscontents_vehicle";
       var_9 = physics_createcontents(var_8);
-      var_0A = [];
-      var_0B = physics_raycast(var_1, var_4.origin, var_9, var_0A, 0, "physicsquery_any");
-      if(!var_0B) {
+      var_10 = [];
+      var_11 = physics_raycast(var_1, var_4.origin, var_9, var_10, 0, "physicsquery_any");
+      if(!var_11) {
         var_6.var_38BF = 1;
       }
     }
@@ -378,13 +378,13 @@ getcustomizationhead(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(var_0 == 1) {
         var_6.var_4D70 = var_5 - var_5 / var_2 / var_7;
       } else {
-        var_0C = 1 - var_7 / var_2;
-        if(var_0C < 0) {
-          var_0C = 0;
+        var_12 = 1 - var_7 / var_2;
+        if(var_12 < 0) {
+          var_12 = 0;
         }
 
-        var_0D = 2 + 4 * var_0C;
-        var_6.var_5FE9 = scripts\mp\perks\_perkfunctions::applystunresistence(var_3, var_4, var_0D);
+        var_13 = 2 + 4 * var_12;
+        var_6.var_5FE9 = scripts\mp\perks\perkfunctions::applystunresistence(var_3, var_4, var_13);
       }
     }
   }

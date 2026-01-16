@@ -213,36 +213,36 @@ gunfireloopfxthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   var_9 = var_6;
-  var_0A = var_7 - var_6;
+  var_10 = var_7 - var_6;
   if(var_5 < var_4) {
     var_8 = var_5;
     var_5 = var_4;
     var_4 = var_8;
   }
 
-  var_0B = var_4;
-  var_0C = var_5 - var_4;
+  var_11 = var_4;
+  var_12 = var_5 - var_4;
   if(var_3 < var_2) {
     var_8 = var_3;
     var_3 = var_2;
     var_2 = var_8;
   }
 
-  var_0D = var_2;
-  var_0E = var_3 - var_2;
-  var_0F = spawnfx(level._effect[var_0], var_1);
+  var_13 = var_2;
+  var_14 = var_3 - var_2;
+  var_15 = spawnfx(level._effect[var_0], var_1);
   if(!level.createfx_enabled) {
-    var_0F willneverchange();
+    var_15 willneverchange();
   }
 
   for(;;) {
-    var_10 = var_0D + randomint(var_0E);
+    var_10 = var_13 + randomint(var_14);
     for(var_11 = 0; var_11 < var_10; var_11++) {
-      triggerfx(var_0F);
-      wait(var_0B + randomfloat(var_0C));
+      triggerfx(var_15);
+      wait(var_11 + randomfloat(var_12));
     }
 
-    wait(var_9 + randomfloat(var_0A));
+    wait(var_9 + randomfloat(var_10));
   }
 }
 
@@ -348,18 +348,18 @@ sort_reactive_ents(var_0, var_1) {
 
   foreach(var_5 in var_2) {
     var_9 = vector2d(var_5.v["origin"] - level.player.origin);
-    var_0A = vector2d(var_0 - level.player.origin);
-    var_0B = vectornormalize(var_9);
-    var_0C = vectornormalize(var_0A);
-    var_5.dot = vectordot(var_0B, var_0C);
+    var_10 = vector2d(var_0 - level.player.origin);
+    var_11 = vectornormalize(var_9);
+    var_12 = vectornormalize(var_10);
+    var_5.dot = vectordot(var_11, var_12);
   }
 
-  for(var_0E = 0; var_0E < var_2.size - 1; var_0E++) {
-    for(var_0F = var_0E + 1; var_0F < var_2.size; var_0F++) {
-      if(var_2[var_0E].dot > var_2[var_0F].dot) {
-        var_10 = var_2[var_0E];
-        var_2[var_0E] = var_2[var_0F];
-        var_2[var_0F] = var_10;
+  for(var_14 = 0; var_14 < var_2.size - 1; var_14++) {
+    for(var_15 = var_14 + 1; var_15 < var_2.size; var_15++) {
+      if(var_2[var_14].dot > var_2[var_15].dot) {
+        var_10 = var_2[var_14];
+        var_2[var_14] = var_2[var_15];
+        var_2[var_15] = var_10;
       }
     }
   }
@@ -369,8 +369,8 @@ sort_reactive_ents(var_0, var_1) {
     var_5.dot = undefined;
   }
 
-  for(var_0E = 4; var_0E < var_2.size; var_0E++) {
-    var_2[var_0E] = undefined;
+  for(var_14 = 4; var_14 < var_2.size; var_14++) {
+    var_2[var_14] = undefined;
   }
 
   return var_2;

@@ -48,11 +48,11 @@ func_89EA(var_0) {
 }
 
 func_9FA5() {
-  if(!isDefined(self.target_getindexoftarget)) {
+  if(!isDefined(self.node)) {
     return 0;
   }
 
-  if(isDefined(self.isnodeoccupied) && self seerecently(self.isnodeoccupied, 1.5) && distancesquared(self.origin, self.isnodeoccupied.origin) < 250000) {
+  if(isDefined(self.enemy) && self seerecently(self.enemy, 1.5) && distancesquared(self.origin, self.enemy.origin) < 250000) {
     return !self func_8199();
   }
 
@@ -62,7 +62,7 @@ func_9FA5() {
 func_1524() {
   self endon("killanimscript");
   for(;;) {
-    if(!isDefined(self.target_getindexoftarget)) {
+    if(!isDefined(self.node)) {
       return;
     }
 
@@ -90,7 +90,7 @@ func_393C(var_0) {
     return 0;
   }
 
-  if(isDefined(self.isnodeoccupied) && distancesquared(self.isnodeoccupied.origin, var_0.origin) < 65536) {
+  if(isDefined(self.enemy) && distancesquared(self.enemy.origin, var_0.origin) < 65536) {
     return 0;
   }
 
@@ -187,8 +187,8 @@ func_7DCB() {
     return self.physics_querypoint;
   }
 
-  if(isDefined(self.target_getindexoftarget)) {
-    return self.target_getindexoftarget;
+  if(isDefined(self.node)) {
+    return self.node;
   }
 
   return undefined;
@@ -304,7 +304,7 @@ func_4710(var_0, var_1, var_2, var_3, var_4) {
     return 0;
   }
 
-  if(abs(self getspawnpoint_searchandrescue()) > 45 && isDefined(self.isnodeoccupied) && vectordot(anglesToForward(self.angles), vectornormalize(self.isnodeoccupied.origin - self.origin)) > 0.8) {
+  if(abs(self getspawnpoint_searchandrescue()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.8) {
     return 0;
   }
 
@@ -313,8 +313,8 @@ func_4710(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(scripts\engine\utility::absangleclamp180(var_4 - self.angles[1]) > 30) {
-    if(isDefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) < 65536) {
-      if(vectordot(anglesToForward(self.angles), self.isnodeoccupied.origin - self.origin) > 0) {
+    if(isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 65536) {
+      if(vectordot(anglesToForward(self.angles), self.enemy.origin - self.origin) > 0) {
         return 0;
       }
     }
@@ -364,14 +364,14 @@ func_10D80(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  var_0A = var_6.var_20F0;
-  if(var_0A <= 6 && var_9) {
+  var_10 = var_6.var_20F0;
+  if(var_10 <= 6 && var_9) {
     self endon("goal_changed");
     self.var_22F0 = level.var_4754[var_0];
     func_20F4(var_5, self.var_22F0);
-    var_0B = vectornormalize(var_1 - self.origin);
-    var_6 = func_3DEE(var_1, var_3, var_0, var_0B, var_7, var_8, var_9);
-    self.var_22F0 = length(scripts\anim\utility::func_B031("cover_trans_dist", var_0, var_0A));
+    var_11 = vectornormalize(var_1 - self.origin);
+    var_6 = func_3DEE(var_1, var_3, var_0, var_11, var_7, var_8, var_9);
+    self.var_22F0 = length(scripts\anim\utility::func_B031("cover_trans_dist", var_0, var_10));
     func_20F4(var_5, self.var_22F0);
     if(!self maymovetopoint(var_1)) {
       self.var_22F0 = undefined;
@@ -383,21 +383,21 @@ func_10D80(var_0, var_1, var_2, var_3, var_4) {
       return;
     }
 
-    var_0A = var_6.var_20F0;
-    var_0C = var_3 - scripts\anim\utility::func_B031("cover_trans_angles", var_0, var_0A);
+    var_10 = var_6.var_20F0;
+    var_12 = var_3 - scripts\anim\utility::func_B031("cover_trans_angles", var_0, var_10);
   } else {
     self give_smack_perk(self.var_4718);
     self waittill("runto_arrived");
-    var_0C = var_4 - scripts\anim\utility::func_B031("cover_trans_angles", var_1, var_0C);
-    if(!func_4710(var_1, var_3, var_0, var_0A, var_0C)) {
+    var_12 = var_4 - scripts\anim\utility::func_B031("cover_trans_angles", var_1, var_12);
+    if(!func_4710(var_1, var_3, var_0, var_10, var_12)) {
       return;
     }
   }
 
-  self.var_20F0 = var_0A;
+  self.var_20F0 = var_10;
   self.var_20F2 = var_0;
   self.var_22F0 = undefined;
-  self func_8396(self.var_4718, var_0C);
+  self func_8396(self.var_4718, var_12);
 }
 
 func_3DEE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -407,9 +407,9 @@ func_3DEE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = spawnStruct();
   var_9 = (0, 0, 0);
   var_8.var_20F0 = -1;
-  var_0A = 2;
-  for(var_0B = 1; var_0B <= var_0A; var_0B++) {
-    var_8.var_20F0 = var_7.var_12654[var_0B];
+  var_10 = 2;
+  for(var_11 = 1; var_11 <= var_10; var_11++) {
+    var_8.var_20F0 = var_7.var_12654[var_11];
     if(!func_3E00(var_0, var_1, var_2, var_8.var_20F0, var_6)) {
       continue;
     }
@@ -417,24 +417,24 @@ func_3DEE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     break;
   }
 
-  if(var_0B > var_0A) {
+  if(var_11 > var_10) {
     var_8.var_20F0 = -1;
     return var_8;
   }
 
-  var_0C = distancesquared(var_0, self.origin);
-  var_0D = distancesquared(var_0, self.var_4718);
-  if(var_0C < var_0D * 2 * 2) {
-    if(var_0C < var_0D) {
+  var_12 = distancesquared(var_0, self.origin);
+  var_13 = distancesquared(var_0, self.var_4718);
+  if(var_12 < var_13 * 2 * 2) {
+    if(var_12 < var_13) {
       var_8.var_20F0 = -1;
       return var_8;
     }
 
     if(!var_6) {
-      var_0E = vectornormalize(self.var_4718 - self.origin);
-      var_0F = var_1 - scripts\anim\utility::func_B031("cover_trans_angles", var_2, var_8.var_20F0);
-      var_10 = anglesToForward((0, var_0F, 0));
-      var_11 = vectordot(var_0E, var_10);
+      var_14 = vectornormalize(self.var_4718 - self.origin);
+      var_15 = var_1 - scripts\anim\utility::func_B031("cover_trans_angles", var_2, var_8.var_20F0);
+      var_10 = anglesToForward((0, var_15, 0));
+      var_11 = vectordot(var_14, var_10);
       if(var_11 < 0.707) {
         var_8.var_20F0 = -1;
         return var_8;
@@ -454,7 +454,7 @@ func_58E7() {
   for(;;) {
     func_58E6();
     for(;;) {
-      scripts\engine\utility::waittill_any_3("goal_changed", "goal_changed_previous_frame");
+      scripts\engine\utility::waittill_any("goal_changed", "goal_changed_previous_frame");
       if(isDefined(self.var_4718) && isDefined(self.vehicle_getspawnerarray) && distance2d(self.var_4718, self.vehicle_getspawnerarray) < 1) {
         continue;
       }
@@ -541,7 +541,7 @@ func_6A0F() {
 }
 
 func_6A6D(var_0) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -549,11 +549,11 @@ func_6A6D(var_0) {
     return 0;
   }
 
-  if(self.var_BC == "cover" && issentient(self.isnodeoccupied) && gettime() - self lastknowntime(self.isnodeoccupied) > 15000) {
+  if(self.var_BC == "cover" && issentient(self.enemy) && gettime() - self lastknowntime(self.enemy) > 15000) {
     return 0;
   }
 
-  return sighttracepassed(self.isnodeoccupied getshootatpos(), self.vehicle_getspawnerarray + (0, 0, 60), 0, undefined);
+  return sighttracepassed(self.enemy getshootatpos(), self.vehicle_getspawnerarray + (0, 0, 60), 0, undefined);
 }
 
 func_58E6() {
@@ -601,7 +601,7 @@ func_58E6() {
   if(isDefined(self.var_6A6C)) {
     var_5 = self.angles[1];
   } else if(func_6A6D(var_2)) {
-    var_5 = vectortoyaw(self.isnodeoccupied.origin - self.vehicle_getspawnerarray);
+    var_5 = vectortoyaw(self.enemy.origin - self.vehicle_getspawnerarray);
   } else {
     var_6 = isDefined(var_2) && var_3;
     var_6 = var_6 && var_2.type != "Path" && var_2.type != "Path 3D" && var_2.type != "Ambush" || !scripts\anim\utility_common::recentlysawenemy();
@@ -618,23 +618,23 @@ func_58E6() {
   var_8 = spawnStruct();
   scripts\anim\exit_node::func_371A(var_8, var_0, 1, var_5, var_4, 9, -1);
   var_9 = 1;
-  for(var_0A = 2; var_0A <= 9; var_0A++) {
-    if(var_8.transitions[var_0A] > var_8.transitions[var_9]) {
-      var_9 = var_0A;
+  for(var_10 = 2; var_10 <= 9; var_10++) {
+    if(var_8.transitions[var_10] > var_8.transitions[var_9]) {
+      var_9 = var_10;
     }
   }
 
   self.var_20F0 = var_8.var_12654[var_9];
   self.var_20F2 = var_0;
-  var_0B = scripts\anim\utility::func_B031("cover_trans", var_0, self.var_20F0);
-  var_0C = length(scripts\anim\utility::func_B031("cover_trans_dist", var_0, self.var_20F0));
-  var_0D = var_0C + 8;
-  var_0D = var_0D * var_0D;
-  while(isDefined(self.vehicle_getspawnerarray) && distancesquared(self.origin, self.vehicle_getspawnerarray) > var_0D) {
+  var_11 = scripts\anim\utility::func_B031("cover_trans", var_0, self.var_20F0);
+  var_12 = length(scripts\anim\utility::func_B031("cover_trans_dist", var_0, self.var_20F0));
+  var_13 = var_12 + 8;
+  var_13 = var_13 * var_13;
+  while(isDefined(self.vehicle_getspawnerarray) && distancesquared(self.origin, self.vehicle_getspawnerarray) > var_13) {
     wait(0.05);
   }
 
-  if(isDefined(self.var_22F0) && self.var_22F0 < var_0C + 8) {
+  if(isDefined(self.var_22F0) && self.var_22F0 < var_12 + 8) {
     return;
   }
 
@@ -642,20 +642,20 @@ func_58E6() {
     return;
   }
 
-  var_0E = distance(self.origin, self.vehicle_getspawnerarray);
-  if(abs(var_0E - var_0C) > 8) {
+  var_14 = distance(self.origin, self.vehicle_getspawnerarray);
+  if(abs(var_14 - var_12) > 8) {
     return;
   }
 
-  var_0F = vectortoyaw(self.vehicle_getspawnerarray - self.origin);
+  var_15 = vectortoyaw(self.vehicle_getspawnerarray - self.origin);
   if(isDefined(self.heat) && var_3) {
     var_10 = var_5 - scripts\anim\utility::func_B031("cover_trans_angles", var_0, self.var_20F0);
     var_11 = func_7DD9(self.vehicle_getspawnerarray, var_5, var_0, self.var_20F0);
-  } else if(var_0E > 0) {
+  } else if(var_14 > 0) {
     var_12 = scripts\anim\utility::func_B031("cover_trans_dist", var_2, self.var_20F0);
     var_13 = atan(var_12[1] / var_12[0]);
     if(!isDefined(self.var_6A6C) || self.livestreamingenable) {
-      var_10 = var_0F - var_13;
+      var_10 = var_15 - var_13;
       if(scripts\engine\utility::absangleclamp180(var_10 - self.angles[1]) > 30) {
         return;
       }
@@ -663,7 +663,7 @@ func_58E6() {
       var_10 = self.angles[1];
     }
 
-    var_14 = var_0E - var_0C;
+    var_14 = var_14 - var_12;
     var_11 = self.origin + vectornormalize(self.vehicle_getspawnerarray - self.origin) * var_14;
   } else {
     var_10 = self.angles[1];
@@ -718,7 +718,7 @@ func_5B8D(var_0, var_1, var_2, var_3) {
 func_5B6C(var_0) {
   self endon("killanimscript");
   for(;;) {
-    if(!isDefined(self.target_getindexoftarget)) {
+    if(!isDefined(self.node)) {
       break;
     }
 

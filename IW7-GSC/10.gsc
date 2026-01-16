@@ -213,8 +213,9 @@ func_7DC9(var_0, var_1, var_2) {
     } else if(var_5 > 0) {
       var_7 = var_3 / var_5;
     }
-  } else if(var_5 > 0)
+  } else if(var_5 > 0) {
     var_7 = var_3 / var_5;
+  }
 
   if(abs(var_6) > 0.001 && var_6 * var_4 >= 0) {
     var_8 = var_4 / var_6;

@@ -241,9 +241,9 @@ addstartspawnpoints(var_0, var_1) {
           continue;
         }
 
-        var_0A = vectornormalize(var_9.origin - var_6.origin);
-        var_0B = vectordot(var_7, var_0A);
-        if(var_0B > 0.86) {
+        var_10 = vectornormalize(var_9.origin - var_6.origin);
+        var_11 = vectordot(var_7, var_10);
+        if(var_11 > 0.86) {
           var_6.infront = 0;
           break;
         }
@@ -542,11 +542,11 @@ getactiveplayerlist() {
       continue;
     }
 
-    if(var_2 scripts\mp\killstreaks\_killstreaks::isusinggunship() && isDefined(var_2.chopper) && !isDefined(var_2.chopper.var_BCB4) || !var_2.chopper.var_BCB4) {
+    if(var_2 scripts\mp\killstreaks\killstreaks::isusinggunship() && isDefined(var_2.chopper) && !isDefined(var_2.chopper.var_BCB4) || !var_2.chopper.var_BCB4) {
       continue;
     }
 
-    if(var_2 scripts\mp\killstreaks\_killstreaks::func_9FC4()) {
+    if(var_2 scripts\mp\killstreaks\killstreaks::func_9FC4()) {
       continue;
     }
 
@@ -596,24 +596,24 @@ func_12F1F() {
     var_7.spawnviewpathnodes = undefined;
   }
 
-  foreach(var_0A in level.var_105EA) {
-    if(!isDefined(var_0A)) {
+  foreach(var_10 in level.var_105EA) {
+    if(!isDefined(var_10)) {
       continue;
     }
 
-    var_0A.var_108DF = getspawnteam(var_0A);
-    level.var_1091D[level.var_1091D.size] = var_0A;
-    var_0A.spawnviewpathnodes = undefined;
+    var_10.var_108DF = getspawnteam(var_10);
+    level.var_1091D[level.var_1091D.size] = var_10;
+    var_10.spawnviewpathnodes = undefined;
   }
 
-  foreach(var_0D in level.balldrones) {
-    if(!isDefined(var_0D)) {
+  foreach(var_13 in level.balldrones) {
+    if(!isDefined(var_13)) {
       continue;
     }
 
-    var_0D.var_108DF = getspawnteam(var_0D);
-    level.var_1091D[level.var_1091D.size] = var_0D;
-    var_0D.spawnviewpathnodes = undefined;
+    var_13.var_108DF = getspawnteam(var_13);
+    level.var_1091D[level.var_1091D.size] = var_13;
+    var_13.spawnviewpathnodes = undefined;
   }
 }
 
@@ -985,20 +985,20 @@ func_67D3(var_0, var_1) {
     }
 
     if(var_7 && isDefined(var_9.spawnviewpathnodes) && var_9.spawnviewpathnodes.size > 0) {
-      var_0A = _precomputedlosdatatest(var_9, var_0);
-      var_5 = var_0A[0];
-      var_6 = var_0A[1];
+      var_10 = _precomputedlosdatatest(var_9, var_0);
+      var_5 = var_10[0];
+      var_6 = var_10[1];
     }
 
     if(!isDefined(var_5)) {
-      var_0B = undefined;
+      var_11 = undefined;
       if(isplayer(var_9)) {
-        var_0B = var_9 getEye();
+        var_11 = var_9 getEye();
       } else {
-        var_0B = var_9.origin + (0, 0, 50);
+        var_11 = var_9.origin + (0, 0, 50);
       }
 
-      var_5 = func_54EC(var_0, var_9, var_0B);
+      var_5 = func_54EC(var_0, var_9, var_11);
       var_6 = var_5;
     }
 

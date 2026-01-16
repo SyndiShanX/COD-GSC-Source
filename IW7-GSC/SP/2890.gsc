@@ -99,7 +99,7 @@ func_F56D(var_0, var_1, var_2, var_3) {
   var_7 = strtok(tablelookup("sp\recommended_loadouts.csv", 0, var_0, 5), ", ");
   var_8 = tablelookup("sp\recommended_loadouts.csv", 0, var_0, 6);
   var_9 = tablelookup("sp\recommended_loadouts.csv", 0, var_0, 7);
-  var_0A = tablelookup("sp\recommended_loadouts.csv", 0, var_0, 8);
+  var_10 = tablelookup("sp\recommended_loadouts.csv", 0, var_0, 8);
   if(scripts\sp\utility::func_93A6() && !scripts\sp\specialist_MAYBE::func_2C91()) {
     var_6[1] = var_6[0];
     var_7[1] = var_7[0];
@@ -131,9 +131,9 @@ func_F56D(var_0, var_1, var_2, var_3) {
     var_5 = func_79B0(var_5);
   }
 
-  func_F467(var_2, var_4, var_5, var_7[0], var_6[0], var_7[1], var_6[1], var_8, var_9, var_0A);
-  var_0B = int(tablelookup("sp\recommended_loadouts.csv", 0, var_0, 9));
-  if(var_0B == 1) {
+  func_F467(var_2, var_4, var_5, var_7[0], var_6[0], var_7[1], var_6[1], var_8, var_9, var_10);
+  var_11 = int(tablelookup("sp\recommended_loadouts.csv", 0, var_0, 9));
+  if(var_11 == 1) {
     setomnvar("ui_loadouts_disabled", 1);
     return;
   }
@@ -265,17 +265,17 @@ func_82FA() {
   var_7 = level.player func_84C6("currentLoadout", "offhandEquipment", 0);
   var_8 = level.player func_84C6("currentLoadout", "equipment", 1);
   var_9 = level.player func_84C6("currentLoadout", "offhandEquipment", 1);
-  var_0A = func_31CD(var_2, var_3);
-  var_0B = func_31CD(var_4, var_5);
-  setlookatent(var_0A, var_0B, var_6, var_7, var_8, var_9);
-  var_0C = level.player func_84C6("currentLoadout", "weaponClipAmmo", 0);
-  var_0D = level.player func_84C6("currentLoadout", "weaponStockAmmo", 0);
-  var_0E = level.player func_84C6("currentLoadout", "weaponClipAmmo", 1);
-  var_0F = level.player func_84C6("currentLoadout", "weaponStockAmmo", 1);
-  level.player setweaponammostock(var_0A, var_0D);
-  level.player setweaponammostock(var_0B, var_0F);
-  level.player setweaponammoclip(var_0A, var_0C);
-  level.player setweaponammoclip(var_0B, var_0E);
+  var_10 = func_31CD(var_2, var_3);
+  var_11 = func_31CD(var_4, var_5);
+  setlookatent(var_10, var_11, var_6, var_7, var_8, var_9);
+  var_12 = level.player func_84C6("currentLoadout", "weaponClipAmmo", 0);
+  var_13 = level.player func_84C6("currentLoadout", "weaponStockAmmo", 0);
+  var_14 = level.player func_84C6("currentLoadout", "weaponClipAmmo", 1);
+  var_15 = level.player func_84C6("currentLoadout", "weaponStockAmmo", 1);
+  level.player setweaponammostock(var_10, var_13);
+  level.player setweaponammostock(var_11, var_15);
+  level.player setweaponammoclip(var_10, var_12);
+  level.player setweaponammoclip(var_11, var_14);
   var_10 = level.player func_84C6("currentLoadout", "offhandEquipmentAmmo", 0);
   var_11 = level.player func_84C6("currentLoadout", "equipmentAmmo", 0);
   var_12 = level.player func_84C6("currentLoadout", "offhandEquipmentAmmo", 1);
@@ -360,26 +360,26 @@ func_EB5B() {
     var_7 = level.player getweaponammoclip(var_4);
     var_8 = func_7D6A(var_4);
     var_9 = var_8[0];
-    var_0A[0] = var_8[1];
-    var_0A[1] = var_8[2];
-    var_0A[2] = var_8[3];
+    var_10[0] = var_8[1];
+    var_10[1] = var_8[2];
+    var_10[2] = var_8[3];
     if(!scripts\engine\utility::array_contains(lib_0A2F::func_DA17(), var_9)) {
       continue;
     }
 
     if(var_2 == var_9 || var_2 == "none") {
-      var_0B = 0;
+      var_11 = 0;
       var_2 = var_9;
       level.player func_84C7("currentLoadout", "heldWeapon", var_2);
     } else {
-      var_0B = 1;
+      var_11 = 1;
     }
 
-    level.player func_84C7("currentLoadout", "weaponSetups", var_0B, "weapon", var_9);
-    level.player func_84C7("currentLoadout", "weaponClipAmmo", var_0B, var_7);
-    level.player func_84C7("currentLoadout", "weaponStockAmmo", var_0B, var_6);
-    foreach(var_0E, var_0D in var_0A) {
-      level.player func_84C7("currentLoadout", "weaponSetups", var_0B, "attachment", var_0E, var_0A[var_0E]);
+    level.player func_84C7("currentLoadout", "weaponSetups", var_11, "weapon", var_9);
+    level.player func_84C7("currentLoadout", "weaponClipAmmo", var_11, var_7);
+    level.player func_84C7("currentLoadout", "weaponStockAmmo", var_11, var_6);
+    foreach(var_14, var_13 in var_10) {
+      level.player func_84C7("currentLoadout", "weaponSetups", var_11, "attachment", var_14, var_10[var_14]);
     }
   }
 
@@ -762,14 +762,14 @@ func_7D6A(var_0) {
     }
   }
 
-  foreach(var_0C in var_6) {
+  foreach(var_12 in var_6) {
     if(var_2 == "none") {
-      var_2 = var_0C;
+      var_2 = var_12;
       continue;
     }
 
     if(var_3 == "none") {
-      var_3 = var_0C;
+      var_3 = var_12;
     }
   }
 
@@ -781,36 +781,36 @@ func_F33B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 func_F467(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = func_10A4F(var_1);
-  var_1 = var_0A[0];
-  var_0B = var_0A[1];
-  var_0C = var_0A[2];
-  var_0D = var_0A[3];
-  var_0A = func_10A4F(var_2);
-  var_2 = var_0A[0];
-  var_0E = var_0A[1];
-  var_0F = var_0A[2];
-  var_10 = var_0A[3];
+  var_10 = func_10A4F(var_1);
+  var_1 = var_10[0];
+  var_11 = var_10[1];
+  var_12 = var_10[2];
+  var_13 = var_10[3];
+  var_10 = func_10A4F(var_2);
+  var_2 = var_10[0];
+  var_14 = var_10[1];
+  var_15 = var_10[2];
+  var_10 = var_10[3];
   if(isDefined(var_1) && var_1 != "") {
     level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "weapon", var_1);
   } else {
     level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "weapon", "none");
   }
 
-  if(isDefined(var_1) && var_1 != "" && isDefined(var_0B)) {
-    level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 0, var_0B);
+  if(isDefined(var_1) && var_1 != "" && isDefined(var_11)) {
+    level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 0, var_11);
   } else {
     level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 0, "none");
   }
 
-  if(isDefined(var_1) && var_1 != "" && isDefined(var_0C)) {
-    level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 1, var_0C);
+  if(isDefined(var_1) && var_1 != "" && isDefined(var_12)) {
+    level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 1, var_12);
   } else {
     level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 1, "none");
   }
 
-  if(isDefined(var_1) && var_1 != "" && isDefined(var_0D)) {
-    level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 2, var_0D);
+  if(isDefined(var_1) && var_1 != "" && isDefined(var_13)) {
+    level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 2, var_13);
   } else {
     level.player func_84C7("loadouts", var_0, "weaponSetups", 0, "attachment", 2, "none");
   }
@@ -821,14 +821,14 @@ func_F467(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
     level.player func_84C7("loadouts", var_0, "weaponSetups", 1, "weapon", "none");
   }
 
-  if(isDefined(var_2) && var_2 != "" && isDefined(var_0E)) {
-    level.player func_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 0, var_0E);
+  if(isDefined(var_2) && var_2 != "" && isDefined(var_14)) {
+    level.player func_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 0, var_14);
   } else {
     level.player func_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 0, "none");
   }
 
-  if(isDefined(var_2) && var_2 != "" && isDefined(var_0F)) {
-    level.player func_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 1, var_0F);
+  if(isDefined(var_2) && var_2 != "" && isDefined(var_15)) {
+    level.player func_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 1, var_15);
   } else {
     level.player func_84C7("loadouts", var_0, "weaponSetups", 1, "attachment", 1, "none");
   }

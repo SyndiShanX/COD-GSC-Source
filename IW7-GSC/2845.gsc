@@ -323,8 +323,9 @@ func_734D(var_0, var_1, var_2, var_3) {
     } else if(var_1[var_7].ent.health < var_1[var_7].health) {
       var_5[var_5.size] = var_1[var_7];
       continue;
-    } else
+    } else {
       continue;
+    }
   }
 
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", 0.2);
@@ -352,8 +353,9 @@ func_734D(var_0, var_1, var_2, var_3) {
           setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 2);
           var_15 linkto(var_11[var_7].ent, func_129D(var_11[var_7].ent), (0, 0, 0), (0, 0, 0));
         }
-      } else
+      } else {
         setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 3);
+      }
 
       continue;
     }

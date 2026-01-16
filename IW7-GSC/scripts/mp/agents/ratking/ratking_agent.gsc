@@ -144,9 +144,9 @@ setupagent() {
   self.meleeattackchance["staff_stomp"] = 30;
   self.var_504E = 55;
   self.var_129AF = 55;
-  self.var_368 = -60;
-  self.isbot = 60;
-  self.objective_team = "slasher_grenade_zm";
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
+  self.grenadeweapon = "slasher_grenade_zm";
   self.objective_state = 999;
   self.ground_pound_damage = 50;
   self.footstepdetectdist = 2500;
@@ -188,17 +188,17 @@ isinravemode() {
   return 0;
 }
 
-onratkingdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+onratkingdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   accumulatedamage(var_2, var_7);
-  ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0B, var_0C);
+  ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_11, var_12);
 }
 
-ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  var_0D = self.health;
+ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  var_13 = self.health;
   if(isDefined(var_7)) {
-    var_0E = vectortoyaw(var_7);
-    var_0F = self.angles[1];
-    self.var_E3 = angleclamp180(var_0E - var_0F);
+    var_14 = vectortoyaw(var_7);
+    var_15 = self.angles[1];
+    self.var_E3 = angleclamp180(var_14 - var_15);
   } else {
     self.var_E3 = 0;
   }
@@ -220,8 +220,8 @@ ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     self notify("fake_death");
   }
 
-  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0B, var_0C, 0, 1);
-  if(self.health > 0 && self.health < var_0D) {
+  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_11, var_12, 0, 1);
+  if(self.health > 0 && self.health < var_13) {
     self notify("pain");
   }
 
@@ -230,7 +230,7 @@ ratking_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     if(isDefined(var_10)) {
       [
         [var_10]
-      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     }
   }
 }

@@ -113,7 +113,7 @@ func_124AF(var_0, var_1, var_2, var_3) {
 }
 
 func_124B7(var_0, var_1, var_2, var_3) {
-  return isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Right";
+  return isDefined(self.node) && self.node.type == "Cover Right";
 }
 
 func_12045(var_0, var_1, var_2, var_3) {

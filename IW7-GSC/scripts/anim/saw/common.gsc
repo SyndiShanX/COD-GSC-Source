@@ -36,7 +36,7 @@ main(var_0) {
 
   var_5 = gettime();
   var_6 = "start";
-  scripts\anim\shared::placeweaponon(self.var_394, "none");
+  scripts\anim\shared::placeweaponon(self.weapon, "none");
   var_0 show();
   if(isDefined(var_0.var_1A56)) {
     self.a.var_D707 = ::func_D707;
@@ -83,8 +83,8 @@ func_6D63(var_0) {
   self endon("killanimscript");
   var_1 = cos(15);
   for(;;) {
-    while(isDefined(self.isnodeoccupied)) {
-      var_2 = self.isnodeoccupied.origin;
+    while(isDefined(self.enemy)) {
+      var_2 = self.enemy.origin;
       var_3 = var_0 gettagangles("tag_aim");
       if(scripts\engine\utility::within_fov(var_0.origin, var_3, var_2, var_1) || distancesquared(var_0.origin, var_2) < -25536) {
         if(!var_0.var_5855) {
@@ -122,8 +122,8 @@ func_12A99(var_0, var_1) {
 func_1109E() {
   self endon("killanimscript");
   for(;;) {
-    if(!isDefined(self.target_getindexoftarget) || distancesquared(self.origin, self.target_getindexoftarget.origin) > 4096) {
-      self func_83AF();
+    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096) {
+      self stopuseturret();
     }
 
     wait(0.25);
@@ -132,33 +132,33 @@ func_1109E() {
 
 func_D707(var_0) {
   if(var_0 == "pain") {
-    if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 4096) {
+    if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096) {
       self.a.usingworldspacehitmarkers hide();
-      scripts\anim\shared::placeweaponon(self.var_394, "right");
+      scripts\anim\shared::placeweaponon(self.weapon, "right");
       self.a.var_D707 = ::func_D705;
       return;
     } else {
-      self func_83AF();
+      self stopuseturret();
     }
   }
 
   if(var_0 == "saw") {
-    var_1 = self func_8164();
+    var_1 = self getturret();
     return;
   }
 
   self.a.usingworldspacehitmarkers delete();
   self.a.usingworldspacehitmarkers = undefined;
-  scripts\anim\shared::placeweaponon(self.var_394, "right");
+  scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
 func_D705(var_0) {
-  if(!isDefined(self.target_getindexoftarget) || distancesquared(self.origin, self.target_getindexoftarget.origin) > 4096) {
-    self func_83AF();
+  if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 4096) {
+    self stopuseturret();
     self.a.usingworldspacehitmarkers delete();
     self.a.usingworldspacehitmarkers = undefined;
-    if(isDefined(self.var_394) && self.var_394 != "none") {
-      scripts\anim\shared::placeweaponon(self.var_394, "right");
+    if(isDefined(self.weapon) && self.weapon != "none") {
+      scripts\anim\shared::placeweaponon(self.weapon, "right");
       return;
     }
 
@@ -171,7 +171,7 @@ func_D705(var_0) {
 }
 
 func_D860(var_0) {
-  scripts\anim\shared::placeweaponon(self.var_394, "right");
+  scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
 func_5AAA(var_0) {}

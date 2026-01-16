@@ -291,16 +291,16 @@ logevent_playerdeath(var_0, var_1, var_2) {
     var_7 = 0;
     var_8 = 0;
     var_9 = 0;
-    var_0A = 0;
-    var_0B = "s";
-    var_0C = 0;
+    var_10 = 0;
+    var_11 = "s";
+    var_12 = 0;
     if(isDefined(var_0) && isplayer(var_0)) {
       var_4 = var_0.analyticslog.playerid;
       if(isDefined(var_0.team)) {
         if(var_0.team == "axis") {
-          var_0B = "a";
+          var_11 = "a";
         } else {
-          var_0B = "l";
+          var_11 = "l";
         }
       }
 
@@ -311,30 +311,30 @@ logevent_playerdeath(var_0, var_1, var_2) {
       }
 
       if(isDefined(var_0.lifeid)) {
-        var_0C = var_0.lifeid;
+        var_12 = var_0.lifeid;
       }
 
-      var_0D = anglesToForward(var_0 getplayerangles());
-      if(isDefined(var_0D)) {
-        var_8 = var_0D[0];
-        var_9 = var_0D[1];
-        var_0A = var_0D[2];
+      var_13 = anglesToForward(var_0 getplayerangles());
+      if(isDefined(var_13)) {
+        var_8 = var_13[0];
+        var_9 = var_13[1];
+        var_10 = var_13[2];
       }
     }
 
-    var_0E = level.analyticslog.nextdeathid;
+    var_14 = level.analyticslog.nextdeathid;
     level.analyticslog.nextdeathid++;
     var_2 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, "None");
-    var_0F = "s";
+    var_15 = "s";
     if(self.team == "axis") {
-      var_0F = "a";
+      var_15 = "a";
     } else {
-      var_0F = "l";
+      var_15 = "l";
     }
 
     bbprint("gamemp_death", "@"
       playerid % i x % f y % f z % f gun_orientx % f gun_orienty % f gun_orientz % f weapon % s mean_of_death % s attackerid % i action % i server_death_id % i victim_life_index % d attacker_life_index % d victim_team % s attacker_team % s attacker_pos_x % f attacker_pos_y % f attacker_pos_z % f attacker_gun_orientx % f attacker_gun_orienty % f attacker_gun_orientz % f victim_weapon % s ",self.analyticslog.playerid,self.origin[0],self.origin[1],self.origin[2],var_3[0],var_3[1],var_3[2],var_2,scripts\engine\utility::ter_op(isDefined(var_1),var_1,"
-      None "),var_4,buildkilldeathactionvalue(),var_0E,self.lifeid,var_0C,var_0F,var_0B,var_5,var_6,var_7,var_8,var_9,var_0A,self.primaryweapon);
+      None "),var_4,buildkilldeathactionvalue(),var_14,self.lifeid,var_12,var_15,var_11,var_5,var_6,var_7,var_8,var_9,var_10,self.primaryweapon);
       if(isDefined(var_1) && isexplosivedamagemod(var_1)) {
         logevent_explosion(scripts\engine\utility::ter_op(isDefined(var_2), var_2, "generic"), self.origin, var_0, 1);
       }
@@ -342,7 +342,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
       if(isDefined(self.attackers)) {
         foreach(var_11 in self.attackers) {
           if(isDefined(var_11) && isplayer(var_11) && var_11 != var_0) {
-            logevent_assist(var_11.analyticslog.playerid, var_0E, var_2);
+            logevent_assist(var_11.analyticslog.playerid, var_14, var_2);
           }
         }
       }
@@ -430,7 +430,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
       }
 
       var_0 = anglesToForward(self.angles);
-      bbprint("gamemp_scoreboard", "ownerid %i score %i", self.analyticslog.playerid, self.destroynavrepulsor);
+      bbprint("gamemp_scoreboard", "ownerid %i score %i", self.analyticslog.playerid, self.score);
     }
 
     logevent_minimapcorners() {
@@ -694,20 +694,20 @@ logevent_playerdeath(var_0, var_1, var_2) {
             var_9 = var_4.teamdiffyaw;
           }
 
-          var_0A = var_4.isactive[var_1];
-          var_0B = 0;
+          var_10 = var_4.isactive[var_1];
+          var_11 = 0;
           if(isDefined(var_4.disabledreason) && isDefined(var_4.disabledreason[var_1])) {
-            var_0B = var_4.disabledreason[var_1];
+            var_11 = var_4.disabledreason[var_1];
           }
 
-          var_0C = level.spawnglobals.logicvariantid;
-          var_0D = 0;
+          var_12 = level.spawnglobals.logicvariantid;
+          var_13 = 0;
           if(isDefined(level.spawnglobals.buddyspawnid)) {
-            var_0D = level.spawnglobals.buddyspawnid;
+            var_13 = level.spawnglobals.buddyspawnid;
             level.spawnglobals.buddyspawnid = 0;
           }
 
-          bbreportspawntypes(var_6, var_7, var_8, var_9, var_3, var_0A, var_0B, var_2, var_0C, var_0D);
+          bbreportspawntypes(var_6, var_7, var_8, var_9, var_3, var_10, var_11, var_2, var_12, var_13);
         }
 
         analyticssend_spawnplayerdetails(var_0, var_1, var_2) {
@@ -718,29 +718,29 @@ logevent_playerdeath(var_0, var_1, var_2) {
               var_7 = var_4.origin[0];
               var_8 = var_4.origin[1];
               var_9 = var_4.origin[2];
-              var_0A = 0;
+              var_10 = 0;
               if(var_4 == var_0) {
-                var_0A = 1;
+                var_10 = 1;
               }
 
-              var_0B = 0;
+              var_11 = 0;
               if(isDefined(var_0.sethalfresparticles) && var_0.sethalfresparticles == var_4) {
-                var_0B = 1;
+                var_11 = 1;
               }
 
-              var_0C = 0;
+              var_12 = 0;
               if(var_4.team == "axis") {
-                var_0C = 1;
+                var_12 = 1;
               } else if(var_4.team == "allies") {
-                var_0C = 2;
+                var_12 = 2;
               }
 
-              var_0D = 0;
+              var_13 = 0;
               if(isDefined(var_4.analyticslog.playerid)) {
-                var_0D = var_4.analyticslog.playerid;
+                var_13 = var_4.analyticslog.playerid;
               }
 
-              bbreportspawnplayerdetails(var_2, var_6, var_7, var_8, var_9, var_0D, var_0C, var_0A, var_0B);
+              bbreportspawnplayerdetails(var_2, var_6, var_7, var_8, var_9, var_13, var_12, var_10, var_11);
             }
           }
         }
@@ -751,24 +751,24 @@ logevent_playerdeath(var_0, var_1, var_2) {
             var_7 = var_5.analytics.allyaveragedist;
             var_8 = var_5.analytics.enemyaveragedist;
             var_9 = var_5.analytics.timesincelastspawn;
-            var_0A = 0;
+            var_10 = 0;
             if(isDefined(var_0.lastspawnpoint) && var_0.lastspawnpoint == var_5) {
-              var_0A = 1;
+              var_10 = 1;
             }
 
-            var_0B = 0;
+            var_11 = 0;
             if(var_3 == var_5) {
-              var_0B = 1;
+              var_11 = 1;
             }
 
-            var_0C = var_5.analytics.maxenemysightfraction;
-            var_0D = var_5.analytics.randomscore;
-            var_0E = var_5.analytics.spawnusedbyenemies;
-            var_0F = 0;
+            var_12 = var_5.analytics.maxenemysightfraction;
+            var_13 = var_5.analytics.randomscore;
+            var_14 = var_5.analytics.spawnusedbyenemies;
+            var_15 = 0;
             if(var_5.lastspawnteam == "axis") {
-              var_0F = 1;
+              var_15 = 1;
             } else if(var_5.lastspawnteam == "allies") {
-              var_0F = 2;
+              var_15 = 2;
             }
 
             var_10 = var_5.lastspawntime;
@@ -788,7 +788,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
               var_14 = var_5.badspawnreason;
             }
 
-            bbreportspawnfactors(2, var_6, var_0C, var_11, var_0D, var_2, var_7, var_8, var_0B, var_0A, var_0F, var_12, var_0E, var_9, var_13, var_14);
+            bbreportspawnfactors(2, var_6, var_12, var_11, var_13, var_2, var_7, var_8, var_11, var_10, var_15, var_12, var_14, var_9, var_13, var_14);
           }
         }
 

@@ -91,7 +91,7 @@ func_2B2B(var_0) {
           self.var_AA25 dodamage(1000, self.var_AA25.origin, self, self, "MOD_IMPACT", "power_blackhat_mp");
           self notify("blackhat_fired");
           func_2B2E();
-          scripts\mp\killstreaks\_killstreaks::givescoreforblackhat();
+          scripts\mp\killstreaks\killstreaks::givescoreforblackhat();
         }
       }
 
@@ -155,7 +155,7 @@ func_2B28(var_0) {
   if(level.teambased) {
     if(isDefined(level.mines)) {
       foreach(var_4 in level.mines) {
-        if(isDefined(var_4) && var_4.team != self.team || isDefined(var_4.triggerportableradarping) && var_4.triggerportableradarping != self) {
+        if(isDefined(var_4) && var_4.team != self.team || isDefined(var_4.owner) && var_4.owner != self) {
           self.var_AA26 = 1;
           var_1[var_1.size] = var_4;
         }
@@ -164,35 +164,35 @@ func_2B28(var_0) {
 
     if(isDefined(level.turrets)) {
       foreach(var_7 in level.turrets) {
-        if(isDefined(var_7) && var_7.team != self.team || isDefined(var_7.triggerportableradarping) && var_7.triggerportableradarping != self) {
+        if(isDefined(var_7) && var_7.team != self.team || isDefined(var_7.owner) && var_7.owner != self) {
           var_1[var_1.size] = var_7;
         }
       }
     }
 
     if(isDefined(level.uavmodels)) {
-      foreach(var_0A in level.uavmodels[var_2]) {
-        if(isDefined(var_0A) && var_0A.team != self.team || isDefined(var_0A.triggerportableradarping) && var_0A.triggerportableradarping != self) {
-          var_1[var_1.size] = var_0A;
+      foreach(var_10 in level.uavmodels[var_2]) {
+        if(isDefined(var_10) && var_10.team != self.team || isDefined(var_10.owner) && var_10.owner != self) {
+          var_1[var_1.size] = var_10;
         }
       }
     }
 
-    if(isDefined(level.chopper) && level.chopper.team != self.team || isDefined(level.chopper.triggerportableradarping) && level.chopper.triggerportableradarping != self) {
+    if(isDefined(level.chopper) && level.chopper.team != self.team || isDefined(level.chopper.owner) && level.chopper.owner != self) {
       var_1[var_1.size] = level.chopper;
     }
 
     if(isDefined(level.littlebirds)) {
-      foreach(var_0D in level.littlebirds) {
-        if(isDefined(var_0D) && var_0D.team != self.team || isDefined(var_0D.triggerportableradarping) && var_0D.triggerportableradarping != self) {
-          var_1[var_1.size] = var_0D;
+      foreach(var_13 in level.littlebirds) {
+        if(isDefined(var_13) && var_13.team != self.team || isDefined(var_13.owner) && var_13.owner != self) {
+          var_1[var_1.size] = var_13;
         }
       }
     }
 
     if(isDefined(level.balldrones)) {
       foreach(var_10 in level.balldrones) {
-        if(isDefined(var_10) && var_10.team != self.team || isDefined(var_10.triggerportableradarping) && var_10.triggerportableradarping != self) {
+        if(isDefined(var_10) && var_10.team != self.team || isDefined(var_10.owner) && var_10.owner != self) {
           var_1[var_1.size] = var_10;
         }
       }
@@ -200,7 +200,7 @@ func_2B28(var_0) {
 
     if(isDefined(level.var_8B5F)) {
       foreach(var_13 in level.var_8B5F) {
-        if(isDefined(var_13) && var_13.team != self.team || isDefined(var_13.triggerportableradarping) && var_13.triggerportableradarping != self) {
+        if(isDefined(var_13) && var_13.team != self.team || isDefined(var_13.owner) && var_13.owner != self) {
           var_1[var_1.size] = var_13;
         }
       }
@@ -208,7 +208,7 @@ func_2B28(var_0) {
 
     if(isDefined(var_0) && var_0 == 1) {
       foreach(var_16 in level.characters) {
-        if(isDefined(var_16) && isalive(var_16) && var_16.team != self.team || isDefined(var_16.triggerportableradarping) && var_16.triggerportableradarping != self) {
+        if(isDefined(var_16) && isalive(var_16) && var_16.team != self.team || isDefined(var_16.owner) && var_16.owner != self) {
           var_1[var_1.size] = var_16;
         }
       }
@@ -225,12 +225,12 @@ func_2B28(var_0) {
     }
 
     if(isDefined(level.uavmodels)) {
-      foreach(var_0A in level.uavmodels) {
-        if(!isDefined(var_0A)) {
+      foreach(var_10 in level.uavmodels) {
+        if(!isDefined(var_10)) {
           continue;
         }
 
-        var_1[var_1.size] = var_0A;
+        var_1[var_1.size] = var_10;
       }
     }
 
@@ -239,12 +239,12 @@ func_2B28(var_0) {
     }
 
     if(isDefined(level.littlebirds)) {
-      foreach(var_0D in level.littlebirds) {
-        if(!isDefined(var_0D)) {
+      foreach(var_13 in level.littlebirds) {
+        if(!isDefined(var_13)) {
           continue;
         }
 
-        var_1[var_1.size] = var_0D;
+        var_1[var_1.size] = var_13;
       }
     }
 

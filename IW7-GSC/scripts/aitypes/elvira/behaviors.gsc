@@ -45,8 +45,9 @@ aimattarget() {
     if(!self canshoot(var_0)) {
       var_0 = scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos();
     }
-  } else
+  } else {
     var_0 = scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos();
+  }
 
   self.lookposition = var_0;
 }
@@ -74,8 +75,9 @@ shootattarget() {
 
     var_1.objective = "normal";
     self.bt.m_bfiring = 1;
-  } else
+  } else {
     self.bt.m_bfiring = 0;
+  }
 
   if(!isDefined(var_1.pos) && !isDefined(var_1.ent)) {
     return 0;
@@ -154,8 +156,9 @@ updateeveryframe(var_0) {
       if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
       }
-    } else
+    } else {
       self.enemyreacquiredtime = undefined;
+    }
   } else {
     self.lastenemysighttime = 0;
     self.lastenemysightpos = undefined;
@@ -333,8 +336,9 @@ reviveplayer_end(var_0, var_1) {
     } else {
       self.nextrevivetime = gettime() + var_3.min_time_between_revivals;
     }
-  } else
+  } else {
     self.nextrevivetime = gettime() + var_3.min_time_between_revivals;
+  }
 
   self.reviveplayer = undefined;
   scripts\aitypes\dlc3\bt_state_api::btstate_endstates(var_0);
@@ -590,8 +594,9 @@ acquire_tick(var_0) {
     }
 
     var_2 = self canshoot(scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos());
-  } else
+  } else {
     var_2 = 0;
+  }
 
   var_5 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
   var_6 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
@@ -605,8 +610,9 @@ acquire_tick(var_0) {
         aimattarget();
         shootattarget();
       }
-    } else
+    } else {
       var_5.targetacquiredtime = gettime();
+    }
   } else {
     stopshootingattarget();
     var_5.targetacquiredtime = undefined;
@@ -929,8 +935,9 @@ elvirarevealdialogue() {
           break;
       }
     }
-  } else
+  } else {
     scripts\cp\cp_vo::try_to_play_vo_on_all_players("pap_quest_success", 0);
+  }
 
   foreach(var_2 in level.players) {
     var_2 thread scripts\cp\cp_vo::add_to_nag_vo("nag_find_pap", "town_comment_vo", 120, 120, 4, 1);
@@ -1083,8 +1090,9 @@ trycastspell(var_0) {
   if(!isDefined(self.next_spellcast_time)) {
     self.next_spellcast_time = gettime() + var_2.init_spellcast_delay;
     return 0;
-  } else if(gettime() < self.next_spellcast_time)
+  } else if(gettime() < self.next_spellcast_time) {
     return 0;
+  }
 
   if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < var_2.max_dist_for_spell_cast_sq) {
     var_4 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
@@ -1135,8 +1143,9 @@ trymeleeattacks(var_0, var_1) {
     if(var_1 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       return 0;
     }
-  } else if(var_1 > self.meleeradiusbasesq)
+  } else if(var_1 > self.meleeradiusbasesq) {
     return 0;
+  }
 
   scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "melee_attack");
   return 1;

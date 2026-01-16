@@ -692,7 +692,7 @@ listen_for_leg_damage() {
   var_0 setCanDamage(1);
   var_1 = 0;
   while(!var_1) {
-    var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     if(isDefined(var_6) && is_explosive(var_6, var_8)) {
       var_1 = 1;
       break;
@@ -879,7 +879,7 @@ hide_on_damage() {
   var_0 = getent("car_mirror_ground", "targetname");
   var_0 hide();
   for(;;) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(isDefined(var_2) && isplayer(var_2) && var_5 == "MOD_MELEE" && var_2.currentmeleeweapon == "iw7_knife_zm_crowbar") {
       self hide();
       level.car_mirror_hit = 1;
@@ -901,7 +901,7 @@ break_mirror_in_bathroom() {
   var_1 = getent("bathroom_mirror_piece", "targetname");
   var_1 hide();
   for(;;) {
-    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     if(isDefined(var_3) && isplayer(var_3) && var_6 == "MOD_MELEE" && var_3.currentmeleeweapon == "iw7_knife_zm_crowbar") {
       playFX(level._effect["mirror_break"], (-1060.77, 3661.85, 463.01), (0, 0, -30));
       playsoundatpos((-1060, 3661, 463), "mpq_mirror_shatter");
@@ -909,8 +909,8 @@ break_mirror_in_bathroom() {
       level.bathroom_mirror_hit = 1;
       var_0 = getent("bathroom_mirror_broken", "targetname");
       var_0 show();
-      var_0C = getent("bathroom_mirror_piece", "targetname");
-      var_0C show();
+      var_12 = getent("bathroom_mirror_piece", "targetname");
+      var_12 show();
       break;
     }
   }
@@ -1065,9 +1065,9 @@ ray_gun_activation_func(var_0, var_1) {
       level.knife_throw_target_body show();
       level scripts\cp\utility::set_completed_quest_mark(5);
       level.body_made = 1;
-      var_0A = scripts\engine\utility::random(level.players);
-      if(isDefined(var_0A.vo_prefix)) {
-        switch (var_0A.vo_prefix) {
+      var_10 = scripts\engine\utility::random(level.players);
+      if(isDefined(var_10.vo_prefix)) {
+        switch (var_10.vo_prefix) {
           case "p1_":
             level thread scripts\cp\cp_vo::try_to_play_vo("sally_life_ray_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
             break;
@@ -1108,11 +1108,11 @@ ray_gun_activation_func(var_0, var_1) {
   }
 
   if(!isDefined(level.key_spawned)) {
-    var_0B = 1;
-    if(var_0B) {
+    var_11 = 1;
+    if(var_11) {
       level.key_spawned = 1;
       var_4 = scripts\engine\utility::getstruct("mirror_laser_start", "targetname");
-      playsoundatpos(var_0B.origin, "cp_town_life_death_ray");
+      playsoundatpos(var_11.origin, "cp_town_life_death_ray");
       wait(1);
       wait(1);
       wait(1);
@@ -1120,9 +1120,9 @@ ray_gun_activation_func(var_0, var_1) {
       level thread ray_fail_vo(var_6);
       level.knife_throw_target_body hide();
       spawn_garage_key(level.knife_throw_target_body.origin);
-      var_0A = scripts\engine\utility::random(level.players);
-      if(isDefined(var_0A.vo_prefix)) {
-        switch (var_0A.vo_prefix) {
+      var_10 = scripts\engine\utility::random(level.players);
+      if(isDefined(var_10.vo_prefix)) {
+        switch (var_10.vo_prefix) {
           case "p1_":
             level thread scripts\cp\cp_vo::try_to_play_vo("sally_death_ray_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
             break;
@@ -1616,7 +1616,7 @@ listen_for_turnstile_damage() {
   if(isDefined(var_0)) {
     var_0 setCanDamage(1);
     for(;;) {
-      var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+      var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
       if(isDefined(var_2) && isplayer(var_2)) {
         playFX(level._effect["turnstile_teleport"], var_0.origin);
         var_0 hide();
@@ -1655,15 +1655,15 @@ phase3_watch_gauge_trigs() {
         self.gauge thread phase3_gauge_movement_logic();
         continue;
       } else {
-        var_0A = self.gauge.angles;
+        var_10 = self.gauge.angles;
         self.gauge notify("damaged");
         wait(0.1);
-        self.gauge.angles = var_0A;
-        self.gauge.current_value = var_0A;
+        self.gauge.angles = var_10;
+        self.gauge.current_value = var_10;
         self.gauge.current_reading = phase3_get_gauge_reading(self.gauge);
         self.gauge.stuck = 1;
-        var_0B = phase3_check_for_combo_complete();
-        if(var_0B) {
+        var_11 = phase3_check_for_combo_complete();
+        if(var_11) {
           scripts\engine\utility::flag_set("launchcode_step1");
           return;
         }

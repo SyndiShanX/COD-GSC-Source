@@ -19,7 +19,7 @@ power_on_buffer() {
     }
 
     if(isDefined(var_1)) {
-      level scripts\engine\utility::waittill_any_3("power_on", var_1 + " power_on");
+      level scripts\engine\utility::waittill_any("power_on", var_1 + " power_on");
     }
   }
 
@@ -53,21 +53,21 @@ use_buffer_trap(var_0, var_1) {
   }
 
   var_0.offset_up = distance2d(var_2.origin, var_0.origin);
-  var_0A = var_2.origin;
-  var_0B = 0;
-  while(var_0B < 2) {
+  var_10 = var_2.origin;
+  var_11 = 0;
+  while(var_11 < 2) {
     var_2 moveto(var_2.origin + (0, 0, 5), 0.1);
     foreach(var_1 in level.players) {
-      var_0D = var_1.origin[2] - var_2.origin[2];
-      if(distance(var_2.origin, var_1.origin) < 72 && var_1.origin[2] > var_2.origin[2] && var_0D < 72) {
+      var_13 = var_1.origin[2] - var_2.origin[2];
+      if(distance(var_2.origin, var_1.origin) < 72 && var_1.origin[2] > var_2.origin[2] && var_13 < 72) {
         var_1 setvelocity((randomintrange(220, 250), randomintrange(220, 250), 0));
       }
     }
 
     wait(0.1);
-    var_2 moveto(var_0A, 0.1);
+    var_2 moveto(var_10, 0.1);
     wait(0.2);
-    var_0B = var_0B + 0.3;
+    var_11 = var_11 + 0.3;
   }
 
   foreach(var_8 in var_2.var_127C9) {
@@ -119,22 +119,22 @@ buffer_move() {
       break;
     }
 
-    var_0A = undefined;
+    var_10 = undefined;
     if(!isDefined(self.last_spot)) {
-      var_0B = var_3[var_9];
-      var_0A = sqrt(var_4[var_9]) / 180;
-      self moveto(var_0B.origin, var_0A, 1, 0);
+      var_11 = var_3[var_9];
+      var_10 = sqrt(var_4[var_9]) / 180;
+      self moveto(var_11.origin, var_10, 1, 0);
     } else {
-      var_0B = var_3[var_9];
-      var_0A = sqrt(var_4[var_9]) / 180;
+      var_11 = var_3[var_9];
+      var_10 = sqrt(var_4[var_9]) / 180;
       self playsoundonmovingent("trap_buffer_bump_edge");
-      self moveto(var_0B.origin, var_0A, 0, 0);
-      self rotateyaw(randomintrange(500, 1080) * var_0, var_0A, randomfloatrange(0, var_0A * 0.5), 0);
+      self moveto(var_11.origin, var_10, 0, 0);
+      self rotateyaw(randomintrange(500, 1080) * var_0, var_10, randomfloatrange(0, var_10 * 0.5), 0);
       var_0 = var_0 * -1;
     }
 
-    wait(var_0A);
-    self.last_spot = var_0B;
+    wait(var_10);
+    self.last_spot = var_11;
   }
 }
 
@@ -410,7 +410,7 @@ rockmode(var_0, var_1) {
   self.desired_dance_angles = (0, var_2.angles[1], 0);
   self.precacheleaderboards = 1;
   self ghostskulls_complete_status(var_2.origin);
-  scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+  scripts\engine\utility::waittill_any("goal", "goal_reached");
   self notify("rockmode");
   self.do_immediate_ragdoll = 1;
   self.is_dancing = 1;
@@ -442,14 +442,14 @@ moshdeath(var_0, var_1) {
 
 get_rock_spot(var_0) {
   if(isDefined(self.rockspot)) {
-    self.rockspot.triggerportableradarping = undefined;
+    self.rockspot.owner = undefined;
     self.rockspot = undefined;
   }
 
   var_1 = sortbydistance(level.punk_rockspots, var_0.origin);
   foreach(var_3 in var_1) {
-    if(!isDefined(var_3.triggerportableradarping)) {
-      var_3.triggerportableradarping = self;
+    if(!isDefined(var_3.owner)) {
+      var_3.owner = self;
       self.rockspot = var_3;
       return var_3;
     }
@@ -500,7 +500,7 @@ release_zombie_on_trap_done(var_0) {
   self.is_rocking = undefined;
   self.do_immediate_ragdoll = 0;
   if(isDefined(self.rockspot)) {
-    self.rockspot.triggerportableradarping = undefined;
+    self.rockspot.owner = undefined;
   }
 
   self.rockspot = undefined;
@@ -509,6 +509,6 @@ release_zombie_on_trap_done(var_0) {
 release_rockspot_on_death() {
   self waittill("death");
   if(isDefined(self.rockspot)) {
-    self.rockspot.triggerportableradarping = undefined;
+    self.rockspot.owner = undefined;
   }
 }

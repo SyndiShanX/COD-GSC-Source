@@ -560,10 +560,10 @@ alien_fire_off() {
 
 update_damage_score(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!isDefined(level.var_24B8) || var_1 != level.var_24B8) {
-    if(isDefined(var_1) && isDefined(var_1.triggerportableradarping)) {
-      scripts\cp\cp_agent_utils::store_attacker_info(var_1.triggerportableradarping, var_2 * 0.75);
+    if(isDefined(var_1) && isDefined(var_1.owner)) {
+      scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_2 * 0.75);
     } else if(isDefined(var_1) && isDefined(var_1.pet) && var_1.pet == 1) {
-      scripts\cp\cp_agent_utils::store_attacker_info(var_1.triggerportableradarping, var_2);
+      scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_2);
     } else {
       scripts\cp\cp_agent_utils::store_attacker_info(var_1, var_2);
     }
@@ -665,12 +665,12 @@ handleapdamage(var_0, var_1, var_2, var_3) {
 onkillstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = 0;
   var_8 = undefined;
-  if(isDefined(var_0) && isDefined(self.triggerportableradarping)) {
-    if(isDefined(var_0.triggerportableradarping) && isplayer(var_0.triggerportableradarping)) {
-      var_0 = var_0.triggerportableradarping;
+  if(isDefined(var_0) && isDefined(self.owner)) {
+    if(isDefined(var_0.owner) && isplayer(var_0.owner)) {
+      var_0 = var_0.owner;
     }
 
-    if(self.triggerportableradarping scripts\cp\utility::isenemy(var_0)) {
+    if(self.owner scripts\cp\utility::isenemy(var_0)) {
       var_8 = var_0;
     }
   }
@@ -681,8 +681,8 @@ onkillstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7 = 1;
   }
 
-  if(isDefined(self.triggerportableradarping) && isDefined(var_5)) {
-    self.triggerportableradarping thread scripts\cp\utility::leaderdialogonplayer(var_5, undefined, undefined, self.origin);
+  if(isDefined(self.owner) && isDefined(var_5)) {
+    self.owner thread scripts\cp\utility::leaderdialogonplayer(var_5, undefined, undefined, self.origin);
   }
 
   self notify("death");
@@ -699,7 +699,7 @@ handlemeleedamage(var_0, var_1, var_2) {
 
 handleempdamage(var_0, var_1, var_2) {
   if(var_0 == "emp_grenade_mp" && var_1 == "MOD_GRENADE_SPLASH") {
-    self notify("emp_damage", var_0.triggerportableradarping, 8);
+    self notify("emp_damage", var_0.owner, 8);
     return 0;
   }
 
@@ -718,7 +718,7 @@ func_3343() {
       continue;
     }
 
-    if(!friendlyfirecheck(self.triggerportableradarping, var_0)) {
+    if(!friendlyfirecheck(self.owner, var_0)) {
       continue;
     }
 
@@ -766,19 +766,19 @@ func_3343() {
   }
 
   if(level.teambased) {
-    if(isDefined(var_0) && isDefined(self.triggerportableradarping)) {
-      var_0A = var_0.pers["team"];
-      var_0B = self.triggerportableradarping.pers["team"];
-      if(isDefined(var_0A) && isDefined(var_0B) && var_0A != var_0B) {
+    if(isDefined(var_0) && isDefined(self.owner)) {
+      var_10 = var_0.pers["team"];
+      var_11 = self.owner.pers["team"];
+      if(isDefined(var_10) && isDefined(var_11) && var_10 != var_11) {
         var_0 notify("destroyed_equipment");
       }
     }
-  } else if(isDefined(self.triggerportableradarping) && isDefined(var_0) && var_0 != self.triggerportableradarping) {
+  } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 
   if(self.weapon_name == "transponder_mp" || self.weapon_name == "ztransponder_mp") {
-    self.triggerportableradarping notify("transponder_update", 0);
+    self.owner notify("transponder_update", 0);
   }
 
   waittillframeend;

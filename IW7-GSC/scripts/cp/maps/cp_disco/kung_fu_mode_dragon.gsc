@@ -97,14 +97,14 @@ dragon_shuriken_throw_listener(var_0) {
     var_7 = [];
     var_8 = var_3.origin;
     var_9 = self getplayerangles();
-    var_0A = anglesToForward(var_3.angles);
-    var_0B = vectornormalize(var_0A) * 100 + var_8;
-    var_0C = 10;
-    var_0D = var_0C * -1;
-    var_0D = var_0D + var_0C;
-    var_0E = var_8 + anglesToForward(var_9 + (var_0D / 10, var_0D, 0)) * 45;
-    magicbullet(var_1, var_8, var_0E, self);
-    var_0D = var_0D + var_0C;
+    var_10 = anglesToForward(var_3.angles);
+    var_11 = vectornormalize(var_10) * 100 + var_8;
+    var_12 = 10;
+    var_13 = var_12 * -1;
+    var_13 = var_13 + var_12;
+    var_14 = var_8 + anglesToForward(var_9 + (var_13 / 10, var_13, 0)) * 45;
+    magicbullet(var_1, var_8, var_14, self);
+    var_13 = var_13 + var_12;
     var_3 delete();
     thread scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(scripts\cp\maps\cp_disco\kung_fu_mode::getrbabilitycost());
     scripts\cp\powers\coop_powers::power_enablepower();
@@ -198,22 +198,22 @@ throw_charged_shuriken(var_0, var_1, var_2) {
 
   if(var_4.size == 0) {
     var_9 = self getplayerangles();
-    var_0A = anglesToForward(var_1.angles);
-    var_0B = vectornormalize(var_0A) * 100 + var_5;
-    var_0C = 10;
-    var_0D = var_0C * -1;
-    for(var_0E = 0; var_0E < 3; var_0E++) {
-      var_0F = var_5 + anglesToForward(var_9 + (var_0D / 10, var_0D, 0)) * 45;
-      magicbullet(var_2, var_5, var_0F, self);
-      var_0D = var_0D + var_0C;
+    var_10 = anglesToForward(var_1.angles);
+    var_11 = vectornormalize(var_10) * 100 + var_5;
+    var_12 = 10;
+    var_13 = var_12 * -1;
+    for(var_14 = 0; var_14 < 3; var_14++) {
+      var_15 = var_5 + anglesToForward(var_9 + (var_13 / 10, var_13, 0)) * 45;
+      magicbullet(var_2, var_5, var_15, self);
+      var_13 = var_13 + var_12;
     }
   } else {
-    var_0E = 0;
+    var_14 = 0;
     foreach(var_7 in var_4) {
-      if(var_0E == 3) {
+      if(var_14 == 3) {
         break;
       } else {
-        var_0E++;
+        var_14++;
       }
 
       magicbullet(var_2, var_5, var_7 gettagorigin("j_mainroot") + (0, 0, 10), self);
@@ -249,7 +249,7 @@ dragon_super_use(var_0) {
   var_7 = spawn("script_model", var_6);
   var_7.angles = var_4 + (0, -90, 0);
   var_7 setModel("tag_origin_dragon_super");
-  var_7.triggerportableradarping = self;
+  var_7.owner = self;
   var_7.spiral_center = self.origin;
   var_7 thread move_dragon(var_5, var_2, var_1);
   var_7 thread dragon_super_damage(self, 15, var_1);
@@ -339,30 +339,30 @@ follow_dragon_path(var_0, var_1) {
       var_8 = scripts\engine\utility::get_array_of_closest(self.origin, var_3, undefined, 24, 1500, 1);
       if(var_8.size > 0) {
         var_9 = anglesToForward(self.angles);
-        var_0A = var_8[0];
-        self.isnodeoccupied = var_0A;
+        var_10 = var_8[0];
+        self.enemy = var_10;
         clean_up_spiral();
-        while(isalive(var_0A)) {
-          var_0B = distancesquared(self.origin, var_0A.origin);
-          if(var_0B < var_2) {
-            var_0C = var_0A.origin + (0, 0, 60) - self.origin + (0, 0, 60);
-            var_0D = vectortoangles(var_0C);
-            self rotateto(var_0D, 0.1);
-            var_0E = length(var_0C);
-            var_0C = vectornormalize(var_0C) * var_0E + 100;
-            self moveto(self.origin + var_0C + (0, 0, 60), 0.25);
+        while(isalive(var_10)) {
+          var_11 = distancesquared(self.origin, var_10.origin);
+          if(var_11 < var_2) {
+            var_12 = var_10.origin + (0, 0, 60) - self.origin + (0, 0, 60);
+            var_13 = vectortoangles(var_12);
+            self rotateto(var_13, 0.1);
+            var_14 = length(var_12);
+            var_12 = vectornormalize(var_12) * var_14 + 100;
+            self moveto(self.origin + var_12 + (0, 0, 60), 0.25);
             self waittill("movedone");
-            if(isalive(var_0A)) {
-              dragon_kill_guy(var_0A, self.triggerportableradarping, var_1);
+            if(isalive(var_10)) {
+              dragon_kill_guy(var_10, self.owner, var_1);
             }
 
             continue;
           }
 
-          var_0F = getclosestpointonnavmesh(self.origin);
-          var_10 = var_0A findpath(var_0F, var_0A.origin, 1, 1);
+          var_15 = getclosestpointonnavmesh(self.origin);
+          var_10 = var_10 findpath(var_15, var_10.origin, 1, 1);
           var_10 = [];
-          move_along_path_new(var_10, var_0A);
+          move_along_path_new(var_10, var_10);
           wait(0.1);
         }
       } else {

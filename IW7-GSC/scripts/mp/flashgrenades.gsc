@@ -41,7 +41,7 @@ func_B9D9() {
       continue;
     }
 
-    if(isDefined(self.triggerportableradarping) && isDefined(var_4) && var_4 == self.triggerportableradarping) {
+    if(isDefined(self.owner) && isDefined(var_4) && var_4 == self.owner) {
       continue;
     }
 
@@ -54,16 +54,16 @@ func_B9D9() {
     var_3 = 1;
     var_9 = var_2 * var_3 * var_0;
     var_9 = var_9 + var_6;
-    var_9 = scripts\mp\perks\_perkfunctions::applystunresistence(var_4, self, var_9);
+    var_9 = scripts\mp\perks\perkfunctions::applystunresistence(var_4, self, var_9);
     if(var_9 < 0.25) {
       continue;
     }
 
-    var_0A = undefined;
+    var_10 = undefined;
     if(var_9 > 2) {
-      var_0A = 0.75;
+      var_10 = 0.75;
     } else {
-      var_0A = 0.25;
+      var_10 = 0.25;
     }
 
     if(level.teambased && isDefined(var_4) && isDefined(var_4.team) && var_4.team == self.team && var_4 != self) {
@@ -71,12 +71,12 @@ func_B9D9() {
         continue;
       } else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
         var_9 = var_9 * 0.5;
-        var_0A = var_0A * 0.5;
+        var_10 = var_10 * 0.5;
         var_8 = 0;
         var_7 = 1;
       } else if(level.friendlyfire == 3) {
         var_9 = var_9 * 0.5;
-        var_0A = var_0A * 0.5;
+        var_10 = var_10 * 0.5;
         var_7 = 1;
       }
     } else if(isDefined(var_4)) {
@@ -87,18 +87,18 @@ func_B9D9() {
     }
 
     if(var_8 && isDefined(self)) {
-      thread func_20CA(var_9, var_0A);
+      thread func_20CA(var_9, var_10);
       if(isDefined(var_4) && var_4 != self) {
         var_4 thread scripts\mp\damagefeedback::updatedamagefeedback("flash");
-        var_0B = self;
+        var_11 = self;
         if(isplayer(var_4) && var_4 isitemunlocked("specialty_paint", "perk") && var_4 scripts\mp\utility::_hasperk("specialty_paint")) {
-          var_0B thread scripts\mp\perks\_perkfunctions::setpainted(var_4);
+          var_11 thread scripts\mp\perks\perkfunctions::setpainted(var_4);
         }
       }
     }
 
     if(var_7 && isDefined(var_4)) {
-      var_4 thread func_20CA(var_9, var_0A);
+      var_4 thread func_20CA(var_9, var_10);
     }
   }
 }

@@ -431,8 +431,9 @@ dointro() {
     if(!self issplitscreenplayer() || self isreloading()) {
       scripts\mp\utility\game::leaderdialogonplayer("offense_obj", "introboost");
     }
-  } else if(!self issplitscreenplayer() || self isreloading())
+  } else if(!self issplitscreenplayer() || self isreloading()) {
     scripts\mp\utility\game::leaderdialogonplayer("defense_obj", "introboost");
+  }
 }
 
 watchhostmigration() {
@@ -619,8 +620,9 @@ func_E76B() {
   } else if(var_1 > var_2) {
     scripts\mp\utility\game::leaderdialog("round_success", "allies");
     scripts\mp\utility\game::leaderdialog("round_failure", "axis");
-  } else
+  } else {
     scripts\mp\utility\game::leaderdialog("lead_tied");
+  }
 }
 
 func_7690() {
@@ -654,8 +656,9 @@ func_7690() {
   } else if(var_0 == "axis") {
     scripts\mp\utility\game::leaderdialog("mission_success", "axis");
     scripts\mp\utility\game::leaderdialog("mission_failure", "allies");
-  } else
+  } else {
     scripts\mp\utility\game::leaderdialog("mission_draw");
+  }
 }
 
 func_BDEF() {

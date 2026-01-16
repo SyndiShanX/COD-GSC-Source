@@ -73,7 +73,7 @@ monitorsentient(var_0) {
   var_1 = self.sentientpool;
   var_2 = self.sentientpoolindex;
   if(isDefined(var_0)) {
-    scripts\engine\utility::waittill_any_3("death", "remove_sentient", var_0);
+    scripts\engine\utility::waittill_any("death", "remove_sentient", var_0);
   } else {
     scripts\engine\utility::waittill_either("death", "remove_sentient");
   }

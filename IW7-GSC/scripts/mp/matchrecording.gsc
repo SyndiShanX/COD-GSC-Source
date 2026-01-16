@@ -194,22 +194,22 @@ matchrecording_logevent(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
   matchrecording_inceventlinecount();
   var_9 = matchrecording_teammap(var_1);
-  var_0A = int(var_3) + "," + int(var_4);
-  var_0B = matchrecording_eventcharmap(var_2);
+  var_10 = int(var_3) + "," + int(var_4);
+  var_11 = matchrecording_eventcharmap(var_2);
   if(var_2 == "BULLET" || var_2 == "FRONT_LINE" || var_2 == "FRONT_LINE_ALLIES" || var_2 == "FRONT_LINE_AXIS") {}
 
-  var_0C = "";
+  var_12 = "";
   if(isDefined(var_6)) {
-    var_0C = " s:" + var_6;
+    var_12 = " s:" + var_6;
   }
 
-  var_0D = "";
+  var_13 = "";
   if(isDefined(var_7) && isDefined(var_8)) {
-    var_0D = " " + int(var_7) + "," + int(var_8);
+    var_13 = " " + int(var_7) + "," + int(var_8);
   }
 
-  var_0E = "|" + var_0 + " " + var_9 + " " + var_0B + " " + var_0A + " " + var_5 + var_0D + var_0C;
-  level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_0E;
+  var_14 = "|" + var_0 + " " + var_9 + " " + var_11 + " " + var_10 + " " + var_5 + var_13 + var_12;
+  level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_14;
 }
 
 matchrecording_logeventmsg(var_0, var_1, var_2) {
@@ -363,8 +363,8 @@ func_B3FE() {
     }
 
     if(isDefined(var_6.engagementtimes)) {
-      foreach(var_0B in var_6.engagementtimes) {
-        var_4 = var_4 + var_0B;
+      foreach(var_11 in var_6.engagementtimes) {
+        var_4 = var_4 + var_11;
         var_3++;
       }
     }
@@ -380,9 +380,9 @@ func_B3FE() {
   }
 
   if(isDefined(level.var_744D) && isDefined(level.var_744D.var_12F92) && isDefined(level.var_744D.var_5AFE)) {
-    var_0E = level.var_744D.var_12F92 + level.var_744D.var_5AFE;
-    if(var_0E > 0) {
-      matchrecording_logeventmsg("LOG_STAT", gettime(), "Frontline Uptime: " + level.var_744D.var_12F92 / var_0E * 100 + "%");
+    var_14 = level.var_744D.var_12F92 + level.var_744D.var_5AFE;
+    if(var_14 > 0) {
+      matchrecording_logeventmsg("LOG_STAT", gettime(), "Frontline Uptime: " + level.var_744D.var_12F92 / var_14 * 100 + "%");
     }
   }
 }

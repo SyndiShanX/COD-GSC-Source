@@ -54,7 +54,7 @@ func_1166B() {
   for(;;) {
     self setclientomnvar("ui_dodge_charges", 4);
     self waittill("sprint_slide_begin");
-    var_1 = scripts\engine\utility::waittill_any_timeout_1(0.1, "sprint_slide_end");
+    var_1 = scripts\engine\utility::waittill_any_timeout(0.1, "sprint_slide_end");
     if(var_1 != "timeout") {
       continue;
     }
@@ -235,7 +235,7 @@ func_C7A6(var_0) {
 func_13AA0(var_0, var_1, var_2) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_2, "leave", "end_spawnview");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(var_2, "leave", "end_spawnview");
   if(isDefined(var_1)) {
     scripts\mp\utility::outlinedisable(var_0, var_1);
     if(!isai(var_1)) {

@@ -878,8 +878,8 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
 
         case "ch_intel_kills_this_life":
           if(isDefined(self.killsthislife)) {
-            var_0B = self.pers["cur_kill_streak"];
-            func_F80D(var_0B);
+            var_11 = self.pers["cur_kill_streak"];
+            func_F80D(var_11);
             thread func_99B9();
           }
           break;
@@ -887,9 +887,9 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
         case "ch_intel_multiple_weapon_kills":
           var_7 = self.var_9978.progress;
           if(isDefined(self.killsperweapon)) {
-            var_0C = combinealtweaponarray(self.killsperweapon);
-            var_0D = combinepartialprogress(var_0C);
-            if(var_0D.size > var_7) {
+            var_12 = combinealtweaponarray(self.killsperweapon);
+            var_13 = combinepartialprogress(var_12);
+            if(var_13.size > var_7) {
               updatecurrentobjective();
             }
           }
@@ -897,26 +897,26 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
 
         case "ch_intel_multiple_weapon_one_life":
           if(isDefined(self.killsthislifeperweapon)) {
-            var_0E = combinealtweaponarray(self.killsthislifeperweapon);
-            var_0D = combinepartialprogress(var_0E);
+            var_14 = combinealtweaponarray(self.killsthislifeperweapon);
+            var_13 = combinepartialprogress(var_14);
             thread func_99B9();
-            func_F80D(var_0D.size);
+            func_F80D(var_13.size);
           }
           break;
 
         case "ch_intel_ballistic_kills":
           if(((isDefined(var_2) && scripts\mp\utility::iscacprimaryweapon(var_2)) || scripts\mp\utility::iscacsecondaryweapon(var_2)) && !weaponusesenergybullets(var_2)) {
             if(var_3 == "MOD_MELEE") {
-              var_0F = scripts\mp\utility::getweaponrootname(var_2);
-              if(var_0F == "iw7_devastator") {
+              var_15 = scripts\mp\utility::getweaponrootname(var_2);
+              if(var_15 == "iw7_devastator") {
                 var_10 = getweaponvariantindex(var_2);
                 if(isDefined(var_10) && var_10 == 4 || var_10 == 36) {
                   updatecurrentobjective();
                 }
               }
             } else if(isexplosivedamagemod(var_3)) {
-              var_0F = scripts\mp\utility::getweaponrootname(var_2);
-              if(var_0F == "iw7_kbs") {
+              var_15 = scripts\mp\utility::getweaponrootname(var_2);
+              if(var_15 == "iw7_kbs") {
                 var_10 = getweaponvariantindex(var_2);
                 if(isDefined(var_10) && var_10 == 6 || var_10 == 38) {
                   updatecurrentobjective();
@@ -931,18 +931,18 @@ func_99BA(var_0, var_1, var_2, var_3, var_4) {
         case "ch_intel_energy_kills":
           if(((isDefined(var_2) && scripts\mp\utility::iscacprimaryweapon(var_2)) || scripts\mp\utility::iscacsecondaryweapon(var_2)) && weaponusesenergybullets(var_2)) {
             if(var_3 == "MOD_MELEE") {
-              var_0F = scripts\mp\utility::getweaponrootname(var_2);
-              if(var_0F == "iw7_rvn") {
-                if(self func_8519(var_2)) {
+              var_15 = scripts\mp\utility::getweaponrootname(var_2);
+              if(var_15 == "iw7_rvn") {
+                if(self isalternatemode(var_2)) {
                   updatecurrentobjective();
                 }
               }
             } else if(isexplosivedamagemod(var_3)) {
-              var_0F = scripts\mp\utility::getweaponrootname(var_2);
-              if(var_0F == "iw7_rvn") {
+              var_15 = scripts\mp\utility::getweaponrootname(var_2);
+              if(var_15 == "iw7_rvn") {
                 var_10 = getweaponvariantindex(var_2);
                 if(isDefined(var_10) && var_10 == 3 || var_10 == 35) {
-                  if(self func_8519(var_2)) {
+                  if(self isalternatemode(var_2)) {
                     updatecurrentobjective();
                   }
                 }

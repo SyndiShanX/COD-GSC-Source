@@ -1227,8 +1227,9 @@ func_1179B() {
       self.var_B888[self.var_C239 - 1].inuse = 0;
       var_0 setclientomnvar(self.var_B888[self.var_C239 - 1].omnvar, -1);
     }
-  } else
+  } else {
     self notify("finished_reload");
+  }
 }
 
 func_510A(var_0) {

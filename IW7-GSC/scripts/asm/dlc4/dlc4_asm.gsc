@@ -225,15 +225,15 @@ alienmeleenotehandler(var_0, var_1, var_2, var_3) {
       var_8 = var_7[0];
       if(var_8 > var_3) {
         var_9 = getmovedelta(var_6, var_3, var_8);
-        var_0A = length2d(var_9);
-        var_0B = getanimlength(var_6);
-        var_0C = var_8 * var_0B - var_3 * var_0B;
-        var_0D = var_5 getvelocity();
-        var_0E = var_5.origin + var_0D * var_0C;
-        var_0F = distance(var_0E, self.origin);
+        var_10 = length2d(var_9);
+        var_11 = getanimlength(var_6);
+        var_12 = var_8 * var_11 - var_3 * var_11;
+        var_13 = var_5 getvelocity();
+        var_14 = var_5.origin + var_13 * var_12;
+        var_15 = distance(var_14, self.origin);
         var_10 = 1;
-        if(var_0F > var_0A && var_0A > 0) {
-          var_10 = var_0F / var_0A;
+        if(var_15 > var_10 && var_10 > 0) {
+          var_10 = var_15 / var_10;
           if(var_10 < 1) {
             var_10 = 1;
           }
@@ -314,15 +314,15 @@ playmovingmeleeattack(var_0, var_1, var_2, var_3) {
   var_7 = getanimlength(var_6) * 1 / var_4;
   var_8 = getnotetracktimes(var_6, "start_melee");
   var_9 = var_7 * var_8[0];
-  var_0A = gettunedata();
-  var_0B = randomfloatrange(var_0A.min_stop_facing_enemy_time_before_hit, var_0A.max_stop_facing_enemy_time_before_hit);
-  var_0C = var_9 - var_0B;
-  if(var_0C < 0) {
-    var_0C = 0.1;
+  var_10 = gettunedata();
+  var_11 = randomfloatrange(var_10.min_stop_facing_enemy_time_before_hit, var_10.max_stop_facing_enemy_time_before_hit);
+  var_12 = var_9 - var_11;
+  if(var_12 < 0) {
+    var_12 = 0.1;
   }
 
   thread scripts\asm\zombie\melee::func_6A6A(var_1, self.curmeleetarget);
-  thread stopfacingenemy(var_1, var_0C);
+  thread stopfacingenemy(var_1, var_12);
   if(isDefined(self.preventplayerpushdist)) {
     self func_85C9(self.preventplayerpushdist);
   }

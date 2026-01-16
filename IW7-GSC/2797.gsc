@@ -68,8 +68,9 @@ calculatefactorscore(var_0, var_1, var_2, var_3) {
     if(!isDefined(var_3)) {}
 
     var_13 = [[var_4]](var_0, var_3);
-  } else
+  } else {
     var_13 = [[var_4]](var_0);
+  }
 
   var_13 = clamp(var_13, 0, 100);
   var_13 = var_13 * var_2;
@@ -203,7 +204,7 @@ func_26AE(var_0) {
   var_2 = [];
 
   if(level.teambased) {
-    var_1[0] = scripts\mp\gameobjects::func_7E93(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
   } else {
     var_1[var_1.size] = "all";
   }
@@ -586,7 +587,7 @@ func_26B4(var_0) {
   var_2 = [];
 
   if(level.teambased) {
-    var_1[0] = scripts\mp\gameobjects::func_7E93(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
   } else {
     var_1[var_1.size] = "all";
   }
@@ -646,7 +647,7 @@ func_26AF(var_0) {
   var_2 = [];
 
   if(level.teambased) {
-    var_1[0] = scripts\mp\gameobjects::func_7E93(self.team);
+    var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
   } else {
     var_1[var_1.size] = "all";
   }
@@ -845,8 +846,9 @@ func_26B0(var_0, var_1) {
   if(isDefined(var_2)) {
     var_6 = distancesquared(var_2, var_0.origin);
     return scripts\engine\utility::ter_op(var_6 < var_5, 0, 100);
-  } else
+  } else {
     return 100;
+  }
 }
 
 func_26B1(var_0, var_1) {

@@ -8,9 +8,9 @@ func_1342F() {}
 func_13430() {
   level endon("game_ended");
   self endon("end_explode");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("explode", var_0);
-  func_10E0B(var_0, self.triggerportableradarping);
+  func_10E0B(var_0, self.owner);
 }
 
 func_10E0B(var_0, var_1) {
@@ -34,7 +34,7 @@ func_10E0B(var_0, var_1) {
 }
 
 func_13431(var_0, var_1, var_2, var_3) {
-  var_4 = scripts\engine\utility::array_add_safe(var_0, var_2);
+  var_4 = scripts\engine\utility::add_to_array(var_0, var_2);
   if(!scripts\common\trace::ray_trace_passed(var_3, var_1.origin + (0, 0, 32), var_4)) {
     return 0;
   }

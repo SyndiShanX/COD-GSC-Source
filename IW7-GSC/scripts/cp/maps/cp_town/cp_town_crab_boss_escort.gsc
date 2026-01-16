@@ -519,10 +519,10 @@ egg_sac_fly(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = var_3 * 20;
   play_launch_muzzle_flash(var_1, var_8, var_4);
   var_0 thread egg_sac_safe_delete(var_0, var_3);
-  for(var_0A = 1; var_0A <= var_9; var_0A++) {
-    var_0B = var_0A / 20;
-    var_0C = 0.5 * var_7 * var_0B * var_0B + var_8 * var_0B + var_1;
-    var_0.origin = var_0C;
+  for(var_10 = 1; var_10 <= var_9; var_10++) {
+    var_11 = var_10 / 20;
+    var_12 = 0.5 * var_7 * var_11 * var_11 + var_8 * var_11 + var_1;
+    var_0.origin = var_12;
     scripts\engine\utility::waitframe();
   }
 
@@ -760,11 +760,11 @@ calculate_egg_sac_spawn_pos() {
     var_7 = var_5[1] - 90 + var_6 / 2;
     for(var_8 = 0; var_8 < var_1; var_8++) {
       var_9 = var_7 + var_8 * var_6;
-      var_0A = (var_5[0], var_9, var_5[2]);
-      var_0B = randomfloatrange(400, 1000);
-      var_0C = getclosestpointonnavmesh(var_2.origin + anglesToForward(var_0A) * var_0B);
-      var_0C = scripts\engine\utility::drop_to_ground(var_0C, 0, -100);
-      var_0[var_0.size] = var_0C;
+      var_10 = (var_5[0], var_9, var_5[2]);
+      var_11 = randomfloatrange(400, 1000);
+      var_12 = getclosestpointonnavmesh(var_2.origin + anglesToForward(var_10) * var_11);
+      var_12 = scripts\engine\utility::drop_to_ground(var_12, 0, -100);
+      var_0[var_0.size] = var_12;
     }
   }
 

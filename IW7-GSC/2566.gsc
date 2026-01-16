@@ -48,7 +48,7 @@ func_12E90(var_0) {
     self._blackboard.var_32D2 = undefined;
   }
 
-  if(weaponclass(self.var_394) == "pistol") {
+  if(weaponclass(self.weapon) == "pistol") {
     lib_0A19::func_12F5C(var_0);
   }
 
@@ -138,7 +138,7 @@ func_9E40(var_0) {
 }
 
 func_8BEC(var_0) {
-  if(isDefined(self.isnodeoccupied)) {
+  if(isDefined(self.enemy)) {
     return level.success;
   }
 
@@ -146,11 +146,11 @@ func_8BEC(var_0) {
 }
 
 func_8C0B(var_0) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return level.failure;
   }
 
-  if(self getpersstat(self.isnodeoccupied)) {
+  if(self cansee(self.enemy)) {
     return level.success;
   }
 
@@ -163,7 +163,7 @@ hasammoinclip() {
     return 1;
   }
 
-  if(!isDefined(self.var_394)) {
+  if(!isDefined(self.weapon)) {
     return 0;
   }
 
@@ -191,11 +191,11 @@ func_9E8B(var_0, var_1) {
 }
 
 func_13D98(var_0, var_1) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return level.failure;
   }
 
-  if(distancesquared(self.origin, self.isnodeoccupied.origin) <= var_1 * var_1) {
+  if(distancesquared(self.origin, self.enemy.origin) <= var_1 * var_1) {
     return level.success;
   }
 
@@ -211,7 +211,7 @@ func_8BF6(var_0) {
 }
 
 func_8C24(var_0) {
-  if(isDefined(self.objective_team) && self.objective_team == "seeker") {
+  if(isDefined(self.grenadeweapon) && self.grenadeweapon == "seeker") {
     if(self.objective_state > 0) {
       return level.success;
     }
@@ -221,7 +221,7 @@ func_8C24(var_0) {
 }
 
 func_B4EB(var_0) {
-  if(!isDefined(self.var_394)) {
+  if(!isDefined(self.weapon)) {
     return level.failure;
   }
 
@@ -233,8 +233,8 @@ func_B4EB(var_0) {
 }
 
 func_12EC2(var_0) {
-  if(!isDefined(self.doentitiessharehierarchy) || self.doentitiessharehierarchy != self.isnodeoccupied) {
-    self.doentitiessharehierarchy = self.isnodeoccupied;
+  if(!isDefined(self.doentitiessharehierarchy) || self.doentitiessharehierarchy != self.enemy) {
+    self.doentitiessharehierarchy = self.enemy;
   }
 
   return level.success;
@@ -253,8 +253,8 @@ func_FE6E(var_0) {
   self.bt.shootparams.taskid = var_0;
   self.bt.shootparams.starttime = gettime();
   self.bt.m_bfiring = 0;
-  self.doentitiessharehierarchy = self.isnodeoccupied;
-  self.var_299D = self.isnodeoccupied;
+  self.doentitiessharehierarchy = self.enemy;
+  self.var_299D = self.enemy;
   var_1 = scripts\anim\utility_common::isasniper();
   if(var_1) {
     func_FE5D(self.bt.shootparams);
@@ -310,7 +310,7 @@ func_FE88(var_0) {
 
   var_1 = self.bt.shootparams;
   var_2 = makescrambler();
-  if(isDefined(self.isnodeoccupied) && !isplayer(self.isnodeoccupied) && var_1.starttime < gettime()) {
+  if(isDefined(self.enemy) && !isplayer(self.enemy) && var_1.starttime < gettime()) {
     var_3 = int(gettime() / 50);
     if(self getentitynumber() % 4 != var_3 % 4) {
       return level.running;
@@ -327,9 +327,9 @@ func_FE88(var_0) {
   } else if(isDefined(self.goodshootpos)) {
     var_1.pos = self.goodshootpos;
     var_1.ent = undefined;
-  } else if(self getpersstat(self.isnodeoccupied)) {
-    var_1.pos = self.isnodeoccupied getshootatpos();
-    var_1.ent = self.isnodeoccupied;
+  } else if(self cansee(self.enemy)) {
+    var_1.pos = self.enemy getshootatpos();
+    var_1.ent = self.enemy;
   } else {
     return level.success;
   }
@@ -338,7 +338,7 @@ func_FE88(var_0) {
     var_1.objective = "normal";
   }
 
-  scripts\asm\asm_bb::bb_setshootparams(var_1, self.isnodeoccupied);
+  scripts\asm\asm_bb::bb_setshootparams(var_1, self.enemy);
   if(isaimedataimtarget()) {
     if(!self.bt.m_bfiring) {
       resetmisstime_code();
@@ -361,19 +361,19 @@ func_FE88(var_0) {
 }
 
 func_8BCE(var_0) {
-  if(self.var_394 == "none") {
+  if(self.weapon == "none") {
     return 0;
   }
 
-  return self.bulletsinclip >= weaponclipsize(self.var_394) * var_0;
+  return self.bulletsinclip >= weaponclipsize(self.weapon) * var_0;
 }
 
 func_43EB(var_0) {
-  if(!isDefined(self.var_394) || self.var_394 == "none") {
+  if(!isDefined(self.weapon) || self.weapon == "none") {
     return level.failure;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     if(!func_8BCE(0.5)) {
       return level.success;
     }
@@ -405,9 +405,9 @@ func_43EB(var_0) {
     }
   }
 
-  if(isDefined(self.isnodeoccupied) && isDefined(self.var_101B4) && !scripts\engine\utility::istrue(self.var_C009)) {
+  if(isDefined(self.enemy) && isDefined(self.var_101B4) && !scripts\engine\utility::istrue(self.var_C009)) {
     var_1 = 409;
-    var_2 = distancesquared(self.origin, self.isnodeoccupied.origin);
+    var_2 = distancesquared(self.origin, self.enemy.origin);
     if(var_2 < var_1 * var_1) {
       return level.failure;
     }
@@ -429,7 +429,7 @@ func_DF55(var_0) {
 }
 
 func_DF4E() {
-  var_0 = weaponclipsize(self.var_394);
+  var_0 = weaponclipsize(self.weapon);
   self.bulletsinclip = int(var_0 * 0.5);
   self.bulletsinclip = int(clamp(self.bulletsinclip, 0, var_0));
 }
@@ -443,7 +443,7 @@ func_DF56(var_0) {
     return level.success;
   }
 
-  var_1 = weaponclipsize(self.var_394);
+  var_1 = weaponclipsize(self.weapon);
   var_2 = isDefined(self._blackboard.var_32D2);
   if(!var_2 && self.bulletsinclip == var_1) {
     return level.success;
@@ -472,7 +472,7 @@ chooseshootstyle(var_0) {
   var_1 = -3036;
   var_2 = 810000;
   var_3 = 2560000;
-  var_4 = weaponclass(self.var_394);
+  var_4 = weaponclass(self.weapon);
   var_5 = makescrambler();
   var_6 = isDefined(var_5);
   if(isDefined(self.bt.var_FEDB)) {
@@ -488,7 +488,7 @@ chooseshootstyle(var_0) {
     return func_F840(var_1, "mg", 0);
   }
 
-  if(isDefined(var_1.ent) && isDefined(var_1.ent.isnodeoccupied) && isDefined(var_1.ent.isnodeoccupied.physics_setgravityragdollscalar)) {
+  if(isDefined(var_1.ent) && isDefined(var_1.ent.enemy) && isDefined(var_1.ent.enemy.physics_setgravityragdollscalar)) {
     return func_F840(var_1, "single", 0);
   }
 
@@ -500,7 +500,7 @@ chooseshootstyle(var_0) {
     return func_F840(var_1, "single", 0);
   }
 
-  if(scripts\anim\utility_common::isshotgun(self.var_394)) {
+  if(scripts\anim\utility_common::isshotgun(self.weapon)) {
     if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
       return func_F840(var_1, "single", 0);
     } else {
@@ -512,7 +512,7 @@ chooseshootstyle(var_0) {
     return func_F840(var_1, "single", 0);
   }
 
-  if(weaponburstcount(self.var_394) > 0) {
+  if(weaponburstcount(self.weapon) > 0) {
     return func_F840(var_1, "burst", 0);
   }
 
@@ -524,7 +524,7 @@ chooseshootstyle(var_0) {
       return func_F840(var_1, "full", 0);
     }
   } else if(var_8 < var_3 || func_FFC6()) {
-    if(weaponissemiauto(self.var_394) || func_FFF6()) {
+    if(weaponissemiauto(self.weapon) || func_FFF6()) {
       return func_F840(var_1, "semi", 1);
     } else {
       return func_F840(var_1, "burst", 1);
@@ -550,11 +550,11 @@ func_FFC6() {
     return 0;
   }
 
-  return level.var_7683 == 3 && isplayer(self.isnodeoccupied);
+  return level.var_7683 == 3 && isplayer(self.enemy);
 }
 
 func_FFF6() {
-  if(weaponclass(self.var_394) != "rifle") {
+  if(weaponclass(self.weapon) != "rifle") {
     return 0;
   }
 
@@ -599,7 +599,7 @@ func_4F66() {
 }
 
 choosenumshotsandbursts(var_0) {
-  if(isDefined(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) > 160000) {
+  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 160000) {
     var_0.var_32BD = randomintrange(1, 5);
   } else {
     var_0.var_32BD = 10;
@@ -628,7 +628,7 @@ choosenumshotsandbursts(var_0) {
 
 func_4F65(var_0) {
   var_1 = 0;
-  var_2 = weaponburstcount(self.var_394);
+  var_2 = weaponburstcount(self.weapon);
   if(var_2) {
     var_1 = var_2;
   } else if(scripts\anim\weaponlist::usingsemiautoweapon()) {
@@ -655,7 +655,7 @@ shouldshoot() {
     return 0;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -663,13 +663,13 @@ shouldshoot() {
     return 0;
   }
 
-  if(!isDefined(self.var_394) || self.var_394 == "") {
+  if(!isDefined(self.weapon) || self.weapon == "") {
     return 0;
   }
 
-  if(self getpersstat(self.isnodeoccupied)) {
+  if(self cansee(self.enemy)) {
     scripts\anim\utility_common::dontgiveuponsuppressionyet();
-    self.goodshootpos = self.isnodeoccupied getshootatpos();
+    self.goodshootpos = self.enemy getshootatpos();
     return 1;
   }
 
@@ -678,7 +678,7 @@ shouldshoot() {
 
 func_3EF8(var_0) {
   if(isDefined(self.var_FED1)) {
-    if(!isDefined(self.isnodeoccupied)) {
+    if(!isDefined(self.enemy)) {
       var_0.pos = self.var_FED1;
       self.var_FED1 = undefined;
     } else {
@@ -704,14 +704,14 @@ func_FECA(var_0) {
   }
 
   var_2 = scripts\anim\utility_common::cansuppressenemy();
-  if(var_1.objective == "suppress" || self.team == "allies" && !isDefined(self.isnodeoccupied) && !var_2) {
+  if(var_1.objective == "suppress" || self.team == "allies" && !isDefined(self.enemy) && !var_2) {
     func_FECC(var_1, var_2);
   }
 }
 
 func_FECB(var_0) {
   if(!scripts\anim\utility_common::shouldshootenemyent()) {
-    if(!isDefined(self.isnodeoccupied)) {
+    if(!isDefined(self.enemy)) {
       func_8C4D(var_0);
       return;
     }
@@ -733,7 +733,7 @@ func_100A4() {
 }
 
 func_F83F(var_0) {
-  var_0.ent = self.isnodeoccupied;
+  var_0.ent = self.enemy;
   var_0.pos = var_0.ent getshootatpos();
 }
 
@@ -772,7 +772,7 @@ func_10026() {
     }
 
     var_1 = isDefined(var_0) && distancesquared(self.origin, var_0.origin) < 65536;
-    if((var_1 || distancesquared(self.origin, level.var_A935[self.team]) < 65536) && !isDefined(self.isnodeoccupied) || distancesquared(self.isnodeoccupied.origin, level.var_A934[self.team]) < 262144) {
+    if((var_1 || distancesquared(self.origin, level.var_A935[self.team]) < 65536) && !isDefined(self.enemy) || distancesquared(self.enemy.origin, level.var_A934[self.team]) < 262144) {
       return 1;
     }
   }
@@ -789,7 +789,7 @@ func_FFC2() {
     return 0;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -797,7 +797,7 @@ func_FFC2() {
     return 0;
   }
 
-  if(weaponclass(self.var_394) == "mg") {
+  if(weaponclass(self.weapon) == "mg") {
     return 0;
   }
 
@@ -813,13 +813,13 @@ func_FFC2() {
     return 0;
   }
 
-  var_0 = vectornormalize(self.isnodeoccupied.origin - self.origin);
+  var_0 = vectornormalize(self.enemy.origin - self.origin);
   var_1 = anglesToForward(self.angles);
   if(vectordot(var_0, var_1) < 0.5) {
     return 0;
   }
 
-  if(self getpersstat(self.isnodeoccupied) && self canshootenemy()) {
+  if(self cansee(self.enemy) && self canshootenemy()) {
     return 0;
   }
 
@@ -893,7 +893,7 @@ func_24D4(var_0) {
   }
 
   var_1 = distancesquared(self.var_F126.origin, self.origin);
-  if(self getpersstat(self.var_F126) && var_1 < 122500) {
+  if(self cansee(self.var_F126) && var_1 < 122500) {
     return level.success;
   }
 
@@ -954,14 +954,14 @@ func_E84D(var_0) {
     return level.success;
   }
 
-  if(!isDefined(self.isnodeoccupied) || self.isnodeoccupied != self.loadstartpointtransients) {
+  if(!isDefined(self.enemy) || self.enemy != self.loadstartpointtransients) {
     return level.running;
   }
 
   var_5 = self.bt.shootparams;
-  if(self getpersstat(self.isnodeoccupied)) {
-    var_5.pos = self.isnodeoccupied getshootatpos();
-    var_5.ent = self.isnodeoccupied;
+  if(self cansee(self.enemy)) {
+    var_5.pos = self.enemy getshootatpos();
+    var_5.ent = self.enemy;
   } else {
     return level.running;
   }
@@ -982,7 +982,7 @@ func_E84D(var_0) {
     var_5.objective = "normal";
   }
 
-  scripts\asm\asm_bb::bb_setshootparams(var_5, self.isnodeoccupied);
+  scripts\asm\asm_bb::bb_setshootparams(var_5, self.enemy);
   if(isaimedataimtarget()) {
     if(!self.bt.m_bfiring) {
       resetmisstime_code();
@@ -1025,7 +1025,7 @@ func_12A82(var_0) {
 func_8082() {
   var_0 = self getEye();
   foreach(var_2 in level.players) {
-    if(!self getpersstat(var_2)) {
+    if(!self cansee(var_2)) {
       continue;
     }
 
@@ -1071,7 +1071,7 @@ func_12F1D(var_0) {
     self.var_BF5C = gettime() + randomintrange(3000, 5000);
   }
 
-  if(!isDefined(self.isnodeoccupied) || !isalive(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy) || !isalive(self.enemy)) {
     return level.success;
   }
 
@@ -1080,7 +1080,7 @@ func_12F1D(var_0) {
   }
 
   self.var_BF5C = gettime() + 200;
-  if(self.var_394 != self.primaryweapon) {
+  if(self.weapon != self.primaryweapon) {
     return level.success;
   }
 

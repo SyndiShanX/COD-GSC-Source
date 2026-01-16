@@ -69,10 +69,12 @@ func_1843(var_0, var_1, var_2, var_3, var_4) {
         }
 
         var_7 = 1;
-      } else
+      } else {
         var_6 = scripts\mp\utility\game::outlineenableforteam(self, "cyan", var_2.team, 0, 0, "lowest");
-    } else
+      }
+    } else {
       var_6 = scripts\mp\utility\game::outlineenableforplayer(self, "cyan", var_2, 0, 0, "lowest");
+    }
 
     if(!scripts\mp\utility\game::istrue(var_7)) {
       thread func_E14B(var_6, var_4);
@@ -178,9 +180,10 @@ func_E121(var_0) {
 
   if(level.teambased) {
     var_1 = self.team;
-    level.uavmodels[var_1] = scripts\engine\utility::array_removeundefined(level.uavmodels[var_1]);
-  } else
+    level.uavmodels[var_1] = ::scripts\engine\utility::array_removeundefined(level.uavmodels[var_1]);
+  } else {
     level.uavmodels = scripts\engine\utility::array_removeundefined(level.uavmodels);
+  }
 
   if(isDefined(self)) {
     self delete();
@@ -374,8 +377,9 @@ func_20CF(var_0, var_1) {
     if(level.teambased && var_0.team != var_2 || !level.teambased) {
       var_4 = "orange";
       var_5 = 1;
-    } else
+    } else {
       return;
+    }
   }
 
   if(isDefined(var_4)) {
@@ -576,8 +580,9 @@ dodamagetokillstreak(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       if(!scripts\mp\utility\game::func_9FE7(var_1, var_3, self)) {
         return;
       }
-    } else if(!scripts\mp\utility\game::func_9FD8(var_1, var_3, self))
+    } else if(!scripts\mp\utility\game::func_9FD8(var_1, var_3, self)) {
       return;
+    }
   }
 
   if(isagent(self)) {

@@ -91,12 +91,12 @@ func_9AD8() {
       var_7 show();
     }
 
-    foreach(var_0A in var_3.segments) {
-      if(isDefined(var_0A.var_6E86)) {
-        var_0A.var_6E86 show();
+    foreach(var_10 in var_3.segments) {
+      if(isDefined(var_10.var_6E86)) {
+        var_10.var_6E86 show();
       }
 
-      var_0A show();
+      var_10 show();
     }
 
     if(var_3 == level.var_13563.var_E546[1]) {
@@ -107,18 +107,18 @@ func_9AD8() {
   }
 
   scripts\engine\utility::waitframe();
-  foreach(var_0A in level.var_13563.var_E546[0].segments) {
-    var_0A.var_6E86 unlink();
-    var_0A.var_6E86 rotateroll(-90, 0.05);
+  foreach(var_10 in level.var_13563.var_E546[0].segments) {
+    var_10.var_6E86 unlink();
+    var_10.var_6E86 rotateroll(-90, 0.05);
   }
 
   wait(1);
   level.player playSound("scn_vr_rotate_90");
   level.var_13563.var_E546[1] func_E53E("active");
-  var_0F = 1.5;
+  var_15 = 1.5;
   var_10 = 0.35;
-  level.var_13563.var_E546[1] rotateroll(90, var_0F, var_10, var_10);
-  wait(var_0F + 0.1);
+  level.var_13563.var_E546[1] rotateroll(90, var_15, var_10, var_10);
+  wait(var_15 + 0.1);
   level.var_13563.var_E546[1] func_E53E("passive");
   level.var_13563.var_2F09.origin = var_1.var_CBFA.origin;
   foreach(var_12 in level.var_13563.var_4D95) {
@@ -953,16 +953,16 @@ func_799F(var_0, var_1, var_2) {
       break;
   }
 
-  var_0A = [];
-  for(var_0B = 0; var_0B < var_2; var_0B++) {
-    if(var_0B > var_3.size - 1) {
+  var_10 = [];
+  for(var_11 = 0; var_11 < var_2; var_11++) {
+    if(var_11 > var_3.size - 1) {
       break;
     }
 
-    var_0A[var_0A.size] = var_3[var_0B];
+    var_10[var_10.size] = var_3[var_11];
   }
 
-  return scripts\engine\utility::array_randomize(var_0A);
+  return scripts\engine\utility::array_randomize(var_10);
 }
 
 func_1085F(var_0, var_1, var_2) {
@@ -1396,7 +1396,7 @@ func_A5D0() {
 func_1E3A() {
   level endon("reset_vr");
   for(;;) {
-    level.player scripts\engine\utility::waittill_any_3("reload_start", "weapon_switch_started", "offhand_fired", "weapon_fired");
+    level.player scripts\engine\utility::waittill_any("reload_start", "weapon_switch_started", "offhand_fired", "weapon_fired");
     var_0 = undefined;
     var_1 = undefined;
     var_2 = undefined;
@@ -1407,7 +1407,7 @@ func_1E3A() {
     var_7 = scripts\sp\utility::func_7BD6();
     var_8 = scripts\sp\utility::func_7C3D();
     var_9 = scripts\sp\utility::func_7CAF();
-    var_0A = scripts\sp\utility::func_7CB1();
+    var_10 = scripts\sp\utility::func_7CB1();
     if(isDefined(var_7) && var_7 != "none") {
       var_0 = level.player getweaponammoclip(var_7);
     }
@@ -1420,20 +1420,20 @@ func_1E3A() {
       var_2 = level.player getweaponammoclip(var_9);
     }
 
-    if(isDefined(var_0A) && var_0A != "none") {
-      var_3 = level.player getweaponammoclip(var_0A);
+    if(isDefined(var_10) && var_10 != "none") {
+      var_3 = level.player getweaponammoclip(var_10);
     }
 
     if(lib_0A2F::func_DA40(var_4)) {
       if(issubstr(var_4, "chargeshot") || issubstr(var_4, "penetrationrail")) {
-        var_0B = 2;
-        if(level.player getcurrentweaponclipammo() < var_0B) {
+        var_11 = 2;
+        if(level.player getcurrentweaponclipammo() < var_11) {
           level.player setweaponammoclip(var_4, var_5);
         }
       } else if(issubstr(var_4, "steeldragon")) {
-        var_0B = 25;
+        var_11 = 25;
         if(var_6 < var_5) {
-          if(level.player getcurrentweaponclipammo() < var_0B) {
+          if(level.player getcurrentweaponclipammo() < var_11) {
             level.player givemaxammo(var_4);
           }
         }
@@ -1459,7 +1459,7 @@ func_1E3A() {
     }
 
     if(isDefined(var_3) && var_3 < 1) {
-      level.player givemaxammo(var_0A);
+      level.player givemaxammo(var_10);
     }
   }
 }
@@ -1613,8 +1613,8 @@ func_E241() {
       func_465F(var_9, var_7);
     }
 
-    foreach(var_0C in var_7.segments) {
-      func_F189(var_0C, var_7);
+    foreach(var_12 in var_7.segments) {
+      func_F189(var_12, var_7);
     }
 
     var_7 scripts\sp\utility::func_65DD("ring_spinning");
@@ -1724,16 +1724,16 @@ func_E1A2() {
     }
   }
 
-  foreach(var_0F in level.var_13563.var_4D95) {
-    var_0F moveto(var_0F.origin, 0.05);
-    var_0F hide();
-    if(isDefined(var_0F.var_A645)) {
-      var_0F.var_A645 hide();
-      var_0F.var_A645 hidepart("tag_num" + var_0F.var_A645.var_4B5B);
-      var_0F.var_A645 giveperk("tag_num0");
-      var_0F.var_A645.var_4B5B = 0;
-      foreach(var_11 in var_0F.var_A645.var_1141C) {
-        var_0F.var_A645 hidepart(var_11);
+  foreach(var_15 in level.var_13563.var_4D95) {
+    var_15 moveto(var_15.origin, 0.05);
+    var_15 hide();
+    if(isDefined(var_15.var_A645)) {
+      var_15.var_A645 hide();
+      var_15.var_A645 hidepart("tag_num" + var_15.var_A645.var_4B5B);
+      var_15.var_A645 giveperk("tag_num0");
+      var_15.var_A645.var_4B5B = 0;
+      foreach(var_11 in var_15.var_A645.var_1141C) {
+        var_15.var_A645 hidepart(var_11);
       }
     }
   }
@@ -1759,18 +1759,18 @@ func_10FB6() {
     var_7.var_6E86 stopsounds();
   }
 
-  foreach(var_0C in level.var_13563.var_12B98) {
-    var_0C stopsounds();
-    var_0C givescorefortrophyblocks();
-    var_0C clearanim( % root, 0);
+  foreach(var_12 in level.var_13563.var_12B98) {
+    var_12 stopsounds();
+    var_12 givescorefortrophyblocks();
+    var_12 clearanim( % root, 0);
   }
 
-  foreach(var_0F in level.var_13563.var_4D95) {
-    if(isDefined(var_0F.var_A645)) {
-      var_0F.var_A645 stopsounds();
-      var_0F.var_A645 givescorefortrophyblocks();
-      var_0F.var_A645 clearanim( % root, 0);
-      var_0F.var_A645 scripts\sp\utility::func_65DD("killcounter_animating");
+  foreach(var_15 in level.var_13563.var_4D95) {
+    if(isDefined(var_15.var_A645)) {
+      var_15.var_A645 stopsounds();
+      var_15.var_A645 givescorefortrophyblocks();
+      var_15.var_A645 clearanim( % root, 0);
+      var_15.var_A645 scripts\sp\utility::func_65DD("killcounter_animating");
     }
   }
 }
@@ -1893,14 +1893,14 @@ func_12BA8() {
       }
     }
 
-    foreach(var_0C in var_4.segments) {
-      var_0C.var_CBFA unlink();
-      if(isDefined(var_0C.var_6E86)) {
-        var_0C.var_6E86 unlink();
+    foreach(var_12 in var_4.segments) {
+      var_12.var_CBFA unlink();
+      if(isDefined(var_12.var_6E86)) {
+        var_12.var_6E86 unlink();
       }
 
-      if(isDefined(var_0C.var_6B71)) {
-        foreach(var_8 in var_0C.var_6B71) {
+      if(isDefined(var_12.var_6B71)) {
+        foreach(var_8 in var_12.var_6B71) {
           var_8 unlink();
         }
       }

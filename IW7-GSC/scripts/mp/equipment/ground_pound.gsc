@@ -60,7 +60,7 @@ groundpound_impact(var_0, var_1) {
   if(isDefined(var_2.stopfxontag)) {
     var_4 = spawn("script_model", var_3);
     var_4.angles = var_0.angles;
-    var_4.triggerportableradarping = var_0;
+    var_4.owner = var_0;
     var_4.weapon_name = "groundpound_mp";
     var_4.impactstruct = var_2;
     var_4.killcament = var_0;
@@ -161,42 +161,42 @@ func_8653(var_0, var_1, var_2, var_3, var_4) {
   var_7 = scripts\engine\utility::ter_op(level.hardcoremode, var_5.innerdamagehc, var_5.innerdamage);
   var_8 = scripts\engine\utility::ter_op(level.hardcoremode, var_5.outerdamagehc, var_5.outerdamage);
   var_9 = var_1 scripts\mp\utility::isinarbitraryup();
-  var_0A = scripts\engine\utility::ter_op(var_9, self gettagorigin("TAG_EYE", 1, 1), self gettagorigin("TAG_EYE"));
-  var_0B = abs(vectordot(var_0A - var_3.origin, (0, 0, 1)));
-  var_0C = scripts\engine\utility::ter_op(var_9, self gettagorigin("TAG_ORIGIN", 1, 1), self gettagorigin("TAG_ORIGIN"));
-  var_0D = abs(vectordot(var_0C - var_3.origin, (0, 0, 1)));
-  if(var_0B > var_5.maxzdelta && var_0D > var_5.maxzdelta) {
+  var_10 = scripts\engine\utility::ter_op(var_9, self gettagorigin("TAG_EYE", 1, 1), self gettagorigin("TAG_EYE"));
+  var_11 = abs(vectordot(var_10 - var_3.origin, (0, 0, 1)));
+  var_12 = scripts\engine\utility::ter_op(var_9, self gettagorigin("TAG_ORIGIN", 1, 1), self gettagorigin("TAG_ORIGIN"));
+  var_13 = abs(vectordot(var_12 - var_3.origin, (0, 0, 1)));
+  if(var_11 > var_5.maxzdelta && var_13 > var_5.maxzdelta) {
     return 0;
   }
 
-  var_0E = var_6 != 0;
-  if(var_0E) {
-    var_0E = var_6 < 0;
-    if(!var_0E) {
-      if(!var_0E) {
-        var_0F = distancesquared(var_3.origin, var_1.origin);
-        if(var_0F <= var_6) {
-          var_0E = 1;
+  var_14 = var_6 != 0;
+  if(var_14) {
+    var_14 = var_6 < 0;
+    if(!var_14) {
+      if(!var_14) {
+        var_15 = distancesquared(var_3.origin, var_1.origin);
+        if(var_15 <= var_6) {
+          var_14 = 1;
         }
       }
 
-      if(!var_0E) {
-        var_0F = distancesquared(var_3.origin, var_1 gettagorigin("j_mainroot"));
-        if(var_0F <= var_6) {
-          var_0E = 1;
+      if(!var_14) {
+        var_15 = distancesquared(var_3.origin, var_1 gettagorigin("j_mainroot"));
+        if(var_15 <= var_6) {
+          var_14 = 1;
         }
       }
 
-      if(!var_0E) {
-        var_0F = distancesquared(var_3.origin, var_1 getEye());
-        if(var_0F <= var_6) {
-          var_0E = 1;
+      if(!var_14) {
+        var_15 = distancesquared(var_3.origin, var_1 getEye());
+        if(var_15 <= var_6) {
+          var_14 = 1;
         }
       }
     }
   }
 
-  if(var_0E) {
+  if(var_14) {
     var_4 = scripts\engine\utility::ter_op(var_7 > 0, var_7, var_4);
     if(!var_1 isonground()) {
       var_4 = var_4 * 1;

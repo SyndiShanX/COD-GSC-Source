@@ -6,11 +6,11 @@
 init() {
   level.seismic_trap_settings = [];
   var_0 = spawnStruct();
-  var_0.var_39B = "zmb_robotprojectile_mp";
+  var_0.weaponinfo = "zmb_robotprojectile_mp";
   var_0.modelbase = "cp_town_seismic_wave_device";
   var_0.modelplacement = "cp_town_seismic_wave_device_good";
   var_0.modelplacementfailed = "cp_town_seismic_wave_device_bad";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -128,7 +128,7 @@ create_seismic_trap_for_player(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.seismic_trap_type = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_seismic";
   var_2.carried_seismic_trap = spawn("script_model", var_2.origin);
   var_2.carried_seismic_trap.angles = var_1.angles;
@@ -141,14 +141,14 @@ create_seismic_trap_for_player(var_0, var_1) {
 }
 
 create_seismic_trap(var_0, var_1) {
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_3 = var_0.seismic_trap_type;
   var_4 = spawn("script_model", var_0.origin + (0, 0, 2));
   var_4 setModel(level.seismic_trap_settings[var_3].modelbase);
   var_4.var_EB9C = 3;
   var_4.angles = (0, var_0.carried_seismic_trap.angles[1], 0);
   var_4.seismic_trap_type = var_3;
-  var_4.triggerportableradarping = var_2;
+  var_4.owner = var_2;
   var_4 setotherent(var_2);
   var_4.team = var_2.team;
   var_4.name = "crafted_seismic";
@@ -239,14 +239,14 @@ seismic_trap_setplaced(var_0) {
   }
 
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.firstplacement = undefined;
   var_1 = create_seismic_trap(self, var_0);
   var_1.isplaced = 1;
-  var_1 thread func_9367(self.triggerportableradarping);
+  var_1 thread func_9367(self.owner);
   self playSound("trap_boom_box_drop");
   self notify("placed");
   var_1 thread seismic_trap_setactive();
@@ -315,9 +315,9 @@ func_9371(var_0) {
 seismic_trap_setactive() {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.seismic_trap_settings[self.seismic_trap_type].pow);
+  self sethintstring(level.seismic_trap_settings[self.seismic_trap_type].hintstring);
   scripts\cp\utility::addtotraplist();
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
   scripts\cp\utility::setselfusable(var_0);
   self setusefov(120);
@@ -386,8 +386,8 @@ seismic_trap_kill_zombies() {
       }
 
       level thread fling_zombie(self, var_2);
-      if(isDefined(self.triggerportableradarping)) {
-        self.triggerportableradarping scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
+      if(isDefined(self.owner)) {
+        self.owner scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
       }
     }
 
@@ -412,8 +412,8 @@ fling_zombie(var_0, var_1) {
   var_2 = vectornormalize((var_2[0], var_2[1], 0));
   var_1.ragdollimpactvector = var_2 * 3500;
   var_3 = undefined;
-  if(isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping scripts\cp\utility::is_valid_player()) {
-    var_3 = var_0.triggerportableradarping;
+  if(isDefined(var_0.owner) && var_0.owner scripts\cp\utility::is_valid_player()) {
+    var_3 = var_0.owner;
   }
 
   var_1 dodamage(var_1.health + 100, var_0.origin + (0, 0, -50), var_3, var_3, "MOD_UNKNOWN", "iw7_fantrap_zm");

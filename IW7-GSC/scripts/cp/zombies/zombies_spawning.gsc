@@ -455,7 +455,7 @@ func_772C(var_0, var_1) {
     var_8 = randomintrange(var_3 * -1, var_3);
     var_5 = getclosestpointonnavmesh((var_0[0] + var_7, var_0[1] + var_8, var_0[2]));
     var_6 = 1;
-    foreach(var_0A in level.players) {
+    foreach(var_10 in level.players) {
       if(positionwouldtelefrag(var_5)) {
         var_6 = 0;
       }
@@ -600,11 +600,11 @@ func_8456(var_0) {
     }
   }
 
-  var_0B = 562500;
-  var_0C = 4000000;
-  var_0D = 9000000;
-  var_0E = 122500;
-  var_0F = -25536;
+  var_11 = 562500;
+  var_12 = 4000000;
+  var_13 = 9000000;
+  var_14 = 122500;
+  var_15 = -25536;
   var_10 = -99999999;
   var_11 = undefined;
   var_12 = 15000;
@@ -629,13 +629,13 @@ func_8456(var_0) {
     }
 
     var_1D = distancesquared(var_17.origin, var_6.origin);
-    if(var_1D < var_0E) {
+    if(var_1D < var_14) {
       var_1A = var_1A - -15536;
       var_15 = var_15 + " Too Close";
-    } else if(var_1D > var_0D) {
+    } else if(var_1D > var_13) {
       var_1A = var_1A - -15536;
       var_15 = var_15 + " Too Far";
-    } else if(var_1D < var_0B) {
+    } else if(var_1D < var_11) {
       if(var_1C < max(int(level.specialroundcounter + 1) * 10, 20)) {
         var_1A = var_1A + var_1B;
         var_15 = var_15 + " Chance Close";
@@ -643,7 +643,7 @@ func_8456(var_0) {
         var_1A = var_1A - var_1B;
         var_15 = var_15 + " Close";
       }
-    } else if(var_1D > var_0C) {
+    } else if(var_1D > var_12) {
       var_1A = var_1A - var_1B;
       var_15 = var_15 + " Far";
     } else {
@@ -666,7 +666,7 @@ func_8456(var_0) {
   for(var_1F = var_18.size - 1; var_1F >= 0; var_1F--) {
     var_20 = 1;
     foreach(var_17 in level.players) {
-      if(distancesquared(var_17.origin, var_18[var_1F].origin) < var_0F) {
+      if(distancesquared(var_17.origin, var_18[var_1F].origin) < var_15) {
         var_20 = 0;
         break;
       }
@@ -1246,14 +1246,14 @@ func_10927() {
       continue;
     }
 
-    var_0A = undefined;
+    var_10 = undefined;
     if(!isDefined(level.respawn_data) && level.respawn_enemy_list.size > 0) {
       level.respawn_data = level.respawn_enemy_list[0];
     }
 
     if((var_2 && var_5 < 1) || scripts\engine\utility::flag("force_spawn_boss")) {
-      var_0A = func_2CFC();
-      if(isDefined(var_0A)) {
+      var_10 = func_2CFC();
+      if(isDefined(var_10)) {
         if(scripts\engine\utility::flag("force_spawn_boss")) {
           scripts\engine\utility::flag_clear("force_spawn_boss");
         }
@@ -1263,20 +1263,20 @@ func_10927() {
         }
       }
     } else if(should_spawn_clown() && var_5 < var_6) {
-      var_0A = get_spawner_and_spawn_goons(var_9);
+      var_10 = get_spawner_and_spawn_goons(var_9);
     } else if(respawning_special_zombie()) {
-      var_0A = get_spawner_and_spawn_goons(var_9);
+      var_10 = get_spawner_and_spawn_goons(var_9);
     } else {
       if(var_5) {
         var_5--;
       }
 
-      var_0A = spawn_zombie();
+      var_10 = spawn_zombie();
     }
 
-    if(isDefined(var_0A)) {
+    if(isDefined(var_10)) {
       if(level.respawning_enemies > 0) {
-        level.respawning_enemies = int(level.respawning_enemies - var_0A);
+        level.respawning_enemies = int(level.respawning_enemies - var_10);
         wait(0.1);
         continue;
       }
@@ -1547,8 +1547,8 @@ func_A5FA(var_0, var_1) {
   }
 
   if(var_0 > var_3) {
-    var_0B = scripts\engine\utility::array_randomize(level.spawned_enemies);
-    foreach(var_5 in var_0B) {
+    var_11 = scripts\engine\utility::array_randomize(level.spawned_enemies);
+    foreach(var_5 in var_11) {
       if(isDefined(var_5.dont_scriptkill)) {
         continue;
       }
@@ -1969,7 +1969,7 @@ func_13F1D(var_0, var_1, var_2) {
 }
 
 func_5173(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "emerge_done");
+  scripts\engine\utility::waittill_any("death", "emerge_done");
   if(isDefined(var_0)) {
     var_0 delete();
   }
@@ -2287,10 +2287,10 @@ make_volume_active() {
   }
 
   var_8 = scripts\engine\utility::getstructarray("secure_window", "script_noteworthy");
-  foreach(var_0A in var_8) {
-    if(ispointinvolume(var_0A.origin, self)) {
-      var_0B = scripts\engine\utility::getclosest(var_0A.origin, level.window_entrances);
-      var_0B.enabled = 1;
+  foreach(var_10 in var_8) {
+    if(ispointinvolume(var_10.origin, self)) {
+      var_11 = scripts\engine\utility::getclosest(var_10.origin, level.window_entrances);
+      var_11.enabled = 1;
     }
   }
 
@@ -2501,7 +2501,7 @@ func_3114() {
     level.var_3120 = [];
   }
 
-  level.var_3120 = scripts\engine\utility::array_add_safe(level.var_3120, self);
+  level.var_3120 = scripts\engine\utility::add_to_array(level.var_3120, self);
   self.allowpain = 0;
   self.is_reserved = 1;
   increase_reserved_spawn_slots(1);
@@ -3176,7 +3176,7 @@ func_310F() {
   thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix);
   self.playing_stumble = 0;
   for(;;) {
-    var_0 = scripts\engine\utility::waittill_any_timeout_1(6, "attack_hit", "attack_miss");
+    var_0 = scripts\engine\utility::waittill_any_timeout(6, "attack_hit", "attack_miss");
     switch (var_0) {
       case "attack_hit":
         level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "attack_swipe", 0);
@@ -3346,14 +3346,14 @@ func_5773(var_0) {
     }
 
     if(isDefined(var_0)) {
-      var_0B = var_0;
+      var_11 = var_0;
     } else if(isDefined(var_7) && func_CF4C(var_7)) {
-      var_0B = 189225;
+      var_11 = 189225;
     } else {
-      var_0B = 1000000;
+      var_11 = 1000000;
     }
 
-    if(var_5 >= var_0B) {
+    if(var_5 >= var_11) {
       if(!var_4) {
         if(level.last_mini_zone_fail + 1000 > gettime()) {
           return;
@@ -3516,9 +3516,9 @@ func_F5EC() {
       }
 
       if(isDefined(level.var_B789[var_7].target)) {
-        var_0A = level.var_B789[var_7].target;
-        level.var_B789[var_7].var_186E[var_0A] = level.var_B789[var_0A];
-        level.var_B789[var_0A].var_186E[var_7] = level.var_B789[var_7];
+        var_10 = level.var_B789[var_7].target;
+        level.var_B789[var_7].var_186E[var_10] = level.var_B789[var_10];
+        level.var_B789[var_10].var_186E[var_7] = level.var_B789[var_7];
       }
 
       var_4++;
@@ -3608,7 +3608,7 @@ func_FF55(var_0) {
     return 1;
   }
 
-  var_1 = isDefined(self.isnodeoccupied) && isDefined(self.isnodeoccupied.is_fast_traveling);
+  var_1 = isDefined(self.enemy) && isDefined(self.enemy.is_fast_traveling);
   if(!var_1 && distancesquared(var_0.origin, getclosestpointonnavmesh(var_0.origin)) > 10000) {
     return 1;
   }
@@ -3663,7 +3663,7 @@ add_idle_spot(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0;
   var_1.var_336 = "zombie_idle_spot";
-  level.var_13F33 = scripts\engine\utility::array_add_safe(level.var_13F33, var_1);
+  level.var_13F33 = scripts\engine\utility::add_to_array(level.var_13F33, var_1);
 }
 
 move_idle_spot(var_0, var_1) {
@@ -3762,7 +3762,7 @@ func_DDC7(var_0, var_1) {
 }
 
 func_DF41() {
-  scripts\engine\utility::waittill_any_3("StopFindTargetNoGoal", "death");
+  scripts\engine\utility::waittill_any("StopFindTargetNoGoal", "death");
   self.var_92E8.var_E540.var_1621[self.var_92E9] = 0;
   self.var_92E8 = undefined;
   self.var_92E9 = undefined;

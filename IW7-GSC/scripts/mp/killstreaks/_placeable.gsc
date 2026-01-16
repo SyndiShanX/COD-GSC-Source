@@ -28,7 +28,7 @@ createplaceable(var_0) {
   var_2 = spawn("script_model", self.origin);
   var_2 setModel(var_1.modelbase);
   var_2.angles = self.angles;
-  var_2.triggerportableradarping = self;
+  var_2.owner = self;
   var_2.team = self.team;
   var_2.config = var_1;
   var_2.firstplacement = 1;
@@ -141,8 +141,8 @@ onplaced(var_0) {
   }
 
   self setcursorhint("HINT_NOICON");
-  self sethintstring(var_1.pow);
-  var_2 = self.triggerportableradarping;
+  self sethintstring(var_1.hintstring);
+  var_2 = self.owner;
   var_2 getrigindexfromarchetyperef();
   var_2.iscarrying = undefined;
   self.carriedby = undefined;
@@ -159,7 +159,7 @@ onplaced(var_0) {
   thread handledamage(var_0);
   thread handledeath(var_0);
   self makeusable();
-  scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.triggerportableradarping);
+  scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.owner);
   foreach(var_4 in level.players) {
     if(var_4 == var_2) {
       self enableplayeruse(var_4);
@@ -263,7 +263,7 @@ hideheadicons() {
     return;
   }
 
-  if(isDefined(self.triggerportableradarping)) {
+  if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 }
@@ -299,7 +299,7 @@ handledeathdamage(var_0, var_1, var_2, var_3) {
   var_4 = self.config;
   var_5 = scripts\mp\damage::onkillstreakkilled(self.streakname, var_0, var_1, var_2, var_3, var_4.scorepopup, var_4.var_52DA);
   if(var_5 && isDefined(var_4.var_C4F3)) {
-    self[[var_4.var_C4F3]](self.streakname, var_0, self.triggerportableradarping, var_2);
+    self[[var_4.var_C4F3]](self.streakname, var_0, self.owner, var_2);
   }
 }
 
@@ -337,7 +337,7 @@ oncarrierdeath(var_0, var_1) {
 func_C547(var_0) {
   self endon("death");
   level endon("game_ended");
-  self.triggerportableradarping waittill("killstreak_disowned");
+  self.owner waittill("killstreak_disowned");
   cleanup(var_0);
 }
 
@@ -384,8 +384,8 @@ timeout(var_0) {
     }
   }
 
-  if(isDefined(self.triggerportableradarping) && isDefined(var_1.gonevo)) {
-    self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer(var_1.gonevo);
+  if(isDefined(self.owner) && isDefined(var_1.gonevo)) {
+    self.owner thread scripts\mp\utility::leaderdialogonplayer(var_1.gonevo);
   }
 
   self notify("death");
@@ -425,7 +425,7 @@ createbombsquadmodel(var_0) {
     var_2 = spawn("script_model", self.origin);
     var_2.angles = self.angles;
     var_2 hide();
-    var_2 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+    var_2 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
     var_2 setModel(var_1.modelbombsquad);
     var_2 linkto(self);
     var_2 setcontents(0);
@@ -460,7 +460,7 @@ createcarriedobject(var_0) {
 
   var_1 = spawnturret("misc_turret", self.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = self.angles;
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   var_2 = level.placeableconfigs[var_0];
   var_1 setModel(var_2.modelbase);
   var_1 getvalidattachments();

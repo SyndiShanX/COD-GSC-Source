@@ -19,8 +19,9 @@ mt_setprogress(var_0, var_1) {
     if(level.wave_num >= var_3) {
       return self setrankedplayerdata("cp", "meritProgress", var_0, var_3);
     }
-  } else
+  } else {
     return self setrankedplayerdata("cp", "meritProgress", var_0, var_1);
+  }
 }
 
 mt_setstate(var_0, var_1) {

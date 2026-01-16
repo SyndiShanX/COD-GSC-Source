@@ -683,34 +683,34 @@ func_28ED() {
     }
 
     var_9 = level.spawned_enemies;
-    foreach(var_0B in var_9) {
-      if(!isDefined(var_0B) || var_0B == self || !scripts\cp\utility::isreallyalive(var_0B)) {
+    foreach(var_11 in var_9) {
+      if(!isDefined(var_11) || var_11 == self || !scripts\cp\utility::isreallyalive(var_11)) {
         continue;
       }
 
-      if(isDefined(var_0B.agent_type) && var_0B.agent_type == "zombie_brute" || var_0B.agent_type == "zombie_grey") {
+      if(isDefined(var_11.agent_type) && var_11.agent_type == "zombie_brute" || var_11.agent_type == "zombie_grey") {
         continue;
       }
 
-      if(func_28EA(var_0B)) {
+      if(func_28EA(var_11)) {
         continue;
       }
 
-      if(!func_D64A(2304, 56, self.origin + var_4, var_2, var_0B gettagorigin("j_mainroot"))) {
+      if(!func_D64A(2304, 56, self.origin + var_4, var_2, var_11 gettagorigin("j_mainroot"))) {
         continue;
       }
 
-      if(func_28E8(var_0B, var_3)) {
+      if(func_28E8(var_11, var_3)) {
         continue;
       }
 
-      if(func_28E7(var_0B, self.origin + var_4 + var_5, var_6)) {
+      if(func_28E7(var_11, self.origin + var_4 + var_5, var_6)) {
         continue;
       }
 
-      func_28F5(var_0B);
-      func_28E3(var_0B);
-      func_28EB(var_0B, var_3);
+      func_28F5(var_11);
+      func_28E3(var_11);
+      func_28EB(var_11, var_3);
     }
 
     scripts\engine\utility::waitframe();

@@ -126,8 +126,8 @@ func_23D7(var_0) {
     }
   }
 
-  foreach(var_0A, var_6 in var_1) {
-    var_6 give_zombies_perk("player" + var_0A + 1);
+  foreach(var_10, var_6 in var_1) {
+    var_6 give_zombies_perk("player" + var_10 + 1);
   }
 }
 
@@ -381,7 +381,7 @@ summon_a_zombie_at(var_0, var_1) {
     playsoundatpos(var_0 + (0, 0, -11), "zmb_grey_energy_ring_activate");
     var_5 = thread scripts\engine\utility::play_loopsound_in_space("zmb_grey_energy_ring_activate_lp", var_0 + (0, 0, -11));
     triggerfx(var_4);
-    var_3 scripts\engine\utility::waittill_any_3("death", "intro_vignette_done");
+    var_3 scripts\engine\utility::waittill_any("death", "intro_vignette_done");
     if(scripts\engine\utility::istrue(var_1) && isDefined(var_3)) {
       var_3 scragentsetanimscale(1, 1);
     }
@@ -699,9 +699,9 @@ func_13F7A(var_0, var_1, var_2, var_3) {
   var_7 = self.teleport_loner_target_player;
   var_8 = func_7B0B(var_7.origin);
   var_9 = func_7B0A(var_7 getplayerangles(), var_7.origin, func_7CE9(), 350);
-  var_0A = func_7CEE(self, var_8, var_9);
-  func_85F3(var_6, var_0A);
-  self setorigin(var_0A);
+  var_10 = func_7CEE(self, var_8, var_9);
+  func_85F3(var_6, var_10);
+  self setorigin(var_10);
   self.angles = vectortoangles(var_7.origin - self.origin);
   self show();
   self notify("update_mobile_shield_visibility", 1);
@@ -862,7 +862,7 @@ func_85FF(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_bb::bb_getmeleetarget();
   if(!isDefined(var_4)) {
     self orientmode("face angle abs", self.angles);
-  } else if(isplayer(var_4) && isDefined(self.isnodeoccupied) && var_4 == self.isnodeoccupied) {
+  } else if(isplayer(var_4) && isDefined(self.enemy) && var_4 == self.enemy) {
     self orientmode("face enemy");
   } else {
     var_5 = var_4.origin - self.origin;
@@ -986,13 +986,13 @@ func_6D07(var_0, var_1, var_2, var_3, var_4) {
   var_8 = var_1 / var_7;
   var_6 thread func_FE3A(var_6);
   for(var_9 = 0; var_9 < var_7; var_9++) {
-    var_0A = var_6.origin;
-    var_0B = anglesToForward(var_6.angles);
-    var_6.origin = var_0A + var_3 * var_8;
-    var_0C = var_0B * var_5;
-    var_0D = var_0A + var_0C;
-    var_0E = var_0A - var_0C;
-    playfxbetweenpoints(level._effect["zombie_mini_grey_shock_arc"], var_0D, vectortoangles(var_0E - var_0D), var_0E);
+    var_10 = var_6.origin;
+    var_11 = anglesToForward(var_6.angles);
+    var_6.origin = var_10 + var_3 * var_8;
+    var_12 = var_11 * var_5;
+    var_13 = var_10 + var_12;
+    var_14 = var_10 - var_12;
+    playfxbetweenpoints(level._effect["zombie_mini_grey_shock_arc"], var_13, vectortoangles(var_14 - var_13), var_14);
     scripts\engine\utility::waitframe();
   }
 

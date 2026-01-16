@@ -229,8 +229,9 @@ stopridingvehicle(var_0, var_1) {
     var_7 = scripts\engine\utility::ter_op(issuperready(), 1, 0);
     self setweaponammoclip(var_2.weapon, var_7);
     self assignweaponoffhandspecial(var_2.weapon);
-  } else
+  } else {
     thread func_13B6D();
+  }
 
   thread func_13A6F();
   thread func_12F32();
@@ -461,8 +462,9 @@ func_2A79() {
       } else if(scripts\mp\utility\game::istryingtousekillstreak() && superdisabledduringkillstreak(var_0.staticdata.ref)) {
         superdisabledduringkillstreakmessage();
         var_1 = 0;
-      } else
+      } else {
         var_1 = func_1289E(var_0.staticdata.useweapon, var_0.staticdata.var_130F9, var_0.staticdata.var_130FA);
+      }
     }
 
     if(var_1 && (!isDefined(var_0.staticdata.beginusefunc) || scripts\mp\utility\game::istrue(self[[var_0.staticdata.beginusefunc]]()))) {
@@ -744,7 +746,7 @@ func_110C4() {
   } else if(issuperready()) {
     self.pers["superCooldownTime"] = getcurrentsuper().var_461E;
   } else if(issuperinuse()) {
-    self.pers["superCooldownTime"] = scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().var_461E, 0);
+    self.pers["superCooldownTime"] = ::scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().var_461E, 0);
   } else {
     self.pers["superCooldownTime"] = 0;
   }
@@ -1212,8 +1214,9 @@ givesuperweapon(var_0) {
       self setweaponammoclip(var_0.staticdata.weapon, var_1);
       self assignweaponoffhandspecial(var_0.staticdata.weapon);
     }
-  } else
+  } else {
     stoprumble();
+  }
 }
 
 watchobjuse(var_0, var_1) {
@@ -1226,8 +1229,9 @@ watchobjuse(var_0, var_1) {
     if(scripts\mp\utility\game::istrue(var_1)) {
       self waittill("super_obj_drain");
     }
-  } else if(!isDefined(self.carryobject))
+  } else if(!isDefined(self.carryobject)) {
     self waittill("obj_picked_up");
+  }
   else {
     wait 0.05;
   }

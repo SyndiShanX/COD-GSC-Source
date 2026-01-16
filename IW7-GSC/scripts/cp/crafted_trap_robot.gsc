@@ -6,11 +6,11 @@
 init() {
   level.robot_trap_settings = [];
   var_0 = spawnStruct();
-  var_0.var_39B = "zmb_robotprojectile_mp";
+  var_0.weaponinfo = "zmb_robotprojectile_mp";
   var_0.modelbase = "cp_disco_rocket_robot";
   var_0.modelplacement = "cp_disco_rocket_robot";
   var_0.modelplacementfailed = "cp_disco_rocket_robot_bad";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -132,7 +132,7 @@ create_robot_trap_for_player(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.robot_trap_type = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_ims";
   var_2.carried_robot_trap = spawn("script_model", var_2.origin);
   var_2.carried_robot_trap.angles = var_1.angles;
@@ -145,14 +145,14 @@ create_robot_trap_for_player(var_0, var_1) {
 }
 
 create_robot_trap(var_0, var_1) {
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_3 = var_0.robot_trap_type;
   var_4 = spawn("script_model", var_0.origin + (0, 0, 2));
   var_4 setModel(level.robot_trap_settings[var_3].modelbase);
   var_4.var_EB9C = 3;
   var_4.angles = (0, var_0.carried_robot_trap.angles[1], 0);
   var_4.robot_trap_type = var_3;
-  var_4.triggerportableradarping = var_2;
+  var_4.owner = var_2;
   var_4 setotherent(var_2);
   var_4.team = var_2.team;
   var_4.name = "crafted_ims";
@@ -246,14 +246,14 @@ robot_trap_setplaced(var_0) {
   }
 
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.firstplacement = undefined;
   var_1 = create_robot_trap(self, var_0);
   var_1.isplaced = 1;
-  var_1 thread func_9367(self.triggerportableradarping);
+  var_1 thread func_9367(self.owner);
   self playSound("trap_boom_box_drop");
   self notify("placed");
   var_1 thread robot_trap_setactive();
@@ -322,9 +322,9 @@ func_9371(var_0) {
 robot_trap_setactive() {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.robot_trap_settings[self.robot_trap_type].pow);
+  self sethintstring(level.robot_trap_settings[self.robot_trap_type].hintstring);
   scripts\cp\utility::addtotraplist();
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
   self setusefov(120);
   self setuserange(96);
@@ -350,8 +350,8 @@ robot_trap_setactive() {
   self setscriptablepartstate("head_coils", "on");
   self setscriptablepartstate("LED_Panel", "Idle");
   thread rotate_robot();
-  if(isDefined(self.triggerportableradarping)) {
-    thread robot_usability_monitor(self.triggerportableradarping);
+  if(isDefined(self.owner)) {
+    thread robot_usability_monitor(self.owner);
   }
 
   thread robot_trap_attackzombies();
@@ -392,7 +392,7 @@ robot_usability_monitor(var_0) {
           self makeunusable();
           self disableplayeruse(var_0);
         } else {
-          self sethintstring(level.robot_trap_settings[self.robot_trap_type].pow);
+          self sethintstring(level.robot_trap_settings[self.robot_trap_type].hintstring);
           self setusefov(120);
           self setuserange(112);
           self makeusable();
@@ -472,7 +472,7 @@ robot_trap_attackzombies() {
     }
 
     wait(self.config.var_DDAC);
-    if(!isDefined(self.triggerportableradarping)) {
+    if(!isDefined(self.owner)) {
       break;
     }
 
@@ -481,7 +481,7 @@ robot_trap_attackzombies() {
     }
   }
 
-  if(isDefined(self.carriedby) && isDefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping) {
+  if(isDefined(self.carriedby) && isDefined(self.owner) && self.carriedby == self.owner) {
     return;
   }
 
@@ -493,8 +493,8 @@ robot_zap(var_0) {
   var_0.electrocuted = 1;
   thread electrocute_zombie(var_0);
   var_0 setscriptablepartstate("electrocuted", "on");
-  if(isDefined(self.triggerportableradarping)) {
-    var_1 = self.triggerportableradarping;
+  if(isDefined(self.owner)) {
+    var_1 = self.owner;
   } else {
     var_1 = undefined;
   }
@@ -535,8 +535,8 @@ launch_rocket(var_0, var_1, var_2) {
   var_4 = spawn("script_model", var_3);
   var_4 setModel(self.config.var_6A03);
   var_4.angles = self.angles;
-  var_5 = self.config.var_39B;
-  var_6 = self.triggerportableradarping;
+  var_5 = self.config.weaponinfo;
+  var_6 = self.owner;
   var_7 = self.var_2514;
   if(var_2) {
     var_7 = self.alt_attackheightpos;

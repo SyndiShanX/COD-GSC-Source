@@ -323,7 +323,7 @@ setteam(var_0) {
 
   if(level.ingraceperiod && !self.hasdonecombat) {
     self.hasspawned = 0;
-    self.pers["lives"] = scripts\mp\utility::getgametypenumlives();
+    self.pers["lives"] = ::scripts\mp\utility::getgametypenumlives();
   }
 
   if(self.sessionstate == "playing") {

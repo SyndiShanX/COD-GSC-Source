@@ -43,7 +43,7 @@ initbroshot(var_0) {
     }
   } else {
     var_3 = scripts\engine\utility::array_sort_with_func(level.players, ::compare_player_score);
-    if(!scripts\mp\utility::istrue(level.forcebroshot) && var_3[0].destroynavrepulsor <= 0) {
+    if(!scripts\mp\utility::istrue(level.forcebroshot) && var_3[0].score <= 0) {
       return 0;
     }
   }
@@ -72,8 +72,8 @@ initbroshot(var_0) {
     var_8 = physics_raycast(var_6, var_5, var_7, undefined, 1, "physicsquery_closest");
     var_9 = isDefined(var_8) && var_8.size > 0;
     if(var_9) {
-      var_0A = var_8[0]["position"];
-      level.camera_bro_shot.char_loc[var_4].origin = var_0A;
+      var_10 = var_8[0]["position"];
+      level.camera_bro_shot.char_loc[var_4].origin = var_10;
     }
   }
 
@@ -138,51 +138,51 @@ startbroshot(var_0) {
     var_3 hideeffectsforbroshot();
   }
 
-  for(var_0A = 0; var_0A < 6; var_0A++) {
-    if(!isDefined(level.topplayers[var_0A])) {
+  for(var_10 = 0; var_10 < 6; var_10++) {
+    if(!isDefined(level.topplayers[var_10])) {
       break;
     }
 
-    if(!isDefined(level.topplayers[var_0A].loadoutarchetype)) {
+    if(!isDefined(level.topplayers[var_10].loadoutarchetype)) {
       continue;
     }
 
-    self.mvparray[var_0A] = spawnStruct();
+    self.mvparray[var_10] = spawnStruct();
     if(level.gametype == "infect") {
-      if(isbot(level.topplayers[var_0A])) {
-        var_0B = level.topplayers[var_0A].loadoutarchetype;
+      if(isbot(level.topplayers[var_10])) {
+        var_11 = level.topplayers[var_10].loadoutarchetype;
       } else {
-        var_0B = level.topplayers[var_0A] scripts\mp\class::cac_getcharacterarchetype();
+        var_11 = level.topplayers[var_10] scripts\mp\class::cac_getcharacterarchetype();
       }
     } else {
-      var_0B = level.topplayers[var_0A].loadoutarchetype;
+      var_11 = level.topplayers[var_10].loadoutarchetype;
     }
 
-    var_0C = tablelookuprownum("mp\battleRigTable.csv", 1, var_0B);
-    if(isbot(level.topplayers[var_0A]) || isDefined(level.topplayers[var_0A].lastarchetypeinfo)) {
-      var_0D = level.topplayers[var_0A] getcustomizationbody();
-      var_0E = level.topplayers[var_0A] getcustomizationhead();
-      var_0F = tablelookuprownum("mp\cac\heads.csv", 1, var_0E);
-      var_10 = tablelookuprownum("mp\cac\bodies.csv", 1, var_0D);
-      if(isDefined(level.topplayers[var_0A].lastarchetypeinfo)) {
-        var_0C = tablelookuprownum("mp\battleRigTable.csv", 1, level.topplayers[var_0A].lastarchetypeinfo.archetype);
+    var_12 = tablelookuprownum("mp\battleRigTable.csv", 1, var_11);
+    if(isbot(level.topplayers[var_10]) || isDefined(level.topplayers[var_10].lastarchetypeinfo)) {
+      var_13 = level.topplayers[var_10] getcustomizationbody();
+      var_14 = level.topplayers[var_10] getcustomizationhead();
+      var_15 = tablelookuprownum("mp\cac\heads.csv", 1, var_14);
+      var_10 = tablelookuprownum("mp\cac\bodies.csv", 1, var_13);
+      if(isDefined(level.topplayers[var_10].lastarchetypeinfo)) {
+        var_12 = tablelookuprownum("mp\battleRigTable.csv", 1, level.topplayers[var_10].lastarchetypeinfo.archetype);
       }
     } else {
-      var_10 = level.topplayers[var_0A] scripts\mp\teams::getplayermodelindex();
-      var_0F = level.topplayers[var_0A] scripts\mp\teams::getplayerheadmodel();
+      var_10 = level.topplayers[var_10] scripts\mp\teams::getplayermodelindex();
+      var_15 = level.topplayers[var_10] scripts\mp\teams::getplayerheadmodel();
     }
 
-    self.mvparray[var_0A].setprintchannel = var_0C;
-    self.mvparray[var_0A].var_6A = var_10;
-    self.mvparray[var_0A].playfxontag = var_0F;
-    self.mvparray[var_0A].var_39C = getdisplayweapon(level.topplayers[var_0A]);
-    self.mvparray[var_0A].var_9C = level.topplayers[var_0A] getclantag();
-    self.mvparray[var_0A].name = level.topplayers[var_0A].name;
-    self.mvparray[var_0A].var_3A3 = level.topplayers[var_0A] getxuid();
-    self.mvparray[var_0A].podiumindex = var_0A;
-    self.mvparray[var_0A].clientnum = level.topplayers[var_0A] getentitynumber();
-    level.topplayers[var_0A] setguntypeforui(var_0A);
-    level.topplayers[var_0A].bro = makebrowinner(var_0A, level.camera_bro_shot.char_loc[var_0A]);
+    self.mvparray[var_10].setprintchannel = var_12;
+    self.mvparray[var_10].var_6A = var_10;
+    self.mvparray[var_10].playfxontag = var_15;
+    self.mvparray[var_10].var_39C = getdisplayweapon(level.topplayers[var_10]);
+    self.mvparray[var_10].var_9C = level.topplayers[var_10] getclantag();
+    self.mvparray[var_10].name = level.topplayers[var_10].name;
+    self.mvparray[var_10].var_3A3 = level.topplayers[var_10] getxuid();
+    self.mvparray[var_10].podiumindex = var_10;
+    self.mvparray[var_10].clientnum = level.topplayers[var_10] getentitynumber();
+    level.topplayers[var_10] setguntypeforui(var_10);
+    level.topplayers[var_10].bro = makebrowinner(var_10, level.camera_bro_shot.char_loc[var_10]);
   }
 
   foreach(var_3 in level.players) {
@@ -313,10 +313,10 @@ cleanupgamemodes() {
 
   if(scripts\mp\utility::istrue(level.dogtagsenabled)) {
     if(isDefined(level.dogtags)) {
-      foreach(var_0E in level.dogtags) {
-        if(isDefined(var_0E) && isDefined(var_0E.visuals)) {
-          for(var_9 = 0; var_9 < var_0E.visuals.size; var_9++) {
-            var_0E.visuals[var_9] hide();
+      foreach(var_14 in level.dogtags) {
+        if(isDefined(var_14) && isDefined(var_14.visuals)) {
+          for(var_9 = 0; var_9 < var_14.visuals.size; var_9++) {
+            var_14.visuals[var_9] hide();
           }
         }
       }
@@ -473,51 +473,51 @@ dotaunt(var_0, var_1) {
   var_7 = tablelookup("mp\cac\taunts.csv", 0, var_4, 20);
   var_8 = tablelookup("mp\cac\taunts.csv", 0, var_4, 21);
   var_9 = tablelookup("mp\cac\taunts.csv", 0, var_4, 12) == "Y";
-  var_0A = tablelookup("mp\cac\taunts.csv", 0, var_4, 9);
-  var_0B = "ui_broshot_anim_" + var_0;
-  if(isDefined(level.interruptabletaunts[var_0]) && level.interruptabletaunts[var_0] == var_0A) {
+  var_10 = tablelookup("mp\cac\taunts.csv", 0, var_4, 9);
+  var_11 = "ui_broshot_anim_" + var_0;
+  if(isDefined(level.interruptabletaunts[var_0]) && level.interruptabletaunts[var_0] == var_10) {
     self notify("taunt_end");
     return;
   }
 
-  var_0C = getdisplayweapon(self) == "none" || getdisplayweapon(self) == "iw7_fists_mp";
-  if(!isDefined(level.firsttaunttracker[var_0B]) && !var_0C) {
-    if(!var_9 && isDefined(level.supergunout[var_0B])) {
-      level.firsttaunttracker[var_0B] = 1;
-      putgunaway(var_0B);
+  var_12 = getdisplayweapon(self) == "none" || getdisplayweapon(self) == "iw7_fists_mp";
+  if(!isDefined(level.firsttaunttracker[var_11]) && !var_12) {
+    if(!var_9 && isDefined(level.supergunout[var_11])) {
+      level.firsttaunttracker[var_11] = 1;
+      putgunaway(var_11);
     }
 
     if(!var_9) {
-      level.supergunout[var_0B] = undefined;
+      level.supergunout[var_11] = undefined;
     }
   }
 
-  if(var_9 && !isDefined(level.supergunout[var_0B])) {
-    level.firsttaunttracker[var_0B] = undefined;
-    takesupergunout(var_0B, var_5);
-    level.supergunout[var_0B] = 1;
+  if(var_9 && !isDefined(level.supergunout[var_11])) {
+    level.firsttaunttracker[var_11] = undefined;
+    takesupergunout(var_11, var_5);
+    level.supergunout[var_11] = 1;
   }
 
-  var_0D = tablelookup("mp\cac\taunts.csv", 0, var_4, 17);
-  var_0E = tablelookup("mp\cac\taunts.csv", 0, var_4, 18);
-  if(var_0 > 0 && var_0D != "" && var_0E != "") {
+  var_13 = tablelookup("mp\cac\taunts.csv", 0, var_4, 17);
+  var_14 = tablelookup("mp\cac\taunts.csv", 0, var_4, 18);
+  if(var_0 > 0 && var_13 != "" && var_14 != "") {
     if(var_0 == 1) {
-      var_0A = var_0D;
+      var_10 = var_13;
     } else if(var_0 == 2) {
-      var_0A = var_0E;
+      var_10 = var_14;
     }
   }
 
-  scripts\mp\broshot_utilities::processepictaunt(var_0A, var_0, 1);
-  var_0F = "ui_broshot_anim_" + var_0;
-  setomnvar(var_0F, var_4);
+  scripts\mp\broshot_utilities::processepictaunt(var_10, var_0, 1);
+  var_15 = "ui_broshot_anim_" + var_0;
+  setomnvar(var_15, var_4);
   var_10 = float(var_8) / 30;
   var_11 = var_10;
   if(var_6 != "") {
     var_11 = var_11 * float(var_6);
   }
 
-  level.interruptabletaunts[var_0] = var_0A;
+  level.interruptabletaunts[var_0] = var_10;
   thread interruptblocker(var_0, var_10);
   wait(var_11);
   level.taunts_done = 1;
@@ -830,7 +830,7 @@ getrigsuperputawaydurationfromref(var_0) {
 }
 
 compare_player_score(var_0, var_1) {
-  return var_0.destroynavrepulsor >= var_1.destroynavrepulsor;
+  return var_0.score >= var_1.score;
 }
 
 onplayerconnect() {

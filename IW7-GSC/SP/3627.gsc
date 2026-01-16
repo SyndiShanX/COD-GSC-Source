@@ -240,7 +240,7 @@ func_CB92(var_0) {
 
     var_8 = scripts\sp\utility::func_78BB(self.origin, var_3, level.player.var_C337.var_CB8F.var_56E8);
     var_9 = scripts\sp\utility::func_79B3(self.origin, var_3);
-    var_0A = distance2d(level.player.origin, var_8.origin) / level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d;
+    var_10 = distance2d(level.player.origin, var_8.origin) / level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d;
     if(!isDefined(var_8)) {
       wait(level.player.var_C337.var_CB8F.queuedialog);
       continue;
@@ -265,14 +265,14 @@ func_CB92(var_0) {
 
     doping();
     scripts\engine\utility::array_thread([var_8, var_9], ::func_CB94, level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d);
-    var_0B = 1;
-    var_0C = level.player.var_C337.var_CB8F.queuedialog - var_0B;
-    if(var_0C > var_0B) {
-      wait(var_0C);
+    var_11 = 1;
+    var_12 = level.player.var_C337.var_CB8F.queuedialog - var_11;
+    if(var_12 > var_11) {
+      wait(var_12);
       continue;
     }
 
-    wait(var_0B);
+    wait(var_11);
   }
 }
 

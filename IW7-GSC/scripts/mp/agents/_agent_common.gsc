@@ -16,11 +16,11 @@ codecallback_agentadded() {
   level.agentarray[level.agentarray.size] = self;
 }
 
-codecallback_agentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+codecallback_agentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   var_1 = [[level.agentvalidateattacker]](var_1);
-  var_0C = self[[level.agentfunc]]("on_damaged");
-  if(isDefined(var_0C)) {
-    self[[var_0C]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  var_12 = self[[level.agentfunc]]("on_damaged");
+  if(isDefined(var_12)) {
+    self[[var_12]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 }
 
@@ -32,9 +32,9 @@ codecallback_agentimpaled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
 codecallback_agentkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_1 = [[level.agentvalidateattacker]](var_1);
-  var_0A = self[[level.agentfunc]]("on_killed");
-  if(isDefined(var_0A)) {
-    self thread[[var_0A]](var_0, var_1, var_2, var_4, var_5, var_6, var_7, var_8, var_9);
+  var_10 = self[[level.agentfunc]]("on_killed");
+  if(isDefined(var_10)) {
+    self thread[[var_10]](var_0, var_1, var_2, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 }
 

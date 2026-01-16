@@ -46,7 +46,7 @@ func_2AD0() {
   var_0.var_1581[5] = lib_0C08::func_12F13;
   var_0.var_1581[6] = lib_0C08::func_128A9;
   var_0.var_1581[7] = lib_0C08::func_E602;
-  var_0.var_1581[8] = scripts\aitypes\combat::func_9E40;
+  var_0.var_1581[8] = ::scripts\aitypes\combat::func_9E40;
   var_0.var_1581[9] = lib_0C08::func_97EB;
   var_0.var_1581[10] = lib_0C08::func_12E77;
   var_0.var_1581[11] = lib_0C08::func_9D5B;

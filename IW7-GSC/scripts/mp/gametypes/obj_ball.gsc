@@ -537,9 +537,9 @@ detonateball() {
   var_0 setModel("tag_origin");
   var_1 = self.lastcarrier scripts\mp\utility::_launchgrenade("blackhole_grenade_mp", self.curorigin, (0, 0, 0));
   var_1 linkto(var_0, "tag_origin");
-  var_1.triggerportableradarping = self.lastcarrier;
+  var_1.owner = self.lastcarrier;
   var_1 hide(1);
-  var_1.triggerportableradarping thread scripts\mp\blackholegrenade::func_2B3E(var_1);
+  var_1.owner thread scripts\mp\blackholegrenade::func_2B3E(var_1);
 }
 
 givegrabscore(var_0) {
@@ -664,28 +664,28 @@ ball_set_dropped(var_0, var_1, var_2, var_3) {
   scripts\mp\gameobjects::updateworldicons();
   self.isresetting = 0;
   if(!var_0) {
-    var_0A = self.lastcarrierteam;
-    var_0B = scripts\mp\utility::getotherteam(var_0A);
+    var_10 = self.lastcarrierteam;
+    var_11 = scripts\mp\utility::getotherteam(var_10);
     if(!scripts\mp\utility::istrue(level.devball) && !isDefined(var_1) && !scripts\mp\utility::istrue(var_2)) {
-      scripts\mp\utility::statusdialog("ally_drop_drone", var_0A);
-      scripts\mp\utility::statusdialog("enemy_drop_drone", var_0B);
+      scripts\mp\utility::statusdialog("ally_drop_drone", var_10);
+      scripts\mp\utility::statusdialog("enemy_drop_drone", var_11);
     }
 
-    var_0C = (0, var_5[1], 0);
-    var_0D = anglesToForward(var_0C);
+    var_12 = (0, var_5[1], 0);
+    var_13 = anglesToForward(var_12);
     if(isDefined(var_1)) {
-      var_0E = var_0D * 20 + (0, 0, 80);
+      var_14 = var_13 * 20 + (0, 0, 80);
     } else {
-      var_0E = var_0E * 200 + (0, 0, 80);
+      var_14 = var_14 * 200 + (0, 0, 80);
     }
 
-    ball_physics_launch(var_0E);
+    ball_physics_launch(var_14);
   }
 
-  var_0F = spawnStruct();
-  var_0F.carryobject = self;
-  var_0F.deathoverridecallback = ::ball_overridemovingplatformdeath;
-  self.trigger thread scripts\mp\movers::handle_moving_platforms(var_0F);
+  var_15 = spawnStruct();
+  var_15.carryobject = self;
+  var_15.deathoverridecallback = ::ball_overridemovingplatformdeath;
+  self.trigger thread scripts\mp\movers::handle_moving_platforms(var_15);
   if(level.timerstoppedforgamemode) {
     level scripts\mp\gamelogic::resumetimer();
   }
@@ -941,7 +941,7 @@ superabilitywatcher() {
 
     case "super_teleport":
     case "super_rewind":
-      scripts\engine\utility::waittill_any_3("teleport_success", "rewind_success");
+      scripts\engine\utility::waittill_any("teleport_success", "rewind_success");
       ball_drop_on_ability();
       break;
   }
@@ -994,21 +994,21 @@ ball_pass_projectile(var_0, var_1, var_2) {
   var_7 = var_3 + var_5;
   var_8 = var_1 gettargetorigin();
   var_9 = scripts\common\trace::sphere_trace(var_7, var_8, level.balltraceradius, var_0, level.ballphysicscontentoverride, 0);
-  var_0A = 1;
+  var_10 = 1;
   if(var_9["fraction"] < 1 || !scripts\mp\utility::isreallyalive(var_1)) {
     if(var_9["hittype"] == "hittype_entity" && isDefined(var_9["entity"]) && isplayer(var_9["entity"])) {
-      var_0A = max(0.1, 0.7 * var_9["fraction"]);
+      var_10 = max(0.1, 0.7 * var_9["fraction"]);
     } else {
-      var_0A = 0.7 * var_9["fraction"];
+      var_10 = 0.7 * var_9["fraction"];
     }
 
-    scripts\mp\gameobjects::setposition(var_7 + var_5 * var_0A, self.visuals[0].angles);
+    scripts\mp\gameobjects::setposition(var_7 + var_5 * var_10, self.visuals[0].angles);
   } else {
     scripts\mp\gameobjects::setposition(var_9["position"], self.visuals[0].angles);
   }
 
   if(isDefined(var_1)) {
-    self.projectile = scripts\mp\utility::_magicbullet("uplinkball_tracking_mp", var_7 + var_6 * var_0A, var_8, var_0);
+    self.projectile = scripts\mp\utility::_magicbullet("uplinkball_tracking_mp", var_7 + var_6 * var_10, var_8, var_0);
     self.projectile missile_settargetent(var_1, var_1 gettargetoffset());
   }
 
@@ -1092,10 +1092,10 @@ validatepasstarget(var_0, var_1, var_2) {
   var_8 = vectornormalize(var_6 - var_4);
   var_9 = vectordot(var_5, var_8);
   if(var_9 > var_3) {
-    var_0A = var_5 * 30;
-    var_0B = var_4 + var_0A;
-    var_0C = scripts\common\trace::sphere_trace(var_0B, var_6, level.balltraceradius, var_1, level.ballphysicscontentoverride, 0);
-    if((isDefined(var_0C["entity"]) && isplayer(var_0C["entity"])) || var_0C["fraction"] > 0.8) {
+    var_10 = var_5 * 30;
+    var_11 = var_4 + var_10;
+    var_12 = scripts\common\trace::sphere_trace(var_11, var_6, level.balltraceradius, var_1, level.ballphysicscontentoverride, 0);
+    if((isDefined(var_12["entity"]) && isplayer(var_12["entity"])) || var_12["fraction"] > 0.8) {
       var_2.pass_dot = var_9;
       var_0.lastvalidpassorg = var_4;
       var_0.lastvalidpassdir = var_5;
@@ -1420,12 +1420,12 @@ ball_physics_launch(var_0, var_1) {
     var_7 = vectornormalize(var_0) * 80;
     var_8 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_player", "physicscontents_actor", "physicscontents_glass", "physicscontents_itemclip"];
     var_9 = physics_createcontents(var_8);
-    var_0A = scripts\common\trace::sphere_trace(var_6, var_6 + var_7, 38, var_1, var_9);
-    if(var_0A["fraction"] < 1) {
-      var_0B = 0.7 * var_0A["fraction"];
-      scripts\mp\gameobjects::setposition(var_6 + var_7 * var_0B, var_2.angles);
+    var_10 = scripts\common\trace::sphere_trace(var_6, var_6 + var_7, 38, var_1, var_9);
+    if(var_10["fraction"] < 1) {
+      var_11 = 0.7 * var_10["fraction"];
+      scripts\mp\gameobjects::setposition(var_6 + var_7 * var_11, var_2.angles);
     } else {
-      scripts\mp\gameobjects::setposition(var_0A["position"], var_2.angles);
+      scripts\mp\gameobjects::setposition(var_10["position"], var_2.angles);
     }
   }
 
@@ -1527,17 +1527,17 @@ physics_impact_watch() {
 
 ball_impact_sounds(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = var_0 physics_getbodyid(0);
-  var_0A = physics_getbodylinvel(var_9);
-  var_0B = length(var_0A);
-  if(isDefined(var_0.playing_sound) || var_0B < 70) {
+  var_10 = physics_getbodylinvel(var_9);
+  var_11 = length(var_10);
+  if(isDefined(var_0.playing_sound) || var_11 < 70) {
     return;
   }
 
   var_0 endon("death");
   var_0.playing_sound = 1;
-  var_0C = "mp_uplink_ball_bounce";
-  var_0 playSound(var_0C);
-  var_0D = lookupsoundlength(var_0C);
+  var_12 = "mp_uplink_ball_bounce";
+  var_0 playSound(var_12);
+  var_13 = lookupsoundlength(var_12);
   wait(0.1);
   var_0.playing_sound = undefined;
 }

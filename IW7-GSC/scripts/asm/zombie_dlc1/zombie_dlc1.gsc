@@ -57,51 +57,51 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
   var_7 = scripts\asm\asm_mp::asm_getanim(var_0, var_6);
   var_8 = var_5 - var_4.origin;
   var_9 = (var_8[0], var_8[1], 0);
-  var_0A = vectortoangles(var_9);
-  var_0B = issubstr(var_6, "jump_across");
-  var_0C = var_6 == "traverse_boost" && self.species == "humanoid" || self.species == "zombie";
-  self orientmode("face angle abs", var_0A);
+  var_10 = vectortoangles(var_9);
+  var_11 = issubstr(var_6, "jump_across");
+  var_12 = var_6 == "traverse_boost" && self.species == "humanoid" || self.species == "zombie";
+  self orientmode("face angle abs", var_10);
   self ghostlaunched("anim deltas");
-  var_0D = self getsafecircleorigin(var_6, var_7);
-  var_0E = "flex_height_up_start";
-  var_0F = getnotetracktimes(var_0D, var_0E);
-  if(var_0F.size == 0) {
-    var_0E = "flex_height_start";
-    var_0F = getnotetracktimes(var_0D, var_0E);
-    if(var_0F.size == 0) {
-      var_0E = "traverse_jump_start";
-      var_0F = getnotetracktimes(var_0D, var_0E);
+  var_13 = self getsafecircleorigin(var_6, var_7);
+  var_14 = "flex_height_up_start";
+  var_15 = getnotetracktimes(var_13, var_14);
+  if(var_15.size == 0) {
+    var_14 = "flex_height_start";
+    var_15 = getnotetracktimes(var_13, var_14);
+    if(var_15.size == 0) {
+      var_14 = "traverse_jump_start";
+      var_15 = getnotetracktimes(var_13, var_14);
     }
   }
 
   var_10 = "flex_height_up_end";
-  var_11 = getnotetracktimes(var_0D, var_10);
+  var_11 = getnotetracktimes(var_13, var_10);
   if(var_11.size == 0) {
     var_10 = "flex_height_end";
-    var_11 = getnotetracktimes(var_0D, var_10);
+    var_11 = getnotetracktimes(var_13, var_10);
     if(var_11.size == 0) {
       var_10 = "traverse_jump_end";
-      var_11 = getnotetracktimes(var_0D, var_10);
+      var_11 = getnotetracktimes(var_13, var_10);
     }
   }
 
   var_12 = "highest_point";
-  var_13 = getnotetracktimes(var_0D, var_12);
+  var_13 = getnotetracktimes(var_13, var_12);
   var_14 = "flex_height_down_start";
-  var_15 = getnotetracktimes(var_0D, var_14);
+  var_15 = getnotetracktimes(var_13, var_14);
   var_16 = "flex_height_down_end";
-  opcode::OP_SetNewLocalVariableFieldCached0 = getnotetracktimes(var_0D, var_16);
+  opcode::OP_SetNewLocalVariableFieldCached0 = getnotetracktimes(var_13, var_16);
   opcode::OP_EvalSelfFieldVariable = "crawler_early_stop";
-  opcode::OP_Return = getnotetracktimes(var_0D, opcode::OP_EvalSelfFieldVariable);
-  opcode::OP_CallBuiltin0 = getnotetracktimes(var_0D, "code_move");
+  opcode::OP_Return = getnotetracktimes(var_13, opcode::OP_EvalSelfFieldVariable);
+  opcode::OP_CallBuiltin0 = getnotetracktimes(var_13, "code_move");
   if(var_1A.size > 0) {
-    opcode::OP_CallBuiltin1 = getmovedelta(var_0D, 0, opcode::OP_CallBuiltin0[0]);
+    opcode::OP_CallBuiltin1 = getmovedelta(var_13, 0, opcode::OP_CallBuiltin0[0]);
   } else {
-    opcode::OP_CallBuiltin1 = getmovedelta(var_0E, 0, 1);
+    opcode::OP_CallBuiltin1 = getmovedelta(var_14, 0, 1);
   }
 
   opcode::OP_CallBuiltin2 = scripts\mp\agents\_scriptedagents::func_7DC9(var_8, opcode::OP_CallBuiltin1);
-  opcode::OP_CallBuiltin3 = animhasnotetrack(var_0D, "ignoreanimscaling");
+  opcode::OP_CallBuiltin3 = animhasnotetrack(var_13, "ignoreanimscaling");
   if(opcode::OP_CallBuiltin3) {
     var_1C.var_13E2B = 1;
   }
@@ -112,29 +112,29 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
     self.endnode = opcode::OP_CallBuiltin4;
     opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
     if(var_13.size > 0) {
-      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_0D, "traverse", var_0E, var_12, 0, ::zombietraversenotetrackhandler_dlc1);
+      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_13, "traverse", var_14, var_12, 0, ::zombietraversenotetrackhandler_dlc1);
       opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
       if(isDefined(var_1F.script_noteworthy) && var_1F.script_noteworthy == "continue_flex_height") {
-        scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_0D, "traverse", var_12, var_10, 1, ::zombietraversenotetrackhandler_dlc1);
+        scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_13, "traverse", var_12, var_10, 1, ::zombietraversenotetrackhandler_dlc1);
       }
 
       self scragentsetanimscale(1, 1);
       scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
     } else if(var_15.size == 0) {
-      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_0D, "traverse", var_0E, var_10, 0, ::zombietraversenotetrackhandler_dlc1);
+      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_13, "traverse", var_14, var_10, 0, ::zombietraversenotetrackhandler_dlc1);
       self scragentsetanimscale(1, 1);
       scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
-    } else if(var_0F.size == 0) {
+    } else if(var_15.size == 0) {
       scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", "flex_height_down_start", ::zombietraversenotetrackhandler_dlc1);
-      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_0D, "traverse", var_14, var_16, 0, ::zombietraversenotetrackhandler_dlc1);
+      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_13, "traverse", var_14, var_16, 0, ::zombietraversenotetrackhandler_dlc1);
       self scragentsetanimscale(1, 1);
       scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
     } else {
       opcode::OP_CallBuiltin = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
       opcode::OP_CallBuiltin5 = var_20.origin;
       opcode::OP_BoolNot = var_11[0];
-      scripts\mp\agents\_scriptedagents::func_5AC2(var_6, var_7, "traverse", var_0D, var_0E, var_10, opcode::OP_CallBuiltin5, opcode::OP_BoolNot, ::zombietraversenotetrackhandler_dlc1);
-      opcode::OP_ScriptFarMethodThreadCall = getanimlength(var_0D);
+      scripts\mp\agents\_scriptedagents::func_5AC2(var_6, var_7, "traverse", var_13, var_14, var_10, opcode::OP_CallBuiltin5, opcode::OP_BoolNot, ::zombietraversenotetrackhandler_dlc1);
+      opcode::OP_ScriptFarMethodThreadCall = getanimlength(var_13);
       if(var_15[0] - var_11[0] >= 0.05 / opcode::OP_ScriptFarMethodThreadCall) {
         self scragentsetanimscale(1, 1);
         scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", var_14, ::zombietraversenotetrackhandler_dlc1);
@@ -142,7 +142,7 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
 
       opcode::OP_CallBuiltin5 = self.endnode.origin;
       opcode::OP_BoolNot = opcode::OP_SetNewLocalVariableFieldCached0[0];
-      scripts\mp\agents\_scriptedagents::func_5AC2(var_6, var_7, "traverse", var_0D, var_14, var_16, opcode::OP_CallBuiltin5, opcode::OP_BoolNot, ::zombietraversenotetrackhandler_dlc1);
+      scripts\mp\agents\_scriptedagents::func_5AC2(var_6, var_7, "traverse", var_13, var_14, var_16, opcode::OP_CallBuiltin5, opcode::OP_BoolNot, ::zombietraversenotetrackhandler_dlc1);
       self scragentsetanimscale(1, 1);
       if(var_19.size == 0 || !scripts\engine\utility::istrue(self.dismember_crawl)) {
         scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
@@ -160,27 +160,27 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
       opcode::OP_CallBuiltin5 = var_21.origin;
     }
 
-    scripts\mp\agents\_scriptedagents::func_5AC2(var_6, var_7, "traverse", var_0D, var_14, var_16, opcode::OP_CallBuiltin5, opcode::OP_BoolNot, ::zombietraversenotetrackhandler_dlc1);
+    scripts\mp\agents\_scriptedagents::func_5AC2(var_6, var_7, "traverse", var_13, var_14, var_16, opcode::OP_CallBuiltin5, opcode::OP_BoolNot, ::zombietraversenotetrackhandler_dlc1);
     if(var_19.size == 0 || !scripts\engine\utility::istrue(self.dismember_crawl)) {
       scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc1);
     }
-  } else if(var_0B && abs(var_8[2]) < 64) {
-    if(var_0F.size != 1) {
-      var_0F = getnotetracktimes(var_0D, "flex_across_start");
+  } else if(var_11 && abs(var_8[2]) < 64) {
+    if(var_15.size != 1) {
+      var_15 = getnotetracktimes(var_13, "flex_across_start");
     }
 
     if(var_11.size != 1) {
-      var_11 = getnotetracktimes(var_0D, "flex_across_end");
+      var_11 = getnotetracktimes(var_13, "flex_across_end");
     }
 
-    opcode::OP_ScriptFarMethodThreadCall = getanimlength(var_0D);
-    opcode::OP_JumpOnTrueExpr = var_0F[0] * opcode::OP_ScriptFarMethodThreadCall;
+    opcode::OP_ScriptFarMethodThreadCall = getanimlength(var_13);
+    opcode::OP_JumpOnTrueExpr = var_15[0] * opcode::OP_ScriptFarMethodThreadCall;
     opcode::OP_SetLevelFieldVariableField = var_11[0] * opcode::OP_ScriptFarMethodThreadCall;
     self scragentsetanimscale(1, 1);
     scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", "flex_across_start");
-    opcode::OP_CastBool = removezfromvec(getmovedelta(var_0D, var_0F[0], var_11[0]));
+    opcode::OP_CastBool = removezfromvec(getmovedelta(var_13, var_15[0], var_11[0]));
     opcode::OP_EvalNewLocalArrayRefCached0 = distance2d(self.origin, var_5);
-    opcode::OP_CallBuiltinPointer = getmovedelta(var_0D, var_0F[0], 1);
+    opcode::OP_CallBuiltinPointer = getmovedelta(var_13, var_15[0], 1);
     opcode::OP_inequality = length2d(opcode::OP_CallBuiltinPointer);
     opcode::OP_GetThisthread = opcode::OP_EvalNewLocalArrayRefCached0 - opcode::OP_inequality;
     opcode::OP_ClearFieldVariable = length2d(opcode::OP_CastBool);
@@ -196,7 +196,7 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
     scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse");
   } else if(var_8[2] > 16) {
     if(opcode::OP_CallBuiltin1[2] > 0) {
-      if(var_0C) {
+      if(var_12) {
         self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
         opcode::OP_SafeCreateVariableFieldCached = clamp(2 / var_1C.var_3A6, 0.5, 1);
         if(var_11.size > 0) {
@@ -209,7 +209,7 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
         }
 
         self scragentsetanimscale(1, 1);
-      } else if(var_0F.size > 0) {
+      } else if(var_15.size > 0) {
         var_1C.var_13E2B = 1;
         var_1C.var_3A6 = 1;
         if(!opcode::OP_CallBuiltin3 && length2dsquared(var_9) < 0.64 * length2dsquared(opcode::OP_CallBuiltin1)) {
@@ -217,9 +217,9 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
         }
 
         self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
-        scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_0E);
-        opcode::OP_ScriptFarFunctionCall2 = getmovedelta(var_0D, 0, var_0F[0]);
-        opcode::OP_ScriptFarFunctionCall = getmovedelta(var_0D, 0, var_11[0]);
+        scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_14);
+        opcode::OP_ScriptFarFunctionCall2 = getmovedelta(var_13, 0, var_15[0]);
+        opcode::OP_ScriptFarFunctionCall = getmovedelta(var_13, 0, var_11[0]);
         var_1C.var_13E2B = 1;
         var_1C.var_3A6 = 1;
         opcode::OP_ScriptFarChildThreadCall = var_5 - self.origin;
@@ -230,10 +230,10 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
 
         opcode::OP_ClearLocalVariableFieldCached = opcode::OP_CallBuiltin1 - opcode::OP_ScriptFarFunctionCall;
         opcode::OP_checkclearparams = (opcode::OP_ClearLocalVariableFieldCached[0] * var_1C.var_13E2B, opcode::OP_ClearLocalVariableFieldCached[1] * var_1C.var_13E2B, opcode::OP_ClearLocalVariableFieldCached[2] * var_1C.var_3A6);
-        opcode::OP_CastFieldObject = rotatevector(opcode::OP_checkclearparams, var_0A);
+        opcode::OP_CastFieldObject = rotatevector(opcode::OP_checkclearparams, var_10);
         opcode::OP_End = var_5 - opcode::OP_CastFieldObject;
         opcode::OP_size = opcode::OP_ScriptFarFunctionCall - opcode::OP_ScriptFarFunctionCall2;
-        opcode::OP_EmptyArray = rotatevector(opcode::OP_size, var_0A);
+        opcode::OP_EmptyArray = rotatevector(opcode::OP_size, var_10);
         opcode::OP_bit_and = opcode::OP_End - self.origin;
         opcode::OP_less_equal = opcode::OP_CallBuiltin2;
         opcode::OP_CallBuiltin2 = scripts\mp\agents\_scriptedagents::func_7DC9(opcode::OP_bit_and, opcode::OP_EmptyArray, 1);
@@ -256,7 +256,7 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
         scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse");
       }
     } else {
-      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_0D, "traverse", "flex_height_start", "flex_height_end", 1, ::zombietraversenotetrackhandler_dlc1);
+      scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_13, "traverse", "flex_height_start", "flex_height_end", 1, ::zombietraversenotetrackhandler_dlc1);
     }
   } else if(abs(var_8[2]) < 16 || opcode::OP_CallBuiltin1[2] == 0) {
     self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
@@ -274,14 +274,14 @@ dotraverseanim_dlc1(var_0, var_1, var_2, var_3) {
   } else if(opcode::OP_CallBuiltin1[2] < 0) {
     self scragentsetanimscale(var_1C.var_13E2B, var_1C.var_3A6);
     opcode::OP_SafeCreateVariableFieldCached = clamp(2 / var_1C.var_3A6, 0.5, 1);
-    if(var_0F.size > 0) {
-      scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_0E);
+    if(var_15.size > 0) {
+      scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, self.traverseratescale, "traverse", var_14);
     }
 
     if(var_11.size > 0) {
       scripts\mp\agents\_scriptedagents::func_CED3(var_6, var_7, opcode::OP_SafeCreateVariableFieldCached * 1, "traverse", var_10);
       scripts\mp\agents\_scriptedagents::func_F2B1(var_6, var_7, self.traverseratescale);
-      if(animhasnotetrack(var_0D, "removestatelock")) {
+      if(animhasnotetrack(var_13, "removestatelock")) {
         scripts\mp\agents\_scriptedagents::func_1384D("traverse", "removestatelock");
       }
 

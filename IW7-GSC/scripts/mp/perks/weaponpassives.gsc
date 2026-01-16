@@ -1,7 +1,7 @@
-/************************************************
- * Decompiled by Bog and Edited by SyndiShanX
- * Script: scripts\mp\perks\_weaponpassives.gsc
-************************************************/
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
+ * Script: scripts\mp\perks\weaponpassives.gsc
+***********************************************/
 
 weaponpassivesinit() {
   level thread func_13B0C();
@@ -26,21 +26,24 @@ func_13B0C() {
 watchweaponchanged() {
   self endon("death");
   self endon("disconnect");
+
   for(;;) {
     var_0 = self getcurrentweapon();
+
     if(isDefined(var_0) && var_0 != "none") {
       setmodeswitchkillweapon(self, var_0);
       giveweaponpassives(var_0);
       scripts\mp\weapons::func_12F5D(var_0);
     }
 
-    scripts\engine\utility::waittill_any_3("weapon_change", "giveLoadout");
+    scripts\engine\utility::waittill_any("weapon_change", "giveLoadout");
   }
 }
 
 giveweaponpassives(var_0) {
   clearpassives();
   var_1 = scripts\mp\loot::getpassivesforweapon(var_0);
+
   if(isDefined(var_1)) {
     foreach(var_3 in var_1) {
       giveplayerpassive(var_3);
@@ -75,7 +78,7 @@ definepassivevalue(var_0) {
   }
 
   if(!isDefined(self.passivevalues[var_0])) {
-    self.passivevalues[var_0] = 0;
+    self.passivevalues[var_0] = 0.0;
   }
 }
 
@@ -110,6 +113,7 @@ updateweaponpassivesonuse(var_0, var_1) {
 func_8978(var_0, var_1) {
   if(isDefined(var_0.tookweaponfrom)) {
     var_2 = var_0.tookweaponfrom[var_1];
+
     if(isDefined(var_2) && var_2 != var_0) {
       playFX(scripts\engine\utility::getfx("seeker_explosion"), var_0.origin);
       var_0 dodamage(9999, var_2.origin, var_2, var_2, "MOD_EXPLOSIVE", var_1);
@@ -155,11 +159,12 @@ loadoutweapongiven(var_0) {
 
 checkprestigeextraclassicammo(var_0, var_1) {
   var_2 = var_1 + "_extra_ammo";
+
   if(isDefined(level.prestigeextras[var_2])) {
     if(self isitemunlocked(var_2, "prestigeExtras", 1)) {
       var_3 = weaponmaxammo(var_0);
       var_4 = self getweaponammostock(var_0);
-      var_5 = var_3 - var_4 * 0.5;
+      var_5 = (var_3 - var_4) * 0.5;
       self setweaponammostock(var_0, int(min(var_4 + var_5, var_3)));
     }
   }
@@ -168,15 +173,15 @@ checkprestigeextraclassicammo(var_0, var_1) {
 func_89C5(var_0, var_1) {
   if(isDefined(var_0) && isDefined(var_1)) {
     var_2 = scripts\mp\objidpoolmanager::requestminimapid(10);
+
     if(var_2 == -1) {
       return;
     }
-
     scripts\mp\objidpoolmanager::minimap_objective_add(var_2, "active", (0, 0, 0), "cb_compassping_enemy");
     scripts\mp\objidpoolmanager::minimap_objective_onentity(var_2, var_1);
     scripts\mp\objidpoolmanager::minimap_objective_team(var_2, var_0.team);
     var_3 = 3;
-    var_1 scripts\engine\utility::waittill_any_timeout_1(var_3, "damage_begin", "death", "disconnect");
+    var_1 scripts\engine\utility::waittill_any_timeout(var_3, "damage_begin", "death", "disconnect");
     scripts\mp\objidpoolmanager::returnminimapid(var_2);
   }
 }
@@ -185,7 +190,6 @@ func_89E5(var_0, var_1) {
   if(!scripts\mp\utility::isstrstart(var_1, "alt")) {
     return;
   }
-
   var_2 = self getweaponammoclip(var_1);
   triggerportableradarpingteam(var_0.origin, var_0.team, 500, 500);
 }
@@ -208,6 +212,7 @@ passivecolddamagewatchvictim(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_0 getentitynumber();
   var_6 = gettime() + var_3 * 1000;
   var_7 = self.passivecolddamage;
+
   if(!isDefined(var_7)) {
     var_7 = spawnStruct();
     var_7.curspeedmod = 0;
@@ -221,13 +226,16 @@ passivecolddamagewatchvictim(var_0, var_1, var_2, var_3, var_4) {
   var_1 setscriptablepartstate(scripts\engine\utility::ter_op(scripts\mp\utility::istrue(var_4), "weaponPassiveColdGLDamage", "weaponPassiveColdDamage"), "active");
   var_8 = var_7.curspeedmod;
   var_9 = var_8;
+
   for(;;) {
-    var_0A = gettime();
-    foreach(var_0C, var_2 in var_7.speedmods) {
-      var_6 = var_7.endtimes[var_0C];
-      if(var_6 < var_0A) {
-        var_7.speedmods[var_0C] = undefined;
-        var_7.endtimes[var_0C] = undefined;
+    var_10 = gettime();
+
+    foreach(var_12, var_2 in var_7.speedmods) {
+      var_6 = var_7.endtimes[var_12];
+
+      if(var_6 < var_10) {
+        var_7.speedmods[var_12] = undefined;
+        var_7.endtimes[var_12] = undefined;
         continue;
       }
 
@@ -237,6 +245,7 @@ passivecolddamagewatchvictim(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_7.curspeedmod = var_9;
+
     if(var_7.curspeedmod != var_8) {
       var_1 scripts\mp\weapons::updatemovespeedscale();
     }
@@ -272,35 +281,29 @@ passivecolddamageresetdata(var_0) {
 cryogl_watchforexplode(var_0) {
   self waittill("explode", var_1);
   var_2 = scripts\mp\utility::clearscrambler(var_1, 256);
+
   foreach(var_4 in var_2) {
     if(var_4 == var_0) {
       continue;
     }
-
     if(!isDefined(var_4)) {
       continue;
     }
-
     if(!scripts\mp\utility::isreallyalive(var_4)) {
       continue;
     }
-
     if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_4, self)) {
       continue;
     }
-
     if(var_4 != var_0 && scripts\mp\utility::func_9E05(var_0.team, var_4)) {
       continue;
     }
-
     if(var_4 scripts\mp\utility::_hasperk("specialty_stun_resistance")) {
       continue;
     }
-
     if(scripts\mp\utility::istrue(var_4.var_9F72)) {
       continue;
     }
-
     var_4 dodamage(1, var_0.origin, var_0, undefined, "MOD_EXPLOSIVE", "gltacburst_regen");
     thread passivecolddamagewatchvictim(var_0, var_4, -0.2, 2.5, 1);
   }
@@ -311,27 +314,28 @@ func_89A2(var_0, var_1, var_2) {
     var_3 = var_1 getpassivevalue("passive_fire_damage");
     var_1 setscriptablepartstate("burning", "active", 0);
     var_4 = scripts\engine\utility::ter_op(var_1 scripts\mp\utility::_hasperk("specialty_blastshield"), 2, 5);
+
     if(var_3 <= 0) {
       var_1 thread startdamageovertime(var_2, var_0, var_4, 0.5, 2.5, "passive_fire_damage");
-      return;
+    } else {
+      var_1 setpassivevalue("passive_fire_damage", 2.5);
     }
-
-    var_1 setpassivevalue("passive_fire_damage", 2.5);
   }
 }
 
 func_AD69(var_0, var_1) {
-  scripts\engine\utility::waittill_any_timeout_1(5, "death", "disconnect", var_1);
+  scripts\engine\utility::waittill_any_timeout(5, "death", "disconnect", var_1);
   func_11067(var_1);
 }
 
 func_AD68(var_0, var_1) {
-  scripts\engine\utility::waittill_any_timeout_1(5, "disconnect");
+  scripts\engine\utility::waittill_any_timeout(5, "disconnect");
   var_0 func_11067(var_1);
 }
 
 func_10D9E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = spawnfxforclient(scripts\engine\utility::getfx(var_6), self getEye(), self);
+
   foreach(var_9 in level.players) {
     if(var_9 == self) {
       triggerfx(var_7);
@@ -339,8 +343,8 @@ func_10D9E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(isDefined(var_3) && isDefined(var_4)) {
-      var_0A = scripts\engine\utility::ter_op(teamsmatch(self, var_1), var_3, var_4);
-      playfxontagforclients(scripts\engine\utility::getfx(var_0A), self, var_5, var_9);
+      var_10 = scripts\engine\utility::ter_op(teamsmatch(self, var_1), var_3, var_4);
+      playfxontagforclients(scripts\engine\utility::getfx(var_10), self, var_5, var_9);
     }
   }
 
@@ -362,15 +366,16 @@ startdamageovertime(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread func_AD69(var_1, var_5);
   var_1 thread func_AD68(self, var_5);
   var_6 = "MOD_UNKNOWN";
+
   if(var_3 > var_4) {
     return;
   }
-
   if(self.health <= 0) {
     func_11067(var_5);
   }
 
   var_7 = var_2;
+
   if(self.health <= var_7) {
     self dodamage(var_2, self.origin, var_1, undefined, var_6, var_0);
   }
@@ -401,8 +406,7 @@ func_12F61(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(!scripts\mp\utility::playersareenemies(var_1, var_2)) {
     return;
   }
-
-  if(var_1 scripts\mp\utility::_hasperk("passive_berserk") || var_1 scripts\mp\utility::_hasperk("passive_berserk_silent")) {
+  if(var_1 scripts\mp\utility::_hasperk("passive_berserk")) {
     var_1 thread quadfeederon();
   }
 
@@ -533,6 +537,7 @@ func_13AD0() {
   self endon("death");
   self endon("disconnect");
   self endon("remove_minimap_decoys_passive");
+
   for(;;) {
     self waittill("begin_firing");
     thread func_49ED();
@@ -545,35 +550,36 @@ func_49ED() {
   self endon("disconnect");
   self endon("stop_minimap_decoys");
   childthread func_B7B0();
+
   for(;;) {
     thread func_49EC(self.origin, scripts\mp\utility::getotherteam(self.team));
-    wait(0.25);
+    wait 0.25;
   }
 }
 
 func_B7B0() {
   self endon("death");
   self endon("disconnect");
-  scripts\engine\utility::waittill_notify_and_time("end_firing", 1);
+  scripts\engine\utility::waittill_notify_and_time("end_firing", 1.0);
   self notify("stop_minimap_decoys");
 }
 
 func_49EC(var_0, var_1) {
   wait(randomfloatrange(0, 0.1));
+
   if(!isDefined(self) || !scripts\mp\utility::isreallyalive(self)) {
     return;
   }
-
   var_2 = scripts\mp\objidpoolmanager::requestminimapid(10);
+
   if(var_2 == -1) {
     return;
   }
-
   var_3 = (randomintrange(-150, 150), randomintrange(-150, 150), randomintrange(-150, 150));
   scripts\mp\objidpoolmanager::minimap_objective_add(var_2, "active", self.origin + var_3, "cb_compassping_enemy");
   scripts\mp\objidpoolmanager::minimap_objective_team(var_2, var_1);
   var_4 = randomfloatrange(0.4, 0.65);
-  scripts\engine\utility::waittill_any_timeout_1(var_4, "death", "disconnect", "stop_minimap_decoys");
+  scripts\engine\utility::waittill_any_timeout(var_4, "death", "disconnect", "stop_minimap_decoys");
   scripts\mp\objidpoolmanager::returnminimapid(var_2);
 }
 
@@ -585,17 +591,16 @@ func_89AE(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1) || !isDefined(var_0) || !var_1 scripts\mp\utility::_hasperk("passive_headshot_ammo")) {
     return;
   }
-
   if(!scripts\mp\utility::isheadshot(var_0, var_4, var_3, var_1)) {
     return;
   }
-
   var_1 checkpassivemessage("passive_headshot_ammo");
   var_5 = weaponclipsize(var_0);
-  var_6 = var_5 * 1;
+  var_6 = var_5 * 1.0;
   var_7 = var_1 getweaponammoclip(var_0);
   var_8 = min(var_7 + var_6, var_5);
   var_1 setweaponammoclip(var_0, int(var_8));
+
   if(var_1 isdualwielding()) {
     var_7 = var_1 getweaponammoclip(var_0, "left");
     var_8 = min(var_7 + var_6, var_5);
@@ -608,17 +613,16 @@ handlevisordetonationpassive(var_0, var_1, var_2, var_3, var_4) {
   var_1 endon("joined_spectator");
   var_1 endon("disconnect");
   level endon("game_ended");
+
   if(!isDefined(var_1) || !isDefined(var_0) || !var_1 scripts\mp\utility::_hasperk("passive_visor_detonation")) {
     return;
   }
-
   if(!scripts\mp\utility::isheadshot(var_0, var_4, var_3, var_1)) {
     return;
   }
-
   var_5 = var_2 gettagorigin("tag_eye");
   var_6 = var_2.angles;
-  wait(0.1);
+  wait 0.1;
   thread activatevisordetonationpassive(self, var_0, var_5, var_6);
 }
 
@@ -629,7 +633,7 @@ activatevisordetonationpassive(var_0, var_1, var_2, var_3) {
   var_4 setotherent(var_0);
   var_4 setentityowner(var_0);
   var_4 setModel("passive_mp_visorDetonation");
-  wait(1);
+  wait 1;
   var_4 delete();
 }
 
@@ -638,17 +642,16 @@ handleoverloadpassive(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_1 endon("joined_spectator");
   var_1 endon("disconnect");
   level endon("game_ended");
+
   if(!isDefined(var_1) || !isDefined(var_0) || !var_1 scripts\mp\utility::_hasperk("passive_railgun_overload") && !var_1 scripts\mp\utility::_hasperk("passive_overkill")) {
     return;
   }
-
-  if(!isDefined(var_2.hitbychargedshot) && var_2.hitbychargedshot == var_1) {
+  if(!(isDefined(var_2.hitbychargedshot) && var_2.hitbychargedshot == var_1)) {
     return;
   }
-
   var_6 = var_2 gettagorigin("tag_eye");
   var_7 = var_2.angles;
-  wait(0.1);
+  wait 0.1;
   var_2.hitbychargedshot = undefined;
   thread activateoverloadpassive(self, var_0, var_6, var_7);
   var_1 thread func_89AB(var_1, var_2);
@@ -661,7 +664,7 @@ activateoverloadpassive(var_0, var_1, var_2, var_3) {
   var_4 setotherent(var_0);
   var_4 setentityowner(var_0);
   var_4 setModel("passive_mp_visorDetonation");
-  wait(1);
+  wait 1;
   var_4 delete();
 }
 
@@ -674,6 +677,7 @@ handlemark2xpbonus(var_0, var_1) {
   var_2 = getdvarfloat("mk2_bonus", 0.15);
   var_3 = scripts\mp\utility::getweapongroup(var_1);
   var_4 = var_3 + "_mk_ii_bonus";
+
   if(isDefined(level.prestigeextras[var_4])) {
     if(self isitemunlocked(var_4, "prestigeExtras", 1)) {
       var_2 = getdvarfloat("mk2_extra_bonus", 0.3);
@@ -692,12 +696,16 @@ testpassivemessage(var_0, var_1) {
   var_2 = 0;
   var_3 = scripts\mp\passives::getpassivedeathwatching(var_0);
   var_4 = "";
+
   if(isDefined(var_3)) {
     var_4 = var_3 + var_1;
     var_2 = scripts\mp\hud_message::testmiscmessage(var_4);
   }
 
-  if(var_2) {}
+  if(var_2) {
+    return;
+  }
+  return;
 }
 
 checkpassivemessage(var_0, var_1) {
@@ -706,6 +714,7 @@ checkpassivemessage(var_0, var_1) {
   }
 
   var_2 = scripts\mp\passives::getpassivedeathwatching(var_0);
+
   if(isDefined(var_2)) {
     if(isendstr(var_1, "_camo")) {
       var_3 = scripts\mp\utility::strip_suffix(var_1, "_camo");
@@ -729,6 +738,7 @@ func_12F0F() {
   self endon("death");
   self endon("disconnect");
   self endon("kill_scrambler_passive");
+
   for(;;) {
     self waittill("killed_enemy", var_0, var_1, var_2);
     self notify("start_scrambler_passive");
@@ -742,7 +752,7 @@ func_6CE3() {
   self endon("disconnect");
   self endon("kill_scrambler_passive");
   self endon("start_scrambler_passive");
-  wait(1);
+  wait 1.0;
   func_4114();
 }
 
@@ -752,6 +762,7 @@ func_4114() {
 
 func_F77D() {
   var_0 = self getcurrentweapon();
+
   if(isDefined(var_0)) {
     var_1 = weaponclipsize(var_0);
     var_2 = func_7F60(var_1);
@@ -767,11 +778,11 @@ func_89C2(var_0, var_1, var_2) {
   if(!isDefined(var_1) || !isDefined(var_0) || !var_1 scripts\mp\utility::_hasperk("passive_last_shots_ammo") && !var_1 scripts\mp\utility::_hasperk("passive_last_shots_ammo_kbs")) {
     return;
   }
-
   var_3 = weaponclipsize(var_0);
   var_4 = func_7F60(var_3);
   var_5 = 0;
   var_5 = func_3E60(var_1, var_0, "right", var_3, var_4);
+
   if(var_1 isdualwielding()) {
     var_5 = func_3E60(var_1, var_0, "left", var_3, var_4) || var_5;
   }
@@ -783,6 +794,7 @@ func_89C2(var_0, var_1, var_2) {
 
 func_3E60(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_0 getweaponammoclip(var_1, var_2);
+
   if(var_5 >= var_4) {
     return 0;
   }
@@ -794,7 +806,7 @@ func_3E60(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_7F60(var_0) {
-  return int(max(1, var_0 * 0.2));
+  return int(max(1.0, var_0 * 0.2));
 }
 
 func_F740() {
@@ -810,11 +822,14 @@ func_8CB9(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("removeHealthOnKillPassive");
+
   for(;;) {
     self waittill("killed_enemy", var_1, var_2, var_3);
+
     if(isalive(self) && var_2 == var_0 && self.health < self.maxhealth) {
       var_4 = int(self.maxhealth * 0.15);
       var_5 = self.health + var_4;
+
       if(self.health + var_5 > self.maxhealth) {
         var_5 = self.maxhealth;
       }
@@ -830,6 +845,7 @@ func_12CA7() {}
 
 handledoublekillreload(var_0) {
   var_1 = self.var_DDC2 + 1;
+
   if(var_1 % 2 == 0) {
     scripts\mp\hud_message::showmiscmessage("scavenger");
     var_2 = weaponclipsize(var_0);
@@ -839,6 +855,7 @@ handledoublekillreload(var_0) {
     var_6 = min(var_4 + var_5, var_2);
     self setweaponammoclip(var_0, int(var_6));
     self setweaponammostock(var_0, int(var_3 - var_5));
+
     if(self isdualwielding()) {
       var_3 = self getweaponammostock(var_0);
       var_4 = self getweaponammoclip(var_0, "left");
@@ -865,8 +882,10 @@ func_6A02(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("removeExplosiveKillsPassive");
+
   for(;;) {
     self waittill("killed_enemy", var_1, var_2, var_3);
+
     if(var_2 == var_0) {
       if(func_9E84(self, var_2, var_3, self.origin, var_1)) {
         thread func_582E(var_1, var_2);
@@ -876,33 +895,29 @@ func_6A02(var_0) {
 }
 
 func_9E84(var_0, var_1, var_2, var_3, var_4) {
-  if(isalive(var_0) && !var_0 scripts\mp\utility::isusingremote() && var_2 == "MOD_RIFLE_BULLET" || var_2 == "MOD_PISTOL_BULLET" || var_2 == "MOD_HEAD_SHOT" && !scripts\mp\utility::iskillstreakweapon(var_1) && !isDefined(var_0.assistedsuicide)) {
+  if(isalive(var_0) && !var_0 scripts\mp\utility::isusingremote() && (var_2 == "MOD_RIFLE_BULLET" || var_2 == "MOD_PISTOL_BULLET" || var_2 == "MOD_HEAD_SHOT") && !scripts\mp\utility::iskillstreakweapon(var_1) && !isDefined(var_0.assistedsuicide)) {
     var_5 = scripts\mp\utility::getweapongroup(var_1);
+
     switch (var_5) {
       case "weapon_pistol":
         var_6 = 800;
         break;
-
       case "weapon_beam":
       case "weapon_smg":
         var_6 = 1200;
         break;
-
+      case "weapon_dmr":
       case "weapon_lmg":
       case "weapon_assault":
-      case "weapon_dmr":
         var_6 = 1500;
         break;
-
       case "weapon_rail":
       case "weapon_sniper":
         var_6 = 2000;
         break;
-
       case "weapon_shotgun":
         var_6 = 500;
         break;
-
       case "weapon_projectile":
       default:
         var_6 = 1536;
@@ -910,6 +925,7 @@ func_9E84(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_7 = var_6 * var_6;
+
     if(distancesquared(var_3, var_4.origin) > var_7) {
       return 1;
     }
@@ -927,6 +943,7 @@ func_582E(var_0, var_1) {
 
 func_F79B() {
   var_0 = self getcurrentweapon();
+
   if(doesshareammo(var_0)) {
     var_0 = scripts\mp\utility::func_E0CF(var_0);
   }
@@ -942,10 +959,12 @@ func_B8D5(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("removeMissRefundPassive");
+
   for(;;) {
     self waittill("shot_missed", var_1);
+
     if(var_1 == var_0) {
-      if(randomfloat(1) > 0.75) {
+      if(randomfloat(1.0) > 0.75) {
         var_2 = self getweaponammostock(var_0);
         self setweaponammostock(var_0, var_2 + 1);
       }
@@ -1029,8 +1048,10 @@ func_12CF8() {}
 updatenukepassive(var_0) {
   self endon("death");
   self endon("disconnect");
+
   for(;;) {
     self waittill("weapon_passives_given");
+
     if((scripts\mp\utility::_hasperk("passive_nuke") || hasnukepassiveinloadout() || isDefined(self.pers["passive_nuke_key"]) && self.pers["passive_nuke_key"] > 0) && !getpassivedeathwatching(self, "passive_nuke_key")) {
       thread func_C1C7();
       setpassivedeathwatching(self, "passive_nuke_key", 1);
@@ -1041,8 +1062,10 @@ updatenukepassive(var_0) {
 hasnukepassiveinloadout() {
   var_0 = 0;
   var_1 = self getweaponslistprimaries();
+
   foreach(var_3 in var_1) {
     var_4 = scripts\mp\loot::getpassivesforweapon(var_3);
+
     if(isDefined(var_4) && var_4.size > 0) {
       foreach(var_6 in var_4) {
         if(var_6 == "passive_nuke") {
@@ -1062,20 +1085,25 @@ hasnukepassiveinloadout() {
 
 func_89CC(var_0, var_1, var_2) {
   self endon("disconnect");
+
   if(!isDefined(var_0) || !scripts\mp\utility::isreallyalive(var_0) && !scripts\mp\utility::issimultaneouskillenabled() || !isDefined(var_2) || !isDefined(var_1)) {
     return;
   }
-
   var_3 = !scripts\mp\utility::isreallyalive(var_0) && scripts\mp\utility::issimultaneouskillenabled();
   var_4 = undefined;
+
   if(level.gametype == "infect") {
     var_5 = [];
     var_5[var_5.size] = "passive_nuke";
   } else {
-    var_5 = scripts\mp\loot::getpassivesforweapon(var_3);
+    var_5 = scripts\mp\loot::getpassivesforweapon(var_2);
+
     if(issubstr(var_2, "iw7_vr_mpl_range") && var_0 scripts\mp\utility::_hasperk("passive_nuke")) {
       var_5[var_5.size] = "passive_nuke";
-      var_4 = 1;
+
+      if(!isDefined(var_0.pers["passive_nuke_key"]) || isDefined(var_0.pers["passive_nuke_key"]) && var_0.pers["passive_nuke_key"] < 8) {
+        var_4 = 1;
+      }
     }
 
     if(!isDefined(var_5) || var_5.size == 0) {
@@ -1084,6 +1112,7 @@ func_89CC(var_0, var_1, var_2) {
   }
 
   var_6 = 0;
+
   foreach(var_8 in var_5) {
     if(var_8 == "passive_nuke") {
       var_6 = 1;
@@ -1094,9 +1123,9 @@ func_89CC(var_0, var_1, var_2) {
   if(!var_6) {
     return;
   }
-
   if(var_3) {
     waittillframeend;
+
     if(!scripts\mp\utility::istrue(self.simultaneouskill)) {
       return;
     }
@@ -1108,41 +1137,27 @@ func_89CC(var_0, var_1, var_2) {
     var_0.pers["passive_nuke_key"]++;
   }
 
-  if(isDefined(var_4) && var_0.pers["passive_nuke_key"] == 15) {
+  if(isDefined(var_4)) {
+    var_0.pers["passive_nuke_key"] = 15;
     var_0 thread func_C1C8();
   }
 
   if(var_0.pers["passive_nuke_key"] >= 25) {
     var_0 checkpassivemessage("passive_nuke");
     var_0 thread scripts\mp\hud_message::showkillstreaksplash("nuke");
-    var_0 scripts\mp\killstreaks\_killstreaks::awardkillstreak("nuke", var_0);
+    var_0 scripts\mp\killstreaks\killstreaks::awardkillstreak("nuke", var_0);
     var_0.pers["passive_nuke_key"] = 0;
     var_0 scripts\mp\missions::func_D991("ch_darkops_nuke");
-    return;
-  }
-
-  if(var_0.pers["passive_nuke_key"] == 24) {
+  } else if(var_0.pers["passive_nuke_key"] == 24) {
     var_0 thread scripts\mp\hud_message::showsplash("nuke_kill_single");
-    return;
-  }
-
-  if(var_0.pers["passive_nuke_key"] == 2) {
+	} else if(var_0.pers["passive_nuke_key"] == 2) {
     var_0 thread func_C1C8();
-    return;
-  }
-
-  if(var_0.pers["passive_nuke_key"] >= 20) {
+  } else if(var_0.pers["passive_nuke_key"] >= 20) {
     var_0 thread func_C1C8();
-    return;
-  }
-
-  if(var_0.pers["passive_nuke_key"] >= 5) {
+  } else if(var_0.pers["passive_nuke_key"] >= 5) {
     if(var_0.pers["passive_nuke_key"] % 5 == 0) {
       var_0 thread func_C1C8();
-      return;
     }
-
-    return;
   }
 }
 
@@ -1154,6 +1169,7 @@ func_C1C8() {
 func_C1C7() {
   self endon("disconnect");
   self waittill("death");
+
   if(scripts\mp\utility::issimultaneouskillenabled()) {
     scripts\engine\utility::waitframe();
   }
@@ -1171,6 +1187,7 @@ quadfeederon() {
     scripts\mp\utility::giveperk("specialty_overcharge");
     self func_85C1(65);
     var_0 = self func_85C0();
+
     if(var_0 < 0) {
       var_0 = 100;
     }
@@ -1197,7 +1214,7 @@ listencancelquadfeeder() {
   self endon("end_quadFeederEffect");
   self endon("stop_quadFeeder_timer");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("death", "weapon_change");
+  scripts\engine\utility::waittill_any("death", "weapon_change");
   unsetquadfeedereffect();
 }
 
@@ -1242,17 +1259,19 @@ func_4112(var_0) {
 
 func_F82B() {
   var_0 = [];
+
   foreach(var_6, var_2 in level.scoreinfo) {
     var_3 = issubstr(var_6, "_mode_");
     var_4 = issubstr(var_6, "_score");
     var_5 = var_2["value"];
+
     if(var_3 && var_4 && var_5 > 0) {
       var_0[var_0.size] = func_4A0B(var_6, 0.2);
     }
   }
 
   foreach(var_8 in var_0) {
-    scripts\mp\utility::func_1824(var_8.var_67E5, var_8.var_2C80, var_8.var_394);
+    scripts\mp\utility::func_1824(var_8.var_67E5, var_8.var_2C80, var_8.weapon);
   }
 
   thread func_4113(var_0);
@@ -1266,15 +1285,16 @@ func_4A0B(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_3.var_67E5 = var_0;
   var_3.var_2C80 = var_1;
-  var_3.var_394 = var_2;
+  var_3.weapon = var_2;
   return var_3;
 }
 
 func_4113(var_0) {
   self endon("disconnect");
   self waittill("score_bonus_objectives_removed");
+
   foreach(var_2 in var_0) {
-    scripts\mp\utility::func_E165(var_2.var_67E5, var_2.var_2C80, var_2.var_394);
+    scripts\mp\utility::func_E165(var_2.var_67E5, var_2.var_2C80, var_2.weapon);
   }
 }
 
@@ -1313,15 +1333,15 @@ func_12EAA(var_0) {
     if(var_2 == self || !isDefined(self) || !isDefined(self.team) || !isDefined(var_2) || !isDefined(var_2.team)) {
       continue;
     }
-
     var_3 = func_7F04(var_2);
+
     if(level.teambased && self.team == var_2.team && var_2.health > 0) {
       if(var_3 < 0) {
-        wait(0.1);
+        wait 0.1;
+
         if(!isDefined(var_2)) {
           continue;
         }
-
         var_4 = scripts\mp\utility::outlineenableforplayer(var_2, "cyan", self, 0, 1, "level_script");
         self.var_905B[self.var_905B.size] = var_4;
         self.var_905A[var_4] = var_2;
@@ -1337,12 +1357,13 @@ func_12EAA(var_0) {
       var_5 = [];
       var_6 = [];
       scripts\mp\utility::outlinedisable(var_3, var_2);
+
       foreach(var_4 in self.var_905B) {
         var_8 = self.var_905A[var_4];
+
         if(var_8 == var_2) {
           continue;
         }
-
         var_5[var_5.size] = var_4;
         var_6[var_4] = var_8;
       }
@@ -1361,6 +1382,7 @@ func_7F04(var_0) {
 
   foreach(var_2 in self.var_905B) {
     var_3 = self.var_905A[var_2];
+
     if(var_3 == var_0) {
       return var_2;
     }
@@ -1396,6 +1418,7 @@ func_905C(var_0) {
 func_905E() {
   self endon("disconnect");
   self endon("passive_hivemind_cancel");
+
   for(;;) {
     level waittill("player_spawned", var_0);
     thread func_12EA9(var_0);
@@ -1405,6 +1428,7 @@ func_905E() {
 func_905F() {
   self endon("disconnect");
   self endon("passive_hivemind_cancel");
+
   for(;;) {
     level waittill("joined_spectator", var_0);
     thread func_12EA9(var_0);
@@ -1415,6 +1439,7 @@ func_F74B() {
   self endon("passive_hunter_killer_cancel");
   thread func_12EAE(level.players);
   thread func_91EA();
+
   foreach(var_1 in level.players) {
     thread func_91EC(var_1);
     thread func_91EB(var_1);
@@ -1423,6 +1448,7 @@ func_F74B() {
 
 func_12CD4() {
   self notify("passive_hunter_killer_cancel");
+
   foreach(var_1 in self.var_91E9) {
     var_2 = self.var_91E8[var_1];
     scripts\mp\utility::outlinedisable(var_1, var_2);
@@ -1440,8 +1466,9 @@ func_91EC(var_0) {
 
 func_91EB(var_0) {
   self endon("passive_hunter_killer_cancel");
+
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     thread func_12EAD(var_0);
   }
 }
@@ -1449,14 +1476,16 @@ func_91EB(var_0) {
 func_91ED(var_0) {
   self endon("passive_hunter_killer_cancel");
   var_0 endon("passive_hunter_killer_listen_cancel");
+
   for(;;) {
-    wait(1);
+    wait 1.0;
     thread func_12EAD(var_0);
   }
 }
 
 func_91EA() {
   self endon("passive_hunter_killer_cancel");
+
   for(;;) {
     level waittill("connected", var_0);
     thread func_12EAD(var_0);
@@ -1472,10 +1501,10 @@ func_7F09(var_0) {
 
   foreach(var_2 in self.var_91E9) {
     var_3 = self.var_91E8[var_2];
+
     if(!isDefined(var_3)) {
       continue;
     }
-
     if(var_3 == var_0) {
       return var_2;
     }
@@ -1503,10 +1532,10 @@ func_12EAE(var_0) {
     if(var_2 == self || !isDefined(self) || !isDefined(self.team) || !isDefined(var_2) || !isDefined(var_2.team)) {
       continue;
     }
-
     var_3 = func_7F09(var_2);
     var_4 = var_2.maxhealth / 2;
     var_5 = var_2.health;
+
     if(level.teambased && self.team != var_2.team && var_5 <= var_4 && var_5 > 0) {
       if(var_3 < 0 && !var_2 scripts\mp\utility::_hasperk("specialty_empimmune")) {
         var_6 = scripts\mp\utility::outlineenableforplayer(var_2, "red", self, 1, 0, "level_script");
@@ -1522,14 +1551,15 @@ func_12EAE(var_0) {
       var_7 = [];
       var_8 = [];
       scripts\mp\utility::outlinedisable(var_3, var_2);
+
       foreach(var_6 in self.var_91E9) {
-        var_0A = self.var_91E8[var_6];
-        if(var_0A == var_2) {
+        var_10 = self.var_91E8[var_6];
+
+        if(var_10 == var_2) {
           continue;
         }
-
         var_7[var_7.size] = var_6;
-        var_8[var_6] = var_0A;
+        var_8[var_6] = var_10;
       }
 
       self.var_91E9 = var_7;
@@ -1553,6 +1583,7 @@ setwallrunquieterpassive() {
   self endon("disconnect");
   self endon("unsetWallrunQuieter");
   thread wallrunquieterwatchfordeath();
+
   for(;;) {
     if(self iswallrunning() || !self isonground()) {
       if(!scripts\mp\utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
@@ -1579,6 +1610,7 @@ wallrunquieterwatchfordeath() {
 
 unsetwallrunquieterpassive() {
   self notify("unsetWallrunQuieter");
+
   if(scripts\mp\utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
     setpassivevalue("passive_wallrun_quieter", undefined);
     checkpassivemessage("passive_wallrun_quieter", "_end");
@@ -1592,17 +1624,20 @@ setslideblastshield() {
   self endon("unsetSlideBlastShield");
   thread slideblastshieldwatchfordeath();
   var_0 = undefined;
+
   for(;;) {
     var_1 = self getstance();
+
     if(self issprintsliding() || (var_1 == "crouch" || var_1 == "prone") && self isonground()) {
       var_0 = undefined;
+
       if(!scripts\mp\utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
         setpassivevalue("passive_slide_blastshield", 1);
         checkpassivemessage("passive_slide_blastshield", "_start");
         scripts\mp\utility::giveperk("specialty_blastshield");
       }
     } else if(!isDefined(var_0)) {
-      var_0 = gettime() + 250;
+      var_0 = gettime() + 250.0;
     } else if(gettime() >= var_0) {
       if(scripts\mp\utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
         setpassivevalue("passive_slide_blastshield", undefined);
@@ -1624,6 +1659,7 @@ slideblastshieldwatchfordeath() {
 
 unsetslideblastshield() {
   self notify("unsetSlideBlastShield");
+
   if(scripts\mp\utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
     setpassivevalue("passive_slide_blastshield", undefined);
     checkpassivemessage("passive_slide_blastshield", "_end");
@@ -1637,10 +1673,11 @@ setproneblindeye() {
   self endon("unsetProneBlindEye");
   thread proneblindeyewatchfordeath();
   var_0 = undefined;
+
   for(;;) {
     if(self getstance() == "prone") {
       if(!isDefined(var_0)) {
-        var_0 = gettime() + 600;
+        var_0 = gettime() + 600.0;
       } else if(gettime() >= var_0) {
         if(!scripts\mp\utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
           setpassivevalue("passive_prone_blindeye", 1);
@@ -1650,6 +1687,7 @@ setproneblindeye() {
       }
     } else {
       var_0 = undefined;
+
       if(scripts\mp\utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
         setpassivevalue("passive_prone_blindeye", undefined);
         checkpassivemessage("passive_prone_blindeye", "_end");
@@ -1670,6 +1708,7 @@ proneblindeyewatchfordeath() {
 
 unsetproneblindeye() {
   self notify("unsetProneBlindEye");
+
   if(scripts\mp\utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
     setpassivevalue("passive_prone_blindeye", undefined);
     checkpassivemessage("passive_prone_blindeye", "_end");
@@ -1683,11 +1722,13 @@ setstationaryengineer() {
   self endon("unsetStationaryEngineer");
   thread stationaryengineerwatchfordeath();
   var_0 = undefined;
+
   for(;;) {
     var_1 = self getstance();
+
     if(var_1 == "crouch" || var_1 == "prone" || lengthsquared(self getvelocity()) == 0) {
       if(!isDefined(var_0)) {
-        var_0 = gettime() + 750;
+        var_0 = gettime() + 750.0;
       } else if(gettime() > var_0) {
         if(!scripts\mp\utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
           setpassivevalue("passive_stationary_engineer", 1);
@@ -1697,6 +1738,7 @@ setstationaryengineer() {
       }
     } else {
       var_0 = undefined;
+
       if(scripts\mp\utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
         setpassivevalue("passive_stationary_engineer", undefined);
         checkpassivemessage("passive_stationary_engineer", "_end");
@@ -1710,6 +1752,7 @@ setstationaryengineer() {
 
 unsetstationaryengineer() {
   self notify("unsetStationaryEngineer");
+
   if(scripts\mp\utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
     setpassivevalue("passive_stationary_engineer", undefined);
     checkpassivemessage("passive_stationary_engineer", "_end");
@@ -1729,7 +1772,10 @@ setdoppleganger() {
   self endon("disconnect");
   self endon("unsetDoppleganger");
   thread dopplegangerwatchfordeath();
-  scripts\engine\utility::waitframe();
+
+  for(;;) {
+    scripts\engine\utility::waitframe();
+  }
 }
 
 dopplegangerwatchfordeath() {
@@ -1741,6 +1787,7 @@ dopplegangerwatchfordeath() {
 
 unsetdoppleganger() {
   self notify("unsetDoppleganger");
+
   if(scripts\mp\utility::istrue(getpassivevalue("passive_doppleganger"))) {
     setpassivevalue("passive_doppleganger", undefined);
     checkpassivemessage("passive_doppleganger", "_end");
@@ -1759,7 +1806,7 @@ unsetcollatstreak() {
 
 collatstreakgive() {
   if(!isDefined(self.lastcollattime) || self.lastcollattime < gettime()) {
-    scripts\mp\killstreaks\_killstreaks::awardkillstreak("venom", self);
+    scripts\mp\killstreaks\killstreaks::awardkillstreak("venom", self);
     scripts\mp\hud_message::showkillstreaksplash("venom");
     self.lastcollattime = gettime();
   }
@@ -1799,6 +1846,7 @@ getstackvalues(var_0) {
 
 getstackcount(var_0) {
   var_1 = getstackvalues(var_0);
+
   if(!isDefined(var_1)) {
     return 0;
   }
@@ -1810,6 +1858,7 @@ addstackcount(var_0, var_1) {}
 
 func_89EB(var_0, var_1) {
   var_2 = var_0.killsthislife.size + 1;
+
   if(var_2 >= 5) {
     var_3 = weaponclipsize(var_1);
     var_4 = int(max(var_3 * 0.2, 1));
@@ -1823,16 +1872,17 @@ func_89C8(var_0, var_1) {
   var_2 = "passive_move_speed_on_kill";
   var_0 notify(var_2);
   var_0 endon(var_2);
+
   if(!isDefined(var_0.weaponpassivespeedonkillmod) || var_0.weaponpassivespeedonkillmod != 0.04) {
     var_0.weaponpassivespeedonkillmod = 0.04;
     var_0 scripts\mp\weapons::updatemovespeedscale();
   }
 
-  var_0 scripts\engine\utility::waittill_any_timeout_1(3.5, "death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any_timeout(3.5, "death", "disconnect");
+
   if(!isDefined(var_0)) {
     return;
   }
-
   var_0.weaponpassivespeedonkillmod = 0;
   var_0 scripts\mp\weapons::updatemovespeedscale();
   var_0 checkpassivemessage("passive_move_speed_on_kill");
@@ -1852,7 +1902,6 @@ func_89DB(var_0, var_1) {
   if(!isDefined(var_0) || !scripts\mp\utility::isreallyalive(var_0) || !isDefined(var_1)) {
     return;
   }
-
   if(!getpassivedeathwatching(var_0, "passive_refresh_key")) {
     var_0 thread func_DE76();
     var_0 setpassivedeathwatching(var_0, "passive_refresh_key", 1);
@@ -1869,17 +1918,11 @@ func_89DB(var_0, var_1) {
     var_0 thread scripts\mp\hud_message::showkillstreaksplash("refresh");
     var_0 scripts\mp\powers::func_1813(1);
     var_0.pers["passive_refresh_key"] = 0;
-    return;
-  }
-
-  if(var_0.pers["passive_refresh_key"] == 4) {
+  } else if(var_0.pers["passive_refresh_key"] == 4) {
     var_0 thread scripts\mp\hud_message::showsplash("refresh_kill_single");
-    return;
   }
-
-  if(var_0.pers["passive_refresh_key"] == 3) {
+  else if(var_0.pers["passive_refresh_key"] == 3) {
     var_0 thread func_DE77();
-    return;
   }
 }
 
@@ -1899,27 +1942,26 @@ func_89B3(var_0, var_1) {
   if(!isDefined(var_0) || !scripts\mp\utility::isreallyalive(var_0) || !isDefined(var_1)) {
     return;
   }
-
   var_2 = var_1.name;
+
   if(teamsmatch(var_0, var_1)) {
     return;
   }
-
   if(!isDefined(var_0.var_903C)) {
     var_0.var_903C = [];
   } else if(func_903B(var_0, var_2)) {
     return;
   }
-
   var_0.var_903C[var_0.var_903C.size] = var_2;
   var_3 = 0;
   var_4 = 0;
+
   foreach(var_6 in level.players) {
     if(teamsmatch(var_0, var_6)) {
       continue;
     }
-
     var_7 = var_6.name;
+
     if(func_903B(var_0, var_7)) {
       var_3++;
     }
@@ -1928,23 +1970,25 @@ func_89B3(var_0, var_1) {
   }
 
   var_9 = var_4 - var_3;
+
   if(var_9 <= 3) {
     var_0 func_903E(var_9);
   }
 
   if(var_9 <= 0) {
-    var_0A = 0;
+    var_10 = 0;
+
     if(var_4 >= 3) {
-      var_0A = 200;
+      var_10 = 200;
     } else if(var_4 >= 2) {
-      var_0A = 100;
+      var_10 = 100;
     } else {
-      var_0A = 75;
+      var_10 = 75;
     }
 
-    var_0B = var_0A * var_4;
+    var_11 = var_10 * var_4;
     var_0 checkpassivemessage("passive_hitman");
-    var_0 thread scripts\mp\supers::stopshellshock(var_0B);
+    var_0 thread scripts\mp\supers::stopshellshock(var_11);
     var_0.var_903C = [];
   }
 }
@@ -1965,15 +2009,14 @@ func_903B(var_0, var_1) {
 
 func_903E(var_0) {
   var_0 = int(max(0, var_0));
+
   switch (var_0) {
     case 0:
       thread scripts\mp\hud_message::showkillstreaksplash("hitman_kill_all");
       break;
-
     case 1:
       thread scripts\mp\hud_message::showsplash("hitman_kill_single");
       break;
-
     default:
       thread scripts\mp\hud_message::showsplash("hitman_kill", var_0);
       break;
@@ -2000,8 +2043,9 @@ func_89AB(var_0, var_1) {
   self endon("disconnect");
   var_1 endon("diconnect");
   level thread handlegoreeffect(var_1);
-  wait(0.05);
+  wait 0.05;
   var_2 = var_1 func_8113();
+
   if(isDefined(var_2)) {
     var_2 hide();
     var_2.permanentcustommovetransition = 1;
@@ -2012,6 +2056,7 @@ func_89AB(var_0, var_1) {
 
 handlegoreeffect(var_0) {
   var_1 = var_0 gettagorigin("j_spine4");
+
   if(var_0.loadoutarchetype == "archetype_scout") {
     playFX(level._effect["passive_gore_robot"], var_1, (1, 0, 0));
   } else {
@@ -2029,14 +2074,15 @@ func_89E7(var_0, var_1) {
 func_89E6(var_0, var_1) {}
 
 func_89AF(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!scripts\mp\utility::isheadshot(var_0, var_4, var_3, var_1)) {}
+  if(!scripts\mp\utility::isheadshot(var_0, var_4, var_3, var_1)) {
+    return;
+  }
 }
 
 func_89D9(var_0, var_1) {
   if(!isDefined(var_0) || !scripts\mp\utility::isreallyalive(var_0) || !isDefined(var_1)) {
     return;
   }
-
   if(!getpassivedeathwatching(var_0, "passive_random_perks_key")) {
     var_0 thread func_DCC3();
     var_0 setpassivedeathwatching(var_0, "passive_random_perks_key", 1);
@@ -2049,7 +2095,6 @@ func_89D9(var_0, var_1) {
     if(isDefined(var_0.var_DCC2) && var_0.var_DCC2.size >= 3) {
       return;
     }
-
     var_0.pers["passive_random_perks_key"]++;
   }
 
@@ -2058,14 +2103,15 @@ func_89D9(var_0, var_1) {
   }
 
   if(var_0.pers["passive_random_perks_key"] >= 3) {
-    var_2 = var_0 scripts\mp\perks\_perks::func_7DE8();
+    var_2 = var_0 scripts\mp\perks::func_7DE8();
+
     if(isDefined(var_2) && var_2.size > 0) {
       var_3 = randomintrange(0, var_2.size - 1);
       var_4 = var_2[var_3];
+
       if(!isDefined(var_4)) {
         return;
       }
-
       var_0 checkpassivemessage("passive_random_perks", "_" + var_4);
       var_0 scripts\mp\utility::giveperk(var_4);
       var_5 = scripts\engine\utility::ter_op(isDefined(var_0.var_DCC2), var_0.var_DCC2.size, 0);
@@ -2077,7 +2123,8 @@ func_89D9(var_0, var_1) {
 }
 
 func_11753(var_0) {
-  var_1 = var_0 scripts\mp\perks\_perks::func_7DE8();
+  var_1 = var_0 scripts\mp\perks::func_7DE8();
+
   if(isDefined(var_1) && var_1.size > 0) {
     foreach(var_3 in var_1) {
       testpassivemessage("passive_random_perks", "_" + var_3);
@@ -2088,6 +2135,7 @@ func_11753(var_0) {
 func_DCC3() {
   self endon("disconnect");
   self waittill("death");
+
   if(isDefined(self.var_DCC2)) {
     foreach(var_1 in self.var_DCC2) {
       scripts\mp\utility::removeperk(var_1);
@@ -2103,7 +2151,6 @@ handlespecialistpassive(var_0, var_1) {
   if(!isDefined(var_0) || !scripts\mp\utility::isreallyalive(var_0) || !isDefined(var_1)) {
     return;
   }
-
   if(!getpassivedeathwatching(var_0, "passive_mini_specialist_key")) {
     var_0 thread specialistpassivedeathwatcher();
     var_0 setpassivedeathwatching(var_0, "passive_mini_specialist_key", 1);
@@ -2116,23 +2163,19 @@ handlespecialistpassive(var_0, var_1) {
     if(isDefined(var_0.minispecialistkillperks) && var_0.minispecialistkillperks.size >= 3) {
       return;
     }
-
     var_0.pers["passive_mini_specialist_key"]++;
   }
 
   var_2 = scripts\engine\utility::ter_op(var_0 scripts\mp\utility::_hasperk("specialty_hardline"), 1, 0);
+
   if(!isDefined(var_0.minispecialistkillperks)) {
     var_0.minispecialistkillperks = [];
   }
 
   var_3 = undefined;
-  if(var_0.pers["passive_mini_specialist_key"] >= 14 && !var_0 scripts\mp\utility::_hasperk("passive_nuke")) {
+
+  if(var_0.pers["passive_mini_specialist_key"] >= 15 && !var_0 scripts\mp\utility::_hasperk("passive_nuke")) {
     var_0 scripts\mp\utility::giveperk("passive_nuke");
-    if(isDefined(var_0.pers["passive_nuke_key"])) {
-      var_0.pers["passive_nuke_key"] = var_0.pers["passive_nuke_key"] + 14;
-    } else {
-      var_0.pers["passive_nuke_key"] = 14;
-    }
   } else if(var_0.pers["passive_mini_specialist_key"] >= 8 - var_2 && !var_0 scripts\mp\utility::_hasperk("passive_double_kill_reload") && !var_0 scripts\mp\utility::_hasperk("passive_stationary_engineer") && !var_0 scripts\mp\utility::_hasperk("passive_jump_super")) {
     var_0 scripts\mp\utility::giveperk("passive_double_kill_reload");
     var_0 scripts\mp\utility::giveperk("passive_stationary_engineer");
@@ -2157,6 +2200,7 @@ handlespecialistpassive(var_0, var_1) {
 specialistpassivedeathwatcher() {
   self endon("disconnect");
   self waittill("death");
+
   if(isDefined(self.minispecialistkillperks)) {
     foreach(var_1 in self.minispecialistkillperks) {
       scripts\mp\utility::removeperk(var_1);
@@ -2172,18 +2216,16 @@ func_89B0(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1) || !isDefined(var_0) || !var_1 scripts\mp\utility::_hasperk("passive_headshot_super")) {
     return;
   }
-
   if(!scripts\mp\utility::isheadshot(var_0, var_4, var_3, var_1)) {
     return;
   }
-
   var_1 thread scripts\mp\supers::stopshellshock(100);
   var_1 checkpassivemessage("passive_headshot_super");
 }
 
 func_89A3(var_0, var_1, var_2) {
   var_3 = spawn("trigger_radius", var_1.origin, 0, 50, 100);
-  var_3.triggerportableradarping = var_0;
+  var_3.owner = var_0;
   scripts\mp\utility::playteamfxforclient(var_0.team, var_1.origin, "player_plasma_friendly", "player_plasma_enemy", 5);
   var_3 thread func_AD70(var_2);
   var_3 thread func_AD71();
@@ -2192,24 +2234,25 @@ func_89A3(var_0, var_1, var_2) {
 
 func_AD70(var_0) {
   self endon("passive_fire_kill_delete");
+
   for(;;) {
     self waittill("trigger", var_1);
-    if(!isDefined(var_1) || !isDefined(self) || !isDefined(self.triggerportableradarping)) {
+
+    if(!isDefined(var_1) || !isDefined(self) || !isDefined(self.owner)) {
       break;
     }
 
     if(!isplayer(var_1)) {
       continue;
     }
-
-    if(teamsmatch(self.triggerportableradarping, var_1)) {
+    if(teamsmatch(self.owner, var_1)) {
       continue;
     }
-
     var_2 = var_1 getpassivevalue("passive_fire_kill");
+
     if(var_2 <= 0) {
-      var_1 thread func_10D9E(var_0, self.triggerportableradarping, "passive_fire_kill", "player_plasma_friendly", "player_plasma_enemy", "j_mainroot", "player_plasma_screen_stand");
-      var_1 thread startdamageovertime(var_0, self.triggerportableradarping, 5, 0.5, 4, "passive_fire_kill");
+      var_1 thread func_10D9E(var_0, self.owner, "passive_fire_kill", "player_plasma_friendly", "player_plasma_enemy", "j_mainroot", "player_plasma_screen_stand");
+      var_1 thread startdamageovertime(var_0, self.owner, 5, 0.5, 4, "passive_fire_kill");
       continue;
     }
 
@@ -2218,11 +2261,11 @@ func_AD70(var_0) {
 }
 
 func_AD71() {
-  wait(5);
+  wait 5;
+
   if(!isDefined(self)) {
     return;
   }
-
   self notify("passive_fire_kill_delete");
   self delete();
 }
@@ -2253,24 +2296,26 @@ func_1174D() {
   var_7 = (0, 0, 0);
   var_8 = 100;
   var_9 = 0;
-  var_0A = 1;
-  var_0B = 0.15;
+  var_10 = 1;
+  var_11 = 0.15;
+
   for(;;) {
     var_9++;
-    var_0C = var_0 + var_1 * var_6 * var_9;
-    var_0D = var_0C - var_0;
-    if(!func_1174A(var_5, var_0D)) {
+    var_12 = var_0 + var_1 * (var_6 * var_9);
+    var_13 = var_12 - var_0;
+
+    if(!func_1174A(var_5, var_13)) {
       break;
     }
 
-    var_0E = var_0C + (0, 0, var_8 * -1);
-    var_0F = func_11755(var_0C, var_0E);
-    if(var_0F == var_0E) {
+    var_14 = var_12 + (0, 0, var_8 * -1);
+    var_15 = func_11755(var_12, var_14);
+
+    if(var_15 == var_14) {
       continue;
     }
-
-    var_10 = var_0A + var_0B * var_9;
-    scripts\mp\utility::playteamfxforclient(self.team, var_0F, "player_plasma_friendly", "player_plasma_enemy", var_10);
+    var_16 = var_10 + var_11 * var_9;
+    scripts\mp\utility::playteamfxforclient(self.team, var_15, "player_plasma_friendly", "player_plasma_enemy", var_16);
   }
 }
 
@@ -2305,6 +2350,7 @@ func_11749(var_0, var_1) {
 func_11755(var_0, var_1) {
   var_2 = scripts\common\trace::create_contents(0, 1, 1, 1, 1, 0, 0);
   var_3 = physics_raycast(var_0, var_1, var_2, [self], 0, "physicsquery_closest");
+
   if(isDefined(var_3) && var_3.size > 0) {
     return var_3[0]["position"];
   }
@@ -2316,7 +2362,6 @@ func_8974(var_0, var_1) {
   if(!isDefined(var_0) || !scripts\mp\utility::isreallyalive(var_0) || !isDefined(var_1) || var_0.var_2049) {
     return;
   }
-
   if(var_0.var_204A == 0 && level.gametype != "infect" && isDefined(level.aonrules) && level.aonrules == 1) {
     var_0.var_204A = 1;
     var_0 thread scripts\mp\hud_message::showsplash("specialty_scavenger");
@@ -2353,11 +2398,9 @@ handlejumpsuperonkillpassive(var_0, var_1) {
   if(var_0 isonground()) {
     return;
   }
-
   if(var_0 iswallrunning()) {
     return;
   }
-
   var_0 scripts\mp\supers::stopshellshock(100);
   var_0 checkpassivemessage("passive_jump_super");
 }
@@ -2366,7 +2409,6 @@ handlemeleesuperonkillpassive(var_0, var_1, var_2) {
   if(var_2 != "MOD_MELEE") {
     return;
   }
-
   var_0 scripts\mp\supers::stopshellshock(500);
   var_0 checkpassivemessage("passive_melee_super");
 }
@@ -2377,6 +2419,7 @@ handledoublekillsuperpassive(var_0, var_1) {
   var_0 endon("unset_passive_double_kill_super");
   var_0 notify("watchDoubleKillSuperPassive");
   var_0 endon("watchDoubleKillSuperPassive");
+
   if(!scripts\mp\utility::istrue(var_0.passivedoublekillpending)) {
     var_0.passivedoublekillpending = 1;
   } else {
@@ -2386,22 +2429,23 @@ handledoublekillsuperpassive(var_0, var_1) {
     return;
   }
 
-  wait(4);
+  wait 4;
   var_0.passivedoublekillpending = undefined;
 }
 
 setmodeswitchkillweapon(var_0, var_1) {
-  if(!scripts\mp\class::weaponhaspassive(var_1, getweaponvariantindex(var_1), "passive_mode_switch_score") || scripts\mp\class::weaponhaspassive(var_1, getweaponvariantindex(var_1), "passive_mode_switch_score_epic")) {
+  if(!(scripts\mp\class::weaponhaspassive(var_1, getweaponvariantindex(var_1), "passive_mode_switch_score") || scripts\mp\class::weaponhaspassive(var_1, getweaponvariantindex(var_1), "passive_mode_switch_score_epic"))) {
     return;
   }
-
   var_2 = var_0.modeswitchkills;
+
   if(!isDefined(var_2)) {
     resetmodeswitchkillweapons(var_0);
   }
 
   var_3 = getmodeswitchkillweaponkey(var_1);
   var_4 = var_2.arr[var_3];
+
   if(!isDefined(var_4)) {
     var_4 = spawnStruct();
     var_4.numkills = 0;
@@ -2412,10 +2456,10 @@ setmodeswitchkillweapon(var_0, var_1) {
 
 unsetmodeswitchkillweapon(var_0, var_1) {
   var_2 = var_0.modeswitchkills;
+
   if(!isDefined(var_2)) {
     return;
   }
-
   var_3 = getmodeswitchkillweaponkey(var_1);
   var_2.arr[var_3] = undefined;
 }
@@ -2433,37 +2477,38 @@ watchmodeswitchkillweaponsdrop(var_0) {
   var_0 notify("watchModeSwitchKillWeaponsDrop");
   var_0 endon("watchModeSwitchKillWeaponsDrop");
   var_1 = var_0.modeswitchkills;
+
   for(;;) {
     var_2 = var_0 getweaponslistprimaries();
     var_3 = [];
     var_4 = [];
+
     for(var_5 = 0; var_5 < var_2.size; var_5++) {
       var_6 = var_2[var_5];
-      var_3[var_5] = scripts\mp\utility::getweaponrootname(var_6);
+      var_3[var_5] = ::scripts\mp\utility::getweaponrootname(var_6);
       var_4[var_5] = getweaponvariantindex(var_6);
     }
 
     var_7 = getarraykeys(var_1.arr);
     var_8 = [];
     var_9 = [];
+
     for(var_5 = 0; var_5 < var_7.size; var_5++) {
-      var_0A = var_7[var_5];
-      var_0B = strtok(var_0A, "_");
-      var_8[var_5] = var_0B[0];
-      var_9[var_5] = var_0B[1];
+      var_10 = var_7[var_5];
+      var_11 = strtok(var_10, "_");
+      var_8[var_5] = var_11[0];
+      var_9[var_5] = var_11[1];
     }
 
     for(var_5 = 0; var_5 < var_7.size; var_5++) {
-      for(var_0C = 0; var_0C < var_2.size; var_0C++) {
-        if(var_8[var_5] != var_3[var_0C]) {
+      for(var_12 = 0; var_12 < var_2.size; var_12++) {
+        if(var_8[var_5] != var_3[var_12]) {
           continue;
         }
-
-        if(var_9[var_5] != var_4[var_0C]) {
+        if(var_9[var_5] != var_4[var_12]) {
           continue;
         }
-
-        unsetmodeswitchkillweapon(var_0, var_2[var_0C]);
+        unsetmodeswitchkillweapon(var_0, var_2[var_12]);
         break;
       }
     }
@@ -2474,47 +2519,50 @@ watchmodeswitchkillweaponsdrop(var_0) {
 
 updatemodeswitchweaponkills(var_0, var_1, var_2) {
   var_3 = var_0.modeswitchkills;
+
   if(!isDefined(var_3)) {
     return;
   }
-
   if(scripts\mp\utility::func_8238(var_2) != "primary") {
     return;
   }
-
   var_4 = scripts\mp\utility::getweaponrootname(var_2);
   var_5 = getweaponvariantindex(var_2);
+
   if(!isDefined(var_5)) {
     return;
   }
-
   var_6 = var_4 + "_" + var_5;
   var_7 = var_3.arr[var_6];
+
   if(!isDefined(var_7)) {
     return;
   }
+  var_8 = var_0 isalternatemode(var_2);
 
-  var_8 = var_0 func_8519(var_2);
   if(!isDefined(var_7.killinaltmode) || var_7.killinaltmode == var_8) {
     var_7.numkills++;
+
     if(var_7.numkills >= 2) {
       var_9 = var_7.numkills - 2;
+
       if(scripts\engine\utility::mod(var_9, 2) == 0) {
         var_0 checkpassivemessage("passive_mode_switch_score");
       }
     }
   } else {
     var_7.numkills = 1;
+
     if(var_0 scripts\mp\utility::_hasperk("passive_mode_switch_score_epic")) {
-      var_0A = "mode_switch_kill_epic";
+      var_10 = "mode_switch_kill_epic";
     } else {
-      var_0A = "mode_switch_kill";
+      var_10 = "mode_switch_kill";
     }
 
-    var_0 thread scripts\mp\rank::scoreeventpopup(var_0A);
-    var_0B = scripts\mp\rank::getscoreinfovalue(var_0A);
-    var_0 thread scripts\mp\rank::scorepointspopup(var_0B);
-    var_0 scripts\mp\killstreaks\_killstreaks::func_83A7(var_0A, var_0B);
+    var_0 thread scripts\mp\rank::scoreeventpopup(var_10);
+    var_11 = scripts\mp\rank::getscoreinfovalue(var_10);
+    var_0 thread scripts\mp\rank::scorepointspopup(var_11);
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A7(var_10, var_11);
   }
 
   var_7.killinaltmode = var_8;
@@ -2525,14 +2573,12 @@ getmodeswitchkillweaponkey(var_0) {
 }
 
 handlemeleeconeexplodeonkillpassive(var_0, var_1, var_2, var_3) {
-  if(!var_0 func_8519(var_2)) {
+  if(!var_0 isalternatemode(var_2)) {
     return;
   }
-
   if(var_3 != "MOD_MELEE") {
     return;
   }
-
   var_4 = var_0 gettagorigin("j_spineupper");
   var_5 = var_0 getplayerangles();
   var_6 = anglesToForward(var_5);
@@ -2542,45 +2588,42 @@ handlemeleeconeexplodeonkillpassive(var_0, var_1, var_2, var_3) {
   thread meleeconeexplodeworldfx(var_4, var_5, var_0);
   thread meleeconeexplodeattackerfx(var_0);
   var_1 thread scripts\mp\damage::enqueuecorpsetablefunc("passive_melee_cone_expl", ::meleeconeexplodevictimcorpsefx);
-  foreach(var_0B in level.players) {
-    if(var_0B == var_0) {
+
+  foreach(var_11 in level.players) {
+    if(var_11 == var_0) {
       continue;
     }
-
-    if(!scripts\mp\utility::isreallyalive(var_0B)) {
+    if(!scripts\mp\utility::isreallyalive(var_11)) {
       continue;
     }
-
-    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_0, var_0B)) {
+    if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_0, var_11)) {
       continue;
     }
-
-    if(level.friendlyfire == 0 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_0, var_0B))) {
+    if(level.friendlyfire == 0 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_0, var_11))) {
       continue;
     }
-
-    if(!scripts\mp\utility::pointvscone(var_0B gettagorigin("tag_eye"), var_8, var_6, var_7, var_9, 128, 18)) {
-      if(!scripts\mp\utility::pointvscone(var_0B gettagorigin("tag_origin"), var_8, var_6, var_7, var_9, 128, 18)) {
-        if(!scripts\mp\utility::pointvscone(var_0B gettagorigin("j_mainroot"), var_8, var_6, var_7, var_9, 128, 18)) {
+    if(!scripts\mp\utility::pointvscone(var_11 gettagorigin("tag_eye"), var_8, var_6, var_7, var_9, 128, 18)) {
+      if(!scripts\mp\utility::pointvscone(var_11 gettagorigin("tag_origin"), var_8, var_6, var_7, var_9, 128, 18)) {
+        if(!scripts\mp\utility::pointvscone(var_11 gettagorigin("j_mainroot"), var_8, var_6, var_7, var_9, 128, 18)) {
           continue;
         }
       }
     }
 
-    if(var_0B damageconetrace(var_4, var_0) <= 0) {
+    if(var_11 damageconetrace(var_4, var_0) <= 0) {
+      continue;
+    }
+    var_12 = min(325, distance(var_4, var_11 getEye()));
+    var_13 = 1 - var_12 / 325;
+    var_14 = 80 + var_13 * 60;
+    var_11 dodamage(var_14, var_4, var_0, var_0, "MOD_EXPLOSIVE", var_2);
+
+    if(scripts\mp\utility::isreallyalive(var_11)) {
+      thread meleeconeexplodevictimfx(var_11);
       continue;
     }
 
-    var_0C = min(325, distance(var_4, var_0B getEye()));
-    var_0D = 1 - var_0C / 325;
-    var_0E = 80 + var_0D * 60;
-    var_0B dodamage(var_0E, var_4, var_0, var_0, "MOD_EXPLOSIVE", var_2);
-    if(scripts\mp\utility::isreallyalive(var_0B)) {
-      thread meleeconeexplodevictimfx(var_0B);
-      continue;
-    }
-
-    var_0B thread scripts\mp\damage::enqueuecorpsetablefunc("passive_melee_cone_expl", ::meleeconeexplodevictimcorpsefx);
+    var_11 thread scripts\mp\damage::enqueuecorpsetablefunc("passive_melee_cone_expl", ::meleeconeexplodevictimcorpsefx);
   }
 }
 
@@ -2592,15 +2635,16 @@ meleeconeexplodeworldfx(var_0, var_1, var_2) {
   var_4 setotherent(var_2);
   var_4 setentityowner(var_2);
   var_4 setModel("passive_mp_meleeConeExpl");
+
   if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_2)) {
     var_4 setscriptablepartstate("effects", "activePhase");
   } else {
     var_4 setscriptablepartstate("effects", "active");
   }
 
-  wait(0.2);
+  wait 0.2;
   physicsexplosionsphere(var_0, 128, 0, 1);
-  wait(0.2);
+  wait 0.2;
   var_4 delete();
 }
 
@@ -2609,7 +2653,7 @@ meleeconeexplodeattackerfx(var_0) {
   var_0 notify("meleeConeExplodeAttackerVfx");
   var_0 endon("meleeConeExplodeAttackerVfx");
   var_0 setscriptablepartstate("weaponPassiveMeleeConeExplAttacker", "active");
-  scripts\engine\utility::waittill_any_timeout_1(0.2);
+  scripts\engine\utility::waittill_any_timeout(0.2);
   var_0 setscriptablepartstate("weaponPassiveMeleeConeExplAttacker", "neutral");
 }
 
@@ -2618,13 +2662,14 @@ meleeconeexplodevictimfx(var_0) {
   var_0 notify("meleeConeExplodeVictimVfx");
   var_0 endon("meleeConeExplodeVictimVfx");
   var_0 setscriptablepartstate("weaponPassiveMeleeConeExplVictim", "active", 0);
-  var_0 scripts\engine\utility::waittill_any_timeout_1(2.75);
+  var_0 scripts\engine\utility::waittill_any_timeout(2.75);
   var_0 setscriptablepartstate("weaponPassiveMeleeConeExplVictim", "neutral", 0);
 }
 
 meleeconeexplodevictimcorpsefx(var_0) {
   var_0 setscriptablepartstate("weaponPassiveMeleeConeExplVictim", "active", 0);
-  wait(2.75);
+  wait 2.75;
+
   if(isDefined(var_0)) {
     var_0 setscriptablepartstate("weaponPassiveMeleeConeExplVictim", "neutral", 0);
   }
@@ -2634,8 +2679,8 @@ handleleaderkillscorepassive(var_0, var_1, var_2) {
   if(scripts\mp\utility::getweaponbasedsmokegrenadecount(var_2) != scripts\mp\utility::getweaponbasedsmokegrenadecount(var_0 getcurrentprimaryweapon())) {
     return;
   }
-
   var_3 = [];
+
   if(!level.teambased) {
     var_3 = scripts\engine\utility::array_remove(level.players, var_0);
   } else {
@@ -2643,11 +2688,11 @@ handleleaderkillscorepassive(var_0, var_1, var_2) {
   }
 
   var_4 = 1;
+
   foreach(var_6 in var_3) {
-    if(var_1.destroynavrepulsor >= var_6.destroynavrepulsor) {
+    if(var_1.score >= var_6.score) {
       continue;
     }
-
     var_4 = 0;
     break;
   }
@@ -2655,23 +2700,21 @@ handleleaderkillscorepassive(var_0, var_1, var_2) {
   if(!var_4) {
     return;
   }
-
   var_8 = "leader_kill_" + int(min(var_3.size, 5));
   var_0 thread scripts\mp\rank::scoreeventpopup(var_8);
   var_9 = scripts\mp\rank::getscoreinfovalue(var_8);
   var_0 thread scripts\mp\rank::scorepointspopup(var_9);
-  var_0 scripts\mp\killstreaks\_killstreaks::func_83A7(var_8, var_9);
+  var_0 scripts\mp\killstreaks\killstreaks::func_83A7(var_8, var_9);
 }
 
 handlepowermeleeondamagepassive(var_0, var_1, var_2, var_3) {
   if(var_3 != "MOD_MELEE") {
     return;
   }
-
   var_4 = var_0 gettagorigin("j_spineupper");
   var_5 = var_0 getplayerangles();
   var_6 = anglesToForward(var_5);
   var_7 = anglestoup(var_5);
   thread meleeconeexplodeattackerfx(var_0);
-  wait(0.01);
+  wait 0.01;
 }

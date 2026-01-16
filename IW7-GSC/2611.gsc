@@ -196,8 +196,9 @@ menu_none() {
       setmenu("add_options");
       return;
     }
-  } else
+  } else {
     level.last_displayed_ent = undefined;
+  }
 }
 
 menu_add_options() {

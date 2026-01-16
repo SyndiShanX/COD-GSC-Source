@@ -74,27 +74,27 @@ main() {
   level.var_1923 = [];
   level.var_5C63 = [];
   var_9 = getspawnerarray();
-  for(var_0A = 0; var_0A < var_9.size; var_0A++) {
-    var_9[var_0A] thread func_107AB();
+  for(var_10 = 0; var_10 < var_9.size; var_10++) {
+    var_9[var_10] thread func_107AB();
   }
 
   level.var_5C63 = undefined;
   scripts\sp\utility::func_9189("tracker", 1, "default");
   thread func_D970();
   scripts\engine\utility::array_thread(var_8, ::func_107F2);
-  var_0B = getarraykeys(level.var_1923);
-  for(var_0A = 0; var_0A < var_0B.size; var_0A++) {
-    var_0C = tolower(var_0B[var_0A]);
-    if(!issubstr(var_0C, "rpg")) {
+  var_11 = getarraykeys(level.var_1923);
+  for(var_10 = 0; var_10 < var_11.size; var_10++) {
+    var_12 = tolower(var_11[var_10]);
+    if(!issubstr(var_12, "rpg")) {
       continue;
     }
 
-    var_0D = "iw7_lockon";
-    precacheitem(var_0D);
+    var_13 = "iw7_lockon";
+    precacheitem(var_13);
     break;
   }
 
-  var_0B = undefined;
+  var_11 = undefined;
 }
 
 func_1B09() {}
@@ -1007,12 +1007,12 @@ func_4E47() {
         }
 
         var_0 = var_0.var_4F;
-      } else if(isDefined(var_0.triggerportableradarping)) {
-        if(isai(var_0) && isplayer(var_0.triggerportableradarping)) {
+      } else if(isDefined(var_0.owner)) {
+        if(isai(var_0) && isplayer(var_0.owner)) {
           var_3 = "friendly";
         }
 
-        var_0 = var_0.triggerportableradarping;
+        var_0 = var_0.owner;
       } else if(isDefined(var_0.damageowner)) {
         if(isDefined(var_0.var_ED)) {
           var_3 = "destructible";
@@ -1044,19 +1044,19 @@ func_1931() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     self.var_C873 = var_0;
     if(isDefined(var_1) && isplayer(var_1)) {
-      var_0A = var_1 getcurrentweapon();
-      if(isDefined(var_0A) && scripts\sp\utility::isprimaryweapon(var_0A) && isDefined(var_4) && var_4 == "MOD_PISTOL_BULLET" || var_4 == "MOD_RIFLE_BULLET") {
+      var_10 = var_1 getcurrentweapon();
+      if(isDefined(var_10) && scripts\sp\utility::isprimaryweapon(var_10) && isDefined(var_4) && var_4 == "MOD_PISTOL_BULLET" || var_4 == "MOD_RIFLE_BULLET") {
         var_1 thread scripts\sp\player_stats::func_DED8();
       }
 
-      var_0B = getweaponbasename(var_0A);
-      if(isDefined(var_0B) && var_0B == "iw7_m4" && scripts\sp\utility::func_9FFE(var_0A)) {
+      var_11 = getweaponbasename(var_10);
+      if(isDefined(var_11) && var_11 == "iw7_m4" && scripts\sp\utility::func_9FFE(var_10)) {
         thread func_11AD7(var_3);
       }
     }
 
-    foreach(var_0D in self.var_4CF5) {
-      thread[[var_0D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+    foreach(var_13 in self.var_4CF5) {
+      thread[[var_13]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     }
 
     if(!isalive(self) || self.var_EB) {
@@ -1861,16 +1861,16 @@ ishighjumping(var_0, var_1, var_2) {
       var_8[var_8.size] = vectornormalize(var_4.origin - self.origin);
     }
 
-    foreach(var_0C in var_8) {
-      if(vectordot(var_6, var_0C) > 0) {
+    foreach(var_12 in var_8) {
+      if(vectordot(var_6, var_12) > 0) {
         return 1;
       }
     }
   }
 
-  var_0E = var_2 * var_2;
+  var_14 = var_2 * var_2;
   foreach(var_4 in level.players) {
-    if(distancesquared(var_4.origin, self.origin) < var_0E) {
+    if(distancesquared(var_4.origin, self.origin) < var_14) {
       return 1;
     }
   }
@@ -2019,7 +2019,7 @@ func_2697(var_0) {
       continue;
     }
 
-    if(!isDefined(var_1.isnodeoccupied)) {
+    if(!isDefined(var_1.enemy)) {
       self settargetentity(scripts\engine\utility::random(var_0));
       self notify("startfiring");
       self func_8398();
@@ -2047,7 +2047,7 @@ func_12F9C(var_0) {
   }
 
   scripts\asm\asm_bb::func_296E(var_0);
-  while(!isDefined(self func_8164()) || self func_8164() != var_0) {
+  while(!isDefined(self getturret()) || self getturret() != var_0) {
     wait(0.05);
   }
 
@@ -2109,12 +2109,12 @@ func_D31C(var_0) {
 func_11054() {
   self notify("stop_using_turret");
   self notify("stop_using_built_in_burst_fire");
-  var_0 = self func_8164();
+  var_0 = self getturret();
   if(!isDefined(var_0)) {
     return;
   }
 
-  self func_83AF();
+  self stopuseturret();
   scripts\asm\asm_bb::func_296E(undefined);
   self givescorefortrophyblocks();
   var_0 givesentry();
@@ -2170,7 +2170,7 @@ func_73D8(var_0) {
   self waittill("trigger");
   self.var_369 = 0;
   self sethintstring("");
-  self func_83AF();
+  self stopuseturret();
   self notify("stopped_use_turret");
   var_0 notify("friendly_finished_using_mg42");
 }
@@ -2270,7 +2270,7 @@ func_73D3() {
   self endon("death");
   var_0 = self.var_73D0;
   self.var_73D0 = undefined;
-  self func_83AF();
+  self stopuseturret();
   self notify("stopped_use_turret");
   self.var_369 = 0;
   self.objective_playermask_showto = self.oldradius;
@@ -2808,7 +2808,7 @@ camper_trigger_think(var_0) {
     var_5 = var_1[var_4];
     var_6 = getspawner(var_5, "script_linkname");
     if(isDefined(var_6)) {
-      var_2 = scripts\engine\utility::array_add_safe(var_2, var_6);
+      var_2 = scripts\engine\utility::add_to_array(var_2, var_6);
       continue;
     }
 
@@ -2817,7 +2817,7 @@ camper_trigger_think(var_0) {
       continue;
     }
 
-    var_3 = scripts\engine\utility::array_add_safe(var_3, var_7);
+    var_3 = scripts\engine\utility::add_to_array(var_3, var_7);
   }
 
   var_0 waittill("trigger");
@@ -2861,14 +2861,14 @@ func_BC9F(var_0) {
   self endon("death");
   var_1 = 0;
   for(;;) {
-    if(!isalive(self.isnodeoccupied)) {
+    if(!isalive(self.enemy)) {
       self waittill("enemy");
       var_1 = 0;
       continue;
     }
 
-    if(isplayer(self.isnodeoccupied)) {
-      if(self.isnodeoccupied scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") || scripts\engine\utility::flag("player_flashed")) {
+    if(isplayer(self.enemy)) {
+      if(self.enemy scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") || scripts\engine\utility::flag("player_flashed")) {
         self.logstring = 0;
         for(;;) {
           self.objective_playermask_showto = 180;
@@ -2881,14 +2881,14 @@ func_BC9F(var_0) {
     }
 
     if(var_1) {
-      if(self getpersstat(self.isnodeoccupied)) {
+      if(self cansee(self.enemy)) {
         wait(0.05);
         continue;
       }
 
       var_1 = 0;
     } else {
-      if(self getpersstat(self.isnodeoccupied)) {
+      if(self cansee(self.enemy)) {
         var_1 = 1;
       }
 
@@ -3229,10 +3229,10 @@ func_2BD0() {
 
 func_1085E(var_0) {
   var_1 = var_0 giveplayeraccessory();
-  if(var_1.var_394 != "none") {
-    var_2 = getweaponmodel(var_1.var_394);
+  if(var_1.weapon != "none") {
+    var_2 = getweaponmodel(var_1.weapon);
     var_1 attach(var_2, "tag_weapon_right");
-    var_3 = getweaponhidetags(var_1.var_394);
+    var_3 = getweaponhidetags(var_1.weapon);
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
       var_1 hidepart(var_3[var_4], var_2);
     }

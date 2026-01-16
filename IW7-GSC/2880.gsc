@@ -130,8 +130,9 @@ func_DC81(var_0) {
     if(isDefined(var_0.var_9B89) || !isai(var_0)) {
       var_0.origin = var_7;
       var_0.angles = var_8;
-    } else
+    } else {
       var_0 func_80F1(var_7, var_8, 100000.0);
+    }
 
     var_9 = undefined;
 
@@ -244,8 +245,9 @@ func_DC84(var_0) {
       if(isDefined(var_7.var_9B89) || !isai(var_7)) {
         var_7.origin = var_12;
         var_7.angles = var_13;
-      } else
+      } else {
         var_7 func_80F1(var_12, var_13, 100000.0);
+      }
 
       var_14 = undefined;
 
@@ -392,8 +394,9 @@ func_DC82(var_0) {
     if(isDefined(var_0.var_9B89) || !isai(var_0)) {
       var_0.origin = var_6;
       var_0.angles = var_7;
-    } else
+    } else {
       var_0 func_80F1(var_6, var_7, 100000.0);
+    }
 
     var_8 = undefined;
 

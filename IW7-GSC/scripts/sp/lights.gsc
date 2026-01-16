@@ -40,24 +40,24 @@ init_light_generic_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self.var_AD22 = [];
   self.var_127C9 = [];
   var_8 = scripts\sp\utility::func_7A8F();
-  foreach(var_0A in var_8) {
-    if(func_9C37(var_0A)) {
-      self.var_AD22[self.var_AD22.size] = var_0A;
+  foreach(var_10 in var_8) {
+    if(func_9C37(var_10)) {
+      self.var_AD22[self.var_AD22.size] = var_10;
       continue;
     }
 
-    if(isDefined(var_0A.script_noteworthy) && var_0A.script_noteworthy == "on") {
-      self.var_AD83[self.var_AD83.size] = var_0A;
+    if(isDefined(var_10.script_noteworthy) && var_10.script_noteworthy == "on") {
+      self.var_AD83[self.var_AD83.size] = var_10;
       continue;
     }
 
-    if(isDefined(var_0A.script_noteworthy) && var_0A.script_noteworthy == "off") {
-      self.var_12BB6[self.var_12BB6.size] = var_0A;
+    if(isDefined(var_10.script_noteworthy) && var_10.script_noteworthy == "off") {
+      self.var_12BB6[self.var_12BB6.size] = var_10;
       continue;
     }
 
-    if(issubstr(var_0A.classname, "trigger")) {
-      self.var_127C9[self.var_127C9.size] = var_0A;
+    if(issubstr(var_10.classname, "trigger")) {
+      self.var_127C9[self.var_127C9.size] = var_10;
     }
   }
 
@@ -74,20 +74,20 @@ init_light_generic_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(self.var_AD83.size != 0 || self.var_12BB6.size != 0) {}
 
   scripts\engine\utility::array_thread(self.var_127C9, ::init_light_trig, self);
-  foreach(var_0D in self.var_AD83) {
-    if(isDefined(var_0D.script_fxid)) {
-      var_0D.effect = scripts\engine\utility::createoneshoteffect(var_0D.script_fxid);
-      var_0E = (0, 0, 0);
-      var_0F = (0, 0, 0);
-      if(isDefined(var_0D.script_parameters)) {
-        var_10 = strtok(var_0D.script_parameters, ", ");
-        var_0E = (float(var_10[0]), float(var_10[1]), float(var_10[2]));
+  foreach(var_13 in self.var_AD83) {
+    if(isDefined(var_13.script_fxid)) {
+      var_13.effect = scripts\engine\utility::createoneshoteffect(var_13.script_fxid);
+      var_14 = (0, 0, 0);
+      var_15 = (0, 0, 0);
+      if(isDefined(var_13.script_parameters)) {
+        var_10 = strtok(var_13.script_parameters, ", ");
+        var_14 = (float(var_10[0]), float(var_10[1]), float(var_10[2]));
         if(var_10.size >= 6) {
-          var_0F = (float(var_10[3]), float(var_10[4]), float(var_10[5]));
+          var_15 = (float(var_10[3]), float(var_10[4]), float(var_10[5]));
         }
       }
 
-      var_0D.effect scripts\common\createfx::set_origin_and_angles(var_0D.origin + var_0E, var_0D.angles + var_0F);
+      var_13.effect scripts\common\createfx::set_origin_and_angles(var_13.origin + var_14, var_13.angles + var_15);
     }
   }
 
@@ -114,7 +114,7 @@ func_ACA2() {
 
   for(;;) {
     if(!scripts\sp\utility::func_65DB("light_on")) {
-      level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
+      level scripts\engine\utility::waittill_any("bemani_573", self.var_12711, self.var_C14B);
       scripts\sp\utility::script_delay();
       if(isDefined(self.var_50D3)) {
         if(isDefined(self.script_delay)) {
@@ -137,7 +137,7 @@ func_ACA2() {
       func_ACA4();
     }
 
-    level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12712, self.var_C14C);
+    level scripts\engine\utility::waittill_any("bemani_573", self.var_12712, self.var_C14C);
     scripts\sp\utility::script_delay();
     if(isDefined(self.var_50D3)) {
       if(isDefined(self.script_delay)) {
@@ -174,14 +174,14 @@ func_ACA2() {
   }
 }
 
-init_light_flicker(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E) {
-  init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_0A, var_0B, 1);
+init_light_flicker(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_10, var_11, 1);
   if(getdvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
-  func_B27A(var_2, var_3, var_6, var_7, var_8, var_0C, var_0D);
-  if(isDefined(var_0E) && var_0E) {
+  func_B27A(var_2, var_3, var_6, var_7, var_8, var_12, var_13);
+  if(isDefined(var_14) && var_14) {
     return;
   }
 
@@ -304,7 +304,7 @@ func_AC89() {
 
   for(;;) {
     if(!scripts\sp\utility::func_65DB("light_on") && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
-      level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
+      level scripts\engine\utility::waittill_any("bemani_573", self.var_12711, self.var_C14B);
     }
 
     scripts\sp\utility::script_delay();
@@ -343,7 +343,7 @@ func_AC89() {
     }
 
     if(!self.var_12AE3) {
-      level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12712, self.var_C14C);
+      level scripts\engine\utility::waittill_any("bemani_573", self.var_12712, self.var_C14C);
     } else {
       func_AC8A(1);
     }
@@ -391,7 +391,7 @@ func_AC8A(var_0, var_1) {
   }
 
   if(!isDefined(var_0) && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
-    level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
+    level scripts\engine\utility::waittill_any("bemani_573", self.var_12711, self.var_C14B);
   }
 
   for(;;) {
@@ -412,14 +412,14 @@ func_AC8A(var_0, var_1) {
   }
 }
 
-init_light_pulse_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E) {
-  init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_0A, undefined, 1);
+init_light_pulse_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
+  init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_10, undefined, 1);
   if(getdvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
-  func_B27B(var_2, var_3, var_6, var_7, var_8, var_0C, var_0D, var_0B);
-  if(isDefined(var_0E) && var_0E) {
+  func_B27B(var_2, var_3, var_6, var_7, var_8, var_12, var_13, var_11);
+  if(isDefined(var_14) && var_14) {
     return;
   }
 
@@ -519,7 +519,7 @@ func_AC9D() {
 
   for(;;) {
     if(!scripts\sp\utility::func_65DB("light_on") && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
-      level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
+      level scripts\engine\utility::waittill_any("bemani_573", self.var_12711, self.var_C14B);
     }
 
     scripts\sp\utility::script_delay();
@@ -558,7 +558,7 @@ func_AC9D() {
     }
 
     if(!self.var_12AE3) {
-      level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12712, self.var_C14C);
+      level scripts\engine\utility::waittill_any("bemani_573", self.var_12712, self.var_C14C);
     } else {
       func_AC9E(1);
     }
@@ -606,7 +606,7 @@ func_AC9E(var_0) {
   }
 
   if(!isDefined(var_0) && isDefined(self.var_12711) || isDefined(self.var_C14B)) {
-    level scripts\engine\utility::waittill_any_3("bemani_573", self.var_12711, self.var_C14B);
+    level scripts\engine\utility::waittill_any("bemani_573", self.var_12711, self.var_C14B);
   }
 
   for(;;) {

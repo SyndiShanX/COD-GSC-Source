@@ -124,7 +124,7 @@ init() {
 
   scripts\mp\agents\agents::wait_till_agent_funcs_defined();
   level.agent_funcs["odin_juggernaut"] = level.agent_funcs["player"];
-  level.agent_funcs["odin_juggernaut"]["think"] = scripts\engine\utility::empty_init_func;
+  level.agent_funcs["odin_juggernaut"]["think"] = ::scripts\engine\utility::empty_init_func;
   level.odin_marking_flash_radius_max = 800;
   level.odin_marking_flash_radius_min = 200;
   level.var_1639 = [];
@@ -551,8 +551,9 @@ func_1399C() {
       self.odin_airdropusetime = func_C2E6("airdrop");
       var_1 = level.var_C321[self.odintype].weapon["airdrop"];
       level thread scripts\mp\killstreaks\airdrop::doflyby(var_0, self.targeting_marker.origin, randomfloat(360), var_1.var_1AA0);
-    } else
+    } else {
       var_0 scripts\mp\utility\game::func_13A7("odin_negative_action");
+    }
 
     wait 1.0;
   }
@@ -593,8 +594,9 @@ func_13B49() {
       }
 
       self.odin_smokeusetime = func_C2E6("smoke");
-    } else
+    } else {
       var_0 scripts\mp\utility\game::func_13A7("odin_negative_action");
+    }
 
     wait 1.0;
   }
@@ -626,8 +628,9 @@ func_13ACA() {
     if(gettime() >= self.odin_markingusetime) {
       self.odin_markingusetime = func_C2E6("marking");
       thread func_58EE(self.targeting_marker.origin + (0, 0, 10));
-    } else
+    } else {
       var_0 scripts\mp\utility\game::func_13A7("odin_negative_action");
+    }
 
     wait 1.0;
   }
@@ -662,8 +665,9 @@ func_13AAF() {
       if(isDefined(var_2)) {
         self.odin_juggernautusetime = func_C2E6("juggernaut");
         thread func_1369E(var_2);
-      } else
+      } else {
         var_0 scripts\mp\utility\game::func_13A7("odin_negative_action");
+      }
     } else if(isDefined(self.var_A4A3)) {
       var_2 = func_7F25(self.targeting_marker.origin);
 
@@ -673,8 +677,9 @@ func_13AAF() {
         var_0 playrumbleonentity("pistol_fire");
         self.var_A4A3 scripts\mp\bots\bots_strategy::bot_protect_point(var_2.origin, 128);
         var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
-      } else
+      } else {
         var_0 scripts\mp\utility\game::func_13A7("odin_negative_action");
+      }
     }
 
     wait 1.1;
@@ -860,8 +865,9 @@ func_1369E(var_0) {
     var_5 = scripts\mp\utility\game::outlineenableforplayer(var_3, "cyan", self.owner, 0, 0, "killstreak");
     thread removeoutline(var_5, var_3);
     var_3 scripts\mp\utility\game::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
-  } else
+  } else {
     var_1 iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
+  }
 }
 
 func_13AAE() {

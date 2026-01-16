@@ -355,7 +355,7 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\engine\utility::flag_set("game_saving");
   var_8 = func_7E6B();
   var_9 = gettime();
-  var_0A = 0;
+  var_10 = 0;
   for(;;) {
     if(func_2685(undefined, var_4)) {
       waitfortransientloading("tryAutoSave()");
@@ -367,9 +367,9 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
         break;
       }
 
-      var_0A++;
+      var_10++;
       if(scripts\sp\utility::func_93A6()) {
-        if(var_0A == 3) {
+        if(var_10 == 3) {
           break;
         }
 
@@ -380,8 +380,8 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
       }
 
-      var_0B = savegamenocommit(var_0, var_8, var_2, var_5);
-      if(var_0B < 0) {
+      var_11 = savegamenocommit(var_0, var_8, var_2, var_5);
+      if(var_11 < 0) {
         break;
       }
 
@@ -400,11 +400,11 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
         continue;
       }
 
-      if(func_6A43(var_0B)) {
+      if(func_6A43(var_11)) {
         continue;
       }
 
-      if(!func_2685(undefined, var_4, var_0B)) {
+      if(!func_2685(undefined, var_4, var_11)) {
         continue;
       }
 
@@ -413,7 +413,7 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
         continue;
       }
 
-      if(!func_2686(var_0B)) {
+      if(!func_2686(var_11)) {
         continue;
       }
 
@@ -427,12 +427,12 @@ func_12891(var_0, var_1, var_2, var_3, var_4, var_5) {
         break;
       }
 
-      if(!commitwouldbevalid(var_0B)) {
+      if(!commitwouldbevalid(var_11)) {
         scripts\engine\utility::flag_clear("game_saving");
         return 0;
       }
 
-      commitsave(var_0B);
+      commitsave(var_11);
       level.player func_8591(0);
       level.var_A9E7 = gettime();
       setdvar("ui_grenade_death", "0");
@@ -677,11 +677,11 @@ func_268A(var_0) {
 func_268F(var_0, var_1) {
   var_2 = getaiunittypearray("bad_guys", "all");
   foreach(var_4 in var_2) {
-    if(!isDefined(var_4.isnodeoccupied)) {
+    if(!isDefined(var_4.enemy)) {
       continue;
     }
 
-    if(!isplayer(var_4.isnodeoccupied)) {
+    if(!isplayer(var_4.enemy)) {
       continue;
     }
 
@@ -743,17 +743,17 @@ func_268F(var_0, var_1) {
     }
   }
 
-  var_0B = getEntArray("scriptable", "code_classname");
-  foreach(var_0D in var_0B) {
-    if(!isDefined(var_0D.var_ED) || var_0D.var_ED != "vehicle") {
+  var_11 = getEntArray("scriptable", "code_classname");
+  foreach(var_13 in var_11) {
+    if(!isDefined(var_13.var_ED) || var_13.var_ED != "vehicle") {
       continue;
     }
 
-    if(!isDefined(var_0D.var_C528)) {
+    if(!isDefined(var_13.var_C528)) {
       continue;
     }
 
-    if(distancesquared(var_0D.origin, level.player.origin) < 160000) {
+    if(distancesquared(var_13.origin, level.player.origin) < 160000) {
       return 0;
     }
   }

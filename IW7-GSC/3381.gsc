@@ -55,10 +55,10 @@ func_F9BE(var_0) {
         break;
 
       case "knife_wheel":
-        var_0A = spawn("script_model", var_7.origin);
-        var_0A setModel("cp_rave_misfortune_wheel_01");
-        var_0A.angles = var_7.angles;
-        self.var_13CFD = var_0A;
+        var_10 = spawn("script_model", var_7.origin);
+        var_10 setModel("cp_rave_misfortune_wheel_01");
+        var_10.angles = var_7.angles;
+        self.var_13CFD = var_10;
         break;
     }
   }
@@ -72,26 +72,26 @@ func_F9BE(var_0) {
   self.knife_throw_target thread knife_target_damage_monitor(self.knife_throw_target);
   self.knife_throw_target linkto(self.var_13CFD);
   self.var_13CFF = self.var_13CFD.angles;
-  var_0C = scripts\engine\utility::istrue(self.requires_power) && isDefined(self.power_area);
+  var_12 = scripts\engine\utility::istrue(self.requires_power) && isDefined(self.power_area);
   thread interaction_usability_manager_per_wave(self);
   for(;;) {
-    var_0D = "power_on";
-    if(var_0C) {
-      var_0D = level scripts\engine\utility::waittill_any_return_no_endon_death_3("power_on", self.power_area + " power_on", "power_off");
+    var_13 = "power_on";
+    if(var_12) {
+      var_13 = level scripts\engine\utility::waittill_any_return_no_endon_death_3("power_on", self.power_area + " power_on", "power_off");
     }
 
-    if(var_0D == "power_off" && !scripts\engine\utility::istrue(self.powered_on)) {
+    if(var_13 == "power_off" && !scripts\engine\utility::istrue(self.powered_on)) {
       wait(0.25);
       continue;
     }
 
-    if(var_0D != "power_off" && !isDefined(var_0)) {
+    if(var_13 != "power_off" && !isDefined(var_0)) {
       self.powered_on = 1;
     } else {
       self.powered_on = 0;
     }
 
-    if(!var_0C) {
+    if(!var_12) {
       break;
     }
   }
@@ -99,7 +99,7 @@ func_F9BE(var_0) {
 
 interaction_usability_manager_per_wave(var_0) {
   for(;;) {
-    level scripts\engine\utility::waittill_any_3("regular_wave_starting", "event_wave_starting");
+    level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
     foreach(var_2 in level.players) {
       scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_0, var_2);
     }
@@ -129,7 +129,7 @@ use_knife_throw(var_0, var_1) {
   var_1 scripts\cp\utility::setlowermessage("knife_hint", &"CP_RAVE_KNIFE_HINT", 6);
   var_1 setclientomnvar("zombie_arcade_game_time", 1);
   scripts\engine\utility::waitframe();
-  var_0.destroynavrepulsor = 0;
+  var_0.score = 0;
   var_0.knife_throw_target setCanDamage(1);
   var_0.knife_throw_target.health = 10000000;
   var_0.knife_throw_target.head_hit = 0;
@@ -178,9 +178,9 @@ func_10A00(var_0, var_1) {
 knife_target_damage_monitor(var_0) {
   var_0 endon("death");
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 10000000;
-    if(!isDefined(var_0A)) {
+    if(!isDefined(var_10)) {
       continue;
     }
 
@@ -188,7 +188,7 @@ knife_target_damage_monitor(var_0) {
       continue;
     }
 
-    if(var_0A != "iw7_cpknifethrow_mp") {
+    if(var_10 != "iw7_cpknifethrow_mp") {
       continue;
     }
 
@@ -287,7 +287,7 @@ func_6955(var_0, var_1, var_2) {
     var_1 scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(var_1);
     var_1 scripts\cp\zombies\arcade_game_utility::restore_player_grenades_post_game();
     playsoundatpos(var_0.origin, "mp_slot_machine_coins");
-    var_3 = var_0.destroynavrepulsor;
+    var_3 = var_0.score;
     if(var_1.arcade_game_award_type == "soul_power") {
       var_1 scripts\cp\zombies\zombie_afterlife_arcade::give_soul_power(var_1, var_3);
     } else {

@@ -1,6 +1,6 @@
 /**************************************************
  * Decompiled by Bog and Edited by SyndiShanX
- * Script: scripts\mp\killstreaks\_emp_common.gsc
+ * Script: scripts\mp\killstreaks\emp_common.gsc
 **************************************************/
 
 func_20C3() {
@@ -193,7 +193,7 @@ func_5AA9() {
   self notify("doShockEffects");
   self endon("doShockEffects");
   self setscriptablepartstate("emped", "active", 0);
-  scripts\engine\utility::waittill_any_3("death", "emp_stop_vfx", "game_ended");
+  scripts\engine\utility::waittill_any("death", "emp_stop_vfx", "game_ended");
   self setscriptablepartstate("emped", "neutral", 0);
 }
 
@@ -240,15 +240,15 @@ func_61C1(var_0) {
     }
   }
 
-  foreach(var_0A in level.uplinks) {
-    if(isDefined(var_0A)) {
-      var_1[var_1.size] = var_0A;
+  foreach(var_10 in level.uplinks) {
+    if(isDefined(var_10)) {
+      var_1[var_1.size] = var_10;
     }
   }
 
-  foreach(var_0D in level.remote_uav) {
-    if(isDefined(var_0D)) {
-      var_1[var_1.size] = var_0D;
+  foreach(var_13 in level.remote_uav) {
+    if(isDefined(var_13)) {
+      var_1[var_1.size] = var_13;
     }
   }
 

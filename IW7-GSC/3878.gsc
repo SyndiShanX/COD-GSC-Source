@@ -151,7 +151,7 @@ func_117C9() {
     level scripts\engine\utility::flag_waitopen("stealth_spotted");
     wait(randomfloatrange(0.4, 0.6));
     foreach(var_1 in level.players) {
-      if(self getpersstat(var_1)) {
+      if(self cansee(var_1)) {
         self func_84F7("sight", var_1, var_1.origin);
       }
     }
@@ -185,7 +185,7 @@ func_117CD(var_0, var_1) {
       break;
 
     case "investigate":
-      if(isDefined(var_0.isnodeoccupied) && var_0.isnodeoccupied == self) {
+      if(isDefined(var_0.enemy) && var_0.enemy == self) {
         var_0 func_84EA(self, 1);
       }
       break;
@@ -286,7 +286,7 @@ func_117C6() {
     var_3 = [];
     var_4 = getdvarfloat("ai_threatForcedRate") * var_0;
     foreach(var_8, var_6 in self.var_10E6D.var_729B) {
-      if(var_2 < var_6.end && issentient(var_6.ent) && !self getpersstat(var_6.ent)) {
+      if(var_2 < var_6.end && issentient(var_6.ent) && !self cansee(var_6.ent)) {
         var_7 = self func_84E9(var_6.ent);
         if(isplayer(var_6.ent)) {
           var_6.ent thread func_117D0(1, max(var_6.ent.var_10E6D.var_B4CB, var_7));
@@ -341,13 +341,13 @@ func_117CE() {
       self.var_10E6D.var_B476 = max(self.var_10E6D.var_B476, var_6.var_29);
       if(getdvarint("ai_threatsight", 1)) {
         var_8 = var_6 func_84E9(self);
-        var_9 = var_6 getpersstat(self);
+        var_9 = var_6 cansee(self);
         if(var_9) {
           var_0 = gettime();
         }
 
         if(var_8 >= 1) {
-          if(!isDefined(self.var_10E6D.var_117DC[var_7]) && isDefined(var_6.isnodeoccupied) && var_6.isnodeoccupied == self) {
+          if(!isDefined(self.var_10E6D.var_117DC[var_7]) && isDefined(var_6.enemy) && var_6.enemy == self) {
             var_6 thread func_117D6(self);
           }
 
@@ -355,14 +355,14 @@ func_117CE() {
         }
 
         self.var_10E6D.var_B4CB = max(self.var_10E6D.var_B4CB, var_6 func_84E9(self));
-        var_0A = var_9 && scripts\engine\utility::istrue(level.var_10E6D.var_5659) || var_6 lib_0F22::func_9B2C() && var_8 > 0;
-        if(var_0A) {
-          var_0B = vectornormalize(var_3 - var_6 getEye());
-          var_0C = anglestoright(var_6 gettagangles("j_spineupper"));
-          var_0A = vectordot(var_0B, var_0C) > var_4;
+        var_10 = var_9 && scripts\engine\utility::istrue(level.var_10E6D.var_5659) || var_6 lib_0F22::func_9B2C() && var_8 > 0;
+        if(var_10) {
+          var_11 = vectornormalize(var_3 - var_6 getEye());
+          var_12 = anglestoright(var_6 gettagangles("j_spineupper"));
+          var_10 = vectordot(var_11, var_12) > var_4;
         }
 
-        if(var_0A) {
+        if(var_10) {
           var_6.var_10E6D.var_B020 = self;
           var_6 func_8306(self);
         } else if(isDefined(var_6.var_10E6D.var_B020) && var_6.var_10E6D.var_B020 == self) {
@@ -376,12 +376,12 @@ func_117CE() {
       }
     }
 
-    var_0E = !var_2 && var_0 > 0 && gettime() - var_0 < 250;
+    var_14 = !var_2 && var_0 > 0 && gettime() - var_0 < 250;
     if(getdvarfloat("ai_threatsightFakeThreat") <= 0) {
-      thread func_117D0(var_0E, self.var_10E6D.var_B4CB);
+      thread func_117D0(var_14, self.var_10E6D.var_B4CB);
     }
 
-    self.var_10E6D.var_117DF = var_0E;
+    self.var_10E6D.var_117DF = var_14;
     wait(0.05);
   }
 }
@@ -423,11 +423,11 @@ func_117D0(var_0, var_1, var_2) {
     self.var_10E6D.var_117DA = 0;
     self.var_10E6D.var_117D9 = 0;
     foreach(var_9 in var_7) {
-      var_0A = spawn("script_origin", self.origin);
-      var_0A linkto(self);
-      var_0A ghostattack(0, 0);
-      var_0A.var_9F00 = 0;
-      self.var_10E6D.var_117D8[var_9] = var_0A;
+      var_10 = spawn("script_origin", self.origin);
+      var_10 linkto(self);
+      var_10 ghostattack(0, 0);
+      var_10.var_9F00 = 0;
+      self.var_10E6D.var_117D8[var_9] = var_10;
     }
   }
 
@@ -442,14 +442,14 @@ func_117D0(var_0, var_1, var_2) {
   }
 
   while(isDefined(self.var_10E6D.var_117D8)) {
-    var_0B = 0;
-    var_0C = 0;
+    var_11 = 0;
+    var_12 = 0;
     if(var_1 > 0) {
       if(var_1 < var_5) {
-        var_0D = clamp(var_1, 0, var_5);
-        var_0E = var_0D / var_5;
-        var_0F = 1 - var_4;
-        var_10 = var_4 + var_0F * var_0E;
+        var_13 = clamp(var_1, 0, var_5);
+        var_14 = var_13 / var_5;
+        var_15 = 1 - var_4;
+        var_10 = var_4 + var_15 * var_14;
         self.var_10E6D.var_117DA = var_10;
       } else {
         self.var_10E6D.var_117DA = 1;
@@ -460,9 +460,9 @@ func_117D0(var_0, var_1, var_2) {
     }
 
     self.var_10E6D.var_117DA = clamp(self.var_10E6D.var_117DA, 0, 1);
-    foreach(var_9, var_0A in self.var_10E6D.var_117D8) {
+    foreach(var_9, var_10 in self.var_10E6D.var_117D8) {
       var_12 = 1;
-      switch (var_0B) {
+      switch (var_11) {
         case 0:
           if(var_1 < 0.75) {
             var_12 = cos(var_3 * var_1 * 0.666);
@@ -492,28 +492,28 @@ func_117D0(var_0, var_1, var_2) {
 
       var_13 = clamp(self.var_10E6D.var_117DA * var_12, 0, 1);
       if(var_13 > 0) {
-        var_0C = 1;
-        if(var_0A.var_9F00 == 0) {
-          var_0A ghostattack(0, 0);
-          var_0A scripts\engine\utility::delaycall(0.05, ::playloopsound, var_9);
-          var_0A.var_9F00 = 1;
+        var_12 = 1;
+        if(var_10.var_9F00 == 0) {
+          var_10 ghostattack(0, 0);
+          var_10 scripts\engine\utility::delaycall(0.05, ::playloopsound, var_9);
+          var_10.var_9F00 = 1;
         }
 
-        var_0A scripts\engine\utility::delaycall(0, ::ghostattack, var_13, 0.05);
-      } else if(var_0A.var_9F00 == 1) {
-        var_0A ghostattack(0, 0.05);
-        var_0A scripts\engine\utility::delaycall(0.05, ::stoploopsound);
-        var_0A.var_9F00 = 0;
+        var_10 scripts\engine\utility::delaycall(0, ::ghostattack, var_13, 0.05);
+      } else if(var_10.var_9F00 == 1) {
+        var_10 ghostattack(0, 0.05);
+        var_10 scripts\engine\utility::delaycall(0.05, ::stoploopsound);
+        var_10.var_9F00 = 0;
       }
 
-      var_0B++;
+      var_11++;
     }
 
-    if(!var_0C) {
-      foreach(var_0A in self.var_10E6D.var_117D8) {
-        var_0A ghostattack(0, 0.05);
-        var_0A stoploopsound();
-        var_0A scripts\engine\utility::delaycall(0.05, ::delete);
+    if(!var_12) {
+      foreach(var_10 in self.var_10E6D.var_117D8) {
+        var_10 ghostattack(0, 0.05);
+        var_10 stoploopsound();
+        var_10 scripts\engine\utility::delaycall(0.05, ::delete);
       }
 
       self.var_10E6D.var_117D8 = undefined;

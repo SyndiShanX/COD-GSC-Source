@@ -120,7 +120,7 @@ func_108EA(var_0, var_1) {
   var_3 = spawn("script_model", var_1);
   var_3.health = var_2.health;
   var_3.team = self.team;
-  var_3.triggerportableradarping = self;
+  var_3.owner = self;
   var_3 setCanDamage(1);
   var_3 setModel(var_2.placedmodel);
   if(level.teambased) {
@@ -176,7 +176,7 @@ modifydamage(var_0, var_1, var_2, var_3, var_4) {
 }
 
 handledeathdamage(var_0, var_1, var_2) {
-  var_3 = self.triggerportableradarping;
+  var_3 = self.owner;
   var_4 = level.var_D671[self.var_773C];
   if(isDefined(var_3) && var_0 != var_3) {
     var_0 notify("destroyed_equipment");
@@ -234,7 +234,7 @@ func_3DE7(var_0) {
     var_4 = undefined;
     foreach(var_6 in var_1) {
       if(isDefined(var_6) && scripts\mp\utility::isreallyalive(var_6)) {
-        if((level.teambased && func_B3E5(var_6.team, self.team, var_2.var_11589)) || !level.teambased && func_B3E4(var_6.triggerportableradarping, self, var_2.var_11589)) {
+        if((level.teambased && func_B3E5(var_6.team, self.team, var_2.var_11589)) || !level.teambased && func_B3E4(var_6.owner, self, var_2.var_11589)) {
           var_7 = distancesquared(var_6.origin, self.origin);
           if(var_7 < var_3) {
             var_4 = var_6;
@@ -245,10 +245,10 @@ func_3DE7(var_0) {
     }
 
     var_9 = isDefined(var_4);
-    var_0A = isDefined(self.ingame_cinematic_loop[var_0]);
-    if(var_9 && !var_0A) {
+    var_10 = isDefined(self.ingame_cinematic_loop[var_0]);
+    if(var_9 && !var_10) {
       self[[var_2.var_C510]]();
-    } else if(!var_9 && var_0A) {
+    } else if(!var_9 && var_10) {
       self[[var_2.var_C51E]]();
     }
 
@@ -265,5 +265,5 @@ func_B3E4(var_0, var_1, var_2) {
 }
 
 func_7F0C(var_0) {
-  return var_0.triggerportableradarping.guid + var_0.var_64;
+  return var_0.owner.guid + var_0.var_64;
 }

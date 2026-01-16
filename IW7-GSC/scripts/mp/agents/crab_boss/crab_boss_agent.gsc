@@ -131,8 +131,8 @@ setupagent() {
   self.var_B601 = 45;
   self.var_504E = 55;
   self.var_129AF = 55;
-  self.var_368 = -60;
-  self.isbot = 60;
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
   self.ground_pound_damage = 50;
   self.footstepdetectdist = 2500;
   self.footstepdetectdistwalk = 2500;
@@ -149,6 +149,6 @@ getenemy() {
   return undefined;
 }
 
-ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
+ondamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   var_2 = 0;
 }

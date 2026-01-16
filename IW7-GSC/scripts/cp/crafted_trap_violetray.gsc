@@ -6,11 +6,11 @@
 init() {
   level.violetray_trap_settings = [];
   var_0 = spawnStruct();
-  var_0.var_39B = "zmb_robotprojectile_mp";
+  var_0.weaponinfo = "zmb_robotprojectile_mp";
   var_0.modelbase = "cp_town_violet_xray_device";
   var_0.modelplacement = "cp_town_violet_xray_device_good";
   var_0.modelplacementfailed = "cp_town_violet_xray_device_bad";
-  var_0.pow = &"COOP_CRAFTABLES_PICKUP";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
   var_0.placestring = &"COOP_CRAFTABLES_PLACE";
   var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
   var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
@@ -128,7 +128,7 @@ create_violetray_trap_for_player(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
   var_2.violetray_trap_type = var_0;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2.name = "crafted_violetray";
   var_2.carried_violetray_trap = spawn("script_model", var_2.origin);
   var_2.carried_violetray_trap.angles = var_1.angles;
@@ -141,14 +141,14 @@ create_violetray_trap_for_player(var_0, var_1) {
 }
 
 create_violetray_trap(var_0, var_1) {
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_3 = var_0.violetray_trap_type;
   var_4 = spawn("script_model", var_0.origin + (0, 0, 2));
   var_4 setModel(level.violetray_trap_settings[var_3].modelbase);
   var_4.var_EB9C = 3;
   var_4.angles = (0, var_0.carried_violetray_trap.angles[1], 0);
   var_4.violetray_trap_type = var_3;
-  var_4.triggerportableradarping = var_2;
+  var_4.owner = var_2;
   var_4 setotherent(var_2);
   var_4.team = var_2.team;
   var_4.name = "crafted_violetray";
@@ -237,14 +237,14 @@ violetray_trap_setplaced(var_0) {
   }
 
   self.carriedby = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
   }
 
   self.firstplacement = undefined;
   var_1 = create_violetray_trap(self, var_0);
   var_1.isplaced = 1;
-  var_1 thread func_9367(self.triggerportableradarping);
+  var_1 thread func_9367(self.owner);
   self playSound("trap_boom_box_drop");
   self playSound("town_xray_activate");
   self notify("placed");
@@ -314,9 +314,9 @@ func_9371(var_0) {
 violetray_trap_setactive() {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level.violetray_trap_settings[self.violetray_trap_type].pow);
+  self sethintstring(level.violetray_trap_settings[self.violetray_trap_type].hintstring);
   scripts\cp\utility::addtotraplist();
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
   scripts\cp\utility::setselfusable(var_0);
   self setusefov(120);
@@ -369,8 +369,8 @@ violetray_trap_attack_zombies() {
         var_3 = self.origin - var_2.origin;
         var_4 = vectortoangles(var_3);
         var_2.desired_death_angles = (0, var_4[1], 0);
-        if(isDefined(self.triggerportableradarping)) {
-          var_2.var_CF80 = self.triggerportableradarping;
+        if(isDefined(self.owner)) {
+          var_2.var_CF80 = self.owner;
         } else {
           var_2.var_CF80 = undefined;
         }
@@ -378,8 +378,8 @@ violetray_trap_attack_zombies() {
         var_2 scripts\asm\asm::asm_setstate("violetraydeath");
         thread scripts\engine\utility::play_sound_in_space("town_xray_burn_zombie", var_2.origin);
         wait(0.05);
-        if(isDefined(self.triggerportableradarping)) {
-          self.triggerportableradarping scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
+        if(isDefined(self.owner)) {
+          self.owner scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
         }
       }
     }

@@ -45,59 +45,59 @@ func_BD15(var_0) {
     }
   }
 
-  var_0F = scripts\engine\utility::get_target_ent();
-  if(var_0F scripts\sp\vehicle::func_9FEF()) {
-    var_7 func_BD16(var_0F, var_0);
+  var_15 = scripts\engine\utility::get_target_ent();
+  if(var_15 scripts\sp\vehicle::func_9FEF()) {
+    var_7 func_BD16(var_15, var_0);
     self notify("done_moving");
     return;
   }
 
-  if(!isDefined(var_0F.angles)) {
-    var_0F.angles = (0, 0, 0);
+  if(!isDefined(var_15.angles)) {
+    var_15.angles = (0, 0, 0);
   }
 
   var_0.var_BCDA = var_7;
-  var_7.origin = var_0F.origin;
-  var_7.angles = var_0F.angles;
+  var_7.origin = var_15.origin;
+  var_7.angles = var_15.angles;
   var_10 = undefined;
   var_11 = undefined;
   var_12 = 5;
   var_13 = 0;
   var_14 = 0;
   var_15 = undefined;
-  if(isDefined(var_0F.var_ED75)) {
-    var_12 = var_0F.var_ED75;
+  if(isDefined(var_15.var_ED75)) {
+    var_12 = var_15.var_ED75;
   }
 
-  if(isDefined(var_0F.script_accel)) {
-    var_13 = var_0F.script_accel;
+  if(isDefined(var_15.script_accel)) {
+    var_13 = var_15.script_accel;
   }
 
-  if(isDefined(var_0F.var_ED4C)) {
-    var_14 = var_0F.var_ED4C;
+  if(isDefined(var_15.var_ED4C)) {
+    var_14 = var_15.var_ED4C;
   }
 
-  if(isDefined(var_0F.script_earthquake)) {
-    var_10 = var_0F.script_earthquake;
+  if(isDefined(var_15.script_earthquake)) {
+    var_10 = var_15.script_earthquake;
   }
 
-  if(isDefined(var_0F.script_exploder)) {
-    var_11 = var_0F.script_exploder;
+  if(isDefined(var_15.script_exploder)) {
+    var_11 = var_15.script_exploder;
   }
 
-  if(isDefined(var_0F.var_EDA0)) {
-    var_15 = var_0F.var_EDA0;
+  if(isDefined(var_15.var_EDA0)) {
+    var_15 = var_15.var_EDA0;
   }
 
   var_0 waittill("trigger");
-  var_0F scripts\sp\utility::script_delay();
-  if(isDefined(var_0F.target)) {
-    var_0F = var_0F scripts\engine\utility::get_target_ent();
+  var_15 scripts\sp\utility::script_delay();
+  if(isDefined(var_15.target)) {
+    var_15 = var_15 scripts\engine\utility::get_target_ent();
   } else {
-    var_0F = undefined;
+    var_15 = undefined;
   }
 
-  while(isDefined(var_0F)) {
+  while(isDefined(var_15)) {
     if(isDefined(var_15)) {
       scripts\engine\utility::flag_wait(var_15);
     }
@@ -111,54 +111,54 @@ func_BD15(var_0) {
       }
     }
 
-    if(!isDefined(var_0F.angles)) {
-      var_0F.angles = (0, 0, 0);
+    if(!isDefined(var_15.angles)) {
+      var_15.angles = (0, 0, 0);
     }
 
-    var_7 func_BD13(var_0F, var_12, var_13, var_14);
+    var_7 func_BD13(var_15, var_12, var_13, var_14);
     var_7 notify("stop_constant_quake");
     var_12 = 5;
     var_13 = 0;
     var_14 = 0;
     var_10 = undefined;
-    var_0F scripts\sp\utility::script_delay();
-    if(isDefined(var_0F.var_ED75)) {
-      var_12 = var_0F.var_ED75;
+    var_15 scripts\sp\utility::script_delay();
+    if(isDefined(var_15.var_ED75)) {
+      var_12 = var_15.var_ED75;
     }
 
-    if(isDefined(var_0F.script_accel)) {
-      var_13 = var_0F.script_accel;
+    if(isDefined(var_15.script_accel)) {
+      var_13 = var_15.script_accel;
     }
 
-    if(isDefined(var_0F.var_ED4C)) {
-      var_14 = var_0F.var_ED4C;
+    if(isDefined(var_15.var_ED4C)) {
+      var_14 = var_15.var_ED4C;
     }
 
-    if(isDefined(var_0F.script_earthquake)) {
-      var_10 = var_0F.script_earthquake;
+    if(isDefined(var_15.script_earthquake)) {
+      var_10 = var_15.script_earthquake;
     }
 
-    if(isDefined(var_0F.script_exploder)) {
-      var_11 = var_0F.script_exploder;
+    if(isDefined(var_15.script_exploder)) {
+      var_11 = var_15.script_exploder;
     }
 
-    if(isDefined(var_0F.var_EDA0)) {
-      var_15 = var_0F.var_EDA0;
+    if(isDefined(var_15.var_EDA0)) {
+      var_15 = var_15.var_EDA0;
     }
 
-    var_16 = var_0F scripts\sp\utility::func_7A8F();
+    var_16 = var_15 scripts\sp\utility::func_7A8F();
     if(var_16.size > 0) {
       if(issubstr(var_16[0].classname, "trigger")) {
         var_16[0] waittill("trigger");
       }
     }
 
-    if(isDefined(var_0F.target)) {
-      var_0F = var_0F scripts\engine\utility::get_target_ent();
+    if(isDefined(var_15.target)) {
+      var_15 = var_15 scripts\engine\utility::get_target_ent();
       continue;
     }
 
-    var_0F = undefined;
+    var_15 = undefined;
   }
 
   self notify("done_moving");

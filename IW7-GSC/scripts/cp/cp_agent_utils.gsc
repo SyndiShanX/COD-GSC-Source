@@ -49,13 +49,13 @@ is_scripted_agent(var_0) {
 spawn_scripted_agent(var_0, var_1, var_2, var_3) {
   var_0.onenteranimstate = var_0 speciesfunc("on_enter_animstate");
   var_0.is_scripted_agent = 1;
-  var_0 giveplaceable(var_2, var_3, level.agent_definition[var_1]["animclass"], 15, 60);
+  var_0 spawnagent(var_2, var_3, level.agent_definition[var_1]["animclass"], 15, 60);
   return var_0;
 }
 
 spawn_regular_agent(var_0, var_1, var_2) {
   var_0.is_scripted_agent = 0;
-  var_0 giveplaceable(var_1, var_2);
+  var_0 spawnagent(var_1, var_2);
   return var_0;
 }
 
@@ -214,7 +214,7 @@ set_agent_team(var_0, var_1) {
   self.team = var_0;
   self.var_20 = var_0;
   self.pers["team"] = var_0;
-  self.triggerportableradarping = var_1;
+  self.owner = var_1;
   self setotherent(var_1);
   self setentityowner(var_1);
 }
@@ -275,31 +275,31 @@ default_spawn_func(var_0, var_1, var_2) {
   return var_3;
 }
 
-default_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = self;
-  if(is_friendly_damage(var_0C, var_0)) {
+default_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = self;
+  if(is_friendly_damage(var_12, var_0)) {
     return;
   }
 
   var_2 = scripts\cp\cp_damage::func_F29B(var_4, var_5, var_2, var_1, var_3, var_6, var_7, var_8, var_9, var_0);
-  if(isplayer(var_1) && !scripts\cp\utility::is_trap(var_0, var_5, var_0C)) {
+  if(isplayer(var_1) && !scripts\cp\utility::is_trap(var_0, var_5, var_12)) {
     var_2 = scripts\cp\cp_damage::scale_alien_damage_by_perks(var_1, var_2, var_4, var_5);
     var_2 = scripts\cp\cp_damage::scale_alien_damage_by_weapon_type(var_1, var_2, var_4, var_5, var_8);
   }
 
-  var_2 = riot_shield_damage_adjustment(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0C);
+  var_2 = riot_shield_damage_adjustment(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_12);
   var_2 = scripts\cp\cp_damage::scale_alien_damage_by_prestige(var_1, var_2);
   var_2 = int(var_2);
   process_damage_score(var_1, var_2, var_4);
-  process_damage_rewards(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0C);
-  process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0C);
-  var_0C[[level.agent_funcs[var_0C.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_0A, var_0B);
+  process_damage_rewards(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_12);
+  process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_12);
+  var_12[[level.agent_funcs[var_12.agent_type]["on_damaged_finished"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0, var_10, var_11);
 }
 
-riot_shield_damage_adjustment(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
-  var_0A.riotblock = undefined;
+riot_shield_damage_adjustment(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_10.riotblock = undefined;
   if(var_8 == "shield") {
-    var_0A.riotblock = 1;
+    var_10.riotblock = 1;
     var_2 = 0;
   }
 
@@ -312,12 +312,12 @@ process_damage_score(var_0, var_1, var_2) {
   }
 }
 
-default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C) {
-  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
-  var_0D = scripts\cp\utility::is_trap(var_0, var_5);
+default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+  self getrespawndelay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
+  var_13 = scripts\cp\utility::is_trap(var_0, var_5);
   if(isDefined(var_1)) {
-    if(isplayer(var_1) || isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-      if(!var_0D) {
+    if(isplayer(var_1) || isDefined(var_1.owner) && isplayer(var_1.owner)) {
+      if(!var_13) {
         var_1 scripts\cp\cp_damage::check_for_special_damage(self, var_5, var_4);
       }
     }
@@ -332,7 +332,7 @@ is_friendly_damage(var_0, var_1) {
       return 1;
     }
 
-    if(isDefined(var_1.triggerportableradarping) && isDefined(var_1.triggerportableradarping.team) && var_1.triggerportableradarping.team == var_0.team) {
+    if(isDefined(var_1.owner) && isDefined(var_1.owner.team) && var_1.owner.team == var_0.team) {
       return 1;
     }
   }
@@ -418,12 +418,12 @@ on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
   if(scripts\engine\utility::istrue(self.hasriotshieldequipped)) {
     scripts\cp\utility::launchshield(var_2, var_3);
     if(!var_9) {
-      var_0A = self dropitem(self getcurrentweapon());
-      if(isDefined(var_0A)) {
-        var_0A thread deletepickupafterawhile();
-        var_0A.triggerportableradarping = self;
-        var_0A.ownersattacker = var_1;
-        var_0A makeunusable();
+      var_10 = self dropitem(self getcurrentweapon());
+      if(isDefined(var_10)) {
+        var_10 thread deletepickupafterawhile();
+        var_10.owner = self;
+        var_10.ownersattacker = var_1;
+        var_10 makeunusable();
       }
     }
   }
@@ -432,7 +432,7 @@ on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
     return;
   }
 
-  var_0B = self;
+  var_11 = self;
   self.body = self getplayerviewmodelfrombody(var_8);
   if(should_do_immediate_ragdoll(self)) {
     do_immediate_ragdoll(self.body);
@@ -440,7 +440,7 @@ on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
     thread delaystartragdoll(self.body, var_6, var_5, var_4, var_0, var_3);
   }
 
-  process_kill_rewards(var_1, var_0B, var_6, var_4, var_3);
+  process_kill_rewards(var_1, var_11, var_6, var_4, var_3);
   if(isDefined(level.update_humanoid_death_challenges)) {
     [[level.update_humanoid_death_challenges]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
   }
@@ -482,16 +482,16 @@ delaystartragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_6 = var_0 func_8112();
-  var_0A = 0.35;
+  var_10 = 0.35;
   if(animhasnotetrack(var_6, "start_ragdoll")) {
-    var_0B = getnotetracktimes(var_6, "start_ragdoll");
-    if(isDefined(var_0B)) {
-      var_0A = var_0B[0];
+    var_11 = getnotetracktimes(var_6, "start_ragdoll");
+    if(isDefined(var_11)) {
+      var_10 = var_11[0];
     }
   }
 
-  var_0C = var_0A * getanimlength(var_6);
-  wait(var_0C);
+  var_12 = var_10 * getanimlength(var_6);
+  wait(var_12);
   if(isDefined(var_0)) {
     var_0 giverankxp();
   }
@@ -526,75 +526,75 @@ func_E08D(var_0) {
   return var_0;
 }
 
-process_damage_rewards(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
+process_damage_rewards(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   scripts\cp\cp_damage::update_damage_score(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
+process_damage_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(!scripts\engine\utility::isbulletdamage(var_4)) {
     if(scripts\cp\utility::is_trap(var_0, var_5)) {
       return;
     }
 
-    var_0B = gettime();
-    if(isDefined(var_1.nexthittime) && var_1.nexthittime > var_0B) {
+    var_11 = gettime();
+    if(isDefined(var_1.nexthittime) && var_1.nexthittime > var_11) {
       return;
     } else {
-      var_1.nexthittime = var_0B + 250;
+      var_1.nexthittime = var_11 + 250;
     }
   }
 
-  var_0C = "standard";
-  var_0D = undefined;
-  if(var_0A.health <= var_2) {
-    var_0D = 1;
+  var_12 = "standard";
+  var_13 = undefined;
+  if(var_10.health <= var_2) {
+    var_13 = 1;
   }
 
-  var_0E = scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
-  if(var_0E) {
-    var_0C = "hitcritical";
+  var_14 = scripts\cp\utility::isheadshot(var_5, var_8, var_4, var_1);
+  if(var_14) {
+    var_12 = "hitcritical";
   }
 
-  var_0F = scripts\engine\utility::isbulletdamage(var_4);
-  var_10 = var_0E && var_1 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
-  var_11 = var_0F && var_1 scripts\cp\utility::is_consumable_active("bonus_damage_on_last_bullets");
-  var_12 = var_0F && var_1 scripts\cp\utility::is_consumable_active("damage_booster_upgrade");
+  var_15 = scripts\engine\utility::isbulletdamage(var_4);
+  var_10 = var_14 && var_1 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
+  var_11 = var_15 && var_1 scripts\cp\utility::is_consumable_active("bonus_damage_on_last_bullets");
+  var_12 = var_15 && var_1 scripts\cp\utility::is_consumable_active("damage_booster_upgrade");
   var_13 = scripts\engine\utility::istrue(var_1.inlaststand);
-  var_14 = !var_13 && var_0E && var_0F && var_1 scripts\cp\utility::is_consumable_active("headshot_explosion");
-  var_15 = !scripts\cp\utility::isreallyalive(var_0A) || isagent(var_0A) && var_2 >= var_0A.health;
+  var_14 = !var_13 && var_14 && var_15 && var_1 scripts\cp\utility::is_consumable_active("headshot_explosion");
+  var_15 = !scripts\cp\utility::isreallyalive(var_10) || isagent(var_10) && var_2 >= var_10.health;
   var_16 = var_4 == "MOD_EXPLOSIVE_BULLET" || var_4 == "MOD_EXPLOSIVE" || var_4 == "MOD_GRENADE_SPLASH" || var_4 == "MOD_PROJECTILE" || var_4 == "MOD_PROJECTILE_SPLASH";
   var_17 = var_4 == "MOD_MELEE";
   if(scripts\cp\cp_damage::func_A010(var_5)) {
-    var_0C = "special_weapon";
+    var_12 = "special_weapon";
   } else if(var_10 || var_11 || var_12 || var_14) {
-    var_0C = "card_boosted";
+    var_12 = "card_boosted";
   } else if(issubstr(var_5, "arkyellow") && var_4 == "MOD_EXPLOSIVE_BULLET" && var_8 == "none") {
-    var_0C = "yellow_arcane_cp";
+    var_12 = "yellow_arcane_cp";
   } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_16) {
-    var_0C = "high_damage";
+    var_12 = "high_damage";
   } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_17) {
-    var_0C = "high_damage";
-  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_0F) {
-    var_0C = "high_damage";
-  } else if(isplayer(var_1) && scripts\engine\utility::istrue(var_1.deadeye_charge) && var_0F) {
-    var_0C = "dewdrops_cp";
+    var_12 = "high_damage";
+  } else if(isplayer(var_1) && var_1 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
+    var_12 = "high_damage";
+  } else if(isplayer(var_1) && scripts\engine\utility::istrue(var_1.deadeye_charge) && var_15) {
+    var_12 = "dewdrops_cp";
   } else if(scripts\engine\utility::istrue(level.insta_kill)) {
-    var_0C = "high_damage";
+    var_12 = "high_damage";
   } else if(var_5 == "incendiary_ammo_mp") {
-    var_0C = "red_arcane_cp";
+    var_12 = "red_arcane_cp";
   } else if(var_5 == "stun_ammo_mp") {
-    var_0C = "blue_arcane_cp";
+    var_12 = "blue_arcane_cp";
   } else if(var_5 == "slayer_ammo_mp") {
-    var_0C = "pink_arcane_cp";
+    var_12 = "pink_arcane_cp";
   }
 
   if(isDefined(var_1)) {
-    if(isDefined(var_1.triggerportableradarping)) {
-      var_1.triggerportableradarping thread scripts\cp\cp_damage::updatedamagefeedback(var_0C, var_0D, var_2, var_0A.riotblock);
+    if(isDefined(var_1.owner)) {
+      var_1.owner thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_2, var_10.riotblock);
       return;
     }
 
-    var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_0C, var_0D, var_2, var_0A.riotblock);
+    var_1 thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_2, var_10.riotblock);
   }
 }
 
@@ -661,7 +661,7 @@ deactivateagent() {
   self.hasdied = 0;
   self.marked_by_hybrid = undefined;
   self.mortartarget = undefined;
-  self.triggerportableradarping = undefined;
+  self.owner = undefined;
   self.connecttime = undefined;
   self.waitingtodeactivate = undefined;
   self.is_burning = undefined;

@@ -116,7 +116,7 @@ func_AE18() {
   level._effect["slide_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
 }
 
-func_5044(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {}
+func_5044(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {}
 
 func_5046(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {}
 

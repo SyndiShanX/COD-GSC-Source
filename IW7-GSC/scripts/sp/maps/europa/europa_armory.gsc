@@ -236,23 +236,23 @@ func_1353A(var_0, var_1) {
       }
     }
 
-    var_0C = 0;
+    var_12 = 0;
     if(!var_5) {
       if(var_1) {
-        var_0D = getEntArray(var_3.target, "targetname");
-        foreach(var_0F in var_0D) {
-          if(!isspawner(var_0F)) {
+        var_13 = getEntArray(var_3.target, "targetname");
+        foreach(var_15 in var_13) {
+          if(!isspawner(var_15)) {
             continue;
           }
 
-          if(var_0F.var_C1 > 0) {
-            var_0C = 1;
+          if(var_15.var_C1 > 0) {
+            var_12 = 1;
             break;
           }
         }
       }
 
-      if(!var_0C) {
+      if(!var_12) {
         break;
       }
     }
@@ -1056,11 +1056,11 @@ func_3621() {
     }
 
     var_1 = gettime() + var_0;
-    var_2 = level.player func_8519(level.player getcurrentweapon());
+    var_2 = level.player isalternatemode(level.player getcurrentweapon());
     var_3 = 0;
     var_4 = 3;
     while(func_3614()) {
-      if(level.player func_8519(level.player getcurrentweapon()) != var_2) {
+      if(level.player isalternatemode(level.player getcurrentweapon()) != var_2) {
         var_2 = !var_2;
         var_3++;
       }
@@ -1548,7 +1548,7 @@ func_3575() {
   var_8 = undefined;
   var_9 = undefined;
   while(!scripts\engine\utility::flag("c12_fight_done")) {
-    var_0A = gettime();
+    var_10 = gettime();
     if(!isDefined(var_8) && func_9C6B()) {
       if(var_6 == -1) {
         var_6 = gettime() + 3000;
@@ -1558,7 +1558,7 @@ func_3575() {
     }
 
     if(isDefined(var_8)) {
-      if(var_0A > var_9) {
+      if(var_10 > var_9) {
         var_8 func_7398(var_8.var_3FF5);
         var_8 = undefined;
       }
@@ -1567,7 +1567,7 @@ func_3575() {
     }
 
     if(var_6 > 0) {
-      if(var_0A > var_6) {
+      if(var_10 > var_6) {
         if(isDefined(var_7)) {
           foreach(var_2 in level.var_EBCA) {
             if(var_7 != var_2) {
@@ -1579,7 +1579,7 @@ func_3575() {
           }
         }
 
-        var_9 = var_0A + 8000;
+        var_9 = var_10 + 8000;
         var_8 func_7399();
       }
     }
@@ -1709,7 +1709,7 @@ func_11B3F() {
   }
 
   var_9 = scripts\engine\utility::getstruct("tram_move_start", "targetname");
-  var_0A = var_9;
+  var_10 = var_9;
   for(;;) {
     if(isDefined(var_9.var_EDA0)) {
       func_12863(var_9.var_EDA0);
@@ -1726,7 +1726,7 @@ func_11B3F() {
     var_9 = scripts\engine\utility::getstruct(var_9.target, "targetname");
   }
 
-  level.var_11B30 thread func_11B45(var_0A);
+  level.var_11B30 thread func_11B45(var_10);
 }
 
 func_11B44() {
@@ -1839,7 +1839,7 @@ func_11B51() {
     var_4 = level.var_11B30.origin + rotatevector(var_1.offset, level.var_11B30.angles);
     var_5 = scripts\engine\utility::drop_to_ground(var_4, 15, -100);
     var_6 = level.var_11B30.angles + var_1.var_C36A;
-    var_1.target_getindexoftarget = spawncovernode(var_5, var_6, var_2, var_3);
+    var_1.node = spawncovernode(var_5, var_6, var_2, var_3);
   }
 }
 
@@ -1849,8 +1849,8 @@ debug_line(var_0, var_1) {
 
 func_11B38() {
   foreach(var_1 in level.var_11B30.var_C058) {
-    if(isDefined(var_1.target_getindexoftarget)) {
-      despawncovernode(var_1.target_getindexoftarget);
+    if(isDefined(var_1.node)) {
+      despawncovernode(var_1.node);
     }
   }
 }
@@ -1894,8 +1894,8 @@ func_11B39(var_0, var_1, var_2) {
     if(self.var_5F75) {
       var_9 = self.var_4C18 + self.missionfailed * self.var_BCD2;
       if(vectordot(self.missionfailed, vectornormalize(level.player.origin - var_9)) > 0) {
-        var_0A = func_7D15(self.missionfailed, var_9);
-        self.getclosestpointonnavmesh3d = self.getclosestpointonnavmesh3d + var_4 * var_8 * var_0A;
+        var_10 = func_7D15(self.missionfailed, var_9);
+        self.getclosestpointonnavmesh3d = self.getclosestpointonnavmesh3d + var_4 * var_8 * var_10;
         func_11B53(var_8);
       } else if(self.getclosestpointonnavmesh3d > 0) {
         self.getclosestpointonnavmesh3d = self.getclosestpointonnavmesh3d - var_5 * var_8;
@@ -1910,19 +1910,19 @@ func_11B39(var_0, var_1, var_2) {
       func_11B53(var_8);
     }
 
-    var_0B = self.var_4C18;
+    var_11 = self.var_4C18;
     if(isDefined(self.var_90DF)) {
-      var_0B = var_0B + self.var_90DF.origin;
+      var_11 = var_11 + self.var_90DF.origin;
     }
 
     if(var_3) {
-      self moveto(var_0B, self.var_11937);
+      self moveto(var_11, self.var_11937);
     } else {
-      self.origin = var_0B;
+      self.origin = var_11;
     }
 
-    var_0C = distance(self.var_4C18, var_0.origin) / var_6;
-    self.angles = var_0.angles - var_7 * var_0C;
+    var_12 = distance(self.var_4C18, var_0.origin) / var_6;
+    self.angles = var_0.angles - var_7 * var_12;
     wait(self.var_11937);
   }
 
@@ -1992,19 +1992,19 @@ func_11B3E() {
   var_8 = 2;
   for(;;) {
     var_9 = randomfloatrange(var_3, var_4);
-    var_0A = randomfloatrange(var_5, var_6);
-    var_0B = randomfloatrange(var_7, var_8);
-    var_0C = var_0 + (var_9, var_0A, var_0B);
-    var_0D = randomfloatrange(var_1, var_2);
-    self.var_90DF moveto(var_0C, var_0D, var_0D * 0.5, var_0D * 0.5);
-    wait(var_0D);
+    var_10 = randomfloatrange(var_5, var_6);
+    var_11 = randomfloatrange(var_7, var_8);
+    var_12 = var_0 + (var_9, var_10, var_11);
+    var_13 = randomfloatrange(var_1, var_2);
+    self.var_90DF moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    wait(var_13);
     var_9 = randomfloatrange(var_3, var_4);
-    var_0A = randomfloatrange(var_5, var_6);
-    var_0B = randomfloatrange(var_7, var_8) * -1;
-    var_0C = var_0 + (var_9, var_0A, var_0B);
-    var_0D = randomfloatrange(var_1, var_2);
-    self.var_90DF moveto(var_0C, var_0D, var_0D * 0.5, var_0D * 0.5);
-    wait(var_0D);
+    var_10 = randomfloatrange(var_5, var_6);
+    var_11 = randomfloatrange(var_7, var_8) * -1;
+    var_12 = var_0 + (var_9, var_10, var_11);
+    var_13 = randomfloatrange(var_1, var_2);
+    self.var_90DF moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    wait(var_13);
   }
 }
 
@@ -2509,7 +2509,7 @@ func_CFA3(var_0) {
   wait(1);
   var_1 = [];
   foreach(var_3 in scripts\engine\utility::getstructarray("c12_rocket_target", "targetname")) {
-    var_1[var_1.size] = scripts\engine\utility::spawn_script_origin(var_3.origin);
+    var_1[var_1.size] = ::scripts\engine\utility::spawn_script_origin(var_3.origin);
   }
 
   level.var_3623 = var_1;
@@ -2770,7 +2770,7 @@ func_7459(var_0, var_1, var_2) {
 }
 
 func_BA6B() {
-  level scripts\engine\utility::waittill_any_3("mons_cannon_fired", "mons_cannon_targeting", "removing_mons_cannon");
+  level scripts\engine\utility::waittill_any("mons_cannon_fired", "mons_cannon_targeting", "removing_mons_cannon");
   self stopsounds();
   wait(0.05);
   self delete();
@@ -3009,16 +3009,16 @@ func_4FAC() {
       }
     }
 
-    var_0B = [];
+    var_11 = [];
     foreach(var_9 in var_7) {
       if(isDefined(var_9.var_4FAE)) {
         continue;
       }
 
-      var_0B[var_0B.size] = var_9;
+      var_11[var_11.size] = var_9;
     }
 
-    var_7 = var_0B;
+    var_7 = var_11;
     wait(0.05);
   }
 }
@@ -3203,8 +3203,8 @@ func_4FA3() {
       var_8 = vectornormalize(var_7 - level.player.origin) * 800;
       level.player.var_102E8 moveslide((0, 0, 15), 15, var_8);
       var_9 = vectortoangles(var_4 - level.player.origin);
-      var_0A = angleclamp180(var_9[1] - level.player.var_102E8.angles[1]) * 0.15;
-      level.player.var_102E8.angles = level.player.var_102E8.angles + (0, var_0A, 0);
+      var_10 = angleclamp180(var_9[1] - level.player.var_102E8.angles[1]) * 0.15;
+      level.player.var_102E8.angles = level.player.var_102E8.angles + (0, var_10, 0);
       wait(0.05);
     }
   }
@@ -3327,8 +3327,8 @@ func_78C6(var_0) {
 
   foreach(var_3 in var_1) {
     var_3.var_429C = undefined;
-    foreach(var_0A in var_3.path.var_D648) {
-      var_0A.var_56E8 = undefined;
+    foreach(var_10 in var_3.path.var_D648) {
+      var_10.var_56E8 = undefined;
     }
   }
 
@@ -3448,16 +3448,16 @@ func_4F9F() {
   var_5 = (0, var_5[1], var_5[2]);
   level.player.var_E505 rotateto(var_5, var_8 * 0.5, var_8 * 0.25);
   wait(var_8 - 0.2);
-  var_0A = scripts\sp\utility::func_10639("player_rig");
-  var_0A hide();
+  var_10 = scripts\sp\utility::func_10639("player_rig");
+  var_10 hide();
   level.player.var_E505 notify("stop_decompress_loop");
   scripts\engine\utility::flag_set("player_holding_on");
   level.var_EBBB scripts\sp\utility::anim_stopanimscripted();
-  var_0B = [var_0A, level.var_EBBB];
+  var_11 = [var_10, level.var_EBBB];
   level.player.var_E505 delete();
-  thread func_4FA0(var_0A);
+  thread func_4FA0(var_10);
   thread func_224E();
-  var_3 scripts\sp\anim::func_1F2C(var_0B, var_1);
+  var_3 scripts\sp\anim::func_1F2C(var_11, var_1);
 }
 
 func_4F9B() {
@@ -3503,9 +3503,9 @@ func_4FA2(var_0, var_1, var_2) {
       var_9 = var_6;
     }
 
-    var_0A = vectornormalize(var_0 - level.player.var_E505.origin);
-    var_0B = var_9 * var_3;
-    level.player.var_E505.origin = level.player.var_E505.origin + var_0A * var_0B;
+    var_10 = vectornormalize(var_0 - level.player.var_E505.origin);
+    var_11 = var_9 * var_3;
+    level.player.var_E505.origin = level.player.var_E505.origin + var_10 * var_11;
     wait(var_3);
   }
 }
@@ -3608,13 +3608,13 @@ func_C95E(var_0, var_1, var_2) {
     var_6 = var_8;
   }
 
-  var_0A = [];
+  var_10 = [];
   foreach(var_9, var_8 in var_0) {
-    var_0C = var_5[var_9] / var_4;
-    var_0A[var_0A.size] = (var_8[0], var_8[1], var_1[2] + var_3 * var_0C);
+    var_12 = var_5[var_9] / var_4;
+    var_10[var_10.size] = (var_8[0], var_8[1], var_1[2] + var_3 * var_12);
   }
 
-  return var_0A;
+  return var_10;
 }
 
 func_11B36() {
@@ -3828,12 +3828,12 @@ func_2874() {
       var_7 = undefined;
       var_4 = scripts\engine\utility::array_randomize(var_4);
       foreach(var_9 in var_4) {
-        var_0A = distancesquared(var_9.origin, level.player.origin);
-        if(var_0A < var_3.var_B7C8) {
+        var_10 = distancesquared(var_9.origin, level.player.origin);
+        if(var_10 < var_3.var_B7C8) {
           continue;
         }
 
-        if(var_0A > var_3.setthreatbiasagainstall) {
+        if(var_10 > var_3.setthreatbiasagainstall) {
           continue;
         }
 
@@ -3930,12 +3930,12 @@ func_532E(var_0) {
       continue;
     }
 
-    foreach(var_0A in var_6) {
-      if(var_0A == var_3) {
+    foreach(var_10 in var_6) {
+      if(var_10 == var_3) {
         continue;
       }
 
-      if(distance2dsquared(var_0A.origin, var_3.origin) > var_5) {
+      if(distance2dsquared(var_10.origin, var_3.origin) > var_5) {
         var_6[var_6.size] = var_3;
         break;
       }
@@ -3946,15 +3946,15 @@ func_532E(var_0) {
     }
   }
 
-  var_0D = scripts\engine\utility::getfx("explosion_dust");
-  for(var_0E = 0; var_0E < var_6.size; var_0E++) {
-    if(isDefined(var_6[var_0E].script_fxid)) {
-      playFX(scripts\engine\utility::getfx(var_6[var_0E].script_fxid), var_6[var_0E].origin);
+  var_13 = scripts\engine\utility::getfx("explosion_dust");
+  for(var_14 = 0; var_14 < var_6.size; var_14++) {
+    if(isDefined(var_6[var_14].script_fxid)) {
+      playFX(scripts\engine\utility::getfx(var_6[var_14].script_fxid), var_6[var_14].origin);
     } else {
-      playFX(var_0D, var_6[var_0E].origin);
+      playFX(var_13, var_6[var_14].origin);
     }
 
-    var_6[var_0E].var_BFB3 = gettime() + 1000;
+    var_6[var_14].var_BFB3 = gettime() + 1000;
     wait(randomfloatrange(0, 0.1));
   }
 }

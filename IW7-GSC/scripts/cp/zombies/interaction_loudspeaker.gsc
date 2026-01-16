@@ -162,7 +162,7 @@ visionsetthermalforplayer(var_0) {
 
   self.desired_dance_angles = (0, var_1.angles[1], 0);
   self ghostskulls_complete_status(var_1.origin);
-  scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+  scripts\engine\utility::waittill_any("goal", "goal_reached");
   self.do_immediate_ragdoll = 1;
   self.is_dancing = 1;
   level.rave_dancing_zombies[level.rave_dancing_zombies.size] = self;

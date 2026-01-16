@@ -135,24 +135,24 @@ light_fixture_flicker_setup() {
         var_7 show();
       }
 
-      foreach(var_0A in var_2) {
-        var_0A hide();
+      foreach(var_10 in var_2) {
+        var_10 hide();
       }
 
-      foreach(var_0D in var_1) {
-        var_0D setlightintensity(var_4);
+      foreach(var_13 in var_1) {
+        var_13 setlightintensity(var_4);
       }
     } else if(scripts\engine\utility::flag("light_fixture_off")) {
       foreach(var_7 in var_3) {
         var_7 hide();
       }
 
-      foreach(var_0A in var_2) {
-        var_0A show();
+      foreach(var_10 in var_2) {
+        var_10 show();
       }
 
-      foreach(var_0D in var_1) {
-        var_0D setlightintensity(var_5);
+      foreach(var_13 in var_1) {
+        var_13 setlightintensity(var_5);
       }
     }
 

@@ -709,8 +709,9 @@ func_3977() {
       if(issubstr(var_4, "_mat_rdc")) {
         var_5 = scripts\sp\utility::strip_suffix(var_4, "_mat_rdc");
         var_6 = "tag_" + var_5;
-      } else
+      } else {
         var_6 = "tag_" + var_4;
+      }
 
       var_3 = spawn("script_model", self.origin);
       var_3 setModel(var_4);
@@ -842,8 +843,9 @@ func_B2E5() {
           if(var_11.var_1153F > var_9.var_1153F) {
             var_9 = var_11;
           }
-        } else
+        } else {
           var_9 = var_11;
+        }
       }
 
       var_16 = scripts\sp\math::func_C097(var_2, var_1, var_11.var_56EA);
@@ -1015,8 +1017,8 @@ func_3987(var_0) {
   var_3 = vectornormalize(var_0.origin - self.origin);
   var_4 = vectordot(var_1, var_3);
   var_5 = vectordot(var_2, var_3);
-  self.var_8B50["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.var_8B50["cap_hardpoint_missile_barrage"]);
-  self.var_8B51["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.var_8B51["cap_hardpoint_missile_barrage"]);
+  self.var_8B50["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.var_8B50["cap_hardpoint_missile_barrage"]);
+  self.var_8B51["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.var_8B51["cap_hardpoint_missile_barrage"]);
 
   if(var_4 < 0) {
     var_6 = self.var_8B50["cap_hardpoint_missile_barrage"];
@@ -1097,8 +1099,9 @@ func_396A(var_0, var_1) {
       if(!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed")) {
         return 0;
       }
-    } else if(!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed_hyperaggressive"))
+    } else if(!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed_hyperaggressive")) {
       return 0;
+    }
   }
 
   return 1;
@@ -1177,8 +1180,9 @@ func_FF48() {
         if(gettime() - self.var_B89D * 1000 >= var_0) {
           scripts\sp\utility::func_65E1("missiles_player_looking");
         }
-      } else
+      } else {
         var_0 = gettime();
+      }
     } else {
       scripts\sp\utility::func_65DD("missiles_player_looking");
       var_0 = undefined;
@@ -1245,8 +1249,9 @@ func_FF6E() {
         if(gettime() - self.var_B8A2 * 1000 >= var_0) {
           scripts\sp\utility::func_65DD("missiles_player_looking");
         }
-      } else
+      } else {
         var_0 = gettime();
+      }
     } else {
       scripts\sp\utility::func_65E1("missiles_player_looking");
       var_0 = undefined;

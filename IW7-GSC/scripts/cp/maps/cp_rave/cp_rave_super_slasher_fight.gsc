@@ -887,7 +887,7 @@ play_intro(var_0, var_1, var_2) {
   triggerfx(var_4);
   playsoundatpos(var_1 + var_3, "zmb_superslasher_summon_activate");
   var_5 = thread scripts\engine\utility::play_loopsound_in_space("zmb_superslasher_summon_activate_lp", var_1 + var_3);
-  var_0 scripts\engine\utility::waittill_any_3("death", "intro_vignette_done");
+  var_0 scripts\engine\utility::waittill_any("death", "intro_vignette_done");
   if(scripts\engine\utility::istrue(var_2) && isDefined(var_0)) {
     var_0 scragentsetanimscale(1, 1);
   }

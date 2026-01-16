@@ -279,8 +279,8 @@ createmazeonmodel(var_0, var_1, var_2) {
   level.maze_attributes[var_0.mod_name].maze = [];
   for(var_6 = 0; var_6 < 6; var_6++) {
     for(var_7 = 0; var_7 < 6; var_7++) {
-      foreach(var_0A, var_9 in level.maze_attributes) {
-        if(var_0A == var_0.mod_name) {
+      foreach(var_10, var_9 in level.maze_attributes) {
+        if(var_10 == var_0.mod_name) {
           var_9.maze[var_6][var_7] = spawnStruct();
           var_9.maze[var_6][var_7].wall_directions = [];
           var_9.maze[var_6][var_7].visited = 0;
@@ -290,23 +290,23 @@ createmazeonmodel(var_0, var_1, var_2) {
   }
 
   var_0 setscriptablepartstate("maze_puzzle", "cursor");
-  foreach(var_0E, var_0C in level.array_of_small_crt_script_models) {
-    var_0D = var_0E;
-    if(var_0D > 10) {
-      var_0D = randomintrange(0, 11);
+  foreach(var_14, var_12 in level.array_of_small_crt_script_models) {
+    var_13 = var_14;
+    if(var_13 > 10) {
+      var_13 = randomintrange(0, 11);
     }
 
-    var_0C setscriptablepartstate("solved_grid", "solved_puzzle_" + var_0D);
+    var_12 setscriptablepartstate("solved_grid", "solved_puzzle_" + var_13);
   }
 
   if(!isDefined(level.mazerollsarray)) {
     level.mazerollsarray = [];
   }
 
-  foreach(var_0E, var_10 in level.maze_attributes) {
-    if(var_0E == var_0.mod_name) {
-      level.random_maze_roll[var_0E] = random_maze_roll();
-      level thread store_wall_directions(var_10, level.random_maze_roll[var_0E]);
+  foreach(var_14, var_10 in level.maze_attributes) {
+    if(var_14 == var_0.mod_name) {
+      level.random_maze_roll[var_14] = random_maze_roll();
+      level thread store_wall_directions(var_10, level.random_maze_roll[var_14]);
     }
   }
 
@@ -985,29 +985,29 @@ enable_wire_struct_next_wave() {
 }
 
 setup_backstory_interaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = spawnStruct();
-  var_0A.script_noteworthy = "backstory_interaction";
-  var_0A.origin = (-213.9, 5640, 95.6);
-  var_0A.angles = (0, 288.9, 0);
-  var_0A.name = "backstory_interaction";
-  var_0A.hint_func = var_4;
-  var_0A.spend_type = var_2;
-  var_0A.tutorial = var_3;
-  var_0A.activation_func = var_5;
-  var_0A.enabled = 1;
-  var_0A.disable_guided_interactions = 0;
-  var_0A.script_parameters = "default";
+  var_10 = spawnStruct();
+  var_10.script_noteworthy = "backstory_interaction";
+  var_10.origin = (-213.9, 5640, 95.6);
+  var_10.angles = (0, 288.9, 0);
+  var_10.name = "backstory_interaction";
+  var_10.hint_func = var_4;
+  var_10.spend_type = var_2;
+  var_10.tutorial = var_3;
+  var_10.activation_func = var_5;
+  var_10.enabled = 1;
+  var_10.disable_guided_interactions = 0;
+  var_10.script_parameters = "default";
   if(!isDefined(var_6)) {
     var_6 = 0;
   }
 
-  var_0A.cost = var_6;
-  var_0A.requires_power = 0;
-  var_0A.powered_on = 1;
-  var_0A.init_func = var_8;
-  var_0A.can_use_override_func = var_9;
-  level.interactions[var_1] = var_0A;
-  scripts\cp\cp_interaction::add_to_current_interaction_list(var_0A);
+  var_10.cost = var_6;
+  var_10.requires_power = 0;
+  var_10.powered_on = 1;
+  var_10.init_func = var_8;
+  var_10.can_use_override_func = var_9;
+  level.interactions[var_1] = var_10;
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_10);
 }
 
 init_venomx_models_interactions() {
@@ -1868,24 +1868,24 @@ venomx_weapon_logic_start(var_0) {
     return;
   }
 
-  if(!isDefined(var_0.triggerportableradarping.basetriggercount)) {
-    var_0.triggerportableradarping.basetriggercount = 0;
+  if(!isDefined(var_0.owner.basetriggercount)) {
+    var_0.owner.basetriggercount = 0;
   }
 
   if(issubstr(var_0.weapon_name, "pap1")) {
-    var_0.triggerportableradarping thread explode_venomx_projectile_early(var_0, 2);
-    var_0.triggerportableradarping thread venomx_pap1_effects(var_0);
+    var_0.owner thread explode_venomx_projectile_early(var_0, 2);
+    var_0.owner thread venomx_pap1_effects(var_0);
     return;
   }
 
   if(issubstr(var_0.weapon_name, "pap2")) {
-    var_0.triggerportableradarping thread explode_venomx_projectile_early(var_0, 3);
-    var_0.triggerportableradarping thread venomx_pap2_effects(var_0);
+    var_0.owner thread explode_venomx_projectile_early(var_0, 3);
+    var_0.owner thread venomx_pap2_effects(var_0);
     return;
   }
 
-  var_0.triggerportableradarping thread explode_venomx_projectile_early(var_0, 1);
-  var_0.triggerportableradarping thread deal_venomx_projectile_damage(var_0, 1);
+  var_0.owner thread explode_venomx_projectile_early(var_0, 1);
+  var_0.owner thread deal_venomx_projectile_damage(var_0, 1);
 }
 
 explode_venomx_projectile_early(var_0, var_1) {
@@ -1896,7 +1896,7 @@ explode_venomx_projectile_early(var_0, var_1) {
   self endon("one_instance_of_explode_early_" + self.name);
   var_2 = self;
   for(;;) {
-    scripts\engine\utility::waittill_any_3("detonate_venomx_projectile_early", "detonate_pap1venomx_projectile_early", "detonate_pap2venomx_projectile_early");
+    scripts\engine\utility::waittill_any("detonate_venomx_projectile_early", "detonate_pap1venomx_projectile_early", "detonate_pap2venomx_projectile_early");
     if(!isDefined(var_0.origin) || !isDefined(var_0.angles)) {
       return;
     }
@@ -1945,7 +1945,7 @@ deal_venomx_projectile_damage(var_0, var_1) {
     var_4 = 200;
   }
 
-  var_0 scripts\engine\utility::waittill_any_3("missile_stuck", "death");
+  var_0 scripts\engine\utility::waittill_any("missile_stuck", "death");
   if(!isDefined(var_0.origin)) {
     return;
   }
@@ -2027,7 +2027,7 @@ venomx_pap1_effects(var_0) {
   self endon("delete_older_overlapping_threads");
   self endon("disconnect");
   var_1 = self;
-  var_0 scripts\engine\utility::waittill_any_3("missile_stuck", "detonateExplosive");
+  var_0 scripts\engine\utility::waittill_any("missile_stuck", "detonateExplosive");
   var_2 = var_0.origin;
   var_3 = var_0.angles;
   while(isDefined(var_0.origin)) {
@@ -2046,7 +2046,7 @@ venomx_pap2_effects(var_0) {
   self endon("delete_older_overlapping_threads");
   self endon("disconnect");
   var_1 = self;
-  var_0 scripts\engine\utility::waittill_any_3("missile_stuck", "detonateExplosive");
+  var_0 scripts\engine\utility::waittill_any("missile_stuck", "detonateExplosive");
   var_2 = var_0.origin;
   var_3 = var_0.angles;
   while(isDefined(var_0.origin)) {
@@ -2064,7 +2064,7 @@ venomx_pap2_effects(var_0) {
 remove_frozen_effects_on_disconnect(var_0) {
   self notify("one_thread_of_removal_for_" + self.name);
   self endon("one_thread_of_removal_for_" + self.name);
-  scripts\engine\utility::waittill_any_3("disconnect", "death");
+  scripts\engine\utility::waittill_any("disconnect", "death");
   if(isDefined(self.sacred_grounds)) {
     foreach(var_2 in self.sacred_grounds) {
       var_2 delete();
@@ -2131,19 +2131,19 @@ slow_mo_sphere(var_0, var_1, var_2, var_3, var_4, var_5) {
   level.frozenzombiefunc = scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
   level.thawzombiefunc = scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
   var_8 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  foreach(var_0A in var_8) {
-    if(issubstr(var_0A.agent_type, "alien")) {
-      var_0A.moveratescale = 0.9;
-      var_0A.var_C081 = 1;
-      var_0A.traverseratescale = 1;
+  foreach(var_10 in var_8) {
+    if(issubstr(var_10.agent_type, "alien")) {
+      var_10.moveratescale = 0.9;
+      var_10.var_C081 = 1;
+      var_10.traverseratescale = 1;
     } else {
-      var_0A scripts\mp\agents\_scriptedagents::setstatelocked(0, "DoAttack");
+      var_10 scripts\mp\agents\_scriptedagents::setstatelocked(0, "DoAttack");
     }
 
-    var_0A.activated_venomx_sphere = 0;
-    var_0A.noturnanims = 0;
-    var_0A.isfrozen = undefined;
-    var_0A notify("unslow_zombie");
+    var_10.activated_venomx_sphere = 0;
+    var_10.noturnanims = 0;
+    var_10.isfrozen = undefined;
+    var_10 notify("unslow_zombie");
   }
 }
 
@@ -2398,9 +2398,9 @@ adjust_clip_ammo_from_stock(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_9 = var_0 getweaponammoclip(var_1, var_2);
-  var_0A = var_3 - var_9;
-  var_0B = min(var_9 + var_0A, var_3);
-  var_0 setweaponammoclip(var_1, int(var_0B), var_2);
+  var_10 = var_3 - var_9;
+  var_11 = min(var_9 + var_10, var_3);
+  var_0 setweaponammoclip(var_1, int(var_11), var_2);
 }
 
 venomx_add_ammo(var_0, var_1) {
@@ -2471,8 +2471,8 @@ runmazeinstanceforpoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         level thread disable_scriptables_for_mazes(var_4);
         var_4.xcoord = var_1;
         var_4.ycoord = var_2;
-        var_0A = return_position_x_y(var_1, var_2, var_4);
-        var_4 moveto(var_0A, 0.1);
+        var_10 = return_position_x_y(var_1, var_2, var_4);
+        var_4 moveto(var_10, 0.1);
         var_5 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_puzzle_all_complete", "final_comment_vo");
         var_5 notify("end_thread_for_" + var_4.mod_name);
       } else if(!scripts\engine\utility::istrue(level.maze_completed[var_4.mod_name])) {
@@ -2486,8 +2486,8 @@ runmazeinstanceforpoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     var_4.xcoord = var_1;
     var_4.ycoord = var_2;
-    var_0A = return_position_x_y(var_1, var_2, var_4);
-    var_4 moveto(var_0A, 0.1);
+    var_10 = return_position_x_y(var_1, var_2, var_4);
+    var_4 moveto(var_10, 0.1);
     return;
   }
 
@@ -3316,22 +3316,22 @@ createmaze(var_0, var_1, var_2) {
 
   var_0 setscriptablepartstate("maze_puzzle", "cursor");
   var_1 setscriptablepartstate("maze_puzzle", "cursor");
-  foreach(var_0E, var_0C in level.array_of_small_crt_script_models) {
-    var_0D = var_0E;
-    if(var_0D > 10) {
-      var_0D = randomintrange(0, 11);
+  foreach(var_14, var_12 in level.array_of_small_crt_script_models) {
+    var_13 = var_14;
+    if(var_13 > 10) {
+      var_13 = randomintrange(0, 11);
     }
 
-    var_0C setscriptablepartstate("solved_grid", "solved_puzzle_" + var_0D);
+    var_12 setscriptablepartstate("solved_grid", "solved_puzzle_" + var_13);
   }
 
   if(!isDefined(level.mazerollsarray)) {
     level.mazerollsarray = [];
   }
 
-  foreach(var_0E, var_10 in level.maze_attributes) {
-    level.random_maze_roll[var_0E] = random_maze_roll();
-    level thread store_wall_directions(var_10, level.random_maze_roll[var_0E]);
+  foreach(var_14, var_10 in level.maze_attributes) {
+    level.random_maze_roll[var_14] = random_maze_roll();
+    level thread store_wall_directions(var_10, level.random_maze_roll[var_14]);
   }
 
   level thread choose_start_end_mazepos(var_0, level.random_maze_roll["maze1"]);
@@ -3823,7 +3823,7 @@ start_fake_spawn_sequence(var_0, var_1) {
   var_9 = getrandomnavpoints(var_1, 128, var_3);
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(var_3);
   wait(2);
-  var_0A = skeleton_spawner(var_9, var_0);
+  var_10 = skeleton_spawner(var_9, var_0);
   while(level.goons_alive > 0) {
     wait(0.1);
   }
@@ -3980,7 +3980,7 @@ activatefiguredamage(var_0, var_1, var_2) {
   var_2 setCanDamage(1);
   var_2 endon("end_thread_for_" + var_2.model);
   for(;;) {
-    var_2 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C);
+    var_2 waittill("damage", var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
     if(!isplayer(var_4)) {
       continue;
     }
@@ -4021,7 +4021,7 @@ activatefiguredamage(var_0, var_1, var_2) {
       if(level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2) {
         level.hidden_figures_killed = level.chosen_number_for_morse_code_pap2;
       } else {
-        level thread scripts\cp\utility::add_to_notify_queue("venomx_pap1_kill", var_2, var_2.origin, var_0C);
+        level thread scripts\cp\utility::add_to_notify_queue("venomx_pap1_kill", var_2, var_2.origin, var_12);
         level.hidden_figures_killed++;
       }
     }
@@ -4072,16 +4072,16 @@ showhiddenfigurestoplayer(var_0, var_1, var_2, var_3) {
 
     var_8 = randomintrange(-200, 200);
     var_9 = randomintrange(-200, 200);
-    var_0A = randomintrange(90, 200);
-    var_3.figure_one_offset = (var_8, var_9, var_0A);
-    var_0B = randomintrange(-200, 200);
-    var_0C = randomintrange(-200, 200);
-    var_0D = randomintrange(90, 200);
-    var_3.figure_two_offset = (var_0B, var_0C, var_0D);
-    var_0E = randomintrange(-200, 200);
-    var_0F = randomintrange(-200, 200);
     var_10 = randomintrange(90, 200);
-    var_3.figure_three_offset = (var_0E, var_0F, var_10);
+    var_3.figure_one_offset = (var_8, var_9, var_10);
+    var_11 = randomintrange(-200, 200);
+    var_12 = randomintrange(-200, 200);
+    var_13 = randomintrange(90, 200);
+    var_3.figure_two_offset = (var_11, var_12, var_13);
+    var_14 = randomintrange(-200, 200);
+    var_15 = randomintrange(-200, 200);
+    var_10 = randomintrange(90, 200);
+    var_3.figure_three_offset = (var_14, var_15, var_10);
     var_11 = randomintrange(-200, 200);
     var_12 = randomintrange(-200, 200);
     var_13 = randomintrange(90, 200);
@@ -4177,8 +4177,8 @@ cipher(var_0, var_1, var_2) {
         var_9 = derivenumberfromletter(var_9);
       }
 
-      var_0A = modfunc(derivenumberfromletter(var_0[var_7]) + var_9, 26);
-      var_6[var_7] = deriveletterfromnumber(var_0A);
+      var_10 = modfunc(derivenumberfromletter(var_0[var_7]) + var_9, 26);
+      var_6[var_7] = deriveletterfromnumber(var_10);
       continue;
     }
 

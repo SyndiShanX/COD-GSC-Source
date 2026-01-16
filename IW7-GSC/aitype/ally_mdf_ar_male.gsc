@@ -11,7 +11,7 @@ main() {
   self.subclass = "MDF";
   self.accuracy = 0.2;
   self.health = 150;
-  self.objective_team = lib_0A2F::func_7BEB();
+  self.grenadeweapon = lib_0A2F::func_7BEB();
   self.objective_state = 1;
   self.secondaryweapon = "";
   self.var_101B4 = "";
@@ -22,7 +22,7 @@ main() {
     self func_82DB(768, 1024);
   }
 
-  self.var_394 = lib_0A2F::func_7BEC("rifle");
+  self.weapon = lib_0A2F::func_7BEC("rifle");
   lib_08C2::main();
 }
 

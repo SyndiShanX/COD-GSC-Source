@@ -4,7 +4,7 @@
 *********************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("venom", ::func_1288B, undefined, undefined, undefined, ::func_13C17);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("venom", ::func_1288B, undefined, undefined, undefined, ::func_13C17);
   var_0 = ["passive_increased_debuff", "passive_decreased_damage", "passive_increased_speed", "passive_decreased_duration", "passive_quiet_vehicle", "passive_decreased_speed", "passive_heavy", "passive_increased_frost", "passive_speed_heavy", "passive_stealth_speed"];
   scripts\mp\killstreak_loot::func_DF07("venom", var_0);
   level._effect["venom_gas"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_gas_cloud");
@@ -32,7 +32,7 @@ func_13C17(var_0) {
 }
 
 func_1288B(var_0) {
-  var_1 = scripts\mp\killstreaks\_killstreaks::func_D507(var_0);
+  var_1 = scripts\mp\killstreaks\killstreaks::func_D507(var_0);
   if(!var_1) {
     return 0;
   }
@@ -40,7 +40,7 @@ func_1288B(var_0) {
   var_2 = func_6C9B(80, 20, 10);
   if(!isDefined(var_2)) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_NOT_ENOUGH_SPACE");
-    thread scripts\mp\killstreaks\_killstreaks::func_11086();
+    thread scripts\mp\killstreaks\killstreaks::func_11086();
     return 0;
   }
 
@@ -71,7 +71,7 @@ func_1288B(var_0) {
 
   var_9 = spawnvehicle(var_3, var_0.streakname, var_6, var_2, self.angles, self);
   var_9.team = self.team;
-  var_9.triggerportableradarping = self;
+  var_9.owner = self;
   var_9.health = 99999;
   var_9.maxhealth = var_5;
   var_9.var_EDD7 = var_5;
@@ -109,7 +109,7 @@ func_1288B(var_0) {
   self func_8490("disable_guns", 1);
   self func_8490("disable_boost", 1);
   thread func_F673();
-  var_9 scripts\mp\killstreaks\_utility::func_1843(var_0.streakname, "Killstreak_Ground", var_9.triggerportableradarping, 1);
+  var_9 scripts\mp\killstreaks\_utility::func_1843(var_0.streakname, "Killstreak_Ground", var_9.owner, 1);
   var_9 scripts\mp\killstreaks\_utility::func_FAE4("venom_end");
   var_9 thread func_13285();
   var_9 thread func_1327E();
@@ -117,12 +117,12 @@ func_1288B(var_0) {
   var_9 thread func_1327B();
   var_9 thread func_13279();
   var_9 thread func_1327A();
-  var_0A = var_9.var_AC75;
+  var_10 = var_9.var_AC75;
   if(scripts\mp\utility::isanymlgmatch()) {
-    var_0A = int(var_0A / 2);
+    var_10 = int(var_10 / 2);
   }
 
-  var_9 thread func_13281(var_0A);
+  var_9 thread func_13281(var_10);
   var_9 thread func_13283();
   var_9 thread func_1327C();
   var_9 thread venom_watchempdamage();
@@ -132,7 +132,7 @@ func_1288B(var_0) {
   }
 
   self.restoreangles = self.angles;
-  thread func_5130(var_9, var_0A);
+  thread func_5130(var_9, var_10);
   level thread scripts\mp\utility::teamplayercardsplash(var_7, self);
   return 1;
 }
@@ -156,8 +156,8 @@ func_F673() {
   var_2 = self energy_getrestorerate(var_0);
   var_3 = self energy_getresttimems(var_0);
   self energy_setmax(var_0, 140);
-  self goalflag(var_0, 600);
-  self goal_type(var_0, 500);
+  self energy_setrestorerate(var_0, 600);
+  self energy_setresttimems(var_0, 500);
   thread func_E2DE(var_1, var_2, var_3);
 }
 
@@ -167,15 +167,15 @@ func_E2DE(var_0, var_1, var_2) {
   self waittill("restore_old_values");
   var_3 = 0;
   self energy_setmax(var_3, var_0);
-  self goalflag(var_3, 1000);
-  self goal_type(var_3, 0);
+  self energy_setrestorerate(var_3, 1000);
+  self energy_setresttimems(var_3, 0);
   wait(0.5);
-  self goalflag(var_3, var_1);
-  self goal_type(var_3, var_2);
+  self energy_setrestorerate(var_3, var_1);
+  self energy_setresttimems(var_3, var_2);
 }
 
 func_13285() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self endon("venom_end");
   level endon("game_ended");
@@ -196,7 +196,7 @@ func_13285() {
 }
 
 func_1327E() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self endon("venom_end");
   level endon("game_ended");
@@ -217,7 +217,7 @@ func_1327E() {
 }
 
 func_1327D() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self endon("venom_end");
   level endon("game_ended");
@@ -235,7 +235,7 @@ func_1327D() {
 }
 
 func_1327B() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self endon("venom_end");
   level endon("game_ended");
@@ -262,19 +262,19 @@ func_0118(var_0, var_1) {
 }
 
 func_13279() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self endon("venom_end");
   level endon("game_ended");
   for(;;) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E);
-    var_0A = scripts\mp\utility::func_13CA1(var_0A, var_0E);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
+    var_10 = scripts\mp\utility::func_13CA1(var_10, var_14);
     if(isDefined(var_2) && var_2.classname != "trigger_hurt") {
-      if(isDefined(var_2.triggerportableradarping)) {
-        var_2 = var_2.triggerportableradarping;
+      if(isDefined(var_2.owner)) {
+        var_2 = var_2.owner;
       }
 
-      if(isDefined(var_2.team) && var_2.team == self.team && var_2 != self.triggerportableradarping) {
+      if(isDefined(var_2.team) && var_2.team == self.team && var_2 != self.owner) {
         continue;
       }
     }
@@ -283,8 +283,8 @@ func_13279() {
       continue;
     }
 
-    if(isDefined(var_0A)) {
-      var_1 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_2, var_0A, var_5, var_1, self.maxhealth, 1, 1, 1);
+    if(isDefined(var_10)) {
+      var_1 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_2, var_10, var_5, var_1, self.maxhealth, 1, 1, 1);
     }
 
     self.var_EDD7 = self.var_EDD7 - var_1;
@@ -294,23 +294,23 @@ func_13279() {
 
     var_0 setclientomnvar("ui_killstreak_health", self.var_EDD7 / 10);
     if(isplayer(var_2)) {
-      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_2, var_0A, self, var_5);
-      if(isDefined(var_0A) && var_0A == "concussion_grenade_mp") {
-        if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_2))) {
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_2, var_10, self, var_5);
+      if(isDefined(var_10) && var_10 == "concussion_grenade_mp") {
+        if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_2))) {
           var_2 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
         }
       }
 
       var_2 scripts\mp\damagefeedback::updatedamagefeedback("");
       if(self.var_EDD7 <= 0) {
-        var_2 notify("destroyed_killstreak", var_0A);
-        var_0F = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+        var_2 notify("destroyed_killstreak", var_10);
+        var_15 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
         var_10 = "callout_destroyed_" + self.streakname;
-        if(var_0F != "") {
-          var_10 = var_10 + "_" + var_0F;
+        if(var_15 != "") {
+          var_10 = var_10 + "_" + var_15;
         }
 
-        scripts\mp\damage::onkillstreakkilled(self.streakname, var_2, var_0A, var_5, var_1, "destroyed_" + self.streakname, "venom_destroyed", var_10, 1);
+        scripts\mp\damage::onkillstreakkilled(self.streakname, var_2, var_10, var_5, var_1, "destroyed_" + self.streakname, "venom_destroyed", var_10, 1);
         self notify("venom_end", self.origin);
       }
 
@@ -324,7 +324,7 @@ func_13279() {
 }
 
 func_1327A() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   level endon("game_ended");
   self waittill("venom_end", var_1, var_2);
   scripts\mp\utility::printgameaction("killstreak ended - venom", var_0);
@@ -360,7 +360,7 @@ func_1327A() {
     var_0 setplayerangles(var_0.restoreangles);
     var_0 thermalvisionfofoverlayoff();
     var_0.restoreangles = undefined;
-    var_0 thread scripts\mp\killstreaks\_killstreaks::func_11086();
+    var_0 thread scripts\mp\killstreaks\killstreaks::func_11086();
     var_0 scripts\engine\utility::allow_usability(1);
     var_0 scripts\engine\utility::allow_weapon_switch(1);
     var_0 notify("restore_old_values");
@@ -370,7 +370,7 @@ func_1327A() {
 }
 
 func_13281(var_0) {
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_1 endon("disconnect");
   self endon("venom_end");
   self endon("host_migration_lifetime_update");
@@ -382,19 +382,19 @@ func_13281(var_0) {
 }
 
 func_13283() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   self endon("venom_end");
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "disconnect", "joined_spectators");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "disconnect", "joined_spectators");
   self notify("venom_end", self.origin);
 }
 
 func_1327C() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self endon("venom_end");
   level endon("game_ended");
-  thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit("venom_end");
+  thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit("venom_end");
   self waittill("killstreakExit");
   self notify("venom_end", self.origin);
 }
@@ -409,7 +409,7 @@ venom_watchempdamage() {
 }
 
 func_13284() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   self endon("venom_end");
   level endon("game_ended");
@@ -420,7 +420,7 @@ func_13284() {
 }
 
 func_13275() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   foreach(var_2 in level.players) {
     if(var_2.team == var_0.team && var_2 != var_0) {
       continue;
@@ -431,7 +431,7 @@ func_13275() {
 }
 
 func_13276(var_0) {
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_1 endon("disconnect");
   self endon("venom_end");
   var_0 endon("disconnect");

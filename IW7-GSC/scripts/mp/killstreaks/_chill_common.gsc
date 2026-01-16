@@ -130,7 +130,7 @@ chill_blind() {
 
   self notify("chillBlind");
   self endon("chillBlind");
-  scripts\engine\utility::waittill_any_timeout_1(var_6, "chillEnd");
+  scripts\engine\utility::waittill_any_timeout(var_6, "chillEnd");
   self setscriptablepartstate(var_4, "neutral", 0);
   var_0.var_2B9B = undefined;
 }
@@ -143,7 +143,7 @@ chill_update() {
   for(;;) {
     var_1 = gettime();
     var_2 = 0;
-    foreach(var_0A, var_4 in var_0.times) {
+    foreach(var_10, var_4 in var_0.times) {
       var_5 = var_4[0];
       var_6 = var_4[1];
       var_7 = var_4[2];
@@ -157,7 +157,7 @@ chill_update() {
         continue;
       }
 
-      thread chillend(var_0A);
+      thread chillend(var_10);
     }
 
     var_0.speedmod = var_2 * -0.55;

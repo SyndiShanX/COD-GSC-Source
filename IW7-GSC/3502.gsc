@@ -103,8 +103,9 @@ func_128EF(var_0, var_1) {
   } else if(isDefined(level.var_B8F4)) {
     self iprintlnbold(&"KILLSTREAKS_GROUND_APPROACHES_TOO_CROWDED");
     return 0;
-  } else if(scripts\mp\utility\game::isusingremote())
+  } else if(scripts\mp\utility\game::isusingremote()) {
     return 0;
+  }
 
   var_2 = func_F1C4();
 
@@ -181,7 +182,7 @@ func_1012E() {
   self.locationobjectives = [];
 
   for(var_1 = 0; var_1 < 3; var_1++) {
-    self.locationobjectives[var_1] = scripts\mp\objidpoolmanager::requestminimapid(1);
+    self.locationobjectives[var_1] = ::scripts\mp\objidpoolmanager::requestminimapid(1);
 
     if(self.locationobjectives[var_1] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(self.locationobjectives[var_1], "invisible", (0, 0, 0));
@@ -246,8 +247,9 @@ func_49F1(var_0, var_1) {
         var_5.var_8EFA = level.spawnpoints[var_7].origin[1];
       }
     }
-  } else
+  } else {
     var_6 = -2000;
+  }
 
   var_5.var_B0ED = var_5.var_B0ED + var_6;
   var_5.var_8EF9 = var_5.var_8EF9 - var_6;
@@ -478,8 +480,9 @@ firemortar(var_0, var_1, var_2) {
   for(;;) {
     if(!isDefined(var_4) || var_7 > 115 || distancesquared(var_4.origin, var_1) < 500) {
       break;
-    } else
+    } else {
       wait 0.05;
+    }
 
     var_7++;
   }

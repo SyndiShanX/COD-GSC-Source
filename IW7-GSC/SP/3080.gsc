@@ -226,7 +226,7 @@ canseetarget(var_0) {
   }
 
   if(isDefined(var_3)) {
-    return self getpersstat(var_3);
+    return self cansee(var_3);
   }
 
   return 1;
@@ -279,7 +279,7 @@ shouldshoot(var_0) {
     return level.failure;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return level.failure;
   }
 
@@ -321,7 +321,7 @@ func_FE8B(var_0) {
 
   var_6 = gettime();
   if(isDefined(var_0.ent)) {
-    var_0.var_29A1 = self getpersstat(var_0.ent);
+    var_0.var_29A1 = self cansee(var_0.ent);
     var_0.var_3124 = self seerecently(var_0.ent, 1);
     if(issentient(var_0.ent)) {
       var_0.var_A9AB = self lastknowntime(var_0.ent);
@@ -369,26 +369,26 @@ func_FE8C(var_0) {
       var_3 = undefined;
     }
   } else {
-    var_2 = self.isnodeoccupied;
-    var_3 = self.isnodeoccupied;
+    var_2 = self.enemy;
+    var_3 = self.enemy;
     if(self.var_27F7) {
       if(func_8C3C("left") && func_9F5B("left") && func_8C3C("right") && func_9F5B("right")) {
         var_4 = self func_848B();
         if(isDefined(var_4) && var_4.size > 0) {
           var_5 = var_4[0];
-          var_6 = self.isnodeoccupied.origin - self.origin;
+          var_6 = self.enemy.origin - self.origin;
           var_7 = var_5.origin - self.origin;
           var_8 = vectornormalize(var_7);
-          var_9 = self.isnodeoccupied.origin + var_5.origin * 0.5;
-          var_0A = vectornormalize(var_9 - self.origin);
-          var_0B = vectortoangles(var_0A);
-          var_0C = anglesToForward(self.angles);
-          if(vectordot(var_0A, var_0C) > 0) {
-            var_0D = anglestoright(var_0B);
-            if(vectordot(var_8, var_0A) > 0) {
-              var_0E = vectordot(var_0D, var_6);
-              var_0F = vectordot(var_0D, var_7);
-              if(var_0F > var_0E) {
+          var_9 = self.enemy.origin + var_5.origin * 0.5;
+          var_10 = vectornormalize(var_9 - self.origin);
+          var_11 = vectortoangles(var_10);
+          var_12 = anglesToForward(self.angles);
+          if(vectordot(var_10, var_12) > 0) {
+            var_13 = anglestoright(var_11);
+            if(vectordot(var_8, var_10) > 0) {
+              var_14 = vectordot(var_13, var_6);
+              var_15 = vectordot(var_13, var_7);
+              if(var_15 > var_14) {
                 var_3 = var_5;
               } else {
                 var_2 = var_5;
@@ -771,24 +771,24 @@ func_FE67(var_0, var_1) {
 
   if(isDefined(var_7.ent)) {
     var_9 = func_3596();
-    var_0A = undefined;
-    foreach(var_0C in var_9) {
-      if(self._blackboard.shootparams.var_13CC3[var_0C] == var_7) {
-        var_0A = var_0C;
+    var_10 = undefined;
+    foreach(var_12 in var_9) {
+      if(self._blackboard.shootparams.var_13CC3[var_12] == var_7) {
+        var_10 = var_12;
         break;
       }
     }
 
-    if(self getpersstat(var_7.ent)) {
+    if(self cansee(var_7.ent)) {
       if(var_8) {
         return var_7.ent.origin;
       }
 
-      var_0E = var_7.ent getshootatpos();
-      return var_0E + func_FE69(var_7, var_0E);
+      var_14 = var_7.ent getshootatpos();
+      return var_14 + func_FE69(var_7, var_14);
     } else {
-      var_0E = self lastknownpos(var_8.ent) + (0, 0, 60);
-      return var_0E + func_FE69(var_7, var_0E);
+      var_14 = self lastknownpos(var_8.ent) + (0, 0, 60);
+      return var_14 + func_FE69(var_7, var_14);
     }
   }
 
@@ -1201,7 +1201,7 @@ func_3906(var_0) {
     var_5 = var_1.var_13CC3[var_4];
     if(isDefined(var_5)) {
       if(isDefined(var_5.ent)) {
-        if(self getpersstat(var_5.ent)) {
+        if(self cansee(var_5.ent)) {
           return level.success;
         }
 
@@ -1210,7 +1210,7 @@ func_3906(var_0) {
 
       if(isDefined(var_5.var_EF76)) {
         foreach(var_7 in var_5.var_EF76) {
-          if(self getpersstat(var_7)) {
+          if(self cansee(var_7)) {
             return level.success;
           }
         }
@@ -1278,18 +1278,18 @@ func_7FCB() {
     }
   }
 
-  var_0A = undefined;
-  var_0B = undefined;
-  var_0C = 0;
-  foreach(var_0E in var_1) {
-    var_0F = self lastknowntime(var_0E);
-    if(var_0F > var_0C) {
-      var_0C = var_0F;
-      var_0A = var_0E;
+  var_10 = undefined;
+  var_11 = undefined;
+  var_12 = 0;
+  foreach(var_14 in var_1) {
+    var_15 = self lastknowntime(var_14);
+    if(var_15 > var_12) {
+      var_12 = var_15;
+      var_10 = var_14;
     }
   }
 
-  return var_0A;
+  return var_10;
 }
 
 func_B4EA(var_0) {
@@ -1354,7 +1354,7 @@ func_1043E(var_0, var_1) {
 
 enableweaponswitch(var_0) {
   if(isDefined(var_0)) {
-    var_1 = var_0.target_getindexoftarget;
+    var_1 = var_0.node;
     if(!isDefined(var_1)) {
       var_1 = getclosestnodeinsight(var_0.origin);
     }
@@ -1724,7 +1724,7 @@ func_35AD(var_0, var_1) {
     return 0;
   }
 
-  var_2 = self.isnodeoccupied;
+  var_2 = self.enemy;
   if(isDefined(var_0)) {
     var_2 = var_0;
   }
@@ -1777,19 +1777,19 @@ func_128AE(var_0, var_1) {
 
   var_7 = randomfloat(var_7);
   var_9 = randomfloat(360);
-  var_0A = var_4.origin + (var_7 * cos(var_9), var_7 * sin(var_9), 0);
+  var_10 = var_4.origin + (var_7 * cos(var_9), var_7 * sin(var_9), 0);
   if(var_0 == "left") {
-    var_0B = "tag_brass_le";
+    var_11 = "tag_brass_le";
   } else {
-    var_0B = "tag_brass_ri";
+    var_11 = "tag_brass_ri";
   }
 
-  var_0C = self gettagangles(var_0B);
-  var_0D = self gettagorigin(var_0B) + rotatevector((0, -10, 0), var_0C);
-  var_0E = self func_81ED(var_0D, var_0A);
-  if(isDefined(var_0E)) {
+  var_12 = self gettagangles(var_11);
+  var_13 = self gettagorigin(var_11) + rotatevector((0, -10, 0), var_12);
+  var_14 = self func_81ED(var_13, var_10);
+  if(isDefined(var_14)) {
     self playSound("c12_grenade_launch");
-    var_0E makeunusable();
+    var_14 makeunusable();
     var_2.var_A993 = var_3;
   }
 }

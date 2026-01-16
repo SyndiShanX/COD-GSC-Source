@@ -48,10 +48,12 @@ func_819B(var_0, var_1) {
         } else {
           break;
         }
-      } else
+      } else {
         break;
-    } else
+      }
+    } else {
       break;
+    }
   }
 
   if(isDefined(var_3.location) && isDefined(var_3.angles)) {

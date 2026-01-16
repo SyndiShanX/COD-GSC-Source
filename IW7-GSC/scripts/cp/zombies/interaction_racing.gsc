@@ -233,7 +233,7 @@ func_D24B(var_0, var_1, var_2) {
   var_0 setclientomnvar("zombie_arcade_game_time", 1);
   var_0 setclientomnvar("zombie_zz_widget", 1);
   scripts\engine\utility::waitframe();
-  var_1.destroynavrepulsor = 0;
+  var_1.score = 0;
   var_1.var_870F hide();
   var_4 = strtok(var_1.var_870F.model, "_");
   var_5 = var_4[var_4.size - 1];
@@ -504,7 +504,7 @@ func_5555(var_0, var_1) {
         var_5.out_of_order = 1;
       }
 
-      level scripts\engine\utility::waittill_any_3("regular_wave_starting", "event_wave_starting");
+      level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
       level.var_2119 = 0;
       foreach(var_5 in var_3) {
         if(var_5.script_location != "arcade") {

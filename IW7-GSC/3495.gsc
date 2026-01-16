@@ -291,8 +291,9 @@ func_658F() {
         if(self.combatmode == "follow_player") {
           thread patrolfield();
         }
-      } else
+      } else {
         self.lastaction = "noTargetsFound";
+      }
 
       wait 0.05;
     }
@@ -992,8 +993,9 @@ jackalgettargets() {
       if(isDefined(var_1[var_2])) {
         var_0[var_0.size] = var_1[var_2];
       }
-    } else
+    } else {
       continue;
+    }
 
     wait 0.05;
   }

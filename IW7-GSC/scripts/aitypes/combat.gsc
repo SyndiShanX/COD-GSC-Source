@@ -342,8 +342,9 @@ func_FE88(var_0) {
   } else if(self cansee(self.enemy)) {
     var_1.pos = self.enemy getshootatpos();
     var_1.ent = self.enemy;
-  } else
+  } else {
     return anim.success;
+  }
 
   if(!isDefined(var_1.objective)) {
     var_1.objective = "normal";
@@ -360,8 +361,9 @@ func_FE88(var_0) {
 
     func_3EF8(var_1);
     self.bt.m_bfiring = 1;
-  } else
+  } else {
     self.bt.m_bfiring = 0;
+  }
 
   if(!isDefined(var_1.pos) && !isDefined(var_1.ent)) {
     return anim.success;
@@ -690,8 +692,9 @@ func_3EF8(var_0) {
     if(!isDefined(self.enemy)) {
       var_0.pos = self.var_FED1;
       self.var_FED1 = undefined;
-    } else
+    } else {
       self.var_FED1 = undefined;
+    }
   }
 
   var_1 = func_FECA(var_0);
@@ -732,8 +735,9 @@ func_FECB(var_0) {
 
       return "retry";
     }
-  } else
+  } else {
     func_F83F(var_0);
+  }
 }
 
 func_100A4() {
@@ -977,8 +981,9 @@ func_E84D(var_0) {
   if(self cansee(self.enemy)) {
     var_5.pos = self.enemy getshootatpos();
     var_5.ent = self.enemy;
-  } else
+  } else {
     return anim.running;
+  }
 
   if(!isDefined(self.var_F184)) {
     self.var_F184 = 1;
@@ -1008,8 +1013,9 @@ func_E84D(var_0) {
 
     func_3EF8(var_5);
     self.bt.m_bfiring = 1;
-  } else
+  } else {
     self.bt.m_bfiring = 0;
+  }
 
   if(!isDefined(var_5.pos) && !isDefined(var_5.ent)) {
     return anim.success;

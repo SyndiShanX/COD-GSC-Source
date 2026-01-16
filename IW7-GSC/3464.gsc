@@ -553,7 +553,7 @@ sentry_handledeath() {
   self waittill("death");
 
   if(isDefined(self.owner)) {
-    self.owner.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
+    self.owner.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
   }
 
   if(!isDefined(self)) {
@@ -645,7 +645,7 @@ sentry_handleuse(var_0) {
       self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
     }
 
-    var_1.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
+    var_1.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
     var_1 setcarryingsentry(self, 0, var_0);
   }
 }
@@ -1450,8 +1450,9 @@ sam_acquiretarget() {
             }
           }
         }
-      } else
+      } else {
         var_1 = level.uavmodels[level.otherteam[self.team]];
+      }
 
       foreach(var_9 in var_1) {
         if(isDefined(var_9.isleaving) && var_9.isleaving) {
@@ -2068,8 +2069,9 @@ shocktarget(var_0) {
     if(scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_mini_explosives")) {
       thread missileburstfire(var_0);
       var_1 = 1.5;
-    } else
+    } else {
       self shootturret();
+    }
 
     wait(var_1);
   }
@@ -2185,8 +2187,9 @@ watchshockdamage(var_0) {
             if(var_15.visiblelocations.size > 1) {
               var_17 = randomint(var_15.visiblelocations.size);
               var_16 = var_15.visiblelocations[var_17];
-            } else
+            } else {
               var_16 = var_15.visiblelocations[0];
+            }
 
             playfxbetweenpoints(scripts\engine\utility::getfx("sentry_shock_arc"), var_8, vectortoangles(var_16 - var_8), var_16);
           }
@@ -2212,8 +2215,9 @@ placehinton() {
   if(var_0 == "super_trophy") {
     self.owner forceusehinton(&"LUA_MENU_MP_PLACE_SUPER_TROPHY");
     return;
-  } else
+  } else {
     self.owner forceusehinton(&"SENTRY_PLACE");
+  }
 }
 
 cannotplacehinton() {
@@ -2222,6 +2226,7 @@ cannotplacehinton() {
   if(var_0 == "super_trophy") {
     self.owner forceusehinton(&"LUA_MENU_MP_CANNOT_PLACE_SUPER_TROPHY");
     return;
-  } else
+  } else {
     self.owner forceusehinton(&"SENTRY_CANNOT_PLACE");
+  }
 }

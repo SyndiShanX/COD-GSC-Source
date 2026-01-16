@@ -53,9 +53,9 @@ func_986A() {
   if(var_4 == "stationary") {
     if(var_1.size >= var_3) {
       var_5 = 0;
-      foreach(var_0A in var_1) {
-        if(isai(var_0A) && level.bot_personality_type[var_0A.personality] == "active") {
-          var_0A.role = undefined;
+      foreach(var_10 in var_1) {
+        if(isai(var_10) && level.bot_personality_type[var_10.personality] == "active") {
+          var_10.role = undefined;
           var_5 = 1;
           break;
         }
@@ -282,31 +282,31 @@ func_2DC3() {
         continue;
       }
 
-      var_0A = bot_attacker_limit_for_team(var_4);
-      var_0B = bot_defender_limit_for_team(var_4);
+      var_10 = bot_attacker_limit_for_team(var_4);
+      var_11 = bot_defender_limit_for_team(var_4);
       if(!var_1[var_4]) {
         var_1[var_4] = 1;
-        var_0C = [];
+        var_12 = [];
         foreach(var_8 in level.participants) {
           if(scripts\mp\utility::isteamparticipant(var_8) && isDefined(var_8.team) && var_8.team == var_4) {
             if(isbot(var_8)) {
-              var_0C[var_0C.size] = var_8;
+              var_12[var_12.size] = var_8;
             }
           }
         }
 
-        var_0F = scripts\engine\utility::array_sort_with_func(var_0C, ::func_9B74);
-        if(var_0C.size < var_0B) {
-          var_0B = var_0C.size;
+        var_15 = scripts\engine\utility::array_sort_with_func(var_12, ::func_9B74);
+        if(var_12.size < var_11) {
+          var_11 = var_12.size;
         }
 
-        var_0B = int(var_0B);
-        for(var_10 = 0; var_10 < var_0B; var_10++) {
-          var_0C[var_10] bot_set_role("defender");
+        var_11 = int(var_11);
+        for(var_10 = 0; var_10 < var_11; var_10++) {
+          var_12[var_10] bot_set_role("defender");
         }
 
-        for(var_10 = var_0B; var_10 < var_0C.size; var_10++) {
-          var_0C[var_10] bot_set_role("attacker");
+        for(var_10 = var_11; var_10 < var_12.size; var_10++) {
+          var_12[var_10] bot_set_role("attacker");
         }
 
         wait(1);
@@ -315,7 +315,7 @@ func_2DC3() {
 
       var_11 = get_allied_attackers_for_team(var_4);
       var_12 = get_allied_defenders_for_team(var_4);
-      if(var_11.size > var_0A) {
+      if(var_11.size > var_10) {
         var_13 = 0;
         foreach(var_15 in var_11) {
           if(isai(var_15)) {
@@ -334,7 +334,7 @@ func_2DC3() {
         }
       }
 
-      if(var_12.size > var_0B) {
+      if(var_12.size > var_11) {
         var_17 = 0;
         foreach(var_19 in var_12) {
           if(isai(var_19)) {

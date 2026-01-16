@@ -27,11 +27,11 @@ func_11809(var_0, var_1, var_2, var_3) {
     self.zombiepiece delete();
     self.zombiepiece = undefined;
     var_4 = self gettagorigin("J_Wrist_ri");
-    if(!isDefined(self.isnodeoccupied)) {
+    if(!isDefined(self.enemy)) {
       return;
     }
 
-    var_5 = self.isnodeoccupied.origin + (0, 0, 0);
+    var_5 = self.enemy.origin + (0, 0, 0);
     magicbullet("iw7_zombiepiece_mp", var_4, var_5, self);
   }
 }
@@ -109,7 +109,7 @@ func_100AC(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -118,7 +118,7 @@ func_100AC(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = anglesToForward(self.angles);
-  var_5 = self.isnodeoccupied.origin - self.origin;
+  var_5 = self.enemy.origin - self.origin;
   var_5 = (var_5[0], var_5[1], 0);
   var_5 = vectornormalize(var_5);
   if(vectordot(var_4, var_5) < 0) {
@@ -212,7 +212,7 @@ func_100A0(var_0, var_1, var_2, var_3) {
 }
 
 func_FFF1(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
@@ -248,7 +248,7 @@ shouldreloadwhilemoving(var_0, var_1, var_2, var_3) {
 }
 
 canseethroughfoliage(var_0, var_1, var_2, var_3) {
-  return isDefined(self.isnodeoccupied) && self.helmetlocation == "head";
+  return isDefined(self.enemy) && self.helmetlocation == "head";
 }
 
 func_9E70(var_0, var_1, var_2, var_3) {
@@ -267,7 +267,7 @@ func_CD6C() {
 }
 
 func_58E5(var_0, var_1, var_2, var_3) {
-  self.setplayerignoreradiusdamage = self.isnodeoccupied.origin + (0, 0, 40);
+  self.setplayerignoreradiusdamage = self.enemy.origin + (0, 0, 40);
   self.doentitiessharehierarchy = undefined;
   thread func_8979(var_1);
   scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
@@ -311,8 +311,8 @@ func_8979(var_0) {
   }
 
   for(var_4 = 0; var_4 < var_3; var_4++) {
-    if(isDefined(self.isnodeoccupied)) {
-      var_5 = self.isnodeoccupied.origin + (0, 0, 40);
+    if(isDefined(self.enemy)) {
+      var_5 = self.enemy.origin + (0, 0, 40);
       var_6 = var_5 - self.setplayerignoreradiusdamage;
       var_7 = length(var_6);
       if(var_7 < 10) {
@@ -331,7 +331,7 @@ func_8979(var_0) {
 
   self setscriptablepartstate("laser_flare", "inactive");
   self.setplayerignoreradiusdamage = undefined;
-  self.doentitiessharehierarchy = self.isnodeoccupied;
+  self.doentitiessharehierarchy = self.enemy;
   self.blaserattack = 0;
 }
 

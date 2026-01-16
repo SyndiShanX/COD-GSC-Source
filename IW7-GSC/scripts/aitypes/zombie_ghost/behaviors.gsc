@@ -406,10 +406,12 @@ ghostexplosionradiusdamage(var_0, var_1, var_2) {
         }
 
         process_moving_target_hit(var_3, var_1, var_0);
-      } else if(isDefined(level.hit_wrong_moving_target_func))
+      } else if(isDefined(level.hit_wrong_moving_target_func)) {
         [[level.hit_wrong_moving_target_func]](var_1, var_3, var_0);
-    } else if(isDefined(level.process_player_gns_combo_func))
+      }
+    } else if(isDefined(level.process_player_gns_combo_func)) {
       [[level.process_player_gns_combo_func]](var_1, var_3);
+    }
   }
 }
 

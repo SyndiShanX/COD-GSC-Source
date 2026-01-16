@@ -38,7 +38,7 @@ removeheavyarmor() {
   self.heavyarmor = undefined;
 }
 
-heavyarmormodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
+heavyarmormodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(var_2 <= 0 && var_3 <= 0) {
     return [0, var_2, var_3];
   }
@@ -63,17 +63,17 @@ heavyarmormodifydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     return [1, 1, 0];
   }
 
-  var_0B = var_0 getheavyarmor();
-  var_0C = heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-  var_0D = var_2 * var_0C;
-  var_0E = var_3 * var_0C;
-  var_0F = var_0D + var_0E;
-  if(!var_0A) {
-    var_0 subtractheavyarmor(var_0F);
+  var_11 = var_0 getheavyarmor();
+  var_12 = heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  var_13 = var_2 * var_12;
+  var_14 = var_3 * var_12;
+  var_15 = var_13 + var_14;
+  if(!var_10) {
+    var_0 subtractheavyarmor(var_15);
   }
 
   if(var_0 hasheavyarmorinvulnerability()) {
-    return [var_0B, 1, 0];
+    return [var_11, 1, 0];
   }
 
   return [var_2 + var_3, 1, 0];
@@ -107,30 +107,30 @@ heavyarmor_break() {
   thread removeheavyarmor();
 }
 
-heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
-  var_0B = [];
+heavyarmor_getdamagemodifier(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = [];
   if(scripts\mp\utility::issuperweapon(var_4)) {
-    var_0B[var_0B.size] = 1.33;
+    var_11[var_11.size] = 1.33;
   }
 
   if(isexplosivedamagemod(var_4)) {
-    var_0B[var_0B.size] = 1.5;
+    var_11[var_11.size] = 1.5;
   }
 
   if(var_4 == "MOD_MELEE") {
-    var_0B[var_0B.size] = 1.5;
+    var_11[var_11.size] = 1.5;
   }
 
   if(scripts\mp\utility::isheadshot(var_5, var_8, var_4, var_1)) {
-    var_0B[var_0B.size] = 1.5;
+    var_11[var_11.size] = 1.5;
   }
 
-  var_0C = 1;
-  foreach(var_0E in var_0B) {
-    if(var_0E > var_0C) {
-      var_0E = var_0C;
+  var_12 = 1;
+  foreach(var_14 in var_11) {
+    if(var_14 > var_12) {
+      var_14 = var_12;
     }
   }
 
-  return var_0C;
+  return var_12;
 }

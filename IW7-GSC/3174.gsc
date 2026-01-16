@@ -81,13 +81,13 @@ func_89E1() {
 func_136E3(var_0, var_1) {
   self endon(var_1 + "_finished");
   for(;;) {
-    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     if(!isalive(self)) {
       break;
     }
 
-    var_0C = func_3E95(var_0, var_1);
-    self func_82AB(var_0C, 1, 0.01, 1);
+    var_12 = func_3E95(var_0, var_1);
+    self func_82AB(var_12, 1, 0.01, 1);
     thread func_89E1();
     wait(0.35);
   }
@@ -104,21 +104,21 @@ func_9F3A(var_0) {
 func_3E95(var_0, var_1) {
   var_2 = [];
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower")) {
-    var_2[var_2.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_torso");
+    var_2[var_2.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_torso");
   } else if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var_2[var_2.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_head");
+    var_2[var_2.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_head");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
-    var_2[var_2.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_right_arm");
+    var_2[var_2.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_right_arm");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
-    var_2[var_2.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_left_arm");
+    var_2[var_2.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_left_arm");
   } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    var_2[var_2.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_left_leg");
+    var_2[var_2.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_left_leg");
   } else if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    var_2[var_2.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_right_leg");
+    var_2[var_2.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_right_leg");
   }
 
   if(var_2.size < 2) {
-    var_2[var_2.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_default");
+    var_2[var_2.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "add_default");
   }
 
   return var_2[randomint(var_2.size)];
@@ -398,23 +398,23 @@ func_3EEC(var_0, var_1, var_2) {
 
   var_3 = [];
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
   } else if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower");
   } else if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm");
   } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_leg");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_leg");
   } else if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_leg");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_leg");
   }
 
   if(var_3.size < 2) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   }
 
   return var_3[randomint(var_3.size)];
@@ -431,7 +431,7 @@ func_3EE9(var_0, var_1, var_2) {
 
   var_3 = [];
   if(var_3.size < 2) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   }
 
   return var_3[randomint(var_3.size)];
@@ -439,19 +439,19 @@ func_3EE9(var_0, var_1, var_2) {
 
 func_3ED6(var_0, var_1, var_2) {
   var_3 = [];
-  var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+  var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   return var_3[randomint(var_3.size)];
 }
 
 func_3EE8(var_0, var_1, var_2) {
   var_3 = [];
-  var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+  var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   if(scripts\engine\utility::damagelocationisany("left_hand", "left_arm_lower", "left_arm_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm");
   }
 
   if(scripts\engine\utility::damagelocationisany("right_hand", "right_arm_lower", "right_arm_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm");
   }
 
   return var_3[randomint(var_3.size)];
@@ -460,27 +460,27 @@ func_3EE8(var_0, var_1, var_2) {
 func_3EEA(var_0, var_1, var_2) {
   var_3 = [];
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_upper");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_upper");
   } else if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_lower");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_torso_lower");
   } else if(scripts\engine\utility::damagelocationisany("neck")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_neck");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_neck");
   } else if(scripts\engine\utility::damagelocationisany("head")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_head");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_head");
   } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "right_leg_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_leg");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_leg");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_left_arm_upper");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_left_arm_upper");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_left_arm_lower");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_left_arm_lower");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_right_arm_upper");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_right_arm_upper");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_right_arm_lower");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_right_arm_lower");
   }
 
   if(var_3.size < 2) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_default");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "pistol_default");
   }
 
   return var_3[randomint(var_3.size)];
@@ -507,11 +507,11 @@ func_3EEB(var_0, var_1, var_2) {
   }
 
   if(var_8) {
-    var_6[var_6.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "long");
+    var_6[var_6.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "long");
   } else if(var_7) {
-    var_6[var_6.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "medium");
+    var_6[var_6.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "medium");
   } else if(self maymovetopoint(self gettweakablevalue((var_3, 0, 0)))) {
-    var_6[var_6.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "short");
+    var_6[var_6.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "short");
   }
 
   if(var_6.size == 0) {
@@ -550,13 +550,13 @@ func_3EE6(var_0, var_1, var_2) {
 func_3ED4(var_0, var_1, var_2) {
   var_3 = [];
   if(scripts\engine\utility::damagelocationisany("torso_upper", "torso_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso");
   } else if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
   }
 
   if(var_3.size < 2) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   }
 
   return var_3[randomint(var_3.size)];
@@ -574,23 +574,23 @@ func_3EE7(var_0, var_1, var_2) {
 func_3ED5(var_0, var_1, var_2) {
   var_3 = [];
   if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_upper");
   } else if(scripts\engine\utility::damagelocationisany("torso_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso_lower");
   } else if(scripts\engine\utility::damagelocationisany("head", "helmet", "neck")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "head");
   } else if(scripts\engine\utility::damagelocationisany("right_arm_upper", "right_arm_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_arm");
   } else if(scripts\engine\utility::damagelocationisany("left_arm_upper", "left_arm_lower")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_arm");
   } else if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_leg");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "left_leg");
   } else if(scripts\engine\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_leg");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "right_leg");
   }
 
   if(var_3.size < 2) {
-    var_3[var_3.size] = scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
+    var_3[var_3.size] = ::scripts\asm\asm::asm_lookupanimfromalias(var_1, "default");
   }
 
   return var_3[randomint(var_3.size)];

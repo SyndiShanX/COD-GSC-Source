@@ -253,9 +253,9 @@ func_13ACC(var_0) {
     var_7 = var_2 - var_4 * 32;
     var_8 = rotatevector(var_4, (0, 45, 0));
     var_9 = var_2 + var_8 * 64;
-    var_0A = rotatevector(var_4, (0, 135, 0));
-    var_0B = var_2 + var_0A * 32;
-    var_0C = gettime();
+    var_10 = rotatevector(var_4, (0, 135, 0));
+    var_11 = var_2 + var_10 * 32;
+    var_12 = gettime();
     self.var_B62A.origin = var_6;
     wait(0.05);
     playFXOnTag(level._effect["swipe_trail"], self.var_B62A, "tag_origin");
@@ -265,7 +265,7 @@ func_13ACC(var_0) {
     self.var_B62A.origin = var_5;
     thread func_20D9(var_5);
     wait(0.05);
-    self.var_B62A.origin = var_0B;
+    self.var_B62A.origin = var_11;
     wait(0.05);
     self.var_B62A.origin = var_7;
     wait(0.05);
@@ -294,26 +294,26 @@ func_11A83(var_0, var_1, var_2) {
   var_7 = undefined;
   var_8 = 0;
   var_9 = gettime();
-  var_0A = var_2;
-  var_4 = scripts\common\trace::ray_trace(var_3, var_0, var_0A);
+  var_10 = var_2;
+  var_4 = scripts\common\trace::ray_trace(var_3, var_0, var_10);
   if(isDefined(var_4["entity"])) {
     var_8 = 1;
     var_6 = var_4["entity"];
-    var_0A[var_0A.size] = var_6;
+    var_10[var_10.size] = var_6;
   }
 
   if(isDefined(var_1)) {
-    var_5 = scripts\common\trace::ray_trace(var_0, var_1, var_0A);
+    var_5 = scripts\common\trace::ray_trace(var_0, var_1, var_10);
     if(isDefined(var_5) && isDefined(var_5["entity"])) {
       var_8 = 1;
       var_7 = var_4["entity"];
-      var_0A[var_0A.size] = var_7;
+      var_10[var_10.size] = var_7;
     }
   }
 
   if(isDefined(var_6)) {
     if(isDefined(var_6.var_904B) && var_6.var_904B == var_9) {
-      return var_0A;
+      return var_10;
     }
 
     if(!scripts\mp\utility::attackerishittingteam(var_6, self) && var_6 != self) {
@@ -323,7 +323,7 @@ func_11A83(var_0, var_1, var_2) {
 
   if(isDefined(var_7)) {
     if(isDefined(var_7.var_904B) && var_7.var_904B == var_9) {
-      return var_0A;
+      return var_10;
     }
 
     if(!scripts\mp\utility::attackerishittingteam(var_7, self) && var_7 != self) {
@@ -331,5 +331,5 @@ func_11A83(var_0, var_1, var_2) {
     }
   }
 
-  return var_0A;
+  return var_10;
 }

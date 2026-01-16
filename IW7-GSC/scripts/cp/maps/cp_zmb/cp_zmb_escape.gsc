@@ -40,8 +40,8 @@ delete_zombie_gamemode_entities() {
   }
 
   var_8 = getEntArray("bollard_trigger", "targetname");
-  foreach(var_0A in var_8) {
-    var_0A delete();
+  foreach(var_10 in var_8) {
+    var_10 delete();
   }
 }
 

@@ -106,12 +106,12 @@ ss_play_jumpscale(var_0, var_1, var_2, var_3, var_4) {
   self gib_fx_override("noclip");
   var_8 = getmovedelta(var_2);
   var_9 = length2d(var_8);
-  var_0A = length2d(var_5);
-  var_0B = var_0A / var_9;
-  var_0C = max(var_5[2] / var_8[2], 0);
-  var_0D = 1;
-  self scragentsetanimscale(var_0B, var_0C);
-  scripts\mp\agents\_scriptedagents::func_CED2(var_0, var_1, var_0D, var_0, "end");
+  var_10 = length2d(var_5);
+  var_11 = var_10 / var_9;
+  var_12 = max(var_5[2] / var_8[2], 0);
+  var_13 = 1;
+  self scragentsetanimscale(var_11, var_12);
+  scripts\mp\agents\_scriptedagents::func_CED2(var_0, var_1, var_13, var_0, "end");
 }
 
 ss_play_jumptoroof(var_0, var_1, var_2, var_3) {
@@ -351,8 +351,8 @@ ss_play_jumpmove_end(var_0, var_1, var_2, var_3) {
     var_8 = var_9["position"];
   }
 
-  var_0A = max(var_8[2] - self.origin[2] / var_6[2], 0);
-  self scragentsetanimscale(1, var_0A);
+  var_10 = max(var_8[2] - self.origin[2] / var_6[2], 0);
+  self scragentsetanimscale(1, var_10);
   self ghostlaunched("anim deltas");
   self gib_fx_override("noclip");
   scripts\mp\agents\_scriptedagents::func_CED2(var_1, var_4, self.moveratescale, var_1, "end", scripts\asm\asm::func_2341(var_0, var_1));
@@ -390,12 +390,12 @@ superslasher_shouldstartarrival(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  var_0A = self.objective_playermask_showto;
-  if(isDefined(self.target_getindexoftarget) || isDefined(self.physics_querypoint)) {
-    var_0A = 0;
+  var_10 = self.objective_playermask_showto;
+  if(isDefined(self.node) || isDefined(self.physics_querypoint)) {
+    var_10 = 0;
   }
 
-  self.asm.var_11068 = func_3722(var_0, var_2, self.vehicle_getspawnerarray, var_0A, 0);
+  self.asm.var_11068 = func_3722(var_0, var_2, self.vehicle_getspawnerarray, var_10, 0);
   if(!isDefined(self.asm.var_11068)) {
     return 0;
   }
@@ -410,28 +410,28 @@ func_3722(var_0, var_1, var_2, var_3, var_4) {
   var_7 = length2dsquared(var_6);
   var_8 = lib_0F3C::func_3E96(var_0, var_1);
   var_9 = self getsafecircleorigin(var_1, var_8);
-  var_0A = getmovedelta(var_9);
-  var_0B = getangledelta3d(var_9);
-  var_0C = rotatevector(var_0A, self.angles);
-  var_0D = var_0C + self.origin;
-  var_0E = 0;
-  var_0F = distancesquared(var_0D, var_2);
-  if(var_0F > var_3 * var_3) {
-    var_0E = 1;
+  var_10 = getmovedelta(var_9);
+  var_11 = getangledelta3d(var_9);
+  var_12 = rotatevector(var_10, self.angles);
+  var_13 = var_12 + self.origin;
+  var_14 = 0;
+  var_15 = distancesquared(var_13, var_2);
+  if(var_15 > var_3 * var_3) {
+    var_14 = 1;
   }
 
-  var_10 = getclosestpointonnavmesh(var_0D, self);
+  var_10 = getclosestpointonnavmesh(var_13, self);
   var_11 = self func_84AC();
   if(!navisstraightlinereachable(var_11, var_10, self)) {
     return undefined;
   }
 
-  if(var_0E) {
-    var_0C = rotatevector(var_0A, var_5 - var_0B);
-    var_12 = var_2 - var_0C;
-  } else if(distance2dsquared(var_11, var_0E) > 4) {
-    var_0D = rotatevector(var_0B, var_6 - var_0C);
-    var_12 = var_11 - var_0D;
+  if(var_14) {
+    var_12 = rotatevector(var_10, var_5 - var_11);
+    var_12 = var_2 - var_12;
+  } else if(distance2dsquared(var_11, var_14) > 4) {
+    var_13 = rotatevector(var_11, var_6 - var_12);
+    var_12 = var_11 - var_13;
   } else {
     var_12 = self.origin;
   }
@@ -440,9 +440,9 @@ func_3722(var_0, var_1, var_2, var_3, var_4) {
   var_13.getgrenadedamageradius = var_9;
   var_13.opcode::OP_GetUnsignedShort = 4;
   var_13.areanynavvolumesloaded = var_12;
-  var_13.opcode::OP_ScriptFarMethodChildThreadCall = var_0B[1];
+  var_13.opcode::OP_ScriptFarMethodChildThreadCall = var_11[1];
   var_13.log = var_5;
-  var_13.stricmp = var_0A;
+  var_13.stricmp = var_10;
   var_13.animindex = var_8;
   return var_13;
 }
@@ -563,11 +563,11 @@ superslasher_needstoturn(var_0, var_1, var_2, var_3) {
   } else if(isDefined(self.bt.target)) {
     var_8 = self.bt.target getvelocity();
     var_9 = self.bt.target.origin + var_8;
-    var_0A = var_9 - self.origin;
-    var_0B = vectortoyaw(var_0A);
-    var_0C = angleclamp180(var_0B - self.angles[1]);
-    if(abs(var_0C) >= 35) {
-      self.asm.turndata = var_0C;
+    var_10 = var_9 - self.origin;
+    var_11 = vectortoyaw(var_10);
+    var_12 = angleclamp180(var_11 - self.angles[1]);
+    if(abs(var_12) >= 35) {
+      self.asm.turndata = var_12;
       return 1;
     }
   }

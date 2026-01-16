@@ -153,25 +153,25 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
   self.x = var_5.x + var_8 * var_9;
   if(var_7 == var_5.aligny) {
-    var_0A = 0;
-    var_0B = 0;
+    var_10 = 0;
+    var_11 = 0;
   } else if(var_9 == "middle" || var_7.aligny == "middle") {
-    var_0A = int(var_7.height / 2);
+    var_10 = int(var_7.height / 2);
     if(var_8 == "top" || var_6.aligny == "bottom") {
-      var_0B = -1;
+      var_11 = -1;
     } else {
-      var_0B = 1;
+      var_11 = 1;
     }
   } else {
-    var_0A = var_7.height;
+    var_10 = var_7.height;
     if(var_8 == "top") {
-      var_0B = -1;
+      var_11 = -1;
     } else {
-      var_0B = 1;
+      var_11 = 1;
     }
   }
 
-  self.y = var_5.y + var_0A * var_0B;
+  self.y = var_5.y + var_10 * var_11;
   self.x = self.x + self.xoffset;
   self.y = self.y + self.yoffset;
   switch (self.elemtype) {

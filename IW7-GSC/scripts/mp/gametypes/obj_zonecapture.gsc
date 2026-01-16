@@ -187,7 +187,7 @@ trackgametypevips() {
 }
 
 cleanupgametypevips() {
-  level scripts\engine\utility::waittill_any_3("game_ended", "zone_moved");
+  level scripts\engine\utility::waittill_any("game_ended", "zone_moved");
   foreach(var_1 in level.players) {
     var_1 setgametypevip(0);
   }
@@ -234,8 +234,8 @@ zone_onuse(var_0) {
   }
 
   thread scripts\mp\utility::printandsoundoneveryone(var_1, var_3, undefined, undefined, "mp_dom_flag_captured", undefined, var_0);
-  foreach(var_0A in level.players) {
-    showcapturedhardpointeffecttoplayer(var_1, var_0A);
+  foreach(var_10 in level.players) {
+    showcapturedhardpointeffecttoplayer(var_1, var_10);
   }
 
   level.zone.gameobject thread updatechevrons(var_1);
@@ -506,30 +506,30 @@ postshipmodifychevrons(var_0) {
     var_9 setModel("hp_chevron_scriptable");
     var_9 = createvisualsinfo(var_9, (-176, -192, 308), (0, 0, 0), var_0);
     var_2[var_2.size] = var_9;
-    var_0A = spawn("script_model", (-176, -128, 308));
-    var_0A setModel("hp_chevron_scriptable");
-    var_0A = createvisualsinfo(var_0A, (-176, -128, 308), (0, 0, 0), var_0);
-    var_2[var_2.size] = var_0A;
-    var_0B = spawn("script_model", (-176, -64, 308));
-    var_0B setModel("hp_chevron_scriptable");
-    var_0B = createvisualsinfo(var_0B, (-176, -64, 308), (0, 0, 0), var_0);
-    var_2[var_2.size] = var_0B;
-    var_0C = spawn("script_model", (-176, 0, 308));
-    var_0C setModel("hp_chevron_scriptable");
-    var_0C = createvisualsinfo(var_0C, (-176, 0, 308), (0, 0, 0), var_0);
-    var_2[var_2.size] = var_0C;
-    var_0D = spawn("script_model", (-176, 64, 308));
-    var_0D setModel("hp_chevron_scriptable");
-    var_0D = createvisualsinfo(var_0D, (-176, 64, 308), (0, 0, 0), var_0);
-    var_2[var_2.size] = var_0D;
-    var_0E = spawn("script_model", (-176, 128, 308));
-    var_0E setModel("hp_chevron_scriptable");
-    var_0E = createvisualsinfo(var_0E, (-176, 128, 308), (0, 0, 0), var_0);
-    var_2[var_2.size] = var_0E;
-    var_0F = spawn("script_model", (-176, 192, 308));
-    var_0F setModel("hp_chevron_scriptable");
-    var_0F = createvisualsinfo(var_0F, (-176, 192, 308), (0, 0, 0), var_0);
-    var_2[var_2.size] = var_0F;
+    var_10 = spawn("script_model", (-176, -128, 308));
+    var_10 setModel("hp_chevron_scriptable");
+    var_10 = createvisualsinfo(var_10, (-176, -128, 308), (0, 0, 0), var_0);
+    var_2[var_2.size] = var_10;
+    var_11 = spawn("script_model", (-176, -64, 308));
+    var_11 setModel("hp_chevron_scriptable");
+    var_11 = createvisualsinfo(var_11, (-176, -64, 308), (0, 0, 0), var_0);
+    var_2[var_2.size] = var_11;
+    var_12 = spawn("script_model", (-176, 0, 308));
+    var_12 setModel("hp_chevron_scriptable");
+    var_12 = createvisualsinfo(var_12, (-176, 0, 308), (0, 0, 0), var_0);
+    var_2[var_2.size] = var_12;
+    var_13 = spawn("script_model", (-176, 64, 308));
+    var_13 setModel("hp_chevron_scriptable");
+    var_13 = createvisualsinfo(var_13, (-176, 64, 308), (0, 0, 0), var_0);
+    var_2[var_2.size] = var_13;
+    var_14 = spawn("script_model", (-176, 128, 308));
+    var_14 setModel("hp_chevron_scriptable");
+    var_14 = createvisualsinfo(var_14, (-176, 128, 308), (0, 0, 0), var_0);
+    var_2[var_2.size] = var_14;
+    var_15 = spawn("script_model", (-176, 192, 308));
+    var_15 setModel("hp_chevron_scriptable");
+    var_15 = createvisualsinfo(var_15, (-176, 192, 308), (0, 0, 0), var_0);
+    var_2[var_2.size] = var_15;
     var_10 = spawn("script_model", (-144, 240, 308));
     var_10 setModel("hp_chevron_scriptable");
     var_10 = createvisualsinfo(var_10, (-144, 240, 308), (0, 270, 0), var_0);

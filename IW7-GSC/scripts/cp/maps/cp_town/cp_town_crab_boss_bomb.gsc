@@ -281,7 +281,7 @@ crab_boss_death_anim_sequence(var_0) {
   level endon("game_ended");
   if(isalive(var_0)) {
     var_0 scripts\aitypes\crab_boss\behaviors::dodeath(0);
-    var_0 scripts\engine\utility::waittill_any_timeout_1(3, "death_done");
+    var_0 scripts\engine\utility::waittill_any_timeout(3, "death_done");
     var_0.nocorpse = 1;
     var_0 suicide();
   }

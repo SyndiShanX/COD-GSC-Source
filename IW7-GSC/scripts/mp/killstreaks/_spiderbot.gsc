@@ -5,7 +5,7 @@
 
 init() {
   level._effect["spider_explode"] = loadfx("vfx\core\expl\grenadeexp_default");
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("spiderbot", ::func_1288A);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("spiderbot", ::func_1288A);
 }
 
 func_1288A(var_0) {
@@ -112,7 +112,7 @@ func_13BB0(var_0, var_1) {
 func_13B79(var_0) {
   var_0 endon("death");
   self endon("detonate_spiderbot");
-  var_0.var_1155F scripts\engine\utility::waittill_any_3("phase_shift_power_activated", "rewind_activated", "powers_teleport_used", "powers_transponder_used", "orbital_deployment_action", "death", "disconnect");
+  var_0.var_1155F scripts\engine\utility::waittill_any("phase_shift_power_activated", "rewind_activated", "powers_teleport_used", "powers_transponder_used", "orbital_deployment_action", "death", "disconnect");
   var_0.var_1155F = undefined;
 }
 

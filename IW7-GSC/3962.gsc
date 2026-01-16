@@ -25,7 +25,7 @@ func_FAB0() {
   level.agent_definition["zombie_grey"]["setup_func"] = ::setupagent;
   level.agent_funcs["zombie_grey"]["on_killed"] = ::func_C5D1;
   level.agent_funcs["zombie_grey"]["on_damaged"] = ::func_C5CF;
-  level.agent_funcs["zombie_grey"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.agent_funcs["zombie_grey"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.agent_funcs["zombie_grey"]["gametype_on_damage_finished"] = ::func_C5D0;
 }
 

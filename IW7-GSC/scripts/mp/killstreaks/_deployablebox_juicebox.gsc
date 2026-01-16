@@ -5,9 +5,9 @@
 
 init() {
   var_0 = spawnStruct();
-  var_0.var_39B = "deployable_vest_marker_mp";
+  var_0.weaponinfo = "deployable_vest_marker_mp";
   var_0.modelbase = "afr_mortar_ammo_01";
-  var_0.pow = &"KILLSTREAKS_HINTS_DEPLOYABLE_JUICEBOX_PICKUP";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_DEPLOYABLE_JUICEBOX_PICKUP";
   var_0.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_JUICEBOX_TAKING";
   var_0.var_67E5 = "deployable_juicebox_taken";
   var_0.streakname = "deployable_juicebox";
@@ -31,7 +31,7 @@ init() {
   var_0.allowhvtspawn = 0;
   var_0.maxuses = 4;
   level.boxsettings["deployable_juicebox"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("deployable_juicebox", ::func_128E0);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("deployable_juicebox", ::func_128E0);
   level.deployable_box["deployable_juicebox"] = [];
 }
 
@@ -46,9 +46,9 @@ func_128E0(var_0, var_1) {
 }
 
 onusedeployable(var_0) {
-  thread scripts\mp\perks\_perkfunctions::setjuiced(15);
+  thread scripts\mp\perks\perkfunctions::setjuiced(15);
 }
 
 func_3937(var_0) {
-  return !scripts\mp\utility::isjuggernaut() && !scripts\mp\perks\_perkfunctions::hasjuiced();
+  return !scripts\mp\utility::isjuggernaut() && !scripts\mp\perks\perkfunctions::hasjuiced();
 }

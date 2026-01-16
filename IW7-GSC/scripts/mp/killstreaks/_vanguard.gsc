@@ -6,7 +6,7 @@
 init() {
   func_FAB1();
   func_FAC4();
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("vanguard", ::func_1290D);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("vanguard", ::func_1290D);
   level.remote_uav = [];
   level.vanguard_lastdialogtime = 0;
   level.var_1317F = ::vanguard_firemissile;
@@ -171,7 +171,7 @@ func_10E0A(var_0, var_1, var_2) {
   }
 
   thread watchintrocleared(var_0);
-  var_3 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("vanguard");
+  var_3 = scripts\mp\killstreaks\killstreaks::initridekillstreak("vanguard");
   if(var_3 != "success") {
     var_0 notify("death");
     return 0;
@@ -222,7 +222,7 @@ func_4A30(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.lifeid = var_0;
   var_6.team = var_1.team;
   var_6.pers["team"] = var_1.team;
-  var_6.triggerportableradarping = var_1;
+  var_6.owner = var_1;
   var_6 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_1);
   if(issentient(var_6)) {
     var_6 give_zombies_perk("DogsDontAttack");
@@ -234,7 +234,7 @@ func_4A30(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.var_1037E = 0;
   var_6.inheliproximity = 0;
   var_6.helitype = "remote_uav";
-  var_7.triggerportableradarping = var_1;
+  var_7.owner = var_1;
   var_7 setentityowner(var_6);
   var_7 thread scripts\mp\weapons::doblinkinglight("tag_fx1");
   var_7.parent = var_6;
@@ -308,10 +308,10 @@ func_1316C(var_0) {
   self endon("disconnect");
   var_0 endon("death");
   var_0 endon("end_remote");
-  var_0 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  var_0 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
   var_0 waittill("killstreakExit");
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("gryphon_gone");
+  if(isDefined(var_0.owner)) {
+    var_0.owner scripts\mp\utility::leaderdialogonplayer("gryphon_gone");
   }
 
   var_0 notify("death");
@@ -346,7 +346,7 @@ func_1317A(var_0) {
 }
 
 func_13175() {
-  playfxontagforclients(level.vanguard_fx["target_marker_circle"], self.attackarrow, "tag_origin", self.triggerportableradarping);
+  playfxontagforclients(level.vanguard_fx["target_marker_circle"], self.attackarrow, "tag_origin", self.owner);
   thread func_13179();
 }
 
@@ -366,7 +366,7 @@ func_13179() {
   self endon("end_remote");
   if(!level.hardcoremode) {
     foreach(var_1 in level.players) {
-      if(self.triggerportableradarping scripts\mp\utility::isenemy(var_1)) {
+      if(self.owner scripts\mp\utility::isenemy(var_1)) {
         scripts\engine\utility::waitframe();
         playfxontagforclients(level.vanguard_fx["target_marker_circle"], self.attackarrow, "tag_origin", var_1);
       }
@@ -375,7 +375,7 @@ func_13179() {
 }
 
 func_13178(var_0) {
-  var_1 = isdualwielding(var_0.triggerportableradarping, var_0);
+  var_1 = isdualwielding(var_0.owner, var_0);
   if(isDefined(var_1)) {
     var_0.attackarrow.origin = var_1[0] + (0, 0, 4);
     return var_1[0];
@@ -535,7 +535,7 @@ func_1317D() {
       return;
     }
 
-    if(!isDefined(self.triggerportableradarping)) {
+    if(!isDefined(self.owner)) {
       return;
     }
 
@@ -545,7 +545,7 @@ func_1317D() {
           return;
         }
 
-        if(!isDefined(self.triggerportableradarping)) {
+        if(!isDefined(self.owner)) {
           return;
         }
 
@@ -563,23 +563,23 @@ func_1317D() {
         }
 
         var_2 = getentityvelocity(var_1);
-        self.triggerportableradarping setclientomnvar("ui_vanguard", var_2);
+        self.owner setclientomnvar("ui_vanguard", var_2);
         wait(0.1);
       }
 
       self notify("in_range");
       self.var_DCCE = 0;
-      self.triggerportableradarping setclientomnvar("ui_vanguard", 1);
+      self.owner setclientomnvar("ui_vanguard", 1);
     }
 
     var_3 = int(angleclamp(self.angles[1]));
-    self.triggerportableradarping setclientomnvar("ui_vanguard_heading", var_3);
+    self.owner setclientomnvar("ui_vanguard_heading", var_3);
     var_4 = self.origin[2] * 0.0254;
     var_4 = int(clamp(var_4, -250, 250));
-    self.triggerportableradarping setclientomnvar("ui_vanguard_altitude", var_4);
+    self.owner setclientomnvar("ui_vanguard_altitude", var_4);
     var_5 = distance2d(self.origin, self.attackarrow.origin) * 0.0254;
     var_5 = int(clamp(var_5, 0, 256));
-    self.triggerportableradarping setclientomnvar("ui_vanguard_range", var_5);
+    self.owner setclientomnvar("ui_vanguard_range", var_5);
     var_0 = self.origin;
     wait(0.1);
   }
@@ -637,7 +637,7 @@ func_13173() {
 
 func_1316B(var_0) {
   var_0 endon("death");
-  var_0.triggerportableradarping scripts\engine\utility::waittill_any_3("killstreak_disowned");
+  var_0.owner scripts\engine\utility::waittill_any("killstreak_disowned");
   var_0 notify("death");
 }
 
@@ -645,8 +645,8 @@ func_1316E(var_0, var_1) {
   var_0 endon("death");
   var_2 = 60;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_2);
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("gryphon_gone");
+  if(isDefined(var_0.owner)) {
+    var_0.owner scripts\mp\utility::leaderdialogonplayer("gryphon_gone");
   }
 
   var_0 notify("death");
@@ -666,15 +666,15 @@ func_13169(var_0) {
     var_0.var_1155D delete();
   }
 
-  vanguard_endride(var_0.triggerportableradarping, var_0);
+  vanguard_endride(var_0.owner, var_0);
 }
 
 func_1316D(var_0) {
   var_0 endon("death");
-  level scripts\engine\utility::waittill_any_3("objective_cam", "game_ended");
+  level scripts\engine\utility::waittill_any("objective_cam", "game_ended");
   playFX(level.vanguard_fx["explode"], var_0.origin);
   var_0 playSound("ball_drone_explode");
-  vanguard_endride(var_0.triggerportableradarping, var_0);
+  vanguard_endride(var_0.owner, var_0);
 }
 
 vanguard_endride(var_0, var_1) {
@@ -795,7 +795,7 @@ modifydamage(var_0, var_1, var_2, var_3) {
     var_4 = self.maxhealth * 0.34;
   }
 
-  playfxontagforclients(level.vanguard_fx["hit"], self, "tag_origin", self.triggerportableradarping);
+  playfxontagforclients(level.vanguard_fx["hit"], self, "tag_origin", self.owner);
   if(self.var_1037E == 0 && self.var_E1 >= self.maxhealth / 2) {
     self.var_1037E = 1;
     playFXOnTag(level.vanguard_fx["smoke"], self, "tag_origin");
@@ -805,8 +805,8 @@ modifydamage(var_0, var_1, var_2, var_3) {
 }
 
 handledeathdamage(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("gryphon_destroyed");
+  if(isDefined(self.owner)) {
+    self.owner scripts\mp\utility::leaderdialogonplayer("gryphon_destroyed");
   }
 
   scripts\mp\damage::onkillstreakkilled("vanguard", var_0, var_1, var_2, var_3, "destroyed_vanguard", undefined, "callout_destroyed_vanguard");

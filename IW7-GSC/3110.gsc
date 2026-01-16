@@ -71,8 +71,9 @@ func_136D0(var_0) {
     } else if(gettime() - self.var_CB49 > 100) {
       return anim.failure;
     }
-  } else
+  } else {
     self.var_CB49 = undefined;
+  }
 
   return anim.running;
 }
@@ -113,8 +114,9 @@ func_3D48(var_0) {
     }
 
     self clearpath();
-  } else if(distancesquared(self.var_F181.origin, self.origin) <= 4096)
+  } else if(distancesquared(self.var_F181.origin, self.origin) <= 4096) {
     self clearpath();
+  }
   else {
     self scragentsetgoalentity(self.var_F181);
   }

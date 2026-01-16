@@ -267,8 +267,9 @@ func_13B4E(var_0, var_1, var_2, var_3, var_4, var_5) {
           break;
       }
     }
-  } else if(isDefined(var_4))
+  } else if(isDefined(var_4)) {
     self notify(var_4);
+  }
 
   if(isDefined(var_1)) {
     if(isDefined(self)) {

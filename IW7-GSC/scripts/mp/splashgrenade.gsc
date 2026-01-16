@@ -13,7 +13,7 @@ splashgrenadeused(var_0) {
   var_1 = scripts\mp\powerloot::func_7FC2("power_splashGrenade", 6);
   for(var_2 = 0; var_2 < var_1; var_2++) {
     var_3 = scripts\mp\utility::_launchgrenade("globproj_mp", (0, 0, 0), (0, 0, 0));
-    var_3.triggerportableradarping = self;
+    var_3.owner = self;
     var_3.team = self.team;
     var_3.weapon_name = "globproj_mp";
     var_3.parentinflictor = var_0 getentitynumber();
@@ -33,7 +33,7 @@ func_85CD(var_0, var_1) {
   var_0 endon("grenadeOnExplode");
   var_0 thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
   var_0 endon("end_explode");
-  var_2 = var_0.triggerportableradarping;
+  var_2 = var_0.owner;
   var_3 = var_0.grenades;
   var_4 = var_0.power;
   var_0 waittill("explode", var_5);
@@ -74,34 +74,34 @@ setinteractwithethereal(var_0, var_1, var_2, var_3) {
   }
 
   var_9 = undefined;
-  var_0A = [];
+  var_10 = [];
   if(level.teambased) {
     var_9 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
   } else {
     var_9 = level.characters;
   }
 
-  var_0B = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
-  foreach(var_0D in var_9) {
-    if(!isDefined(var_0D) || var_0D == self || !scripts\mp\utility::isreallyalive(var_0D)) {
+  var_11 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
+  foreach(var_13 in var_9) {
+    if(!isDefined(var_13) || var_13 == self || !scripts\mp\utility::isreallyalive(var_13)) {
       continue;
     }
 
-    var_0E = distancesquared(var_0, var_0D.origin);
-    if(var_0E > 13225 || var_0E < 7225) {
+    var_14 = distancesquared(var_0, var_13.origin);
+    if(var_14 > 13225 || var_14 < 7225) {
       continue;
     }
 
-    var_0F = physics_raycast(var_0, var_0D.origin, var_0B, undefined, 0, "physicsquery_closest");
-    if(!isDefined(var_0F) || var_0F.size > 0) {
+    var_15 = physics_raycast(var_0, var_13.origin, var_11, undefined, 0, "physicsquery_closest");
+    if(!isDefined(var_15) || var_15.size > 0) {
       continue;
     }
 
-    var_0A[var_0A.size] = var_0D;
+    var_10[var_10.size] = var_13;
   }
 
-  if(var_0A.size > 0) {
-    var_0A = scripts\engine\utility::array_randomize(var_0A);
+  if(var_10.size > 0) {
+    var_10 = scripts\engine\utility::array_randomize(var_10);
   }
 
   var_11 = 0;
@@ -119,8 +119,8 @@ setinteractwithethereal(var_0, var_1, var_2, var_3) {
   for(var_18 = 0; var_18 < var_2.size; var_18++) {
     var_19 = undefined;
     var_1A = randomint(2);
-    if(var_1A && var_11 < var_0A.size) {
-      var_1B = var_0A[var_11].origin - var_0;
+    if(var_1A && var_11 < var_10.size) {
+      var_1B = var_10[var_11].origin - var_0;
       var_1B = (var_1B[0], var_1B[1], 0);
       var_11++;
     } else if(var_17 < 6) {
@@ -148,7 +148,7 @@ setinteractwithethereal(var_0, var_1, var_2, var_3) {
     var_21 show();
     var_21 unlink(1);
     var_21 = scripts\mp\utility::_launchgrenade("globproj_mp", var_20, var_1B, undefined, undefined, var_21);
-    var_21.triggerportableradarping = self;
+    var_21.owner = self;
     var_21.team = self.team;
     var_21.weapon_name = "globproj_mp";
     if(var_18 == 0) {
@@ -170,7 +170,7 @@ func_B79A(var_0, var_1) {
   var_4 = scripts\mp\powerloot::func_7FC4("power_splashGrenade", 60);
   var_5 = spawn("trigger_rotatable_radius", var_0.origin, 0, var_4, 60);
   var_5.angles = var_0.angles;
-  var_5.triggerportableradarping = self;
+  var_5.owner = self;
   var_5 enablelinkto();
   var_5 linkto(var_0);
   var_5 hide();
@@ -195,9 +195,9 @@ istrialversion(var_0) {
   self notify("grenadeCleanup");
   self endon("grenadeCleanup");
   if(isDefined(var_0)) {
-    self.triggerportableradarping scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_0, "disconnect");
+    self.owner scripts\engine\utility::waittill_any_timeout_no_endon_death(var_0, "disconnect");
   } else {
-    self.triggerportableradarping waittill("disconnect");
+    self.owner waittill("disconnect");
   }
 
   if(isDefined(self)) {
@@ -227,8 +227,8 @@ func_B24D(var_0, var_1, var_2) {
 
 func_13B91() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  var_0 = self.triggerportableradarping;
+  self.owner endon("disconnect");
+  var_0 = self.owner;
   var_1 = var_0.team;
   if(!isDefined(self.var_127C0)) {
     self.var_127C0 = [];
@@ -246,7 +246,7 @@ func_13B91() {
       continue;
     }
 
-    var_3 = scripts\engine\utility::ter_op(isDefined(var_2.triggerportableradarping), var_2.triggerportableradarping, var_2);
+    var_3 = scripts\engine\utility::ter_op(isDefined(var_2.owner), var_2.owner, var_2);
     if(!level.friendlyfire && var_3 != var_0 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_3, var_0))) {
       continue;
     }
@@ -259,7 +259,7 @@ func_13B91() {
 
 func_13B93() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   for(;;) {
     foreach(var_2, var_1 in self.var_127C0) {
       if(!isDefined(var_1)) {
@@ -326,7 +326,7 @@ func_139C0() {
       var_0.var_32A0 = 0;
       if(var_1 <= 0 && var_0.var_32A4.size > 0) {
         var_2 = var_0.var_32A4[0];
-        var_3 = var_2.triggerportableradarping;
+        var_3 = var_2.owner;
         var_4 = var_2.weapon_name;
         var_5 = func_7E11();
         self dodamage(var_5, var_2.origin, var_3, var_2, "MOD_EXPLOSIVE", var_4);

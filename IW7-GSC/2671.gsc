@@ -98,7 +98,7 @@ init_passive_random_attachment(var_0) {
     var_8 = scripts\cp\utility::getweaponcosmeticattachment(var_6);
     var_9 = scripts\cp\utility::getweaponreticle(var_6);
     var_10 = scripts\cp\utility::getweaponpaintjobid(var_6);
-    var_0.weapon_build_models[var_5] = scripts\cp\utility::mpbuildweaponname(var_6, var_2, var_7, var_9, scripts\cp\utility::get_weapon_variant_id(var_0, var_4), self getentitynumber(), self.clientid, var_10, var_8);
+    var_0.weapon_build_models[var_5] = ::scripts\cp\utility::mpbuildweaponname(var_6, var_2, var_7, var_9, scripts\cp\utility::get_weapon_variant_id(var_0, var_4), self getentitynumber(), self.clientid, var_10, var_8);
   }
 }
 
@@ -513,8 +513,9 @@ func_89B1(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_1.var_C93F >= 2) {
     var_1 notify("force_regeneration");
     var_1.var_C93F = 0;
-  } else
+  } else {
     var_1.var_C93F++;
+  }
 }
 
 func_96B9(var_0) {
@@ -1037,8 +1038,9 @@ scrambler_stun_damage(var_0, var_1) {
       var_0.allowpain = 1;
       var_0.stun_hit_time = gettime() + 1000;
       var_0.stunned = 1;
-    } else
+    } else {
       return;
+    }
   } else {
     if(var_0 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
       var_0.scripted_mode = 1;
@@ -1109,8 +1111,9 @@ trackkillsforrandomperks(var_0, var_1, var_2, var_3, var_4, var_5) {
         if(!var_1 scripts\cp\utility::has_zombie_perk(var_7)) {
           var_1 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_7, 0);
           break;
-        } else
+        } else {
           var_6 = scripts\engine\utility::array_remove(var_6, var_7);
+        }
 
         scripts\engine\utility::waitframe();
       }
@@ -1334,7 +1337,7 @@ handlemeleeconeexplode(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_3 != "MOD_MELEE") {
     return;
   }
-  if(!issubstr(var_0, "meleervn") && !var_1 func_8519(var_0)) {
+  if(!issubstr(var_0, "meleervn") && !var_1 isalternatemode(var_0)) {
     return;
   }
   var_6 = var_2 gettagorigin("j_spineupper");

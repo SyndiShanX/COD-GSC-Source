@@ -198,8 +198,9 @@ func_8FF1() {
       } else if(gettime() / 1000 - var_1 > var_0) {
         break;
       }
-    } else
+    } else {
       var_1 = -1;
+    }
 
     wait 0.05;
   }
@@ -218,8 +219,9 @@ func_8FF2() {
       } else if(gettime() / 1000 - var_1 > var_0) {
         break;
       }
-    } else
+    } else {
       var_1 = -1;
+    }
 
     wait 0.05;
   }
@@ -238,8 +240,9 @@ func_8FF3() {
       } else if(gettime() / 1000 - var_1 > var_0) {
         break;
       }
-    } else
+    } else {
       var_1 = -1;
+    }
 
     wait 0.05;
   }
@@ -656,7 +659,7 @@ func_2731() {
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(11);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(12);
   level.var_12B7D.turrets["cap_turret_cannon_large_un"][4] thread func_0BB6::func_129DF();
-  level.var_12B7D.turrets["cap_turret_cannon_large_un"] = scripts\engine\utility::array_remove(level.var_12B7D.turrets["cap_turret_cannon_large_un"], level.var_12B7D.turrets["cap_turret_cannon_large_un"][4]);
+  level.var_12B7D.turrets["cap_turret_cannon_large_un"] = ::scripts\engine\utility::array_remove(level.var_12B7D.turrets["cap_turret_cannon_large_un"], level.var_12B7D.turrets["cap_turret_cannon_large_un"][4]);
   level.var_12B67 func_0BB6::func_3984(level.var_3665);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(14);
   level.var_12B61 func_81D0();
@@ -1197,8 +1200,9 @@ func_1D75(var_0, var_1, var_2) {
     var_12 = var_12 + var_11;
     self vehicle_teleport(var_12, level.var_D127.angles);
     wait 0.05;
-  } else
+  } else {
     thread func_0BDC::func_A373(self.script_noteworthy, 500);
+  }
 
   thread func_2CB6();
   wait 1.0;
@@ -1301,8 +1305,9 @@ func_F031(var_0, var_1, var_2, var_3) {
   if(scripts\engine\utility::is_true(var_1)) {
     thread func_0BB6::func_39F0();
     thread func_12A43();
-  } else
+  } else {
     self.var_12FBA = 1;
+  }
 
   if(!isDefined(var_2)) {
     return;
@@ -1495,8 +1500,9 @@ func_5880() {
     } else if(level.var_A243 - level.var_A242 == 2 && scripts\engine\utility::cointoss()) {
       var_2 = "phspace_slt_lastoneraider";
       wait(randomfloatrange(0.5, 0.8));
-    } else if(level.var_A243 - level.var_A242 == 1 && scripts\engine\utility::cointoss())
+    } else if(level.var_A243 - level.var_A242 == 1 && scripts\engine\utility::cointoss()) {
       wait(randomfloatrange(0.5, 0.8));
+    }
 
     level.var_EA99 scripts\sp\utility::func_10346(var_2);
   }
@@ -1517,7 +1523,7 @@ func_CB28(var_0, var_1) {
     }
   }
 
-  level.var_134F6[var_0] = scripts\engine\utility::array_randomize(level.var_134F6[var_0]);
+  level.var_134F6[var_0] = ::scripts\engine\utility::array_randomize(level.var_134F6[var_0]);
 
   foreach(var_4, var_3 in level.var_134F6[var_0]) {
     if(var_3[1] == 0) {
@@ -2110,8 +2116,9 @@ func_720F(var_0, var_1) {
     if(scripts\engine\utility::cointoss()) {
       scripts\sp\utility::func_10350("phspace_plr_phalanxisdown");
       scripts\sp\utility::func_10350("phspace_plr_allshipsopenfire");
-    } else
+    } else {
       scripts\sp\utility::func_10350("phspace_vcp_vanguardengagin");
+    }
   }
 
   var_2 = 0;

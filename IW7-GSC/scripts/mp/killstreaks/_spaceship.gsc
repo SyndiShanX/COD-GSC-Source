@@ -99,7 +99,7 @@ func_105B5(var_0, var_1, var_2) {
   }
 
   var_1 lib_0BD3::func_D31A(var_0, undefined, var_2);
-  var_0.triggerportableradarping = var_1;
+  var_0.owner = var_1;
   func_10585(var_0, var_1);
   func_105DE(var_0, 1500, 1500 - var_0.var_E1);
   thread func_105A5(var_0, var_1);
@@ -112,7 +112,7 @@ func_105B6(var_0, var_1) {
   var_1 lib_0BD3::func_D05B();
   var_1 getrigindexfromarchetyperef();
   func_105CD(var_0);
-  var_0.triggerportableradarping = undefined;
+  var_0.owner = undefined;
   var_1.var_10574 = undefined;
   var_1.var_105E8 = gettime();
   var_1.var_A9F2 = var_0;
@@ -159,7 +159,7 @@ func_105A6(var_0) {
   var_0 endon("death");
   var_0 endon("playerReserved");
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(20, "spaceshipTimeout");
+  var_0 scripts\engine\utility::waittill_any_timeout(20, "spaceshipTimeout");
   while(gettime() - var_0.lastdamagetime < 5000) {
     wait(0.25);
   }
@@ -208,10 +208,10 @@ func_105A3(var_0, var_1) {
   func_10575(var_0, var_1);
   var_0.outlineids = [];
   if(level.teambased) {
-    var_0.outlineids[0] = scripts\mp\utility::outlineenableforteam(var_0, "cyan", var_1.team, 1, 0, "equipment");
-    var_0.outlineids[1] = scripts\mp\utility::outlineenableforteam(var_0, "orange", scripts\mp\utility::getotherteam(var_1.team), 1, 0, "equipment");
+    var_0.outlineids[0] = ::scripts\mp\utility::outlineenableforteam(var_0, "cyan", var_1.team, 1, 0, "equipment");
+    var_0.outlineids[1] = ::scripts\mp\utility::outlineenableforteam(var_0, "orange", scripts\mp\utility::getotherteam(var_1.team), 1, 0, "equipment");
   } else {
-    var_0.outlineids[0] = scripts\mp\utility::func_C793(var_0, "orange", 1, 0, "equipment");
+    var_0.outlineids[0] = ::scripts\mp\utility::func_C793(var_0, "orange", 1, 0, "equipment");
   }
 
   var_0 hudoutlinedisableforclient(var_1);
@@ -284,18 +284,18 @@ func_10575(var_0, var_1) {
       continue;
     }
 
-    if(!isDefined(var_5.triggerportableradarping)) {
+    if(!isDefined(var_5.owner)) {
       continue;
     }
 
-    if(!level.teambased || var_1.team != var_5.triggerportableradarping.team) {
+    if(!level.teambased || var_1.team != var_5.owner.team) {
       thread func_105DF(var_5, var_3, undefined, var_1);
-      thread func_105DF(var_0, var_3, undefined, var_5.triggerportableradarping);
+      thread func_105DF(var_0, var_3, undefined, var_5.owner);
       continue;
     }
 
     thread func_105DF(var_5, var_2, undefined, var_1);
-    thread func_105DF(var_0, var_2, undefined, var_5.triggerportableradarping);
+    thread func_105DF(var_0, var_2, undefined, var_5.owner);
   }
 }
 
@@ -326,8 +326,8 @@ func_105A1(var_0) {
   level endon("game_ended");
   var_1 = var_0.var_10483;
   var_2 = var_0.team;
-  var_3 = var_0.triggerportableradarping;
-  var_0 scripts\engine\utility::waittill_any_3("death", "spaceship_crashing");
+  var_3 = var_0.owner;
+  var_0 scripts\engine\utility::waittill_any("death", "spaceship_crashing");
   func_1057E(var_0);
   func_1057C(var_0);
   func_1057B();
@@ -352,13 +352,13 @@ func_105A9(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5.lastdamagetime = gettime();
-  if(isDefined(var_5.triggerportableradarping)) {
+  if(isDefined(var_5.owner)) {
     var_6 = var_5.maxhealth - var_5.var_E1;
     var_7 = var_6 - var_3;
     func_105DE(var_5, var_6, var_7);
     thread func_10587(var_5);
-    if(isDefined(var_0.triggerportableradarping)) {
-      var_0 = var_0.triggerportableradarping;
+    if(isDefined(var_0.owner)) {
+      var_0 = var_0.owner;
     }
   }
 
@@ -390,21 +390,21 @@ func_1059F(var_0, var_1) {
   var_5 = 200;
   var_6 = 440;
   for(;;) {
-    var_0 waittill("spaceship_collision", var_7, var_8, var_9, var_0A);
-    var_0B = var_1 getnormalizedmovement();
-    var_0C = var_0B[0] + 1 / 2;
-    var_0D = var_5 + var_6 - var_5 * var_0C;
-    var_0E = var_8 - var_4 / var_0D - var_4;
-    if(var_0E > 1) {
-      var_0E = 1;
-    } else if(var_0E < 0) {
-      var_0E = 0;
+    var_0 waittill("spaceship_collision", var_7, var_8, var_9, var_10);
+    var_11 = var_1 getnormalizedmovement();
+    var_12 = var_11[0] + 1 / 2;
+    var_13 = var_5 + var_6 - var_5 * var_12;
+    var_14 = var_8 - var_4 / var_13 - var_4;
+    if(var_14 > 1) {
+      var_14 = 1;
+    } else if(var_14 < 0) {
+      var_14 = 0;
     }
 
-    var_0F = var_0E * var_7;
-    if(var_0F > 0) {
-      var_10 = var_2 + var_3 - var_2 * var_0F;
-      var_0 dodamage(var_10, var_0A, var_1, var_1, "MOD_IMPACT");
+    var_15 = var_14 * var_7;
+    if(var_15 > 0) {
+      var_10 = var_2 + var_3 - var_2 * var_15;
+      var_0 dodamage(var_10, var_10, var_1, var_1, "MOD_IMPACT");
     }
   }
 }
@@ -432,7 +432,7 @@ func_10587(var_0) {
 }
 
 func_105DE(var_0, var_1, var_2) {
-  if(!isDefined(var_0.triggerportableradarping)) {
+  if(!isDefined(var_0.owner)) {
     return;
   }
 
@@ -440,7 +440,7 @@ func_105DE(var_0, var_1, var_2) {
     if(var_2 < 495 && var_1 >= 495) {
       func_105CD(var_0);
       var_0.var_FE12 = scripts\engine\utility::getfx("cockpit_fire");
-      playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.triggerportableradarping);
+      playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.owner);
       var_3 = [];
       var_3["tag_thrust_rear1"] = "spaceship_dmg_trail";
       func_105DF(var_0, var_3);
@@ -449,11 +449,11 @@ func_105DE(var_0, var_1, var_2) {
 
     if(var_2 < 990.0001 && var_1 >= 990.0001) {
       var_0.var_FE12 = scripts\engine\utility::getfx("cockpit_smoke");
-      playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.triggerportableradarping);
+      playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.owner);
       return;
     }
 
-    playfxontagforclients(scripts\engine\utility::getfx("cockpit_sparks"), var_0, "j_stickleft", var_0.triggerportableradarping);
+    playfxontagforclients(scripts\engine\utility::getfx("cockpit_sparks"), var_0, "j_stickleft", var_0.owner);
     return;
   }
 
@@ -465,7 +465,7 @@ func_105DE(var_0, var_1, var_2) {
   if(var_2 >= 495 && var_1 < 495) {
     func_105CD(var_0);
     var_0.var_FE12 = scripts\engine\utility::getfx("cockpit_smoke");
-    playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.triggerportableradarping);
+    playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.owner);
     var_3 = [];
     var_3["tag_thrust_rear1"] = "spaceship_dmg_trail";
     func_105DF(var_0, [], var_3);
@@ -482,8 +482,8 @@ func_105CD(var_0) {
 
 func_105AA(var_0, var_1, var_2, var_3) {
   var_4 = self;
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0 = var_0.triggerportableradarping;
+  if(isDefined(var_0.owner)) {
+    var_0 = var_0.owner;
   }
 
   if(isDefined(var_4.var_FE12)) {
@@ -492,8 +492,8 @@ func_105AA(var_0, var_1, var_2, var_3) {
 
   var_4 playSound(level.var_105C8["explode"]);
   playFX(scripts\engine\utility::getfx("spaceship_death"), var_4.origin, anglesToForward(var_4.angles), anglestoup(var_4.angles));
-  if(isDefined(var_4.triggerportableradarping)) {
-    var_4.triggerportableradarping dodamage(var_4.health + 1, var_4.triggerportableradarping.origin, var_0, undefined, var_2);
+  if(isDefined(var_4.owner)) {
+    var_4.owner dodamage(var_4.health + 1, var_4.owner.origin, var_0, undefined, var_2);
   }
 
   var_4 notify("spaceship_crashing");
@@ -527,7 +527,7 @@ func_105A4(var_0) {
   }
 }
 
-func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(var_4 != "MOD_IMPACT") {
     if(!isDefined(var_0) || !isDefined(var_0.var_105E6)) {
       return var_2;
@@ -539,11 +539,11 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   if(var_5 == "spaceship_strike_mp") {
-    var_0C = var_0;
-    var_0D = distance(var_0C.origin, var_0C.var_105E6);
-    if(var_0D < 10000) {
+    var_12 = var_0;
+    var_13 = distance(var_12.origin, var_12.var_105E6);
+    if(var_13 < 10000) {
       var_2 = var_2 * 1;
-    } else if(var_0D < 30000) {
+    } else if(var_13 < 30000) {
       var_2 = var_2 * 0.5;
     } else {
       var_2 = var_2 * 0.25;
@@ -551,7 +551,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   var_2 = int(max(var_2, 1));
-  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 func_105E2() {
@@ -609,7 +609,7 @@ func_105C4(var_0) {
 
     var_6 = 0;
     foreach(var_8 in level.var_1676) {
-      if(isDefined(var_8) && isDefined(var_8.triggerportableradarping) && isDefined(var_8.triggerportableradarping.team) && var_8.triggerportableradarping.team != var_0) {
+      if(isDefined(var_8) && isDefined(var_8.owner) && isDefined(var_8.owner.team) && var_8.owner.team != var_0) {
         var_9 = distancesquared(var_8.origin, var_5.origin);
         if(!isDefined(var_6) || var_9 > var_6) {
           var_6 = var_9;
@@ -721,7 +721,7 @@ func_105E1(var_0, var_1) {
     var_1 notifyonplayercommand("exitJackal", "+actionslot 2");
   }
 
-  while(isDefined(var_0.triggerportableradarping)) {
+  while(isDefined(var_0.owner)) {
     var_1 waittill("exitJackal");
     if(func_10579(var_0, var_1)) {
       thread func_10581(var_0, var_1);
@@ -878,7 +878,7 @@ func_10593(var_0) {
     return undefined;
   }
 
-  if(isDefined(var_5.triggerportableradarping)) {
+  if(isDefined(var_5.owner)) {
     return undefined;
   }
 
@@ -912,7 +912,7 @@ func_1058A(var_0) {
 func_10591(var_0) {
   if(isDefined(level.var_A841)) {
     foreach(var_2 in level.var_A841) {
-      if((!isDefined(var_2.team) || var_2.team == var_0.triggerportableradarping.team) && var_0 istouching(var_2)) {
+      if((!isDefined(var_2.team) || var_2.team == var_0.owner.team) && var_0 istouching(var_2)) {
         return 1;
       }
     }
@@ -924,7 +924,7 @@ func_10591(var_0) {
 }
 
 func_105AC(var_0, var_1) {
-  var_0.triggerportableradarping forceusehinton(&"MP_JACKAL_EXIT");
+  var_0.owner forceusehinton(&"MP_JACKAL_EXIT");
 }
 
 func_105B2(var_0, var_1, var_2) {
@@ -932,7 +932,7 @@ func_105B2(var_0, var_1, var_2) {
     var_3 = var_0 getentitynumber();
     var_1.var_A41D[var_3] = undefined;
     var_1.var_A41E[var_3] = undefined;
-    var_4 = var_0.triggerportableradarping;
+    var_4 = var_0.owner;
     if(func_10579(var_0, var_4)) {
       var_5 = func_10596(var_1, var_4);
       thread func_10581(var_0, var_4, var_5);
@@ -941,8 +941,8 @@ func_105B2(var_0, var_1, var_2) {
 }
 
 func_105AF(var_0, var_1) {
-  if(isDefined(var_0.triggerportableradarping)) {
-    var_0.triggerportableradarping getrigindexfromarchetyperef();
+  if(isDefined(var_0.owner)) {
+    var_0.owner getrigindexfromarchetyperef();
   }
 }
 
@@ -1109,7 +1109,7 @@ func_105B7(var_0, var_1, var_2, var_3) {
 func_1057D(var_0) {
   var_1 = var_0.var_A9F2;
   var_0.var_A9F2 = undefined;
-  if(isDefined(var_1) && !isDefined(var_1.triggerportableradarping)) {
+  if(isDefined(var_1) && !isDefined(var_1.owner)) {
     var_1 notify("spaceshipTimeout");
   }
 }
@@ -1130,13 +1130,13 @@ func_1058E(var_0) {
 }
 
 func_105AD(var_0, var_1) {
-  if(isDefined(var_0.triggerportableradarping)) {
+  if(isDefined(var_0.owner)) {
     var_0 func_8476(var_1.var_B4C9);
   }
 }
 
 func_105B0(var_0, var_1) {
-  if(isDefined(var_0.triggerportableradarping)) {
+  if(isDefined(var_0.owner)) {
     var_0 func_8476(1);
   }
 }
@@ -1238,7 +1238,7 @@ func_10594(var_0, var_1) {
     return 0;
   }
 
-  if(!isDefined(var_0.triggerportableradarping)) {
+  if(!isDefined(var_0.owner)) {
     return 0;
   }
 
@@ -1252,7 +1252,7 @@ func_10594(var_0, var_1) {
 func_105B9(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnfxforclient(scripts\engine\utility::getfx(var_2), var_1 getEye() + var_3, var_1);
   triggerfx(var_5);
-  var_1 scripts\engine\utility::waittill_any_timeout_1(var_4, "death", "disconnect");
+  var_1 scripts\engine\utility::waittill_any_timeout(var_4, "death", "disconnect");
   var_5 delete();
 }
 

@@ -39,21 +39,21 @@ give_attacker_kill_rewards(var_0, var_1) {
 
     if(!isDefined(self.hybrid_assist)) {
       var_9 = 0.1;
-      var_0A = self.maxhealth * var_9;
+      var_10 = self.maxhealth * var_9;
       var_7 = getassistbonusamount();
       if(isDefined(level.cash_scalar)) {
         var_7 = var_7 * level.cash_scalar;
       }
 
-      foreach(var_0C in self.attacker_damage) {
-        if(var_0C.player == var_4 || isDefined(var_4.triggerportableradarping) && var_0C.player == var_4.triggerportableradarping) {
+      foreach(var_12 in self.attacker_damage) {
+        if(var_12.player == var_4 || isDefined(var_4.owner) && var_12.player == var_4.owner) {
           continue;
         }
 
-        if(var_0C.var_DA >= var_0A) {
-          if(isDefined(var_0C.player) && var_0C.player != var_4) {
-            var_0C.player scripts\cp\cp_persistence::eog_player_update_stat("assists", 1);
-            givekillreward(var_0C.player, var_7);
+        if(var_12.var_DA >= var_10) {
+          if(isDefined(var_12.player) && var_12.player != var_4) {
+            var_12.player scripts\cp\cp_persistence::eog_player_update_stat("assists", 1);
+            givekillreward(var_12.player, var_7);
           }
         }
       }
@@ -64,22 +64,22 @@ give_attacker_kill_rewards(var_0, var_1) {
     return;
   }
 
-  if(!isplayer(var_4) && !isDefined(var_4.triggerportableradarping) || !isplayer(var_4.triggerportableradarping)) {
+  if(!isplayer(var_4) && !isDefined(var_4.owner) || !isplayer(var_4.owner)) {
     return;
   }
 
-  var_0E = 0;
-  if(isDefined(var_4.triggerportableradarping)) {
-    var_4 = var_4.triggerportableradarping;
-    var_0E = 1;
+  var_14 = 0;
+  if(isDefined(var_4.owner)) {
+    var_4 = var_4.owner;
+    var_14 = 1;
   }
 
   var_2 = get_reward_point_for_kill();
   if(isDefined(var_4) && var_4 == "soft" && !var_5) {
-    var_0E = int(var_0E * 1.5);
+    var_14 = int(var_14 * 1.5);
   }
 
-  givekillreward(var_3, var_0E, "large", var_4);
+  givekillreward(var_3, var_14, "large", var_4);
 }
 
 getassistbonusamount() {

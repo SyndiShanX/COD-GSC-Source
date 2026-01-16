@@ -19,7 +19,7 @@ func_FAB0() {
 
   level.agent_definition["crab_brute"]["setup_func"] = ::setupagent;
   level.agent_definition["crab_brute"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["crab_brute"]["on_damaged"] = scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
+  level.agent_funcs["crab_brute"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
   }
@@ -31,7 +31,7 @@ func_FAB0() {
     level.damage_feedback_overrride = [];
   }
 
-  level.damage_feedback_overrride["crab_brute"] = scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
+  level.damage_feedback_overrride["crab_brute"] = ::scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
   if(!isDefined(level.special_zombie_damage_func)) {
     level.special_zombie_damage_func = [];
   }
@@ -145,8 +145,8 @@ setupagent() {
   self.var_B601 = 45;
   self.var_504E = 55;
   self.var_129AF = 55;
-  self.var_368 = -60;
-  self.isbot = 60;
+  self.upaimlimit = -60;
+  self.downaimlimit = 60;
   self setavoidanceradius(45);
   self.ground_pound_damage = 50;
   self.footstepdetectdist = 2500;
@@ -190,7 +190,7 @@ lookatenemy() {
   self orientmode("face angle abs", self.angles);
 }
 
-crab_brute_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+crab_brute_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(scripts\asm\asm::asm_isinstate("burrow_loop")) {
     return 0;
   }
@@ -201,11 +201,11 @@ crab_brute_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
   self.lastdamagetime = gettime();
   if(isDefined(var_7)) {
-    var_0C = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
-    var_0D = anglesToForward(self.angles) * -1;
-    var_0E = vectordot(var_0D, var_7);
-    if(var_0E > var_0C.reduce_damage_dot) {
-      var_2 = var_2 * var_0C.reduce_damage_pct;
+    var_12 = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
+    var_13 = anglesToForward(self.angles) * -1;
+    var_14 = vectordot(var_13, var_7);
+    if(var_14 > var_12.reduce_damage_dot) {
+      var_2 = var_2 * var_12.reduce_damage_pct;
       self.armor_hit = 1;
     }
   }
@@ -213,23 +213,23 @@ crab_brute_special_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   return var_2;
 }
 
-func_C4D1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+func_C4D1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(self.agent_type) && self.agent_type == "crab_brute") {
     var_1 scripts\cp\cp_merits::processmerit("mt_dlc3_crab_brute");
   }
 
-  var_0C = scripts\engine\utility::random(["ammo_max", "instakill_30", "cash_2", "instakill_30", "cash_2", "instakill_30", "cash_2"]);
-  if(isDefined(var_0C) && !isDefined(self.var_72AC)) {
+  var_12 = scripts\engine\utility::random(["ammo_max", "instakill_30", "cash_2", "instakill_30", "cash_2", "instakill_30", "cash_2"]);
+  if(isDefined(var_12) && !isDefined(self.var_72AC)) {
     if(!isDefined(level.brute_loot_check[self.spawn_round_num])) {
       level.brute_loot_check[self.spawn_round_num] = 1;
-      level thread scripts\cp\loot::drop_loot(self.origin, var_1, var_0C);
+      level thread scripts\cp\loot::drop_loot(self.origin, var_1, var_12);
     }
   }
 
-  var_0D = 400;
+  var_13 = 400;
   level thread boss_death_vo();
-  foreach(var_0F in level.players) {
-    var_0F scripts\cp\cp_persistence::give_player_currency(var_0D);
+  foreach(var_15 in level.players) {
+    var_15 scripts\cp\cp_persistence::give_player_currency(var_13);
   }
 }
 
@@ -252,7 +252,7 @@ shouldignoreenemy(var_0) {
     return 1;
   }
 
-  if(var_0.ignoreme || isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping.ignoreme) {
+  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme) {
     return 1;
   }
 

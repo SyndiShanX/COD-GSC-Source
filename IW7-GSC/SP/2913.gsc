@@ -194,31 +194,31 @@ func_36DC(var_0, var_1, var_2, var_3) {
     var_9 = (var_9[0] * -1.5, var_9[1] * -1.5, var_9[2]);
   }
 
-  if((var_1 && !level.player getweaponrankinfominxp()) || var_3) {
+  if((var_1 && !level.player playerads()) || var_3) {
     var_5 = var_1;
-    var_0A = 0.75;
-    var_0B = var_0A / 2.5;
+    var_10 = 0.75;
+    var_11 = var_10 / 2.5;
   } else {
-    var_0B = var_7 * 0.5;
-    var_0B = 1 - clamp(var_0B, 0, 0.7);
-    var_0A = var_0B * 1.5;
+    var_11 = var_7 * 0.5;
+    var_11 = 1 - clamp(var_11, 0, 0.7);
+    var_10 = var_11 * 1.5;
     if(func_7B8E() == "backwards") {
-      var_0B = var_0B * 6;
-      var_0A = var_0A * 3;
+      var_11 = var_11 * 6;
+      var_10 = var_10 * 3;
     }
   }
 
   var_9 = var_9 * var_5;
-  if(level.player getweaponrankinfominxp()) {
+  if(level.player playerads()) {
     var_9 = var_9 * 0.65;
-    var_0A = var_0A * 1.35;
+    var_10 = var_10 * 1.35;
   }
 
   if(var_2) {
-    var_0A = var_0A * 0.5;
+    var_10 = var_10 * 0.5;
   }
 
-  func_11182(var_9, var_0B, var_0A, var_5);
+  func_11182(var_9, var_11, var_10, var_5);
 }
 
 func_11182(var_0, var_1, var_2, var_3) {

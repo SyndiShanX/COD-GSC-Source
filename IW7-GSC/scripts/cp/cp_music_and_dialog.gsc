@@ -430,7 +430,7 @@ add_to_ambient_sound_queue(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7.next_play_time = gettime() + var_6 * 1000;
   }
 
-  level.ambient_sound_queue = scripts\engine\utility::array_add_safe(level.ambient_sound_queue, var_7);
+  level.ambient_sound_queue = scripts\engine\utility::add_to_array(level.ambient_sound_queue, var_7);
 }
 
 ambient_sound_queue() {

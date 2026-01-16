@@ -99,19 +99,19 @@ func_89EF() {
       continue;
     }
 
-    if(!isDefined(self.isnodeoccupied) || !isalive(self.isnodeoccupied)) {
-      scripts\engine\utility::waittill_any_3("enemy", "death");
+    if(!isDefined(self.enemy) || !isalive(self.enemy)) {
+      scripts\engine\utility::waittill_any("enemy", "death");
     }
 
     if(!isalive(self)) {
       continue;
     }
 
-    if(!isDefined(self.isnodeoccupied)) {
+    if(!isDefined(self.enemy)) {
       continue;
     }
 
-    var_1 = distance(self.isnodeoccupied.origin, self.origin);
+    var_1 = distance(self.enemy.origin, self.origin);
     if(var_1 < 800 && scripts\mp\bots\_bots_powers::func_8BEE()) {
       if(var_1 < 550) {
         continue;
@@ -135,8 +135,8 @@ func_89EE() {
       continue;
     }
 
-    if(!isDefined(self.isnodeoccupied) || !isalive(self.isnodeoccupied)) {
-      scripts\engine\utility::waittill_any_3("enemy", "death");
+    if(!isDefined(self.enemy) || !isalive(self.enemy)) {
+      scripts\engine\utility::waittill_any("enemy", "death");
     }
 
     if(!isalive(self)) {
@@ -144,7 +144,7 @@ func_89EE() {
     }
 
     if(scripts\mp\bots\_bots_powers::func_8BEE()) {
-      var_0 = distance(self.isnodeoccupied.origin, self.origin);
+      var_0 = distance(self.enemy.origin, self.origin);
       if(var_0 < 600) {
         continue;
       }

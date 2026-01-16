@@ -49,8 +49,9 @@ exceededmaxremoteuavs(var_0) {
     } else {
       return 0;
     }
-  } else if(isDefined(level.remote_uav[var_0]))
+  } else if(isDefined(level.remote_uav[var_0])) {
     return 1;
+  }
   else {
     return 0;
   }
@@ -84,8 +85,9 @@ tryuseremoteuav(var_0, var_1) {
   if(var_3) {
     scripts\mp\matchdata::logkillstreakevent(var_1, self.origin);
     thread scripts\mp\utility\game::teamplayercardsplash("used_remote_uav", self);
-  } else
+  } else {
     scripts\mp\utility::decrementfauxvehiclecount();
+  }
 
   self.iscarrying = 0;
   return var_3;
@@ -300,8 +302,9 @@ func_12E70(var_0) {
         if(self attackbuttonpressed()) {
           self notify("place_carryRemoteUAV");
         }
-      } else if(self.team != "spectator")
+      } else if(self.team != "spectator") {
         self forceusehinton(&"KILLSTREAKS_REMOTE_UAV_CANNOT_PLACE");
+      }
     }
 
     var_1 = var_0.canbeplaced;
@@ -567,8 +570,9 @@ func_DFAA(var_0) {
       }
 
       var_8 = func_DFAB(var_0, var_9, var_5);
-    } else if(level.teambased)
+    } else if(level.teambased) {
       var_8 = func_DFAB(var_0, level.uavmodels[level.otherteam[self.team]], var_5);
+    }
     else {
       var_8 = func_DFAB(var_0, level.uavmodels, var_5);
     }
@@ -618,8 +622,9 @@ func_DFAB(var_0, var_1, var_2) {
         continue;
       }
       var_6 = var_5.guid;
-    } else
+    } else {
       var_6 = var_5.birthtime;
+    }
 
     if(isDefined(var_5.sentrytype) || isDefined(var_5.var_12A9A)) {
       var_7 = (0, 0, 32);
@@ -748,8 +753,9 @@ remoteuav_markplayer(var_0) {
     var_0 playlocalsound("player_hit_while_ads_hurt");
     var_0 thread scripts\mp\flashgrenades::func_20CA(2.0, 1.0);
     var_0 thread scripts\mp\rank::scoreeventpopup("marked_by_remote_uav");
-  } else if(isDefined(var_0.uavtype))
+  } else if(isDefined(var_0.uavtype)) {
     var_0.var_2B0C = var_0.birthtime;
+  }
   else if(isDefined(var_0.owner) && isalive(var_0.owner)) {
     var_0.owner thread scripts\mp\rank::scoreeventpopup("turret_marked_by_remote_uav");
   }
@@ -947,8 +953,9 @@ remoteuav_in_range() {
     if(!self istouching(self.rangetrigger) && !self.inheliproximity) {
       return 1;
     }
-  } else if(distance2d(self.origin, level.mapcenter) < self.maxdistance && self.origin[2] < self.maxheight && !self.inheliproximity)
+  } else if(distance2d(self.origin, level.mapcenter) < self.maxdistance && self.origin[2] < self.maxheight && !self.inheliproximity) {
     return 1;
+  }
 
   return 0;
 }
@@ -1147,8 +1154,9 @@ watchstingerproximity(var_0) {
         self hide();
         wait 0.05;
         self delete();
-      } else
+      } else {
         var_1 = var_5;
+      }
     }
 
     wait 0.05;
@@ -1208,8 +1216,9 @@ watchsamproximity(var_0, var_1) {
 
           var_3 hide();
           var_3.markfordetete = 1;
-        } else
+        } else {
           var_3.lastvectotarget = var_12;
+        }
       }
     }
 

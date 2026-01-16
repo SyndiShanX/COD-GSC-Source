@@ -20,7 +20,7 @@ func_7AA4() {
   var_0["trigger_multiple_compass"] = ::func_12769;
   var_0["trigger_multiple_fx_volume"] = ::func_1276E;
   var_0["trigger_multiple_kleenex"] = ::func_12770;
-  var_0["trigger_multiple_light_sunshadow"] = scripts\sp\lights::func_11203;
+  var_0["trigger_multiple_light_sunshadow"] = ::scripts\sp\lights::func_11203;
   var_0["trigger_multiple_jackal_boundary_autoturn"] = ::func_12759;
   var_0["trigger_multiple_jackal_boundary_warning"] = ::func_1275B;
   var_0["trigger_multiple_jackal_boundary_push"] = ::func_1275A;
@@ -29,7 +29,7 @@ func_7AA4() {
   var_0["trigger_multiple_arbitrary_up"] = ::func_12723;
   var_0["trigger_multiple_spacejump"] = ::func_12794;
   if(!scripts\sp\starts::func_9C4B()) {
-    var_0["trigger_multiple_autosave"] = scripts\sp\autosave::func_12724;
+    var_0["trigger_multiple_autosave"] = ::scripts\sp\autosave::func_12724;
     var_0["trigger_multiple_spawn"] = lib_0B77::func_12797;
     var_0["trigger_multiple_spawn_reinforcement"] = lib_0B77::func_12798;
   }
@@ -45,14 +45,14 @@ func_7AA4() {
   var_0["trigger_multiple_friendly_stop_respawn"] = ::trigger_friendly_stop_respawn;
   var_0["trigger_multiple_physics"] = ::func_1277E;
   var_0["trigger_multiple_fx_watersheeting"] = ::func_1276F;
-  var_0["trigger_multiple_fakeactor_move"] = scripts\sp\fakeactor::func_12735;
-  var_0["trigger_multiple_fakeactor_node_disable"] = scripts\sp\fakeactor::func_12736;
-  var_0["trigger_multiple_fakeactor_node_enable"] = scripts\sp\fakeactor::func_12738;
-  var_0["trigger_multiple_fakeactor_node_disablegroup"] = scripts\sp\fakeactor::func_12737;
-  var_0["trigger_multiple_fakeactor_node_enablegroup"] = scripts\sp\fakeactor::func_12739;
-  var_0["trigger_multiple_fakeactor_node_passthrough"] = scripts\sp\fakeactor::func_1273B;
-  var_0["trigger_multiple_fakeactor_node_lock"] = scripts\sp\fakeactor::func_1273A;
-  var_0["trigger_multiple_geo_mover"] = scripts\sp\geo_mover::func_12764;
+  var_0["trigger_multiple_fakeactor_move"] = ::scripts\sp\fakeactor::func_12735;
+  var_0["trigger_multiple_fakeactor_node_disable"] = ::scripts\sp\fakeactor::func_12736;
+  var_0["trigger_multiple_fakeactor_node_enable"] = ::scripts\sp\fakeactor::func_12738;
+  var_0["trigger_multiple_fakeactor_node_disablegroup"] = ::scripts\sp\fakeactor::func_12737;
+  var_0["trigger_multiple_fakeactor_node_enablegroup"] = ::scripts\sp\fakeactor::func_12739;
+  var_0["trigger_multiple_fakeactor_node_passthrough"] = ::scripts\sp\fakeactor::func_1273B;
+  var_0["trigger_multiple_fakeactor_node_lock"] = ::scripts\sp\fakeactor::func_1273A;
+  var_0["trigger_multiple_geo_mover"] = ::scripts\sp\geo_mover::func_12764;
   var_0["trigger_multiple_transient"] = ::func_12773;
   var_0["trigger_multiple_fire"] = ::func_1273C;
   var_0["trigger_radius_fire"] = ::func_1273C;
@@ -81,16 +81,16 @@ func_7AA5() {
     var_0["camper_spawner"] = lib_0B77::camper_trigger_think;
     var_0["flood_spawner"] = lib_0B77::func_6F5D;
     var_0["trigger_spawner"] = lib_0B77::func_12797;
-    var_0["trigger_autosave"] = scripts\sp\autosave::func_12724;
+    var_0["trigger_autosave"] = ::scripts\sp\autosave::func_12724;
     var_0["trigger_spawngroup"] = ::func_1279A;
     var_0["trigger_vehicle_spline_spawn"] = ::func_127AC;
     var_0["trigger_vehicle_spawn"] = lib_0B77::func_12797;
     var_0["random_spawn"] = lib_0B77::func_DC9B;
   }
 
-  var_0["autosave_now"] = scripts\sp\autosave::func_2671;
-  var_0["trigger_autosave_tactical"] = scripts\sp\autosave::func_12727;
-  var_0["trigger_autosave_stealth"] = scripts\sp\autosave::func_12726;
+  var_0["autosave_now"] = ::scripts\sp\autosave::func_2671;
+  var_0["trigger_autosave_tactical"] = ::scripts\sp\autosave::func_12727;
+  var_0["trigger_autosave_stealth"] = ::scripts\sp\autosave::func_12726;
   var_0["trigger_unlock"] = ::func_127A8;
   var_0["trigger_lookat"] = ::func_12760;
   var_0["trigger_looking"] = ::func_12762;
@@ -116,7 +116,7 @@ func_7AA5() {
   var_0["trigger_slide"] = ::func_12792;
   var_0["trigger_dooropen"] = ::func_12734;
   var_0["stealth_shadow"] = ::func_1279C;
-  var_0["geo_mover"] = scripts\sp\geo_mover::func_12764;
+  var_0["geo_mover"] = ::scripts\sp\geo_mover::func_12764;
   var_0["no_crouch_or_prone"] = ::func_12775;
   var_0["no_prone"] = ::func_12776;
   return var_0;
@@ -141,73 +141,73 @@ func_9726() {
   var_9 = getEntArray("trigger_once", "classname");
   var_4 = scripts\sp\utility::func_22A2(var_4, var_9);
   if(!scripts\sp\starts::func_9C4B()) {
-    for(var_0A = 0; var_0A < var_4.size; var_0A++) {
-      if(var_4[var_0A].spawnimpulsefield & 32) {
-        thread lib_0B77::func_12797(var_4[var_0A]);
+    for(var_10 = 0; var_10 < var_4.size; var_10++) {
+      if(var_4[var_10].spawnimpulsefield & 32) {
+        thread lib_0B77::func_12797(var_4[var_10]);
       }
     }
   }
 
-  var_0B = ["trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_disk", "trigger_damage"];
-  foreach(var_0D in var_0B) {
-    var_4 = getEntArray(var_0D, "code_classname");
-    foreach(var_0F in var_4) {
-      if(isDefined(var_0F.script_flag_true)) {
-        level thread func_1278F(var_0F);
+  var_11 = ["trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_disk", "trigger_damage"];
+  foreach(var_13 in var_11) {
+    var_4 = getEntArray(var_13, "code_classname");
+    foreach(var_15 in var_4) {
+      if(isDefined(var_15.script_flag_true)) {
+        level thread func_1278F(var_15);
       }
 
-      if(isDefined(var_0F.script_flag_false)) {
-        level thread func_1278E(var_0F);
+      if(isDefined(var_15.script_flag_false)) {
+        level thread func_1278E(var_15);
       }
 
-      if(isDefined(var_0F.var_ED0E) || isDefined(var_0F.var_ED0D)) {
-        level thread scripts\sp\autosave::func_268B(var_0F);
+      if(isDefined(var_15.var_ED0E) || isDefined(var_15.var_ED0D)) {
+        level thread scripts\sp\autosave::func_268B(var_15);
       }
 
-      if(isDefined(var_0F.var_EE17)) {
-        level thread scripts\sp\mgturret::func_B6BE(var_0F);
+      if(isDefined(var_15.var_EE17)) {
+        level thread scripts\sp\mgturret::func_B6BE(var_15);
       }
 
-      if(isDefined(var_0F.var_EDF7)) {
-        level thread lib_0B77::func_A617(var_0F);
+      if(isDefined(var_15.var_EDF7)) {
+        level thread lib_0B77::func_A617(var_15);
       }
 
-      if(isDefined(var_0F.var_EDF5)) {
-        level thread scripts\sp\vehicle_code::func_A629(var_0F);
+      if(isDefined(var_15.var_EDF5)) {
+        level thread scripts\sp\vehicle_code::func_A629(var_15);
       }
 
-      if(isDefined(var_0F.script_emptyspawner)) {
-        level thread lib_0B77::func_61BD(var_0F);
+      if(isDefined(var_15.script_emptyspawner)) {
+        level thread lib_0B77::func_61BD(var_15);
       }
 
-      if(isDefined(var_0F.script_prefab_exploder)) {
-        var_0F.script_exploder = var_0F.script_prefab_exploder;
+      if(isDefined(var_15.script_prefab_exploder)) {
+        var_15.script_exploder = var_15.script_prefab_exploder;
       }
 
-      if(isDefined(var_0F.script_exploder)) {
-        level thread exploder_load(var_0F);
+      if(isDefined(var_15.script_exploder)) {
+        level thread exploder_load(var_15);
       }
 
-      if(isDefined(var_0F.var_EEEF)) {
-        level thread func_12780(var_0F);
+      if(isDefined(var_15.var_EEEF)) {
+        level thread func_12780(var_15);
       }
 
-      if(isDefined(var_0F.var_ED18)) {
-        level thread func_12729(var_0F);
+      if(isDefined(var_15.var_ED18)) {
+        level thread func_12729(var_15);
       }
 
-      if(isDefined(var_0F.var_EEEE)) {
-        var_0F thread func_1274C();
+      if(isDefined(var_15.var_EEEE)) {
+        var_15 thread func_1274C();
       }
 
-      if(isDefined(var_0F.var_EE90)) {
-        level thread lib_0B77::func_DC8F(var_0F);
+      if(isDefined(var_15.var_EE90)) {
+        level thread lib_0B77::func_DC8F(var_15);
       }
 
-      if(isDefined(var_0F.var_336)) {
-        var_10 = var_0F.var_336;
+      if(isDefined(var_15.var_336)) {
+        var_10 = var_15.var_336;
         if(isDefined(var_1[var_10])) {
-          level thread[[var_1[var_10]]](var_0F);
+          level thread[[var_1[var_10]]](var_15);
         }
       }
     }
@@ -534,23 +534,23 @@ func_1277E(var_0) {
   var_0 scripts\sp\utility::script_delay();
   foreach(var_6 in var_2) {
     var_9 = var_6.fgetarg;
-    var_0A = var_6.script_parameters;
-    var_0B = var_6.script_damage;
+    var_10 = var_6.script_parameters;
+    var_11 = var_6.script_damage;
     if(!isDefined(var_9)) {
       var_9 = 350;
     }
 
-    if(!isDefined(var_0A)) {
-      var_0A = 0.25;
+    if(!isDefined(var_10)) {
+      var_10 = 0.25;
     }
 
-    setdvar("tempdvar", var_0A);
-    var_0A = getdvarfloat("tempdvar");
-    if(isDefined(var_0B)) {
-      radiusdamage(var_6.origin, var_9, var_0B, var_0B * 0.5);
+    setdvar("tempdvar", var_10);
+    var_10 = getdvarfloat("tempdvar");
+    if(isDefined(var_11)) {
+      radiusdamage(var_6.origin, var_9, var_11, var_11 * 0.5);
     }
 
-    physicsexplosionsphere(var_6.origin, var_9, var_9 * 0.5, var_0A);
+    physicsexplosionsphere(var_6.origin, var_9, var_9 * 0.5, var_10);
   }
 }
 
@@ -669,10 +669,10 @@ func_7D1F() {
     }
   }
 
-  var_0A = [];
-  var_0A["triggers"] = var_0;
-  var_0A["target_origin"] = var_1;
-  return var_0A;
+  var_10 = [];
+  var_10["triggers"] = var_0;
+  var_10["target_origin"] = var_1;
+  return var_10;
 }
 
 func_12760(var_0) {
@@ -717,7 +717,7 @@ func_12761(var_0, var_1) {
     }
 
     var_0 waittill("trigger", var_9);
-    var_0A = [];
+    var_10 = [];
     while(var_9 istouching(var_0)) {
       if(var_8 && !sighttracepassed(var_9 getEye(), var_5, 0, undefined)) {
         if(var_6) {
@@ -728,11 +728,11 @@ func_12761(var_0, var_1) {
         continue;
       }
 
-      var_0B = vectornormalize(var_5 - var_9.origin);
-      var_0C = var_9 getplayerangles();
-      var_0D = anglesToForward(var_0C);
-      var_0E = vectordot(var_0D, var_0B);
-      if(var_0E >= var_2) {
+      var_11 = vectornormalize(var_5 - var_9.origin);
+      var_12 = var_9 getplayerangles();
+      var_13 = anglesToForward(var_12);
+      var_14 = vectordot(var_13, var_11);
+      if(var_14 >= var_2) {
         scripts\engine\utility::array_thread(var_4, scripts\sp\utility::func_F225, "trigger");
         if(var_6) {
           scripts\engine\utility::flag_set(var_7, var_9);
@@ -908,8 +908,8 @@ func_12729(var_0) {
     return;
   }
 
-  var_0A = var_4 scripts\sp\utility::func_4C39(var_0.var_ED18);
-  if(!var_0A) {
+  var_10 = var_4 scripts\sp\utility::func_4C39(var_0.var_ED18);
+  if(!var_10) {
     level scripts\engine\utility::delaythread(0.25, ::func_12729, var_0);
     return;
   }
@@ -1423,9 +1423,9 @@ func_A391(var_0, var_1, var_2) {
     var_7 = vectornormalize(self.origin - level.var_D127.origin);
     var_8 = anglesToForward(level.var_D127.angles);
     var_9 = vectordot(var_7, var_8);
-    var_0A = vectornormalize(level.var_D127.func_2AC);
-    var_0B = vectordot(var_7, var_0A);
-    if(var_9 > 0.1 && var_0B > 0.1) {
+    var_10 = vectornormalize(level.var_D127.func_2AC);
+    var_11 = vectordot(var_7, var_10);
+    if(var_9 > 0.1 && var_11 > 0.1) {
       if(var_4) {
         var_4 = 0;
         var_3[[level.var_A056.trigger_func.var_A0E5]](var_4);

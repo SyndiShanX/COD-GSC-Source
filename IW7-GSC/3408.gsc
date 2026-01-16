@@ -127,7 +127,7 @@ can_collect_lost_and_found_items(var_0) {
 lost_and_found_clean_up_monitor(var_0, var_1) {
   level endon("game_ended");
   var_1 thread lost_and_found_time_out(var_0, var_1);
-  var_1 scripts\engine\utility::waittill_any_3("disconnect", "clear_previous_tombstone", "lost_and_found_collected", "lost_and_found_time_out");
+  var_1 scripts\engine\utility::waittill_any("disconnect", "clear_previous_tombstone", "lost_and_found_collected", "lost_and_found_time_out");
   if(isDefined(var_1)) {
     var_1 setclientomnvar("zm_lostandfound_timer", 0);
     var_1 setclientomnvar("zm_lostandfound_target", undefined);

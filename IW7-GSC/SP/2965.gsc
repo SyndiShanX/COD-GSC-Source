@@ -58,7 +58,7 @@ func_31B2(var_0, var_1, var_2, var_3, var_4) {
   return var_5;
 }
 
-func_3197(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+func_3197(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(!isDefined(var_5)) {
     var_5 = 0;
   }
@@ -71,29 +71,29 @@ func_3197(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_4 = 1;
   }
 
-  var_0C = spawnStruct();
-  var_0C.effect = loadfx(var_0);
-  var_0C.physics_setgravitydynentscalar = var_1;
-  var_0C.sound = var_2;
-  var_0C.var_312E = var_5;
-  var_0C.delay = var_4;
-  var_0C.var_136A1 = var_6;
-  var_0C.var_10E6A = var_7;
-  var_0C.var_C174 = var_8;
-  var_0C.var_2A4E = var_3;
-  var_0C.var_F1EA = var_9;
-  var_0C.var_DFEC = var_0A;
-  var_0C.var_24DF = var_0B;
-  return var_0C;
+  var_12 = spawnStruct();
+  var_12.effect = loadfx(var_0);
+  var_12.physics_setgravitydynentscalar = var_1;
+  var_12.sound = var_2;
+  var_12.var_312E = var_5;
+  var_12.delay = var_4;
+  var_12.var_136A1 = var_6;
+  var_12.var_10E6A = var_7;
+  var_12.var_C174 = var_8;
+  var_12.var_2A4E = var_3;
+  var_12.var_F1EA = var_9;
+  var_12.var_DFEC = var_10;
+  var_12.var_24DF = var_11;
+  return var_12;
 }
 
-func_3184(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  var_0C = level.var_13570;
-  if(!isDefined(level.vehicle.var_116CE.var_131BC[var_0C])) {
-    level.vehicle.var_116CE.var_131BC[var_0C] = [];
+func_3184(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = level.var_13570;
+  if(!isDefined(level.vehicle.var_116CE.var_131BC[var_12])) {
+    level.vehicle.var_116CE.var_131BC[var_12] = [];
   }
 
-  level.vehicle.var_116CE.var_131BC[var_0C][level.vehicle.var_116CE.var_131BC[var_0C].size] = func_3197(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  level.vehicle.var_116CE.var_131BC[var_12][level.vehicle.var_116CE.var_131BC[var_12].size] = func_3197(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 func_3183(var_0) {
@@ -105,11 +105,11 @@ func_3183(var_0) {
   level.vehicle.var_116CE.var_4DF9[var_1] = var_0;
 }
 
-func_31B7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A) {
-  var_0B = level.var_13570;
-  level.var_13570 = "rocket_death" + var_0B;
-  func_3184(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
-  level.var_13570 = var_0B;
+func_31B7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  var_11 = level.var_13570;
+  level.var_13570 = "rocket_death" + var_11;
+  func_3184(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  level.var_13570 = var_11;
 }
 
 func_31A2(var_0) {
@@ -122,31 +122,31 @@ func_31C8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
     level.vehicle.var_116CE.mgturret = [];
   }
 
-  var_0A = level.var_13570;
-  if(!isDefined(level.vehicle.var_116CE.mgturret[var_0A])) {
-    level.vehicle.var_116CE.mgturret[var_0A] = [];
+  var_10 = level.var_13570;
+  if(!isDefined(level.vehicle.var_116CE.mgturret[var_10])) {
+    level.vehicle.var_116CE.mgturret[var_10] = [];
   }
 
   precachemodel(var_2);
   precacheturret(var_0);
-  var_0B = spawnStruct();
-  var_0B.info = var_0;
-  var_0B.physics_setgravitydynentscalar = var_1;
-  var_0B.model = var_2;
-  var_0B.setthreatbiasagainstall = var_3;
-  var_0B.var_5041 = var_4;
-  var_0B.var_51AD = var_5;
-  var_0B.var_5035 = var_6;
-  var_0B.var_5036 = var_7;
+  var_11 = spawnStruct();
+  var_11.info = var_0;
+  var_11.physics_setgravitydynentscalar = var_1;
+  var_11.model = var_2;
+  var_11.setthreatbiasagainstall = var_3;
+  var_11.var_5041 = var_4;
+  var_11.var_51AD = var_5;
+  var_11.var_5035 = var_6;
+  var_11.var_5036 = var_7;
   if(isDefined(var_8)) {
-    var_0B.var_C367 = var_8;
+    var_11.var_C367 = var_8;
   }
 
   if(isDefined(var_9)) {
-    var_0B.var_DE46 = var_9;
+    var_11.var_DE46 = var_9;
   }
 
-  level.vehicle.var_116CE.mgturret[var_0A][level.vehicle.var_116CE.mgturret[var_0A].size] = var_0B;
+  level.vehicle.var_116CE.mgturret[var_10][level.vehicle.var_116CE.mgturret[var_10].size] = var_11;
 }
 
 func_31A4(var_0, var_1, var_2, var_3, var_4, var_5) {

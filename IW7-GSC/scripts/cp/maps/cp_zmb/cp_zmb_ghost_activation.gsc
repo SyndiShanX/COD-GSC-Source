@@ -82,7 +82,7 @@ wait_for_8bitskull_damage(var_0, var_1, var_2) {
   var_3 thread eye_damage_monitor(var_3, var_1);
   wait(2);
   triggerfx(var_5);
-  var_6 = var_3 scripts\engine\utility::waittill_any_timeout_1(var_2, "got_one_ice_monster_eye");
+  var_6 = var_3 scripts\engine\utility::waittill_any_timeout(var_2, "got_one_ice_monster_eye");
   if(var_6 == "timeout") {
     var_5 delete();
     return 0;
@@ -99,7 +99,7 @@ eye_damage_monitor(var_0, var_1) {
   var_0 endon("got_one_ice_monster_eye");
   var_1 endon("ride_finished");
   for(;;) {
-    var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     if(isDefined(var_3) && scripts\engine\utility::istrue(var_3.linked_to_coaster)) {
       var_3 scripts\cp\cp_damage::updatedamagefeedback("standard");
       var_3 playlocalsound("ghosts_8bit_target_explo");
@@ -577,7 +577,7 @@ critical_shot_watcher(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_model", var_4.pos);
   var_5 setModel("zmb_8_bit_price");
   var_5.angles = var_4.angles;
-  var_6 = var_0 scripts\engine\utility::waittill_any_timeout_1(var_3, var_2, "arcade_game_over_for_player", "spawned", "disconnect", "bball_timer_expired", "last_stand");
+  var_6 = var_0 scripts\engine\utility::waittill_any_timeout(var_3, var_2, "arcade_game_over_for_player", "spawned", "disconnect", "bball_timer_expired", "last_stand");
   if(var_6 == var_2) {
     deactivate_start_arcade_game_func(var_1);
     playFX(level._effect["skull_discovered"], var_4.pos, anglesToForward(var_4.angles), anglestoup(var_4.angles));
@@ -631,7 +631,7 @@ hit_the_floating_skull_with_spaceland_laser() {
   var_6 thread movement_logic(var_6);
   var_6 thread visibility_monitor(var_6);
   for(;;) {
-    var_6 waittill("damage", var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10);
+    var_6 waittill("damage", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10);
     var_6.health = var_6.health + var_7;
     if(can_floating_skull_be_destroyed(var_10)) {
       break;
@@ -711,7 +711,7 @@ brute_hit_arcade_cabinet_with_laser() {
   level endon("brute_laser_hit_cabinet");
   var_0 = getent("ghost_arcade_damage_trigger", "targetname");
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(isDefined(var_2) && isDefined(var_2.agent_type) && var_2.agent_type == "zombie_brute" && isDefined(var_5) && var_5 == "MOD_RIFLE_BULLET") {
       break;
     }

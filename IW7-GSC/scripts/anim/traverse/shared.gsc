@@ -107,8 +107,8 @@ func_5AC3(var_0) {
   }
 
   var_6 = 0;
-  if(isDefined(var_5) && isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == var_0["coverType"] && distancesquared(self.target_getindexoftarget.origin, var_3.origin) < 625) {
-    if(scripts\engine\utility::absangleclamp180(self.target_getindexoftarget.angles[1] - var_3.angles[1]) > 160) {
+  if(isDefined(var_5) && isDefined(self.node) && self.node.type == var_0["coverType"] && distancesquared(self.node.origin, var_3.origin) < 625) {
+    if(scripts\engine\utility::absangleclamp180(self.node.angles[1] - var_3.angles[1]) > 160) {
       var_6 = 1;
       var_4 = var_5;
     }
@@ -150,9 +150,9 @@ func_5AC3(var_0) {
   }
 
   self.a.nodeath = 0;
-  if(var_6 && isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 256) {
+  if(var_6 && isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256) {
     self.a.movement = "stop";
-    self func_83B9(self.target_getindexoftarget.origin);
+    self func_83B9(self.node.origin);
   } else if(isDefined(var_0["traverseStopsAtEnd"])) {
     self.a.movement = "stop";
   } else {
@@ -221,9 +221,9 @@ func_89F7() {
     var_9 = 1;
   }
 
-  var_0A = var_6 - var_4 / 3;
-  var_0B = ceil(var_0A * 20);
-  thread func_11662(var_8, 0, var_0B, var_9);
+  var_10 = var_6 - var_4 / 3;
+  var_11 = ceil(var_10 * 20);
+  thread func_11662(var_8, 0, var_11, var_9);
   thread func_6CE5(var_1[2]);
 }
 
@@ -276,21 +276,21 @@ func_5864(var_0) {
     var_8 = var_7[2];
     var_7 = getmovedelta(self.var_126DB, 0, var_1[0]);
     var_9 = var_7[2];
-    var_0A = var_1[0];
-    var_0B = getanimlength(self.var_126DB);
-    var_0C = int(var_0A - var_6 * var_0B * 30);
-    var_0D = max(1, var_0C - 2);
-    var_0E = var_9 - var_8;
+    var_10 = var_1[0];
+    var_11 = getanimlength(self.var_126DB);
+    var_12 = int(var_10 - var_6 * var_11 * 30);
+    var_13 = max(1, var_12 - 2);
+    var_14 = var_9 - var_8;
     if(var_3) {
       var_7 = getmovedelta(self.var_126DB, 0, 1);
-      var_0F = var_7[2] - var_9;
-      var_10 = self.var_126E4.origin[2] - self.origin[2] - var_0F;
+      var_15 = var_7[2] - var_9;
+      var_10 = self.var_126E4.origin[2] - self.origin[2] - var_15;
     } else {
       var_11 = self.var_126EB;
       var_10 = var_11.var_126D5 - self.origin[2] - var_11.origin[2];
     }
 
-    thread func_11662(var_10 - var_0E, 0, var_0D);
+    thread func_11662(var_10 - var_14, 0, var_13);
     return 1;
   }
 }
@@ -461,13 +461,13 @@ func_D9BD(var_0) {
     self.var_138A6.var_C050[var_4] = var_3.origin - self.origin;
     var_4++;
     if(isDefined(var_3.target)) {
-      var_0A = scripts\engine\utility::getstruct(var_3.target, "targetname");
+      var_10 = scripts\engine\utility::getstruct(var_3.target, "targetname");
     } else {
-      var_0A = undefined;
+      var_10 = undefined;
     }
 
     scripts\sp\utility::func_51D4(var_3);
-    var_3 = var_0A;
+    var_3 = var_10;
     if(isDefined(var_3) && isDefined(var_3.var_EF1D)) {
       if(var_3.var_EF1D == "wallrun_mantle") {
         self.var_138A6.var_B313 = var_3.origin - self.origin;

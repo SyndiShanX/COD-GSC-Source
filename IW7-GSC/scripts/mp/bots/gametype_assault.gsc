@@ -265,8 +265,8 @@ atk_bomber_update() {
     level.bomb_zone_assaulting = level.curbombzone;
   }
 
-  var_0A = level.bomb_zone_assaulting;
-  self.bombzonegoal = var_0A;
+  var_10 = level.bomb_zone_assaulting;
+  self.bombzonegoal = var_10;
   if(!isDefined(level.initial_bomb_pickup_time) || gettime() - level.initial_bomb_pickup_time < level.initial_pickup_wait_time) {
     level.initial_bomb_pickup_time = gettime() + level.initial_pickup_wait_time;
     self botclearscriptgoal();
@@ -277,21 +277,21 @@ atk_bomber_update() {
   self botclearscriptgoal();
   if(level.attack_behavior == "rush") {
     self getpathactionvalue("scripted");
-    var_0B = self getparent(var_0A.bottargets, "node_exposed");
-    var_0C = self botgetdifficultysetting("strategyLevel") * 0.45;
-    var_0D = self botgetdifficultysetting("strategyLevel") + 1 * 0.15;
-    foreach(var_0E in var_0A.bottargets) {
-      if(!scripts\engine\utility::array_contains(var_0A, var_0E)) {
-        var_0A[var_0A.size] = var_0E;
+    var_11 = self getparent(var_10.bottargets, "node_exposed");
+    var_12 = self botgetdifficultysetting("strategyLevel") * 0.45;
+    var_13 = self botgetdifficultysetting("strategyLevel") + 1 * 0.15;
+    foreach(var_14 in var_10.bottargets) {
+      if(!scripts\engine\utility::array_contains(var_10, var_14)) {
+        var_10[var_10.size] = var_14;
       }
     }
 
-    if(randomfloat(1) < var_0B) {
-      var_10 = var_0A[0];
-    } else if(randomfloat(1) < var_0D) {
-      var_10 = var_0B[1];
+    if(randomfloat(1) < var_11) {
+      var_10 = var_10[0];
+    } else if(randomfloat(1) < var_13) {
+      var_10 = var_11[1];
     } else {
-      var_10 = scripts\engine\utility::random(var_0B);
+      var_10 = scripts\engine\utility::random(var_11);
     }
 
     self botsetscriptgoal(var_10.origin, 0, "critical");
@@ -375,7 +375,7 @@ clear_target_zone_update() {
       if(!scripts\mp\bots\_bots_util::bot_is_defending_point(var_1.curorigin)) {
         var_1["min_goal_time"] = 2;
         var_1["max_goal_time"] = 4;
-        var_1["override_origin_node"] = scripts\engine\utility::random(var_1.bottargets);
+        var_1["override_origin_node"] = ::scripts\engine\utility::random(var_1.bottargets);
         scripts\mp\bots\_bots_strategy::bot_protect_point(var_1.curorigin, level.protect_radius, var_1);
         return;
       }
@@ -445,8 +445,8 @@ bomb_defuser_update() {
       scripts\mp\bots\_bots_util::bot_waittill_out_of_combat_or_time(var_8);
     }
 
-    var_0A = gettime() >= var_9;
-    sd_press_use(level.defusetime + 2, "bomb_defused", var_0A);
+    var_10 = gettime() >= var_9;
+    sd_press_use(level.defusetime + 2, "bomb_defused", var_10);
     self botclearscriptgoal();
     scripts\mp\bots\_bots_strategy::bot_enable_tactical_goals();
   }
@@ -488,7 +488,7 @@ defender_update() {
   self endon("new_role");
   if(!scripts\mp\bots\_bots_util::bot_is_defending_point(self.defend_zone.curorigin)) {
     var_0["score_flags"] = "strict_los";
-    var_0["override_origin_node"] = scripts\engine\utility::random(self.defend_zone.bottargets);
+    var_0["override_origin_node"] = ::scripts\engine\utility::random(self.defend_zone.bottargets);
     scripts\mp\bots\_bots_strategy::bot_protect_point(self.defend_zone.curorigin, level.protect_radius, var_0);
   }
 }
@@ -529,8 +529,8 @@ backstabber_update() {
     self getpathactionvalue("scripted");
     var_9 = self botsetscriptgoalnode(var_4, "guard");
     if(var_9) {
-      var_0A = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
-      if(var_0A == "goal") {
+      var_10 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
+      if(var_10 == "goal") {
         wait(randomfloatrange(1, 4));
         self.backstabber_stage = "2_move_to_enemy_spawn";
       }
@@ -538,13 +538,13 @@ backstabber_update() {
   }
 
   if(self.backstabber_stage == "2_move_to_enemy_spawn") {
-    var_0B = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_attacker");
-    var_0C = scripts\engine\utility::random(var_0B);
+    var_11 = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_attacker");
+    var_12 = scripts\engine\utility::random(var_11);
     self getpathactionvalue("scripted");
-    var_9 = self botsetscriptgoal(var_0C.origin, 250, "guard");
+    var_9 = self botsetscriptgoal(var_12.origin, 250, "guard");
     if(var_9) {
-      var_0A = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
-      if(var_0A == "goal") {
+      var_10 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
+      if(var_10 == "goal") {
         self.backstabber_stage = "3_move_to_bombzone";
       }
     }
@@ -558,8 +558,8 @@ backstabber_update() {
     self getpathactionvalue(undefined);
     var_9 = self botsetscriptgoal(scripts\engine\utility::random(level.bombzones[self.bombzone_num_picked].bottargets).origin, 160, "objective");
     if(var_9) {
-      var_0A = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
-      if(var_0A == "goal") {
+      var_10 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
+      if(var_10 == "goal") {
         self botclearscriptgoal();
         self.backstabber_stage = "2_move_to_enemy_spawn";
         self.bombzone_num_picked = 1 - self.bombzone_num_picked;
@@ -765,7 +765,7 @@ get_specific_zone(var_0) {
 bomber_wait_for_death() {
   self endon("stopped_being_bomb_carrier");
   self endon("new_role");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   level.atk_bomber = undefined;
   level.last_atk_bomber_death_time = gettime();
   if(isDefined(self)) {
@@ -871,11 +871,11 @@ initialize_sd_role() {
       if(var_1.size < 4) {
         bot_set_role("defender");
       } else {
-        foreach(var_0B in var_1) {
-          var_0C = level.bot_personality_type[var_0B.personality];
-          if(var_0C == "active") {
+        foreach(var_11 in var_1) {
+          var_12 = level.bot_personality_type[var_11.personality];
+          if(var_12 == "active") {
             bot_set_role("defender");
-            var_0B bot_set_role(undefined);
+            var_11 bot_set_role(undefined);
             break;
           }
         }
@@ -894,29 +894,29 @@ initialize_sd_role() {
   }
 
   if(self.role == "defender") {
-    var_0E = level.bombzones;
+    var_14 = level.bombzones;
     if(has_override_zone_targets(self.team)) {
-      var_0E = get_override_zone_targets(self.team);
+      var_14 = get_override_zone_targets(self.team);
     }
 
-    if(var_0E.size == 1) {
-      self.defend_zone = var_0E[0];
+    if(var_14.size == 1) {
+      self.defend_zone = var_14[0];
       return;
     }
 
-    var_0F = get_players_defending_zone(var_0E[0]);
-    var_10 = get_players_defending_zone(var_0E[1]);
-    if(var_0F.size < var_10.size) {
-      self.defend_zone = var_0E[0];
+    var_15 = get_players_defending_zone(var_14[0]);
+    var_10 = get_players_defending_zone(var_14[1]);
+    if(var_15.size < var_10.size) {
+      self.defend_zone = var_14[0];
       return;
     }
 
-    if(var_10.size < var_0F.size) {
-      self.defend_zone = var_0E[1];
+    if(var_10.size < var_15.size) {
+      self.defend_zone = var_14[1];
       return;
     }
 
-    self.defend_zone = scripts\engine\utility::random(var_0E);
+    self.defend_zone = scripts\engine\utility::random(var_14);
     return;
   }
 }
@@ -1027,12 +1027,12 @@ bot_sd_ai_director_update() {
           var_6 = 0;
           var_7 = get_living_players_on_team(game["defenders"], 1);
           foreach(var_9 in var_7) {
-            var_0A = var_9 getnearestnode();
-            var_0B = var_9 botgetdifficultysetting("strategyLevel");
-            if(var_0B > 0 && var_9.role != "camp_bomb" && isDefined(var_0A) && nodesvisible(var_5, var_0A, 1)) {
-              var_0C = var_9 botgetfovdot();
-              if(scripts\engine\utility::within_fov(var_9.origin, var_9.angles, level.sdbomb.curorigin, var_0C)) {
-                if(var_0B >= 2 || distancesquared(var_9.origin, level.sdbomb.curorigin) < squared(700)) {
+            var_10 = var_9 getnearestnode();
+            var_11 = var_9 botgetdifficultysetting("strategyLevel");
+            if(var_11 > 0 && var_9.role != "camp_bomb" && isDefined(var_10) && nodesvisible(var_5, var_10, 1)) {
+              var_12 = var_9 botgetfovdot();
+              if(scripts\engine\utility::within_fov(var_9.origin, var_9.angles, level.sdbomb.curorigin, var_12)) {
+                if(var_11 >= 2 || distancesquared(var_9.origin, level.sdbomb.curorigin) < squared(700)) {
                   var_6 = 1;
                   break;
                 }
@@ -1125,6 +1125,6 @@ bot_sd_ai_director_update() {
 }
 
 defuser_wait_for_death() {
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   level.bomb_defuser = undefined;
 }

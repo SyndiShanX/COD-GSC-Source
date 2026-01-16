@@ -64,8 +64,8 @@ player_select_one_symbol() {
   var_1 = [(2984, 150, 380), (-184, -1328, 76), (-3306, -3040, 184), (-1320, -4748, 360), (-1648, 1119, -58), (-5972, 4600, 330), (1918, -2184, 196), (-3616, 1376, 23), (-2046, -1306, 46), (776, 1432, 261)];
   var_2 = [(0, 330, 90), (0, 0, 90), (0, 168, 90), (0, 240, 90), (0, 225, 90), (0, 11, 90), (0, 150, 90), (0, 205, 90), (0, 220, 90), (0, 0, 90)];
   var_3 = scripts\engine\utility::array_randomize([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  foreach(var_0A, var_5 in var_0) {
-    var_6 = var_3[var_0A];
+  foreach(var_10, var_5 in var_0) {
+    var_6 = var_3[var_10];
     var_7 = var_1[var_6];
     var_8 = var_2[var_6];
     var_9 = spawn_quest_vfx_symbol(var_7, var_8, var_5);
@@ -74,9 +74,9 @@ player_select_one_symbol() {
     scripts\engine\utility::waitframe();
   }
 
-  level waittill("GnS_letter_selected", var_0B);
+  level waittill("GnS_letter_selected", var_11);
   delete_letter_symbols();
-  return var_0B;
+  return var_11;
 }
 
 spawn_quest_vfx_symbol(var_0, var_1, var_2) {
@@ -241,9 +241,9 @@ damage_monitor(var_0) {
   var_0 setCanDamage(1);
   var_0.health = 999999;
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
-    if(isplayer(var_2) && isDefined(var_0A) && var_0A == "iw7_cpknifethrow_mp") {
+    if(isplayer(var_2) && isDefined(var_10) && var_10 == "iw7_cpknifethrow_mp") {
       break;
     }
   }
@@ -397,7 +397,7 @@ skull_damage_monitor(var_0) {
   var_0 setCanDamage(1);
   var_0.health = 999999;
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
     if(!isplayer(var_2)) {
       continue;

@@ -63,8 +63,9 @@ func_5A38() {
         var_2.var_5A50 = var_3[1];
         level.doors[var_2.var_5A50] = var_2;
       }
-    } else
+    } else {
       var_2.var_5A33 = "unlocked";
+    }
 
     switch (var_2.script_noteworthy) {
       case "hinged_left":
@@ -438,8 +439,9 @@ func_5A36(var_0, var_1) {
     foreach(var_4 in var_1) {
       scripts\engine\utility::flag_wait(var_4);
     }
-  } else
+  } else {
     scripts\engine\utility::flag_wait(var_1);
+  }
 
   var_2 thread func_48C7();
 }

@@ -19,8 +19,8 @@ func_91E0(var_0, var_1) {
   self.var_9DA6 = 0;
   self setturretanim(self.primaryturretanim);
   self func_82AB(self.primaryturretanim, 1, 0.2, 1);
-  if(isDefined(self.var_394)) {
-    scripts\anim\shared::placeweaponon(self.var_394, "none");
+  if(isDefined(self.weapon)) {
+    scripts\anim\shared::placeweaponon(self.weapon, "none");
   }
 
   self.var_C584 = 1;
@@ -108,9 +108,9 @@ func_129D3() {
     self.var_12A7F = undefined;
     self.var_C584 = undefined;
     self.autoboltmissileeffects = undefined;
-    self func_83AF();
-    if(isDefined(self.var_394)) {
-      scripts\anim\shared::placeweaponon(self.var_394, "right");
+    self stopuseturret();
+    if(isDefined(self.weapon)) {
+      scripts\anim\shared::placeweaponon(self.weapon, "right");
     }
   }
 

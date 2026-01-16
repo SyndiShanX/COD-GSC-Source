@@ -40,7 +40,7 @@ func_6BBC() {
 }
 
 func_6BBB() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_1 = self.origin;
   playFX(scripts\engine\utility::getfx("fear_mine_vanish"), var_1);
   if(isDefined(self.var_76CF)) {
@@ -49,7 +49,7 @@ func_6BBB() {
 
   var_2 = var_0 scripts\mp\powerloot::func_7FC4("power_fearGrenade", 160);
   var_3 = spawn("trigger_radius", var_1, 0, var_2, 160);
-  var_3.triggerportableradarping = var_0;
+  var_3.owner = var_0;
   var_4 = scripts\mp\utility::func_108CB(var_0, var_1, "haywire_smoke_friendly", "haywire_smoke_enemy", 0);
   var_0 thread func_13A3E(var_3, self.var_76CF);
   wait(5);
@@ -62,7 +62,7 @@ func_6BBB() {
 }
 
 func_13A3E(var_0, var_1) {
-  var_0.triggerportableradarping endon("disconnect");
+  var_0.owner endon("disconnect");
   self endon("disconnect");
   for(;;) {
     var_0 waittill("trigger", var_2);
@@ -70,13 +70,13 @@ func_13A3E(var_0, var_1) {
       continue;
     }
 
-    var_3 = func_370F(var_0.triggerportableradarping, var_2);
+    var_3 = func_370F(var_0.owner, var_2);
     if(var_3.var_13378 > 0) {
-      var_2 thread func_127C3(var_3.var_13378, var_0.triggerportableradarping, var_1);
+      var_2 thread func_127C3(var_3.var_13378, var_0.owner, var_1);
     }
 
     if(var_3.attackerendzone > 0) {
-      var_0.triggerportableradarping thread func_127C3(var_3.attackerendzone, var_0.triggerportableradarping, var_1);
+      var_0.owner thread func_127C3(var_3.attackerendzone, var_0.owner, var_1);
     }
   }
 }
@@ -121,7 +121,7 @@ func_2A67(var_0, var_1, var_2) {
   self dodamage(var_3, self.origin, var_1, var_2, "MOD_EXPLOSIVE", "fear_grenade_mp");
   for(;;) {
     var_4 = self.var_6BB9.var_6393 - gettime() / 1000;
-    var_5 = scripts\engine\utility::waittill_any_timeout_1(var_4, "fear_update_duration");
+    var_5 = scripts\engine\utility::waittill_any_timeout(var_4, "fear_update_duration");
     if(var_5 == "timeout") {
       func_6319();
       break;
@@ -154,7 +154,7 @@ func_6319() {
 }
 
 func_4115(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "stop_fear_effects");
+  scripts\engine\utility::waittill_any("death", "disconnect", "stop_fear_effects");
   var_0 delete();
 }
 
@@ -263,7 +263,7 @@ func_E83D() {
 }
 
 func_4119(var_0) {
-  scripts\engine\utility::waittill_any_3("stop_fear_effects", "death", "disconnect");
+  scripts\engine\utility::waittill_any("stop_fear_effects", "death", "disconnect");
   var_0 delete();
 }
 
@@ -280,7 +280,7 @@ func_108CE(var_0, var_1, var_2) {
   var_4 showtoplayer(var_0);
   var_4 thread func_13A3D();
   var_5 = spawn("script_model", var_1);
-  var_5.triggerportableradarping = var_0;
+  var_5.owner = var_0;
   var_5.projectile = var_4;
   var_5.config = dropweapon();
   var_5 hide();
@@ -298,7 +298,7 @@ func_13A3D() {
 
 func_13A41() {
   self endon("death");
-  var_0 = scripts\engine\utility::waittill_any_timeout_1(4, "detonate_ghost_grenade");
+  var_0 = scripts\engine\utility::waittill_any_timeout(4, "detonate_ghost_grenade");
   thread func_108CF();
   self delete();
 }
@@ -313,12 +313,12 @@ func_108CF() {
       var_2 = var_3 * var_0.var_763E;
     }
 
-    var_1 = spawnfxforclient(var_0.var_1336D, self.origin + var_2, self.triggerportableradarping);
+    var_1 = spawnfxforclient(var_0.var_1336D, self.origin + var_2, self.owner);
     triggerfx(var_1);
   }
 
   if(isDefined(var_0.var_FC43)) {
-    self playsoundtoplayer(var_0.var_FC43, self.triggerportableradarping);
+    self playsoundtoplayer(var_0.var_FC43, self.owner);
   }
 
   wait(var_0.var_AC75);
@@ -356,7 +356,7 @@ setgametypevip(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = randomfloatrange(var_2, var_3);
   var_8 = randomfloatrange(var_4, var_5);
   var_9 = anglesToForward(self.angles);
-  var_0A = anglestoright(self.angles);
-  var_0B = anglestoup(self.angles);
-  return self.origin + var_9 * var_6 + var_0A * var_7 + var_0B * var_8;
+  var_10 = anglestoright(self.angles);
+  var_11 = anglestoup(self.angles);
+  return self.origin + var_9 * var_6 + var_10 * var_7 + var_11 * var_8;
 }

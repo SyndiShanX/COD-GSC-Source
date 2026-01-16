@@ -63,7 +63,7 @@ func_2851(var_0, var_1) {
 
 func_2852(var_0, var_1) {
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("death");
+  scripts\engine\utility::waittill_any("death");
   if(scripts\mp\utility::isreallyalive()) {
     thread func_2851(var_0, var_1);
   }

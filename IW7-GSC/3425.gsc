@@ -161,8 +161,9 @@ func_7859(var_0) {
     for(var_3 = 2; var_3 < var_1.size; var_3++) {
       var_2 = var_2 + "_" + var_1[var_3];
     }
-  } else
+  } else {
     var_2 = var_0.script_linkname;
+  }
 
   return var_2;
 }
@@ -226,10 +227,12 @@ func_5CF7(var_0, var_1, var_2) {
     if(level.desired_enemy_deaths_this_wave == level.current_enemy_deaths) {
       level thread scripts\cp\loot::drop_loot(var_1, var_2, "ammo_max");
       return 1;
-    } else
+    } else {
       return 0;
-  } else
+    }
+  } else {
     return 0;
+  }
 }
 
 func_79EB() {
@@ -1119,8 +1122,9 @@ func_6731(var_0) {
         if(var_1 >= var_2) {
           break;
         }
-      } else
+      } else {
         break;
+      }
     }
   } else {
     for(;;) {
@@ -1306,8 +1310,9 @@ func_10927() {
           var_2--;
         }
       }
-    } else if(should_spawn_clown() && var_5 < var_6)
+    } else if(should_spawn_clown() && var_5 < var_6) {
       var_10 = get_spawner_and_spawn_goons(var_9);
+    }
     else {
       if(var_5) {
         var_5--;
@@ -1362,10 +1367,12 @@ spawn_zombie() {
       var_3 scripts\cp\zombies\zombies_pillage::func_6690(var_3);
       var_0.lastspawntime = gettime();
       var_0 thread func_1296E(0.25);
-    } else
+    } else {
       return 0;
-  } else
+    }
+  } else {
     return 0;
+  }
 
   return 1;
 }
@@ -1391,8 +1398,9 @@ func_2CFC() {
     func_3115(var_1);
     var_0 move_to_spot(var_1);
     var_1.in_use = 0;
-  } else
+  } else {
     return 0;
+  }
 
   level notify("boss_spawned", var_0);
   level thread func_CCBB();
@@ -1676,8 +1684,9 @@ func_1068A(var_0, var_1) {
   if(isDefined(var_0)) {
     var_3 = var_0.origin;
     var_4 = var_0.angles;
-  } else if(isDefined(var_1))
+  } else if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   var_5 = func_13F53(var_2, var_3, var_4, "axis", self);
 
@@ -1706,8 +1715,9 @@ spawn_wave_enemy(var_0, var_1, var_2, var_3) {
   if(isDefined(var_2)) {
     var_4 = var_2.origin;
     var_5 = var_2.angles;
-  } else if(isDefined(var_3))
+  } else if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
   if(!isDefined(self.script_animation)) {
     var_4 = getclosestpointonnavmesh(var_4);
@@ -1717,16 +1727,18 @@ spawn_wave_enemy(var_0, var_1, var_2, var_3) {
   if(level.agent_definition[var_0]["species"] == "alien") {
     var_6 = func_1B98(var_0, var_4, var_5, self);
     level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_6, "spawn", 1);
-  } else if(level.agent_definition[var_0]["species"] == "c6")
+  } else if(level.agent_definition[var_0]["species"] == "c6") {
     var_6 = func_33B1(var_0, var_4, var_5, "axis", self);
+  }
   else if(var_0 == "zombie_brute") {
     var_6 = func_13F13("zombie_brute", "axis", var_4, var_5);
 
     if(isDefined(var_6)) {
       level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_6, "spawn", 1);
     }
-  } else
+  } else {
     var_6 = func_13F53(var_0, var_4, var_5, "axis", self);
+  }
 
   if(!isDefined(var_6)) {
     return undefined;
@@ -1906,8 +1918,9 @@ func_53A9() {
       } else {
         var_0 = 0;
       }
-    } else
+    } else {
       var_0 = 0;
+    }
 
     if(var_0 > 3) {
       self setorigin(self.origin + (0, 0, 5), 1);
@@ -2420,8 +2433,9 @@ func_D1F7() {
               break;
             }
           }
-        } else
+        } else {
           break;
+        }
       }
     }
 
@@ -2603,10 +2617,12 @@ func_A5B4() {
       } else if(var_5 - self.traversal_start_time < 10000) {
         wait 1;
         continue;
-      } else
+      } else {
         var_2 = 6;
-    } else
+      }
+    } else {
       self.traversal_start_time = undefined;
+    }
 
     if(isDefined(self.var_9393)) {
       wait 1;
@@ -2642,8 +2658,9 @@ func_A5B4() {
         } else {
           var_2 = 0;
         }
-      } else
+      } else {
         var_2 = 0;
+      }
 
       if(var_2 == 4) {
         self setorigin(self.origin + (0, 0, 10), 0);
@@ -2726,8 +2743,9 @@ func_E81B() {
           } else if(level.wave_num == 4 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("magic_wheel")) {
             level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("magic_wheel", 7);
             level.players[0] notify("saw_wheel_tutorial");
-          } else if(level.wave_num == 9 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("pap"))
+          } else if(level.wave_num == 9 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("pap")) {
             level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("pap", 7);
+          }
         }
       }
 
@@ -3002,8 +3020,9 @@ func_E7F0(var_0) {
     } else {
       var_2 = 1;
     }
-  } else
+  } else {
     var_2 = 1;
+  }
 
   if(var_2) {
     return;

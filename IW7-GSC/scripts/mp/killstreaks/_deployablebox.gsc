@@ -31,7 +31,7 @@ watchdeployablemarkerplacement(var_0, var_1, var_2, var_3) {
 
   var_2 makecollidewithitemclip(1);
   self notify("deployable_deployed");
-  var_2.triggerportableradarping = self;
+  var_2.owner = self;
   var_2.var_39C = var_3;
   self.marker = var_2;
   if(isgrenadedeployable(var_0)) {
@@ -51,7 +51,7 @@ markeractivate(var_0, var_1, var_2) {
   self notify("markerActivate");
   self endon("markerActivate");
   self waittill("missile_stuck");
-  var_3 = self.triggerportableradarping;
+  var_3 = self.owner;
   var_4 = self.origin;
   if(!isDefined(var_3)) {
     return;
@@ -98,7 +98,7 @@ isholdingdeployablebox() {
   var_0 = self getcurrentweapon();
   if(isDefined(var_0)) {
     foreach(var_2 in level.boxsettings) {
-      if(var_0 == var_2.var_39B) {
+      if(var_0 == var_2.weaponinfo) {
         return 1;
       }
     }
@@ -115,7 +115,7 @@ createboxforplayer(var_0, var_1, var_2) {
   var_4.maxhealth = var_3.maxhealth;
   var_4.angles = var_2.angles;
   var_4.boxtype = var_0;
-  var_4.triggerportableradarping = var_2;
+  var_4.owner = var_2;
   var_4.team = var_2.team;
   var_4.id = var_3.id;
   if(isDefined(var_3.dpadname)) {
@@ -135,7 +135,7 @@ createboxforplayer(var_0, var_1, var_2) {
 box_setactive(var_0) {
   self setcursorhint("HINT_NOICON");
   var_1 = level.boxsettings[self.boxtype];
-  self sethintstring(var_1.pow);
+  self sethintstring(var_1.hintstring);
   self.inuse = 0;
   var_2 = scripts\mp\objidpoolmanager::requestminimapid(1);
   if(var_2 != -1) {
@@ -163,11 +163,11 @@ box_setactive(var_0) {
     }
   } else {
     if(var_2 != -1) {
-      scripts\mp\objidpoolmanager::minimap_objective_player(var_2, self.triggerportableradarping getentitynumber());
+      scripts\mp\objidpoolmanager::minimap_objective_player(var_2, self.owner getentitynumber());
     }
 
-    if(!isDefined(var_1.canusecallback) || self.triggerportableradarping[[var_1.canusecallback]](self)) {
-      box_seticon(self.triggerportableradarping, var_1.streakname, var_1.headiconoffset);
+    if(!isDefined(var_1.canusecallback) || self.owner[[var_1.canusecallback]](self)) {
+      box_seticon(self.owner, var_1.streakname, var_1.headiconoffset);
     }
   }
 
@@ -182,8 +182,8 @@ box_setactive(var_0) {
     self give_zombies_perk("DogsDontAttack");
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping notify("new_deployable_box", self);
+  if(isDefined(self.owner)) {
+    self.owner notify("new_deployable_box", self);
   }
 
   if(level.teambased) {
@@ -195,7 +195,7 @@ box_setactive(var_0) {
     }
   } else {
     foreach(var_4 in level.participants) {
-      _box_setactivehelper(var_4, isDefined(self.triggerportableradarping) && self.triggerportableradarping == var_4, var_1.canusecallback);
+      _box_setactivehelper(var_4, isDefined(self.owner) && self.owner == var_4, var_1.canusecallback);
     }
   }
 
@@ -339,8 +339,8 @@ box_handledeath() {
   self playSound("mp_killstreak_disappear");
   if(isDefined(var_0.deathdamagemax)) {
     var_1 = undefined;
-    if(isDefined(self.triggerportableradarping)) {
-      var_1 = self.triggerportableradarping;
+    if(isDefined(self.owner)) {
+      var_1 = self.owner;
     }
 
     radiusdamage(self.origin + (0, 0, var_0.headiconoffset), var_0.deathdamageradius, var_0.deathdamagemax, var_0.deathdamagemin, var_1, "MOD_EXPLOSIVE", var_0.deathweaponinfo);
@@ -355,7 +355,7 @@ box_handleownerdisconnect() {
   level endon("game_ended");
   self notify("box_handleOwner");
   self endon("box_handleOwner");
-  self.triggerportableradarping waittill("killstreak_disowned");
+  self.owner waittill("killstreak_disowned");
   self notify("death");
 }
 
@@ -376,8 +376,8 @@ boxthink(var_0) {
         var_0[[var_1.onusecallback]](self);
       }
 
-      if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
-        self.triggerportableradarping thread scripts\mp\utility::giveunifiedpoints("support", undefined, var_1.usexp);
+      if(isDefined(self.owner) && var_0 != self.owner) {
+        self.owner thread scripts\mp\utility::giveunifiedpoints("support", undefined, var_1.usexp);
       }
 
       if(isDefined(self.usesremaining)) {
@@ -419,7 +419,7 @@ doubledip(var_0) {
     return;
   }
 
-  if(isDefined(self.triggerportableradarping) && self.triggerportableradarping == var_0) {
+  if(isDefined(self.owner) && self.owner == var_0) {
     box_seticon(var_0, level.boxsettings[self.boxtype].streakname, level.boxsettings[self.boxtype].headiconoffset);
     box_enableplayeruse(var_0);
   }
@@ -450,7 +450,7 @@ box_timeout() {
   var_1 = var_0.lifespan;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_1);
   if(isDefined(var_0.vogone)) {
-    self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer(var_0.vogone);
+    self.owner thread scripts\mp\utility::leaderdialogonplayer(var_0.vogone);
   }
 
   box_leave();
@@ -570,7 +570,7 @@ createbombsquadmodel(var_0) {
     var_2 = spawn("script_model", self.origin);
     var_2.angles = self.angles;
     var_2 hide();
-    var_2 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+    var_2 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
     var_2 setModel(var_1.modelbombsquad);
     var_2 linkto(self);
     var_2 setcontents(0);

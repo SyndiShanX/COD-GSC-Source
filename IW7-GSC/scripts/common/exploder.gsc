@@ -157,13 +157,13 @@ setupexploders() {
 
     var_4.v["exploder"] = var_9.script_exploder;
     if(isDefined(level.createfxexploders)) {
-      var_0A = level.createfxexploders[var_4.v["exploder"]];
-      if(!isDefined(var_0A)) {
-        var_0A = [];
+      var_10 = level.createfxexploders[var_4.v["exploder"]];
+      if(!isDefined(var_10)) {
+        var_10 = [];
       }
 
-      var_0A[var_0A.size] = var_4;
-      level.createfxexploders[var_4.v["exploder"]] = var_0A;
+      var_10[var_10.size] = var_4;
+      level.createfxexploders[var_4.v["exploder"]] = var_10;
     }
 
     if(!isDefined(var_4.v["delay"])) {
@@ -171,15 +171,15 @@ setupexploders() {
     }
 
     if(isDefined(var_9.target)) {
-      var_0B = getEntArray(var_4.v["target"], "targetname")[0];
-      if(isDefined(var_0B)) {
-        var_0C = var_0B.origin;
-        var_4.v["angles"] = vectortoangles(var_0C - var_4.v["origin"]);
+      var_11 = getEntArray(var_4.v["target"], "targetname")[0];
+      if(isDefined(var_11)) {
+        var_12 = var_11.origin;
+        var_4.v["angles"] = vectortoangles(var_12 - var_4.v["origin"]);
       } else {
-        var_0B = scripts\engine\utility::get_target_ent(var_4.v["target"]);
-        if(isDefined(var_0B)) {
-          var_0C = var_0B.origin;
-          var_4.v["angles"] = vectortoangles(var_0C - var_4.v["origin"]);
+        var_11 = scripts\engine\utility::get_target_ent(var_4.v["target"]);
+        if(isDefined(var_11)) {
+          var_12 = var_11.origin;
+          var_4.v["angles"] = vectortoangles(var_12 - var_4.v["origin"]);
         }
       }
     }

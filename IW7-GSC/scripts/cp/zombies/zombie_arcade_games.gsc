@@ -217,7 +217,7 @@ func_61D8(var_0, var_1) {
 func_61D7(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("exit_arcade_game");
-  var_0 scripts\engine\utility::waittill_any_3("last_stand");
+  var_0 scripts\engine\utility::waittill_any("last_stand");
   var_0 playanimscriptevent("power_active_cp", "gesture001");
   var_0 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_0 stoplocalsound("arcadeSound");
@@ -255,7 +255,7 @@ func_61D7(var_0, var_1) {
 func_5653(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("exit_arcade_game");
-  level scripts\engine\utility::waittill_any_3("game_ended", "force_exit_arcade");
+  level scripts\engine\utility::waittill_any("game_ended", "force_exit_arcade");
   var_0 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_0 stoplocalsound("arcadeSound");
   if(isDefined(var_1.script_index)) {

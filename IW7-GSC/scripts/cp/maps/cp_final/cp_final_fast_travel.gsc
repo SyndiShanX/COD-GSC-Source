@@ -63,9 +63,9 @@ stand_on_glyph(var_0) {
   }
 
   var_9 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
-  var_0A = scripts\engine\utility::getclosest(var_0.origin, var_9, 500);
-  var_0A.opened = 1;
-  var_0A.end_point.opened = 1;
+  var_10 = scripts\engine\utility::getclosest(var_0.origin, var_9, 500);
+  var_10.opened = 1;
+  var_10.end_point.opened = 1;
   var_2.fx delete();
 }
 
@@ -299,17 +299,17 @@ blast_doors_with_gun() {
   }
 
   playFX(level._effect[var_2], var_8);
-  var_0D = undefined;
-  var_0E = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
-  foreach(var_10 in var_0E) {
+  var_13 = undefined;
+  var_14 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  foreach(var_10 in var_14) {
     if(var_10.script_noteworthy == "cargo_room") {
-      var_0D = var_10;
+      var_13 = var_10;
     }
   }
 
-  if(isDefined(var_0D)) {
-    var_0D.opened = 1;
-    var_0D.end_point.opened = 1;
+  if(isDefined(var_13)) {
+    var_13.opened = 1;
+    var_13.end_point.opened = 1;
   }
 
   var_12 = getEntArray("center_portal_door_left", "targetname");
@@ -417,7 +417,7 @@ send_followers_through_tube(var_0) {
       continue;
     }
 
-    if(isDefined(var_6.isnodeoccupied) && var_6.isnodeoccupied == var_0) {
+    if(isDefined(var_6.enemy) && var_6.enemy == var_0) {
       if(distancesquared(var_6.origin, var_2) < var_4) {
         thread send_to_portal(var_6);
       }

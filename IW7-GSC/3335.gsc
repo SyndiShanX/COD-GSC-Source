@@ -20,9 +20,9 @@ c4_used(var_0) {
 
 c4_detonate() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   wait(0.1);
-  thread c4_explode(self.triggerportableradarping);
+  thread c4_explode(self.owner);
 }
 
 c4_explode(var_0) {
@@ -42,8 +42,8 @@ c4_delete(var_0) {
   self notify("death");
   level.mines[self getentitynumber()] = undefined;
   self.exploding = 1;
-  var_1 = self.triggerportableradarping;
-  if(isDefined(self.triggerportableradarping)) {
+  var_1 = self.owner;
+  if(isDefined(self.owner)) {
     var_1.plantedlethalequip = scripts\engine\utility::array_remove(var_1.plantedlethalequip, self);
     var_1 notify("c4_update", 0);
   }
@@ -54,9 +54,9 @@ c4_delete(var_0) {
 
 c4_explodeonnotify() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   self waittill("detonateExplosive", var_1);
   if(isDefined(var_1)) {
     thread c4_explode(var_1);
@@ -68,9 +68,9 @@ c4_explodeonnotify() {
 
 c4_destroyonemp() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1);
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
+  if(isDefined(self.owner) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
   }
 
@@ -144,7 +144,7 @@ c4_detonateall() {
 }
 
 c4_addtoarray(var_0) {
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   if(!isDefined(self.c4s)) {
     self.c4s = [];
   }

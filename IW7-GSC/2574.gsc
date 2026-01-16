@@ -11,7 +11,7 @@ meleedeathhandler(var_0) {
 
 melee_init(var_0, var_1) {
   if(!isDefined(var_1)) {
-    var_1 = self.isnodeoccupied;
+    var_1 = self.enemy;
   }
 
   if(isDefined(self.melee)) {
@@ -67,7 +67,7 @@ func_3914(var_0) {
 }
 
 func_9E96(var_0) {
-  var_1 = self.isnodeoccupied;
+  var_1 = self.enemy;
   if(isDefined(var_0)) {
     var_1 = var_0;
   }
@@ -103,7 +103,7 @@ func_9E96(var_0) {
 
 shouldmelee(var_0, var_1) {
   if(!isDefined(var_1)) {
-    var_1 = self.isnodeoccupied;
+    var_1 = self.enemy;
   }
 
   if(!func_9E96(var_1)) {
@@ -199,11 +199,11 @@ func_41C6(var_0) {
 }
 
 func_B5C3(var_0) {
-  if(isDefined(self.isnodeoccupied) && isDefined(self.isnodeoccupied.melee)) {
-    if(isDefined(self.isnodeoccupied.melee.partner)) {
-      self.isnodeoccupied.melee.partner melee_destroy();
+  if(isDefined(self.enemy) && isDefined(self.enemy.melee)) {
+    if(isDefined(self.enemy.melee.partner)) {
+      self.enemy.melee.partner melee_destroy();
     } else {
-      self.isnodeoccupied melee_destroy();
+      self.enemy melee_destroy();
     }
   }
 
@@ -216,7 +216,7 @@ func_B653(var_0) {
     self[[self.fnmeleevsplayer_init]](var_0);
   }
 
-  thread meleedeathhandler(self.isnodeoccupied);
+  thread meleedeathhandler(self.enemy);
 }
 
 meleevsplayer_terminate(var_0) {
@@ -277,7 +277,7 @@ func_B5E8(var_0) {
   self.bt.instancedata[var_0] = spawnStruct();
   self.bt.instancedata[var_0].var_3E30 = gettime() + 100;
   self.bt.instancedata[var_0].timeout = gettime() + 4000;
-  self.bt.instancedata[var_0].var_6572 = self.isnodeoccupied.origin;
+  self.bt.instancedata[var_0].var_6572 = self.enemy.origin;
   if(isplayer(self.melee.target)) {
     self.bt.instancedata[var_0].objective_state_nomessage = self.objective_state_nomessage;
     self.objective_state_nomessage = 0;
@@ -364,7 +364,7 @@ func_B5EB() {
     }
   }
 
-  if(isDefined(self.isnodeoccupied) && var_0 != self.isnodeoccupied) {
+  if(isDefined(self.enemy) && var_0 != self.enemy) {
     return 1;
   }
 
@@ -446,8 +446,8 @@ func_B5F0(var_0) {
     }
 
     if(isDefined(self.var_B621) || abs(self.origin[2] - var_2.origin[2]) < var_9) {
-      var_0A = self func_84AC();
-      if(self[[self.fncanmovefrompointtopoint]](var_0A, var_6)) {
+      var_10 = self func_84AC();
+      if(self[[self.fncanmovefrompointtopoint]](var_10, var_6)) {
         self.melee.var_29A8 = 1;
         return level.success;
       }
@@ -470,64 +470,64 @@ func_B5F0(var_0) {
 
   if(!isDefined(self.melee.var_2AC6) || !self.melee.var_2AC6) {
     if(isDefined(self.var_B5DA)) {
-      var_0B = distance2dsquared(var_2.origin, self.bt.instancedata[var_0].var_6572);
+      var_11 = distance2dsquared(var_2.origin, self.bt.instancedata[var_0].var_6572);
     } else {
-      var_0B = distancesquared(var_3.origin, self.bt.instancedata[var_1].var_6572);
+      var_11 = distancesquared(var_3.origin, self.bt.instancedata[var_1].var_6572);
     }
 
-    if(var_0B > 16384) {
+    if(var_11 > 16384) {
       func_B5E7(var_2);
       self.melee.var_2720 = 1;
       return level.failure;
     }
   }
 
-  var_0C = max(sqrt(var_1) - 24, 0);
-  var_0D = vectornormalize(self.origin - var_2.origin);
-  var_0E = var_2.origin + var_0D * var_0C;
-  var_0F = 36;
+  var_12 = max(sqrt(var_1) - 24, 0);
+  var_13 = vectornormalize(self.origin - var_2.origin);
+  var_14 = var_2.origin + var_13 * var_12;
+  var_15 = 36;
   if(isDefined(self.var_B64F)) {
-    var_0F = self.var_B64F;
+    var_15 = self.var_B64F;
   }
 
   var_10 = 1;
-  if(!func_B5EA(var_0, var_0E)) {
-    var_11 = getclosestpointonnavmesh(var_0E, self);
-    var_10 = distance2dsquared(var_0E, var_11) > var_0F;
+  if(!func_B5EA(var_0, var_14)) {
+    var_11 = getclosestpointonnavmesh(var_14, self);
+    var_10 = distance2dsquared(var_14, var_11) > var_15;
     if(!var_10) {
       var_10 = !self[[self.fncanmovefrompointtopoint]](var_11, var_6);
     }
   }
 
   if(var_10 && isDefined(self.var_B651) && self.var_B651) {
-    if(isDefined(var_2.target_getindexoftarget)) {
-      if(scripts\engine\utility::isnodecoverleft(var_2.target_getindexoftarget)) {
-        var_12 = anglestoleft(var_2.target_getindexoftarget.angles);
-        var_0E = var_2.target_getindexoftarget.origin + var_12 * var_0C;
-      } else if(scripts\engine\utility::isnodecoverright(var_2.target_getindexoftarget)) {
-        var_13 = anglestoright(var_2.target_getindexoftarget.angles);
-        var_0E = var_2.target_getindexoftarget.origin + var_13 * var_0C;
+    if(isDefined(var_2.node)) {
+      if(scripts\engine\utility::isnodecoverleft(var_2.node)) {
+        var_12 = anglestoleft(var_2.node.angles);
+        var_14 = var_2.node.origin + var_12 * var_12;
+      } else if(scripts\engine\utility::isnodecoverright(var_2.node)) {
+        var_13 = anglestoright(var_2.node.angles);
+        var_14 = var_2.node.origin + var_13 * var_12;
       } else {
-        var_14 = anglesToForward(var_2.target_getindexoftarget.angles);
-        var_0E = var_2.target_getindexoftarget.origin - var_14 * var_0C;
+        var_14 = anglesToForward(var_2.node.angles);
+        var_14 = var_2.node.origin - var_14 * var_12;
       }
 
-      if(!func_B5EA(var_0, var_0E)) {
-        var_11 = getclosestpointonnavmesh(var_0E, self);
-        var_10 = distance2dsquared(var_0E, var_11) > var_0F;
-      }
-    }
-
-    if(var_10) {
-      var_0E = var_2.origin - var_0D * var_0C;
-      if(!func_B5EA(var_0, var_0E)) {
-        var_11 = getclosestpointonnavmesh(var_0E, self);
-        var_10 = distance2dsquared(var_0E, var_11) > var_0F;
+      if(!func_B5EA(var_0, var_14)) {
+        var_11 = getclosestpointonnavmesh(var_14, self);
+        var_10 = distance2dsquared(var_14, var_11) > var_15;
       }
     }
 
     if(var_10) {
-      var_0E = var_6;
+      var_14 = var_2.origin - var_13 * var_12;
+      if(!func_B5EA(var_0, var_14)) {
+        var_11 = getclosestpointonnavmesh(var_14, self);
+        var_10 = distance2dsquared(var_14, var_11) > var_15;
+      }
+    }
+
+    if(var_10) {
+      var_14 = var_6;
       var_10 = 0;
     }
   }
@@ -538,10 +538,10 @@ func_B5F0(var_0) {
     return level.failure;
   }
 
-  self func_8481(var_0E);
+  self func_8481(var_14);
   self.var_6D = 6;
-  self.bt.instancedata[var_0].targetpos = var_0E;
-  scripts\asm\asm_bb::bb_requestmeleecharge(var_2, var_0E);
+  self.bt.instancedata[var_0].targetpos = var_14;
+  scripts\asm\asm_bb::bb_requestmeleecharge(var_2, var_14);
   return level.running;
 }
 
@@ -575,7 +575,7 @@ canmeleeduringstealth() {
 }
 
 func_9DD1(var_0) {
-  var_1 = self.isnodeoccupied;
+  var_1 = self.enemy;
   if(isDefined(var_0)) {
     var_1 = var_0;
   }

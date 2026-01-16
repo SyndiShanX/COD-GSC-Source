@@ -14,7 +14,7 @@ func_4F32() {
   for(;;) {
     var_0 = scripts\engine\utility::getclosest(level.players[0].origin, level.window_entrances);
     var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
-    var_1 = scripts\engine\utility::array_add_safe(var_1, var_0);
+    var_1 = scripts\engine\utility::add_to_array(var_1, var_0);
     foreach(var_3 in var_1) {
       var_4 = 0;
       if(isDefined(var_3.angles)) {
@@ -76,9 +76,9 @@ func_97A8() {
 
   var_9 = anglestoright(self.angles);
   foreach(var_6 in var_4) {
-    var_0B = var_6.origin - self.origin;
-    var_0C = vectordot(var_0B, var_9);
-    if(var_0C > 0) {
+    var_11 = var_6.origin - self.origin;
+    var_12 = vectordot(var_11, var_9);
+    if(var_12 > 0) {
       var_6.script_label = "left";
     } else {
       var_6.script_label = "right";
@@ -303,7 +303,7 @@ func_7A29(var_0) {
   }
 
   var_5 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
-  var_5 = scripts\engine\utility::array_add_safe(var_5, var_0);
+  var_5 = scripts\engine\utility::add_to_array(var_5, var_0);
   var_6 = sortbydistance(var_5, self.origin);
   return var_6[0];
 }
@@ -315,7 +315,7 @@ get_open_attack_spot(var_0) {
   }
 
   var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
-  var_2 = scripts\engine\utility::array_add_safe(var_2, var_0);
+  var_2 = scripts\engine\utility::add_to_array(var_2, var_0);
   var_2 = scripts\engine\utility::array_randomize(var_2);
   foreach(var_4 in var_2) {
     if(func_9CD2(var_4)) {

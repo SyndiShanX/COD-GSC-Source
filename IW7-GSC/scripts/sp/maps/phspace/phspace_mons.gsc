@@ -864,8 +864,9 @@ func_126FD() {
       } else {
         var_2 = 0.05;
       }
-    } else
+    } else {
       var_2 = var_2 - 0.05;
+    }
 
     if(var_2 > 0) {
       level.var_12706 = level.var_12706 + var_0;
@@ -1369,7 +1370,7 @@ func_4968(var_0) {
   var_3 = 0;
 
   for(var_4 = []; var_3 < var_2; var_3++) {
-    var_4[var_3] = scripts\sp\maps\phspace\phspace_battle::func_491E(level.var_3670, randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), 1, "1", var_1, var_0);
+    var_4[var_3] = ::scripts\sp\maps\phspace\phspace_battle::func_491E(level.var_3670, randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), randomfloatrange(-8000, 8000), 1, "1", var_1, var_0);
   }
 
   return var_4;
@@ -1924,8 +1925,9 @@ func_BA7E(var_0) {
   if(isDefined(var_0)) {
     self.cannon.var_11512.origin = var_0.origin;
     self.cannon.var_11512 linkto(var_0);
-  } else
+  } else {
     self.cannon.var_11512 linkto(self.cannon, "tag_flash", (20000, 0, 0), (0, 0, 0));
+  }
 
   self.cannon playSound("mons_megacannon_fire");
   earthquake(0.25, 0.75, self.cannon.origin, 15000);

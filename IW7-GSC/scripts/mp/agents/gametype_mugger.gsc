@@ -28,13 +28,13 @@ agent_squadmember_mugger_think() {
   if(gettime() > self.next_time_check_tags) {
     self.next_time_check_tags = gettime() + 500;
     var_0 = 0.78;
-    if(isbot(self.triggerportableradarping)) {
+    if(isbot(self.owner)) {
       var_0 = self botgetfovdot();
     }
 
-    var_1 = self.triggerportableradarping getnearestnode();
+    var_1 = self.owner getnearestnode();
     if(isDefined(var_1)) {
-      var_2 = self.triggerportableradarping scripts\mp\bots\gametype_mugger::bot_find_visible_tags_mugger(var_1, var_0);
+      var_2 = self.owner scripts\mp\bots\gametype_mugger::bot_find_visible_tags_mugger(var_1, var_0);
       self.tags_seen_by_owner = scripts\mp\bots\gametype_conf::bot_combine_tag_seen_arrays(var_2, self.tags_seen_by_owner);
     }
   }

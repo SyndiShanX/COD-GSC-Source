@@ -134,27 +134,27 @@ func_10D23(var_0, var_1, var_2) {
       var_8 thread func_E02B(var_0);
       var_9 = 0;
       if(isaircraft(var_8) && !var_7 func_C8ED("no_chase", " ")) {
-        var_0A = 1;
+        var_10 = 1;
         if(level.var_11A24 >= var_3) {
-          var_0A = 0;
+          var_10 = 0;
         } else if(!var_7 func_C8ED("always_chase", " ") && !scripts\engine\utility::cointoss()) {
-          var_0A = 0;
+          var_10 = 0;
         }
 
-        if(var_0A) {
+        if(var_10) {
           var_9 = 1;
           var_8 thread func_48B2(var_7, undefined, var_0);
         }
       }
 
       if(isDefined(var_7.var_EE11) && !var_9) {
-        var_0B = ["right", "left"];
-        var_0B = scripts\engine\utility::array_randomize(var_0B);
-        var_0C = randomint(var_7.var_EE11 + 1);
-        for(var_0D = 0; var_0D < var_0C; var_0D++) {
-          var_0E = var_0B[var_0D];
+        var_11 = ["right", "left"];
+        var_11 = scripts\engine\utility::array_randomize(var_11);
+        var_12 = randomint(var_7.var_EE11 + 1);
+        for(var_13 = 0; var_13 < var_12; var_13++) {
+          var_14 = var_11[var_13];
           wait(0.1);
-          var_8 thread func_4958(var_0E);
+          var_8 thread func_4958(var_14);
         }
       }
     }
@@ -360,14 +360,14 @@ func_48B2(var_0, var_1, var_2) {
   level.var_1027E[var_2].var_3D3A = var_9;
   level.var_1027E[var_0.var_336].precachesuit = scripts\engine\utility::array_add(level.var_1027E[var_0.var_336].precachesuit, var_8);
   var_8 thread func_E02B(var_0.var_336);
-  var_0A = func_4921(var_8.origin, var_8.angles, var_7);
-  var_8.var_B921 = var_0A;
-  var_0B = 1000;
-  var_1 = (randomint(var_0B), randomint(500), randomint(var_0B));
-  var_0A linkto(var_8, "tag_origin", var_1, (0, 0, 0));
+  var_10 = func_4921(var_8.origin, var_8.angles, var_7);
+  var_8.var_B921 = var_10;
+  var_11 = 1000;
+  var_1 = (randomint(var_11), randomint(500), randomint(var_11));
+  var_10 linkto(var_8, "tag_origin", var_1, (0, 0, 0));
   var_8 thread lib_0BDC::func_A342(var_3);
   var_8 waittill("death");
-  var_0A delete();
+  var_10 delete();
 }
 
 func_3D39(var_0) {
@@ -550,16 +550,16 @@ func_19FF(var_0) {
   if(!isDefined(var_1.var_C5B7)) {
     var_1.var_C5B7 = [];
     var_9 = getEntArray("aiAmbient_on", "script_noteworthy");
-    foreach(var_0B in var_9) {
-      if(var_0B == var_1) {
+    foreach(var_11 in var_9) {
+      if(var_11 == var_1) {
         continue;
       }
 
-      if(var_0B.target != var_1.target) {
+      if(var_11.target != var_1.target) {
         continue;
       }
 
-      var_1.var_C5B7[var_1.var_C5B7.size] = var_0B;
+      var_1.var_C5B7[var_1.var_C5B7.size] = var_11;
     }
   }
 
@@ -568,14 +568,14 @@ func_19FF(var_0) {
   }
 
   var_1.enabled = 1;
-  foreach(var_0B in var_1.var_C5B7) {
-    var_0B.enabled = 1;
+  foreach(var_11 in var_1.var_C5B7) {
+    var_11.enabled = 1;
   }
 
   var_6 = var_1.spawner;
-  var_0F = var_1.var_1B04;
+  var_15 = var_1.var_1B04;
   var_10 = var_1.var_C375;
-  foreach(var_12 in var_0F) {
+  foreach(var_12 in var_15) {
     var_13 = var_12 func_489B(var_1.spawners, var_1);
     var_13 hide();
     var_1.var_1E08[var_1.var_1E08.size] = var_13;
@@ -880,13 +880,13 @@ func_3987(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         var_9 = var_0;
       }
 
-      var_0A = undefined;
+      var_10 = undefined;
       if(isDefined(var_9.script_radius) && var_9.script_radius) {
-        var_0A = spawnStruct();
-        var_0A.var_FF23 = var_9.var_FF23;
-        var_0A.var_FF3E = var_9.var_FF3E;
-        var_0A.origin = func_E45E(var_9.origin, var_9.fgetarg);
-        var_9 = var_0A;
+        var_10 = spawnStruct();
+        var_10.var_FF23 = var_9.var_FF23;
+        var_10.var_FF3E = var_9.var_FF3E;
+        var_10.origin = func_E45E(var_9.origin, var_9.fgetarg);
+        var_9 = var_10;
       }
 
       func_3986(var_9, var_4, var_5, var_6);
@@ -976,7 +976,7 @@ func_39D3(var_0) {
       var_1[var_5] = [];
     }
 
-    var_1[var_5] = scripts\engine\utility::array_add(var_1[var_5], var_4);
+    var_1[var_5] = ::scripts\engine\utility::array_add(var_1[var_5], var_4);
   }
 
   return var_1;
@@ -1045,14 +1045,14 @@ func_E45E(var_0, var_1, var_2, var_3) {
   var_7 = sin(var_6);
   var_8 = cos(var_6);
   var_9 = var_4 * var_8;
-  var_0A = var_4 * var_7;
-  var_0B = 0;
+  var_10 = var_4 * var_7;
+  var_11 = 0;
   if(isDefined(var_2)) {
-    var_0B = randomfloatrange(var_2 * -1, var_2);
+    var_11 = randomfloatrange(var_2 * -1, var_2);
   }
 
   var_9 = var_9 + var_0[0];
-  var_0A = var_0A + var_0[1];
-  var_0B = var_0B + var_0[2];
-  return (var_9, var_0A, var_0B);
+  var_10 = var_10 + var_0[1];
+  var_11 = var_11 + var_0[2];
+  return (var_9, var_10, var_11);
 }

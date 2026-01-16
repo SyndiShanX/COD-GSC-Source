@@ -85,8 +85,8 @@ contractkillsimmediate(var_0, var_1, var_2, var_3, var_4) {
         if(isDefined(self.var_A960)) {
           var_9 = gettime();
           if(abs(self.var_A960 - var_9) < 3000) {
-            var_0A = var_0 getentitynumber();
-            thread stampkillgesture(var_0A);
+            var_10 = var_0 getentitynumber();
+            thread stampkillgesture(var_10);
             var_7 = 1;
           }
         }
@@ -152,7 +152,7 @@ contractkills(var_0) {
           var_5 = 1;
         }
 
-        if(self func_8519(var_2)) {
+        if(self isalternatemode(var_2)) {
           var_6 = scripts\mp\utility::getweaponrootname(var_2);
           var_7 = getweaponvariantindex(var_2);
           if(var_6 == "iw7_longshot") {

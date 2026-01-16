@@ -62,7 +62,7 @@ endselectiononemp() {
   self endon("stop_location_selection");
   for(;;) {
     level waittill("emp_update");
-    if(!scripts\mp\killstreaks\_emp_common::isemped()) {
+    if(!scripts\mp\killstreaks\emp_common::isemped()) {
       continue;
     }
 
@@ -250,34 +250,34 @@ sortlowermessages() {
 }
 
 addlowermessage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_0A = undefined;
-  foreach(var_0C in self.lowermessages) {
-    if(var_0C.name == var_0) {
-      if(var_0C.text == var_1 && var_0C.priority == var_3) {
+  var_10 = undefined;
+  foreach(var_12 in self.lowermessages) {
+    if(var_12.name == var_0) {
+      if(var_12.text == var_1 && var_12.priority == var_3) {
         return;
       }
 
-      var_0A = var_0C;
+      var_10 = var_12;
       break;
     }
   }
 
-  if(!isDefined(var_0A)) {
-    var_0A = spawnStruct();
-    self.lowermessages[self.lowermessages.size] = var_0A;
+  if(!isDefined(var_10)) {
+    var_10 = spawnStruct();
+    self.lowermessages[self.lowermessages.size] = var_10;
   }
 
-  var_0A.name = var_0;
-  var_0A.text = var_1;
-  var_0A.time = var_2;
-  var_0A.addtime = gettime();
-  var_0A.priority = var_3;
-  var_0A.showtimer = var_4;
-  var_0A.shouldfade = var_5;
-  var_0A.fadetoalphatime = var_6;
-  var_0A.fadetoalphatime = var_7;
-  var_0A.hidewhenindemo = var_8;
-  var_0A.hidewheninmenu = var_9;
+  var_10.name = var_0;
+  var_10.text = var_1;
+  var_10.time = var_2;
+  var_10.addtime = gettime();
+  var_10.priority = var_3;
+  var_10.showtimer = var_4;
+  var_10.shouldfade = var_5;
+  var_10.fadetoalphatime = var_6;
+  var_10.fadetoalphatime = var_7;
+  var_10.hidewhenindemo = var_8;
+  var_10.hidewheninmenu = var_9;
   sortlowermessages();
 }
 
@@ -482,16 +482,16 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(level.splitscreen || !var_7) {
     for(var_9 = 0; var_9 < level.players.size; var_9++) {
-      var_0A = level.players[var_9];
-      var_0B = var_0A.team;
-      if(isDefined(var_0B)) {
-        if(var_0B == var_0 && isDefined(var_2)) {
-          var_0A iprintln(var_2, var_6);
+      var_10 = level.players[var_9];
+      var_11 = var_10.team;
+      if(isDefined(var_11)) {
+        if(var_11 == var_0 && isDefined(var_2)) {
+          var_10 iprintln(var_2, var_6);
           continue;
         }
 
-        if(var_0B == var_1 && isDefined(var_3)) {
-          var_0A iprintln(var_3, var_6);
+        if(var_11 == var_1 && isDefined(var_3)) {
+          var_10 iprintln(var_3, var_6);
         }
       }
     }
@@ -504,26 +504,26 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return;
   }
 
-  if(var_0B) {
+  if(var_11) {
     for(var_9 = 0; var_9 < level.players.size; var_9++) {
-      var_0A = level.players[var_9];
-      var_0B = var_0A.team;
-      if(isDefined(var_0B)) {
-        if(var_0B == var_0) {
+      var_10 = level.players[var_9];
+      var_11 = var_10.team;
+      if(isDefined(var_11)) {
+        if(var_11 == var_0) {
           if(isDefined(var_2)) {
-            var_0A iprintln(var_2, var_6);
+            var_10 iprintln(var_2, var_6);
           }
 
-          var_0A playlocalsound(var_4);
+          var_10 playlocalsound(var_4);
           continue;
         }
 
-        if(var_0B == var_1) {
+        if(var_11 == var_1) {
           if(isDefined(var_3)) {
-            var_0A iprintln(var_3, var_6);
+            var_10 iprintln(var_3, var_6);
           }
 
-          var_0A playlocalsound(var_5);
+          var_10 playlocalsound(var_5);
         }
       }
     }
@@ -532,21 +532,21 @@ printandsoundoneveryone(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   for(var_9 = 0; var_9 < level.players.size; var_9++) {
-    var_0A = level.players[var_9];
-    var_0B = var_0A.team;
-    if(isDefined(var_0B)) {
-      if(var_0B == var_0) {
+    var_10 = level.players[var_9];
+    var_11 = var_10.team;
+    if(isDefined(var_11)) {
+      if(var_11 == var_0) {
         if(isDefined(var_2)) {
-          var_0A iprintln(var_2, var_6);
+          var_10 iprintln(var_2, var_6);
         }
 
-        var_0A playlocalsound(var_4);
+        var_10 playlocalsound(var_4);
         continue;
       }
 
-      if(var_0B == var_1) {
+      if(var_11 == var_1) {
         if(isDefined(var_3)) {
-          var_0A iprintln(var_3, var_6);
+          var_10 iprintln(var_3, var_6);
         }
       }
     }
@@ -1767,7 +1767,7 @@ hitscorelimit() {
   } else {
     for(var_0 = 0; var_0 < level.players.size; var_0++) {
       var_1 = level.players[var_0];
-      if(isDefined(var_1.destroynavrepulsor) && var_1.destroynavrepulsor >= level.roundscorelimit) {
+      if(isDefined(var_1.score) && var_1.score >= level.roundscorelimit) {
         return 1;
       }
     }
@@ -2057,13 +2057,13 @@ _hasperk(var_0) {
 }
 
 giveperk(var_0) {
-  scripts\mp\perks\_perks::_setperk(var_0);
-  scripts\mp\perks\_perks::_setextraperks(var_0);
+  scripts\mp\perks\perks::_setperk(var_0);
+  scripts\mp\perks\perks::_setextraperks(var_0);
 }
 
 removeperk(var_0) {
-  scripts\mp\perks\_perks::_unsetperk(var_0);
-  scripts\mp\perks\_perks::func_142F(var_0);
+  scripts\mp\perks\perks::_unsetperk(var_0);
+  scripts\mp\perks\perks::func_142F(var_0);
 }
 
 blockperkfunction(var_0) {
@@ -2074,7 +2074,7 @@ blockperkfunction(var_0) {
   }
 
   if(self.perksblocked[var_0] == 1 && _hasperk(var_0)) {
-    scripts\mp\perks\_perks::func_1431(var_0);
+    scripts\mp\perks\perks::func_1431(var_0);
     foreach(var_6, var_2 in level.extraperkmap) {
       if(var_0 == var_6) {
         foreach(var_4 in var_2) {
@@ -2085,7 +2085,7 @@ blockperkfunction(var_0) {
           }
 
           if(self.perksblocked[var_4] == 1) {
-            scripts\mp\perks\_perks::func_1431(var_4);
+            scripts\mp\perks\perks::func_1431(var_4);
           }
         }
 
@@ -2100,13 +2100,13 @@ unblockperkfunction(var_0) {
   if(self.perksblocked[var_0] == 0) {
     self.perksblocked[var_0] = undefined;
     if(_hasperk(var_0)) {
-      scripts\mp\perks\_perks::func_13D2(var_0);
+      scripts\mp\perks\perks::func_13D2(var_0);
       foreach(var_6, var_2 in level.extraperkmap) {
         if(var_0 == var_6) {
           foreach(var_4 in var_2) {
             self.perksblocked[var_4]--;
             if(self.perksblocked[var_4] == 0) {
-              scripts\mp\perks\_perks::func_13D2(var_4);
+              scripts\mp\perks\perks::func_13D2(var_4);
               self.perksblocked[var_4] = undefined;
             }
           }
@@ -2344,9 +2344,9 @@ func_A679(var_0) {
 }
 
 streakstate(var_0) {
-  var_1 = scripts\mp\killstreaks\_killstreaks::getstreakcost(var_0);
-  var_2 = scripts\mp\killstreaks\_killstreaks::func_7FEE();
-  var_3 = scripts\mp\killstreaks\_killstreaks::getstreakcost(var_2);
+  var_1 = scripts\mp\killstreaks\killstreaks::getstreakcost(var_0);
+  var_2 = scripts\mp\killstreaks\killstreaks::func_7FEE();
+  var_3 = scripts\mp\killstreaks\killstreaks::getstreakcost(var_2);
   return var_1 < var_3;
 }
 
@@ -2574,7 +2574,7 @@ func_24ED() {
     return 1;
   }
 
-  if(isDefined(level.reminder_reaction_pointat) && isDefined(level.reminder_reaction_pointat.triggerportableradarping) && self == level.reminder_reaction_pointat.triggerportableradarping) {
+  if(isDefined(level.reminder_reaction_pointat) && isDefined(level.reminder_reaction_pointat.owner) && self == level.reminder_reaction_pointat.owner) {
     return 1;
   }
 
@@ -3270,7 +3270,7 @@ func_ABF6(var_0) {
 }
 
 iskillstreakdenied() {
-  return scripts\mp\killstreaks\_emp_common::isemped() || isairdenied();
+  return scripts\mp\killstreaks\emp_common::isemped() || isairdenied();
 }
 
 isairdenied() {
@@ -3698,8 +3698,8 @@ func_13CA1(var_0, var_1, var_2) {
         if(var_0 != "alt_none" && getweaponrootname(var_0) == "iw7_axe") {
           if(isDefined(var_1)) {
             var_3 = var_1;
-            if(!isplayer(var_1) && isDefined(var_1.triggerportableradarping)) {
-              var_3 = var_1.triggerportableradarping;
+            if(!isplayer(var_1) && isDefined(var_1.owner)) {
+              var_3 = var_1.owner;
             }
 
             if(isDefined(var_1.classname) && var_1.classname != "grenade" && var_3 getweaponammoclip(var_0) == 0) {
@@ -3820,7 +3820,7 @@ weaponhasattachment(var_0, var_1) {
 }
 
 func_9EE8() {
-  return self getweaponrankinfominxp() > 0.5;
+  return self playerads() > 0.5;
 }
 
 touchingbadtrigger() {
@@ -4041,7 +4041,7 @@ validateusestreak(var_0, var_1) {
     return 0;
   }
 
-  if(scripts\mp\killstreaks\_emp_common::isemped()) {
+  if(scripts\mp\killstreaks\emp_common::isemped()) {
     if(iskillstreakaffectedbyemp(var_0)) {
       if(!isDefined(var_1) && var_1) {
         scripts\mp\hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE_WHEN_JAMMED");
@@ -4570,9 +4570,9 @@ setcommonrulesfrommatchdata(var_0) {
   registerdogtagsenableddvar(level.gametype, var_8);
   var_9 = getmatchrulesdata("commonOption", "spawnProtectionTimer");
   setdynamicdvar("scr_" + level.gametype + "_spawnProtectionTimer", var_9);
-  var_0A = getmatchrulesdata("commonOption", "numLives");
-  setdynamicdvar("scr_" + level.gametype + "_numLives", var_0A);
-  registernumlivesdvar(level.gametype, var_0A);
+  var_10 = getmatchrulesdata("commonOption", "numLives");
+  setdynamicdvar("scr_" + level.gametype + "_numLives", var_10);
+  registernumlivesdvar(level.gametype, var_10);
   setdynamicdvar("scr_player_maxhealth", getmatchrulesdata("commonOption", "maxHealth"));
   setdynamicdvar("scr_player_healthregentime", getmatchrulesdata("commonOption", "healthRegen"));
   level.matchrules_damagemultiplier = 0;
@@ -4831,9 +4831,9 @@ getmatchrulesspecialclass(var_0, var_1) {
   var_2["loadoutSecondaryCamo"] = getmatchrulesdatawithteamandindex("defaultClasses", var_0, var_1, "class", "weaponSetups", 1, "camo");
   var_2["loadoutSecondaryReticle"] = getmatchrulesdatawithteamandindex("defaultClasses", var_0, var_1, "class", "weaponSetups", 1, "reticle");
   var_2["loadoutPerks"] = var_3;
-  var_2["loadoutKillstreak1"] = scripts\mp\class::recipe_getkillstreak(var_0, var_1, 0);
-  var_2["loadoutKillstreak2"] = scripts\mp\class::recipe_getkillstreak(var_0, var_1, 1);
-  var_2["loadoutKillstreak3"] = scripts\mp\class::recipe_getkillstreak(var_0, var_1, 2);
+  var_2["loadoutKillstreak1"] = ::scripts\mp\class::recipe_getkillstreak(var_0, var_1, 0);
+  var_2["loadoutKillstreak2"] = ::scripts\mp\class::recipe_getkillstreak(var_0, var_1, 1);
+  var_2["loadoutKillstreak3"] = ::scripts\mp\class::recipe_getkillstreak(var_0, var_1, 2);
   var_2["loadoutJuggernaut"] = getmatchrulesdatawithteamandindex("defaultClasses", var_0, var_1, "juggernaut");
   return var_2;
 }
@@ -5049,7 +5049,7 @@ getteamarray(var_0, var_1) {
 
 isheadshot(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
-    if(isDefined(var_3.triggerportableradarping)) {
+    if(isDefined(var_3.owner)) {
       if(var_3.var_9F == "script_vehicle") {
         return 0;
       }
@@ -5106,7 +5106,7 @@ func_9E7D(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  if(var_0 func_8519(var_2) && getweaponrootname(var_2) == "iw7_rvn") {
+  if(var_0 isalternatemode(var_2) && getweaponrootname(var_2) == "iw7_rvn") {
     return 1;
   }
 
@@ -5118,8 +5118,8 @@ func_9E7D(var_0, var_1, var_2, var_3) {
 }
 
 attackerishittingteam(var_0, var_1) {
-  if(isDefined(var_1) && isDefined(var_1.triggerportableradarping)) {
-    var_1 = var_1.triggerportableradarping;
+  if(isDefined(var_1) && isDefined(var_1.owner)) {
+    var_1 = var_1.owner;
   }
 
   if(!level.teambased) {
@@ -5154,7 +5154,7 @@ attackerishittingteam(var_0, var_1) {
     return 0;
   }
 
-  if(isagent(var_0) && isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping == var_1) {
+  if(isagent(var_0) && isDefined(var_0.owner) && var_0.owner == var_1) {
     return 0;
   }
 
@@ -5403,7 +5403,7 @@ func_9FE7(var_0, var_1, var_2) {
 }
 
 func_9FD8(var_0, var_1, var_2) {
-  return isDefined(var_2.triggerportableradarping) && !isDefined(var_0) || var_2.triggerportableradarping != var_0;
+  return isDefined(var_2.owner) && !isDefined(var_0) || var_2.owner != var_0;
 }
 
 gethelipilotmeshoffset() {
@@ -5596,8 +5596,8 @@ func_85C6(var_0, var_1, var_2, var_3) {
     var_0.weapon_name = var_1;
   }
 
-  if(!isDefined(var_0.triggerportableradarping)) {
-    var_0.triggerportableradarping = self;
+  if(!isDefined(var_0.owner)) {
+    var_0.owner = self;
   }
 
   if(!isDefined(var_0.team)) {
@@ -5628,8 +5628,8 @@ waittill_missile_fire() {
       var_0.weapon_name = getweaponbasedsmokegrenadecount(var_1);
     }
 
-    if(!isDefined(var_0.triggerportableradarping)) {
-      var_0.triggerportableradarping = self;
+    if(!isDefined(var_0.owner)) {
+      var_0.owner = self;
     }
 
     if(!isDefined(var_0.team)) {
@@ -5741,8 +5741,8 @@ isplayeronenemyteam(var_0) {
 }
 
 isplayerffaenemy(var_0) {
-  if(isDefined(var_0.triggerportableradarping)) {
-    return var_0.triggerportableradarping != self;
+  if(isDefined(var_0.owner)) {
+    return var_0.owner != self;
   }
 
   return var_0 != self;
@@ -5957,7 +5957,7 @@ func_D911() {
 func_F5C6(var_0, var_1, var_2, var_3) {
   var_4 = self energy_getrestorerate(var_0);
   self.var_116D0 = 1;
-  self goalflag(var_0, var_1);
+  self energy_setrestorerate(var_0, var_1);
   if(!isDefined(var_3) || !var_3) {
     wait(var_2);
   } else {
@@ -5971,14 +5971,14 @@ func_F5C6(var_0, var_1, var_2, var_3) {
     }
   }
 
-  self goalflag(var_0, var_4);
+  self energy_setrestorerate(var_0, var_4);
   self.var_116D0 = 0;
 }
 
 func_F5C5(var_0, var_1, var_2, var_3) {
   var_4 = self energy_getresttimems(var_0);
   self.var_116D1 = 1;
-  self goal_type(var_0, var_1);
+  self energy_setresttimems(var_0, var_1);
   if(!isDefined(var_3) || !var_3) {
     wait(var_2);
   } else {
@@ -5992,7 +5992,7 @@ func_F5C5(var_0, var_1, var_2, var_3) {
     }
   }
 
-  self goal_type(var_0, var_4);
+  self energy_setresttimems(var_0, var_4);
   self.var_116D1 = 0;
 }
 
@@ -6052,8 +6052,8 @@ func_108CB(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_0A = spawnfx(scripts\engine\utility::getfx(var_3), var_1);
-  triggerfx(var_0A);
+  var_10 = spawnfx(scripts\engine\utility::getfx(var_3), var_1);
+  triggerfx(var_10);
   foreach(var_7 in level.players) {
     var_8 = scripts\mp\damage::isfriendlyfire(var_0, var_7);
     if(var_7 == var_0 && isDefined(var_4)) {
@@ -6061,14 +6061,14 @@ func_108CB(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(var_8) {
-      var_0A hidefromplayer(var_7);
+      var_10 hidefromplayer(var_7);
     }
   }
 
-  var_0D = [];
-  var_0D[0] = var_5;
-  var_0D[1] = var_0A;
-  return var_0D;
+  var_13 = [];
+  var_13[0] = var_5;
+  var_13[1] = var_10;
+  return var_13;
 }
 
 func_D486(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -6082,14 +6082,14 @@ func_D486(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
 
     if(isDefined(var_5) && scripts\engine\utility::array_contains(var_5, var_9)) {
-      var_0A = 1;
+      var_10 = 1;
     } else if(isDefined(var_6) && scripts\engine\utility::array_contains(var_6, var_9)) {
-      var_0A = 0;
+      var_10 = 0;
     } else {
-      var_0A = func_9E05(var_2, var_9);
+      var_10 = func_9E05(var_2, var_9);
     }
 
-    if(var_0A) {
+    if(var_10) {
       playfxontagforclients(var_3, var_0, var_1, var_9);
       continue;
     }
@@ -6109,14 +6109,14 @@ func_11071(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
 
     if(isDefined(var_5) && scripts\engine\utility::array_contains(var_5, var_9)) {
-      var_0A = 1;
+      var_10 = 1;
     } else if(isDefined(var_6) && scripts\engine\utility::array_contains(var_6, var_9)) {
-      var_0A = 0;
+      var_10 = 0;
     } else {
-      var_0A = func_9E05(var_2, var_9);
+      var_10 = func_9E05(var_2, var_9);
     }
 
-    if(var_0A) {
+    if(var_10) {
       stopfxontagforclients(var_3, var_0, var_1, var_9);
       continue;
     }
@@ -6147,7 +6147,7 @@ playteamfxforclient(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 deleteonplayerdeathdisconnect(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("death", "disconnect");
+  var_0 scripts\engine\utility::waittill_any("death", "disconnect");
   self delete();
 }
 
@@ -6182,9 +6182,9 @@ getplayersinradiusview(var_0, var_1, var_2, var_3) {
   var_6 = func_7E9B(var_0, var_1, var_2, var_3, physics_createcontents(var_4));
   foreach(var_8 in var_6) {
     var_9 = undefined;
-    var_0A = [var_8 gettagorigin("j_head"), var_8 gettagorigin("j_mainroot"), var_8 gettagorigin("tag_origin")];
-    for(var_0B = 0; var_0B < var_0A.size; var_0B++) {
-      if(!scripts\common\trace::ray_trace_passed(var_0, var_0A[var_0B], level.characters, scripts\common\trace::create_contents(0, 1, 1, 1, 1, 1))) {
+    var_10 = [var_8 gettagorigin("j_head"), var_8 gettagorigin("j_mainroot"), var_8 gettagorigin("tag_origin")];
+    for(var_11 = 0; var_11 < var_10.size; var_11++) {
+      if(!scripts\common\trace::ray_trace_passed(var_0, var_10[var_11], level.characters, scripts\common\trace::create_contents(0, 1, 1, 1, 1, 1))) {
         continue;
       }
 
@@ -6195,7 +6195,7 @@ getplayersinradiusview(var_0, var_1, var_2, var_3) {
         var_9 = 1;
       }
 
-      var_5[var_5.size - 1].visiblelocations[var_5[var_5.size - 1].visiblelocations.size] = var_0A[var_0B];
+      var_5[var_5.size - 1].visiblelocations[var_5[var_5.size - 1].visiblelocations.size] = var_10[var_11];
     }
   }
 
@@ -6224,14 +6224,14 @@ func_7E9B(var_0, var_1, var_2, var_3, var_4) {
   var_7 = [];
   if(!isDefined(var_2)) {
     foreach(var_9 in var_6) {
-      var_0A = var_9["entity"];
-      var_7[var_7.size] = var_0A;
+      var_10 = var_9["entity"];
+      var_7[var_7.size] = var_10;
     }
   } else {
     foreach(var_9 in var_9) {
-      var_0A = var_9["entity"];
-      if(isDefined(var_0A.team) && var_0A.team == var_2) {
-        var_7[var_7.size] = var_0A;
+      var_10 = var_9["entity"];
+      if(isDefined(var_10.team) && var_10.team == var_2) {
+        var_7[var_7.size] = var_10;
       }
     }
   }
@@ -6354,33 +6354,33 @@ removedamagemodifier(var_0, var_1) {
 getdamagemodifiertotal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = 1;
   if(isDefined(self.additivedamagemodifiers)) {
-    foreach(var_0B, var_9 in self.additivedamagemodifiers) {
-      var_0A = 0;
-      if(isDefined(self.var_17DE) && isDefined(self.var_17DE[var_0B])) {
-        var_0A = [[self.var_17DE[var_0B]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+    foreach(var_11, var_9 in self.additivedamagemodifiers) {
+      var_10 = 0;
+      if(isDefined(self.var_17DE) && isDefined(self.var_17DE[var_11])) {
+        var_10 = [[self.var_17DE[var_11]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
       }
 
-      if(!var_0A) {
+      if(!var_10) {
         var_7 = var_7 + var_9 - 1;
       }
     }
   }
 
-  var_0C = 1;
+  var_12 = 1;
   if(isDefined(self.multiplicativedamagemodifiers)) {
-    foreach(var_0B, var_9 in self.multiplicativedamagemodifiers) {
-      var_0A = 0;
-      if(isDefined(self.var_BDC7) && isDefined(self.var_BDC7[var_0B])) {
-        var_0A = [[self.var_BDC7[var_0B]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+    foreach(var_11, var_9 in self.multiplicativedamagemodifiers) {
+      var_10 = 0;
+      if(isDefined(self.var_BDC7) && isDefined(self.var_BDC7[var_11])) {
+        var_10 = [[self.var_BDC7[var_11]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
       }
 
-      if(!var_0A) {
-        var_0C = var_0C * var_9;
+      if(!var_10) {
+        var_12 = var_12 * var_9;
       }
     }
   }
 
-  return var_7 * var_0C;
+  return var_7 * var_12;
 }
 
 cleardamagemodifiers() {
@@ -6521,10 +6521,10 @@ func_13A1E(var_0, var_1, var_2, var_3, var_4) {
         var_6 = [];
         foreach(var_8 in var_5) {
           var_9 = self getorigin();
-          var_0A = scripts\engine\utility::ter_op(var_4, var_8 getEye(), var_8.origin);
-          var_0B = physics_createcontents(["physicscontents_solid", "physicscontents_structural", "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_canshootclip"]);
-          var_0C = physics_raycast(var_9, var_0A, var_0B, undefined, 0, "physicsquery_closest");
-          if(var_0C.size <= 0) {
+          var_10 = scripts\engine\utility::ter_op(var_4, var_8 getEye(), var_8.origin);
+          var_11 = physics_createcontents(["physicscontents_solid", "physicscontents_structural", "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_canshootclip"]);
+          var_12 = physics_raycast(var_9, var_10, var_11, undefined, 0, "physicsquery_closest");
+          if(var_12.size <= 0) {
             var_6[var_6.size] = var_8;
           }
         }
@@ -6554,36 +6554,36 @@ radiusplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     var_9 = 0;
   }
 
-  var_0A = scripts\common\trace::create_character_contents();
-  var_0B = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0);
-  var_0C = [];
-  foreach(var_0E in level.characters) {
-    if(!isDefined(var_0E)) {
+  var_10 = scripts\common\trace::create_character_contents();
+  var_11 = scripts\common\trace::create_contents(0, 1, 1, 0, 1, 0);
+  var_12 = [];
+  foreach(var_14 in level.characters) {
+    if(!isDefined(var_14)) {
       continue;
     }
 
-    if(!isreallyalive(var_0E)) {
-      var_0C[var_0C.size] = var_0E;
+    if(!isreallyalive(var_14)) {
+      var_12[var_12.size] = var_14;
       continue;
     }
 
-    if(var_9 && var_0E == var_5) {
-      var_0C[var_0C.size] = var_0E;
+    if(var_9 && var_14 == var_5) {
+      var_12[var_12.size] = var_14;
       continue;
     }
 
-    if(level.teambased && var_0E.team == var_5.team) {
-      var_0C[var_0C.size] = var_0E;
+    if(level.teambased && var_14.team == var_5.team) {
+      var_12[var_12.size] = var_14;
     }
   }
 
-  var_10 = physics_querypoint(var_5.origin, var_2, var_0A, var_0C, "physicsquery_all");
+  var_10 = physics_querypoint(var_5.origin, var_2, var_10, var_12, "physicsquery_all");
   if(isDefined(var_10) && var_10.size > 0) {
     for(var_11 = 0; var_11 < var_10.size; var_11++) {
       var_12 = var_10[var_11]["entity"];
       var_13 = var_10[var_11]["distance"];
       var_14 = var_10[var_11]["position"];
-      var_15 = physics_raycast(var_0, var_14, var_0B, undefined, 0, "physicsquery_closest");
+      var_15 = physics_raycast(var_0, var_14, var_11, undefined, 0, "physicsquery_closest");
       if(isDefined(var_15) && var_15.size > 0) {
         continue;
       }
@@ -6687,7 +6687,7 @@ func_DE38(var_0, var_1) {
 pointvscone(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = var_0 - var_1;
   var_9 = vectordot(var_8, var_2);
-  var_0A = vectordot(var_8, var_3);
+  var_10 = vectordot(var_8, var_3);
   if(var_9 > var_4) {
     return 0;
   }
@@ -6697,7 +6697,7 @@ pointvscone(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   if(isDefined(var_7)) {
-    if(abs(var_0A) > var_7) {
+    if(abs(var_10) > var_7) {
       return 0;
     }
   }
@@ -6735,7 +6735,7 @@ func_1319B(var_0, var_1) {
 func_9EF6(var_0, var_1) {
   var_2 = 0;
   if(isagent(var_0) && isDefined(var_0.agent_type) && var_0.agent_type == "playerProxy") {
-    if(var_0.triggerportableradarping == var_1) {
+    if(var_0.owner == var_1) {
       var_2 = 1;
     }
   }
@@ -6755,7 +6755,7 @@ givestreakpointswithtext(var_0, var_1, var_2) {
   }
 
   var_3 = func_B93D(var_0, var_3, var_1);
-  scripts\mp\killstreaks\_killstreaks::func_83A7(var_0, var_3);
+  scripts\mp\killstreaks\killstreaks::func_83A7(var_0, var_3);
   displayscoreeventpoints(var_3, var_0);
   if(var_0 == "assist_hardline") {
     scripts\mp\missions::func_D991("ch_hardline_extra_score", var_3);
@@ -6775,7 +6775,7 @@ giveunifiedpoints(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 = func_B93D(var_0, var_6, var_1);
   scripts\mp\gamescore::giveplayerscore(var_0, var_6);
-  scripts\mp\killstreaks\_killstreaks::func_83A7(var_0, var_6);
+  scripts\mp\killstreaks\killstreaks::func_83A7(var_0, var_6);
   if(!istrue(var_5)) {
     thread scripts\mp\rank::giverankxp(var_0, var_6, var_1);
   }
@@ -7083,20 +7083,20 @@ bufferednotify_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     self.bufferednotifications[var_0] = [];
   }
 
-  var_0A = spawnStruct();
-  var_0A.var_C8E5 = var_1;
-  var_0A.var_C8E6 = var_2;
-  var_0A.var_C8E7 = var_3;
-  var_0A.var_C8E8 = var_4;
-  var_0A.var_C8E9 = var_5;
-  var_0A.var_C8EA = var_6;
-  var_0A.var_C8EB = var_7;
-  var_0A.var_C8EC = var_8;
-  self.bufferednotifications[var_0][self.bufferednotifications[var_0].size] = var_0A;
+  var_10 = spawnStruct();
+  var_10.var_C8E5 = var_1;
+  var_10.var_C8E6 = var_2;
+  var_10.var_C8E7 = var_3;
+  var_10.var_C8E8 = var_4;
+  var_10.var_C8E9 = var_5;
+  var_10.var_C8EA = var_6;
+  var_10.var_C8EB = var_7;
+  var_10.var_C8EC = var_8;
+  self.bufferednotifications[var_0][self.bufferednotifications[var_0].size] = var_10;
   waittillframeend;
   while(self.bufferednotifications[var_0].size > 0) {
-    var_0A = self.bufferednotifications[var_0][0];
-    self notify(var_0, var_0A.var_C8E5, var_0A.var_C8E6, var_0A.var_C8E7, var_0A.var_C8E8, var_0A.var_C8E9, var_0A.var_C8EA, var_0A.var_C8EB, var_0A.var_C8EC);
+    var_10 = self.bufferednotifications[var_0][0];
+    self notify(var_0, var_10.var_C8E5, var_10.var_C8E6, var_10.var_C8E7, var_10.var_C8E8, var_10.var_C8E9, var_10.var_C8EA, var_10.var_C8EB, var_10.var_C8EC);
     self.bufferednotifications[var_0] = array_remove_index(self.bufferednotifications[var_0], 0);
     wait(0.05);
   }

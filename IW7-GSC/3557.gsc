@@ -23,7 +23,7 @@ func_10842(var_0) {
     var_1 func_5285();
   }
 
-  scripts\mp\utility::printgameaction("deployable cover spawned", var_0.triggerportableradarping);
+  scripts\mp\utility::printgameaction("deployable cover spawned", var_0.owner);
   var_2 = anglesToForward(var_0.angles);
   var_2 = rotatepointaroundvector(anglestoup(var_0.angles), var_2, 90);
   var_3 = anglestoup(var_0.angles);
@@ -31,7 +31,7 @@ func_10842(var_0) {
   var_3 = vectorcross(var_4, var_2);
   var_5 = axistoangles(var_2, var_4, var_3);
   var_1 = spawncoverwall(var_0.origin + anglestoup(var_5) * 2, var_5);
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   var_1.team = self.team;
   var_1 setnonstick(1);
   var_1 give_player_tickets(1);
@@ -46,7 +46,7 @@ func_10842(var_0) {
   var_1 thread func_40EE();
   var_1 thread func_139DE();
   var_1 thread func_139DF(self);
-  var_1 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_1 thread scripts\mp\perks\perk_equipmentping::runequipmentping();
   var_1 thread createcovernavobstacle();
   self.var_4759 = var_1;
 }
@@ -75,7 +75,7 @@ func_5285(var_0) {
   }
 
   self func_8514(var_0);
-  scripts\mp\utility::printgameaction("deployable cover removed", self.triggerportableradarping);
+  scripts\mp\utility::printgameaction("deployable cover removed", self.owner);
 }
 
 func_139DF(var_0) {
@@ -108,21 +108,21 @@ func_40EE() {
 func_40EB() {
   self endon("death");
   self endon("despawnCover");
-  self.triggerportableradarping waittill("death");
+  self.owner waittill("death");
   thread func_5285();
 }
 
 func_40ED() {
   self endon("death");
   self endon("despawnCover");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread func_5285();
 }
 
 func_40EC() {
   self endon("death");
   self endon("despawnCover");
-  self.triggerportableradarping waittill("disconnect");
+  self.owner waittill("disconnect");
   thread func_5285(1);
 }
 

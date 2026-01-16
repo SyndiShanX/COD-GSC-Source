@@ -4,19 +4,19 @@
 *********************************************/
 
 func_98E1(var_0) {
-  self.var_39B[var_0] = spawnStruct();
-  self.var_39B[var_0].weaponisauto = "none";
-  self.var_39B[var_0].var_8BDE = 1;
+  self.weaponinfo[var_0] = spawnStruct();
+  self.weaponinfo[var_0].weaponisauto = "none";
+  self.weaponinfo[var_0].var_8BDE = 1;
   if(getweaponclipmodel(var_0) != "") {
-    self.var_39B[var_0].var_13053 = 1;
+    self.weaponinfo[var_0].var_13053 = 1;
     return;
   }
 
-  self.var_39B[var_0].var_13053 = 0;
+  self.weaponinfo[var_0].var_13053 = 0;
 }
 
 func_A000(var_0) {
-  return isDefined(self.var_39B[var_0]);
+  return isDefined(self.weaponinfo[var_0]);
 }
 
 func_F724() {
@@ -59,7 +59,7 @@ func_FAFB() {
 main() {
   self.a = spawnStruct();
   self.a.laseron = 0;
-  self.primaryweapon = self.var_394;
+  self.primaryweapon = self.weapon;
   func_6DE9();
   if(!scripts\engine\utility::flag_exist("load_finished")) {
     scripts\engine\utility::flag_init("load_finished");
@@ -323,11 +323,11 @@ func_6568() {
 
   for(;;) {
     self waittill("enemy");
-    if(!isalive(self.isnodeoccupied)) {
+    if(!isalive(self.enemy)) {
       continue;
     }
 
-    while(isplayer(self.isnodeoccupied)) {
+    while(isplayer(self.enemy)) {
       if(scripts\anim\utility::func_8BED()) {
         level.var_A9D0 = gettime();
       }
@@ -399,12 +399,12 @@ func_6DE9() {
     anim.var_FED3 = scripts\anim\utility::func_FED2;
   }
 
-  level.fire_notetrack_functions["scripted"] = scripts\anim\notetracks::fire_straight;
-  level.fire_notetrack_functions["cover_right"] = scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["cover_left"] = scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["cover_crouch"] = scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["cover_stand"] = scripts\anim\notetracks::shootnotetrack;
-  level.fire_notetrack_functions["move"] = scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["scripted"] = ::scripts\anim\notetracks::fire_straight;
+  level.fire_notetrack_functions["cover_right"] = ::scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["cover_left"] = ::scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["cover_crouch"] = ::scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["cover_stand"] = ::scripts\anim\notetracks::shootnotetrack;
+  level.fire_notetrack_functions["move"] = ::scripts\anim\notetracks::shootnotetrack;
   scripts\anim\notetracks::registernotetracks();
   if(!isDefined(level.flag)) {
     scripts\common\flags::init_flags();
@@ -737,7 +737,7 @@ func_5031() {
   self.a.weaponposdropping["right"] = "none";
   self.a.weaponposdropping["chest"] = "none";
   self.a.weaponposdropping["back"] = "none";
-  self.lastweapon = self.var_394;
+  self.lastweapon = self.weapon;
   var_0 = scripts\anim\utility_common::usingrocketlauncher();
   self.a.var_BEF9 = var_0;
   if(var_0) {
@@ -771,15 +771,15 @@ func_3597() {
 func_363B() {
   self.var_13CC3 = [];
   if(self.primaryweapon != "" && self.primaryweapon != "none") {
-    self.var_394 = self.primaryweapon;
+    self.weapon = self.primaryweapon;
     self.var_13CC3["right"] = func_3597();
   }
 
   if(self.secondaryweapon != "" && self.secondaryweapon != "none") {
-    self.var_394 = self.secondaryweapon;
+    self.weapon = self.secondaryweapon;
     self.var_13CC3["left"] = func_3597();
   }
 
-  self.var_394 = "";
+  self.weapon = "";
   self.bulletsinclip = 1;
 }

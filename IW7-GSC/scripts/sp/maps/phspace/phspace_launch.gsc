@@ -888,8 +888,9 @@ func_C0CE(var_0) {
     var_0 playSound("jackal_booster_detach_01");
     _setmusicstate("geneva_exit_atmosphere");
     setglobalsoundcontext("atmosphere", "space", 4);
-  } else if(var_0 == level.var_EA99)
+  } else if(var_0 == level.var_EA99) {
     var_0 playSound("jackal_booster_detach_02");
+  }
 }
 
 func_CFDE(var_0) {
@@ -980,8 +981,9 @@ func_CFDE(var_0) {
     if(var_11 > 0) {
       var_20 = scripts\sp\math::func_C097(0, var_3, var_11);
       var_20 = scripts\sp\math::func_6A8E(0, var_2, var_20);
-    } else
+    } else {
       var_20 = 0;
+    }
 
     if(var_5 > 0) {
       var_21 = 1 - scripts\sp\math::func_C097(0, var_4, var_5);
@@ -993,8 +995,9 @@ func_CFDE(var_0) {
       if(var_7 < 0) {
         var_7 = 0;
       }
-    } else
+    } else {
       var_21 = 1;
+    }
 
     var_20 = var_20 * var_19;
 

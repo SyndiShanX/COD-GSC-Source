@@ -50,7 +50,7 @@ func_13D18() {
 }
 
 func_13D11() {
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   foreach(var_1 in self.var_1468) {
     if(isalive(var_1)) {
       var_1 delete();
@@ -72,25 +72,25 @@ func_13D17(var_0) {
 
   var_8 = 2;
   var_9 = anglesToForward(self.angles);
-  var_0A = var_9;
-  var_0B = var_4 - self getEye();
-  var_0A = (var_0A[0], var_0A[1], 0);
-  var_0B = (var_0B[0], var_0B[1], 0);
-  var_0C = scripts\engine\utility::anglebetweenvectorssigned(var_0A, var_0B, (0, 0, 1));
-  if(abs(var_0C) > 21 || 180 - abs(var_0C) < 21) {
-    var_8 = var_0C > 0;
+  var_10 = var_9;
+  var_11 = var_4 - self getEye();
+  var_10 = (var_10[0], var_10[1], 0);
+  var_11 = (var_11[0], var_11[1], 0);
+  var_12 = scripts\engine\utility::anglebetweenvectorssigned(var_10, var_11, (0, 0, 1));
+  if(abs(var_12) > 21 || 180 - abs(var_12) < 21) {
+    var_8 = var_12 > 0;
   }
 
-  var_0D = func_13D15(var_6, var_8);
-  if(!isDefined(self.var_1468[var_0D])) {
-    if(isDefined(level._effect[var_0D])) {
-      self.var_1468[var_0D] = spawnfxforclient(level._effect[var_0D], self getEye(), self);
+  var_13 = func_13D15(var_6, var_8);
+  if(!isDefined(self.var_1468[var_13])) {
+    if(isDefined(level._effect[var_13])) {
+      self.var_1468[var_13] = spawnfxforclient(level._effect[var_13], self getEye(), self);
     }
   }
 
-  triggerfx(self.var_1468[var_0D]);
-  self.var_1468[var_0D] notify("reset");
-  self.var_1468[var_0D] thread func_13D19();
+  triggerfx(self.var_1468[var_13]);
+  self.var_1468[var_13] notify("reset");
+  self.var_1468[var_13] thread func_13D19();
 }
 
 func_13D15(var_0, var_1) {

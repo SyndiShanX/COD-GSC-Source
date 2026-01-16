@@ -9,10 +9,10 @@ zombie_clown_init() {
     level.cop_spawn_percent = 2;
   }
 
-  level.agent_funcs["zombie_clown"]["on_damaged"] = scripts\cp\agents\gametype_zombie::onzombiedamaged;
-  level.agent_funcs["zombie_clown"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["zombie_clown"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
-  level.movemodefunc["zombie_clown"] = scripts\cp\agents\gametype_zombie::run_if_last_zombie;
+  level.agent_funcs["zombie_clown"]["on_damaged"] = ::scripts\cp\agents\gametype_zombie::onzombiedamaged;
+  level.agent_funcs["zombie_clown"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["zombie_clown"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
+  level.movemodefunc["zombie_clown"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
 }
 
 registerscriptedagent() {
@@ -29,8 +29,8 @@ func_FAB0() {
 
   level.agent_definition["zombie_clown"]["setup_func"] = ::setupagent;
   level.agent_definition["zombie_clown"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["zombie_clown"]["on_damaged_finished"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
-  level.agent_funcs["zombie_clown"]["on_killed"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
+  level.agent_funcs["zombie_clown"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["zombie_clown"]["on_killed"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
   if(!isDefined(level.var_8CBD)) {
     level.var_8CBD = [];
   }

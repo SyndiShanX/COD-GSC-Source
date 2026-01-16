@@ -47,7 +47,7 @@ init() {
   level.ac130 = spawn("script_model", var_1);
   level.ac130 setModel("c130_zoomRig");
   level.ac130.angles = (0, 115, 0);
-  level.ac130.triggerportableradarping = undefined;
+  level.ac130.owner = undefined;
   level.ac130.thermal_vision = "ac130_thermal_mp";
   level.ac130.enhanced_vision = "ac130_enhanced_mp";
   level.ac130.var_336 = "ac130rig_script_model";
@@ -56,7 +56,7 @@ init() {
   thread rotateplane("on");
   thread ac130_spawn();
   thread onplayerconnect();
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("ac130", ::tryuseac130);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("ac130", ::tryuseac130);
   level.ac130queue = [];
 }
 
@@ -75,7 +75,7 @@ tryuseac130(var_0, var_1) {
   }
 
   scripts\mp\utility::setusingremote("ac130");
-  var_2 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(var_1);
+  var_2 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_1);
   if(var_2 != "success") {
     if(var_2 != "disconnect") {
       scripts\mp\utility::clearusingremote();
@@ -267,10 +267,10 @@ monitormanualplayerexit() {
   level endon("game_ended");
   level endon("ac130player_removed");
   self endon("disconnect");
-  level.ac130 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  level.ac130 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
   level.ac130 waittill("killstreakExit");
-  if(isDefined(level.ac130.triggerportableradarping)) {
-    level thread removeac130player(level.ac130.triggerportableradarping, 0);
+  if(isDefined(level.ac130.owner)) {
+    level thread removeac130player(level.ac130.owner, 0);
   }
 }
 
@@ -282,7 +282,7 @@ setac130player(var_0) {
 
   init_sounds();
   level.ac130player = var_0;
-  level.ac130.triggerportableradarping = var_0;
+  level.ac130.owner = var_0;
   level.ac130.planemodel show();
   level.ac130.planemodel thread playac130effects();
   level.ac130.incomingmissile = 0;
@@ -426,7 +426,7 @@ removeac130playeronchangeteams() {
 
 removeac130playeronspectate() {
   self endon("ac130player_removed");
-  scripts\engine\utility::waittill_any_3("joined_spectators", "spawned");
+  scripts\engine\utility::waittill_any("joined_spectators", "spawned");
   level thread removeac130player(self, 0);
 }
 
@@ -531,17 +531,17 @@ damagetracker() {
     }
 
     self.wasdamaged = 1;
-    var_0A = var_0;
+    var_10 = var_0;
     if(isplayer(var_1)) {
       var_1 scripts\mp\damagefeedback::updatedamagefeedback("ac130");
     }
 
-    scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_9, level.ac130);
-    if(isDefined(var_1.triggerportableradarping) && isplayer(var_1.triggerportableradarping)) {
-      var_1.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("ac130");
+    scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_9, level.ac130);
+    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
+      var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("ac130");
     }
 
-    self.var_E1 = self.var_E1 + var_0A;
+    self.var_E1 = self.var_E1 + var_10;
     if(self.var_E1 >= self.maxhealth) {
       if(isplayer(var_1)) {
         thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_ac130", var_1);
@@ -778,15 +778,15 @@ ac130_control_bot_aiming() {
     if(isDefined(var_1) && var_1.health <= 0 && gettime() - var_1.deathtime < 2000) {
       var_8 = 1;
       var_9 = 1;
-    } else if(isalive(self.isnodeoccupied) && self botcanseeentity(self.isnodeoccupied) || gettime() - self lastknowntime(self.isnodeoccupied) <= 300) {
+    } else if(isalive(self.enemy) && self botcanseeentity(self.enemy) || gettime() - self lastknowntime(self.enemy) <= 300) {
       var_8 = 1;
-      var_1 = self.isnodeoccupied;
-      var_0A = var_1.origin;
-      var_0 = self.isnodeoccupied.origin;
-      if(self botcanseeentity(self.isnodeoccupied)) {
+      var_1 = self.enemy;
+      var_10 = var_1.origin;
+      var_0 = self.enemy.origin;
+      if(self botcanseeentity(self.enemy)) {
         var_7 = 0;
         var_9 = 1;
-        var_0B = gettime();
+        var_11 = gettime();
       } else {
         var_7 = var_7 + 0.05;
         if(var_7 > 5) {
@@ -805,10 +805,10 @@ ac130_control_bot_aiming() {
       }
 
       if(gettime() > var_4 + 500) {
-        var_0C = randomfloatrange(-1 * var_6 / 2, var_6 / 2);
-        var_0D = randomfloatrange(-1 * var_6 / 2, var_6 / 2);
-        var_0E = randomfloatrange(-1 * var_6 / 2, var_6 / 2);
-        var_5 = (150 * var_0C, 150 * var_0D, 150 * var_0E);
+        var_12 = randomfloatrange(-1 * var_6 / 2, var_6 / 2);
+        var_13 = randomfloatrange(-1 * var_6 / 2, var_6 / 2);
+        var_14 = randomfloatrange(-1 * var_6 / 2, var_6 / 2);
+        var_5 = (150 * var_12, 150 * var_13, 150 * var_14);
         var_4 = gettime();
       }
 
@@ -1267,13 +1267,13 @@ debug_circle(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = 360 / var_6;
   var_8 = [];
   for(var_9 = 0; var_9 < var_6; var_9++) {
-    var_0A = var_7 * var_9;
-    var_0B = cos(var_0A) * var_1;
-    var_0C = sin(var_0A) * var_1;
-    var_0D = var_0[0] + var_0B;
-    var_0E = var_0[1] + var_0C;
-    var_0F = var_0[2];
-    var_8[var_8.size] = (var_0D, var_0E, var_0F);
+    var_10 = var_7 * var_9;
+    var_11 = cos(var_10) * var_1;
+    var_12 = sin(var_10) * var_1;
+    var_13 = var_0[0] + var_11;
+    var_14 = var_0[1] + var_12;
+    var_15 = var_0[2];
+    var_8[var_8.size] = (var_13, var_14, var_15);
   }
 
   if(isDefined(var_4)) {

@@ -114,19 +114,19 @@ func_4A29(var_0, var_1) {
   var_3.visibleteam = "none";
 
   foreach(var_5 in level.teamnamelist) {
-    var_3.teamobjids[var_5] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_3.teamobjids[var_5] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
 
     if(var_3.teamobjids[var_5] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_3.teamobjids[var_5], "invisible", var_3.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_3.teamobjids[var_5], var_5);
     }
 
-    var_3.objpoints[var_5] = scripts\mp\objpoints::func_4A23("objpoint_" + var_5 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
+    var_3.objpoints[var_5] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_5 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
     var_3.objpoints[var_5].alpha = 0;
 
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_6 = "mlg_" + var_5;
-      var_3.objpoints[var_6] = scripts\mp\objpoints::func_4A23("objpoint_" + var_6 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
+      var_3.objpoints[var_6] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_6 + "_" + var_3.entnum, var_3.curorigin + var_1, var_5, undefined);
       var_3.objpoints[var_6].alpha = 0;
     }
   }
@@ -206,19 +206,19 @@ createcarryobject(var_0, var_1, var_2, var_3) {
   var_4.objidpingfriendly = 0;
 
   foreach(var_7 in level.teamnamelist) {
-    var_4.teamobjids[var_7] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_7] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
 
     if(var_4.teamobjids[var_7] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_7], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_7], var_7);
     }
 
-    var_4.objpoints[var_7] = scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+    var_4.objpoints[var_7] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
     var_4.objpoints[var_7].alpha = 0;
 
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_8 = "mlg_" + var_7;
-      var_4.objpoints[var_8] = scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+      var_4.objpoints[var_8] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
       var_4.objpoints[var_8].alpha = 0;
     }
   }
@@ -902,10 +902,12 @@ setdropped(var_0) {
         if(isbombmode()) {
           var_21 = -30;
         }
-      } else
+      } else {
         var_22 = (0, 0, 0);
-    } else
+      }
+    } else {
       var_22 = vectortoangles(var_20);
+    }
 
     for(var_23 = 0; var_23 < self.visuals.size; var_23++) {
       self.visuals[var_23].origin = var_19;
@@ -1087,8 +1089,9 @@ takeobject(var_0) {
 
       self func_80DB();
       scripts\engine\utility::allow_weapon_switch(1);
-    } else if(!var_0.allowweapons)
+    } else if(!var_0.allowweapons) {
       scripts\engine\utility::allow_weapon(1);
+    }
   }
 }
 
@@ -1179,19 +1182,19 @@ createuseobject(var_0, var_1, var_2, var_3) {
   var_4.var_4465 = [];
 
   foreach(var_7 in level.teamnamelist) {
-    var_4.teamobjids[var_7] = scripts\mp\objidpoolmanager::requestminimapid(99);
+    var_4.teamobjids[var_7] = ::scripts\mp\objidpoolmanager::requestminimapid(99);
 
     if(var_4.teamobjids[var_7] != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_add(var_4.teamobjids[var_7], "invisible", var_4.curorigin);
       scripts\mp\objidpoolmanager::minimap_objective_team(var_4.teamobjids[var_7], var_7);
     }
 
-    var_4.objpoints[var_7] = scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+    var_4.objpoints[var_7] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_7 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
     var_4.objpoints[var_7].alpha = 0;
 
     if(getdvarint("com_codcasterEnabled", 0) == 1) {
       var_8 = "mlg_" + var_7;
-      var_4.objpoints[var_8] = scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
+      var_4.objpoints[var_8] = ::scripts\mp\objpoints::func_4A23("objpoint_" + var_8 + "_" + var_4.entnum, var_4.curorigin + var_3, var_7, undefined);
       var_4.objpoints[var_8].alpha = 0;
     }
   }
@@ -1592,8 +1595,9 @@ func_DAD2() {
         if(self.usetime && isDefined(self.onbeginuse)) {
           self[[self.onbeginuse]](self.var_3FF8);
         }
-      } else if(isDefined(self.oncantuse))
+      } else if(isDefined(self.oncantuse)) {
         self[[self.oncantuse]](var_1);
+      }
     }
 
     if(scripts\mp\utility\game::isreallyalive(var_1) && !isDefined(var_1.touchtriggers[var_0])) {
@@ -1698,8 +1702,9 @@ func_127CA(var_0) {
       }
 
       self.touchtriggers[var_0.entnum] = undefined;
-    } else
+    } else {
       self.touchtriggers[var_0.entnum] = undefined;
+    }
   }
 
   if(level.gameended) {
@@ -2091,8 +2096,9 @@ useholdthink(var_0) {
     var_0 setweaponammostock(var_1, 0);
     var_0 setweaponammoclip(var_1, 0);
     var_0 thread func_11382(var_1);
-  } else
+  } else {
     var_0 scripts\engine\utility::allow_weapon(0);
+  }
 
   self.curprogress = 0;
   self.inuse = 1;
@@ -2226,8 +2232,9 @@ useholdthinkloop(var_0, var_1) {
       self.curprogress = self.curprogress + 50 * self.userate;
       self.userate = 1 * var_0.objectivescaler;
       var_3 = 0;
-    } else
+    } else {
       self.userate = 0;
+    }
 
     var_0 updateuiprogress(self, 1);
 
@@ -2410,8 +2417,9 @@ func_12F67(var_0, var_1) {
         } else {
           var_6 getplayersinradiusview();
         }
-      } else if(isDefined(self.var_C2B4))
+      } else if(isDefined(self.var_C2B4)) {
         var_6 settargetent(self.var_C2B4);
+      }
     } else {
       var_6 fadeovertime(0.05);
       var_6.alpha = 0;

@@ -4,7 +4,7 @@
 *******************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("high_value_target", ::func_128E9);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("high_value_target", ::func_128E9);
   level.var_9264["axis"] = 0;
   level.var_9264["allies"] = 0;
   game["dialog"]["hvt_gone"] = "hvt_gone";

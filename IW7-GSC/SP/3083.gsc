@@ -185,12 +185,12 @@ func_36F9(var_0, var_1) {
     var_7 = var_5 / var_3.var_B440;
     var_9 = var_4 / var_3.var_B43D;
     if(var_7 < var_9) {
-      var_0A = var_7;
+      var_10 = var_7;
     } else {
-      var_0A = var_0A;
+      var_10 = var_10;
     }
 
-    var_3.var_8CB0 = int(var_0A * 50);
+    var_3.var_8CB0 = int(var_10 * 50);
     return;
   }
 
@@ -198,12 +198,12 @@ func_36F9(var_0, var_1) {
     var_8 = var_6 / var_3.var_B43E;
     var_9 = var_4 / var_3.var_B43D;
     if(var_8 < var_9) {
-      var_0A = var_8;
+      var_10 = var_8;
     } else {
-      var_0A = var_0A;
+      var_10 = var_10;
     }
 
-    var_3.var_8CB0 = int(var_0A * 50);
+    var_3.var_8CB0 = int(var_10 * 50);
     return;
   }
 
@@ -225,7 +225,7 @@ func_10F6C() {
         continue;
       }
 
-      if(!isDefined(var_0.var_394) || getweaponbasename(var_0.var_394) != "iw7_steeldragon") {
+      if(!isDefined(var_0.weapon) || getweaponbasename(var_0.weapon) != "iw7_steeldragon") {
         continue;
       }
 
@@ -357,7 +357,7 @@ func_C12B(var_0) {
     var_1 = spawnStruct();
     switch (var_0) {
       case "damage":
-        self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+        self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
         switch (var_9) {
           case "j_weaponshoulder_ri":
             var_9 = "right_arm";
@@ -380,19 +380,19 @@ func_C12B(var_0) {
 
         var_1.var_4F = var_3;
         var_1.updategamerprofileall = var_9;
-        var_1.var_394 = var_0B;
+        var_1.weapon = var_11;
         break;
 
       case "damage_subpart":
-        self waittill("damage_subpart", var_0C);
-        var_0D = var_0C[0];
+        self waittill("damage_subpart", var_12);
+        var_13 = var_12[0];
         if(!scripts\sp\utility::func_93A6()) {
-          scripts\sp\damagefeedback::func_4D4C(var_0D.var_3C, var_0D.var_4F, var_0D.var_F2, var_0D.point, undefined, var_0D.stopfxontag, undefined, var_0D.updategamerprofileall, undefined, var_0D.var_394);
+          scripts\sp\damagefeedback::func_4D4C(var_13.var_3C, var_13.var_4F, var_13.var_F2, var_13.point, undefined, var_13.stopfxontag, undefined, var_13.updategamerprofileall, undefined, var_13.weapon);
         }
 
-        var_1.var_4F = var_0D.var_4F;
-        var_1.updategamerprofileall = var_0D.updategamerprofileall;
-        var_1.var_394 = var_0D.var_394;
+        var_1.var_4F = var_13.var_4F;
+        var_1.updategamerprofileall = var_13.updategamerprofileall;
+        var_1.weapon = var_13.weapon;
         break;
 
       default:

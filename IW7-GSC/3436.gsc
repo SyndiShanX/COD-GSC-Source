@@ -101,7 +101,7 @@ func_2618(var_0) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_1 = scripts\engine\utility::waittill_any_timeout_1(var_0, "damage");
+  var_1 = scripts\engine\utility::waittill_any_timeout(var_0, "damage");
   if(isDefined(var_1) && var_1 == "damage") {
     scripts\mp\utility::removeperk("specialty_adrenaline_lite");
   }
@@ -113,7 +113,7 @@ func_2619(var_0) {
   level endon("game_ended");
   self notify("auraRegen_cleanupLuaDamagePublic");
   self endon("auraRegen_cleanupLuaDamagePublic");
-  var_1 = scripts\engine\utility::waittill_any_timeout_1(var_0, "damage");
+  var_1 = scripts\engine\utility::waittill_any_timeout(var_0, "damage");
   self setclientomnvar("ui_aura_regen", 0);
   self notify("auraRegen_cleanupLuaDeathPublic");
 }
@@ -122,7 +122,7 @@ func_261A(var_0) {
   self endon("disconnect");
   self notify("auraRegen_cleanupLuaDeathPublic");
   self endon("auraRegen_cleanupLuaDeathPublic");
-  var_1 = scripts\engine\utility::waittill_any_timeout_1(var_0, "death");
+  var_1 = scripts\engine\utility::waittill_any_timeout(var_0, "death");
   self setclientomnvar("ui_aura_regen", 0);
   self notify("auraRegen_cleanupLuaDamagePublic");
 }

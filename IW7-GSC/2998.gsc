@@ -135,14 +135,16 @@ func_39E8(var_0) {
     } else {
       var_1 = ["cannon_small_ca", "cannon_flak_ca", "cannon_missile_ca"];
     }
-  } else if(self.var_6A8D == "un")
+  } else if(self.var_6A8D == "un") {
     var_1 = ["cannon_large_un"];
+  }
   else if(issubstr(self.classname, "missileboat")) {
     if(!issubstr(self.classname, "plane")) {
       var_1 = ["cannon_missile_ca_hardpoint", "cannon_small_ca"];
     }
-  } else
+  } else {
     var_1 = ["cannon_large_ca"];
+  }
 
   if(var_1.size == 0) {
     return;
@@ -293,13 +295,15 @@ func_39EA(var_0, var_1) {
             } else if(var_5 == "cannon_missile_ca" && scripts\engine\utility::mod(var_7, level.var_C214) == 1) {
               func_39E6(var_6, var_5, var_13, var_7);
             }
-          } else
+          } else {
             func_107FD(var_6, var_5, var_9);
+          }
 
           var_11++;
           var_7++;
-        } else
+        } else {
           break;
+        }
 
         if(var_11 >= 8) {
           var_11 = 0;
@@ -645,8 +649,9 @@ func_1072D(var_0, var_1, var_2) {
     if(scripts\engine\utility::is_true(self.spawn_hidden_turrets)) {
       var_3 hide();
     }
-  } else
+  } else {
     var_3 = spawnStruct();
+  }
 
   var_3.class = var_1;
   var_3.tag = var_2;
@@ -1041,12 +1046,14 @@ func_6D4D(var_0, var_1, var_2, var_3) {
     if(scripts\engine\utility::is_true(self.var_6D40)) {
       var_2 = "tag_flash_2";
       self.var_6D40 = 0;
-    } else
+    } else {
       self.var_6D40 = 1;
+    }
 
     playFXOnTag(scripts\engine\utility::getfx(var_5.var_BDFF), self, var_2);
-  } else if(scripts\sp\utility::hastag(self.model, "TAG_FLASH"))
+  } else if(scripts\sp\utility::hastag(self.model, "TAG_FLASH")) {
     playFXOnTag(scripts\engine\utility::getfx(var_5.var_BDFF), self, "TAG_FLASH");
+  }
   else {
     playFX(scripts\engine\utility::getfx(var_5.var_BDFF), var_0, var_1);
   }
@@ -1090,8 +1097,9 @@ func_39A3(var_0) {
     } else {
       thread func_39A5();
     }
-  } else
+  } else {
     func_39A4();
+  }
 }
 
 func_39A5() {
@@ -1707,7 +1715,7 @@ func_39B6() {
 
 func_39F0(var_0, var_1, var_2, var_3) {
   if(isDefined(self.turrets["cap_turret_missile_barrage"])) {
-    self.turrets["cap_turret_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_missile_barrage"]);
+    self.turrets["cap_turret_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_missile_barrage"]);
 
     if(self.turrets["cap_turret_missile_barrage"].size > 0) {
       thread func_39B7("cap_turret_missile_barrage", var_2, var_3);
@@ -1715,7 +1723,7 @@ func_39F0(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(self.var_8B4F["cap_hardpoint_missile_barrage"])) {
-    self.var_8B4F["cap_hardpoint_missile_barrage"] = scripts\engine\utility::array_removeundefined(self.var_8B4F["cap_hardpoint_missile_barrage"]);
+    self.var_8B4F["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.var_8B4F["cap_hardpoint_missile_barrage"]);
 
     if(self.var_8B4F["cap_hardpoint_missile_barrage"].size > 0) {
       thread func_39B8("cap_hardpoint_missile_barrage", var_2, var_3);
@@ -1929,8 +1937,9 @@ func_39E3(var_0, var_1) {
       } else {
         var_3 = randomfloatrange(var_5.var_13536[0], var_5.var_13536[1]);
       }
-    } else
+    } else {
       var_3 = 1;
+    }
 
     var_8 = 1;
 
@@ -1971,8 +1980,9 @@ func_39E3(var_0, var_1) {
             self.var_B04C = 1;
             self.var_B04A playLoopSound(self.var_10241.var_6D35);
           }
-        } else if(isDefined(self.var_10241.var_6D33))
+        } else if(isDefined(self.var_10241.var_6D33)) {
           thread scripts\engine\utility::play_sound_in_space(self.var_10241.var_6D33, self.origin);
+        }
       }
 
       foreach(var_10 in var_2) {
@@ -2139,8 +2149,9 @@ func_B2CA(var_0, var_1) {
             self.var_114FB = level.var_D127;
             thread func_12A46(self.var_114FB);
             return;
-          } else
+          } else {
             self notify("stop_debug_line_loop");
+          }
         }
       }
     }
@@ -2216,8 +2227,9 @@ func_11547() {
         self settargetentity(self.var_114FB, (0, 0, 0));
         thread func_4180();
         break;
-      } else
+      } else {
         var_0 = var_0 + 1;
+      }
 
       wait 0.05;
     }
@@ -2503,12 +2515,14 @@ func_88BC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       if(var_12 < 0) {
         var_12 = 0.01;
       }
-    } else
+    } else {
       var_12 = var_4.var_DCCC;
+    }
 
     var_13 = var_4.var_32BA + randomfloatrange(-1 * var_12, var_12);
-  } else
+  } else {
     var_13 = var_4.var_DCCA;
+  }
 
   var_14 = undefined;
   var_15 = undefined;
@@ -2913,8 +2927,9 @@ func_39B7(var_0, var_1, var_2) {
             thread func_399B(var_11, var_1);
           }
         }
-      } else if(isDefined(var_6.var_10943))
+      } else if(isDefined(var_6.var_10943)) {
         self[[var_6.var_10943]](var_0, var_6, var_3, var_7);
+      }
       else {
         var_13 = 0;
 
@@ -2978,7 +2993,7 @@ func_39B8(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("entitydeleted");
   self.team = self.script_team;
-  self.var_8B4F[var_0] = scripts\engine\utility::array_removeundefined(self.var_8B4F[var_0]);
+  self.var_8B4F[var_0] = ::scripts\engine\utility::array_removeundefined(self.var_8B4F[var_0]);
 
   if(self.var_8B4F[var_0].size == 0) {
     return;
@@ -3023,7 +3038,7 @@ func_39B8(var_0, var_1, var_2, var_3, var_4) {
     var_11 = 0;
 
     while(var_6 > 0) {
-      self.var_8B4F[var_0] = scripts\engine\utility::array_removeundefined(self.var_8B4F[var_0]);
+      self.var_8B4F[var_0] = ::scripts\engine\utility::array_removeundefined(self.var_8B4F[var_0]);
 
       if(isDefined(self.var_8B4F[var_0]) && self.var_8B4F[var_0].size == 0) {
         return;
@@ -3061,8 +3076,9 @@ func_39B8(var_0, var_1, var_2, var_3, var_4) {
             thread func_399B(var_13, var_1);
           }
         }
-      } else if(isDefined(var_8.var_10943))
+      } else if(isDefined(var_8.var_10943)) {
         self[[var_8.var_10943]](var_0, var_8, var_5, var_9);
+      }
       else {
         var_15 = 0;
 
@@ -3275,8 +3291,9 @@ func_6D51(var_0, var_1, var_2, var_3) {
       var_6.var_AA99 = "capitalship_missile_launch";
       var_6.var_69E9 = "capitalship_cannon_impact";
       var_6 func_0B76::func_A332(var_11, var_12, self, self.var_4D1E.fx.var_B036, undefined, (0, 0, 500), var_10, [self.var_4D1E.fx.var_69DA, "capitalship_cannon_impact", 5], undefined, undefined, undefined, 1);
-    } else
+    } else {
       var_6 func_0B76::func_A332(var_11, var_12, self);
+    }
 
     if(isDefined(var_6) && isDefined(self) && isDefined(self.var_4D1E)) {
       radiusdamage(var_6.origin, self.var_4D1E.var_DCCA, self.var_4D1E.var_B428, self.var_4D1E.var_B73D, self, "MOD_EXPLOSIVE", "viper_missile");
@@ -3660,7 +3677,7 @@ func_B7EA() {
     return;
   }
   self.var_912F = [];
-  self.var_912F["lock_on"] = scripts\sp\hud_util::func_499B("hud_iw7_warning", 256, 64);
+  self.var_912F["lock_on"] = ::scripts\sp\hud_util::func_499B("hud_iw7_warning", 256, 64);
   self.var_912F["lock_on"].alignx = "center";
   self.var_912F["lock_on"].aligny = "top";
   self.var_912F["lock_on"].horzalign = "center";
@@ -3942,8 +3959,9 @@ func_4335(var_0, var_1, var_2, var_3) {
     if(var_6) {
       var_8 = var_3 + "_" + var_7;
       var_9 = func_433A("cap_mons_projectile", var_1, var_8);
-    } else
+    } else {
       var_9 = func_433A("cap_mons_projectile", var_1, var_3);
+    }
 
     if(isDefined(var_9)) {
       if(isDefined(level.var_D127) && var_1 == level.var_D127) {
@@ -3957,8 +3975,9 @@ func_4335(var_0, var_1, var_2, var_3) {
         }
 
         var_9 thread func_433B(self);
-      } else
+      } else {
         var_9 childthread func_4338();
+      }
     }
 
     wait 0.75;
@@ -4045,8 +4064,9 @@ func_4336(var_0, var_1) {
 
     wait 2.0;
     self.anglelerprate = var_4;
-  } else
+  } else {
     self missile_settargetent(var_0, (600, 0, 0));
+  }
 }
 
 func_433A(var_0, var_1, var_2) {

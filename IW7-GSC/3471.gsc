@@ -229,8 +229,9 @@ _box_setactivehelper(var_0, var_1, var_2) {
     }
 
     thread boxthink(var_0);
-  } else
+  } else {
     box_disableplayeruse(var_0);
+  }
 }
 
 box_playerconnected() {

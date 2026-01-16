@@ -127,7 +127,7 @@ func_A86F(var_0, var_1, var_2) {
 
 func_A870(var_0, var_1, var_2, var_3) {
   self endon("death");
-  self.triggerportableradarping = var_1;
+  self.owner = var_1;
   var_4 = gettime() + 300000;
   while(gettime() < var_4) {
     wait(1);
@@ -176,7 +176,7 @@ func_4CDE(var_0, var_1, var_2, var_3) {
   for(var_8 = 0; var_8 < var_5; var_8++) {
     wait(var_6);
     if(isalive(self)) {
-      if(isDefined(var_3.triggerportableradarping) && var_3.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
+      if(isDefined(var_3.owner) && var_3.owner scripts\cp\utility::is_valid_player(1)) {
         self dodamage(var_7, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", "zmb_imsprojectile_mp");
         continue;
       }

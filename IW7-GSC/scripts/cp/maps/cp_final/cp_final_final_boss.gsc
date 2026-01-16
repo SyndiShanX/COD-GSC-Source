@@ -69,19 +69,19 @@ bossfight_loadout() {
   var_8 = 300;
   level thread auto_start_boss_fight(var_8);
   var_9 = scripts\engine\utility::getstructarray("afterlife_selfrevive_door", "script_noteworthy");
-  foreach(var_0B in var_9) {
-    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0B);
+  foreach(var_11 in var_9) {
+    scripts\cp\cp_interaction::remove_from_current_interaction_list(var_11);
   }
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy"));
-  var_0D = getent("bossfight_ala_clip", "targetname");
-  var_0D solid();
-  var_0E = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
-  var_0E = scripts\engine\utility::array_randomize(var_0E);
+  var_13 = getent("bossfight_ala_clip", "targetname");
+  var_13 solid();
+  var_14 = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
+  var_14 = scripts\engine\utility::array_randomize(var_14);
   foreach(var_10, var_1 in level.players) {
     var_1.ability_invulnerable = 1;
-    var_1 setorigin(var_0E[var_10].origin);
-    var_1 setplayerangles(var_0E[var_10].angles);
+    var_1 setorigin(var_14[var_10].origin);
+    var_1 setplayerangles(var_14[var_10].angles);
   }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("meph_perks", "script_noteworthy"));
@@ -314,7 +314,7 @@ play_meph_song(var_0, var_1) {
     wait(2.5);
     var_2 = spawn("script_origin", var_0);
     var_2 playLoopSound(var_1);
-    level scripts\engine\utility::waittill_any_3("game_ended", "FINAL_BOSS_VICTORY");
+    level scripts\engine\utility::waittill_any("game_ended", "FINAL_BOSS_VICTORY");
     var_2 stoploopsound();
     wait(0.1);
     var_2 delete();
@@ -704,10 +704,10 @@ perframeupdate() {
               var_2.talisman = undefined;
             }
 
-            foreach(var_0B in var_0.circles) {
-              if(var_0B.state != "ACTIVE") {
-                var_0B.state = "DORMANT";
-                scripts\cp\cp_interaction::add_to_current_interaction_list(var_0B.interaction);
+            foreach(var_11 in var_0.circles) {
+              if(var_11.state != "ACTIVE") {
+                var_11.state = "DORMANT";
+                scripts\cp\cp_interaction::add_to_current_interaction_list(var_11.interaction);
               }
             }
 
@@ -727,20 +727,20 @@ perframeupdate() {
       }
 
       if(var_2.state == "CHARGING") {
-        var_0F = int(floor(var_2.var_3CB7 * 10));
+        var_15 = int(floor(var_2.var_3CB7 * 10));
       } else {
-        var_0F = int(ceil(var_0F.var_3CB7 * 10));
+        var_15 = int(ceil(var_15.var_3CB7 * 10));
       }
 
       if(var_2.state == "CHARGING") {
         var_10 = int(floor(var_2.previouscharge * 10));
       } else {
-        var_10 = int(ceil(var_0F.previouscharge * 10));
+        var_10 = int(ceil(var_15.previouscharge * 10));
       }
 
-      if(var_0F != var_10) {
-        var_2.model setscriptablepartstate("meter", "" + var_0F);
-        if(var_0F > var_10) {
+      if(var_15 != var_10) {
+        var_2.model setscriptablepartstate("meter", "" + var_15);
+        if(var_15 > var_10) {
           playsoundatpos(var_2.model.origin + (0, 0, 20), "cp_final_talisman_count_up");
         } else {
           playsoundatpos(var_2.model.origin + (0, 0, 20), "cp_final_talisman_count_down");
@@ -1043,7 +1043,7 @@ entanglerhitmonitor(var_0) {
   for(;;) {
     var_2 = 0;
     for(;;) {
-      var_3 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_1.entangler_track_update_frequency, var_1.entangler_hit_same_target_notify);
+      var_3 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death(var_1.entangler_track_update_frequency, var_1.entangler_hit_same_target_notify);
       if(var_3 == var_1.entangler_hit_same_target_notify) {
         var_2 = var_2 + var_1.entangler_track_update_frequency;
         var_4 = min(var_2 / var_1.entangler_track_time, 1);
@@ -1261,14 +1261,14 @@ frenzyprogressmonitor() {
 
   level notify("STOP_FRENZY_SPAWN");
   level notify("STOP_FRENZY_ARMAGEDDON");
-  foreach(var_0D in level.agentarray) {
-    if(var_0D == level.dlc4_boss) {
+  foreach(var_13 in level.agentarray) {
+    if(var_13 == level.dlc4_boss) {
       continue;
     }
 
-    if(isalive(var_0D) && isDefined(var_0D.isactive) && var_0D.isactive) {
-      var_0D.nodamagescale = 1;
-      var_0D dodamage(var_0D.health + 1000, var_0.boss.arenacenter);
+    if(isalive(var_13) && isDefined(var_13.isactive) && var_13.isactive) {
+      var_13.nodamagescale = 1;
+      var_13 dodamage(var_13.health + 1000, var_0.boss.arenacenter);
     }
   }
 

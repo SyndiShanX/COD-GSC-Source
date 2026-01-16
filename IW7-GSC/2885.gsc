@@ -803,8 +803,9 @@ func_495C(var_0) {
         if(scripts\engine\utility::cointoss()) {
           var_6.y = var_7.y - var_6.height;
         }
-      } else
+      } else {
         level.var_3F69.var_A917 = [];
+      }
 
       level.var_3F69.var_A917[level.var_3F69.var_A917.size] = var_2;
     }
@@ -840,8 +841,9 @@ func_495C(var_0) {
         if(scripts\engine\utility::cointoss()) {
           var_6.y = var_7.y - var_6.height;
         }
-      } else
+      } else {
         level.var_7661.var_A917 = [];
+      }
 
       level.var_7661.var_A917[level.var_7661.var_A917.size] = var_2;
     }

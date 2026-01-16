@@ -594,8 +594,9 @@ find_camp_node_worker() {
         } else if(var_13 == 3 && var_14) {
           var_12 = 0;
         }
-      } else
+      } else {
         var_12 = 0;
+      }
 
       if(var_12) {
         wait 0.05;

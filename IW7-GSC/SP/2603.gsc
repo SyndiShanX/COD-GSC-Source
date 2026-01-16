@@ -49,7 +49,7 @@ func_103BC() {
 }
 
 shoulduselasertag() {
-  var_0 = getweaponbasename(self.var_394);
+  var_0 = getweaponbasename(self.weapon);
   switch (var_0) {
     case "iw7_m8":
       return 1;
@@ -102,7 +102,7 @@ func_103BB() {
   var_0 = getlaserstartpoint();
   self.var_103A9 = spawn("script_model", var_0);
   self.var_103A9 setModel("tag_laser");
-  self.var_103A9 func_8575(self.var_394);
+  self.var_103A9 func_8575(self.weapon);
   self.var_103A9 setotherent(self);
   self.var_103A9.origin = var_0;
   self func_857A("interpolate");
@@ -200,31 +200,31 @@ func_E24D(var_0, var_1, var_2, var_3) {
 
       var_9 = var_8 - self.origin;
       var_9 = (var_9[0], var_9[1], 0);
-      var_0A = vectornormalize(var_9);
+      var_10 = vectornormalize(var_9);
       if(scripts\engine\utility::istrue(var_3)) {
         var_6 = var_8;
         var_6 = var_6 + (0, 0, randomfloatrange(12, 36));
       } else {
-        var_6 = var_8 - var_0A * randomfloatrange(120, 180);
+        var_6 = var_8 - var_10 * randomfloatrange(120, 180);
       }
 
-      var_0B = vectorcross(var_0A, (0, 0, 1));
-      var_0C = randomfloatrange(6, 36);
+      var_11 = vectorcross(var_10, (0, 0, 1));
+      var_12 = randomfloatrange(6, 36);
       if(scripts\engine\utility::istrue(var_3)) {
-        var_0C = randomfloatrange(12, 24);
+        var_12 = randomfloatrange(12, 24);
       }
 
       if(isDefined(var_7)) {
-        var_0D = vectordot(var_7, var_0B);
-        if(var_0D < 0) {
-          var_6 = var_6 + var_0B * var_0C;
+        var_13 = vectordot(var_7, var_11);
+        if(var_13 < 0) {
+          var_6 = var_6 + var_11 * var_12;
         } else {
-          var_6 = var_6 - var_0B * var_0C;
+          var_6 = var_6 - var_11 * var_12;
         }
       } else if(randomintrange(0, 2)) {
-        var_6 = var_6 + var_0B * var_0C;
+        var_6 = var_6 + var_11 * var_12;
       } else {
-        var_6 = var_6 - var_0B * var_0C;
+        var_6 = var_6 - var_11 * var_12;
       }
     }
 
@@ -292,7 +292,7 @@ func_45E5(var_0) {
   var_1 = 1;
   var_2 = 0;
   if(isDefined(var_0.target)) {
-    var_1 = self getpersstat(var_0.target);
+    var_1 = self cansee(var_0.target);
     if(isDefined(self.var_45E2) && isDefined(self.var_45E2.target) && self.var_45E2.target != var_0.target) {
       var_2 = 1;
     }
@@ -313,7 +313,7 @@ func_45E5(var_0) {
   } else if(scripts\engine\utility::istrue(self.var_45E2.var_103A6)) {
     self func_857A("interpolate");
     self.var_45E2.var_103A6 = undefined;
-    if(isDefined(var_0.target) && isplayer(var_0.target) && self getpersstat(var_0.target)) {
+    if(isDefined(var_0.target) && isplayer(var_0.target) && self cansee(var_0.target)) {
       func_E24D(var_0, var_2, undefined, 1);
     }
   }
@@ -475,19 +475,19 @@ func_11AF8(var_0) {
         var_9 = var_8.var_FECF;
       }
 
-      var_0A = self func_8164();
-      var_0B = isDefined(var_0A);
-      if(var_0B) {
-        var_0C = var_0A func_851F();
-        var_0D = anglesToForward(self.angles);
-        var_0E = rotatevector(var_0D, var_0C);
-        var_9 = var_7 + var_0E * 512;
+      var_10 = self getturret();
+      var_11 = isDefined(var_10);
+      if(var_11) {
+        var_12 = var_10 func_851F();
+        var_13 = anglesToForward(self.angles);
+        var_14 = rotatevector(var_13, var_12);
+        var_9 = var_7 + var_14 * 512;
       } else if(scripts\asm\asm_bb::func_2985() && isDefined(self._blackboard.shootparams.pos)) {
         if(isDefined(self._blackboard.shootparams.var_29AF)) {
-          var_0F = func_45E5(self._blackboard.shootparams);
+          var_15 = func_45E5(self._blackboard.shootparams);
           var_9 = func_36DA(self._blackboard.shootparams);
           self.var_45E2.var_1A2B = var_9;
-          if(var_0F) {
+          if(var_15) {
             func_11B0C();
           } else {
             func_11B0B();
@@ -563,7 +563,7 @@ func_11AF8(var_0) {
       if(squared(var_1F) > var_1B) {
         var_20 = var_1F * 0.4;
         var_19 = self.asm.var_D8BB + clamp(var_20, -1 * var_5, var_5);
-        var_19 = clamp(var_19, self.var_368, self.isbot);
+        var_19 = clamp(var_19, self.upaimlimit, self.downaimlimit);
       }
     }
 
@@ -586,7 +586,7 @@ func_11AFD() {
   }
 
   var_0 = clamp(self.asm.var_D8C7, self.setdevdvar, self.setmatchdatadef);
-  var_1 = clamp(self.asm.var_D8BB, self.var_368, self.isbot);
+  var_1 = clamp(self.asm.var_D8BB, self.upaimlimit, self.downaimlimit);
   if(isDefined(self.asm.var_58EC) && self.asm.var_58EC) {
     func_11AFF(var_1, var_0);
     return;
@@ -644,10 +644,10 @@ func_11AFE(var_0, var_1) {
   var_7 = 0;
   var_8 = 0;
   var_9 = 0;
-  var_0A = 0;
-  var_0B = 0;
+  var_10 = 0;
+  var_11 = 0;
   if(var_1 < 0) {
-    var_0A = var_1 / self.setdevdvar * self.a.var_1A4B;
+    var_10 = var_1 / self.setdevdvar * self.a.var_1A4B;
     var_9 = 1;
   } else if(var_1 > 0) {
     var_8 = var_1 / self.setmatchdatadef * self.a.var_1A4B;
@@ -655,17 +655,17 @@ func_11AFE(var_0, var_1) {
   }
 
   if(var_0 < 0) {
-    var_0B = var_0 / self.var_368 * self.a.var_1A4B;
+    var_11 = var_0 / self.upaimlimit * self.a.var_1A4B;
     var_9 = 1;
   } else if(var_0 > 0) {
-    var_7 = var_0 / self.isbot * self.a.var_1A4B;
+    var_7 = var_0 / self.downaimlimit * self.a.var_1A4B;
     var_9 = 1;
   }
 
   self func_82AC(var_3, var_7, 0.1, 1, 1);
   self func_82AC(var_4, var_8, 0.1, 1, 1);
-  self func_82AC(var_5, var_0A, 0.1, 1, 1);
-  self func_82AC(var_6, var_0B, 0.1, 1, 1);
+  self func_82AC(var_5, var_10, 0.1, 1, 1);
+  self func_82AC(var_6, var_11, 0.1, 1, 1);
   if(isDefined(var_2)) {
     self func_82AC(var_2, var_9, 0.1, 1, 1);
   }
@@ -680,41 +680,41 @@ func_11AFF(var_0, var_1) {
   var_7 = self.asm.var_11A90.var_AD99;
   var_8 = self.asm.var_11A90.var_AD9A;
   var_9 = self.asm.var_11A90.var_AD9B;
-  var_0A = [var_6, var_9, var_8, var_7, var_5, var_2, var_3, var_4, var_6];
-  var_0B = [-180, -135, -90, -45, 0, 45, 90, 135, 180];
-  var_0C = [(-1, 0, 0), (-0.707, -0.707, 0), (0, -1, 0), (0.707, -0.707, 0), (1, 0, 0), (0.707, 0.707, 0), (0, 1, 0), (-0.707, 0.707, 0), (-1, 0, 0)];
-  var_0D = [80, 91.787, 45, 91.787, 80, 91.787, 45, 91.787, 80];
-  var_0E = (var_1, var_0, 0);
-  var_0F = length2d(var_0E);
-  var_10 = vectornormalize(var_0E);
+  var_10 = [var_6, var_9, var_8, var_7, var_5, var_2, var_3, var_4, var_6];
+  var_11 = [-180, -135, -90, -45, 0, 45, 90, 135, 180];
+  var_12 = [(-1, 0, 0), (-0.707, -0.707, 0), (0, -1, 0), (0.707, -0.707, 0), (1, 0, 0), (0.707, 0.707, 0), (0, 1, 0), (-0.707, 0.707, 0), (-1, 0, 0)];
+  var_13 = [80, 91.787, 45, 91.787, 80, 91.787, 45, 91.787, 80];
+  var_14 = (var_1, var_0, 0);
+  var_15 = length2d(var_14);
+  var_10 = vectornormalize(var_14);
   var_11 = vectortoyaw(var_10);
   var_11 = angleclamp180(var_11);
-  for(var_12 = 0; var_11 > var_0B[var_12]; var_12++) {}
+  for(var_12 = 0; var_11 > var_11[var_12]; var_12++) {}
 
   if(var_12 == 0) {
     var_12 = 1;
   }
 
-  for(var_13 = 0; var_13 < var_0A.size; var_13++) {
+  for(var_13 = 0; var_13 < var_10.size; var_13++) {
     if(var_13 == var_12 || var_13 == var_12 - 1) {
-      var_14 = clamp(var_0F / var_0D[var_13], 0, 1);
-      var_15 = acos(vectordot(var_0C[var_13], var_10));
-      var_16 = clamp(1 - var_15 / var_0D[var_13], 0, 1);
-      var_17 = self getscoreinfocategory(var_0A[var_13]);
+      var_14 = clamp(var_15 / var_13[var_13], 0, 1);
+      var_15 = acos(vectordot(var_12[var_13], var_10));
+      var_16 = clamp(1 - var_15 / var_13[var_13], 0, 1);
+      var_17 = self getscoreinfocategory(var_10[var_13]);
       if(var_17 > 0) {
-        var_18 = getanimlength(var_0A[var_13]);
+        var_18 = getanimlength(var_10[var_13]);
         var_19 = var_14 - var_17 * var_18 / 0.05;
-        self func_82AC(var_0A[var_13], var_16, 0.05, var_19);
+        self func_82AC(var_10[var_13], var_16, 0.05, var_19);
       } else {
-        self func_82AC(var_0A[var_13], var_16, 0.05, 0);
-        self func_82B0(var_0A[var_13], var_14);
+        self func_82AC(var_10[var_13], var_16, 0.05, 0);
+        self func_82B0(var_10[var_13], var_14);
       }
 
       continue;
     }
 
-    if(var_0A[var_13] != var_0A[var_12] && var_0A[var_13] != var_0A[var_12 - 1]) {
-      self clearanim(var_0A[var_13], 0.05);
+    if(var_10[var_13] != var_10[var_12] && var_10[var_13] != var_10[var_12 - 1]) {
+      self clearanim(var_10[var_13], 0.05);
     }
   }
 }
@@ -751,7 +751,7 @@ func_1A3A() {
     return 1;
   }
 
-  var_0 = self func_8164();
+  var_0 = self getturret();
   if(isDefined(self._blackboard.shootparams.var_29AF)) {
     if(!isDefined(self.var_45E2)) {
       return 0;
@@ -786,27 +786,27 @@ func_1A3A() {
     var_7 = vectortoangles(var_6);
     var_8 = var_4 - var_2;
     var_9 = rotatevectorinverted(var_8, self.angles);
-    var_0A = vectortoangles(var_9);
+    var_10 = vectortoangles(var_9);
   } else if(isDefined(var_3)) {
-    var_0B = var_3 getturrettarget(1);
-    return isDefined(var_0B);
+    var_11 = var_3 getturrettarget(1);
+    return isDefined(var_11);
   } else {
     var_7 = self getspawnpointdist();
-    var_0A = vectortoangles(var_0A - var_4);
+    var_10 = vectortoangles(var_10 - var_4);
   }
 
-  var_0C = level.var_1A52;
-  var_0D = level.var_1A51;
-  var_0E = level.var_1A44;
-  var_0F = scripts\engine\utility::absangleclamp180(var_0A[1] - var_0B[1]);
-  if(var_0F > var_0C) {
-    if(var_0F > var_0D || distancesquared(self getEye(), var_7) > level.var_1A50) {
+  var_12 = level.var_1A52;
+  var_13 = level.var_1A51;
+  var_14 = level.var_1A44;
+  var_15 = scripts\engine\utility::absangleclamp180(var_10[1] - var_11[1]);
+  if(var_15 > var_12) {
+    if(var_15 > var_13 || distancesquared(self getEye(), var_7) > level.var_1A50) {
       return 0;
     }
   }
 
-  var_10 = scripts\engine\utility::absangleclamp180(var_0A[0] - var_0B[0]);
-  if(var_10 > var_0E) {
+  var_10 = scripts\engine\utility::absangleclamp180(var_10[0] - var_11[0]);
+  if(var_10 > var_14) {
     return 0;
   }
 

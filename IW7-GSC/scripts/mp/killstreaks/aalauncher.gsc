@@ -4,7 +4,7 @@
 *************************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("aa_launcher", ::func_6D69, undefined, ::func_5FBC, undefined, ::func_11378);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("aa_launcher", ::func_6D69, undefined, ::func_5FBC, undefined, ::func_11378);
   scripts\mp\laserguidedlauncher::func_AC0B("vfx\core\mp\killstreaks\vfx_maaws_split", "vfx\core\mp\killstreaks\vfx_maaws_homing");
 }
 
@@ -32,7 +32,7 @@ func_6D69(var_0) {
 }
 
 func_11378(var_0) {
-  self setweaponammoclip(var_0.var_394, var_0.var_14FF);
+  self setweaponammoclip(var_0.weapon, var_0.var_14FF);
   thread monitorweaponswitch(var_0);
 }
 

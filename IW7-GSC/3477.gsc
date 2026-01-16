@@ -53,8 +53,9 @@ func_526D(var_0, var_1, var_2) {
     var_3.weaponname = var_1;
     self.marker = var_3;
     thread func_526A(var_0, var_3, var_2);
-  } else
+  } else {
     var_3 delete();
+  }
 
   self notify("designator_finished");
 }

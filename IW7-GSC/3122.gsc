@@ -1215,23 +1215,23 @@ func_11C0D(var_0, var_1, var_2, var_3) {
 }
 
 func_11C19(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11C33(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11C69(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11EAD(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11EC3(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11F30(var_0, var_1, var_2, var_3) {
@@ -1275,11 +1275,11 @@ func_11E71(var_0, var_1, var_2, var_3) {
 }
 
 func_11E0A(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11E1E(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11E31(var_0, var_1, var_2, var_3) {
@@ -1307,11 +1307,11 @@ func_11DD6(var_0, var_1, var_2, var_3) {
 }
 
 func_11D6D(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11D78(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11D8E(var_0, var_1, var_2, var_3) {
@@ -1335,11 +1335,11 @@ func_11D42(var_0, var_1, var_2, var_3) {
 }
 
 func_11CD9(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11CED(var_0, var_1, var_2, var_3) {
-  return weaponclass(self.var_394) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
+  return weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
 func_11D00(var_0, var_1, var_2, var_3) {

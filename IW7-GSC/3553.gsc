@@ -30,7 +30,7 @@ func_44F4() {
 
 func_4500() {
   self endon("coneFlash_end");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   thread func_44F4();
 }
 
@@ -56,46 +56,46 @@ func_44F5() {
   var_8 = -96 * var_6;
   var_9 = var_1 + var_8;
   thread func_44F6(var_1, var_2, var_5);
-  var_0A = 0;
-  foreach(var_0C in var_0) {
-    if(!func_44FC(var_0C)) {
+  var_10 = 0;
+  foreach(var_12 in var_0) {
+    if(!func_44FC(var_12)) {
       continue;
     }
 
-    if(!scripts\mp\utility::pointvscone(var_0C gettagorigin("j_spineupper"), var_9, var_6, var_7, 550, 96, 22, 72)) {
+    if(!scripts\mp\utility::pointvscone(var_12 gettagorigin("j_spineupper"), var_9, var_6, var_7, 550, 96, 22, 72)) {
       continue;
     }
 
-    var_4 = physics_raycast(self getEye(), var_0C getEye(), var_3, undefined, 0, "physicsquery_closest");
+    var_4 = physics_raycast(self getEye(), var_12 getEye(), var_3, undefined, 0, "physicsquery_closest");
     if(isDefined(var_4) && var_4.size != 0) {
       continue;
     }
 
-    var_0D = var_0C gettagorigin("j_spineupper") - var_9;
-    var_0E = vectordot(var_6, var_0D);
-    if(var_0E <= 550) {
-      if(var_0E <= 296) {
-        var_0C dodamage(45, self.origin, self, self, "MOD_IMPACT", "coneflash_mp");
+    var_13 = var_12 gettagorigin("j_spineupper") - var_9;
+    var_14 = vectordot(var_6, var_13);
+    if(var_14 <= 550) {
+      if(var_14 <= 296) {
+        var_12 dodamage(45, self.origin, self, self, "MOD_IMPACT", "coneflash_mp");
       } else {
-        var_0C dodamage(27, self.origin, self, self, "MOD_IMPACT", "coneflash_mp");
+        var_12 dodamage(27, self.origin, self, self, "MOD_IMPACT", "coneflash_mp");
       }
     }
 
-    var_0F = min(max(var_0E, 296), 550);
-    var_10 = 1 - var_0F - 296 / 254;
-    var_11 = 0.5 * 1 + vectordot(var_6, vectornormalize(var_0D));
-    thread func_44F0(var_0C, var_9, var_10, var_11);
-    var_0A++;
+    var_15 = min(max(var_14, 296), 550);
+    var_10 = 1 - var_15 - 296 / 254;
+    var_11 = 0.5 * 1 + vectordot(var_6, vectornormalize(var_13));
+    thread func_44F0(var_12, var_9, var_10, var_11);
+    var_10++;
   }
 
-  func_44F8(var_0A);
+  func_44F8(var_10);
 }
 
 func_44F0(var_0, var_1, var_2, var_3) {
   var_0 endon("disconnect");
   var_0 notify("flashbang", var_1, var_2, var_3, self, self.team, 1.33);
   scripts\mp\gamescore::func_11ACE(self, var_0, "power_coneFlash");
-  var_0 scripts\engine\utility::waittill_any_timeout_1(1.33, "death");
+  var_0 scripts\engine\utility::waittill_any_timeout(1.33, "death");
   if(isDefined(self)) {
     scripts\mp\gamescore::untrackdebuffassist(self, var_0, "power_coneFlash");
   }
@@ -185,7 +185,7 @@ func_44F2() {
 }
 
 func_4501() {
-  scripts\engine\utility::waittill_any_3("coneflash_unset", "disconnect");
+  scripts\engine\utility::waittill_any("coneflash_unset", "disconnect");
   func_44F2();
 }
 

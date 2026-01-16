@@ -6,7 +6,7 @@
 init() {
   level.rockets = [];
   level.remotekillstreaks["explode"] = loadfx("vfx\core\expl\aerial_explosion");
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("orbital_deployment", ::func_128F2);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("orbital_deployment", ::func_128F2);
   level._effect["odin_clouds"] = loadfx("vfx\core\mp\killstreaks\odin\odin_parallax_clouds");
   level._effect["odin_fisheye"] = loadfx("vfx\code\screen\vfx_scrnfx_odin_fisheye.vfx");
   level._effect["odin_targeting"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_marker_good_target");
@@ -27,9 +27,9 @@ init() {
   level.var_C6D7["orbital_deployment"].var_1352C = "odin_targets_killed";
   level.var_C6D7["orbital_deployment"].var_12B20 = 3;
   level.var_C6D7["orbital_deployment"].var_12B80 = &"KILLSTREAKS_ODIN_UNAVAILABLE";
-  level.var_C6D7["orbital_deployment"].var_394["juggernaut"] = spawnStruct();
-  level.var_C6D7["orbital_deployment"].var_394["juggernaut"].var_D5E4 = "null";
-  level.var_C6D7["orbital_deployment"].var_394["juggernaut"].var_D5DD = "odin_jugg_launch";
+  level.var_C6D7["orbital_deployment"].weapon["juggernaut"] = spawnStruct();
+  level.var_C6D7["orbital_deployment"].weapon["juggernaut"].var_D5E4 = "null";
+  level.var_C6D7["orbital_deployment"].weapon["juggernaut"].var_D5DD = "odin_jugg_launch";
   if(!isDefined(level.heli_pilot_mesh)) {
     level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
     if(!isDefined(level.heli_pilot_mesh)) {} else {
@@ -101,7 +101,7 @@ func_49FB() {
   }
 
   var_2.getclosestpointonnavmesh3d = 40;
-  var_2.triggerportableradarping = self;
+  var_2.owner = self;
   var_2.team = self.team;
   var_2.streakname = "orbital_deployment";
   level.var_163A["orbital_deployment"] = 1;
@@ -118,7 +118,7 @@ func_49FB() {
 func_C6D4() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_0 endon("juggernaut_dead");
   if(!isai(var_0)) {
@@ -159,9 +159,9 @@ func_7E6A(var_0) {
 func_C6D3() {
   level endon("game_ended");
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
   var_0 = level.var_C6D7["orbital_deployment"];
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0.timeout);
   thread func_C6C7();
@@ -171,14 +171,14 @@ func_C6D0() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
   thread func_C6C7();
 }
 
 func_C6D2() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_1 = var_0 getvieworigin();
   var_2 = var_1 + anglesToForward(self gettagangles("tag_player")) * 10000;
@@ -257,8 +257,8 @@ func_C6C7(var_0) {
   self notify("leaving");
   var_1 = level.var_C6D7["orbital_deployment"];
   scripts\mp\utility::leaderdialog(var_1.votimedout);
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping func_C6C5(self, var_0);
+  if(isDefined(self.owner)) {
+    self.owner func_C6C5(self, var_0);
   }
 
   self notify("gone");
@@ -308,7 +308,7 @@ func_C6C5(var_0, var_1) {
 
     self stoplocalsound("odin_negative_action");
     self stoplocalsound("odin_positive_action");
-    foreach(var_3 in level.var_C6D7["orbital_deployment"].var_394) {
+    foreach(var_3 in level.var_C6D7["orbital_deployment"].weapon) {
       if(isDefined(var_3.var_D5E4)) {
         self stoplocalsound(var_3.var_D5E4);
       }
@@ -380,7 +380,7 @@ func_10DD4(var_0, var_1, var_2) {
   level thread func_B9CB(self);
   level thread monitorgameend(self);
   level thread monitorobjectivecamera(self);
-  var_3 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(var_2);
+  var_3 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_2);
   if(var_3 == "success") {
     level thread func_1285(var_0, var_1, self, var_2);
   } else {
@@ -407,8 +407,8 @@ func_1285(var_0, var_1, var_2, var_3) {
   var_9 linkto(var_8, "tag_origin");
   var_9 setotherent(var_8);
   var_9.team = var_2.team;
-  var_9.triggerportableradarping = var_2;
-  var_9 scripts\mp\killstreaks\_utility::func_1843(var_3, "Killstreak_Air", var_9.triggerportableradarping, 1);
+  var_9.owner = var_2;
+  var_9 scripts\mp\killstreaks\_utility::func_1843(var_3, "Killstreak_Air", var_9.owner, 1);
   if(scripts\mp\utility::isreallyalive(var_2)) {
     var_2 func_10DD8();
   }
@@ -423,7 +423,7 @@ func_1285(var_0, var_1, var_2, var_3) {
   var_8 thread func_13A22("large_rod");
   var_8.team = var_2.team;
   var_8.type = "remote";
-  var_8.triggerportableradarping = var_2;
+  var_8.owner = var_2;
   var_8 thread scripts\mp\killstreaks\_remotemissile::handledamage();
   level.remotemissileinprogress = 1;
   level thread monitordeath(var_8, 1);
@@ -436,9 +436,9 @@ func_1285(var_0, var_1, var_2, var_3) {
   var_8 thread func_13AA4(var_2);
   var_8 thread func_13AA3(var_2);
   for(;;) {
-    var_0A = var_8 scripts\engine\utility::waittill_any_return("death", "missileTargetSet");
+    var_10 = var_8 scripts\engine\utility::waittill_any_return("death", "missileTargetSet");
     scripts\mp\hostmigration::waittillhostmigrationdone();
-    if(var_0A == "death") {
+    if(var_10 == "death") {
       break;
     }
 
@@ -460,7 +460,7 @@ func_1285(var_0, var_1, var_2, var_3) {
 monitorboost(var_0) {
   var_0 endon("death");
   for(;;) {
-    var_0.triggerportableradarping waittill("missileTargetSet");
+    var_0.owner waittill("missileTargetSet");
     var_0 notify("missileTargetSet");
   }
 }
@@ -608,7 +608,7 @@ func_E474(var_0, var_1, var_2, var_3, var_4) {
 func_10D89(var_0, var_1) {
   var_2 = spawn("script_model", var_0);
   var_2.angles = self.angles;
-  var_2.triggerportableradarping = self;
+  var_2.owner = self;
   var_2.team = self.team;
   self.var_98FF = 0;
   self setorigin(var_0 + (0, 0, 15), 1);

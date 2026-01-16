@@ -44,10 +44,10 @@ func_CAC4(var_0) {
   }
 
   thread func_CAC8();
-  var_0B = func_CAC0(var_5);
-  var_0B thread func_CAB4();
-  var_0B thread func_CAB3();
-  var_0B thread func_CAB6();
+  var_11 = func_CAC0(var_5);
+  var_11 thread func_CAB4();
+  var_11 thread func_CAB3();
+  var_11 thread func_CAB6();
   scripts\mp\powers::func_4575(10, "power_phaseSplit_update", "phaseSplit_end");
   thread func_CABB(1);
 }
@@ -56,7 +56,7 @@ func_CAC8() {
   self endon("death");
   self endon("disconnect");
   self endon("phaseSplit_end");
-  while(!scripts\mp\killstreaks\_emp_common::isemped()) {
+  while(!scripts\mp\killstreaks\emp_common::isemped()) {
     scripts\engine\utility::waitframe();
   }
 
@@ -91,7 +91,7 @@ func_CAC0(var_0) {
     var_1.headmodel = undefined;
   }
 
-  var_1 setModel(var_1.triggerportableradarping.model);
+  var_1 setModel(var_1.owner.model);
   var_1.health = 25;
   var_1 botsetflag("disable_attack", 1);
   var_2 = var_1.origin + anglesToForward(var_1.angles) * 500;
@@ -123,17 +123,17 @@ func_CAB4() {
   var_0 = self func_8113();
   var_0 hide();
   playFX(level.var_CAA3["death"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping func_CABB();
-    if(scripts\mp\utility::isreallyalive(self.triggerportableradarping)) {
-      self.triggerportableradarping iprintlnbold("Clone Destroyed");
+  if(isDefined(self.owner)) {
+    self.owner func_CABB();
+    if(scripts\mp\utility::isreallyalive(self.owner)) {
+      self.owner iprintlnbold("Clone Destroyed");
     }
   }
 }
 
 func_CAB3() {
   self endon("death");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("death", "disconnect", "phaseSplit_end");
+  self.owner scripts\engine\utility::waittill_any("death", "disconnect", "phaseSplit_end");
   self suicide();
 }
 
@@ -148,23 +148,23 @@ func_CAB5() {
 
 func_CAC9() {
   level.agent_funcs["phaseSplitAgent"] = level.agent_funcs["player"];
-  level.agent_funcs["phaseSplitAgent"]["think"] = scripts\mp\killstreaks\_agent_killstreak::squadmate_agent_think;
+  level.agent_funcs["phaseSplitAgent"]["think"] = ::scripts\mp\killstreaks\_agent_killstreak::squadmate_agent_think;
   level.agent_funcs["phaseSplitAgent"]["on_killed"] = ::func_CACA;
-  level.agent_funcs["phaseSplitAgent"]["on_damaged"] = scripts\mp\agents\_agents::on_agent_player_damaged;
-  level.agent_funcs["phaseSplitAgent"]["gametype_update"] = scripts\mp\killstreaks\_agent_killstreak::no_gametype_update;
+  level.agent_funcs["phaseSplitAgent"]["on_damaged"] = ::scripts\mp\agents\_agents::on_agent_player_damaged;
+  level.agent_funcs["phaseSplitAgent"]["gametype_update"] = ::scripts\mp\killstreaks\_agent_killstreak::no_gametype_update;
 }
 
 func_CACA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   scripts\mp\agents\_agents::on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
-  if(isplayer(var_1) && isDefined(self.triggerportableradarping) && var_1 != self.triggerportableradarping) {
-    self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("squad_killed");
+  if(isplayer(var_1) && isDefined(self.owner) && var_1 != self.owner) {
+    self.owner scripts\mp\utility::leaderdialogonplayer("squad_killed");
   }
 
   scripts\mp\agents\agent_utility::deactivateagent();
 }
 
 func_CAB2() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_1 = [];
   var_2 = var_0 getweaponslistprimaries();
   var_3 = [];
@@ -179,7 +179,7 @@ func_CAB2() {
   var_2 = var_3;
   if(var_2.size > 0 && var_2[0] != "none") {
     var_5 = var_2[0];
-    var_1["loadoutPrimary"] = scripts\mp\utility::getweaponrootname(var_5);
+    var_1["loadoutPrimary"] = ::scripts\mp\utility::getweaponrootname(var_5);
     var_6 = getweaponattachments(var_5);
     for(var_4 = 0; var_4 < var_6.size; var_4++) {
       var_7 = scripts\engine\utility::ter_op(var_4 > 0, "loadoutPrimaryAttachment" + var_4 + 1, "loadoutPrimaryAttachment");
@@ -191,7 +191,7 @@ func_CAB2() {
 
   if(var_2.size > 0 && var_2[1] != "none") {
     var_5 = var_2[1];
-    var_1["loadoutSecondary"] = scripts\mp\utility::getweaponrootname(var_5);
+    var_1["loadoutSecondary"] = ::scripts\mp\utility::getweaponrootname(var_5);
     var_6 = getweaponattachments(var_5);
     for(var_4 = 0; var_4 < var_6.size; var_4++) {
       var_7 = scripts\engine\utility::ter_op(var_4 > 0, "loadoutSecondaryAttachment1" + var_4, "loadoutSecondaryAttachment");

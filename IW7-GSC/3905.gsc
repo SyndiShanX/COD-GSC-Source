@@ -54,8 +54,8 @@ func_197A(var_0) {
   self.var_2029 moveto(self.var_2021 + (0, 0, self.var_201E), var_9, 0.1, var_9 - 0.1);
   wait(var_9);
   if(self.var_201F == 0) {
-    var_0A = self.var_201D - self.var_2022 - var_9 - var_8;
-    self.var_2029 moveto(self.var_2029.origin + (0, 0, 10), var_0A);
+    var_10 = self.var_201D - self.var_2022 - var_9 - var_8;
+    self.var_2029 moveto(self.var_2029.origin + (0, 0, 10), var_10);
   }
 }
 

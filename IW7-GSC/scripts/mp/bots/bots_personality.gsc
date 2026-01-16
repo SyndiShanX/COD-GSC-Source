@@ -69,27 +69,27 @@ bot_balance_personality() {
     }
   }
 
-  var_0B = undefined;
-  while(!isDefined(var_0B)) {
-    for(var_0C = level.bot_personality_types_desired; var_0C.size > 0; var_0C[var_0D] = undefined) {
-      var_0D = scripts\mp\bots\_bots_util::bot_get_string_index_for_integer(var_0C, randomint(var_0C.size));
-      var_1[var_0D] = var_1[var_0D] - level.bot_personality_types_desired[var_0D];
-      if(var_1[var_0D] < 0) {
-        var_0B = var_0D;
+  var_11 = undefined;
+  while(!isDefined(var_11)) {
+    for(var_12 = level.bot_personality_types_desired; var_12.size > 0; var_12[var_13] = undefined) {
+      var_13 = scripts\mp\bots\_bots_util::bot_get_string_index_for_integer(var_12, randomint(var_12.size));
+      var_1[var_13] = var_1[var_13] - level.bot_personality_types_desired[var_13];
+      if(var_1[var_13] < 0) {
+        var_11 = var_13;
         break;
       }
     }
   }
 
-  var_0E = undefined;
-  var_0F = undefined;
+  var_14 = undefined;
+  var_15 = undefined;
   var_10 = 9999;
   var_11 = undefined;
   var_12 = -9999;
-  var_13 = scripts\engine\utility::array_randomize(level.bot_personality[var_0B]);
+  var_13 = scripts\engine\utility::array_randomize(level.bot_personality[var_11]);
   foreach(var_5 in var_13) {
     if(var_0[var_5] < var_10) {
-      var_0F = var_5;
+      var_15 = var_5;
       var_10 = var_0[var_5];
     }
 
@@ -100,13 +100,13 @@ bot_balance_personality() {
   }
 
   if(var_12 - var_10 >= 2) {
-    var_0E = var_0F;
+    var_14 = var_15;
   } else {
-    var_0E = scripts\engine\utility::random(level.bot_personality[var_0B]);
+    var_14 = scripts\engine\utility::random(level.bot_personality[var_11]);
   }
 
-  if(self botgetpersonality() != var_0E) {
-    self botsetpersonality(var_0E);
+  if(self botgetpersonality() != var_14) {
+    self botsetpersonality(var_14);
   }
 
   self.has_balanced_personality = 1;
@@ -206,9 +206,9 @@ update_personality_default() {
           if(isDefined(var_8)) {
             var_9 = getclosestnodeinsight(var_8);
             if(isDefined(var_9)) {
-              var_0A = scripts\mp\bots\_bots_util::bot_queued_process("bot_find_ambush_entrances", ::bot_find_ambush_entrances, var_9, 0);
-              var_0B = scripts\mp\bots\_bots_strategy::bot_set_ambush_trap(var_7, var_0A, var_9);
-              if(!isDefined(var_0B) || var_0B) {
+              var_10 = scripts\mp\bots\_bots_util::bot_queued_process("bot_find_ambush_entrances", ::bot_find_ambush_entrances, var_9, 0);
+              var_11 = scripts\mp\bots\_bots_strategy::bot_set_ambush_trap(var_7, var_10, var_9);
+              if(!isDefined(var_11) || var_11) {
                 self botclearscriptgoal();
                 var_6 = bot_random_path();
               }
@@ -246,7 +246,7 @@ clear_script_goal_on(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(var_7 == "enemy" && isDefined(self.isnodeoccupied)) {
+    if(var_7 == "enemy" && isDefined(self.enemy)) {
       var_8 = 0;
       var_6 = 1;
     }
@@ -398,17 +398,17 @@ bot_filter_ambush_vicinity(var_0, var_1, var_2) {
   }
 
   var_9 = var_4.size;
-  var_0A = var_0.size;
-  for(var_0B = 0; var_0B < var_0A; var_0B++) {
-    var_0C = 0;
-    var_0D = var_0[var_0B];
-    for(var_0E = 0; !var_0C && var_0E < var_9; var_0E++) {
-      var_0F = distancesquared(var_4[var_0E], var_0D.origin);
-      var_0C = var_0F < var_5;
+  var_10 = var_0.size;
+  for(var_11 = 0; var_11 < var_10; var_11++) {
+    var_12 = 0;
+    var_13 = var_0[var_11];
+    for(var_14 = 0; !var_12 && var_14 < var_9; var_14++) {
+      var_15 = distancesquared(var_4[var_14], var_13.origin);
+      var_12 = var_15 < var_5;
     }
 
-    if(!var_0C) {
-      var_3[var_3.size] = var_0D;
+    if(!var_12) {
+      var_3[var_3.size] = var_13;
     }
   }
 
@@ -488,9 +488,9 @@ find_camp_node_worker() {
 
     var_9 = getzonepath(var_0, var_4);
     if(isDefined(var_9) && var_9.size > 0) {
-      for(var_0A = 0; var_0A <= int(var_9.size / 2); var_0A++) {
-        var_1 = var_9[var_0A];
-        var_2 = var_9[int(min(var_0A + 1, var_9.size - 1))];
+      for(var_10 = 0; var_10 <= int(var_9.size / 2); var_10++) {
+        var_1 = var_9[var_10];
+        var_2 = var_9[int(min(var_10 + 1, var_9.size - 1))];
         if(botzonegetcount(var_2, self.team, "enemy_predict") != 0) {
           break;
         }
@@ -503,15 +503,15 @@ find_camp_node_worker() {
     }
   }
 
-  var_0B = undefined;
+  var_11 = undefined;
   if(isDefined(var_1)) {
-    var_0C = 1;
-    var_0D = 1;
-    var_0E = 0;
-    while(var_0C) {
-      var_0F = getzonenodesbydist(var_1, 800 * var_0D, 1);
-      if(var_0F.size > 1024) {
-        var_0F = getzonenodes(var_1, 0);
+    var_12 = 1;
+    var_13 = 1;
+    var_14 = 0;
+    while(var_12) {
+      var_15 = getzonenodesbydist(var_1, 800 * var_13, 1);
+      if(var_15.size > 1024) {
+        var_15 = getzonenodes(var_1, 0);
       }
 
       wait(0.05);
@@ -522,54 +522,54 @@ find_camp_node_worker() {
         var_3 = (var_3[0], var_3[1] - 45, 0);
       }
 
-      if(var_0F.size > 0) {
-        var_11 = int(min(max(1, var_0F.size * 0.15), 5));
-        if(var_0E) {
-          var_0F = self botnodepickmultiple(var_0F, var_11, var_11, "node_camp", anglesToForward(var_3), "lenient");
+      if(var_15.size > 0) {
+        var_11 = int(min(max(1, var_15.size * 0.15), 5));
+        if(var_14) {
+          var_15 = self botnodepickmultiple(var_15, var_11, var_11, "node_camp", anglesToForward(var_3), "lenient");
         } else {
-          var_0F = self botnodepickmultiple(var_0F, var_11, var_11, "node_camp", anglesToForward(var_3));
+          var_15 = self botnodepickmultiple(var_15, var_11, var_11, "node_camp", anglesToForward(var_3));
         }
 
-        var_0F = bot_filter_ambush_inuse(var_0F);
+        var_15 = bot_filter_ambush_inuse(var_15);
         if(!isDefined(self.can_camp_near_others) || !self.can_camp_near_others) {
           var_12 = 800;
-          var_0F = bot_filter_ambush_vicinity(var_0F, self, var_12);
+          var_15 = bot_filter_ambush_vicinity(var_15, self, var_12);
         }
 
-        if(var_0F.size > 0) {
-          var_0B = scripts\engine\utility::random_weight_sorted(var_0F);
+        if(var_15.size > 0) {
+          var_11 = scripts\engine\utility::random_weight_sorted(var_15);
         }
       }
 
-      if(isDefined(var_0B)) {
-        var_0C = 0;
+      if(isDefined(var_11)) {
+        var_12 = 0;
         continue;
       }
 
       if(isDefined(self.camping_needs_fallback_camp_location)) {
-        if(var_0D == 1 && !var_0E) {
-          var_0D = 3;
-        } else if(var_0D == 3 && !var_0E) {
-          var_0E = 1;
-        } else if(var_0D == 3 && var_0E) {
-          var_0C = 0;
+        if(var_13 == 1 && !var_14) {
+          var_13 = 3;
+        } else if(var_13 == 3 && !var_14) {
+          var_14 = 1;
+        } else if(var_13 == 3 && var_14) {
+          var_12 = 0;
         }
 
         continue;
       }
 
-      var_0C = 0;
-      if(var_0C) {
+      var_12 = 0;
+      if(var_12) {
         wait(0.05);
       }
     }
   }
 
-  if(!isDefined(var_0B) || !self botnodeavailable(var_0B)) {
+  if(!isDefined(var_11) || !self botnodeavailable(var_11)) {
     return 0;
   }
 
-  self.node_ambushing_from = var_0B;
+  self.node_ambushing_from = var_11;
   self.ambush_end = gettime() + self.ambush_duration;
   self.node_ambushing_from.bot_ambush_end = self.ambush_end;
   self.ambush_yaw = var_3[1];

@@ -126,8 +126,9 @@ func_7E6D() {
   if(usingplayer() && isDefined(self.var_1652.player.gs)) {
     var_2 = self.var_1652.player;
     var_0 = var_1 + var_2.gs.var_D396 + randomint(var_2.gs.var_D397);
-  } else
+  } else {
     var_0 = var_1 + 30000 + randomint(30000);
+  }
 
   return var_0;
 }

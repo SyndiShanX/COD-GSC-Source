@@ -55,8 +55,9 @@ func_61F8(var_0) {
     if(getdvarint("fake_jackal_sfx") == 1) {
       func_0C1A::func_11130(0);
     }
-  } else if(!var_0)
+  } else if(!var_0) {
     func_0BDC::func_6B4C("fly");
+  }
 
   level.var_A056.var_1630 = scripts\engine\utility::array_add(level.var_A056.var_1630, self);
 }

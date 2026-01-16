@@ -221,7 +221,7 @@ func_6187() {
         continue;
       }
 
-      if(!level.teamemped[var_1.team] && !var_1 scripts\mp\killstreaks\_emp_common::isemped()) {
+      if(!level.teamemped[var_1.team] && !var_1 scripts\mp\killstreaks\emp_common::isemped()) {
         var_1 func_626B(0);
         continue;
       }
@@ -245,7 +245,7 @@ func_617C() {
         continue;
       }
 
-      if(!var_1 scripts\mp\killstreaks\_emp_common::isemped()) {
+      if(!var_1 scripts\mp\killstreaks\emp_common::isemped()) {
         var_1 func_626B(0);
       }
     }
@@ -274,18 +274,18 @@ func_532B(var_0, var_1, var_2) {
   var_7 = (0, 0, 0);
   var_8 = "";
   var_9 = "";
-  var_0A = "";
-  var_0B = undefined;
-  foreach(var_0D in var_2) {
+  var_10 = "";
+  var_11 = undefined;
+  foreach(var_13 in var_2) {
     if(level.teambased && isDefined(var_1)) {
-      if(isDefined(var_0D.team) && var_0D.team != var_1) {
+      if(isDefined(var_13.team) && var_13.team != var_1) {
         continue;
       }
-    } else if(isDefined(var_0D.triggerportableradarping) && var_0D.triggerportableradarping == var_0) {
+    } else if(isDefined(var_13.owner) && var_13.owner == var_0) {
       continue;
     }
 
-    var_0D notify("damage", var_5, var_0, var_6, var_7, var_3, var_8, var_9, var_0A, var_0B, var_4);
+    var_13 notify("damage", var_5, var_0, var_6, var_7, var_3, var_8, var_9, var_10, var_11, var_4);
     wait(0.05);
   }
 }
@@ -311,18 +311,18 @@ func_52C6(var_0, var_1) {
   var_7 = "";
   var_8 = "";
   var_9 = "";
-  var_0A = undefined;
-  foreach(var_0C in level.rockets) {
+  var_10 = undefined;
+  foreach(var_12 in level.rockets) {
     if(level.teambased && isDefined(var_1)) {
-      if(isDefined(var_0C.team) && var_0C.team != var_1) {
+      if(isDefined(var_12.team) && var_12.team != var_1) {
         continue;
       }
-    } else if(isDefined(var_0C.triggerportableradarping) && var_0C.triggerportableradarping == var_0) {
+    } else if(isDefined(var_12.owner) && var_12.owner == var_0) {
       continue;
     }
 
-    playFX(level.remotekillstreaks["explode"], var_0C.origin);
-    var_0C delete();
+    playFX(level.remotekillstreaks["explode"], var_12.origin);
+    var_12 delete();
     wait(0.05);
   }
 }
@@ -353,10 +353,10 @@ func_52C0(var_0, var_1) {
   var_7 = "";
   var_8 = "";
   var_9 = "";
-  var_0A = undefined;
+  var_10 = undefined;
   if(level.teambased && isDefined(var_1)) {
     if(isDefined(level.ac130player) && isDefined(level.ac130player.team) && level.ac130player.team == var_1) {
-      level.ac130.planemodel notify("damage", var_4, var_0, var_5, var_6, var_2, var_7, var_8, var_9, var_0A, var_3);
+      level.ac130.planemodel notify("damage", var_4, var_0, var_5, var_6, var_2, var_7, var_8, var_9, var_10, var_3);
       return;
     }
 
@@ -364,8 +364,8 @@ func_52C0(var_0, var_1) {
   }
 
   if(isDefined(level.ac130player)) {
-    if(!isDefined(level.ac130.triggerportableradarping) || isDefined(level.ac130.triggerportableradarping) && level.ac130.triggerportableradarping != var_0) {
-      level.ac130.planemodel notify("damage", var_4, var_0, var_5, var_6, var_2, var_7, var_8, var_9, var_0A, var_3);
+    if(!isDefined(level.ac130.owner) || isDefined(level.ac130.owner) && level.ac130.owner != var_0) {
+      level.ac130.planemodel notify("damage", var_4, var_0, var_5, var_6, var_2, var_7, var_8, var_9, var_10, var_3);
       return;
     }
   }
@@ -382,5 +382,5 @@ func_626B(var_0) {
     var_1 = 1;
   }
 
-  thread scripts\mp\killstreaks\_emp_common::func_10D95();
+  thread scripts\mp\killstreaks\emp_common::func_10D95();
 }

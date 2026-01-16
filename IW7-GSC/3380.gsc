@@ -169,22 +169,22 @@ visionsetthermalforplayer(var_0) {
   self.desired_dance_angles = (0, var_2[1], 0);
   if(!self istouching(level.dance_floor_volume)) {
     self ghostskulls_complete_status(var_0.origin);
-    scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+    scripts\engine\utility::waittill_any("goal", "goal_reached");
   }
 
   if(!level.var_3BAA) {
     var_3 = scripts\engine\utility::getstruct("dance_floor_attract_spot_center", "targetname");
     self ghostskulls_complete_status(var_3.origin);
-    scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+    scripts\engine\utility::waittill_any("goal", "goal_reached");
     if(scripts\engine\utility::istrue(level.var_3BAA)) {
       var_0 = func_78B3(self);
       if(!isDefined(var_0)) {
         var_4 = sortbydistance(level.var_4D7A, self.origin);
         self ghostskulls_complete_status(var_4[0].origin);
-        scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+        scripts\engine\utility::waittill_any("goal", "goal_reached");
       } else {
         self ghostskulls_complete_status(var_0.origin);
-        scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+        scripts\engine\utility::waittill_any("goal", "goal_reached");
       }
     } else {
       level.var_3BAA = 1;
@@ -198,7 +198,7 @@ visionsetthermalforplayer(var_0) {
     }
 
     self ghostskulls_complete_status(var_5.origin);
-    scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+    scripts\engine\utility::waittill_any("goal", "goal_reached");
   }
 
   self.do_immediate_ragdoll = 1;

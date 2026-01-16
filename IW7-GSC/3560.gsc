@@ -15,7 +15,7 @@ func_72D3() {
 
 func_72D9(var_0) {
   level endon("game_ended");
-  var_1 = var_0.triggerportableradarping.origin;
+  var_1 = var_0.owner.origin;
   var_0 waittill("missile_stuck", var_2);
   if(isDefined(var_2)) {
     if(func_9FE2(var_2)) {
@@ -26,20 +26,20 @@ func_72D9(var_0) {
         var_6 = spawn("script_model", var_0.origin);
         var_6 setModel("tag_origin");
         var_6.angles = vectortoangles(var_4);
-        var_6.triggerportableradarping = self;
+        var_6.owner = self;
         var_6.team = self.team;
         self.var_72D2 = var_6;
         var_7 = 0.4;
         var_8 = 500 - var_5;
         var_9 = var_8 / 500;
-        var_0A = var_7 * var_9;
-        var_0B = var_6.origin + var_4 * var_8;
-        var_6 func_10DE4(var_2, var_4, var_0A);
+        var_10 = var_7 * var_9;
+        var_11 = var_6.origin + var_4 * var_8;
+        var_6 func_10DE4(var_2, var_4, var_10);
         var_6 endon("forcePushDetonate");
-        var_6 thread func_5916(var_0B, var_0A);
+        var_6 thread func_5916(var_11, var_10);
         var_6 thread func_72D8();
         var_6 thread func_72D7();
-        wait(var_0A);
+        wait(var_10);
         var_0 delete();
         var_6 func_72D5();
         return;
@@ -75,12 +75,12 @@ func_72D4(var_0) {
       var_1.var_DB17 = undefined;
     }
 
-    radiusdamage(var_0, 100, 300, 100, self.triggerportableradarping, "MOD_EXPLOSIVE", "forcepush_mp");
+    radiusdamage(var_0, 100, 300, 100, self.owner, "MOD_EXPLOSIVE", "forcepush_mp");
     earthquake(0.75, 0.5, var_0, 100);
   }
 
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.var_72D2 = undefined;
+  if(isDefined(self.owner)) {
+    self.owner.var_72D2 = undefined;
   }
 
   scripts\engine\utility::waitframe();
@@ -90,7 +90,7 @@ func_72D4(var_0) {
 func_72D8() {
   level endon("game_ended");
   self endon("death");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators", "disconnect");
+  self.owner scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
   self notify("detonateExplosive");
 }
 
@@ -100,7 +100,7 @@ func_72D7() {
   self endon("forcePushEnd");
   var_0 = scripts\common\trace::create_character_contents() + physics_createcontents(["physicscontents_solid", "physicscontents_playerclip"]);
   var_1 = self.origin;
-  var_2 = [self.triggerportableradarping, self.var_AD30];
+  var_2 = [self.owner, self.var_AD30];
   for(;;) {
     scripts\engine\utility::waitframe();
     var_3 = physics_spherecast(var_1, self.origin, 32, var_0, var_2, "physicsquery_closest");
@@ -120,7 +120,7 @@ func_72D6() {
   var_1 = self.origin;
   for(;;) {
     scripts\engine\utility::waitframe();
-    var_2 = [self.triggerportableradarping];
+    var_2 = [self.owner];
     if(isDefined(self.var_AD30)) {
       var_2[var_2.size] = self.var_AD30;
     }

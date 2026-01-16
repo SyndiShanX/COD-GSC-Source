@@ -44,25 +44,25 @@ run_black_hole_logic() {
   var_8 = var_7 + var_6 * var_4;
   var_9 = scripts\cp\cp_agent_utils::getaliveagents();
   var_9 = scripts\engine\utility::array_combine(var_9, level.players);
-  var_0A = scripts\common\trace::ray_trace(var_7, var_8, var_9);
-  var_0B = var_0A["position"];
-  var_1 = scripts\engine\utility::drop_to_ground(var_0B, 20, -1000);
+  var_10 = scripts\common\trace::ray_trace(var_7, var_8, var_9);
+  var_11 = var_10["position"];
+  var_1 = scripts\engine\utility::drop_to_ground(var_11, 20, -1000);
   var_1 = getclosestpointonnavmesh(var_1);
-  var_0C = 250;
-  if(self.chi_meter_amount - var_0C <= 0) {
+  var_12 = 250;
+  if(self.chi_meter_amount - var_12 <= 0) {
     self.kung_fu_exit_delay = 1;
   }
 
-  thread scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(var_0C);
-  var_0D = scripts\engine\utility::spawn_tag_origin(var_1 + (0, 0, 60));
-  var_0D.triggerportableradarping = self;
-  var_0D setModel("tag_origin_tiger_black_hole");
-  thread scripts\engine\utility::play_sound_in_space("chi_tiger_blackhole", var_0D.origin);
-  thread grabclosestzombies(var_0D, 1);
+  thread scripts\cp\zombies\zombies_chi_meter::chi_meter_kill_decrement(var_12);
+  var_13 = scripts\engine\utility::spawn_tag_origin(var_1 + (0, 0, 60));
+  var_13.owner = self;
+  var_13 setModel("tag_origin_tiger_black_hole");
+  thread scripts\engine\utility::play_sound_in_space("chi_tiger_blackhole", var_13.origin);
+  thread grabclosestzombies(var_13, 1);
   self playgestureviewmodel("ges_plyr_gesture042", undefined, 1);
   wait(var_3);
-  var_0D notify("death");
-  var_0D delete();
+  var_13 notify("death");
+  var_13 delete();
 }
 
 grabclosestzombies(var_0, var_1) {
@@ -77,7 +77,7 @@ grabclosestzombies(var_0, var_1) {
   while(isDefined(var_3)) {
     var_4 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.spawned_enemies, undefined, undefined, 200);
     foreach(var_6 in var_4) {
-      if(!scripts\cp\utility::isreallyalive(var_6) || !isDefined(var_0.triggerportableradarping)) {
+      if(!scripts\cp\utility::isreallyalive(var_6) || !isDefined(var_0.owner)) {
         continue;
       }
 
@@ -89,7 +89,7 @@ grabclosestzombies(var_0, var_1) {
         continue;
       }
 
-      if(var_0.triggerportableradarping == var_6) {
+      if(var_0.owner == var_6) {
         continue;
       }
 
@@ -269,27 +269,27 @@ slam_executeinternal(var_0, var_1, var_2, var_3) {
 
   thread scripts\cp\powers\coop_groundpound::slam_physicspulse(var_1);
   var_9 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-  foreach(var_0B in var_9) {
-    if(!isDefined(var_0B) || var_0B == var_0 || !scripts\cp\utility::isreallyalive(var_0B)) {
+  foreach(var_11 in var_9) {
+    if(!isDefined(var_11) || var_11 == var_0 || !scripts\cp\utility::isreallyalive(var_11)) {
       continue;
     }
 
-    var_0C = undefined;
-    var_0D = distancesquared(var_1, var_0B.origin);
-    if(var_0D <= var_6) {
-      var_0C = 1000000;
-    } else if(var_0D <= var_7) {
-      var_0C = 1000000;
+    var_12 = undefined;
+    var_13 = distancesquared(var_1, var_11.origin);
+    if(var_13 <= var_6) {
+      var_12 = 1000000;
+    } else if(var_13 <= var_7) {
+      var_12 = 1000000;
     } else {
       continue;
     }
 
-    var_0B scripts\cp\cp_weapon::shellshockondamage("MOD_EXPLOSIVE", var_0C);
-    if(var_0C >= var_0B.health) {
-      var_0B.customdeath = 1;
+    var_11 scripts\cp\cp_weapon::shellshockondamage("MOD_EXPLOSIVE", var_12);
+    if(var_12 >= var_11.health) {
+      var_11.customdeath = 1;
     }
 
-    var_0B dodamage(var_0C, var_1, var_0, var_0, "MOD_CRUSH");
+    var_11 dodamage(var_12, var_1, var_0, var_0, "MOD_CRUSH");
   }
 
   wait(0.5);

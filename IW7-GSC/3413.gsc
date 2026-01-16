@@ -173,7 +173,7 @@ player_zipline_travel(var_0, var_1) {
 delay_nearby_zombie_cleanup() {
   var_0 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.isnodeoccupied) && var_2.isnodeoccupied == self && distancesquared(var_2.origin, self.origin) < 272144) {
+    if(isDefined(var_2.enemy) && var_2.enemy == self && distancesquared(var_2.origin, self.origin) < 272144) {
       var_2.delay_cleanup_until = gettime() + 12000;
     }
   }
@@ -218,20 +218,20 @@ player_zipline(var_0, var_1) {
   var_0 lerpfovbypreset("zombiearcade");
   var_9 = var_0 func_816D();
   var_0 givegoproattachments("viewmodel_arms_invisi");
-  var_0A = var_2;
-  var_0B = scripts\engine\utility::getstructarray(var_0A.target, "targetname");
-  var_0C = scripts\engine\utility::random(var_0B);
-  var_0D = distance(var_0A.origin, var_5);
-  var_1 = var_0D / 500;
+  var_10 = var_2;
+  var_11 = scripts\engine\utility::getstructarray(var_10.target, "targetname");
+  var_12 = scripts\engine\utility::random(var_11);
+  var_13 = distance(var_10.origin, var_5);
+  var_1 = var_13 / 500;
   var_6 moveto(var_5, var_1);
   var_0 thread func_ECC7(var_1);
   wait(var_1);
-  for(var_0A = var_0C; isDefined(var_0A.target); var_0A = var_0C) {
-    var_0B = scripts\engine\utility::getstructarray(var_0A.target, "targetname");
-    var_0C = scripts\engine\utility::random(var_0B);
-    var_5 = var_0C.origin;
-    var_0D = distance(var_0A.origin, var_5);
-    var_1 = var_0D / 500;
+  for(var_10 = var_12; isDefined(var_10.target); var_10 = var_12) {
+    var_11 = scripts\engine\utility::getstructarray(var_10.target, "targetname");
+    var_12 = scripts\engine\utility::random(var_11);
+    var_5 = var_12.origin;
+    var_13 = distance(var_10.origin, var_5);
+    var_1 = var_13 / 500;
     var_6 moveto(var_5, var_1);
     var_0 thread func_ECC7(var_1);
     wait(var_1);

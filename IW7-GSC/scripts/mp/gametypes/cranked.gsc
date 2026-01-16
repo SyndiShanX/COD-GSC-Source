@@ -216,10 +216,10 @@ onnormaldeath(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  var_0A = 0;
+  var_10 = 0;
   foreach(var_8 in level.players) {
-    if(isDefined(var_8.destroynavrepulsor) && var_8.destroynavrepulsor > var_0A) {
-      var_0A = var_8.destroynavrepulsor;
+    if(isDefined(var_8.score) && var_8.score > var_10) {
+      var_10 = var_8.score;
     }
   }
 }

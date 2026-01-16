@@ -84,8 +84,9 @@ jukebox_start(var_0, var_1, var_2) {
         wait 0.05;
       }
     }
-  } else
+  } else {
     var_5 = level.jukebox_songs;
+  }
 
   var_6 = spawn("script_origin", var_0);
   level.jukebox_org_struct = var_6;

@@ -5,9 +5,9 @@
 
 init() {
   var_0 = spawnStruct();
-  var_0.var_39B = "deployable_vest_marker_mp";
+  var_0.weaponinfo = "deployable_vest_marker_mp";
   var_0.modelbase = "afr_mortar_ammo_01";
-  var_0.pow = &"KILLSTREAKS_HINTS_DEPLOYABLE_GRENADES_PICKUP";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_DEPLOYABLE_GRENADES_PICKUP";
   var_0.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_GRENADES_TAKING";
   var_0.var_67E5 = "deployable_grenades_taken";
   var_0.streakname = "deployable_grenades";
@@ -34,7 +34,7 @@ init() {
   var_0.allowhvtspawn = 1;
   var_0.maxuses = 3;
   level.boxsettings["deployable_grenades"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("deployable_grenades", ::func_128DF);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("deployable_grenades", ::func_128DF);
   level.deployable_box["deployable_grenades"] = [];
 }
 

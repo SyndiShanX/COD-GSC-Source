@@ -39,24 +39,24 @@ func_489F(var_0) {
 
       if(isDefined(var_5)) {
         var_9 = var_1;
-        var_0A = var_2;
-        var_0B = var_3;
+        var_10 = var_2;
+        var_11 = var_3;
         var_1 = [];
         var_2 = [];
         var_3 = [];
-        foreach(var_0D in var_9) {
-          if(ispointinvolume(var_0D.origin, var_5)) {
-            var_1 = scripts\engine\utility::array_add(var_1, var_0D);
+        foreach(var_13 in var_9) {
+          if(ispointinvolume(var_13.origin, var_5)) {
+            var_1 = scripts\engine\utility::array_add(var_1, var_13);
           }
         }
 
-        foreach(var_10 in var_0A) {
+        foreach(var_10 in var_10) {
           if(ispointinvolume(var_10.origin, var_5)) {
             var_2 = scripts\engine\utility::array_add(var_2, var_10);
           }
         }
 
-        foreach(var_13 in var_0B) {
+        foreach(var_13 in var_11) {
           if(ispointinvolume(var_13.origin, var_5)) {
             var_3 = scripts\engine\utility::array_add(var_3, var_13);
           }
@@ -315,7 +315,7 @@ func_3E94(var_0, var_1) {
     var_5 = randomfloatrange(0, 1);
     if(var_0.var_BF1B / 8 >= var_5) {
       if(level.var_D9E5["optionalunlocks"].size > 0) {
-        level.var_D9E5["optionalunlocks"] = scripts\engine\utility::array_randomize(level.var_D9E5["optionalunlocks"]);
+        level.var_D9E5["optionalunlocks"] = ::scripts\engine\utility::array_randomize(level.var_D9E5["optionalunlocks"]);
         foreach(var_7 in level.var_D9E5["optionalunlocks"]) {
           if(scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"], var_7)) {
             var_2 = var_7;
@@ -341,9 +341,9 @@ func_3E94(var_0, var_1) {
 
   if(!isDefined(var_0.var_3850)) {
     var_0.var_3850 = [];
-    foreach(var_0A in level.var_D9E5["loaded_weapons"]) {
-      if(!scripts\engine\utility::array_contains(var_4, var_0A) && !scripts\engine\utility::array_contains(level.var_D9E5["optionalunlocks"], var_0A)) {
-        var_0.var_3850 = scripts\engine\utility::array_add(var_0.var_3850, var_0A);
+    foreach(var_10 in level.var_D9E5["loaded_weapons"]) {
+      if(!scripts\engine\utility::array_contains(var_4, var_10) && !scripts\engine\utility::array_contains(level.var_D9E5["optionalunlocks"], var_10)) {
+        var_0.var_3850 = scripts\engine\utility::array_add(var_0.var_3850, var_10);
       }
     }
   }
@@ -355,7 +355,7 @@ func_3E94(var_0, var_1) {
     var_0.func_845F = 0;
   }
 
-  for(var_0C = 0; var_0C < var_0.var_3850.size; var_0C++) {
+  for(var_12 = 0; var_12 < var_0.var_3850.size; var_12++) {
     if(scripts\engine\utility::get_template_script_MAYBE() == "rogue") {
       if(var_0.var_10310 < var_0.var_11A2E) {
         var_0.func_845F = 1;
@@ -367,7 +367,7 @@ func_3E94(var_0, var_1) {
         break;
       }
 
-      var_2 = var_0.var_3850[var_0C];
+      var_2 = var_0.var_3850[var_12];
       if(weaponclass(var_2) == "spread") {
         var_3 = func_13C06(var_2, var_0.nodes);
         break;
@@ -377,7 +377,7 @@ func_3E94(var_0, var_1) {
     }
 
     if(scripts\engine\utility::get_template_script_MAYBE() == "moon_port") {
-      var_2 = var_0.var_3850[var_0C];
+      var_2 = var_0.var_3850[var_12];
       if(!isDefined(var_0.func_8460)) {
         var_0.func_8460 = 0;
       }
@@ -399,7 +399,7 @@ func_3E94(var_0, var_1) {
       continue;
     }
 
-    var_2 = var_0.var_3850[var_0C];
+    var_2 = var_0.var_3850[var_12];
     var_3 = func_13C06(var_2, var_0.nodes);
     break;
   }
@@ -539,14 +539,14 @@ func_13C06(var_0, var_1) {
   var_8 = undefined;
   var_9 = undefined;
   if(isDefined(var_5) && var_5 == "extra_large") {
-    foreach(var_0B in var_1) {
-      var_0C = var_0B scripts\sp\utility::func_7A97();
-      if(var_0C.size > 0) {
-        foreach(var_0E in var_0C) {
-          if(isDefined(var_0E.script_noteworthy)) {
-            var_0F = var_0E scripts\sp\utility::func_7A97();
-            foreach(var_9 in var_0F) {
-              if(scripts\engine\utility::array_contains(var_1, var_0E)) {
+    foreach(var_11 in var_1) {
+      var_12 = var_11 scripts\sp\utility::func_7A97();
+      if(var_12.size > 0) {
+        foreach(var_14 in var_12) {
+          if(isDefined(var_14.script_noteworthy)) {
+            var_15 = var_14 scripts\sp\utility::func_7A97();
+            foreach(var_9 in var_15) {
+              if(scripts\engine\utility::array_contains(var_1, var_14)) {
                 if(scripts\engine\utility::array_contains(var_1, var_9)) {
                   if(isDefined(var_9.script_parameters) && var_9.script_parameters == "extra_large") {
                     var_3 = var_9;
@@ -564,24 +564,24 @@ func_13C06(var_0, var_1) {
       }
     }
   } else if(isDefined(var_6) && var_6 == "large") {
-    foreach(var_0B in var_2) {
+    foreach(var_11 in var_2) {
       var_15 = 0;
       var_16 = 0;
-      if(isDefined(var_0B.script_parameters) && var_0B.script_parameters == "large") {
-        var_0C = var_0B scripts\sp\utility::func_7A97();
-        if(var_0C.size > 0) {
-          foreach(var_0E in var_0C) {
-            if(!scripts\engine\utility::array_contains(var_1, var_0E)) {
-              if(isDefined(var_0B.script_noteworthy) && var_0B.script_noteworthy == "stacked") {
-                if(isDefined(var_0E.script_parameters) && var_0E.script_parameters == "extra_large") {
+      if(isDefined(var_11.script_parameters) && var_11.script_parameters == "large") {
+        var_12 = var_11 scripts\sp\utility::func_7A97();
+        if(var_12.size > 0) {
+          foreach(var_14 in var_12) {
+            if(!scripts\engine\utility::array_contains(var_1, var_14)) {
+              if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked") {
+                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large") {
                   var_15 = 1;
                 }
               }
             }
 
-            if(!scripts\engine\utility::array_contains(var_1, var_0E) && var_0 == "iw7_sdflmg") {
-              if(!isDefined(var_0B.script_noteworthy)) {
-                if(isDefined(var_0E.script_parameters) && var_0E.script_parameters == "extra_large") {
+            if(!scripts\engine\utility::array_contains(var_1, var_14) && var_0 == "iw7_sdflmg") {
+              if(!isDefined(var_11.script_noteworthy)) {
+                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large") {
                   var_16 = 1;
                 }
               }
@@ -592,32 +592,32 @@ func_13C06(var_0, var_1) {
             var_16 = 1;
           }
 
-          if(isDefined(var_0B.script_noteworthy) && var_0B.script_noteworthy == "stacked") {
+          if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked") {
             var_15 = 1;
           }
         }
 
         if(!var_15 && !var_16) {
-          var_3 = var_0B;
+          var_3 = var_11;
           break;
         }
       }
     }
   } else if(isDefined(var_6) && var_6 == "heavy") {
-    foreach(var_0B in var_2) {
-      if(isDefined(var_0B.script_parameters) && var_0B.script_parameters == "heavy") {
-        var_3 = var_0B;
+    foreach(var_11 in var_2) {
+      if(isDefined(var_11.script_parameters) && var_11.script_parameters == "heavy") {
+        var_3 = var_11;
         break;
       }
     }
   } else if(isDefined(var_6) && var_6 == "pistol") {
-    foreach(var_0B in var_2) {
-      if(isDefined(var_0B.script_parameters) && var_0B.script_parameters == "pistol") {
-        if(isDefined(var_0B.script_noteworthy) && var_0B.script_noteworthy == "locker_weapon") {
-          var_3 = var_0B;
+    foreach(var_11 in var_2) {
+      if(isDefined(var_11.script_parameters) && var_11.script_parameters == "pistol") {
+        if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "locker_weapon") {
+          var_3 = var_11;
           break;
         } else {
-          var_4 = var_0B;
+          var_4 = var_11;
         }
       }
     }
@@ -626,13 +626,13 @@ func_13C06(var_0, var_1) {
       var_3 = var_4;
     }
   } else {
-    foreach(var_0B in var_2) {
-      if(!isDefined(var_0B.script_parameters)) {
-        if(isDefined(var_0B.script_noteworthy) && var_0B.script_noteworthy == "locker_weapon") {
-          var_3 = var_0B;
+    foreach(var_11 in var_2) {
+      if(!isDefined(var_11.script_parameters)) {
+        if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "locker_weapon") {
+          var_3 = var_11;
           break;
         } else {
-          var_4 = var_0B;
+          var_4 = var_11;
         }
       }
     }
@@ -710,39 +710,39 @@ func_116DC(var_0, var_1, var_2) {
   for(var_6 = 0; var_6 < var_1; var_6++) {
     var_7 = 0;
     var_8 = lib_0A2F::func_D9F8();
-    foreach(var_0A in var_8) {
-      var_0B = level.player func_84C6("equipmentState", var_0A);
-      if(!isDefined(var_0B)) {
+    foreach(var_10 in var_8) {
+      var_11 = level.player func_84C6("equipmentState", var_10);
+      if(!isDefined(var_11)) {
         continue;
       }
 
-      if(var_0B == "upgrade2") {
+      if(var_11 == "upgrade2") {
         var_7 = var_7 + 2;
         continue;
       }
 
-      if(var_0B == "upgrade1") {
+      if(var_11 == "upgrade1") {
         var_7 = var_7 + 1;
       }
     }
 
-    var_0D = var_5[var_7];
-    var_0E = level.player func_84C6("equipmentState", var_0D);
-    var_0F = "upgrade1";
-    if(isDefined(var_0E) && var_0E == "upgrade1") {
-      var_0F = "upgrade2";
+    var_13 = var_5[var_7];
+    var_14 = level.player func_84C6("equipmentState", var_13);
+    var_15 = "upgrade1";
+    if(isDefined(var_14) && var_14 == "upgrade1") {
+      var_15 = "upgrade2";
     }
 
-    if(var_0D == "coverwall" && var_0F == "upgrade1") {
+    if(var_13 == "coverwall" && var_15 == "upgrade1") {
       if(level.player.var_4759.var_19.size > 0) {
         level.player thread scripts\sp\coverwall::func_B9C4();
       }
     }
 
-    level.player func_84C7("equipmentState", var_0D, var_0F);
-    level.var_D9E5["weaponstates"][var_0D] = var_0F;
-    lib_0A2F::setlightintensity(var_0D, var_0F);
-    var_4 = scripts\engine\utility::array_add(var_4, var_0D);
+    level.player func_84C7("equipmentState", var_13, var_15);
+    level.var_D9E5["weaponstates"][var_13] = var_15;
+    lib_0A2F::setlightintensity(var_13, var_15);
+    var_4 = scripts\engine\utility::array_add(var_4, var_13);
   }
 
   level thread terminal_unlocks_ui(var_4, var_1);
@@ -826,7 +826,7 @@ func_8835() {
     self.var_87EB["fx_tag"].origin = self.var_87EB["fx_tag"].origin + anglesToForward(var_0.angles) * 47.9;
     self.var_87EB["fx_tag"].origin = self.var_87EB["fx_tag"].origin + anglestoup(var_0.angles) * 52;
   } else {
-    self.var_87EB["fx_tag"] = scripts\engine\utility::spawn_tag_origin();
+    self.var_87EB["fx_tag"] = ::scripts\engine\utility::spawn_tag_origin();
   }
 
   if(!isDefined(var_0)) {

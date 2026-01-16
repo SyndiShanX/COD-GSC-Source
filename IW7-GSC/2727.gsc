@@ -180,8 +180,9 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(var_9 > 3.0) {
       level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_kd_high", undefined, 0.75);
     }
-  } else if(self.kills > 5)
+  } else if(self.kills > 5) {
     level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_kd_high", undefined, 0.75);
+  }
 
   self.modifiers = [];
   level.numkills++;
@@ -473,8 +474,9 @@ func_A651(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(var_34 <= 30) {
         thread scripts\mp\awards::givemidmatchaward("streak_" + var_34);
       }
-    } else if(!(var_34 % 7))
+    } else if(!(var_34 % 7)) {
       scripts\mp\utility\game::setmlgannouncement(17, self.team, self getentitynumber(), 7);
+    }
 
     if(var_34 > 30) {
       thread scripts\mp\awards::givemidmatchaward("streak_max");
@@ -599,8 +601,9 @@ func_3E50(var_0, var_1, var_2, var_3) {
     } else if(var_9 == "iw7_steeldragon_mp") {
       var_8 = "super_steeldragon_kill";
       level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_perk_dragon", undefined, 0.75);
-    } else if(var_9 == "iw7_armmgs_mp")
+    } else if(var_9 == "iw7_armmgs_mp") {
       var_8 = "super_arm2_kill";
+    }
 
     if(isDefined(var_8)) {
       thread scripts\mp\utility\game::giveunifiedpoints(var_8);

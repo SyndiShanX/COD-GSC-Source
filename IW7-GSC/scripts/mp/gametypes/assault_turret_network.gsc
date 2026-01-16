@@ -9,7 +9,7 @@ init() {
   }
 
   var_0 = spawnStruct();
-  var_0.var_39B = "sentry_minigun_mp";
+  var_0.weaponinfo = "sentry_minigun_mp";
   var_0.modelbase = "weapon_ceiling_sentry_temp";
   var_0.modelbombsquad = "weapon_sentry_chaingun_bombsquad";
   var_0.modeldestroyed = "weapon_sentry_chaingun_destroyed";
@@ -44,7 +44,7 @@ func_FAF1(var_0, var_1) {
 }
 
 func_108E9(var_0, var_1) {
-  var_2 = spawnturret("misc_turret", var_0.origin - (0, 0, 32), var_1.settings.var_39B);
+  var_2 = spawnturret("misc_turret", var_0.origin - (0, 0, 32), var_1.settings.weaponinfo);
   var_2.angles = var_0.angles;
   if(var_0.model != "") {
     var_0 delete();
@@ -52,7 +52,7 @@ func_108E9(var_0, var_1) {
 
   var_2 setModel(var_1.settings.modelbase);
   var_2.var_45C3 = var_1;
-  var_2.triggerportableradarping = var_1;
+  var_2.owner = var_1;
   var_2 setleftarc(80);
   var_2 setrightarc(80);
   var_2 give_crafted_gascan(60);
@@ -73,9 +73,9 @@ func_108E9(var_0, var_1) {
 func_12A53(var_0) {
   self setdefaultdroppitch(15);
   self give_player_session_tokens("sentry");
-  self.triggerportableradarping = var_0;
+  self.owner = var_0;
   self setsentryowner(var_0);
-  self.team = self.triggerportableradarping.team;
+  self.team = self.owner.team;
   self setturretteam(self.team);
   thread func_12A59();
   if(isDefined(self.team)) {
@@ -94,7 +94,7 @@ func_12A5D() {
   self give_player_session_tokens("sentry_offline");
   self setsentryowner(undefined);
   scripts\mp\sentientpoolmanager::unregistersentient(self.sentientpool, self.sentientpoolindex);
-  self.triggerportableradarping = undefined;
+  self.owner = undefined;
   self.team = undefined;
   var_0 = self getentitynumber();
   func_E11F(var_0);
@@ -109,7 +109,7 @@ func_12A59() {
   level endon("game_ended");
   self.momentum = 0;
   var_0 = self.var_45C3.settings;
-  thread func_12A6E(weaponfiretime(var_0.var_39B), var_0.overheattime, var_0.cooldowntime);
+  thread func_12A6E(weaponfiretime(var_0.weaponinfo), var_0.overheattime, var_0.cooldowntime);
   for(;;) {
     scripts\engine\utility::waittill_either("turretstatechange", "cooled");
     if(self getteamarray()) {
@@ -130,7 +130,7 @@ sentry_burstfirestart() {
   level endon("game_ended");
   sentry_spinup();
   var_0 = self.var_45C3.settings;
-  var_1 = weaponfiretime(var_0.var_39B);
+  var_1 = weaponfiretime(var_0.weaponinfo);
   var_2 = var_0.burstmin;
   var_3 = var_0.burstmax;
   var_4 = var_0.pausemin;
@@ -198,7 +198,7 @@ func_12A5C(var_0) {
   var_1 = spawn("script_model", self.origin);
   var_1.angles = self.angles;
   var_1 hide();
-  var_1 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+  var_1 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
   var_1 setModel(var_0);
   var_1 linkto(self);
   var_1 setcontents(0);
@@ -362,9 +362,9 @@ func_45CC(var_0) {
 }
 
 func_45CF(var_0) {
-  self.triggerportableradarping = var_0;
+  self.owner = var_0;
   self.team = var_0.team;
-  self.visuals.triggerportableradarping = var_0;
+  self.visuals.owner = var_0;
   foreach(var_2 in self.turrets) {
     if(isDefined(var_2) && isalive(var_2)) {
       var_2 thread func_12A53(var_0);
@@ -383,8 +383,8 @@ func_45CB() {
   }
 
   self.visuals scripts\mp\weapons::stopblinkinglight();
-  self.visuals.triggerportableradarping = undefined;
-  self.triggerportableradarping = undefined;
+  self.visuals.owner = undefined;
+  self.owner = undefined;
   self.team = undefined;
 }
 
@@ -393,7 +393,7 @@ func_45CA() {
   level endon("game_ended");
   self notify("sentry_handleOwner");
   self endon("sentry_handleOwner");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
   self.gameobject func_45C9(undefined);
 }
 

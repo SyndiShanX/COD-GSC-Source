@@ -95,8 +95,9 @@ func_85E3(var_0, var_1) {
     }
 
     var_1 = 100;
-  } else if(!isDefined(var_1))
+  } else if(!isDefined(var_1)) {
     var_1 = 100;
+  }
 
   if(distancesquared(self.origin, var_2) < var_1 * var_1) {
     return 0;

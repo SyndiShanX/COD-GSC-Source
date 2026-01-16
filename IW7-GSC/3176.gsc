@@ -20,7 +20,7 @@ func_51E8(var_0, var_1, var_2, var_3) {
   func_98A7(var_0);
   func_9810();
   func_97C3(var_0);
-  if(weaponclass(self.var_394) == "mg") {
+  if(weaponclass(self.weapon) == "mg") {
     self.var_BC = "cover_lmg";
   }
 }
@@ -276,7 +276,7 @@ func_100A9(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(weaponclass(self.var_394) == var_4) {
+  if(weaponclass(self.weapon) == var_4) {
     return 0;
   }
 
@@ -294,11 +294,11 @@ func_BEA0(var_0, var_1, var_2, var_3) {
   }
 
   if(!isDefined(var_4) && scripts\engine\utility::func_9DA3()) {
-    var_4 = self.isnodeoccupied.origin;
+    var_4 = self.enemy.origin;
   }
 
-  if(!isDefined(var_4) && isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Exposed" && distancesquared(self.target_getindexoftarget.origin, self.origin) < 36) {
-    var_4 = self.target_getindexoftarget.origin + anglesToForward(self.target_getindexoftarget.angles) * 384;
+  if(!isDefined(var_4) && isDefined(self.node) && self.node.type == "Exposed" && distancesquared(self.node.origin, self.origin) < 36) {
+    var_4 = self.node.origin + anglesToForward(self.node.angles) * 384;
   }
 
   if(!isDefined(var_4)) {
@@ -318,7 +318,7 @@ func_BEA0(var_0, var_1, var_2, var_3) {
 }
 
 func_BE9F(var_0, var_1, var_2, var_3) {
-  if(scripts\engine\utility::istrue(self.var_B3E9) && isDefined(self.target_getindexoftarget)) {
+  if(scripts\engine\utility::istrue(self.var_B3E9) && isDefined(self.node)) {
     return 0;
   }
 
@@ -345,8 +345,8 @@ func_81DE() {
     } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
     }
-  } else if(isDefined(self.isnodeoccupied) && scripts\engine\utility::func_9DA3()) {
-    var_1 = self.isnodeoccupied;
+  } else if(isDefined(self.enemy) && scripts\engine\utility::func_9DA3()) {
+    var_1 = self.enemy;
   }
 
   if(isDefined(var_1) && !issentient(var_1)) {
@@ -367,8 +367,8 @@ func_81DD() {
     } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
     }
-  } else if(isDefined(self.isnodeoccupied)) {
-    var_1 = self.isnodeoccupied;
+  } else if(isDefined(self.enemy)) {
+    var_1 = self.enemy;
   }
 
   if(isDefined(var_1) && !issentient(var_1)) {
@@ -389,8 +389,8 @@ laststandrevive() {
     } else if(isDefined(self._blackboard.shootparams.pos)) {
       var_2 = self._blackboard.shootparams.pos;
     }
-  } else if(isDefined(self.isnodeoccupied)) {
-    var_1 = self.isnodeoccupied;
+  } else if(isDefined(self.enemy)) {
+    var_1 = self.enemy;
   }
 
   if(isDefined(var_1) && !issentient(var_1)) {
@@ -501,7 +501,7 @@ func_3ECC(var_0, var_1, var_2) {
 }
 
 func_DF4F(var_0, var_1, var_2) {
-  if(!isDefined(self.var_39B) || !isDefined(self.var_39B[self.var_394])) {
+  if(!isDefined(self.weaponinfo) || !isDefined(self.weaponinfo[self.weapon])) {
     return;
   }
 
@@ -509,8 +509,8 @@ func_DF4F(var_0, var_1, var_2) {
     return;
   }
 
-  if(self.var_39B[self.var_394].var_13053) {
-    var_3 = getweaponclipmodel(self.var_394);
+  if(self.weaponinfo[self.weapon].var_13053) {
+    var_3 = getweaponclipmodel(self.weapon);
     if(isDefined(var_3)) {
       var_4 = scripts\asm\asm::func_232B(var_1, "attach clip left") || scripts\asm\asm::func_232B(var_1, "attach clip right");
       var_5 = scripts\asm\asm::func_232B(var_1, "detach clip left") || scripts\asm\asm::func_232B(var_1, "detach clip right") || scripts\asm\asm::func_232B(var_1, "detach clip nohand");
@@ -529,7 +529,7 @@ func_DF4F(var_0, var_1, var_2) {
         self detach(var_3, var_6);
         self giveperk("tag_clip");
         self notify("clip_detached");
-        self.var_39B[self.var_394].var_8BDE = 1;
+        self.weaponinfo[self.weapon].var_8BDE = 1;
         return;
       }
 

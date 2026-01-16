@@ -102,8 +102,8 @@ init_passive_random_attachment(var_0) {
     var_7 = scripts\cp\utility::getweaponcamo(var_6);
     var_8 = scripts\cp\utility::getweaponcosmeticattachment(var_6);
     var_9 = scripts\cp\utility::getweaponreticle(var_6);
-    var_0A = scripts\cp\utility::getweaponpaintjobid(var_6);
-    var_0.weapon_build_models[var_5] = scripts\cp\utility::mpbuildweaponname(var_6, var_2, var_7, var_9, scripts\cp\utility::get_weapon_variant_id(var_0, var_4), self getentitynumber(), self.clientid, var_0A, var_8);
+    var_10 = scripts\cp\utility::getweaponpaintjobid(var_6);
+    var_0.weapon_build_models[var_5] = ::scripts\cp\utility::mpbuildweaponname(var_6, var_2, var_7, var_9, scripts\cp\utility::get_weapon_variant_id(var_0, var_4), self getentitynumber(), self.clientid, var_10, var_8);
   }
 }
 
@@ -327,7 +327,7 @@ func_91EC(var_0) {
 func_91EB(var_0) {
   self endon("passive_hunter_killer_cancel");
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     thread func_12EAD(var_0);
   }
 }
@@ -385,15 +385,15 @@ func_5AE4(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = var_1 getweaponammostock(var_0);
     var_8 = var_1 getweaponammoclip(var_0);
     var_9 = min(var_6 - var_8, var_7);
-    var_0A = min(var_8 + var_9, var_6);
-    var_1 setweaponammoclip(var_0, int(var_0A));
+    var_10 = min(var_8 + var_9, var_6);
+    var_1 setweaponammoclip(var_0, int(var_10));
     var_1 setweaponammostock(var_0, int(var_7 - var_9));
     if(var_1 isdualwielding()) {
       var_7 = var_1 getweaponammostock(var_0);
       var_8 = var_1 getweaponammoclip(var_0, "left");
       var_9 = min(var_6 - var_8, var_7);
-      var_0A = min(var_8 + var_9, var_6);
-      var_1 setweaponammoclip(var_0, int(var_0A), "left");
+      var_10 = min(var_8 + var_9, var_6);
+      var_1 setweaponammoclip(var_0, int(var_10), "left");
       var_1 setweaponammostock(var_0, int(var_7 - var_9));
     }
   }
@@ -532,7 +532,7 @@ func_89C8(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_1[[level.move_speed_scale]]();
   }
 
-  var_1 scripts\engine\utility::waittill_any_timeout_1(5, "death", "disconnect");
+  var_1 scripts\engine\utility::waittill_any_timeout(5, "death", "disconnect");
   if(!isDefined(var_1)) {
     return;
   }
@@ -837,9 +837,9 @@ dolocaloverkilldamage(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_2 setscriptablepartstate("head", "hide");
   }
 
-  var_0A = scripts\engine\utility::get_array_of_closest(var_2.origin, level.spawned_enemies, [var_2], undefined, 64, 1);
-  foreach(var_0C in var_0A) {
-    var_0C dodamage(var_2.maxhealth, var_2.origin, var_1, var_1, "MOD_EXPLOSIVE", "iw7_walkietalkie_zm");
+  var_10 = scripts\engine\utility::get_array_of_closest(var_2.origin, level.spawned_enemies, [var_2], undefined, 64, 1);
+  foreach(var_12 in var_10) {
+    var_12 dodamage(var_2.maxhealth, var_2.origin, var_1, var_1, "MOD_EXPLOSIVE", "iw7_walkietalkie_zm");
   }
 }
 
@@ -886,9 +886,9 @@ dolocalrailgundamage(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_2 setscriptablepartstate("head", "hide");
   }
 
-  var_0A = scripts\engine\utility::get_array_of_closest(var_2.origin, level.spawned_enemies, [var_2], undefined, 64, 1);
-  foreach(var_0C in var_0A) {
-    var_0C dodamage(var_2.maxhealth, var_2.origin, var_1, var_1, "MOD_EXPLOSIVE", "iw7_walkietalkie_zm");
+  var_10 = scripts\engine\utility::get_array_of_closest(var_2.origin, level.spawned_enemies, [var_2], undefined, 64, 1);
+  foreach(var_12 in var_10) {
+    var_12 dodamage(var_2.maxhealth, var_2.origin, var_1, var_1, "MOD_EXPLOSIVE", "iw7_walkietalkie_zm");
   }
 }
 
@@ -1091,7 +1091,7 @@ scrambler_executevisuals(var_0) {
   var_1 setscriptablepartstate("effects", "active", 0);
   var_2 = var_1.origin + anglesToForward(var_1.angles) * 256;
   var_1 moveto(var_2, var_0);
-  scripts\engine\utility::waittill_any_timeout_1(var_0, "last_stand", "death");
+  scripts\engine\utility::waittill_any_timeout(var_0, "last_stand", "death");
   if(isDefined(var_1)) {
     var_1 delete();
   }
@@ -1393,7 +1393,7 @@ listencancelberserk() {
   self endon("end_berserk");
   self endon("stop_berserk_timer");
   self endon("disconnect");
-  scripts\engine\utility::waittill_any_3("death", "weapon_change");
+  scripts\engine\utility::waittill_any("death", "weapon_change");
   unset_berserk();
 }
 
@@ -1431,7 +1431,7 @@ handlemeleeconeexplode(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(!issubstr(var_0, "meleervn") && !var_1 func_8519(var_0)) {
+  if(!issubstr(var_0, "meleervn") && !var_1 isalternatemode(var_0)) {
     return;
   }
 
@@ -1439,26 +1439,26 @@ handlemeleeconeexplode(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = var_1 getplayerangles();
   var_8 = anglesToForward(var_7);
   var_9 = anglestoup(var_7);
-  var_0A = var_6 - var_8 * 128;
-  var_0B = 384;
+  var_10 = var_6 - var_8 * 128;
+  var_11 = 384;
   playFX(level._effect["cone_expl_fx"], var_6 + (0, 2, 0), var_8, var_9);
-  var_0C = scripts\cp\cp_agent_utils::get_alive_enemies();
-  foreach(var_0E in var_0C) {
-    if(isDefined(var_0E.flung) || isDefined(var_0E.agent_type) && var_0E.agent_type == "zombie_brute" || var_0E.agent_type == "zombie_ghost" || var_0E.agent_type == "zombie_grey" || var_0E.agent_type == "slasher" || var_0E.agent_type == "superslasher") {
+  var_12 = scripts\cp\cp_agent_utils::get_alive_enemies();
+  foreach(var_14 in var_12) {
+    if(isDefined(var_14.flung) || isDefined(var_14.agent_type) && var_14.agent_type == "zombie_brute" || var_14.agent_type == "zombie_ghost" || var_14.agent_type == "zombie_grey" || var_14.agent_type == "slasher" || var_14.agent_type == "superslasher") {
       continue;
     }
 
-    if(!scripts\cp\utility::pointvscone(var_0E gettagorigin("tag_origin"), var_0A, var_8, var_9, var_0B, 128, 12)) {
+    if(!scripts\cp\utility::pointvscone(var_14 gettagorigin("tag_origin"), var_10, var_8, var_9, var_11, 128, 12)) {
       continue;
     }
 
-    if(var_0E damageconetrace(var_6, var_1) <= 0) {
+    if(var_14 damageconetrace(var_6, var_1) <= 0) {
       continue;
     }
 
-    var_0F = int(1500 * var_1 scripts\cp\cp_weapon::get_weapon_level(var_0));
+    var_15 = int(1500 * var_1 scripts\cp\cp_weapon::get_weapon_level(var_0));
     wait(0.05);
-    var_0E dodamage(var_0F, var_6, var_1, var_1, "MOD_EXPLOSIVE", var_0);
+    var_14 dodamage(var_15, var_6, var_1, var_1, "MOD_EXPLOSIVE", var_0);
   }
 }
 
@@ -1575,7 +1575,7 @@ run_adrenaline_visuals(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("remove_adrenaline_visuals");
   var_0 visionsetnakedforplayer("missilecam", scripts\engine\utility::ter_op(1, 0.1, 0));
-  var_0 scripts\engine\utility::waittill_any_timeout_1(var_1, "last_stand");
+  var_0 scripts\engine\utility::waittill_any_timeout(var_1, "last_stand");
   var_0 thread remove_adrenaline_visuals(var_0);
 }
 
@@ -1705,7 +1705,7 @@ runscoperadarinloop(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   var_3 = 0.75;
   while(var_0 adsbuttonpressed()) {
-    if(var_0 getweaponrankinfominxp() >= var_3) {
+    if(var_0 playerads() >= var_3) {
       var_0 playlocalsound("uav_ping");
       var_0 thread scoperadar_executeping(var_0, var_1, var_2);
       var_0 scoperadar_executevisuals(var_0, var_1);
@@ -1733,8 +1733,8 @@ scoperadar_executeping(var_0, var_1, var_2) {
         continue;
       }
 
-      var_0A = var_2 * var_2;
-      if(length2dsquared(var_9) > var_0A) {
+      var_10 = var_2 * var_2;
+      if(length2dsquared(var_9) > var_10) {
         continue;
       }
 
@@ -1764,7 +1764,7 @@ func_C7A7(var_0, var_1, var_2, var_3) {
 func_13AA0(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   level endon("game_ended");
-  var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_2);
+  var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death(var_2);
   if(isDefined(var_1)) {
     disable_outline_for_player(var_1, var_0);
   }
@@ -1785,7 +1785,7 @@ scoperadar_executevisuals(var_0, var_1) {
   var_0.fxent setscriptablepartstate("effects", "active", 0);
   var_2 = var_0.fxent.origin + anglesToForward(var_0.fxent.angles) * 1750;
   var_0.fxent moveto(var_2, var_1);
-  var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_1, "last_stand", "death", "scope_radar_ads_out", "weapon_change", "unsetScopeRadar");
+  var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death(var_1, "last_stand", "death", "scope_radar_ads_out", "weapon_change", "unsetScopeRadar");
   if(isDefined(var_0.closestenemies)) {
     foreach(var_4 in var_0.closestenemies) {
       if(isDefined(var_4)) {

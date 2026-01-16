@@ -58,7 +58,7 @@ transponder_throw(var_0) {
   var_0 thread scripts\mp\weapons::func_3343();
   var_0 thread transponderdamage();
   var_0 thread scripts\mp\weapons::func_66B4(1);
-  var_0 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_0 thread scripts\mp\perks\perk_equipmentping::runequipmentping();
   level thread scripts\mp\weapons::monitordisownedequipment(self, var_0);
 }
 
@@ -88,7 +88,7 @@ watchtransponderdetonation(var_0) {
 }
 
 transponderdamage() {
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 waittill("transponder_update");
   var_0 setclientomnvar("ui_transponder_range_finder", 0);
 }
@@ -178,14 +178,14 @@ transponderactivate() {
   self waittill("missile_stuck", var_0);
   wait(0.05);
   if(!checkvalidposition()) {
-    self.triggerportableradarping placementfailed(self);
+    self.owner placementfailed(self);
     return;
   }
 
-  self.triggerportableradarping notify("powers_transponder_used", 1);
+  self.owner notify("powers_transponder_used", 1);
   self notify("activated");
   self.activated = 1;
-  self.triggerportableradarping func_5616(self);
+  self.owner func_5616(self);
   scripts\mp\weapons::makeexplosiveusable();
   scripts\mp\weapons::explosivehandlemovers(var_0);
 }
@@ -212,7 +212,7 @@ transponder_teleportplayer(var_0) {
   }
 
   iprintlnbold("Transponder lost connection");
-  self.triggerportableradarping transponderdetonateallcharges();
+  self.owner transponderdetonateallcharges();
 }
 
 activationeffects(var_0, var_1) {
@@ -231,10 +231,10 @@ activationeffects(var_0, var_1) {
 
 runtranspondersickness() {
   self endon("disconnect");
-  scripts\mp\killstreaks\_emp_common::func_20C3();
+  scripts\mp\killstreaks\emp_common::func_20C3();
   self shellshock("flashbang_mp", 1.2);
-  scripts\engine\utility::waittill_any_timeout_1(1.2, "death");
-  scripts\mp\killstreaks\_emp_common::func_E0F3();
+  scripts\engine\utility::waittill_any_timeout(1.2, "death");
+  scripts\mp\killstreaks\emp_common::func_E0F3();
 }
 
 transponderrangefinder(var_0) {
@@ -255,7 +255,7 @@ transponderwatchfordisuse(var_0) {
 
 checkvalidposition() {
   var_0 = getclosestpointonnavmesh(self.origin);
-  var_1 = self.triggerportableradarping scripts\mp\powerloot::func_7FC5("power_transponder", 256);
+  var_1 = self.owner scripts\mp\powerloot::func_7FC5("power_transponder", 256);
   if(distance(self.origin, var_0) > var_1) {
     return 0;
   }
@@ -350,7 +350,7 @@ func_12695(var_0, var_1, var_2) {
 func_13AA0(var_0, var_1, var_2) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_2, "leave");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(var_2, "leave");
   if(isDefined(var_1)) {
     scripts\mp\utility::outlinedisable(var_0, var_1);
   }
@@ -375,7 +375,7 @@ func_12691() {
 }
 
 func_AD77(var_0) {
-  scripts\engine\utility::waittill_any_timeout_1(5, "death");
+  scripts\engine\utility::waittill_any_timeout(5, "death");
   thread func_E164(var_0);
 }
 
@@ -396,8 +396,8 @@ func_13ACC(var_0) {
     var_7 = var_2 - var_4 * 32;
     var_8 = rotatevector(var_4, (0, 45, 0));
     var_9 = var_2 + var_8 * 64;
-    var_0A = rotatevector(var_4, (0, 135, 0));
-    var_0B = var_2 + var_0A * 32;
+    var_10 = rotatevector(var_4, (0, 135, 0));
+    var_11 = var_2 + var_10 * 32;
     self.var_B62A.origin = var_6;
     wait(0.05);
     playFXOnTag(level._effect["reaper_swipe_trail"], self.var_B62A, "tag_origin");
@@ -407,7 +407,7 @@ func_13ACC(var_0) {
     self.var_B62A.origin = var_5;
     thread func_20D9(var_5);
     wait(0.075);
-    self.var_B62A.origin = var_0B;
+    self.var_B62A.origin = var_11;
     wait(0.075);
     self.var_B62A.origin = var_7;
     wait(0.05);

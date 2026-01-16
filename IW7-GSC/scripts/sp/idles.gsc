@@ -133,15 +133,15 @@ func_DC81(var_0) {
       ]();
     }
 
-    var_0A = getanimlength(var_3);
-    var_0B = randomintrange(1, 4);
-    var_0C = var_0A * float(var_0B);
+    var_10 = getanimlength(var_3);
+    var_11 = randomintrange(1, 4);
+    var_12 = var_10 * float(var_11);
     if(!isDefined(var_0)) {
       return;
     }
 
     var_0 animscripted("single anim", self.origin, self.angles, var_3, undefined, undefined, 0.2);
-    wait(var_0C);
+    wait(var_12);
     if(!isDefined(var_0)) {
       return;
     }
@@ -153,18 +153,18 @@ func_DC81(var_0) {
 
     var_0 clearanim(var_3, 0.1);
     var_0 animscripted("single anim", self.origin, self.angles, var_6[0], undefined, undefined, 0.2);
-    var_0D = getanimlength(var_6[0]);
-    wait(var_0D);
+    var_13 = getanimlength(var_6[0]);
+    wait(var_13);
     if(!isDefined(var_0)) {
       return;
     }
 
     var_0 clearanim(var_6[0], 0.1);
     var_0 animscripted("single anim", self.origin, self.angles, var_6[1], undefined, undefined, 0.2);
-    var_0A = getanimlength(var_6[1]);
-    var_0B = randomintrange(1, 4);
-    var_0C = var_0A * float(var_0B);
-    wait(var_0C);
+    var_10 = getanimlength(var_6[1]);
+    var_11 = randomintrange(1, 4);
+    var_12 = var_10 * float(var_11);
+    wait(var_12);
     if(!isDefined(var_0)) {
       return;
     }
@@ -176,8 +176,8 @@ func_DC81(var_0) {
 
     var_0 clearanim(var_6[1], 0.1);
     var_0 animscripted("single anim", self.origin, self.angles, var_6[2], undefined, undefined, 0.2);
-    var_0E = getanimlength(var_6[2]);
-    wait(var_0E);
+    var_14 = getanimlength(var_6[2]);
+    wait(var_14);
     if(!isDefined(var_0)) {
       return;
     }
@@ -224,27 +224,27 @@ func_DC84(var_0) {
     }
 
     var_9 = 0;
-    var_0A = undefined;
+    var_10 = undefined;
     foreach(var_7 in var_0) {
-      var_0A = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
-      var_0C = getstartorigin(self.origin, self.angles, var_3);
-      var_0D = getstartangles(self.origin, self.angles, var_3);
+      var_10 = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
+      var_12 = getstartorigin(self.origin, self.angles, var_3);
+      var_13 = getstartangles(self.origin, self.angles, var_3);
       var_3 = level.var_EC85[var_7.var_1FBB]["idle_base"];
       if(isDefined(var_7.var_9B89) || !isai(var_7)) {
-        var_7.origin = var_0C;
-        var_7.angles = var_0D;
+        var_7.origin = var_12;
+        var_7.angles = var_13;
       } else {
-        var_7 func_80F1(var_0C, var_0D, 100000);
+        var_7 func_80F1(var_12, var_13, 100000);
       }
 
-      var_0E = undefined;
+      var_14 = undefined;
       if(isDefined(var_7.var_1ED4)) {
-        var_0E = [[var_7.var_1ED4]]();
+        var_14 = [[var_7.var_1ED4]]();
       }
 
-      var_0F = getanimlength(var_3);
+      var_15 = getanimlength(var_3);
       var_10 = randomintrange(1, 4);
-      var_9 = var_0F * float(var_10);
+      var_9 = var_15 * float(var_10);
       var_7 animscripted("single anim", self.origin, self.angles, var_3, undefined, undefined, 0.2);
     }
 
@@ -257,41 +257,41 @@ func_DC84(var_0) {
     func_13597(var_3, var_12, var_0);
     foreach(var_7 in var_0) {
       var_3 = level.var_EC85[var_7.var_1FBB]["idle_base"];
-      var_0A = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
+      var_10 = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
       var_7 clearanim(var_3, 0.1);
-      var_7 animscripted("single anim", self.origin, self.angles, var_0A[0], undefined, undefined, 0.2);
+      var_7 animscripted("single anim", self.origin, self.angles, var_10[0], undefined, undefined, 0.2);
     }
 
-    var_17 = getanimlength(var_0A[0]);
+    var_17 = getanimlength(var_10[0]);
     wait(var_17);
     foreach(var_7 in var_0) {
-      var_0A = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
-      var_7 clearanim(var_0A[0], 0.1);
-      var_7 animscripted("single anim", self.origin, self.angles, var_0A[1], undefined, undefined, 0.2);
+      var_10 = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
+      var_7 clearanim(var_10[0], 0.1);
+      var_7 animscripted("single anim", self.origin, self.angles, var_10[1], undefined, undefined, 0.2);
     }
 
-    var_0F = getanimlength(var_0A[1]);
+    var_15 = getanimlength(var_10[1]);
     var_10 = randomintrange(1, 4);
-    var_9 = var_0F * float(var_10);
+    var_9 = var_15 * float(var_10);
     wait(var_9);
     var_12 = [];
     foreach(var_7 in var_0) {
       var_12 = scripts\engine\utility::array_add(var_12, level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5][2]);
     }
 
-    func_13597(var_0A[1], var_12, var_0);
+    func_13597(var_10[1], var_12, var_0);
     foreach(var_7 in var_0) {
       var_3 = level.var_EC85[var_7.var_1FBB]["idle_base"];
-      var_0A = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
-      var_7 clearanim(var_0A[1], 0.1);
-      var_7 animscripted("single anim", self.origin, self.angles, var_0A[2], undefined, undefined, 0.2);
+      var_10 = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
+      var_7 clearanim(var_10[1], 0.1);
+      var_7 animscripted("single anim", self.origin, self.angles, var_10[2], undefined, undefined, 0.2);
     }
 
-    var_1E = getanimlength(var_0A[2]);
+    var_1E = getanimlength(var_10[2]);
     wait(var_1E);
     foreach(var_7 in var_0) {
-      var_0A = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
-      var_7 clearanim(var_0A[2], 0.1);
+      var_10 = level.var_EC85[var_7.var_1FBB]["idle_anims"][var_5];
+      var_7 clearanim(var_10[2], 0.1);
     }
 
     scripts\engine\utility::waitframe();
@@ -380,14 +380,14 @@ func_DC82(var_0) {
     }
 
     var_9 = getanimlength(var_2);
-    var_0A = randomintrange(1, 4);
-    var_0B = var_9 * float(var_0A);
+    var_10 = randomintrange(1, 4);
+    var_11 = var_9 * float(var_10);
     var_0 animscripted("single anim", self.origin, self.angles, var_2, undefined, undefined, 0.2);
-    wait(var_0B);
+    wait(var_11);
     var_0 clearanim(var_2, 0.1);
     var_0 animscripted("single anim", self.origin, self.angles, var_5, undefined, undefined, 0.2);
-    var_0C = getanimlength(var_5);
-    wait(var_0C);
+    var_12 = getanimlength(var_5);
+    wait(var_12);
     var_0 clearanim(var_5, 0.1);
     scripts\engine\utility::waitframe();
   }
@@ -409,14 +409,14 @@ func_DC83(var_0) {
     var_6.angles = var_9;
     thread scripts\sp\anim::func_10CBF(var_6, "single anim");
     thread scripts\sp\anim::func_1FCA(var_6, "single anim");
-    var_0A = undefined;
+    var_10 = undefined;
     if(isDefined(var_6.var_1ED4)) {
-      var_0A = [
+      var_10 = [
         [var_6.var_1ED4]
       ]();
     }
 
-    var_6 animscripted("single anim", self.origin, self.angles, var_7, undefined, var_0A, 0);
+    var_6 animscripted("single anim", self.origin, self.angles, var_7, undefined, var_10, 0);
   }
 
   for(;;) {
@@ -437,26 +437,26 @@ func_DC83(var_0) {
       }
     }
 
-    var_0C = [];
-    var_0D = 0;
-    var_0E = randomintrange(1, 4);
+    var_12 = [];
+    var_13 = 0;
+    var_14 = randomintrange(1, 4);
     foreach(var_6 in var_0) {
       var_7 = level.var_EC85[var_6.var_1FBB]["idle_base"];
       var_8 = getstartorigin(self.origin, self.angles, var_7);
       var_9 = getstartangles(self.origin, self.angles, var_7);
       var_6.origin = var_8;
       var_6.angles = var_9;
-      var_0A = undefined;
+      var_10 = undefined;
       if(isDefined(var_6.var_1ED4)) {
-        var_0A = [[var_6.var_1ED4]]();
+        var_10 = [[var_6.var_1ED4]]();
       }
 
       var_10 = getanimlength(var_7);
-      var_0D = var_10;
-      var_6 animscripted("single anim", self.origin, self.angles, var_7, undefined, var_0A, 0.2);
+      var_13 = var_10;
+      var_6 animscripted("single anim", self.origin, self.angles, var_7, undefined, var_10, 0.2);
     }
 
-    wait(var_0D);
+    wait(var_13);
     var_12 = 0;
     foreach(var_6 in var_0) {
       var_7 = level.var_EC85[var_6.var_1FBB]["idle_base"];
@@ -465,12 +465,12 @@ func_DC83(var_0) {
       var_9 = getstartangles(self.origin, self.angles, var_14);
       var_6.origin = var_8;
       var_6.angles = var_9;
-      var_0A = undefined;
+      var_10 = undefined;
       if(isDefined(var_6.var_1ED4)) {
-        var_0A = [[var_6.var_1ED4]]();
+        var_10 = [[var_6.var_1ED4]]();
       }
 
-      var_6 animscripted("single anim", self.origin, self.angles, var_14, undefined, var_0A, 0.2);
+      var_6 animscripted("single anim", self.origin, self.angles, var_14, undefined, var_10, 0.2);
       var_12 = getanimlength(var_14);
     }
 

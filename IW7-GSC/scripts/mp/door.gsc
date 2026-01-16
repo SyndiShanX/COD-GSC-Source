@@ -106,7 +106,7 @@ door_think() {
   for(;;) {
     var_0.var_10E27 = undefined;
     var_0.var_10E29 = undefined;
-    var_0 scripts\engine\utility::waittill_any_3("door_state_done", "door_state_interrupted");
+    var_0 scripts\engine\utility::waittill_any("door_state_done", "door_state_interrupted");
     if(isDefined(var_0.var_10E27) && var_0.var_10E27) {
       var_1 = var_0 door_state_next(var_0.statecurr);
       var_0 door_state_change(var_1, 0);
@@ -161,9 +161,9 @@ door_state_update(var_0) {
     foreach(var_3 in var_1.doors) {
       if(var_1.statecurr == 0) {
         if(isDefined(var_1.var_19E5)) {
-          foreach(var_0A in var_1.var_19E5) {
-            var_0A show();
-            var_0A func_829D(1);
+          foreach(var_10 in var_1.var_19E5) {
+            var_10 show();
+            var_10 func_829D(1);
           }
         }
 
@@ -172,9 +172,9 @@ door_state_update(var_0) {
         }
       } else {
         if(isDefined(var_1.var_19E5)) {
-          foreach(var_0A in var_1.var_19E5) {
-            var_0A hide();
-            var_0A func_829D(0);
+          foreach(var_10 in var_1.var_19E5) {
+            var_10 hide();
+            var_10 func_829D(0);
           }
         }
 
@@ -198,8 +198,8 @@ door_state_update(var_0) {
       }
     }
 
-    var_0F = scripts\engine\utility::ter_op(var_1.statecurr == 0, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
-    var_1 sethintstring(var_0F);
+    var_15 = scripts\engine\utility::ter_op(var_1.statecurr == 0, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
+    var_1 sethintstring(var_15);
     var_1 makeusable();
     var_1 waittill("trigger");
     if(isDefined(var_1.button_smash_count)) {

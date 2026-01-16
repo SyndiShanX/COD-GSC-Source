@@ -85,7 +85,7 @@ func_468A() {
     var_7 = distancesquared(self.origin, var_6);
     var_8 = level.var_10E6D.var_466C.var_733B;
     var_9 = level.var_10E6D.var_466C.var_101E0;
-    var_0A = level.var_10E6D.var_466C.var_53A1;
+    var_10 = level.var_10E6D.var_466C.var_53A1;
     if(isDefined(self.var_10E6D.var_C810)) {
       var_8 = self.var_10E6D.var_C810 * self.var_10E6D.var_C810;
     }
@@ -95,7 +95,7 @@ func_468A() {
     }
 
     if(isDefined(self.var_10E6D.var_C80F)) {
-      var_0A = self.var_10E6D.var_C80F * self.var_10E6D.var_C80F;
+      var_10 = self.var_10E6D.var_C80F * self.var_10E6D.var_C80F;
     }
 
     if(var_7 < var_8) {
@@ -110,9 +110,9 @@ func_468A() {
         continue;
       }
 
-      var_0B = self.var_10E6D.var_466C.ent scripts\sp\utility::func_78E4();
-      var_0C = distancesquared(self.origin, var_0B);
-      if(var_0C <= var_7) {
+      var_11 = self.var_10E6D.var_466C.ent scripts\sp\utility::func_78E4();
+      var_12 = distancesquared(self.origin, var_11);
+      if(var_12 <= var_7) {
         continue;
       }
     }
@@ -125,17 +125,17 @@ func_468A() {
       continue;
     }
 
-    if(var_7 < var_0A) {
-      if(!isDefined(var_4.var_F182) && self getpersstat(var_4)) {
+    if(var_7 < var_10) {
+      if(!isDefined(var_4.var_F182) && self cansee(var_4)) {
         var_2 = var_4;
         break;
       }
     }
 
-    var_0D = anglesToForward(self gettagangles("tag_eye"));
-    var_0E = vectornormalize(var_6 + (0, 0, 30) - self getEye());
-    if(vectordot(var_0D, var_0E) > 0.55) {
-      if(!isDefined(var_4.var_F182) && self getpersstat(var_4)) {
+    var_13 = anglesToForward(self gettagangles("tag_eye"));
+    var_14 = vectornormalize(var_6 + (0, 0, 30) - self getEye());
+    if(vectordot(var_13, var_14) > 0.55) {
+      if(!isDefined(var_4.var_F182) && self cansee(var_4)) {
         var_2 = var_4;
         break;
       }

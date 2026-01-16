@@ -297,7 +297,7 @@ init_hidden_song_2_quest() {
     var_7 show();
     var_7 thread picturewaitfordamage(var_7);
     level.hidden_pictures[level.hidden_pictures.size] = var_7;
-    var_0B = 1;
+    var_11 = 1;
   }
 }
 
@@ -406,8 +406,8 @@ play_hidden_song(var_0, var_1) {
 
   var_7 playLoopSound(var_1);
   var_7 thread earlyendon(var_7);
-  var_0C = lookupsoundlength(var_1) / 1000;
-  level scripts\engine\utility::waittill_any_timeout_1(var_0C, "skip_song");
+  var_12 = lookupsoundlength(var_1) / 1000;
+  level scripts\engine\utility::waittill_any_timeout(var_12, "skip_song");
   var_7 stoploopsound();
   var_7 delete();
   level thread scripts\cp\zombies\zombie_jukebox::jukebox_start((649, 683, 254), 1);
@@ -415,7 +415,7 @@ play_hidden_song(var_0, var_1) {
 
 earlyendon(var_0) {
   level endon("game_ended");
-  level scripts\engine\utility::waittill_any_3("add_hidden_song_to_playlist", "add_hidden_song_2_to_playlist", "force_new_song");
+  level scripts\engine\utility::waittill_any("add_hidden_song_to_playlist", "add_hidden_song_2_to_playlist", "force_new_song");
   if(isDefined(var_0)) {
     var_0 stoploopsound();
     wait(2);
@@ -561,15 +561,15 @@ remove_escape_entities() {
 
   var_9 = getEntArray("escape_spawn_trigger", "targetname");
   if(isDefined(var_9)) {
-    foreach(var_0B in var_9) {
-      var_0B delete();
+    foreach(var_11 in var_9) {
+      var_11 delete();
     }
   }
 
-  var_0D = getEntArray("escape_exit_path", "targetname");
-  if(isDefined(var_0D)) {
-    foreach(var_0F in var_0D) {
-      var_0F delete();
+  var_13 = getEntArray("escape_exit_path", "targetname");
+  if(isDefined(var_13)) {
+    foreach(var_15 in var_13) {
+      var_15 delete();
     }
   }
 }
@@ -995,7 +995,7 @@ kick_for_inactivity(var_0) {
         break;
       }
 
-      var_5 = scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_4, "inputReceived", "currency_earned");
+      var_5 = scripts\engine\utility::waittill_any_timeout_no_endon_death(var_4, "inputReceived", "currency_earned");
       if(gettime() - var_1 < 30000) {
         continue;
       }
@@ -1050,7 +1050,7 @@ check_for_movement() {
 
 add_to_kick_queue(var_0) {
   if(!scripts\engine\utility::exist_in_array_MAYBE(level.kick_player_queue, var_0)) {
-    level.kick_player_queue = scripts\engine\utility::array_add_safe(level.kick_player_queue, var_0);
+    level.kick_player_queue = scripts\engine\utility::add_to_array(level.kick_player_queue, var_0);
   }
 }
 
@@ -1259,7 +1259,7 @@ shredder_battery_spawn() {
   self setCanDamage(1);
   var_0 linkto(self, "tag", (-80, 0, 15), (0, 0, 0));
   for(;;) {
-    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(isDefined(var_2) && isplayer(var_2)) {
       if(distancesquared(var_0.origin, var_4) < 400) {
         var_0 thread knock_off_battery(self);
@@ -1542,33 +1542,33 @@ watch_player_landing(var_0, var_1, var_2) {
     }
 
     wait(0.05);
-    foreach(var_0C in level.players) {
+    foreach(var_12 in level.players) {
       if(scripts\engine\utility::istrue(self.flung)) {
         continue;
       }
 
-      if(var_0C == self) {
+      if(var_12 == self) {
         continue;
       }
 
-      if(!var_0C isonground()) {
+      if(!var_12 isonground()) {
         continue;
       }
 
-      if(isDefined(var_0C.anchor)) {
+      if(isDefined(var_12.anchor)) {
         continue;
       }
 
-      if(self istouching(var_0C)) {
-        var_0C setvelocity(vectornormalize(var_0C.origin - self.origin) * 800 + (0, 0, 50));
+      if(self istouching(var_12)) {
+        var_12 setvelocity(vectornormalize(var_12.origin - self.origin) * 800 + (0, 0, 50));
       }
     }
 
     wait(0.05);
   }
 
-  var_0E = gettime();
-  if(isDefined(self.abh_used) && self.abh_used > var_6 && self.abh_used < var_0E) {
+  var_14 = gettime();
+  if(isDefined(self.abh_used) && self.abh_used > var_6 && self.abh_used < var_14) {
     var_5 = 0;
   }
 
@@ -1631,21 +1631,21 @@ handle_host_migration_during_launch() {
     }
 
     wait(0.05);
-    foreach(var_0B in level.players) {
-      if(var_0B == self) {
+    foreach(var_11 in level.players) {
+      if(var_11 == self) {
         continue;
       }
 
-      if(self istouching(var_0B)) {
-        var_0B setvelocity(vectornormalize(var_0B.origin - self.origin) * 800 + (0, 0, 50));
+      if(self istouching(var_11)) {
+        var_11 setvelocity(vectornormalize(var_11.origin - self.origin) * 800 + (0, 0, 50));
       }
     }
 
     wait(0.05);
   }
 
-  var_0D = gettime();
-  if(isDefined(self.abh_used) && self.abh_used > var_5 && self.abh_used < var_0D) {
+  var_13 = gettime();
+  if(isDefined(self.abh_used) && self.abh_used > var_5 && self.abh_used < var_13) {
     var_4 = 0;
   }
 
@@ -2104,14 +2104,14 @@ zmb_power_gate_handler() {
     }
   }
 
-  var_0A = getEntArray("door_buy", "targetname");
-  foreach(var_2 in var_0A) {
+  var_10 = getEntArray("door_buy", "targetname");
+  foreach(var_2 in var_10) {
     var_2 scripts\engine\utility::trigger_off();
   }
 
-  foreach(var_0E in var_5) {
-    level thread scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0E);
-    var_0E.out_of_order = 1;
+  foreach(var_14 in var_5) {
+    level thread scripts\cp\cp_interaction::remove_from_current_interaction_list(var_14);
+    var_14.out_of_order = 1;
   }
 
   level waittill("moon power_on");
@@ -2130,12 +2130,12 @@ zmb_power_gate_handler() {
     var_13 delete();
   }
 
-  foreach(var_0E in var_5) {
-    var_0E.out_of_order = 0;
-    level thread scripts\cp\cp_interaction::add_to_current_interaction_list(var_0E);
+  foreach(var_14 in var_5) {
+    var_14.out_of_order = 0;
+    level thread scripts\cp\cp_interaction::add_to_current_interaction_list(var_14);
   }
 
-  foreach(var_2 in var_0A) {
+  foreach(var_2 in var_10) {
     var_2 scripts\engine\utility::trigger_on();
   }
 }
@@ -2567,16 +2567,16 @@ cp_zmb_interaction_struct_adjustment(var_0) {
   }
 }
 
-cp_zmb_wait_to_be_revived_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+cp_zmb_wait_to_be_revived_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if((scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) && scripts\engine\utility::istrue(level.the_hoff_revive)) {
-    var_0C = wait_for_hoff_revive(var_0, var_7);
-    if(scripts\engine\utility::istrue(var_0C)) {
+    var_12 = wait_for_hoff_revive(var_0, var_7);
+    if(scripts\engine\utility::istrue(var_12)) {
       scripts\cp\cp_laststand::clear_last_stand_timer(var_0);
       self notify("revive_success");
       return 1;
     }
 
-    if(scripts\engine\utility::istrue(var_0B)) {
+    if(scripts\engine\utility::istrue(var_11)) {
       wait(5);
       scripts\cp\cp_laststand::clear_last_stand_timer(var_0);
       self notify("revive_success");
@@ -2596,7 +2596,7 @@ wait_for_hoff_revive(var_0, var_1) {
   level endon("hoff_death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  var_2 = var_0.reviveent scripts\engine\utility::waittill_any_timeout_1(var_1, "trigger");
+  var_2 = var_0.reviveent scripts\engine\utility::waittill_any_timeout(var_1, "trigger");
   if(var_2 != "trigger") {
     return undefined;
   }
@@ -2700,12 +2700,12 @@ vectors_are_in_box(var_0, var_1, var_2, var_3, var_4) {
   for(var_6 = 0; var_6 < 2; var_6++) {
     foreach(var_8 in var_5) {
       var_9 = 0;
-      foreach(var_0B in var_5) {
-        if(var_8 == var_0B) {
+      foreach(var_11 in var_5) {
+        if(var_8 == var_11) {
           continue;
         }
 
-        if((var_4[var_6] > var_8[var_6] && var_4[var_6] < var_0B[var_6]) || var_4[var_6] > var_0B[var_6] && var_4[var_6] < var_8[var_6]) {
+        if((var_4[var_6] > var_8[var_6] && var_4[var_6] < var_11[var_6]) || var_4[var_6] > var_11[var_6] && var_4[var_6] < var_8[var_6]) {
           break;
         } else {
           var_9++;

@@ -70,12 +70,12 @@ func_D449() {
         continue;
       }
 
-      var_6 = var_5.triggerportableradarping;
+      var_6 = var_5.owner;
       if(!isDefined(var_6) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade") {
         var_6 = getmissileowner(var_5);
       }
 
-      if(isDefined(var_6) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self, var_5.triggerportableradarping))) {
+      if(isDefined(var_6) && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self, var_5.owner))) {
         continue;
       }
 
@@ -98,7 +98,7 @@ func_D449() {
 
 func_D445(var_0) {
   scripts\mp\missions::func_D991("ch_trait_personal_trophy");
-  scripts\mp\killstreaks\_killstreaks::givescorefortrophyblocks();
+  scripts\mp\killstreaks\killstreaks::givescorefortrophyblocks();
   var_0 setCanDamage(0);
   var_0.exploding = 1;
   var_0 stopsounds();
@@ -122,7 +122,7 @@ playertrophy_watchemp() {
   self endon("death");
   self endon("disconnect");
   self endon("player_trophy_end");
-  while(!scripts\mp\killstreaks\_emp_common::isemped()) {
+  while(!scripts\mp\killstreaks\emp_common::isemped()) {
     scripts\engine\utility::waitframe();
   }
 

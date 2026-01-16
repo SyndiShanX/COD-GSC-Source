@@ -4,7 +4,7 @@
 *********************************************/
 
 init() {
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("thor", ::func_12909, undefined, undefined, undefined, ::func_13C8E, undefined, ::func_13099, ::weaponswitchendedairstrike);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("thor", ::func_12909, undefined, undefined, undefined, ::func_13C8E, undefined, ::func_13099, ::weaponswitchendedairstrike);
   level._effect["thor_clouds"] = loadfx("vfx\core\mp\killstreaks\odin\odin_parallax_clouds");
   level._effect["thor_fisheye"] = loadfx("vfx\iw7\_requests\mp\vfx_scrnfx_thor_fisheye.vfx");
   level._effect["thor_targeting"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_marker_odin_cyan");
@@ -25,16 +25,16 @@ init() {
   level.var_117B0["thor"].var_12B80 = &"KILLSTREAKS_LOKI_UNAVAILABLE";
   level.var_117B0["thor"].var_73BE = "compass_objpoint_airstrike_friendly";
   level.var_117B0["thor"].var_6485 = "compass_objpoint_airstrike_busy";
-  level.var_117B0["thor"].var_394["missile"] = spawnStruct();
-  level.var_117B0["thor"].var_394["missile"].var_39C = "thorproj_mp";
-  level.var_117B0["thor"].var_394["missile"].var_13FCB = "thorproj_zoomed_mp";
-  level.var_117B0["thor"].var_394["missile"].projectile = "thorproj_mp";
-  level.var_117B0["thor"].var_394["missile"].var_E7BA = "heavygun_fire";
-  level.var_117B0["thor"].var_394["missile"].var_DF5C = 0.1;
-  level.var_117B0["thor"].var_394["missile"].var_B47C = 5;
-  level.var_117B0["thor"].var_394["missile"].var_D5E4 = "null";
-  level.var_117B0["thor"].var_394["missile"].var_D5DD = "null";
-  level.var_117B0["thor"].var_394["missile"].var_C195 = "null";
+  level.var_117B0["thor"].weapon["missile"] = spawnStruct();
+  level.var_117B0["thor"].weapon["missile"].var_39C = "thorproj_mp";
+  level.var_117B0["thor"].weapon["missile"].var_13FCB = "thorproj_zoomed_mp";
+  level.var_117B0["thor"].weapon["missile"].projectile = "thorproj_mp";
+  level.var_117B0["thor"].weapon["missile"].var_E7BA = "heavygun_fire";
+  level.var_117B0["thor"].weapon["missile"].var_DF5C = 0.1;
+  level.var_117B0["thor"].weapon["missile"].var_B47C = 5;
+  level.var_117B0["thor"].weapon["missile"].var_D5E4 = "null";
+  level.var_117B0["thor"].weapon["missile"].var_D5DD = "null";
+  level.var_117B0["thor"].weapon["missile"].var_C195 = "null";
   level.var_C20D = 0;
   var_0 = ["passive_increased_armor", "passive_decreased_duration", "passive_seek_cluster", "passive_no_cursor", "passive_switch_thruster", "passive_armor_duration"];
   scripts\mp\killstreak_loot::func_DF07("thor", var_0);
@@ -62,7 +62,7 @@ func_13C8E(var_0) {
 func_13B73() {
   self endon("thor_weapon_switch_ended");
   level endon("game_ended");
-  scripts\engine\utility::waittill_any_3("death", "disconnect");
+  scripts\engine\utility::waittill_any("death", "disconnect");
   if(isDefined(level.var_C20D) && level.var_C20D > 0) {
     level.var_C20D--;
   }
@@ -89,7 +89,7 @@ func_13099(var_0) {
 }
 
 func_12909(var_0) {
-  var_1 = scripts\mp\killstreaks\_killstreaks::func_D507(var_0);
+  var_1 = scripts\mp\killstreaks\killstreaks::func_D507(var_0);
   if(!var_1) {
     level.var_C20D--;
     return 0;
@@ -107,7 +107,7 @@ func_10DFC(var_0) {
   self.var_117AF = spawn("script_model", level.var_12AF6);
   self.var_117AF setModel("tag_origin");
   self.var_117AF.angles = (0, 115, 0);
-  self.var_117AF.triggerportableradarping = self;
+  self.var_117AF.owner = self;
   self.var_117AF hide();
   self.var_117AF thread func_E731(-360, 60, "thor_fire_thrusters", "thor_switch_thrusters");
   self.thorrigangle = -360;
@@ -117,7 +117,7 @@ func_10DFC(var_0) {
   if(!isDefined(var_1)) {
     level.var_C20D--;
     scripts\mp\utility::decrementfauxvehiclecount();
-    thread scripts\mp\killstreaks\_killstreaks::func_11086();
+    thread scripts\mp\killstreaks\killstreaks::func_11086();
     return 0;
   }
 
@@ -126,13 +126,13 @@ func_10DFC(var_0) {
 
 func_E731(var_0, var_1, var_2, var_3) {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   if(isDefined(var_2)) {
-    self.triggerportableradarping endon(var_2);
+    self.owner endon(var_2);
   }
 
   if(isDefined(var_3)) {
-    self.triggerportableradarping endon(var_3);
+    self.owner endon(var_3);
   }
 
   if(!isDefined(var_0)) {
@@ -159,47 +159,47 @@ func_4A26(var_0, var_1) {
   var_8 = vectornormalize((var_6, var_7, var_5));
   var_8 = var_8 * var_4;
   var_9 = self.var_117AF.origin + var_8 + (0, 0, 1000);
-  var_0A = self.var_117AF.origin + var_8;
-  var_0B = var_2.modelbase;
-  var_0C = scripts\mp\killstreak_loot::getrarityforlootitem(var_1.variantid);
-  if(var_0C != "") {
-    var_0B = var_0B + "_" + var_0C;
+  var_10 = self.var_117AF.origin + var_8;
+  var_11 = var_2.modelbase;
+  var_12 = scripts\mp\killstreak_loot::getrarityforlootitem(var_1.variantid);
+  if(var_12 != "") {
+    var_11 = var_11 + "_" + var_12;
   }
 
-  var_0D = spawn("script_model", var_9);
-  if(!isDefined(var_0D)) {
+  var_13 = spawn("script_model", var_9);
+  if(!isDefined(var_13)) {
     return undefined;
   }
 
-  var_0D setModel(var_0B);
-  var_0D.team = self.team;
-  var_0D.triggerportableradarping = self;
-  var_0D.health = 99999;
-  var_0D.numflares = 1;
-  var_0D.var_C239 = var_2.var_394["missile"].var_B47C;
-  var_0D.var_C238 = 0;
-  var_0D.var_B88C = func_989D("ID");
-  var_0D.var_B888 = func_989D("Distance");
-  var_0D.var_B47C = var_2.var_394["missile"].var_B47C;
-  var_0D.var_DF5C = var_2.var_394["missile"].var_DF5C;
-  var_0D.zoffset = 10000;
-  var_0D.streakname = var_0;
-  var_0D.var_117B2 = 1;
-  var_0D.streakinfo = var_1;
-  var_0D.basemodel = var_0B;
-  var_0D setCanDamage(1);
-  var_0D setotherent(self);
-  var_0D setscriptablepartstate("body", "hide", 0);
-  var_0D.angles = vectortoangles(self.var_117AF.origin - (var_0D.origin[0], var_0D.origin[1], self.var_117AF.origin[2]));
-  var_0D.var_10E4C = func_495B();
-  thread func_117AE(var_0D, var_0A);
-  return var_0D;
+  var_13 setModel(var_11);
+  var_13.team = self.team;
+  var_13.owner = self;
+  var_13.health = 99999;
+  var_13.numflares = 1;
+  var_13.var_C239 = var_2.weapon["missile"].var_B47C;
+  var_13.var_C238 = 0;
+  var_13.var_B88C = func_989D("ID");
+  var_13.var_B888 = func_989D("Distance");
+  var_13.var_B47C = var_2.weapon["missile"].var_B47C;
+  var_13.var_DF5C = var_2.weapon["missile"].var_DF5C;
+  var_13.zoffset = 10000;
+  var_13.streakname = var_0;
+  var_13.var_117B2 = 1;
+  var_13.streakinfo = var_1;
+  var_13.basemodel = var_11;
+  var_13 setCanDamage(1);
+  var_13 setotherent(self);
+  var_13 setscriptablepartstate("body", "hide", 0);
+  var_13.angles = vectortoangles(self.var_117AF.origin - (var_13.origin[0], var_13.origin[1], self.var_117AF.origin[2]));
+  var_13.var_10E4C = func_495B();
+  thread func_117AE(var_13, var_10);
+  return var_13;
 }
 
 func_117AE(var_0, var_1) {
   var_0 endon("death");
   level endon("game_ended");
-  var_0.triggerportableradarping playlocalsound("thor_init_plr");
+  var_0.owner playlocalsound("thor_init_plr");
   var_0 moveto(var_1, 1);
   var_0 scriptmodelplayanim("iw7_mp_killstreak_thor_idle", 1);
   var_0 setscriptablepartstate("thrusters", "drop", 0);
@@ -209,27 +209,27 @@ func_117AE(var_0, var_1) {
     scripts\mp\utility::setthirdpersondof(0);
   }
 
-  var_3 = var_2.var_394["missile"].var_39C;
-  var_4 = var_2.var_394["missile"].var_13FCB;
+  var_3 = var_2.weapon["missile"].var_39C;
+  var_4 = var_2.weapon["missile"].var_13FCB;
   var_0.primaryweapon = var_3;
   var_0.secondaryweapon = var_4;
-  var_0.triggerportableradarping scripts\mp\utility::_giveweapon(var_3);
-  var_0.triggerportableradarping scripts\mp\utility::_giveweapon(var_4);
-  var_0.triggerportableradarping scripts\mp\utility::_switchtoweaponimmediate(var_3);
-  var_0.triggerportableradarping playerlinkweaponviewtodelta(var_0, "tag_player", 0, 180, 180, 45, 180);
-  var_0.triggerportableradarping func_8236(0);
-  var_0.triggerportableradarping func_85A2(getthormapvisionset(level.mapname));
-  var_0.triggerportableradarping thread func_B011(var_0);
-  var_0.triggerportableradarping setclientomnvar("ui_thor_show", 1);
-  var_0.triggerportableradarping setclientomnvar("ui_thor_missiles_loaded", var_2.var_394["missile"].var_B47C);
-  var_0.triggerportableradarping thermalvisionfofoverlayon();
-  var_0.triggerportableradarping thermalvisionon();
+  var_0.owner scripts\mp\utility::_giveweapon(var_3);
+  var_0.owner scripts\mp\utility::_giveweapon(var_4);
+  var_0.owner scripts\mp\utility::_switchtoweaponimmediate(var_3);
+  var_0.owner playerlinkweaponviewtodelta(var_0, "tag_player", 0, 180, 180, 45, 180);
+  var_0.owner func_8236(0);
+  var_0.owner func_85A2(getthormapvisionset(level.mapname));
+  var_0.owner thread func_B011(var_0);
+  var_0.owner setclientomnvar("ui_thor_show", 1);
+  var_0.owner setclientomnvar("ui_thor_missiles_loaded", var_2.weapon["missile"].var_B47C);
+  var_0.owner thermalvisionfofoverlayon();
+  var_0.owner thermalvisionon();
   for(var_5 = 0; var_5 < 5; var_5++) {
-    var_0.triggerportableradarping setclientomnvar(var_0.var_B88C[var_5].omnvar, undefined);
-    var_0.triggerportableradarping setclientomnvar(var_0.var_B888[var_5].omnvar, -1);
+    var_0.owner setclientomnvar(var_0.var_B88C[var_5].omnvar, undefined);
+    var_0.owner setclientomnvar(var_0.var_B888[var_5].omnvar, -1);
   }
 
-  var_0.triggerportableradarping func_82C0("thor_killstreak", 1);
+  var_0.owner func_82C0("thor_killstreak", 1);
   var_6 = var_2.teamsplash;
   var_7 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.streakinfo.variantid);
   if(var_7 != "") {
@@ -237,7 +237,7 @@ func_117AE(var_0, var_1) {
   }
 
   level thread scripts\mp\utility::teamplayercardsplash(var_6, self);
-  var_0.triggerportableradarping scripts\engine\utility::allow_weapon_switch(0);
+  var_0.owner scripts\engine\utility::allow_weapon_switch(0);
   var_0 func_8ED7(var_0.basemodel);
   var_0 thread func_117A7();
   var_0 thread func_117A0();
@@ -249,7 +249,7 @@ func_117AE(var_0, var_1) {
   var_0 setscriptablepartstate("thrusters", "idle", 0);
   scripts\mp\shellshock::_earthquake(0.2, 0.76, var_0.origin, 1000);
   var_0 linkto(self.var_117AF, "tag_origin");
-  var_0 scripts\mp\killstreaks\_utility::func_1843(var_0.streakname, undefined, var_0.triggerportableradarping, 1);
+  var_0 scripts\mp\killstreaks\_utility::func_1843(var_0.streakname, undefined, var_0.owner, 1);
   var_8 = "icon_minimap_thor_friendly";
   var_0.minimapid = var_0 scripts\mp\killstreaks\_airdrop::createobjective(var_8, undefined, 1, 1, 1);
   var_9 = var_2.timeout;
@@ -257,7 +257,7 @@ func_117AE(var_0, var_1) {
     var_9 = var_9 - 5;
   }
 
-  var_0 thread func_1179D(var_0.triggerportableradarping);
+  var_0 thread func_1179D(var_0.owner);
   var_0 thread func_117AC(var_9);
   var_0 thread func_117AA();
   var_0 thread func_1179F();
@@ -265,7 +265,7 @@ func_117AE(var_0, var_1) {
   var_0 thread func_117AB();
   var_0 thread func_117A2();
   if(scripts\mp\killstreaks\_utility::func_A69F(var_0.streakinfo, "passive_switch_thruster")) {
-    var_0 thread thor_watchswitchthrust(var_0.triggerportableradarping);
+    var_0 thread thor_watchswitchthrust(var_0.owner);
   }
 
   var_0 thread func_117A3();
@@ -275,10 +275,10 @@ func_117AE(var_0, var_1) {
   var_0 thread func_117A8();
   var_0 thread func_11790();
   var_0 thread watchhostmigrationfinishedinit(self, var_2);
-  var_0.triggerportableradarping scripts\mp\matchdata::logkillstreakevent(var_0.streakname, self.origin);
-  var_0.triggerportableradarping scripts\engine\utility::allow_usability(0);
-  var_0.triggerportableradarping setclientomnvar("ui_killstreak_countdown", gettime() + int(var_9 * 1000));
-  var_0.triggerportableradarping setclientomnvar("ui_killstreak_health", var_2.maxhealth / 2600);
+  var_0.owner scripts\mp\matchdata::logkillstreakevent(var_0.streakname, self.origin);
+  var_0.owner scripts\engine\utility::allow_usability(0);
+  var_0.owner setclientomnvar("ui_killstreak_countdown", gettime() + int(var_9 * 1000));
+  var_0.owner setclientomnvar("ui_killstreak_health", var_2.maxhealth / 2600);
 }
 
 func_8ED7(var_0) {
@@ -386,7 +386,7 @@ func_1179D(var_0) {
     }
 
     var_0 scripts\engine\utility::allow_fire(0);
-    scripts\engine\utility::waittill_any_3("finished_single_fire", "finished_reload", "death", "leaving");
+    scripts\engine\utility::waittill_any("finished_single_fire", "finished_reload", "death", "leaving");
     var_0 scripts\engine\utility::allow_fire(1);
   }
 }
@@ -395,20 +395,20 @@ func_117A0() {
   level endon("game_ended");
   self endon("leaving");
   self waittill("death");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping func_11791(self);
-    self.triggerportableradarping setclientomnvar("ui_thor_show", 0);
-    self.triggerportableradarping setclientomnvar("ui_killstreak_countdown", 0);
-    self.triggerportableradarping setclientomnvar("ui_killstreak_health", 0);
-    self.triggerportableradarping setclientomnvar("ui_killstreak_missile_warn", 0);
-    self.triggerportableradarping clearclienttriggeraudiozone(1);
-    self.triggerportableradarping stoprumble("thor_thrust_rumble");
+  if(isDefined(self.owner)) {
+    self.owner func_11791(self);
+    self.owner setclientomnvar("ui_thor_show", 0);
+    self.owner setclientomnvar("ui_killstreak_countdown", 0);
+    self.owner setclientomnvar("ui_killstreak_health", 0);
+    self.owner setclientomnvar("ui_killstreak_missile_warn", 0);
+    self.owner clearclienttriggeraudiozone(1);
+    self.owner stoprumble("thor_thrust_rumble");
     foreach(var_1 in self.var_B88C) {
-      self.triggerportableradarping setclientomnvar(var_1.omnvar, undefined);
+      self.owner setclientomnvar(var_1.omnvar, undefined);
     }
 
     foreach(var_4 in self.var_B888) {
-      self.triggerportableradarping setclientomnvar(var_4.omnvar, -1);
+      self.owner setclientomnvar(var_4.omnvar, -1);
     }
   }
 
@@ -423,16 +423,16 @@ func_117AC(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("host_migration_lifetime_update");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
   thread scripts\mp\killstreaks\_utility::watchhostmigrationlifetime("leaving", var_0, ::func_117AC);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
   func_1179C(3);
   var_1 = ["thor_end", "thor_timeout"];
   var_2 = randomint(var_1.size);
   var_3 = var_1[var_2];
-  self.triggerportableradarping scripts\mp\utility::playkillstreakdialogonplayer(var_3, undefined, undefined, self.triggerportableradarping.origin);
+  self.owner scripts\mp\utility::playkillstreakdialogonplayer(var_3, undefined, undefined, self.owner.origin);
   thread func_11795();
 }
 
@@ -440,7 +440,7 @@ func_117A7() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
   self notify("death");
 }
 
@@ -448,9 +448,9 @@ func_117A5() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
   level waittill("objective_cam");
   thread func_11795();
 }
@@ -458,10 +458,10 @@ func_117A5() {
 func_117A9() {
   self endon("death");
   self endon("leaving");
-  self.triggerportableradarping endon("disconnect");
-  self.triggerportableradarping endon("joined_team");
-  self.triggerportableradarping endon("joined_spectators");
-  level scripts\engine\utility::waittill_any_3("round_end_finished", "game_ended");
+  self.owner endon("disconnect");
+  self.owner endon("joined_team");
+  self.owner endon("joined_spectators");
+  level scripts\engine\utility::waittill_any("round_end_finished", "game_ended");
   var_0 = 1;
   thread func_11795(var_0);
 }
@@ -471,20 +471,20 @@ func_11795(var_0) {
   self notify("leaving");
   var_1 = level.var_117B0[self.streakname];
   scripts\mp\utility::leaderdialog(var_1.votimedout);
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping func_11791(self, var_0);
-    self.triggerportableradarping setclientomnvar("ui_thor_show", 0);
-    self.triggerportableradarping setclientomnvar("ui_killstreak_countdown", 0);
-    self.triggerportableradarping setclientomnvar("ui_killstreak_health", 0);
-    self.triggerportableradarping setclientomnvar("ui_killstreak_missile_warn", 0);
-    self.triggerportableradarping clearclienttriggeraudiozone(1);
-    self.triggerportableradarping stoprumble("thor_thrust_rumble");
+  if(isDefined(self.owner)) {
+    self.owner func_11791(self, var_0);
+    self.owner setclientomnvar("ui_thor_show", 0);
+    self.owner setclientomnvar("ui_killstreak_countdown", 0);
+    self.owner setclientomnvar("ui_killstreak_health", 0);
+    self.owner setclientomnvar("ui_killstreak_missile_warn", 0);
+    self.owner clearclienttriggeraudiozone(1);
+    self.owner stoprumble("thor_thrust_rumble");
     foreach(var_3 in self.var_B88C) {
-      self.triggerportableradarping setclientomnvar(var_3.omnvar, undefined);
+      self.owner setclientomnvar(var_3.omnvar, undefined);
     }
 
     foreach(var_6 in self.var_B888) {
-      self.triggerportableradarping setclientomnvar(var_6.omnvar, -1);
+      self.owner setclientomnvar(var_6.omnvar, -1);
     }
   }
 
@@ -524,7 +524,7 @@ func_11791(var_0, var_1) {
 
     self stoplocalsound("odin_negative_action");
     self stoplocalsound("odin_positive_action");
-    foreach(var_4 in level.var_117B0[var_0.streakname].var_394) {
+    foreach(var_4 in level.var_117B0[var_0.streakname].weapon) {
       if(isDefined(var_4.var_D5E4)) {
         self stoplocalsound(var_4.var_D5E4);
       }
@@ -534,7 +534,7 @@ func_11791(var_0, var_1) {
       }
     }
 
-    thread scripts\mp\killstreaks\_killstreaks::func_11086();
+    thread scripts\mp\killstreaks\killstreaks::func_11086();
     if(isDefined(self.var_117AF)) {
       self.var_117AF delete();
     }
@@ -558,7 +558,7 @@ func_117AA() {
   self endon("death");
   self endon("leaving");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1.angles = vectortoangles((0, 0, 1));
@@ -581,7 +581,7 @@ func_117AA() {
 func_1179F() {
   self endon("death");
   self endon("leaving");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_1 = level.var_117B0[self.streakname];
   var_2 = var_1.maxhealth;
@@ -596,14 +596,14 @@ func_1179F() {
   }
 
   for(;;) {
-    self waittill("damage", var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10, var_11, var_12, var_13, var_14);
+    self waittill("damage", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10, var_11, var_12, var_13, var_14);
     var_10 = scripts\mp\utility::func_13CA1(var_10, var_14);
     if(isDefined(var_8)) {
-      if(isDefined(var_8.triggerportableradarping)) {
-        var_8 = var_8.triggerportableradarping;
+      if(isDefined(var_8.owner)) {
+        var_8 = var_8.owner;
       }
 
-      if(isDefined(var_8.team) && var_8.team == self.team && var_8 != self.triggerportableradarping) {
+      if(isDefined(var_8.team) && var_8.team == self.team && var_8 != self.owner) {
         continue;
       }
     }
@@ -612,12 +612,12 @@ func_1179F() {
       continue;
     }
 
-    if(isDefined(var_0B)) {
-      var_0 func_4CF1(self, var_0B);
+    if(isDefined(var_11)) {
+      var_0 func_4CF1(self, var_11);
     }
 
     if(isDefined(var_10)) {
-      var_7 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_8, var_10, var_0B, var_7, var_1.maxhealth, var_4, var_5, var_6);
+      var_7 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_8, var_10, var_11, var_7, var_1.maxhealth, var_4, var_5, var_6);
       if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
         if(scripts\mp\killstreaks\_utility::isexplosiveantikillstreakweapon(var_10)) {
           var_8 scripts\mp\damagefeedback::updatedamagefeedback("hitblastshield");
@@ -629,8 +629,8 @@ func_1179F() {
     var_0 setclientomnvar("ui_killstreak_health", var_2 / var_1.maxhealth);
     if(isplayer(var_8)) {
       var_8 scripts\mp\damagefeedback::updatedamagefeedback("");
-      scripts\mp\killstreaks\_killstreaks::killstreakhit(var_8, var_10, self, var_0B);
-      scripts\mp\damage::logattackerkillstreak(self, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, var_10);
+      scripts\mp\killstreaks\killstreaks::killstreakhit(var_8, var_10, self, var_11);
+      scripts\mp\damage::logattackerkillstreak(self, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_10);
       if(var_2 <= 0) {
         var_8 notify("destroyed_killstreak", var_10);
         var_15 = "callout_destroyed_thor";
@@ -639,7 +639,7 @@ func_1179F() {
           var_15 = var_15 + "_" + var_16;
         }
 
-        scripts\mp\damage::onkillstreakkilled("thor", var_8, var_10, var_0B, var_7, "destroyed_thor", "thor_destroyed", var_15);
+        scripts\mp\damage::onkillstreakkilled("thor", var_8, var_10, var_11, var_7, "destroyed_thor", "thor_destroyed", var_15);
         return;
       }
     }
@@ -711,7 +711,7 @@ func_117AD() {
   self endon("death");
   self endon("leaving");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_1 = level.var_117B0[self.streakname];
   if(!isai(var_0)) {
@@ -739,7 +739,7 @@ func_117AB() {
   self endon("death");
   self endon("leaving");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_1 = level.var_117B0[self.streakname];
   if(!isai(var_0)) {
@@ -766,7 +766,7 @@ func_117AB() {
 func_117A2() {
   self endon("death");
   self endon("leaving");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   if(!isai(var_0)) {
     var_0 notifyonplayercommand("thor_fire_thrusters", "+smoke");
@@ -848,7 +848,7 @@ thor_watchswitchthrust(var_0) {
   self endon("death");
   self endon("leaving");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   if(!isai(var_0)) {
     var_0 notifyonplayercommand("thor_switch_thrusters", "+speed_throw");
@@ -899,10 +899,10 @@ func_117A3() {
   self endon("death");
   self endon("leaving");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_1 = "missile";
-  var_2 = level.var_117B0[self.streakname].var_394[var_1];
+  var_2 = level.var_117B0[self.streakname].weapon[var_1];
   for(;;) {
     var_0 waittill("missile_fire", var_3, var_4);
     if(scripts\mp\utility::istrue(self.var_9BE2)) {
@@ -955,20 +955,20 @@ func_139D1(var_0, var_1, var_2) {
   var_7 = var_3.origin;
   var_8 = scripts\mp\killstreaks\_utility::func_7E92(var_0);
   var_9 = [];
-  foreach(var_0B in var_8) {
-    if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_0B)) {
+  foreach(var_11 in var_8) {
+    if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_11)) {
       continue;
     }
 
-    if(var_0 worldpointinreticle_circle(var_0B.origin, 65, 55)) {
-      var_9[var_9.size] = var_0B;
+    if(var_0 worldpointinreticle_circle(var_11.origin, 65, 55)) {
+      var_9[var_9.size] = var_11;
     }
   }
 
-  self waittill("explode", var_0D);
-  var_0E = var_2.var_C239;
-  var_0F = "thorproj_tracking_mp";
-  for(var_10 = 0; var_10 < var_0E; var_10++) {
+  self waittill("explode", var_13);
+  var_14 = var_2.var_C239;
+  var_15 = "thorproj_tracking_mp";
+  for(var_10 = 0; var_10 < var_14; var_10++) {
     if(!isDefined(var_2)) {
       break;
     }
@@ -978,24 +978,24 @@ func_139D1(var_0, var_1, var_2) {
     var_13 = anglesToForward(var_6) * 3;
     var_14 = anglestoup(var_6) * sin(var_11);
     var_15 = var_12 + var_13 + var_14;
-    var_16 = scripts\mp\utility::_magicbullet(var_0F, var_0D, var_0D + var_15, var_0);
-    var_16.triggerportableradarping = var_0;
-    var_16.zoffset = var_0D[2];
+    var_16 = scripts\mp\utility::_magicbullet(var_15, var_13, var_13 + var_15, var_0);
+    var_16.owner = var_0;
+    var_16.zoffset = var_13[2];
     var_16.id = func_7FBA(var_4);
     var_16.var_5716 = func_7FBA(var_5);
-    var_16.outlineid = scripts\mp\utility::outlineenableforplayer(var_16, "white", var_16.triggerportableradarping, 0, 0, "killstreak_personal");
+    var_16.outlineid = scripts\mp\utility::outlineenableforplayer(var_16, "white", var_16.owner, 0, 0, "killstreak_personal");
     var_16.streakinfo = var_2.streakinfo;
-    var_16.triggerportableradarping setclientomnvar(var_16.id.omnvar, var_16);
-    var_16.triggerportableradarping setclientomnvar(var_16.var_5716.omnvar, int(var_16.zoffset));
+    var_16.owner setclientomnvar(var_16.id.omnvar, var_16);
+    var_16.owner setclientomnvar(var_16.var_5716.omnvar, int(var_16.zoffset));
     if(scripts\mp\killstreaks\_utility::func_A69F(var_2.streakinfo, "passive_seek_cluster")) {
-      var_16 thread delayseekopentargetinview(0.3, var_16.triggerportableradarping, var_7, var_9);
+      var_16 thread delayseekopentargetinview(0.3, var_16.owner, var_7, var_9);
     } else {
       var_16 thread func_50E6(0.3, var_3);
     }
 
-    var_16 thread func_139F6(var_16.triggerportableradarping, var_2);
-    var_16 thread func_13A22(var_16.triggerportableradarping, var_2);
-    var_16 thread scripts\mp\killstreaks\_utility::watchsupertrophynotify(var_16.triggerportableradarping);
+    var_16 thread func_139F6(var_16.owner, var_2);
+    var_16 thread func_13A22(var_16.owner, var_2);
+    var_16 thread scripts\mp\killstreaks\_utility::watchsupertrophynotify(var_16.owner);
     var_2.var_C239--;
     var_0 setclientomnvar("ui_thor_missiles_loaded", var_2.var_C239);
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
@@ -1072,7 +1072,7 @@ canseetarget(var_0) {
 }
 
 func_50E6(var_0, var_1) {
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   wait(var_0);
   if(isDefined(var_1)) {
     self missile_settargetent(var_1);
@@ -1160,7 +1160,7 @@ func_1179E() {
 
 func_1179B() {
   self endon("death");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   var_0 endon("disconnect");
   var_0 endon("thor_missile_fire_success");
   level endon("game_ended");
@@ -1227,7 +1227,7 @@ func_20D2(var_0) {
     return;
   }
 
-  var_1 = scripts\mp\utility::outlineenableforplayer(var_0, "cyan", self.triggerportableradarping, 1, 1, "killstreak");
+  var_1 = scripts\mp\utility::outlineenableforplayer(var_0, "cyan", self.owner, 1, 1, "killstreak");
   thread removeoutline(var_1, var_0);
 }
 
@@ -1273,9 +1273,9 @@ func_11790(var_0) {
     self waittill("thor_enemy_killed");
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_2);
     if(self.enemieskilledintimewindow > 1) {
-      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_1.var_1352C);
+      self.owner scripts\mp\utility::leaderdialogonplayer(var_1.var_1352C);
     } else {
-      self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer(var_1.var_1352D);
+      self.owner scripts\mp\utility::leaderdialogonplayer(var_1.var_1352D);
     }
 
     self.enemieskilledintimewindow = 0;
@@ -1321,7 +1321,7 @@ func_117A1() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
+  thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
   self waittill("killstreakExit");
   var_0 = level.var_117B0[self.streakname];
   scripts\mp\utility::leaderdialog(var_0.votimedout);

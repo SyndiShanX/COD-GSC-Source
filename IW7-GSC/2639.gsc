@@ -129,8 +129,9 @@ updatehitmarker(var_0, var_1, var_2, var_3, var_4) {
   if(var_1) {
     self setclientomnvar("damage_scale_type", "hitaliensoft");
     self setclientomnvar("damage_feedback_headshot", 1);
-  } else
+  } else {
     self setclientomnvar("damage_feedback_headshot", 0);
+  }
 
   if(isDefined(var_2)) {
     self setclientomnvar("ui_damage_amount", int(var_2));
@@ -751,8 +752,9 @@ func_3343() {
         var_0 notify("destroyed_equipment");
       }
     }
-  } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner)
+  } else if(isDefined(self.owner) && isDefined(var_0) && var_0 != self.owner) {
     var_0 notify("destroyed_equipment");
+  }
 
   if(self.weapon_name == "transponder_mp" || self.weapon_name == "ztransponder_mp") {
     self.owner notify("transponder_update", 0);

@@ -416,8 +416,9 @@ func_710E(var_0, var_1, var_2) {
       var_2.var_71D2 = ::func_7110;
       var_2.taskid = scripts\aitypes\bt_util::bt_getchildtaskid(var_1, 2);
       return;
-    } else if(var_3 == 3)
+    } else if(var_3 == 3) {
       func_0A0D::func_7231(scripts\aitypes\bt_util::bt_getchildtaskid(var_1, var_3));
+    }
   }
 
   var_2.var_71D2 = undefined;

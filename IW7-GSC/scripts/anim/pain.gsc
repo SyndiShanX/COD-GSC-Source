@@ -104,7 +104,7 @@ botmemoryselectpos() {
   }
 
   if(self.a.pose == "stand") {
-    var_1 = isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < 4096;
+    var_1 = isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 4096;
     if(!var_1 && self.a.movement == "run" && abs(self getspawnpoint_searchandrescue()) < 60) {
       return getsafecircleorigin();
     }
@@ -579,8 +579,8 @@ func_4877() {
   scripts\anim\notetracks::donotetracksintercept("transition", ::func_8977);
   self.a.var_10930 = "dying_crawl";
   thread func_5F73();
-  if(isDefined(self.isnodeoccupied)) {
-    self func_8306(self.isnodeoccupied);
+  if(isDefined(self.enemy)) {
+    self func_8306(self.enemy);
   }
 
   func_4F64();
@@ -698,10 +698,10 @@ func_FFC3(var_0) {
   }
 
   var_9 = scripts\anim\utility::func_B027("crawl_death", "longdeath");
-  var_0A = var_4 + "_" + var_5;
-  var_0B = randomint(var_9[var_0A].size);
-  var_0C = var_9[var_0A][var_0B];
-  return var_0C;
+  var_10 = var_4 + "_" + var_5;
+  var_11 = randomint(var_9[var_10].size);
+  var_12 = var_9[var_10][var_11];
+  return var_12;
 }
 
 func_11185() {
@@ -912,7 +912,7 @@ func_8977(var_0) {
 }
 
 func_1A3C() {
-  var_0 = self.isnodeoccupied getshootatpos();
+  var_0 = self.enemy getshootatpos();
   var_1 = self getspawnpointdist();
   var_2 = vectortoangles(var_0 - self getmuzzlepos());
   var_3 = scripts\engine\utility::absangleclamp180(var_1[1] - var_2[1]);
@@ -926,11 +926,11 @@ func_1A3C() {
 }
 
 enemyisingeneraldirection(var_0) {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
-  var_1 = vectornormalize(self.isnodeoccupied getshootatpos() - self getEye());
+  var_1 = vectornormalize(self.enemy getshootatpos() - self getEye());
   return vectordot(var_1, var_0) > 0.5;
 }
 
@@ -1064,7 +1064,7 @@ func_4669() {
       }
 
       thread func_D527("grenade_bounce", var_2);
-      self.objective_team = "fraggrenade";
+      self.grenadeweapon = "fraggrenade";
       self getuniqueobjectid(var_2, var_0, var_1);
     }
 
@@ -1093,22 +1093,22 @@ func_4669() {
     }
 
     func_6560() {
-      if(!isDefined(self.isnodeoccupied)) {
+      if(!isDefined(self.enemy)) {
         return 0;
       }
 
-      if(distancesquared(self.origin, self.isnodeoccupied.origin) > 147456) {
+      if(distancesquared(self.origin, self.enemy.origin) > 147456) {
         return 0;
       }
 
-      if(distancesquared(self.origin, self.isnodeoccupied.origin) < 16384) {
+      if(distancesquared(self.origin, self.enemy.origin) < 16384) {
         return 1;
       }
 
-      var_0 = self.isnodeoccupied.origin + self.var_6579 * 3;
-      var_1 = self.isnodeoccupied.origin;
-      if(self.isnodeoccupied.origin != var_0) {
-        var_1 = pointonsegmentnearesttopoint(self.isnodeoccupied.origin, var_0, self.origin);
+      var_0 = self.enemy.origin + self.var_6579 * 3;
+      var_1 = self.enemy.origin;
+      if(self.enemy.origin != var_0) {
+        var_1 = pointonsegmentnearesttopoint(self.enemy.origin, var_0, self.origin);
       }
 
       if(distancesquared(self.origin, var_1) < 16384) {
@@ -1144,18 +1144,18 @@ func_4669() {
       var_1 = self.origin;
       var_2 = 0.15;
       for(;;) {
-        if(isDefined(self.isnodeoccupied) && isDefined(var_0) && self.isnodeoccupied == var_0) {
-          var_3 = self.isnodeoccupied.origin;
+        if(isDefined(self.enemy) && isDefined(var_0) && self.enemy == var_0) {
+          var_3 = self.enemy.origin;
           self.var_6579 = var_3 - var_1 * 1 / var_2;
           var_1 = var_3;
         } else {
-          if(isDefined(self.isnodeoccupied)) {
-            var_1 = self.isnodeoccupied.origin;
+          if(isDefined(self.enemy)) {
+            var_1 = self.enemy.origin;
           } else {
             var_1 = self.origin;
           }
 
-          var_0 = self.isnodeoccupied;
+          var_0 = self.enemy;
           self.var_FE9F = (0, 0, 0);
         }
 

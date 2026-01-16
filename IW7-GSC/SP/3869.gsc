@@ -80,7 +80,7 @@ func_13437() {
   for(;;) {
     scripts\sp\utility::func_65E3("stealth_enabled");
     if(!isDefined(self.var_10E6D.var_931F)) {
-      self.setturretnode = func_7938();
+      self.maxvisibledist = func_7938();
     }
 
     wait(0.05);

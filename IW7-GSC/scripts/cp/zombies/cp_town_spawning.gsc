@@ -277,15 +277,15 @@ dbg_spawn_goons(var_0, var_1) {
       var_7 = scripts\cp\zombies\zombies_spawning::func_8456(var_8);
       var_8 = sortbydistance(var_8, var_0);
       var_9 = 0;
-      var_0A = cos(70);
-      var_0B = 500;
-      var_0C = var_0B * var_0B;
+      var_10 = cos(70);
+      var_11 = 500;
+      var_12 = var_11 * var_11;
       while(var_9 < var_8.size) {
-        if(distancesquared(var_0, var_8[var_9].origin) > var_0C) {
+        if(distancesquared(var_0, var_8[var_9].origin) > var_12) {
           break;
         }
 
-        if(!scripts\engine\utility::within_fov(var_0, var_1, var_8[var_9].origin, var_0A)) {
+        if(!scripts\engine\utility::within_fov(var_0, var_1, var_8[var_9].origin, var_10)) {
           var_9++;
           continue;
         }
@@ -303,8 +303,8 @@ dbg_spawn_goons(var_0, var_1) {
       level thread scripts\cp\utility::drawsphere(var_7.origin, 20, 3, (0, 1, 0));
       var_7.in_use = 1;
       var_7.lastspawntime = gettime();
-      var_0D = func_10719(var_7);
-      if(isDefined(var_0D)) {
+      var_13 = func_10719(var_7);
+      if(isDefined(var_13)) {
         var_6++;
         wait(randomfloatrange(var_2, var_3));
       }
@@ -342,7 +342,7 @@ func_772C(var_0, var_1) {
     var_8 = randomintrange(var_3 * -1, var_3);
     var_5 = getclosestpointonnavmesh((var_0[0] + var_7, var_0[1] + var_8, var_0[2]));
     var_6 = 1;
-    foreach(var_0A in level.players) {
+    foreach(var_10 in level.players) {
       if(positionwouldtelefrag(var_5)) {
         var_6 = 0;
       }
@@ -456,16 +456,16 @@ egg_sac_fly(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = trajectorycalculateinitialvelocity(var_1, var_2, var_7, var_3);
   var_9 = var_3 * 20;
   scripts\cp\maps\cp_town\cp_town_crab_boss_escort::play_launch_muzzle_flash(var_1, var_8, var_4);
-  for(var_0A = 1; var_0A <= var_9; var_0A++) {
-    var_0B = var_0A / 20;
-    var_0C = 0.5 * var_7 * var_0B * var_0B + var_8 * var_0B + var_1;
-    var_0.origin = var_0C;
+  for(var_10 = 1; var_10 <= var_9; var_10++) {
+    var_11 = var_10 / 20;
+    var_12 = 0.5 * var_7 * var_11 * var_11 + var_8 * var_11 + var_1;
+    var_0.origin = var_12;
     scripts\engine\utility::waitframe();
   }
 
   scripts\engine\utility::waitframe();
-  var_0D = egg_sac_landing_sequence(var_0, var_2, var_4, var_5);
-  return var_0D;
+  var_13 = egg_sac_landing_sequence(var_0, var_2, var_4, var_5);
+  return var_13;
 }
 
 egg_sac_landing_sequence(var_0, var_1, var_2, var_3) {
@@ -504,7 +504,7 @@ crab_mini_audio_monitor() {
   thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix, undefined, 1);
   self.playing_stumble = 0;
   for(;;) {
-    var_0 = scripts\engine\utility::waittill_any_timeout_1(6, "attack_hit", "attack_miss", "attack_charge");
+    var_0 = scripts\engine\utility::waittill_any_timeout(6, "attack_hit", "attack_miss", "attack_charge");
     switch (var_0) {
       case "attack_hit":
         level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "alert", 0);
@@ -577,11 +577,11 @@ func_8456(var_0) {
     }
   }
 
-  var_0B = 562500;
-  var_0C = 4000000;
-  var_0D = 9000000;
-  var_0E = 122500;
-  var_0F = -25536;
+  var_11 = 562500;
+  var_12 = 4000000;
+  var_13 = 9000000;
+  var_14 = 122500;
+  var_15 = -25536;
   var_10 = -99999999;
   var_11 = undefined;
   var_12 = 15000;
@@ -606,13 +606,13 @@ func_8456(var_0) {
     }
 
     var_1D = distancesquared(var_17.origin, var_6.origin);
-    if(var_1D < var_0E) {
+    if(var_1D < var_14) {
       var_1A = var_1A - -15536;
       var_15 = var_15 + " Too Close";
-    } else if(var_1D > var_0D) {
+    } else if(var_1D > var_13) {
       var_1A = var_1A - -15536;
       var_15 = var_15 + " Too Far";
-    } else if(var_1D < var_0B) {
+    } else if(var_1D < var_11) {
       if(var_1C < max(int(level.specialroundcounter + 1) * 10, 20)) {
         var_1A = var_1A + var_1B;
         var_15 = var_15 + " Chance Close";
@@ -620,7 +620,7 @@ func_8456(var_0) {
         var_1A = var_1A - var_1B;
         var_15 = var_15 + " Close";
       }
-    } else if(var_1D > var_0C) {
+    } else if(var_1D > var_12) {
       var_1A = var_1A - var_1B;
       var_15 = var_15 + " Far";
     } else {
@@ -643,7 +643,7 @@ func_8456(var_0) {
   for(var_1F = var_18.size - 1; var_1F >= 0; var_1F--) {
     var_20 = 1;
     foreach(var_17 in level.players) {
-      if(distancesquared(var_17.origin, var_18[var_1F].origin) < var_0F) {
+      if(distancesquared(var_17.origin, var_18[var_1F].origin) < var_15) {
         var_20 = 0;
         break;
       }
@@ -862,7 +862,7 @@ func_726E() {
 }
 
 func_5173(var_0) {
-  scripts\engine\utility::waittill_any_3("death", "emerge_done");
+  scripts\engine\utility::waittill_any("death", "emerge_done");
   if(isDefined(var_0)) {
     var_0 delete();
   }
@@ -1160,14 +1160,14 @@ func_5773(var_0) {
     }
 
     if(isDefined(var_0)) {
-      var_0B = var_0;
+      var_11 = var_0;
     } else if(isDefined(var_7) && scripts\cp\zombies\zombies_spawning::func_CF4C(var_7)) {
-      var_0B = 189225;
+      var_11 = 189225;
     } else {
-      var_0B = 250000;
+      var_11 = 250000;
     }
 
-    if(var_5 >= var_0B) {
+    if(var_5 >= var_11) {
       if(!var_4) {
         if(level.last_mini_zone_fail + 1000 > gettime()) {
           return;
@@ -1308,14 +1308,14 @@ disablespawnvolumes(var_0, var_1) {
     }
   }
 
-  foreach(var_0B in level.copy_active_spawn_volumes) {
+  foreach(var_11 in level.copy_active_spawn_volumes) {
     if(!scripts\engine\utility::istrue(var_1)) {
-      if(isDefined(var_2) && var_0B == var_2) {
+      if(isDefined(var_2) && var_11 == var_2) {
         continue;
       }
     }
 
-    var_0B scripts\cp\zombies\zombies_spawning::make_volume_inactive();
+    var_11 scripts\cp\zombies\zombies_spawning::make_volume_inactive();
   }
 }
 
@@ -1506,7 +1506,7 @@ func_3114() {
     level.var_3120 = [];
   }
 
-  level.var_3120 = scripts\engine\utility::array_add_safe(level.var_3120, self);
+  level.var_3120 = scripts\engine\utility::add_to_array(level.var_3120, self);
   self.allowpain = 0;
   self.is_reserved = 1;
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(1);
@@ -1524,7 +1524,7 @@ func_310F() {
   thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix);
   self.playing_stumble = 0;
   for(;;) {
-    var_0 = scripts\engine\utility::waittill_any_timeout_1(6, "attack_hit", "attack_miss");
+    var_0 = scripts\engine\utility::waittill_any_timeout(6, "attack_hit", "attack_miss");
     switch (var_0) {
       case "attack_hit":
         level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "attack_pounding", 0);

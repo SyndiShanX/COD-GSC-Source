@@ -209,8 +209,8 @@ func_237F(var_0) {
     case "face node":
       var_5 = self.angles[1];
       var_6 = 1024;
-      if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_6) {
-        var_5 = scripts\asm\shared_utility::getnodeforwardyaw(self.target_getindexoftarget);
+      if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_6) {
+        var_5 = scripts\asm\shared_utility::getnodeforwardyaw(self.node);
       }
 
       var_7 = (0, var_5, 0);
@@ -247,8 +247,8 @@ func_7EA3() {
     var_1 = 4096;
   }
 
-  if(isDefined(self.target_getindexoftarget) && distancesquared(self.origin, self.target_getindexoftarget.origin) < var_1) {
-    var_0 = self.target_getindexoftarget;
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
+    var_0 = self.node;
   } else if(isDefined(self.weaponmaxdist) && distancesquared(self.origin, self.weaponmaxdist.origin) < var_1) {
     var_0 = self.weaponmaxdist;
   }

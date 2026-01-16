@@ -6,10 +6,10 @@
 init() {
   var_0 = spawnStruct();
   var_0.id = "deployable_weapon_crate";
-  var_0.var_39B = "crate_marker_mp";
+  var_0.weaponinfo = "crate_marker_mp";
   var_0.modelbase = "mp_weapon_crate";
   var_0.modelbombsquad = "mp_weapon_crate_bombsquad";
-  var_0.pow = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
+  var_0.hintstring = &"KILLSTREAKS_HINTS_DEPLOYABLE_AMMO_USE";
   var_0.var_3A41 = &"KILLSTREAKS_DEPLOYABLE_AMMO_TAKING";
   var_0.var_67E5 = "deployable_ammo_taken";
   var_0.streakname = "deployable_ammo";
@@ -42,7 +42,7 @@ init() {
   var_0.ondeploycallback = ::func_C4CF;
   var_0.canuseotherboxes = 0;
   level.boxsettings["deployable_ammo"] = var_0;
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("deployable_ammo", undefined, ::func_128DD);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("deployable_ammo", undefined, ::func_128DD);
   level.var_5226 = randomintrange(1, var_0.var_B7A5 + 1);
   level.deployable_box["deployable_ammo"] = [];
 }
@@ -61,7 +61,7 @@ func_128D7(var_0, var_1, var_2) {
 }
 
 func_128DD(var_0, var_1) {
-  var_2 = scripts\mp\killstreaks\_deployablebox::begindeployableviamarker(var_0.lifeid, "deployable_ammo", var_1, var_0.var_394);
+  var_2 = scripts\mp\killstreaks\_deployablebox::begindeployableviamarker(var_0.lifeid, "deployable_ammo", var_1, var_0.weapon);
   if(!isDefined(var_2) || !var_2) {
     return 0;
   }
@@ -138,7 +138,7 @@ func_E2B7(var_0) {
   self endon("death");
   level endon("game_eneded");
   var_1 = spawn("trigger_radius", self.origin, 0, var_0.var_127C8, var_0.var_127C5);
-  var_1.triggerportableradarping = self;
+  var_1.owner = self;
   thread scripts\mp\weapons::deleteondeath(var_1);
   if(isDefined(self.moving_platform)) {
     var_1 enablelinkto();
@@ -150,7 +150,7 @@ func_E2B7(var_0) {
   for(;;) {
     var_4 = var_1 getistouchingentities(level.players);
     foreach(var_3 in var_4) {
-      if(isDefined(var_3) && !self.triggerportableradarping scripts\mp\utility::isenemy(var_3)) {
+      if(isDefined(var_3) && !self.owner scripts\mp\utility::isenemy(var_3)) {
         if(!isDefined(var_3.var_116D0) || !var_3.var_116D0) {
           var_3 thread func_93EF();
         }

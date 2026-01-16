@@ -49,7 +49,7 @@ func_A6D4(var_0) {
     self thread[[level.scriptablestatefunc]](self);
   }
 
-  scripts\engine\utility::waittill_any_timeout_1(var_1, "death");
+  scripts\engine\utility::waittill_any_timeout(var_1, "death");
   self.stunned = undefined;
 }
 

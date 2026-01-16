@@ -164,7 +164,7 @@ func_E4C7() {
         continue;
       }
 
-      if(self func_8519(var_3, 1)) {
+      if(self isalternatemode(var_3, 1)) {
         var_3 = getsubstr(var_3, 4, var_3.size);
       }
 
@@ -179,28 +179,28 @@ func_E4C7() {
   }
 
   foreach(var_3 in var_0) {
-    var_0E = 0;
+    var_14 = 0;
     if(scripts\mp\utility::getweaponrootname(var_3) == "iw7_fmg") {
-      var_0E = self func_8519(var_3, 1);
+      var_14 = self isalternatemode(var_3, 1);
     } else if(issubstr(var_3, "akimbo")) {
-      var_0E = 1;
+      var_14 = 1;
     }
 
-    if(var_0E) {
-      var_0F = self getweaponammoclip(var_3, "left") + self getweaponammoclip(var_3, "right") + self getweaponammostock(var_3);
-      var_0F = int(max(var_0F, weaponstartammo(var_3)));
+    if(var_14) {
+      var_15 = self getweaponammoclip(var_3, "left") + self getweaponammoclip(var_3, "right") + self getweaponammostock(var_3);
+      var_15 = int(max(var_15, weaponstartammo(var_3)));
       var_10 = weaponclipsize(var_3);
-      var_11 = int(max(0, var_0F - var_10 * 2));
+      var_11 = int(max(0, var_15 - var_10 * 2));
       self setweaponammoclip(var_3, var_10, "left");
       self setweaponammoclip(var_3, var_10, "right");
       self setweaponammostock(var_3, var_11);
       continue;
     }
 
-    var_0F = self getweaponammoclip(var_3) + self getweaponammostock(var_3);
-    var_0F = int(max(var_0F, weaponstartammo(var_3)));
+    var_15 = self getweaponammoclip(var_3) + self getweaponammostock(var_3);
+    var_15 = int(max(var_15, weaponstartammo(var_3)));
     var_10 = weaponclipsize(var_3);
-    var_11 = int(max(0, var_0F - var_10));
+    var_11 = int(max(0, var_15 - var_10));
     self setweaponammoclip(var_3, var_10);
     self setweaponammostock(var_3, var_11);
   }

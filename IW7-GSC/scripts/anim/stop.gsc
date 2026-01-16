@@ -95,7 +95,7 @@ func_7E6F() {
     var_1 = var_0.angles[1];
     var_2 = var_0.type;
   } else {
-    var_1 = self.var_EC;
+    var_1 = self.desiredangle;
     var_2 = "node was undefined";
   }
 

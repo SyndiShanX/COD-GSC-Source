@@ -162,18 +162,18 @@ func_200F() {
     }
   }
 
-  var_0B = self.origin[2] - var_6 - 24;
-  var_0C = self.origin[2] + var_7 + 72;
-  var_0D = var_0C + var_0B * 0.5;
-  if(var_0D < self.origin[2]) {
-    var_0E = self.origin;
-    var_0F = self.origin[2] - var_0B;
+  var_11 = self.origin[2] - var_6 - 24;
+  var_12 = self.origin[2] + var_7 + 72;
+  var_13 = var_12 + var_11 * 0.5;
+  if(var_13 < self.origin[2]) {
+    var_14 = self.origin;
+    var_15 = self.origin[2] - var_11;
   } else {
-    var_0E = (self.origin[0], self.origin[1], var_0F);
-    var_0F = var_0D - var_0C * 0.5;
+    var_14 = (self.origin[0], self.origin[1], var_15);
+    var_15 = var_13 - var_12 * 0.5;
   }
 
-  func_4926(var_0E, var_0F);
+  func_4926(var_14, var_15);
   scripts\engine\utility::array_thread(var_2, ::func_197D, self);
   func_CF45();
   thread func_FB3E();
@@ -684,52 +684,52 @@ func_1066C(var_0) {
   if(!var_0) {
     if(!self.var_5F37) {
       if(level.var_2006.var_522B.size > 1) {
-        var_0A = "antigrav_area_small_cheap";
+        var_10 = "antigrav_area_small_cheap";
       } else {
-        var_0A = "antigrav_area_small";
+        var_10 = "antigrav_area_small";
       }
     } else if(level.var_2006.var_522B.size > 1) {
-      var_0A = "antigrav_area_small_up_cheap";
+      var_10 = "antigrav_area_small_up_cheap";
     } else {
-      var_0A = "antigrav_area_small_up";
+      var_10 = "antigrav_area_small_up";
     }
 
     if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
-      var_0B = spawnfx(level._effect[var_0A], var_1, (1, 0, 0), (0, 0, 1));
-      func_C0A7(0.55, ::triggerfx, var_0B);
-      self.var_132AA[self.var_132AA.size] = var_0B;
+      var_11 = spawnfx(level._effect[var_10], var_1, (1, 0, 0), (0, 0, 1));
+      func_C0A7(0.55, ::triggerfx, var_11);
+      self.var_132AA[self.var_132AA.size] = var_11;
     } else {
-      func_C0A7(0.55, ::playfx, level._effect[var_0A], var_1, (1, 0, 0), (0, 0, 1));
+      func_C0A7(0.55, ::playfx, level._effect[var_10], var_1, (1, 0, 0), (0, 0, 1));
     }
 
-    var_0C = self.var_85D2 * 0.4;
-    var_0D = 0;
+    var_12 = self.var_85D2 * 0.4;
+    var_13 = 0;
     for(var_3 = 0; var_3 < self.var_378E.size; var_3++) {
       if(self.var_378E[var_3].var_5F15) {
         continue;
       }
 
-      var_0E = distance(self.var_378E[var_3].origin, var_1);
-      var_0F = vectornormalize(self.var_378E[var_3].origin - var_1);
+      var_14 = distance(self.var_378E[var_3].origin, var_1);
+      var_15 = vectornormalize(self.var_378E[var_3].origin - var_1);
       if(self.var_378E[var_3].origin[2] < var_1[2]) {
-        var_0F = scripts\engine\utility::flatten_vector(var_0F);
+        var_15 = scripts\engine\utility::flatten_vector(var_15);
       }
 
-      var_10 = anglestoright(vectortoangles(var_0F));
-      var_11 = var_0C;
+      var_10 = anglestoright(vectortoangles(var_15));
+      var_11 = var_12;
       var_12 = [];
       var_13 = 0;
-      while(var_11 < var_0E) {
-        if(var_13 == 0 && !var_0D) {
+      while(var_11 < var_14) {
+        if(var_13 == 0 && !var_13) {
           var_14 = 0;
-          var_12[var_12.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
+          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_15, (0, var_14, 0)) * var_11, 12, -1000);
         } else if(var_13 == 1) {
           var_14 = 0;
-          var_12[var_12.size] = scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_0F, (0, var_14, 0)) * var_11, 12, -1000);
+          var_12[var_12.size] = ::scripts\engine\utility::drop_to_ground(var_1 + rotatevector(var_15, (0, var_14, 0)) * var_11, 12, -1000);
         }
 
         var_13++;
-        var_11 = var_11 + var_0C;
+        var_11 = var_11 + var_12;
       }
 
       foreach(var_16 in var_12) {
@@ -738,16 +738,16 @@ func_1066C(var_0) {
         var_19 = 0.35 + var_17[var_18];
         var_1A = rotatevector((1, 0, 0), (0, randomfloat(360), 0));
         if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
-          var_0B = spawnfx(level._effect[var_0A], var_16 + (0, 0, 6), var_1A, (0, 0, 1));
-          func_C0A7(var_19, ::triggerfx, var_0B);
-          self.var_132AA[self.var_132AA.size] = var_0B;
+          var_11 = spawnfx(level._effect[var_10], var_16 + (0, 0, 6), var_1A, (0, 0, 1));
+          func_C0A7(var_19, ::triggerfx, var_11);
+          self.var_132AA[self.var_132AA.size] = var_11;
           continue;
         }
 
-        func_C0A7(var_19, ::playfx, level._effect[var_0A], var_16 + (0, 0, 6), var_1A, (0, 0, 1));
+        func_C0A7(var_19, ::playfx, level._effect[var_10], var_16 + (0, 0, 6), var_1A, (0, 0, 1));
       }
 
-      var_0D = !var_0D;
+      var_13 = !var_13;
     }
   }
 }
@@ -801,9 +801,9 @@ func_1066B(var_0, var_1, var_2, var_3) {
     }
 
     if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
-      var_0A = spawnfx(level._effect[var_9], var_1, var_2, (0, 0, 1));
-      func_C0A7(var_8, ::triggerfx, var_0A);
-      var_7.var_132AA[var_7.var_132AA.size] = var_0A;
+      var_10 = spawnfx(level._effect[var_9], var_1, var_2, (0, 0, 1));
+      func_C0A7(var_8, ::triggerfx, var_10);
+      var_7.var_132AA[var_7.var_132AA.size] = var_10;
     } else {
       func_C0A7(var_8, ::playfx, level._effect[var_9], var_1, var_2, (0, 0, 1));
     }
@@ -837,11 +837,11 @@ func_3789(var_0, var_1, var_2, var_3) {
   var_7 = randomfloatrange(30, 70);
   var_8 = var_1 + var_4 * var_5 * 0.15 + (0, 0, var_7 * 0.75);
   var_9 = var_1 + var_4 * var_5 * 0.5 + (0, 0, var_7);
-  var_0A = var_1 + var_4 * var_5 * 0.85 + (0, 0, var_7 * 0.75);
-  var_0B = var_2;
-  var_0C = 0;
+  var_10 = var_1 + var_4 * var_5 * 0.85 + (0, 0, var_7 * 0.75);
+  var_11 = var_2;
+  var_12 = 0;
   if(var_2[2] < var_1[2] - 50) {
-    var_0C = 1;
+    var_12 = 1;
   }
 
   var_0 ghost_killed_update_func((randomfloatrange(360, 900), 0, randomfloatrange(360, 900)), var_3 - 0.05);
@@ -849,17 +849,17 @@ func_3789(var_0, var_1, var_2, var_3) {
   wait(var_3 / 4);
   var_0 moveto(var_9, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_0A, var_3 / 4, 0, 0);
+  var_0 moveto(var_10, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_0B, var_3 / 4, 0, 0);
+  var_0 moveto(var_11, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0D = 0.2;
-  var_0E = randomfloat(5);
-  var_0 ghost_killed_update_func((randomfloatrange(-40, 40), 0, randomfloatrange(-40, 40)), var_0D - 0.05);
-  var_0 moveto(var_0B + var_4 * var_0E / 2 + (0, 0, var_0E), var_0D / 2, 0, var_0D / 2);
-  wait(var_0D / 2);
-  var_0 moveto(var_0B + var_4 * var_0E, var_0D / 2, var_0D / 2, 0);
-  wait(var_0D / 2);
+  var_13 = 0.2;
+  var_14 = randomfloat(5);
+  var_0 ghost_killed_update_func((randomfloatrange(-40, 40), 0, randomfloatrange(-40, 40)), var_13 - 0.05);
+  var_0 moveto(var_11 + var_4 * var_14 / 2 + (0, 0, var_14), var_13 / 2, 0, var_13 / 2);
+  wait(var_13 / 2);
+  var_0 moveto(var_11 + var_4 * var_14, var_13 / 2, var_13 / 2, 0);
+  wait(var_13 / 2);
   func_DFC4(var_0);
 }
 
@@ -1023,6 +1023,6 @@ func_CE2E(var_0) {
   var_1.angles = self.angles;
   var_1 linkto(self);
   var_1 playSound(var_0, "sounddone");
-  var_1 scripts\engine\utility::waittill_any_3("sounddone", "antigrav_force_delete");
+  var_1 scripts\engine\utility::waittill_any("sounddone", "antigrav_force_delete");
   var_1 delete();
 }

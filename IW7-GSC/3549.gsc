@@ -10,7 +10,7 @@ c4_set(var_0) {
 c4_used(var_0) {
   self endon("disconnect");
   var_0 endon("death");
-  scripts\mp\utility::printgameaction("c4 spawn", var_0.triggerportableradarping);
+  scripts\mp\utility::printgameaction("c4 spawn", var_0.owner);
   var_0.throwtime = gettime();
   c4_addtoarray(var_0);
   thread c4_watchfordetonation();
@@ -29,9 +29,9 @@ c4_used(var_0) {
   scripts\mp\weapons::onlethalequipmentplanted(var_0, "power_c4");
   thread scripts\mp\weapons::monitordisownedequipment(self, var_0);
   var_0 thread scripts\mp\weapons::makeexplosiveusabletag("tag_use", 1);
-  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.triggerportableradarping, 1);
+  var_0 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static", var_0.owner, 1);
   var_0 thread c4_destroyonemp();
-  var_0 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
+  var_0 thread scripts\mp\perks\perk_equipmentping::runequipmentping();
   var_0 setscriptablepartstate("plant", "active", 0);
   thread scripts\mp\weapons::outlineequipmentforowner(var_0, self);
   var_0 missilethermal();
@@ -41,13 +41,13 @@ c4_used(var_0) {
 
 c4_detonate() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   wait(0.1);
-  thread c4_explode(self.triggerportableradarping);
+  thread c4_explode(self.owner);
 }
 
 c4_explode(var_0) {
-  scripts\mp\utility::printgameaction("c4 triggered", self.triggerportableradarping);
+  scripts\mp\utility::printgameaction("c4 triggered", self.owner);
   thread c4_delete(0.1);
   self setentityowner(var_0);
   self func_8593();
@@ -67,8 +67,8 @@ c4_delete(var_0) {
   self setCanDamage(0);
   scripts\mp\weapons::makeexplosiveunusuabletag();
   self.exploding = 1;
-  var_1 = self.triggerportableradarping;
-  if(isDefined(self.triggerportableradarping)) {
+  var_1 = self.owner;
+  if(isDefined(self.owner)) {
     var_1.plantedlethalequip = scripts\engine\utility::array_remove(var_1.plantedlethalequip, self);
     var_1 notify("c4_update", 0);
   }
@@ -79,9 +79,9 @@ c4_delete(var_0) {
 
 c4_explodeonnotify() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   level endon("game_ended");
-  var_0 = self.triggerportableradarping;
+  var_0 = self.owner;
   self waittill("detonateExplosive", var_1);
   if(isDefined(var_1)) {
     thread c4_explode(var_1);
@@ -93,17 +93,17 @@ c4_explodeonnotify() {
 
 c4_destroyonemp() {
   self endon("death");
-  self.triggerportableradarping endon("disconnect");
+  self.owner endon("disconnect");
   self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
   if(isDefined(var_3) && var_3 == "emp_grenade_mp") {
-    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+    if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
       var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
     }
   }
 
-  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+  if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
     var_0 notify("destroyed_equipment");
-    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
   }
 
   var_5 = "";
@@ -120,7 +120,7 @@ c4_destroyonemp() {
 
 c4_destroyongameend() {
   self endon("death");
-  level scripts\engine\utility::waittill_any_3("game_ended", "bro_shot_start");
+  level scripts\engine\utility::waittill_any("game_ended", "bro_shot_start");
   thread c4_destroy();
 }
 
@@ -229,7 +229,7 @@ c4_resetaltdetonpickup() {
 }
 
 c4_addtoarray(var_0) {
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   if(!isDefined(self.c4s)) {
     self.c4s = [];
   }

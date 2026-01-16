@@ -41,7 +41,7 @@ func_11776() {
   var_0 = 0;
   for(;;) {
     var_1 = var_0;
-    var_0 = self getweaponrankinfominxp();
+    var_0 = self playerads();
     if(func_12998(var_0, var_1)) {
       func_11775();
     } else if(func_12997(var_0, var_1)) {

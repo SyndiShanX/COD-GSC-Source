@@ -47,9 +47,9 @@ func_10845(var_0, var_1, var_2, var_3) {
   var_5.health = 2500;
   var_5.maxhealth = var_5.health;
   var_5.team = var_1.team;
-  var_5.triggerportableradarping = var_1;
+  var_5.owner = var_1;
   var_5 setCanDamage(1);
-  var_5.triggerportableradarping = var_1;
+  var_5.owner = var_1;
   var_5 thread func_8B5B();
   var_5 setmaxpitchroll(0, 90);
   var_5 vehicle_setspeed(var_5.getclosestpointonnavmesh3d, var_5.var_1545);
@@ -188,45 +188,45 @@ getnewpoint(var_0, var_1) {
       var_8 = var_6[1];
     } else {
       var_9 = level.mapcenter;
-      var_0A = level.mapsize / 4;
-      var_7 = randomfloatrange(var_9[0] - var_0A, var_9[0] + var_0A);
-      var_8 = randomfloatrange(var_9[1] - var_0A, var_9[1] + var_0A);
+      var_10 = level.mapsize / 4;
+      var_7 = randomfloatrange(var_9[0] - var_10, var_9[0] + var_10);
+      var_8 = randomfloatrange(var_9[1] - var_10, var_9[1] + var_10);
     }
 
-    var_0B = getcorrectheight(var_7, var_8, 20);
+    var_11 = getcorrectheight(var_7, var_8, 20);
   } else if(scripts\engine\utility::cointoss()) {
-    var_0C = self.origin - self.besttarget.origin;
-    var_7 = var_0C[0];
-    var_8 = var_0C[1] * -1;
-    var_0B = getcorrectheight(var_7, var_8, 20);
-    var_0D = (var_8, var_7, var_0B);
-    if(distance2d(self.origin, var_0D) > 1200) {
+    var_12 = self.origin - self.besttarget.origin;
+    var_7 = var_12[0];
+    var_8 = var_12[1] * -1;
+    var_11 = getcorrectheight(var_7, var_8, 20);
+    var_13 = (var_8, var_7, var_11);
+    if(distance2d(self.origin, var_13) > 1200) {
       var_8 = var_8 * 0.5;
       var_7 = var_7 * 0.5;
-      var_0D = (var_8, var_7, var_0B);
+      var_13 = (var_8, var_7, var_11);
     }
   } else {
     if(distance2d(self.origin, self.besttarget.origin) < 200) {
       return;
     }
 
-    var_0E = self.angles[1];
-    var_0F = (0, var_0E, 0);
-    var_10 = self.origin + anglesToForward(var_0F) * randomintrange(200, 400);
-    var_0B = getcorrectheight(var_10[0], var_10[1], 20);
+    var_14 = self.angles[1];
+    var_15 = (0, var_14, 0);
+    var_10 = self.origin + anglesToForward(var_15) * randomintrange(200, 400);
+    var_11 = getcorrectheight(var_10[0], var_10[1], 20);
     var_7 = var_10[0];
     var_8 = var_10[1];
   }
 
   for(;;) {
-    var_11 = tracenewpoint(var_7, var_8, var_0B);
+    var_11 = tracenewpoint(var_7, var_8, var_11);
     if(var_11 != 0) {
       return var_11;
     }
 
     var_7 = randomfloatrange(var_0[0] - 1200, var_0[0] + 1200);
     var_8 = randomfloatrange(var_0[1] - 1200, var_0[1] + 1200);
-    var_0B = getcorrectheight(var_7, var_8, 20);
+    var_11 = getcorrectheight(var_7, var_8, 20);
   }
 }
 
@@ -624,7 +624,7 @@ istarget(var_0) {
     return 0;
   }
 
-  if(isDefined(self.triggerportableradarping) && var_0 == self.triggerportableradarping) {
+  if(isDefined(self.owner) && var_0 == self.owner) {
     return 0;
   }
 
@@ -677,11 +677,11 @@ getbesttarget(var_0) {
   var_6 = 0;
   foreach(var_8 in var_0) {
     var_9 = abs(vectortoangles(var_8.origin - self.origin)[1]);
-    var_0A = abs(self gettagangles("tag_flash")[1]);
-    var_9 = abs(var_9 - var_0A);
-    var_0B = var_8 getweaponslistitems();
-    foreach(var_0D in var_0B) {
-      if(issubstr(var_0D, "at4") || issubstr(var_0D, "stinger") || issubstr(var_0D, "jav")) {
+    var_10 = abs(self gettagangles("tag_flash")[1]);
+    var_9 = abs(var_9 - var_10);
+    var_11 = var_8 getweaponslistitems();
+    foreach(var_13 in var_11) {
+      if(issubstr(var_13, "at4") || issubstr(var_13, "stinger") || issubstr(var_13, "jav")) {
         var_9 = var_9 - 40;
       }
     }
@@ -765,8 +765,8 @@ func_8992() {
   }
 }
 
-func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
-  if((var_1 == self || isDefined(var_1.pers) && var_1.pers["team"] == self.team && !level.friendlyfire && level.teambased) && var_1 != self.triggerportableradarping) {
+func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  if((var_1 == self || isDefined(var_1.pers) && var_1.pers["team"] == self.team && !level.friendlyfire && level.teambased) && var_1 != self.owner) {
     return;
   }
 
@@ -816,15 +816,15 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       break;
   }
 
-  scripts\mp\killstreaks\_killstreaks::killstreakhit(var_1, var_5, self);
+  scripts\mp\killstreaks\killstreaks::killstreakhit(var_1, var_5, self);
   var_1 scripts\mp\damagefeedback::updatedamagefeedback("");
   if(isplayer(var_1) && var_1 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
-    var_0C = int(var_2 * level.armorpiercingmod);
-    var_2 = var_2 + var_0C;
+    var_12 = int(var_2 * level.armorpiercingmod);
+    var_2 = var_2 + var_12;
   }
 
   if(self.health <= var_2) {
-    if(isplayer(var_1) && !isDefined(self.triggerportableradarping) || var_1 != self.triggerportableradarping) {
+    if(isplayer(var_1) && !isDefined(self.owner) || var_1 != self.owner) {
       thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_harrier", var_1);
       var_1 thread scripts\mp\utility::giveunifiedpoints("kill", var_5);
       var_1 notify("destroyed_killstreak");
@@ -843,7 +843,7 @@ func_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     self.var_1037E = 1;
   }
 
-  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+  self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 }
 
 playdamageefx() {
@@ -999,11 +999,11 @@ func_E10A() {
 monitorowner() {
   self endon("death");
   self endon("leaving");
-  if(!isDefined(self.triggerportableradarping) || self.triggerportableradarping.team != self.team) {
+  if(!isDefined(self.owner) || self.owner.team != self.team) {
     thread func_8B5E();
     return;
   }
 
-  self.triggerportableradarping scripts\engine\utility::waittill_any_3("joined_team", "disconnect");
+  self.owner scripts\engine\utility::waittill_any("joined_team", "disconnect");
   thread func_8B5E();
 }

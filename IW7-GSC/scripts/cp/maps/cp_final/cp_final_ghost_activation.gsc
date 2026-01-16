@@ -51,7 +51,7 @@ skull_damage_monitor(var_0) {
   var_0 setCanDamage(1);
   var_0 setCanRadiusDamage(1);
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 999999;
     if(isDefined(var_2) && isplayer(var_2)) {
       playFX(level._effect["ghost_explosion_death_green"], var_0.origin);
@@ -67,7 +67,7 @@ wait_for_explosive_damage(var_0) {
   var_1 setCanDamage(1);
   var_1 setCanRadiusDamage(1);
   for(;;) {
-    var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    var_1 waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     var_1.health = 999999;
     if(isDefined(var_6) && is_explosive_damage(var_6)) {
       return;
@@ -128,7 +128,7 @@ stay_on_pressure_plates() {
     turn_on_map_marker();
     level waittill("all_player_on_pressure_plate");
     if(level.players.size == 1) {
-      var_0 = level scripts\engine\utility::waittill_any_timeout_1(1.5, "not_all_player_on_pressure_plate");
+      var_0 = level scripts\engine\utility::waittill_any_timeout(1.5, "not_all_player_on_pressure_plate");
       if(var_0 == "not_all_player_on_pressure_plate") {
         continue;
       }
@@ -139,7 +139,7 @@ stay_on_pressure_plates() {
     turn_on_plate_center_vfx();
     turn_on_pressure_beam_vfx();
     turn_on_skull_meter();
-    var_0 = level scripts\engine\utility::waittill_any_timeout_1(60, "not_all_player_on_pressure_plate");
+    var_0 = level scripts\engine\utility::waittill_any_timeout(60, "not_all_player_on_pressure_plate");
     turn_off_plate_center_vfx();
     turn_off_pressure_beam_vfx();
     if(var_0 == "timeout") {
@@ -588,7 +588,7 @@ wait_between_wave() {
 }
 
 wait_one_wave() {
-  level scripts\engine\utility::waittill_any_3("regular_wave_starting", "event_wave_starting");
+  level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
 }
 
 select_odd_cipher() {
@@ -604,25 +604,25 @@ select_odd_cipher() {
     var_8 = var_4[var_7.target_index];
     var_9 = var_4[var_7.non_target_index];
     var_9 = scripts\engine\utility::array_randomize_objects(var_9);
-    var_0A = scripts\engine\utility::random(var_8);
-    var_0B = [];
-    for(var_0C = 0; var_0C < 3; var_0C++) {
-      var_0B[var_0C] = var_9[var_0C];
+    var_10 = scripts\engine\utility::random(var_8);
+    var_11 = [];
+    for(var_12 = 0; var_12 < 3; var_12++) {
+      var_11[var_12] = var_9[var_12];
     }
 
     level.gns_ciphers = [];
-    for(var_0D = 0; var_0D < 4; var_0D++) {
-      if(var_0D == 3) {
-        create_cipher(var_0A, var_0[var_6[var_0D]], var_1[var_6[var_0D]], "correct_choice");
+    for(var_13 = 0; var_13 < 4; var_13++) {
+      if(var_13 == 3) {
+        create_cipher(var_10, var_0[var_6[var_13]], var_1[var_6[var_13]], "correct_choice");
         continue;
       }
 
-      create_cipher(var_0B[var_0D], var_0[var_6[var_0D]], var_1[var_6[var_0D]], "wrong_choice");
+      create_cipher(var_11[var_13], var_0[var_6[var_13]], var_1[var_6[var_13]], "wrong_choice");
     }
 
-    level waittill("GnS_cipher_selected", var_0E);
+    level waittill("GnS_cipher_selected", var_14);
     clean_up_ciphers();
-    if(var_0E == "correct_choice") {
+    if(var_14 == "correct_choice") {
       break;
     } else {
       wait_one_wave();
@@ -786,7 +786,7 @@ follow_the_light_time_out_monitor() {
   level endon("fail_follow_the_light");
   level endon("succeed_follow_the_light");
   for(;;) {
-    var_0 = level scripts\engine\utility::waittill_any_timeout_1(1.2, "regular_light_node_picked_up");
+    var_0 = level scripts\engine\utility::waittill_any_timeout(1.2, "regular_light_node_picked_up");
     if(var_0 == "timeout") {
       play_time_out_sfx();
       level thread fail_follow_the_light();
@@ -1471,10 +1471,10 @@ set_up_controlling_struct() {
   }
 
   var_9 = getEntArray(var_0.target, "targetname");
-  foreach(var_0B in var_9) {
-    switch (var_0B.script_noteworthy) {
+  foreach(var_11 in var_9) {
+    switch (var_11.script_noteworthy) {
       case "play_area":
-        var_0.play_area = var_0B;
+        var_0.play_area = var_11;
         break;
     }
   }
@@ -2001,33 +2001,33 @@ cp_final_ghost_color_manager() {
   var_7 = 0;
   var_8 = 0;
   var_9 = 0;
-  var_0A = 0;
-  foreach(var_0C in level.zombie_ghosts) {
-    if(var_0C.color == "red_bomb") {
+  var_10 = 0;
+  foreach(var_12 in level.zombie_ghosts) {
+    if(var_12.color == "red_bomb") {
       var_7++;
     }
 
-    if(var_0C.color == "green_bomb") {
+    if(var_12.color == "green_bomb") {
       var_8++;
     }
 
-    if(var_0C.color == "yellow_bomb") {
+    if(var_12.color == "yellow_bomb") {
       var_9++;
     }
 
-    if(var_0C.color == "blue_bomb") {
-      var_0A++;
+    if(var_12.color == "blue_bomb") {
+      var_10++;
     }
 
-    if(var_0C.color == "green") {
+    if(var_12.color == "green") {
       var_4++;
     }
 
-    if(var_0C.color == "yellow") {
+    if(var_12.color == "yellow") {
       var_5++;
     }
 
-    if(var_0C.color == "blue") {
+    if(var_12.color == "blue") {
       var_6++;
     }
   }
@@ -2047,7 +2047,7 @@ cp_final_ghost_color_manager() {
     return;
   }
 
-  if(var_0A < var_3) {
+  if(var_10 < var_3) {
     level.zombie_ghost_model = "zombie_ghost_bomb_blue";
     return;
   }

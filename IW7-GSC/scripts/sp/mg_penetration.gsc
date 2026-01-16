@@ -42,7 +42,7 @@ func_8715(var_0) {
       continue;
     }
 
-    if(self getpersstat(self.var_4B6D)) {
+    if(self cansee(self.var_4B6D)) {
       continue;
     }
 
@@ -60,7 +60,7 @@ func_FE5E(var_0) {
   self endon("new_enemy");
   self.var_4B6D endon("death");
   var_1 = self.var_4B6D;
-  while(self getpersstat(var_1)) {
+  while(self cansee(var_1)) {
     var_2 = vectortoangles(var_1 getEye() - var_0.origin);
     var_2 = anglesToForward(var_2);
     var_0 moveto(var_0.origin + var_2 * 12, 0.1);
@@ -235,18 +235,18 @@ func_DDE5() {
 }
 
 func_DDEB() {
-  if(!isalive(self.isnodeoccupied)) {
+  if(!isalive(self.enemy)) {
     return;
   }
 
-  if(!self getpersstat(self.isnodeoccupied)) {
+  if(!self cansee(self.enemy)) {
     return;
   }
 
-  self.var_A8BB = self.isnodeoccupied getEye();
+  self.var_A8BB = self.enemy getEye();
   self notify("saw_enemy");
-  if(!isalive(self.var_4B6D) || self.var_4B6D != self.isnodeoccupied) {
-    self.var_4B6D = self.isnodeoccupied;
+  if(!isalive(self.var_4B6D) || self.var_4B6D != self.enemy) {
+    self.var_4B6D = self.enemy;
     self notify("new_enemy");
   }
 }

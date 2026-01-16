@@ -230,12 +230,12 @@ func_5853() {
   var_7 = level.var_6C66[var_0];
   var_8 = level.finalkillcam_killcamentityindex[var_0];
   var_9 = level.finalkillcam_killcamentitystarttime[var_0];
-  var_0A = level.finalkillcam_killcamentitystickstovictim[var_0];
-  var_0B = level.finalkillcam_sweapon[var_0];
-  var_0C = level.var_6C62[var_0];
-  var_0D = level.finalkillcam_psoffsettime[var_0];
-  var_0E = level.finalkillcam_timerecorded[var_0];
-  var_0F = level.finalkillcam_timegameended[var_0];
+  var_10 = level.finalkillcam_killcamentitystickstovictim[var_0];
+  var_11 = level.finalkillcam_sweapon[var_0];
+  var_12 = level.var_6C62[var_0];
+  var_13 = level.finalkillcam_psoffsettime[var_0];
+  var_14 = level.finalkillcam_timerecorded[var_0];
+  var_15 = level.finalkillcam_timegameended[var_0];
   var_10 = level.finalkillcam_smeansofdeath[var_0];
   var_11 = level.finalkillcam_attackers[var_0];
   var_12 = level.finalkillcam_attackerdata[var_0];
@@ -248,7 +248,7 @@ func_5853() {
   }
 
   var_15 = 20;
-  var_16 = var_0F - var_0E;
+  var_16 = var_15 - var_14;
   if(var_16 > var_15) {
     level.showingfinalkillcam = 0;
     level notify("final_killcam_done");
@@ -275,11 +275,11 @@ func_5853() {
     var_1B scripts\mp\utility::restorebasevisionset(0);
     var_1B.setclientnamemode = var_2 getentitynumber();
     var_1B scripts\mp\damage::updatedeathdetails(var_11, var_12);
-    if(!scripts\mp\utility::iskillstreakweapon(var_0B)) {
-      var_1B scripts\mp\killcam::func_F770(var_0B, var_10, var_5);
+    if(!scripts\mp\utility::iskillstreakweapon(var_11)) {
+      var_1B scripts\mp\killcam::func_F770(var_11, var_10, var_5);
     }
 
-    var_1B thread scripts\mp\killcam::killcam(var_5, var_18, var_4, var_8, var_9, var_2 getentitynumber(), var_0A, var_0B, var_19 + var_0C, var_0D, 0, 12, var_3, var_2, var_10, var_13, var_14);
+    var_1B thread scripts\mp\killcam::killcam(var_5, var_18, var_4, var_8, var_9, var_2 getentitynumber(), var_10, var_11, var_19 + var_12, var_13, 0, 12, var_3, var_2, var_10, var_13, var_14);
   }
 
   wait(0.15 + level.var_B4A7);
@@ -291,7 +291,7 @@ func_5853() {
   level.showingfinalkillcam = 0;
 }
 
-recordfinalkillcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B) {
+recordfinalkillcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(level.teambased && isDefined(var_2.team)) {
     level.finalkillcam_delay[var_2.team] = var_0;
     level.finalkillcam_victim[var_2.team] = var_1;
@@ -303,10 +303,10 @@ recordfinalkillcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     level.finalkillcam_killcamentitystickstovictim[var_2.team] = var_7;
     level.finalkillcam_sweapon[var_2.team] = var_8;
     level.var_6C62[var_2.team] = var_9;
-    level.finalkillcam_psoffsettime[var_2.team] = var_0A;
-    level.finalkillcam_timerecorded[var_2.team] = scripts\mp\utility::getsecondspassed();
-    level.finalkillcam_timegameended[var_2.team] = scripts\mp\utility::getsecondspassed();
-    level.finalkillcam_smeansofdeath[var_2.team] = var_0B;
+    level.finalkillcam_psoffsettime[var_2.team] = var_10;
+    level.finalkillcam_timerecorded[var_2.team] = ::scripts\mp\utility::getsecondspassed();
+    level.finalkillcam_timegameended[var_2.team] = ::scripts\mp\utility::getsecondspassed();
+    level.finalkillcam_smeansofdeath[var_2.team] = var_11;
     level.finalkillcam_attackers[var_2.team] = var_1.attackers;
     level.finalkillcam_attackerdata[var_2.team] = var_1.attackerdata;
     level.finalkillcam_attackerperks[var_2.team] = var_2.pers["loadoutPerks"];
@@ -329,10 +329,10 @@ recordfinalkillcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     level.finalkillcam_killcamentitystickstovictim[var_2.guid] = var_7;
     level.finalkillcam_sweapon[var_2.guid] = var_8;
     level.var_6C62[var_2.guid] = var_9;
-    level.finalkillcam_psoffsettime[var_2.guid] = var_0A;
-    level.finalkillcam_timerecorded[var_2.guid] = scripts\mp\utility::getsecondspassed();
-    level.finalkillcam_timegameended[var_2.guid] = scripts\mp\utility::getsecondspassed();
-    level.finalkillcam_smeansofdeath[var_2.guid] = var_0B;
+    level.finalkillcam_psoffsettime[var_2.guid] = var_10;
+    level.finalkillcam_timerecorded[var_2.guid] = ::scripts\mp\utility::getsecondspassed();
+    level.finalkillcam_timegameended[var_2.guid] = ::scripts\mp\utility::getsecondspassed();
+    level.finalkillcam_smeansofdeath[var_2.guid] = var_11;
     level.finalkillcam_attackers[var_2.guid] = var_1.attackers;
     level.finalkillcam_attackerdata[var_2.guid] = var_1.attackerdata;
     level.finalkillcam_attackerperks[var_2.guid] = var_2.pers["loadoutPerks"];
@@ -356,11 +356,11 @@ recordfinalkillcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   level.finalkillcam_killcamentitystickstovictim["none"] = var_7;
   level.finalkillcam_sweapon["none"] = var_8;
   level.var_6C62["none"] = var_9;
-  level.finalkillcam_psoffsettime["none"] = var_0A;
-  level.finalkillcam_timerecorded["none"] = scripts\mp\utility::getsecondspassed();
-  level.finalkillcam_timegameended["none"] = scripts\mp\utility::getsecondspassed();
-  level.finalkillcam_timegameended["none"] = scripts\mp\utility::getsecondspassed();
-  level.finalkillcam_smeansofdeath["none"] = var_0B;
+  level.finalkillcam_psoffsettime["none"] = var_10;
+  level.finalkillcam_timerecorded["none"] = ::scripts\mp\utility::getsecondspassed();
+  level.finalkillcam_timegameended["none"] = ::scripts\mp\utility::getsecondspassed();
+  level.finalkillcam_timegameended["none"] = ::scripts\mp\utility::getsecondspassed();
+  level.finalkillcam_smeansofdeath["none"] = var_11;
   level.finalkillcam_attackers["none"] = var_1.attackers;
   level.finalkillcam_attackerdata["none"] = var_1.attackerdata;
   level.finalkillcam_attackerperks["none"] = var_2.pers["loadoutPerks"];

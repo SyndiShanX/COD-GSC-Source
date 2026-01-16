@@ -9,7 +9,7 @@ func_100AD(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
-  if(!isDefined(var_4) || !isDefined(self.isnodeoccupied) || var_4 != self.isnodeoccupied) {
+  if(!isDefined(var_4) || !isDefined(self.enemy) || var_4 != self.enemy) {
     scripts\asm\asm::asm_fireephemeralevent("throwgrenade", "end");
     return 0;
   }
@@ -31,15 +31,15 @@ func_100AD(var_0, var_1, var_2, var_3) {
       var_9 = self func_806B(var_6, var_7, "min energy", "min time", "max time");
       self.a.nextgrenadetrytime = gettime() + randomintrange(1000, 2000);
       if(isDefined(var_9)) {
-        var_0A = spawnStruct();
-        var_0A.var_13E0D = var_5;
-        var_0A.var_1326C = var_9;
-        var_0A.target = var_4;
-        var_0A.var_8A09 = var_6;
-        var_0A.var_6BA0 = 0;
-        var_0A.var_13D8F = func_FFCE(self.objective_team);
-        var_0A.time = gettime();
-        self._blackboard.var_1180C = var_0A;
+        var_10 = spawnStruct();
+        var_10.var_13E0D = var_5;
+        var_10.var_1326C = var_9;
+        var_10.target = var_4;
+        var_10.var_8A09 = var_6;
+        var_10.var_6BA0 = 0;
+        var_10.var_13D8F = func_FFCE(self.grenadeweapon);
+        var_10.time = gettime();
+        self._blackboard.var_1180C = var_10;
         return 1;
       }
     }
@@ -122,7 +122,7 @@ func_CEC6(var_0, var_1, var_2, var_3) {
 }
 
 func_CEFE(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.target_getindexoftarget)) {
+  if(isDefined(self.node)) {
     self.sendmatchdata = 1;
   }
 
@@ -145,8 +145,8 @@ func_FFCE(var_0) {
 
 func_CEC8(var_0, var_1, var_2, var_3) {
   var_4 = level.player;
-  if(isDefined(self.isnodeoccupied)) {
-    var_4 = self.isnodeoccupied;
+  if(isDefined(self.enemy)) {
+    var_4 = self.enemy;
   }
 
   lib_0A18::func_F62B(var_4);
@@ -159,25 +159,25 @@ func_CEC8(var_0, var_1, var_2, var_3) {
   scripts\asm\asm::asm_fireephemeralevent("throwSeeker", "start");
   self.var_C3F3 = self.objective_state_nomessage;
   var_8 = lib_0A1E::asm_getbodyknob();
-  scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
+  scripts\anim\battlechatter_ai::func_67CF(self.grenadeweapon);
   lib_0A1E::func_2369(var_0, var_1, var_7);
   self clearanim(var_8, var_2);
   self func_82EA(var_1, var_7, 1, var_2, func_6B9A());
   thread lib_0A1E::func_231F(var_0, var_1);
   var_9 = "seeker_grenade_folded";
-  var_0A = undefined;
-  var_0B = 0;
-  var_0C = func_810E(var_6);
-  while(!var_0B) {
-    self waittill(var_1, var_0D);
-    if(!isarray(var_0D)) {
-      var_0D = [var_0D];
+  var_10 = undefined;
+  var_11 = 0;
+  var_12 = func_810E(var_6);
+  while(!var_11) {
+    self waittill(var_1, var_13);
+    if(!isarray(var_13)) {
+      var_13 = [var_13];
     }
 
-    foreach(var_16, var_0F in var_0D) {
-      if(var_0F == "attach_seeker") {
-        if(isDefined(var_0C)) {
-          thread func_57E0("tag_accessory_left", var_0C);
+    foreach(var_16, var_15 in var_13) {
+      if(var_15 == "attach_seeker") {
+        if(isDefined(var_12)) {
+          thread func_57E0("tag_accessory_left", var_12);
         } else {
           func_2481(var_1, var_9, "tag_accessory_left");
         }
@@ -185,7 +185,7 @@ func_CEC8(var_0, var_1, var_2, var_3) {
         self.var_9E33 = 1;
       }
 
-      if(var_0F == "grenade_throw" || var_0F == "grenade throw") {
+      if(var_15 == "grenade_throw" || var_15 == "grenade throw") {
         var_10 = self gettagorigin("tag_accessory_left");
         var_11 = 400;
         var_12 = anglesToForward(self.angles);
@@ -193,24 +193,24 @@ func_CEC8(var_0, var_1, var_2, var_3) {
         var_13 = var_13 * 0.6;
         var_14 = vectornormalize(var_12 + var_13);
         var_15 = var_14 * var_11;
-        var_0A = magicgrenademanual(self.objective_team, var_10, var_15, 2);
-        if(isDefined(var_0A)) {
+        var_10 = magicgrenademanual(self.grenadeweapon, var_10, var_15, 2);
+        if(isDefined(var_10)) {
           if(self.objective_state > 0) {
             self.objective_state--;
           }
 
-          self notify("grenade_fire", var_0A, self.objective_team);
+          self notify("grenade_fire", var_10, self.grenadeweapon);
         }
 
         if(isDefined(self.var_F174)) {
           self.var_F174 delete();
         }
 
-        var_0B = 1;
+        var_11 = 1;
         continue;
       }
 
-      if(var_0F == "end") {
+      if(var_15 == "end") {
         self.var_1652.player.numgrenadesinprogresstowardsplayer--;
         self notify("dont_reduce_giptp_on_killanimscript");
         return 0;
@@ -220,15 +220,15 @@ func_CEC8(var_0, var_1, var_2, var_3) {
 
   self notify("dont_reduce_giptp_on_killanimscript");
   self notify("stop grenade check");
-  if(!isDefined(var_0C)) {
+  if(!isDefined(var_12)) {
     self detach(var_9, "tag_accessory_left");
   }
 
   self.var_9E33 = undefined;
   self.objective_state_nomessage = self.var_C3F3;
   self.var_C3F3 = undefined;
-  if(isDefined(var_0A) && self.team == "axis") {
-    level notify("enemy_grenade_fire", var_0A);
+  if(isDefined(var_10) && self.team == "axis") {
+    level notify("enemy_grenade_fire", var_10);
   }
 
   func_F72C(self.var_1652, gettime() + 10000);
@@ -283,14 +283,14 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4) {
     }
 
     self.objective_state_nomessage = 0;
-    var_0A = func_7E6D();
-    func_F72C(self.var_1652, min(gettime() + 3000, var_0A));
-    var_0B = 0;
+    var_10 = func_7E6D();
+    func_F72C(self.var_1652, min(gettime() + 3000, var_10));
+    var_11 = 0;
     if(usingplayer()) {
       var_6.numgrenadesinprogresstowardsplayer++;
       thread func_DE37(var_1, var_6);
       if(var_6.numgrenadesinprogresstowardsplayer > 1) {
-        var_0B = 1;
+        var_11 = 1;
       }
 
       if(self.var_1652.timername == "fraggrenade") {
@@ -301,9 +301,9 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(isDefined(var_4)) {
-      thread func_58BA(var_0, var_1, var_2.var_13E0D, var_9, var_3, var_0A, var_0B);
+      thread func_58BA(var_0, var_1, var_2.var_13E0D, var_9, var_3, var_10, var_11);
     } else {
-      func_58BA(var_0, var_1, var_2.var_13E0D, var_9, var_3, var_0A, var_0B);
+      func_58BA(var_0, var_1, var_2.var_13E0D, var_9, var_3, var_10, var_11);
     }
 
     return 1;
@@ -375,36 +375,36 @@ func_58BA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   var_8 = lib_0A1E::asm_getbodyknob();
-  scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
+  scripts\anim\battlechatter_ai::func_67CF(self.grenadeweapon);
   lib_0A1E::func_2369(var_0, var_1, var_2);
   self clearanim(var_8, var_4);
   self func_82EA(var_1, var_2, 1, var_4, func_6B9A());
   thread lib_0A1E::func_231F(var_0, var_1);
   var_9 = scripts\anim\utility_common::getgrenademodel();
-  var_0A = "none";
-  var_0B = 0;
-  while(!var_0B) {
-    self waittill(var_1, var_0C);
-    if(!isarray(var_0C)) {
-      var_0C = [var_0C];
+  var_10 = "none";
+  var_11 = 0;
+  while(!var_11) {
+    self waittill(var_1, var_12);
+    if(!isarray(var_12)) {
+      var_12 = [var_12];
     }
 
-    foreach(var_0E in var_0C) {
-      if(var_0E == "grenade_left" || var_0E == "grenade_right") {
-        var_0A = func_2481(var_1, var_9, "tag_accessory_right");
+    foreach(var_14 in var_12) {
+      if(var_14 == "grenade_left" || var_14 == "grenade_right") {
+        var_10 = func_2481(var_1, var_9, "tag_accessory_right");
         self.var_9E33 = 1;
       }
 
-      if(var_0E == "grenade_throw" || var_0E == "grenade throw") {
+      if(var_14 == "grenade_throw" || var_14 == "grenade throw") {
         if(isDefined(self.var_1FEC) && self.var_1FEC == "c6") {
           self playSound("c6_grenade_launch");
         }
 
-        var_0B = 1;
+        var_11 = 1;
         continue;
       }
 
-      if(var_0E == "end") {
+      if(var_14 == "end") {
         self.var_1652.player.numgrenadesinprogresstowardsplayer--;
         self notify("dont_reduce_giptp_on_killanimscript");
         return 0;
@@ -430,8 +430,8 @@ func_58BA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   self notify("stop grenade check");
-  if(var_0A != "none") {
-    self detach(var_9, var_0A);
+  if(var_10 != "none") {
+    self detach(var_9, var_10);
   }
 
   self.var_9E33 = undefined;
@@ -503,7 +503,7 @@ func_13A99(var_0, var_1) {
   var_3 = spawnStruct();
   var_3 thread func_13A9A(5);
   var_3 endon("watchGrenadeTowardsPlayerTimeout");
-  var_4 = self.objective_team;
+  var_4 = self.grenadeweapon;
   var_5 = func_7EE6(var_0);
   if(!isDefined(var_5)) {
     return;
@@ -526,21 +526,21 @@ func_13A99(var_0, var_1) {
     }
 
     if(distancesquared(var_5.origin, var_9) < 400) {
-      var_0A = [];
-      for(var_0B = 0; var_0B < var_8.size; var_0B++) {
-        var_0C = var_8[var_0B];
-        var_0D = distancesquared(var_5.origin, var_0C.origin);
-        if(var_0D < var_6) {
-          var_0C func_85C8(var_2, var_1);
+      var_10 = [];
+      for(var_11 = 0; var_11 < var_8.size; var_11++) {
+        var_12 = var_8[var_11];
+        var_13 = distancesquared(var_5.origin, var_12.origin);
+        if(var_13 < var_6) {
+          var_12 func_85C8(var_2, var_1);
           continue;
         }
 
-        if(var_0D < var_7) {
-          var_0A[var_0A.size] = var_0C;
+        if(var_13 < var_7) {
+          var_10[var_10.size] = var_12;
         }
       }
 
-      var_8 = var_0A;
+      var_8 = var_10;
       if(var_8.size == 0) {
         break;
       }

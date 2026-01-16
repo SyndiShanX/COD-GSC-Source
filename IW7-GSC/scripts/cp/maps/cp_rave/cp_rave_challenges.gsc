@@ -293,7 +293,7 @@ add_to_completed_challenges(var_0) {
     self.completed_challenges = [];
   }
 
-  self.completed_challenges = scripts\engine\utility::array_add_safe(self.completed_challenges, var_0);
+  self.completed_challenges = scripts\engine\utility::add_to_array(self.completed_challenges, var_0);
   if(self.completed_challenges.size == level.challenge_list.size) {
     scripts\cp\zombies\achievement::update_achievement("TOP_CAMPER", 1);
   }
@@ -373,7 +373,7 @@ add_to_dismember_queue(var_0) {
   var_1 = spawnStruct();
   var_1.limb = var_0;
   var_1.processed = 0;
-  level.dismember_queue = scripts\engine\utility::array_add_safe(level.dismember_queue, var_1);
+  level.dismember_queue = scripts\engine\utility::add_to_array(level.dismember_queue, var_1);
 }
 
 activate_dismember_arm() {

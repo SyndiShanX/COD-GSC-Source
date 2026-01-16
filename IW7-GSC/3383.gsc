@@ -416,8 +416,9 @@ func_1010C(var_0, var_1) {
     if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && !var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
       var_3 = "iw7_nunchucks_zm_pap1";
       var_0.var_13C25 = scripts\engine\utility::array_add(var_0.var_13C25, "iw7_nunchucks_zm_pap1");
-    } else if(!scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+    } else if(!scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
       var_3 = "iw7_nunchucks_zm_pap1";
+    }
     else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
       var_0.var_13C25 = scripts\engine\utility::array_add(var_0.var_13C25, "iw7_nunchucks_zm_pap2");
       var_3 = "iw7_nunchucks_zm_pap2";
@@ -438,8 +439,9 @@ func_1010C(var_0, var_1) {
       if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && !var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
         var_3 = "iw7_nunchucks_zm_pap1";
         var_0.var_13C25 = scripts\engine\utility::array_add(var_0.var_13C25, "iw7_nunchucks_zm_pap1");
-      } else if(!scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+      } else if(!scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
         var_3 = "iw7_nunchucks_zm_pap1";
+      }
       else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_1 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
         var_0.var_13C25 = scripts\engine\utility::array_add(var_0.var_13C25, "iw7_nunchucks_zm_pap2");
         var_3 = "iw7_nunchucks_zm_pap2";
@@ -679,8 +681,9 @@ wait_for_player_to_take_weapon(var_0) {
     if(isDefined(level.magicwheel_weapon_take_check)) {
       if([[level.magicwheel_weapon_take_check]](var_0, var_1, self)) {
         break;
-      } else
+      } else {
         continue;
+      }
     }
 
     break;

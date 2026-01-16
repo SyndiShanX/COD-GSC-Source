@@ -70,8 +70,9 @@ func_BE55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       if(isDefined(var_7)) {
         var_8 = 40;
         var_1 = self.origin + anglesToForward(self.angles) * var_8;
-      } else
+      } else {
         var_8 = distance2d(var_0, var_1);
+      }
 
       var_9 = var_8 * 0.2;
       var_10 = var_8 * 0.5;
@@ -140,8 +141,9 @@ func_194A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(isDefined(var_5)) {
       self thread[[var_1]](var_2, var_5);
       scripts\engine\utility::delaythread(var_5, scripts\sp\utility::func_77B9, 0.7);
-    } else
+    } else {
       self thread[[var_1]](var_2);
+    }
   }
 
   self waittill("gesture_dialog_finished");

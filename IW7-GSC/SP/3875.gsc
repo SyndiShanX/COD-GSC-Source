@@ -227,7 +227,7 @@ func_3DB9(var_0) {
 
   var_1 = lib_0F27::func_79F5(var_0);
   foreach(var_3 in var_1) {
-    if(isalive(var_3.isnodeoccupied)) {
+    if(isalive(var_3.enemy)) {
       return 0;
     }
   }

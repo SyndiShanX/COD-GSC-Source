@@ -33,8 +33,8 @@ func_B9D2(var_0, var_1) {
   self endon(var_1);
   var_2 = var_0 * var_0;
   for(;;) {
-    if(isDefined(self.isnodeoccupied)) {
-      var_3 = distancesquared(self.origin, self.isnodeoccupied.origin);
+    if(isDefined(self.enemy)) {
+      var_3 = distancesquared(self.origin, self.enemy.origin);
       if(var_3 < var_2) {
         self notify(var_1);
         break;

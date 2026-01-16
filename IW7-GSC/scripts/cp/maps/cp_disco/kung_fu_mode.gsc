@@ -451,21 +451,21 @@ get_enemies_within_reticle(var_0, var_1) {
       continue;
     }
 
-    var_0A = 0;
-    var_0B = var_9.origin;
-    var_0C = self worldpointinreticle_circle(var_9 getEye(), 65, 40);
-    if(var_0C) {
+    var_10 = 0;
+    var_11 = var_9.origin;
+    var_12 = self worldpointinreticle_circle(var_9 getEye(), 65, 40);
+    if(var_12) {
       if(isDefined(var_0)) {
-        var_0D = distance2d(self.origin, var_0B);
-        if(var_0D < var_0) {
-          var_0A = 1;
+        var_13 = distance2d(self.origin, var_11);
+        if(var_13 < var_0) {
+          var_10 = 1;
         }
       } else {
-        var_0A = 1;
+        var_10 = 1;
       }
     }
 
-    if(var_0A && var_2.size < var_1) {
+    if(var_10 && var_2.size < var_1) {
       var_2[var_2.size] = var_9;
       var_4 = scripts\engine\utility::array_remove(var_4, var_9);
     }
@@ -611,15 +611,15 @@ run_neck_slice_logic() {
     var_5 = var_6;
     if(var_5.size > 0) {
       var_5 = sortbydistance(var_5, self.origin);
-      var_0A = var_5[0];
-      if(!var_0A scripts\cp\utility::agentisinstakillimmune()) {
+      var_10 = var_5[0];
+      if(!var_10 scripts\cp\utility::agentisinstakillimmune()) {
         if(var_3 == 0) {
-          thread scripts\engine\utility::play_sound_in_space("chi_dragon_strike_first", var_0A.origin);
+          thread scripts\engine\utility::play_sound_in_space("chi_dragon_strike_first", var_10.origin);
         } else {
-          thread scripts\engine\utility::play_sound_in_space("chi_dragon_strike", var_0A.origin);
+          thread scripts\engine\utility::play_sound_in_space("chi_dragon_strike", var_10.origin);
         }
 
-        thread remove_head_and_kill(var_0A, var_2);
+        thread remove_head_and_kill(var_10, var_2);
       }
     }
 
@@ -672,7 +672,7 @@ getenemiesleftofcenter(var_0, var_1, var_2) {
   var_7 = vectornormalize(var_6) * -35;
   var_8 = 0;
   var_9 = anglestoup(self.angles);
-  for(var_0A = 1; var_0A <= var_0; var_0A++) {
+  for(var_10 = 1; var_10 <= var_0; var_10++) {
     if(var_5.size < 1) {
       break;
     }
@@ -681,26 +681,26 @@ getenemiesleftofcenter(var_0, var_1, var_2) {
       break;
     }
 
-    var_0B = cos(var_0A);
-    foreach(var_0D in var_5) {
-      var_0E = 0;
-      var_0F = var_0D.origin;
-      var_10 = vectornormalize(var_0D.origin - self.origin);
+    var_11 = cos(var_10);
+    foreach(var_13 in var_5) {
+      var_14 = 0;
+      var_15 = var_13.origin;
+      var_10 = vectornormalize(var_13.origin - self.origin);
       var_11 = scripts\engine\utility::anglebetweenvectorssigned(var_6, var_10, var_9);
       if(var_11 > 0 && var_11 < 30) {
         if(isDefined(var_1)) {
-          var_12 = distance2d(self.origin, var_0F);
+          var_12 = distance2d(self.origin, var_15);
           if(var_12 < var_1) {
-            var_0E = 1;
+            var_14 = 1;
           }
         } else {
-          var_0E = 1;
+          var_14 = 1;
         }
       }
 
-      if(var_0E && var_3.size < var_2) {
-        var_3[var_3.size] = var_0D;
-        var_5 = scripts\engine\utility::array_remove(var_5, var_0D);
+      if(var_14 && var_3.size < var_2) {
+        var_3[var_3.size] = var_13;
+        var_5 = scripts\engine\utility::array_remove(var_5, var_13);
       }
 
       if(var_3.size >= var_2) {
@@ -733,25 +733,25 @@ get_enemies_within_fov(var_0, var_1, var_2) {
       break;
     }
 
-    var_0A = cos(var_9);
-    foreach(var_0C in var_5) {
-      var_0D = 0;
-      var_0E = var_0C.origin;
-      var_0F = scripts\engine\utility::within_fov(self getEye() + var_7, self.angles, var_0E + (0, 0, 30), var_0A);
-      if(var_0F) {
+    var_10 = cos(var_9);
+    foreach(var_12 in var_5) {
+      var_13 = 0;
+      var_14 = var_12.origin;
+      var_15 = scripts\engine\utility::within_fov(self getEye() + var_7, self.angles, var_14 + (0, 0, 30), var_10);
+      if(var_15) {
         if(isDefined(var_1)) {
-          var_10 = distance2d(self.origin, var_0E);
+          var_10 = distance2d(self.origin, var_14);
           if(var_10 < var_1) {
-            var_0D = 1;
+            var_13 = 1;
           }
         } else {
-          var_0D = 1;
+          var_13 = 1;
         }
       }
 
-      if(var_0D && var_3.size < var_2) {
-        var_3[var_3.size] = var_0C;
-        var_5 = scripts\engine\utility::array_remove(var_5, var_0C);
+      if(var_13 && var_3.size < var_2) {
+        var_3[var_3.size] = var_12;
+        var_5 = scripts\engine\utility::array_remove(var_5, var_12);
       }
 
       if(var_3.size >= var_2) {
@@ -1862,7 +1862,7 @@ applykungfucooldown(var_0) {
     return;
   }
 
-  level scripts\engine\utility::waittill_any_timeout_1(300, "wave_starting");
+  level scripts\engine\utility::waittill_any_timeout(300, "wave_starting");
   var_0.kung_fu_cooldown = undefined;
   var_0 notify("spawn_gourds");
 }

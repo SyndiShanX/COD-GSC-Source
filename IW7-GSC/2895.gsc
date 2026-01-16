@@ -469,8 +469,9 @@ func_B6AA() {
     }
 
     var_2 = 1;
-  } else
+  } else {
     var_2 = 0;
+  }
 
   for(;;) {
     if(self.count == 0) {
@@ -613,8 +614,9 @@ func_B6A4(var_0, var_1) {
         var_12 = vectornormalize(var_5[self.var_86EA].origin - var_7);
         var_12 = var_12 * var_8;
         var_7 = var_7 + var_12;
-      } else
+      } else {
         self notify("next_target");
+      }
 
       var_2.origin = var_7;
       wait 0.1;
@@ -661,8 +663,9 @@ func_B6A4(var_0, var_1) {
           var_12 = vectornormalize(var_5[self.var_86EA].origin - var_7);
           var_12 = var_12 * var_8;
           var_7 = var_7 + var_12;
-        } else
+        } else {
           self notify("next_target");
+        }
 
         var_2.origin = var_7;
         wait 0.1;
@@ -907,10 +910,12 @@ func_B6A9(var_0, var_1, var_2) {
       if(!isalive(var_5) || isplayer(var_5)) {
         wait 0.05;
         continue;
-      } else
+      } else {
         var_1 = var_5.team;
-    } else
+      }
+    } else {
       var_5 = undefined;
+    }
 
     if(var_1 == "allies") {
       var_6 = "axis";
@@ -1287,7 +1292,7 @@ func_DDE3(var_0) {
 }
 
 func_1A30(var_0, var_1) {
-  if(!isalive(self.var_4B6D) && self getpersstat(self.var_4B6D)) {
+  if(!isalive(self.var_4B6D) && self cansee(self.var_4B6D)) {
     var_1.origin = self.var_A8BB;
     return;
   }
@@ -1350,7 +1355,7 @@ func_10389(var_0) {
 }
 
 func_AB14(var_0) {
-  self func_83AF();
+  self stopuseturret();
   scripts\anim\shared::placeweaponon(self.primaryweapon, "none");
   var_1 = func_7D25(var_0);
   var_2 = _getstartorigin(var_0.origin, var_0.angles, var_1);
@@ -1360,7 +1365,7 @@ func_AB14(var_0) {
 }
 
 func_CB35(var_0) {
-  self func_83AF();
+  self stopuseturret();
   self.turret func_8EAE();
 }
 
@@ -1514,7 +1519,7 @@ func_7BC7(var_0) {
     if(!isDefined(var_3["spots"])) {
       continue;
     }
-    var_3["spot"] = scripts\engine\utility::random(var_3["spots"]);
+    var_3["spot"] = ::scripts\engine\utility::random(var_3["spots"]);
     return var_3;
   }
 }

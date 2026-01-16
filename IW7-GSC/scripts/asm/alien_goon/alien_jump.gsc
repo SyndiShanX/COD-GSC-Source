@@ -68,39 +68,39 @@ func_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon(var_1 + "_finished");
   self.var_11B2F = 0;
   var_9 = spawnStruct();
-  var_0A = func_7F2B(var_2, var_3, var_4, var_5, var_6);
-  func_7F28(var_0A, var_9);
+  var_10 = func_7F2B(var_2, var_3, var_4, var_5, var_6);
+  func_7F28(var_10, var_9);
   if(isDefined(var_7) && isDefined(var_7.var_71CD)) {
-    self[[var_7.var_71CD]](var_0A, var_9);
+    self[[var_7.var_71CD]](var_10, var_9);
   }
 
-  var_0B = func_7F2F(var_2, var_3, var_4);
+  var_11 = func_7F2F(var_2, var_3, var_4);
   self gib_fx_override("noclip");
-  self orientmode("face angle abs", var_0B);
-  var_0C = 0;
-  var_0D = self getsafecircleorigin(var_9.var_AAA5, var_9.var_AAA4);
-  var_0E = self getsafecircleorigin(var_9.var_A7C6, var_9.var_A7C4);
-  var_0F = getnotetracktimes(var_0E, "finish");
-  if(var_0F.size > 0) {
-    var_10 = var_0F[0] * getanimlength(var_0E);
+  self orientmode("face angle abs", var_11);
+  var_12 = 0;
+  var_13 = self getsafecircleorigin(var_9.var_AAA5, var_9.var_AAA4);
+  var_14 = self getsafecircleorigin(var_9.var_A7C6, var_9.var_A7C4);
+  var_15 = getnotetracktimes(var_14, "finish");
+  if(var_15.size > 0) {
+    var_10 = var_15[0] * getanimlength(var_14);
   } else {
-    var_10 = getanimlength(var_0F);
+    var_10 = getanimlength(var_15);
   }
 
   var_11 = var_10 / var_9.var_CEE4;
   var_12 = floor(var_11 * 20);
   var_13 = var_12 / 20 / var_11;
-  var_14 = getnotetracktimes(var_0E, "stop_teleport");
+  var_14 = getnotetracktimes(var_14, "stop_teleport");
   if(var_14.size > 0) {
     var_15 = var_14[0] * var_11;
     var_16 = ceil(var_15 * 20);
     opcode::OP_SetNewLocalVariableFieldCached0 = var_16 / 20 / var_11;
-    opcode::OP_EvalSelfFieldVariable = getmovedelta(var_0E, opcode::OP_SetNewLocalVariableFieldCached0, var_13);
+    opcode::OP_EvalSelfFieldVariable = getmovedelta(var_14, opcode::OP_SetNewLocalVariableFieldCached0, var_13);
   } else {
     var_15 = 0.8 * var_15;
     var_16 = ceil(opcode::OP_EvalSelfFieldVariable * 20);
     opcode::OP_SetNewLocalVariableFieldCached0 = opcode::OP_EvalSelfFieldVariable / 20 / var_13;
-    opcode::OP_EvalSelfFieldVariable = getmovedelta(var_0F, opcode::OP_EvalSelfFieldVariable, var_14);
+    opcode::OP_EvalSelfFieldVariable = getmovedelta(var_15, opcode::OP_EvalSelfFieldVariable, var_14);
   }
 
   var_5 = func_7F29(var_2, var_4, var_5);
@@ -108,18 +108,18 @@ func_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   opcode::OP_CallBuiltin0 = var_4 - opcode::OP_Return;
   self ghostlaunched("anim deltas");
   self playsoundonmovingent(func_7A62());
-  if(animhasnotetrack(var_0D, "start_teleport")) {
+  if(animhasnotetrack(var_13, "start_teleport")) {
     scripts\mp\agents\_scriptedagents::func_CED2(var_9.var_AAA5, var_9.var_AAA4, var_9.var_CEE4, "jump_launch", "start_teleport");
   } else {
-    scripts\mp\agents\_scriptedagents::func_CED1(var_9.var_AAA5, var_9.var_AAA4, var_9.var_CE9E, 0.5 * getanimlength(var_0D) / var_9.var_CEE4);
+    scripts\mp\agents\_scriptedagents::func_CED1(var_9.var_AAA5, var_9.var_AAA4, var_9.var_CE9E, 0.5 * getanimlength(var_13) / var_9.var_CEE4);
   }
 
   opcode::OP_CallBuiltin1 = gettime();
-  var_0C = self ghostexplosionradiusdamage(self.origin, opcode::OP_CallBuiltin0, var_0A.var_A4EB);
+  var_12 = self ghostexplosionradiusdamage(self.origin, opcode::OP_CallBuiltin0, var_10.var_A4EB);
   self.var_11B2F = 1;
   self notify("jump_launching");
   opcode::OP_CallBuiltin2 = self ghosthover();
-  thread func_A4E9(var_0A, var_5, opcode::OP_CallBuiltin2, var_0C);
+  thread func_A4E9(var_10, var_5, opcode::OP_CallBuiltin2, var_12);
   scripts\mp\agents\_scriptedagents::func_1384C("jump_launch", "end");
   opcode::OP_CallBuiltin3 = gettime() - opcode::OP_CallBuiltin1 / 1000;
   if(scripts\engine\utility::istrue(self.bteleporting)) {
@@ -132,13 +132,13 @@ func_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  opcode::OP_CallBuiltin4 = var_0C - opcode::OP_CallBuiltin3 - var_15;
+  opcode::OP_CallBuiltin4 = var_12 - opcode::OP_CallBuiltin3 - var_15;
   if(opcode::OP_CallBuiltin4 > 0) {
     scripts\mp\agents\_scriptedagents::func_CED1(var_9.var_93B3, var_9.var_93B2, var_9.var_CEE4, opcode::OP_CallBuiltin4);
   }
 
   if(isDefined(var_7) && isDefined(var_7.var_71BB)) {
-    self[[var_7.var_71BB]](var_0A, var_9);
+    self[[var_7.var_71BB]](var_10, var_9);
   }
 
   if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
@@ -198,18 +198,18 @@ func_A4E9(var_0, var_1, var_2, var_3) {
     var_9 = 1;
   }
 
-  var_0A = var_9 - var_8;
+  var_10 = var_9 - var_8;
   if(var_8 > 0) {
     wait(var_3 * var_8);
   }
 
-  var_0B = 1;
-  if(distancesquared(self.angles, var_1) > var_0B) {
-    var_0C = anglesdelta(self.angles, var_1);
-    var_0D = var_0C / var_3 * var_0A;
-    var_0D = var_0D * 3.141593 / 180;
-    var_0D = var_0D / 20;
-    self ghostskullstimestart(var_0D);
+  var_11 = 1;
+  if(distancesquared(self.angles, var_1) > var_11) {
+    var_12 = anglesdelta(self.angles, var_1);
+    var_13 = var_12 / var_3 * var_10;
+    var_13 = var_13 * 3.141593 / 180;
+    var_13 = var_13 / 20;
+    self ghostskullstimestart(var_13);
   }
 
   self orientmode("face angle abs", var_1);
@@ -265,10 +265,10 @@ func_7F30(var_0) {
   var_7 = func_7F2E(var_3);
   var_8 = var_6 * var_5 * var_7;
   var_9 = trajectorycalculateexitangle(var_8, var_4, var_1, var_2);
-  var_0A = cos(var_9);
-  var_0.var_A4ED = var_0.var_A4DC / var_8 * var_0A;
-  var_0B = var_4 * (0, 0, -1);
-  var_0.launchvelocity2d = trajectorycalculateinitialvelocity(var_0.var_AAB4, var_0.var_A843, var_0B, var_0.var_A4ED);
+  var_10 = cos(var_9);
+  var_0.var_A4ED = var_0.var_A4DC / var_8 * var_10;
+  var_11 = var_4 * (0, 0, -1);
+  var_0.launchvelocity2d = trajectorycalculateinitialvelocity(var_0.var_AAB4, var_0.var_A843, var_11, var_0.var_A4ED);
   var_0.launchvelocity = var_0.launchvelocity2d * (1, 1, 0);
   var_0.var_A4EB = length(var_0.launchvelocity);
 }
@@ -310,18 +310,18 @@ func_7F2D(var_0, var_1) {
 
   var_8 = getanimlength(var_4);
   var_9 = var_8 * 0.5;
-  var_0A = getnotetracktimes(var_4, "stop_teleport");
-  if(isDefined(var_0A) && var_0A.size > 0) {
-    var_9 = var_0A[0] * var_8;
+  var_10 = getnotetracktimes(var_4, "stop_teleport");
+  if(isDefined(var_10) && var_10.size > 0) {
+    var_9 = var_10[0] * var_8;
   }
 
-  var_0B = getanimlength(var_3);
-  var_0C = ceil(var_0.var_A4ED * 20);
-  var_0D = var_0C / 20;
-  var_0E = var_0B + var_6 + var_9;
-  var_0F = var_0E / var_0D;
-  var_10 = var_0B / var_0F + 0.1;
-  var_11 = var_0B / var_10;
+  var_11 = getanimlength(var_3);
+  var_12 = ceil(var_0.var_A4ED * 20);
+  var_13 = var_12 / 20;
+  var_14 = var_11 + var_6 + var_9;
+  var_15 = var_14 / var_13;
+  var_10 = var_11 / var_15 + 0.1;
+  var_11 = var_11 / var_10;
   return var_11;
 }
 
@@ -436,55 +436,55 @@ getlaserdirection(var_0, var_1) {
   var_7 = vectordot(var_2 * -1, var_6);
   var_8 = length(var_2);
   var_9 = length(var_3);
-  var_0A = length(var_4);
-  var_0B = 0.001;
-  if(var_8 < var_0B || var_9 < var_0B) {
+  var_10 = length(var_4);
+  var_11 = 0.001;
+  if(var_8 < var_11 || var_9 < var_11) {
     return 1;
   }
 
-  var_0C = var_8 * var_8 + var_9 * var_9 - var_0A * var_0A / 2 * var_8 * var_9;
-  if(var_0C <= -1) {
+  var_12 = var_8 * var_8 + var_9 * var_9 - var_10 * var_10 / 2 * var_8 * var_9;
+  if(var_12 <= -1) {
     return 6;
   }
 
-  if(var_0C >= 1) {
+  if(var_12 >= 1) {
     return 1;
   }
 
-  var_0D = acos(var_0C);
+  var_13 = acos(var_12);
   if(var_7 > 0) {
-    if(0 <= var_0D && var_0D < 22.5) {
+    if(0 <= var_13 && var_13 < 22.5) {
       return 1;
     }
 
-    if(22.5 <= var_0D && var_0D < 67.5) {
+    if(22.5 <= var_13 && var_13 < 67.5) {
       return 2;
     }
 
-    if(67.5 <= var_0D && var_0D < 112.5) {
+    if(67.5 <= var_13 && var_13 < 112.5) {
       return 4;
     }
 
-    if(112.5 <= var_0D && var_0D < 157.5) {
+    if(112.5 <= var_13 && var_13 < 157.5) {
       return 7;
     }
 
     return 6;
   }
 
-  if(0 <= var_0D && var_0D < 22.5) {
+  if(0 <= var_13 && var_13 < 22.5) {
     return 1;
   }
 
-  if(22.5 <= var_0D && var_0D < 67.5) {
+  if(22.5 <= var_13 && var_13 < 67.5) {
     return 0;
   }
 
-  if(67.5 <= var_0D && var_0D < 112.5) {
+  if(67.5 <= var_13 && var_13 < 112.5) {
     return 3;
   }
 
-  if(112.5 <= var_0D && var_0D < 157.5) {
+  if(112.5 <= var_13 && var_13 < 157.5) {
     return 5;
   }
 
@@ -514,11 +514,11 @@ func_D4A2(var_0, var_1, var_2, var_3) {
     var_7 = func_7F2C(var_3);
     var_8 = self getsafecircleorigin(var_7, var_1);
     var_9 = getanimlength(var_8);
-    var_0A = min(var_6, var_9 / var_5);
+    var_10 = min(var_6, var_9 / var_5);
     if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
       self setanimstate(var_7, var_1, 0.2);
     } else {
-      self setanimstate(var_7, var_1, var_0A);
+      self setanimstate(var_7, var_1, var_10);
     }
   }
 

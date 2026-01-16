@@ -614,7 +614,7 @@ dostaffprojectiledamage(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(var_8.ignoreme || isDefined(var_8.triggerportableradarping) && var_8.triggerportableradarping.ignoreme) {
+    if(var_8.ignoreme || isDefined(var_8.owner) && var_8.owner.ignoreme) {
       continue;
     }
 

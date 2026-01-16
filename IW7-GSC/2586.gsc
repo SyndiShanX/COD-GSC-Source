@@ -33,7 +33,7 @@ func_2373(var_0, var_1) {
   level.asm[level.var_DEF5].var_F281[var_0] = var_1;
 }
 
-func_2374(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B, var_0C, var_0D, var_0E, var_0F, param_10, param_11, param_12, param_13, param_14, param_15) {
+func_2374(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, param_10, param_11, param_12, param_13, param_14, param_15) {
   var_16 = level.asm[level.var_DEF5];
   var_16.states[var_0] = spawnStruct();
   var_16.states[var_0].var_7048 = var_1;
@@ -46,18 +46,18 @@ func_2374(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   var_16.states[var_0].transitions = [];
   var_16.states[var_0].magicbullet = var_8;
   var_16.states[var_0].var_10B53 = var_9;
-  var_16.states[var_0].var_6A8B = var_0B;
-  var_16.states[var_0].var_C87F = var_0C;
-  var_16.states[var_0].var_C87C = var_0D;
-  var_16.states[var_0].var_4E6D = var_0E;
-  var_16.states[var_0].var_4E54 = var_0F;
+  var_16.states[var_0].var_6A8B = var_11;
+  var_16.states[var_0].var_C87F = var_12;
+  var_16.states[var_0].var_C87C = var_13;
+  var_16.states[var_0].var_4E6D = var_14;
+  var_16.states[var_0].var_4E54 = var_15;
   var_16.states[var_0].var_D773 = param_10;
   var_16.states[var_0].var_D772 = param_11;
   var_16.states[var_0].var_116FA = param_12;
   var_16.states[var_0].var_C704 = param_13;
   var_16.states[var_0].var_1FBA = param_14;
   var_16.states[var_0].var_C94B = param_15;
-  var_16.states[var_0].var_111AC = var_0A;
+  var_16.states[var_0].var_111AC = var_10;
   anim.var_DEF7 = var_0;
 }
 
@@ -150,13 +150,13 @@ func_238A(var_0, var_1, var_2, var_3, var_4, var_5) {
   asm_clearevents(var_1);
   self.asm.var_4E6E = undefined;
   var_9 = var_7.var_111AC;
-  var_0A = undefined;
+  var_10 = undefined;
   if(isDefined(var_8.var_10E23)) {
-    var_0A = var_6.states[var_8.var_10E23].var_111AC;
-    if(isDefined(var_0A)) {
-      foreach(var_0C in var_0A) {
-        if(!isDefined(var_9) || !scripts\engine\utility::array_contains(var_9, var_0C)) {
-          func_2387(var_0C);
+    var_10 = var_6.states[var_8.var_10E23].var_111AC;
+    if(isDefined(var_10)) {
+      foreach(var_12 in var_10) {
+        if(!isDefined(var_9) || !scripts\engine\utility::array_contains(var_9, var_12)) {
+          func_2387(var_12);
         }
       }
     }
@@ -171,14 +171,14 @@ func_238A(var_0, var_1, var_2, var_3, var_4, var_5) {
     self.var_34 = isDefined(var_7.var_C87F);
   }
 
-  var_0E = undefined;
+  var_14 = undefined;
   if(isDefined(var_5)) {
-    var_0E = var_5;
+    var_14 = var_5;
   } else if(isDefined(var_7.var_E88A)) {
-    var_0E = var_7.var_E88A;
+    var_14 = var_7.var_E88A;
   }
 
-  self thread[[var_7.var_7048]](var_0, var_1, var_2, var_0E);
+  self thread[[var_7.var_7048]](var_0, var_1, var_2, var_14);
   if(isDefined(self.var_718D)) {
     self[[self.var_718D]](var_0, var_8.var_10E23, var_1, var_2);
   }
@@ -188,9 +188,9 @@ func_238A(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(isDefined(var_7.var_111AC)) {
-    foreach(var_0C in var_7.var_111AC) {
-      if(!isDefined(var_0A) || !scripts\engine\utility::array_contains(var_0A, var_0C)) {
-        func_2351(var_0C, 0);
+    foreach(var_12 in var_7.var_111AC) {
+      if(!isDefined(var_10) || !scripts\engine\utility::array_contains(var_10, var_12)) {
+        func_2351(var_12, 0);
       }
     }
   }
@@ -415,24 +415,24 @@ func_2310(var_0, var_1, var_2) {
     var_8 = self[[var_6.var_71D1]](var_0, var_1, var_7, var_6.var_100B1);
     if(var_8) {
       var_9 = level.asm[var_0].states[var_6.var_11A1A];
-      var_0A = var_6.var_2B93;
-      if(!isDefined(var_0A)) {
-        var_0A = 0.2;
+      var_10 = var_6.var_2B93;
+      if(!isDefined(var_10)) {
+        var_10 = 0.2;
       }
 
       if(isDefined(var_9.var_C94B) && var_9.var_C94B) {
-        var_0B = func_2310(var_0, var_7, 1);
-        var_7 = var_0B[0];
-        var_0A = var_0B[1];
+        var_11 = func_2310(var_0, var_7, 1);
+        var_7 = var_11[0];
+        var_10 = var_11[1];
       }
 
       if(isDefined(var_7)) {
         if(!var_2) {
           func_2388(var_0, var_1, var_4, var_4.var_116FB);
-          func_238A(var_0, var_7, var_0A);
+          func_238A(var_0, var_7, var_10);
         }
 
-        return [var_7, var_0A];
+        return [var_7, var_10];
       }
     }
   }
@@ -441,17 +441,17 @@ func_2310(var_0, var_1, var_2) {
 }
 
 asm_setstate(var_0, var_1) {
-  foreach(var_0A, var_3 in self.var_164D) {
+  foreach(var_10, var_3 in self.var_164D) {
     var_4 = var_3.var_4BC0;
-    var_5 = level.asm[var_0A].states[var_4];
-    var_6 = level.asm[var_0A].states[var_0];
+    var_5 = level.asm[var_10].states[var_4];
+    var_6 = level.asm[var_10].states[var_0];
     if(!isDefined(var_6)) {
       continue;
     }
 
     var_7 = var_0;
     if(isDefined(var_6.var_C94B) && var_6.var_C94B) {
-      var_8 = func_2310(var_0A, var_0, 1);
+      var_8 = func_2310(var_10, var_0, 1);
       var_7 = var_8[0];
       var_9 = var_8[1];
       if(!isDefined(var_7)) {
@@ -459,8 +459,8 @@ asm_setstate(var_0, var_1) {
       }
     }
 
-    func_2388(var_0A, var_4, var_5, var_5.var_116FB);
-    func_238A(var_0A, var_7, 0.2, undefined, undefined, var_1);
+    func_2388(var_10, var_4, var_5, var_5.var_116FB);
+    func_238A(var_10, var_7, 0.2, undefined, undefined, var_1);
   }
 }
 
@@ -496,7 +496,7 @@ func_2389() {
 }
 
 func_6A18(var_0, var_1, var_2, var_3) {
-  if(weaponclass(self.var_394) == "pistol") {
+  if(weaponclass(self.weapon) == "pistol") {
     if(weaponclass(self.primaryweapon) != "mg" && weaponclass(self.primaryweapon) != "rocketlauncher" && weaponclass(self.primaryweapon) != "pistol") {
       return 0;
     }
@@ -666,33 +666,33 @@ func_231D(var_0, var_1, var_2, var_3) {
     var_8 = var_7[1];
     for(var_9 = var_6 - 1; var_9 >= 0; var_9--) {}
 
-    var_0A = 1;
+    var_10 = 1;
     if(var_7.size > 2) {
-      var_0A = var_7[3];
+      var_10 = var_7[3];
     }
 
-    var_5 = var_5 + var_0A;
+    var_5 = var_5 + var_10;
   }
 
-  var_0B = randomfloat(var_5);
-  var_0C = undefined;
+  var_11 = randomfloat(var_5);
+  var_12 = undefined;
   for(var_6 = 0; var_6 < var_4.transitions.size; var_6++) {
-    var_0D = var_4.transitions[var_6];
-    var_7 = var_0D.var_100B1;
-    var_0C = var_7[1];
-    var_0A = 1;
+    var_13 = var_4.transitions[var_6];
+    var_7 = var_13.var_100B1;
+    var_12 = var_7[1];
+    var_10 = 1;
     if(var_7.size > 2) {
-      var_0A = var_7[3];
+      var_10 = var_7[3];
     }
 
-    if(var_0B < var_0A) {
+    if(var_11 < var_10) {
       break;
     } else {
-      var_0B = var_0B - var_0A;
+      var_11 = var_11 - var_10;
     }
   }
 
-  self.asm.var_DCC7 = var_0 + "_" + var_2 + "_" + var_0C;
+  self.asm.var_DCC7 = var_0 + "_" + var_2 + "_" + var_12;
   return 1;
 }
 

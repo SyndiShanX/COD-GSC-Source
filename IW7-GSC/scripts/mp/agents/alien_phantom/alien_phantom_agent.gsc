@@ -19,10 +19,10 @@ func_FAB0() {
 
   level.agent_definition["alien_phantom"]["setup_func"] = ::setupagent;
   level.agent_definition["alien_phantom"]["setup_model_func"] = ::func_FACE;
-  level.agent_funcs["alien_phantom"]["on_damaged"] = scripts\mp\agents\alien_goon\alien_goon_agent::func_C4E0;
-  level.agent_funcs["alien_phantom"]["gametype_on_damage_finished"] = scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
-  level.agent_funcs["alien_phantom"]["gametype_on_killed"] = scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
-  level.agent_funcs["alien_phantom"]["on_damaged_finished"] = scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
+  level.agent_funcs["alien_phantom"]["on_damaged"] = ::scripts\mp\agents\alien_goon\alien_goon_agent::func_C4E0;
+  level.agent_funcs["alien_phantom"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+  level.agent_funcs["alien_phantom"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
+  level.agent_funcs["alien_phantom"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
   level.agent_funcs["alien_phantom"]["on_killed"] = ::onkilled;
   level.brute_loot_check = [];
   if(!isDefined(level.var_8CBD)) {
@@ -67,10 +67,10 @@ onkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       }
     }
 
-    var_0A = 400;
-    foreach(var_0C in level.players) {
-      if(var_0C scripts\cp\utility::is_valid_player()) {
-        var_0C scripts\cp\cp_persistence::give_player_currency(var_0A);
+    var_10 = 400;
+    foreach(var_12 in level.players) {
+      if(var_12 scripts\cp\utility::is_valid_player()) {
+        var_12 scripts\cp\cp_persistence::give_player_currency(var_10);
       }
     }
   }

@@ -37,7 +37,7 @@ func_18A5(var_0) {
   var_2 = spawn("script_model", var_0.origin);
   var_2.angles = var_0.angles;
   var_2.team = self.team;
-  var_2.triggerportableradarping = self;
+  var_2.owner = self;
   var_2 setModel("mp_trophy_system_iw6");
   var_2 thread func_189C(self);
   var_2 thread func_18A7();
@@ -66,8 +66,8 @@ func_189C(var_0) {
 }
 
 func_189F(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.triggerportableradarping) && var_0 != self.triggerportableradarping) {
-    var_0 scripts\mp\killstreaks\_killstreaks::func_83A0();
+  if(isDefined(self.owner) && var_0 != self.owner) {
+    var_0 scripts\mp\killstreaks\killstreaks::func_83A0();
     var_0 notify("destroyed_equipment");
   }
 

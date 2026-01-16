@@ -253,8 +253,9 @@ func_7A4A(var_0, var_1) {
         var_3 = var_0.origin;
       }
     }
-  } else if(!isDefined(var_3))
+  } else if(!isDefined(var_3)) {
     var_3 = var_0.origin;
+  }
 
   if(isDefined(level.guided_interaction_offset_func)) {
     var_2 = [[level.guided_interaction_offset_func]](var_0, var_1);
@@ -314,16 +315,18 @@ func_7A48(var_0, var_1) {
         var_2 = 0.5;
         var_3 = int(var_3 * var_2);
       }
-    } else
+    } else {
       var_3 = int(var_3 * var_2);
+    }
   } else if(interaction_is_weapon_upgrade(var_0)) {
     var_6 = var_1 getcurrentweapon();
 
     if(var_1 scripts\cp\cp_weapon::can_upgrade(var_6)) {
       var_5 = var_1 scripts\cp\cp_weapon::get_weapon_level(var_6);
       var_3 = scripts\engine\utility::ter_op(var_5 > 1, 10000, 5000);
-    } else
+    } else {
       var_3 = 0;
+    }
 
     if(scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
       var_3 = 0;
@@ -815,8 +818,9 @@ set_interaction_point(var_0, var_1) {
         var_6 = scripts\engine\utility::ter_op(var_8 > 1, int(10000), int(5000));
         self.interaction_trigger sethintstringparams(var_5, var_6);
       }
-    } else if(isDefined(var_5))
+    } else if(isDefined(var_5)) {
       self.interaction_trigger sethintstringparams(var_5);
+    }
   } else if(func_9A16(var_0)) {
     if(!isDefined(self.current_crafting_struct)) {
       level thread[[level.interactions[var_0.script_noteworthy].activation_func]](var_0, self);
@@ -831,8 +835,9 @@ set_interaction_point(var_0, var_1) {
     }
 
     self.interaction_trigger.origin = var_0.origin;
-  } else if(func_9A26(var_0))
+  } else if(func_9A26(var_0)) {
     self.interaction_trigger.origin = (var_0.origin[0], var_0.origin[1], var_2[2] - 15);
+  }
   else if(func_9A15(var_0) && var_0.script_noteworthy == "atm_withdrawal") {
     self.interaction_trigger sethintstringparams(level.atm_amount_deposited);
   } else if(interaction_is_fortune_teller(var_0)) {
@@ -841,8 +846,9 @@ set_interaction_point(var_0, var_1) {
     } else {
       self.interaction_trigger sethintstringparams(level.fortune_visit_cost_1);
     }
-  } else if(var_0.script_noteworthy == "spawned_essence")
+  } else if(var_0.script_noteworthy == "spawned_essence") {
     self.interaction_trigger.origin = var_0.origin;
+  }
 
   func_F422(self.interaction_trigger, var_0);
 
@@ -1544,8 +1550,9 @@ func_9A3D() {
           if(soundexists("purchase_ammo")) {
             var_2 playlocalsound("purchase_ammo");
           }
-        } else if(soundexists("purchase_weapon"))
+        } else if(soundexists("purchase_weapon")) {
           var_2 playlocalsound("purchase_weapon");
+        }
 
         break;
       case "purchase":

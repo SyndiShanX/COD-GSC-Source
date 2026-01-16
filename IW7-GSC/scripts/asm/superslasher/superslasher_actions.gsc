@@ -22,8 +22,8 @@ superslasher_domeleedamage() {
     }
 
     var_9 = var_8.origin - self.origin;
-    var_0A = lengthsquared(var_9);
-    if(var_0A > var_1) {
+    var_10 = lengthsquared(var_9);
+    if(var_10 > var_1) {
       continue;
     }
 
@@ -31,26 +31,26 @@ superslasher_domeleedamage() {
       continue;
     }
 
-    var_0B = (var_9[0], var_9[1], 0);
-    var_9 = vectornormalize(var_0B);
-    var_0C = vectordot(var_9, var_6);
-    if(var_0A < var_4) {
-      if(var_0C < var_5) {
+    var_11 = (var_9[0], var_9[1], 0);
+    var_9 = vectornormalize(var_11);
+    var_12 = vectordot(var_9, var_6);
+    if(var_10 < var_4) {
+      if(var_12 < var_5) {
         continue;
       }
-    } else if(var_0C < var_3) {
+    } else if(var_12 < var_3) {
       continue;
     }
 
     scripts\asm\zombie\melee::domeleedamage(var_8, 0.8 * var_8.maxhealth, "MOD_IMPACT");
-    var_0D = 20;
+    var_13 = 20;
     if(!self isonground()) {
-      var_0D = var_0D * 0.05;
+      var_13 = var_13 * 0.05;
     }
 
-    var_0E = vectornormalize(var_8.origin + (0, 0, 45) - self.origin);
-    var_0F = var_0E * var_0D * 10;
-    var_8 setvelocity(var_0F);
+    var_14 = vectornormalize(var_8.origin + (0, 0, 45) - self.origin);
+    var_15 = var_14 * var_13 * 10;
+    var_8 setvelocity(var_15);
   }
 }
 
@@ -85,12 +85,12 @@ dogenericsummons(var_0, var_1, var_2, var_3) {
   }
 
   var_9 = scripts\engine\utility::array_randomize(var_7);
-  var_0A = var_9.size;
+  var_10 = var_9.size;
   if(var_1 == "ground") {
-    var_0A = 8;
+    var_10 = 8;
   }
 
-  summontracker_init(var_0, var_0A, var_3);
+  summontracker_init(var_0, var_10, var_3);
   if(var_2 <= 0) {
     var_2 = 0.05;
   }
@@ -161,15 +161,15 @@ checkwallsummondamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       break;
     }
 
-    var_0A = var_5 - var_9 / var_5;
-    var_0B = var_1 + var_4 * var_0A * var_3;
-    foreach(var_0D in level.players) {
-      if(isalive(var_0D) && var_0D getstance() != "prone") {
-        var_0E = var_0D.origin - var_0B;
-        var_0F = vectordot(var_0E, var_3);
-        if(abs(var_0F) < var_6) {
-          var_10 = var_0D.origin - var_0F * var_3;
-          var_0D dodamage(0.75 * var_0D.maxhealth, var_10, self, self, "MOD_IMPACT");
+    var_10 = var_5 - var_9 / var_5;
+    var_11 = var_1 + var_4 * var_10 * var_3;
+    foreach(var_13 in level.players) {
+      if(isalive(var_13) && var_13 getstance() != "prone") {
+        var_14 = var_13.origin - var_11;
+        var_15 = vectordot(var_14, var_3);
+        if(abs(var_15) < var_6) {
+          var_10 = var_13.origin - var_15 * var_3;
+          var_13 dodamage(0.75 * var_13.maxhealth, var_10, self, self, "MOD_IMPACT");
         }
       }
     }
@@ -230,20 +230,20 @@ domaskshockwave(var_0) {
   var_8 = shock_wave_wind_sfx();
   scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::kill_off_existing_zombies();
   var_9 = int(var_3 / var_4);
-  var_0A = int(var_4 / var_5);
-  for(var_0B = 0; var_0B < var_9; var_0B++) {
+  var_10 = int(var_4 / var_5);
+  for(var_11 = 0; var_11 < var_9; var_11++) {
     scripts\engine\utility::exploder(100);
-    for(var_0C = 0; var_0C < var_0A; var_0C++) {
-      foreach(var_0E in level.players) {
-        if(playerinanysafearea(var_0E)) {
+    for(var_12 = 0; var_12 < var_10; var_12++) {
+      foreach(var_14 in level.players) {
+        if(playerinanysafearea(var_14)) {
           continue;
         }
 
-        if(scripts\cp\cp_laststand::player_in_laststand(var_0E)) {
+        if(scripts\cp\cp_laststand::player_in_laststand(var_14)) {
           continue;
         }
 
-        var_0E dodamage(0.3 * var_0E.maxhealth, var_2);
+        var_14 dodamage(0.3 * var_14.maxhealth, var_2);
       }
 
       wait(var_5);
@@ -432,21 +432,21 @@ superslasher_dostompattack(var_0) {
   var_7 = 50 + var_1;
   var_8 = self.origin + var_6 * var_7;
   for(var_9 = 0; var_9 < var_4; var_9++) {
-    var_0A = var_8 + var_9 * var_5 * var_6;
-    thread dosticks(var_0A, var_1, 1000);
+    var_10 = var_8 + var_9 * var_5 * var_6;
+    thread dosticks(var_10, var_1, 1000);
     wait(var_2);
   }
 }
 
 dosticks(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_0F = allocattackent();
-  var_0F setattackentorigin(var_0);
-  var_0F setscriptablepartstate("attack", "punjisticks");
+  var_15 = allocattackent();
+  var_15 setattackentorigin(var_0);
+  var_15 setscriptablepartstate("attack", "punjisticks");
   wait(var_2 / 1000);
-  if(isDefined(var_0F)) {
-    var_0F setscriptablepartstate("attack", "off");
-    freeattackent(var_0F);
+  if(isDefined(var_15)) {
+    var_15 setscriptablepartstate("attack", "off");
+    freeattackent(var_15);
   }
 }
 
@@ -485,14 +485,14 @@ dosawsharks(var_0) {
   var_7 = (90, 0, 0);
   var_8 = -25536;
   for(var_9 = 0; var_9 < var_1; var_9++) {
-    var_0A = var_9 * 360 / var_1;
-    var_0B = self.origin + rotatevector(var_7, (0, var_0A, 0));
-    var_0C = spawnsawshark(var_0B);
-    self.sawsharks[self.sawsharks.size] = var_0C;
+    var_10 = var_9 * 360 / var_1;
+    var_11 = self.origin + rotatevector(var_7, (0, var_10, 0));
+    var_12 = spawnsawshark(var_11);
+    self.sawsharks[self.sawsharks.size] = var_12;
     if(var_0 == "roof") {
-      thread dosawshark_followtarget(var_0C, var_3, undefined, var_2 + rotatevector(var_7, (0, var_0A, 0)), var_8);
+      thread dosawshark_followtarget(var_12, var_3, undefined, var_2 + rotatevector(var_7, (0, var_10, 0)), var_8);
     } else {
-      thread dosawshark_followowner(var_0C, var_3, var_0A, var_8);
+      thread dosawshark_followowner(var_12, var_3, var_10, var_8);
     }
 
     scripts\engine\utility::waitframe();
@@ -600,13 +600,13 @@ dosawshark_followtarget(var_0, var_1, var_2, var_3, var_4) {
   var_9 = 32;
   if(isDefined(var_2)) {
     var_6 = vectortoyaw(var_2.origin - var_5);
-    var_0A = var_2 getentitynumber();
-    if(isDefined(var_1.perplayer[var_0A])) {
-      var_1.perplayer[var_0A]++;
+    var_10 = var_2 getentitynumber();
+    if(isDefined(var_1.perplayer[var_10])) {
+      var_1.perplayer[var_10]++;
     }
   }
 
-  var_0B = scripts\common\trace::create_default_contents(1);
+  var_11 = scripts\common\trace::create_default_contents(1);
   while(var_4 > 0) {
     if(!isDefined(var_2) || !isalive(var_2)) {
       var_2 = getclosesttargetableplayerwithinwithlos(var_1, var_5, 512);
@@ -617,14 +617,14 @@ dosawshark_followtarget(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(isDefined(var_2)) {
-      var_0C = var_2.origin - var_5;
-      var_0D = vectortoyaw(var_0C);
-      var_0E = angleclamp180(var_0D - var_6);
-      var_0E = clamp(var_0E, -1 * var_8, var_8);
-      var_6 = angleclamp180(var_6 + var_0E);
-      var_0F = var_5 + rotatevector((var_7, 0, 0), (0, var_6, 0));
-      if(navisstraightlinereachable(var_5, var_0F)) {
-        var_10 = scripts\common\trace::ray_trace(var_0F + (0, 0, 24), var_0F - (0, 0, 24), undefined, var_0B);
+      var_12 = var_2.origin - var_5;
+      var_13 = vectortoyaw(var_12);
+      var_14 = angleclamp180(var_13 - var_6);
+      var_14 = clamp(var_14, -1 * var_8, var_8);
+      var_6 = angleclamp180(var_6 + var_14);
+      var_15 = var_5 + rotatevector((var_7, 0, 0), (0, var_6, 0));
+      if(navisstraightlinereachable(var_5, var_15)) {
+        var_10 = scripts\common\trace::ray_trace(var_15 + (0, 0, 24), var_15 - (0, 0, 24), undefined, var_11);
         var_5 = var_10["position"];
         if(distance2dsquared(var_5, var_2.origin) < var_9 * var_9) {
           var_2 dodamage(0.8 * var_2.maxhealth, var_5, self, self, "MOD_IMPACT");

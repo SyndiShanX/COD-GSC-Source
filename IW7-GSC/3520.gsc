@@ -216,10 +216,11 @@ func_105A3(var_0, var_1) {
   var_0.outlineids = [];
 
   if(level.teambased) {
-    var_0.outlineids[0] = scripts\mp\utility\game::outlineenableforteam(var_0, "cyan", var_1.team, 1, 0, "equipment");
-    var_0.outlineids[1] = scripts\mp\utility\game::outlineenableforteam(var_0, "orange", scripts\mp\utility\game::getotherteam(var_1.team), 1, 0, "equipment");
-  } else
-    var_0.outlineids[0] = scripts\mp\utility\game::func_C793(var_0, "orange", 1, 0, "equipment");
+    var_0.outlineids[0] = ::scripts\mp\utility\game::outlineenableforteam(var_0, "cyan", var_1.team, 1, 0, "equipment");
+    var_0.outlineids[1] = ::scripts\mp\utility\game::outlineenableforteam(var_0, "orange", scripts\mp\utility\game::getotherteam(var_1.team), 1, 0, "equipment");
+  } else {
+    var_0.outlineids[0] = ::scripts\mp\utility\game::func_C793(var_0, "orange", 1, 0, "equipment");
+  }
 
   var_0 hudoutlinedisableforclient(var_1);
   func_10575(var_0, var_1);
@@ -464,10 +465,12 @@ func_105DE(var_0, var_1, var_2) {
     } else if(var_2 < 990.0 && var_1 >= 990.0) {
       var_0.var_FE12 = scripts\engine\utility::getfx("cockpit_smoke");
       playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.owner);
-    } else
+    } else {
       playfxontagforclients(scripts\engine\utility::getfx("cockpit_sparks"), var_0, "j_stickleft", var_0.owner);
-  } else if(var_2 >= 990.0 && var_1 < 990.0)
+    }
+  } else if(var_2 >= 990.0 && var_1 < 990.0) {
     func_105CD(var_0);
+  }
   else if(var_2 >= 495.0 && var_1 < 495.0) {
     func_105CD(var_0);
     var_0.var_FE12 = scripts\engine\utility::getfx("cockpit_smoke");
@@ -953,8 +956,9 @@ func_10591(var_0) {
     }
 
     return 0;
-  } else
+  } else {
     return 1;
+  }
 }
 
 func_105AC(var_0, var_1) {

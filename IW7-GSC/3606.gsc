@@ -108,7 +108,7 @@ func_13A52(var_0) {
 
 watchforoverdriveracegameended(var_0) {
   self endon("overdriveEndRace");
-  level scripts\engine\utility::waittill_any_3("bro_shot_start", "game_ended");
+  level scripts\engine\utility::waittill_any("bro_shot_start", "game_ended");
   var_0.gameendedreceived = 1;
   self notify("overdriveBeginRace");
 }
@@ -152,7 +152,7 @@ func_13AE1() {
   var_0 linkto(var_5);
   thread func_13AEF(var_0);
   thread func_13AF0(var_5);
-  scripts\engine\utility::waittill_any_3("death", "disconnect", "overdriveEnd");
+  scripts\engine\utility::waittill_any("death", "disconnect", "overdriveEnd");
   if(isDefined(var_0)) {
     var_0 delete();
   }

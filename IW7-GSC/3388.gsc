@@ -36,8 +36,8 @@ init_scrambler() {
 
   var_2[0].var_1270F enablelinkto();
   var_2[0].var_1270F linkto(var_2[0].body);
-  foreach(var_0B in var_2[0].rockets) {
-    var_0B linkto(var_2[0].body);
+  foreach(var_11 in var_2[0].rockets) {
+    var_11 linkto(var_2[0].body);
   }
 
   var_2[0].clip disconnectpaths();
@@ -225,7 +225,7 @@ func_8404(var_0, var_1) {
   self.og_goalradius = self.objective_playermask_showto;
   self.objective_playermask_showto = 32;
   self give_mp_super_weapon(scripts\engine\utility::getclosest(self.origin, var_0).origin);
-  scripts\engine\utility::waittill_any_3("goal", "goal_reached");
+  scripts\engine\utility::waittill_any("goal", "goal_reached");
   self.scripted_mode = 0;
 }
 

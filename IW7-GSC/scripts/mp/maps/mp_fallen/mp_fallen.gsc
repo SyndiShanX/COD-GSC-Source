@@ -211,22 +211,22 @@ fixyourcollision() {
   var_9 = spawn("script_model", (1372, 3105, 1168));
   var_9.angles = (0, 0, -90);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_0A = spawn("script_model", (428, 1048, 960));
-  var_0A.angles = (45, 0, 90);
-  var_0A setModel("com_plastic_crate_pallet_mp_rivet_patch");
-  var_0B = spawn("script_model", (428, 120, 960));
-  var_0B.angles = (45, 0, 90);
-  var_0B setModel("com_plastic_crate_pallet_mp_rivet_patch");
-  var_0C = getent("player256x256x256", "targetname");
-  var_0D = spawn("script_model", (-448, 2408, 1280));
-  var_0D.angles = (0, 0, 0);
-  var_0D clonebrushmodeltoscriptmodel(var_0C);
-  var_0E = spawn("script_model", (-448, 2408, 1536));
-  var_0E.angles = (0, 0, 0);
-  var_0E clonebrushmodeltoscriptmodel(var_0C);
-  var_0F = spawn("script_model", (-448, 2408, 1792));
-  var_0F.angles = (0, 0, 0);
-  var_0F clonebrushmodeltoscriptmodel(var_0C);
+  var_10 = spawn("script_model", (428, 1048, 960));
+  var_10.angles = (45, 0, 90);
+  var_10 setModel("com_plastic_crate_pallet_mp_rivet_patch");
+  var_11 = spawn("script_model", (428, 120, 960));
+  var_11.angles = (45, 0, 90);
+  var_11 setModel("com_plastic_crate_pallet_mp_rivet_patch");
+  var_12 = getent("player256x256x256", "targetname");
+  var_13 = spawn("script_model", (-448, 2408, 1280));
+  var_13.angles = (0, 0, 0);
+  var_13 clonebrushmodeltoscriptmodel(var_12);
+  var_14 = spawn("script_model", (-448, 2408, 1536));
+  var_14.angles = (0, 0, 0);
+  var_14 clonebrushmodeltoscriptmodel(var_12);
+  var_15 = spawn("script_model", (-448, 2408, 1792));
+  var_15.angles = (0, 0, 0);
+  var_15 clonebrushmodeltoscriptmodel(var_12);
   var_10 = spawn("script_model", (-1050, 1813, 890));
   var_10.angles = (270, 0, 180);
   var_10 setModel("panel_metal_02_16x176_mp_parkour_patch");
@@ -308,9 +308,9 @@ fixyourballs() {
     var_9 = spawn("script_model", (-796, 1904, 720));
     var_9.angles = (315, 90, -90);
     var_9 setModel("mp_fallen_uplink_col_01");
-    var_0A = spawn("script_model", (-548, 1904, 720));
-    var_0A.angles = (315, 90, -90);
-    var_0A setModel("mp_fallen_uplink_col_01");
+    var_10 = spawn("script_model", (-548, 1904, 720));
+    var_10.angles = (315, 90, -90);
+    var_10 setModel("mp_fallen_uplink_col_01");
   }
 }
 

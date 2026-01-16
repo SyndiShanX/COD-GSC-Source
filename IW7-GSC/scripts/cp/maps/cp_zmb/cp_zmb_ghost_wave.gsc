@@ -94,7 +94,7 @@ entangler_hit_monitor(var_0) {
     record_entangler_progress_percent(var_0, 0);
     var_1 = 0;
     for(;;) {
-      var_2 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(0.2, "entangler_hit_same_target");
+      var_2 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death(0.2, "entangler_hit_same_target");
       if(var_2 == "entangler_hit_same_target") {
         var_1 = var_1 + 0.2;
         var_3 = min(var_1 / get_entangler_track_time(), 1);
@@ -838,7 +838,7 @@ activate_red_moving_target(var_0) {
   var_0 notify("become_red_moving_target");
   var_0.angles = var_0.angles_to_face_when_activated;
   set_moving_target_color(var_0, "red");
-  var_1 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(level.moving_target_pre_fly_time, "death");
+  var_1 = var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death(level.moving_target_pre_fly_time, "death");
   if(var_1 == "timeout") {
     var_0 fly_back_into_portal(var_0);
   }
@@ -954,11 +954,11 @@ stop_moving_targets_sequence() {
 
 purge_undefined_from_moving_target_array() {
   foreach(var_2, var_1 in level.moving_target_groups) {
-    level.moving_target_groups[var_2] = scripts\engine\utility::array_removeundefined(var_1);
+    level.moving_target_groups[var_2] = ::scripts\engine\utility::array_removeundefined(var_1);
   }
 
   foreach(var_4, var_1 in level.moving_target_priority) {
-    level.moving_target_priority[var_4] = scripts\engine\utility::array_removeundefined(var_1);
+    level.moving_target_priority[var_4] = ::scripts\engine\utility::array_removeundefined(var_1);
   }
 }
 
@@ -1225,11 +1225,11 @@ update_num_targets_escaped_hud() {
 
 remove_undefined_from_moving_target_array(var_0) {
   foreach(var_3, var_2 in level.moving_target_groups) {
-    level.moving_target_groups[var_3] = scripts\engine\utility::array_remove(var_2, var_0);
+    level.moving_target_groups[var_3] = ::scripts\engine\utility::array_remove(var_2, var_0);
   }
 
   foreach(var_5, var_2 in level.moving_target_priority) {
-    level.moving_target_priority[var_5] = scripts\engine\utility::array_remove(var_2, var_0);
+    level.moving_target_priority[var_5] = ::scripts\engine\utility::array_remove(var_2, var_0);
   }
 }
 
@@ -1298,7 +1298,7 @@ turn_off_ghost_arcade_scores(var_0) {
 }
 
 register_available_formation(var_0, var_1) {
-  level.available_formations[var_0] = scripts\engine\utility::array_add(level.available_formations[var_0], var_1);
+  level.available_formations[var_0] = ::scripts\engine\utility::array_add(level.available_formations[var_0], var_1);
 }
 
 register_formation_movements(var_0, var_1) {

@@ -43,7 +43,7 @@ song_quest_interactions() {
   self.radios_heard = 0;
   scripts\engine\utility::flag_wait("radios_constructed");
   while(self.radios_heard < level.radios.size) {
-    scripts\engine\utility::waittill_any_timeout_1(10, "radio_heard");
+    scripts\engine\utility::waittill_any_timeout(10, "radio_heard");
   }
 
   thread scripts\cp\cp_vo::try_to_play_vo("song_quest_success", "disco_comment_vo");
@@ -83,7 +83,7 @@ play_hidden_song(var_0, var_1, var_2) {
     var_5 playLoopSound(var_1);
     var_5 thread scripts\cp\zombies\zombie_jukebox::earlyendon(var_5);
     var_8 = lookupsoundlength(var_1) / 1000;
-    level scripts\engine\utility::waittill_any_timeout_1(var_8, "skip_song");
+    level scripts\engine\utility::waittill_any_timeout(var_8, "skip_song");
     var_5 stoploopsound();
     var_5 delete();
   } else {
@@ -526,8 +526,8 @@ display_cipher_to_player(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(level.time_cheater)) {
-    var_0A = "oyousthoughtnyouncouldnmaniphulateatimetandkgetamyjtreausureiwellrguessdwhatinowiyoullcneverigetoitsyouuareopermlanentlyabannednfromneverdreceiivingtmyifortunedtheredisanorwaydtodgetaitdnowgyoutcheatert";
-    var_0 = build_treasure_cipher_word(undefined, var_0A);
+    var_10 = "oyousthoughtnyouncouldnmaniphulateatimetandkgetamyjtreausureiwellrguessdwhatinowiyoullcneverigetoitsyouuareopermlanentlyabannednfromneverdreceiivingtmyifortunedtheredisanorwaydtodgetaitdnowgyoutcheatert";
+    var_0 = build_treasure_cipher_word(undefined, var_10);
     play_cipher_fx(var_0, var_4);
     return;
   }
@@ -670,52 +670,52 @@ get_actual_time_from_civil(var_0, var_1, var_2) {
     var_8 = var_5 / 4;
     var_9 = var_8 - var_7;
     if(var_9 >= 0.75) {
-      var_0A = 1;
+      var_10 = 1;
     } else {
-      var_0A = 0;
+      var_10 = 0;
     }
   } else {
-    var_0A = 0;
+    var_10 = 0;
   }
 
   if(var_3 != 0) {
-    var_0B = floor(var_3 / 86400);
-    var_3 = var_3 - var_0B * 86400;
+    var_11 = floor(var_3 / 86400);
+    var_3 = var_3 - var_11 * 86400;
   } else {
-    var_0B = 0;
+    var_11 = 0;
   }
 
   if(var_3 != 0) {
-    var_0C = floor(var_3 / 3600);
-    var_3 = var_3 - var_0C * 3600;
+    var_12 = floor(var_3 / 3600);
+    var_3 = var_3 - var_12 * 3600;
   } else {
-    var_0C = 0;
+    var_12 = 0;
   }
 
   if(var_3 != 0) {
-    var_0D = floor(var_3 / 60);
-    var_3 = var_3 - var_0D * 60;
+    var_13 = floor(var_3 / 60);
+    var_3 = var_3 - var_13 * 60;
   } else {
-    var_0D = 0;
+    var_13 = 0;
   }
 
-  var_0E = determine_correct_month(var_0B + 1);
-  var_0E["year"] = var_4;
-  var_0E["hours"] = var_0C;
-  var_0E["minutes"] = var_0D;
-  var_0E["seconds"] = var_3;
+  var_14 = determine_correct_month(var_11 + 1);
+  var_14["year"] = var_4;
+  var_14["hours"] = var_12;
+  var_14["minutes"] = var_13;
+  var_14["seconds"] = var_3;
   if(isDefined(var_2)) {
-    return var_0E;
+    return var_14;
   }
 
   if(isDefined(level.isdaylightsavings)) {
-    level notify("time_check", var_4, var_0E["month"], var_0E["days"], var_0C, var_0D, var_3);
-    return var_0E;
+    level notify("time_check", var_4, var_14["month"], var_14["days"], var_12, var_13, var_3);
+    return var_14;
   }
 
-  var_0E = is_daylight_savings(var_0E, var_0, var_1);
-  level notify("time_check", var_4, var_0E["month"], var_0E["days"], var_0C, var_0D, var_3);
-  return var_0E;
+  var_14 = is_daylight_savings(var_14, var_0, var_1);
+  level notify("time_check", var_4, var_14["month"], var_14["days"], var_12, var_13, var_3);
+  return var_14;
 }
 
 is_daylight_savings(var_0, var_1, var_2) {

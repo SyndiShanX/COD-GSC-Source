@@ -18,11 +18,11 @@ func_9DA0(var_0) {
     return 0;
   }
 
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return 0;
   }
 
-  if(isDefined(self.isnodeoccupied.dontmelee)) {
+  if(isDefined(self.enemy.dontmelee)) {
     return 0;
   }
 
@@ -73,7 +73,7 @@ func_FFDD(var_0) {
     return level.failure;
   }
 
-  if(![[self.fnismeleevalid]](self.isnodeoccupied, 0)) {
+  if(![[self.fnismeleevalid]](self.enemy, 0)) {
     func_487B();
     return level.failure;
   }
@@ -85,7 +85,7 @@ func_4881(var_0) {
   self.bt.instancedata[var_0] = spawnStruct();
   self.bt.instancedata[var_0].var_3E30 = gettime() + 100;
   self.bt.instancedata[var_0].timeout = gettime() + 4000;
-  self.bt.instancedata[var_0].var_6572 = self.isnodeoccupied.origin;
+  self.bt.instancedata[var_0].var_6572 = self.enemy.origin;
   self.melee.var_2AC7 = 1;
   self.melee.var_2AC6 = 1;
   self.var_B651 = 1;

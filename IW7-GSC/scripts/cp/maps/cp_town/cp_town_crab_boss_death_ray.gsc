@@ -366,19 +366,19 @@ damage_monitor(var_0) {
   var_0.health = 9999999;
   var_0 setCanDamage(1);
   for(;;) {
-    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A);
+    var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     var_0.health = 9999999;
     if(isplayer(var_2)) {
       var_2 scripts\cp\cp_damage::updatedamagefeedback("pink_arcane_cp");
-      var_0B = 1;
-      if(isDefined(var_0A) && issubstr(var_0A, "iw7_lockon_zm")) {
+      var_11 = 1;
+      if(isDefined(var_10) && issubstr(var_10, "iw7_lockon_zm")) {
         level.crab_boss playSound("boss_crog_hit_gore");
         level.crab_boss playSound("boss_crog_pain");
-        var_0B = 4500;
+        var_11 = 4500;
         playFXOnTag(level._effect["death_ray_cannon_weak_spot_impact"], level.crab_boss.crab_boss_weak_spot, "tag_origin");
       }
 
-      level notify("crab_boss_weak_spot_hit", var_0B);
+      level notify("crab_boss_weak_spot_hit", var_11);
     }
   }
 }

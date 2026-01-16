@@ -233,7 +233,7 @@ func_A730(var_0, var_1, var_2, var_3) {
   self.flaresreservecount = var_0;
   self.flareslive = [];
   if(isDefined(var_2)) {
-    self.triggerportableradarping setclientomnvar(var_2, var_0);
+    self.owner setclientomnvar(var_2, var_0);
   }
 
   thread func_A72F(var_1, var_2);
@@ -246,17 +246,17 @@ func_A72F(var_0, var_1) {
   self endon("crashing");
   self endon("leaving");
   self endon("helicopter_done");
-  if(!isai(self.triggerportableradarping)) {
-    self.triggerportableradarping notifyonplayercommand("manual_flare_popped", var_0);
+  if(!isai(self.owner)) {
+    self.owner notifyonplayercommand("manual_flare_popped", var_0);
   }
 
   while(flares_getnumleft(self)) {
-    self.triggerportableradarping waittill("manual_flare_popped");
+    self.owner waittill("manual_flare_popped");
     var_2 = flares_getflarereserve(self);
-    if(isDefined(var_2) && isDefined(self.triggerportableradarping) && !isai(self.triggerportableradarping)) {
-      self.triggerportableradarping playlocalsound("veh_helo_flares_plr");
+    if(isDefined(var_2) && isDefined(self.owner) && !isai(self.owner)) {
+      self.owner playlocalsound("veh_helo_flares_plr");
       if(isDefined(var_1)) {
-        self.triggerportableradarping setclientomnvar(var_1, flares_getnumleft(self));
+        self.owner setclientomnvar(var_1, flares_getnumleft(self));
       }
     }
   }
@@ -274,8 +274,8 @@ func_A72D(var_0) {
       continue;
     }
 
-    self.triggerportableradarping playlocalsound("missile_incoming");
-    self.triggerportableradarping thread ks_watch_death_stop_sound(self, "missile_incoming");
+    self.owner playlocalsound("missile_incoming");
+    self.owner thread ks_watch_death_stop_sound(self, "missile_incoming");
     if(isDefined(var_0)) {
       var_2 = vectornormalize(var_1[0].origin - self.origin);
       var_3 = vectornormalize(anglestoright(self.angles));
@@ -287,7 +287,7 @@ func_A72D(var_0) {
         var_5 = 3;
       }
 
-      self.triggerportableradarping setclientomnvar(var_0, var_5);
+      self.owner setclientomnvar(var_0, var_5);
     }
 
     foreach(var_7 in var_1) {
@@ -312,7 +312,7 @@ func_A72E(var_0) {
       if(isDefined(var_2)) {
         var_0 missile_settargetent(var_2);
         var_0 notify("missile_pairedWithFlare");
-        self.triggerportableradarping stoplocalsound("missile_incoming");
+        self.owner stoplocalsound("missile_incoming");
         break;
       }
     }

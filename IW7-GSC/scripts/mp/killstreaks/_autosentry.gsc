@@ -9,7 +9,7 @@ init() {
   level.sentrytype["sam_turret"] = "sam_turret";
   level.sentrytype["super_trophy"] = "super_trophy";
   level.sentrytype["sentry_shock"] = "sentry_shock";
-  scripts\mp\killstreaks\_killstreaks::registerkillstreak("sentry_shock", ::tryuseshocksentry);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("sentry_shock", ::tryuseshocksentry);
   scripts\mp\killstreak_loot::func_DF07("sentry_shock", ["passive_extra_health", "passive_increased_duration"]);
   level.sentrysettings = [];
   level.sentrysettings["super_trophy"] = spawnStruct();
@@ -17,12 +17,12 @@ init() {
   level.sentrysettings["super_trophy"].maxhealth = 100;
   level.sentrysettings["super_trophy"].sentrymodeon = "sentry";
   level.sentrysettings["super_trophy"].sentrymodeoff = "sentry_offline";
-  level.sentrysettings["super_trophy"].var_39B = "sentry_laser_mp";
+  level.sentrysettings["super_trophy"].weaponinfo = "sentry_laser_mp";
   level.sentrysettings["super_trophy"].modelbase = "super_trophy_mp";
   level.sentrysettings["super_trophy"].modelgood = "super_trophy_mp_placement";
   level.sentrysettings["super_trophy"].modelbad = "super_trophy_mp_placement_fail";
   level.sentrysettings["super_trophy"].modeldestroyed = "super_trophy_mp";
-  level.sentrysettings["super_trophy"].pow = &"SENTRY_PICKUP";
+  level.sentrysettings["super_trophy"].hintstring = &"SENTRY_PICKUP";
   level.sentrysettings["super_trophy"].playerphysicstrace = 1;
   level.sentrysettings["super_trophy"].teamsplash = "used_super_trophy";
   level.sentrysettings["super_trophy"].shouldsplash = 0;
@@ -42,13 +42,13 @@ init() {
   level.sentrysettings["sentry_shock"].cooldowntime = 0.1;
   level.sentrysettings["sentry_shock"].fxtime = 0.3;
   level.sentrysettings["sentry_shock"].streakname = "sentry_shock";
-  level.sentrysettings["sentry_shock"].var_39B = "sentry_shock_mp";
+  level.sentrysettings["sentry_shock"].weaponinfo = "sentry_shock_mp";
   level.sentrysettings["sentry_shock"].physics_capsulecast = "ks_shock_sentry_mp";
   level.sentrysettings["sentry_shock"].modelbase = "shock_sentry_gun_wm";
   level.sentrysettings["sentry_shock"].modelgood = "shock_sentry_gun_wm_obj";
   level.sentrysettings["sentry_shock"].modelbad = "shock_sentry_gun_wm_obj_red";
   level.sentrysettings["sentry_shock"].modeldestroyed = "shock_sentry_gun_wm_destroyed";
-  level.sentrysettings["sentry_shock"].pow = &"SENTRY_PICKUP";
+  level.sentrysettings["sentry_shock"].hintstring = &"SENTRY_PICKUP";
   level.sentrysettings["sentry_shock"].playerphysicstrace = 1;
   level.sentrysettings["sentry_shock"].teamsplash = "used_shock_sentry";
   level.sentrysettings["sentry_shock"].destroyedsplash = "callout_destroyed_sentry_shock";
@@ -225,7 +225,7 @@ waitrestoreperks() {
 }
 
 createsentryforplayer(var_0, var_1, var_2, var_3) {
-  var_4 = level.sentrysettings[var_0].var_39B;
+  var_4 = level.sentrysettings[var_0].weaponinfo;
   if(scripts\mp\killstreaks\_utility::func_A69F(var_3, "passive_fast_sweep")) {
     var_4 = "sentry_shock_fast_mp";
   }
@@ -362,7 +362,7 @@ sentry_createbombsquadmodel(var_0) {
     var_1 = spawn("script_model", self.origin);
     var_1.angles = self.angles;
     var_1 hide();
-    var_1 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+    var_1 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
     var_1 setModel(level.sentrysettings[var_0].modelbombsquad);
     var_1 linkto(self);
     var_1 setcontents(0);
@@ -380,11 +380,11 @@ sentry_setteamheadicon() {
     return;
   }
 
-  if(!isDefined(self.triggerportableradarping)) {
+  if(!isDefined(self.owner)) {
     return;
   }
 
-  var_1 = self.triggerportableradarping;
+  var_1 = self.owner;
   var_2 = var_1.team;
   if(level.teambased && !scripts\mp\utility::istrue(self.var_115D1)) {
     scripts\mp\entityheadicons::setteamheadicon(var_2, var_0);
@@ -417,7 +417,7 @@ sentry_clearteamheadicon() {
 
 sentry_destroyongameend() {
   self endon("death");
-  level scripts\engine\utility::waittill_any_3("bro_shot_start", "game_ended");
+  level scripts\engine\utility::waittill_any("bro_shot_start", "game_ended");
   self notify("death");
 }
 
@@ -429,7 +429,7 @@ sentry_handledamage() {
   }
 
   var_1 = 0;
-  if(self.triggerportableradarping scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
+  if(self.owner scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
     var_2 = self.weapon_name;
     if(isDefined(var_2)) {
       switch (var_2) {
@@ -461,7 +461,7 @@ sentryhandledeathdamage(var_0, var_1, var_2, var_3) {
   var_4 = level.sentrysettings[self.sentrytype];
   if(var_4.iskillstreak) {
     if(isDefined(var_1) && var_1 == "concussion_grenade_mp") {
-      if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping, var_0))) {
+      if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.owner, var_0))) {
         var_0 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
       }
     }
@@ -483,18 +483,18 @@ sentryhandledeathdamage(var_0, var_1, var_2, var_3) {
 
   var_8 = undefined;
   var_9 = var_0;
-  if(isDefined(var_9) && isDefined(self.triggerportableradarping)) {
-    if(isDefined(var_0.triggerportableradarping) && isplayer(var_0.triggerportableradarping)) {
-      var_9 = var_0.triggerportableradarping;
+  if(isDefined(var_9) && isDefined(self.owner)) {
+    if(isDefined(var_0.owner) && isplayer(var_0.owner)) {
+      var_9 = var_0.owner;
     }
 
-    if(self.triggerportableradarping scripts\mp\utility::isenemy(var_9)) {
+    if(self.owner scripts\mp\utility::isenemy(var_9)) {
       var_8 = var_9;
     }
   }
 
   if(isDefined(var_8)) {
-    var_8 thread scripts\mp\events::supershutdown(self.triggerportableradarping);
+    var_8 thread scripts\mp\events::supershutdown(self.owner);
     var_8 notify("destroyed_equipment");
   }
 
@@ -540,8 +540,8 @@ disablesentry(var_0) {
 sentry_handledeath() {
   self endon("carried");
   self waittill("death");
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(self.triggerportableradarping.placedsentries[self.sentrytype], self);
+  if(isDefined(self.owner)) {
+    self.owner.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
   }
 
   if(!isDefined(self)) {
@@ -612,7 +612,7 @@ sentry_handledeath() {
     self.airlookatent delete();
   }
 
-  scripts\mp\utility::printgameaction("killstreak ended - shock_sentry", self.triggerportableradarping);
+  scripts\mp\utility::printgameaction("killstreak ended - shock_sentry", self.owner);
   self delete();
 }
 
@@ -629,7 +629,7 @@ sentry_handleuse(var_0) {
       self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
     }
 
-    var_1.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
+    var_1.placedsentries[self.sentrytype] = ::scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
     var_1 setcarryingsentry(self, 0, var_0);
   }
 }
@@ -737,7 +737,7 @@ turret_handleuse() {
         var_3.turret_overheat_bar scripts\mp\hud_util::destroyelem();
         var_3 restoreperks();
         var_3 restoreweapons();
-        self sethintstring(level.sentrysettings[self.sentrytype].pow);
+        self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
         self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
         sentry_setowner(self.originalowner);
         self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
@@ -790,16 +790,16 @@ sentry_handleownerdisconnect() {
   level endon("game_ended");
   self notify("sentry_handleOwner");
   self endon("sentry_handleOwner");
-  self.triggerportableradarping waittill("killstreak_disowned");
+  self.owner waittill("killstreak_disowned");
   self notify("death");
 }
 
 sentry_setowner(var_0) {
-  self.triggerportableradarping = var_0;
-  self setsentryowner(self.triggerportableradarping);
+  self.owner = var_0;
+  self setsentryowner(self.owner);
   self setturretminimapvisible(1, self.sentrytype);
   if(level.teambased) {
-    self.team = self.triggerportableradarping.team;
+    self.team = self.owner.team;
     self setturretteam(self.team);
   }
 
@@ -811,17 +811,17 @@ sentry_moving_platform_death(var_0) {
 }
 
 sentry_setplaced(var_0) {
-  if(isDefined(self.triggerportableradarping)) {
-    var_1 = self.triggerportableradarping.placedsentries[self.sentrytype].size;
-    self.triggerportableradarping.placedsentries[self.sentrytype][var_1] = self;
+  if(isDefined(self.owner)) {
+    var_1 = self.owner.placedsentries[self.sentrytype].size;
+    self.owner.placedsentries[self.sentrytype][var_1] = self;
     if(var_1 + 1 > 2) {
-      self.triggerportableradarping.placedsentries[self.sentrytype][0] notify("death");
+      self.owner.placedsentries[self.sentrytype][0] notify("death");
     }
 
-    self.triggerportableradarping allowweaponsforsentry(1);
-    self.triggerportableradarping scripts\engine\utility::allow_usability(1);
-    self.triggerportableradarping thread enablemeleeforsentry();
-    self.triggerportableradarping enableworldup(1);
+    self.owner allowweaponsforsentry(1);
+    self.owner scripts\engine\utility::allow_usability(1);
+    self.owner thread enablemeleeforsentry();
+    self.owner enableworldup(1);
   }
 
   var_2 = level.sentrysettings[self.sentrytype].modelbase;
@@ -881,9 +881,9 @@ sentry_setplaced(var_0) {
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
   self.firstplacement = undefined;
-  if(isDefined(self.triggerportableradarping)) {
-    self.triggerportableradarping.iscarrying = 0;
-    self.triggerportableradarping notify("new_sentry", self);
+  if(isDefined(self.owner)) {
+    self.owner.iscarrying = 0;
+    self.owner notify("new_sentry", self);
   }
 
   sentry_setactive(var_0);
@@ -998,7 +998,7 @@ sentry_oncarrierdeathoremp(var_0, var_1) {
   self endon("placed");
   self endon("death");
   var_0 endon("disconnect");
-  var_0 scripts\engine\utility::waittill_any_3("death", "apply_player_emp");
+  var_0 scripts\engine\utility::waittill_any("death", "apply_player_emp");
   if(self.canbeplaced && !scripts\mp\utility::istrue(var_1)) {
     sentry_setplaced(self.pickupenabled);
     return;
@@ -1017,7 +1017,7 @@ sentry_oncarrierdisconnect(var_0) {
 sentry_oncarrierchangedteam(var_0) {
   self endon("placed");
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any_3("joined_team", "joined_spectators");
+  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   self delete();
 }
 
@@ -1032,7 +1032,7 @@ sentry_setactive(var_0) {
   self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
   if(var_0) {
     self setcursorhint("HINT_NOICON");
-    self sethintstring(level.sentrysettings[self.sentrytype].pow);
+    self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
     self makeusable();
   }
 
@@ -1055,8 +1055,8 @@ sentry_setactive(var_0) {
         break;
 
       default:
-        scripts\mp\killstreaks\_utility::func_1843(self.sentrytype, "Killstreak_Ground", self.triggerportableradarping, 1, "carried");
-        if(var_2 == self.triggerportableradarping && var_0) {
+        scripts\mp\killstreaks\_utility::func_1843(self.sentrytype, "Killstreak_Ground", self.owner, 1, "carried");
+        if(var_2 == self.owner && var_0) {
           self enableplayeruse(var_2);
         } else {
           self disableplayeruse(var_2);
@@ -1072,7 +1072,7 @@ sentry_setactive(var_0) {
   }
 
   if(self.shouldsplash) {
-    level thread scripts\mp\utility::teamplayercardsplash(var_4, self.triggerportableradarping);
+    level thread scripts\mp\utility::teamplayercardsplash(var_4, self.owner);
     self.shouldsplash = 0;
   }
 
@@ -1149,9 +1149,9 @@ sentry_timeout() {
     }
   }
 
-  if(isDefined(self.triggerportableradarping)) {
+  if(isDefined(self.owner)) {
     if(isDefined(level.sentrysettings[self.sentrytype].votimeout)) {
-      self.triggerportableradarping scripts\mp\utility::playkillstreakdialogonplayer(level.sentrysettings[self.sentrytype].votimeout, undefined, undefined, self.triggerportableradarping.origin);
+      self.owner scripts\mp\utility::playkillstreakdialogonplayer(level.sentrysettings[self.sentrytype].votimeout, undefined, undefined, self.owner.origin);
     }
   }
 
@@ -1184,7 +1184,7 @@ sentry_laser_burstfirestart() {
   self endon("stop_shooting");
   level endon("game_ended");
   sentry_spinup();
-  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
+  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
   var_1 = level.sentrysettings[self.sentrytype].burstmin;
   var_2 = level.sentrysettings[self.sentrytype].burstmax;
   if(isDefined(self.supportturret) && self.supportturret) {
@@ -1214,7 +1214,7 @@ sentry_burstfirestart() {
   self endon("stop_shooting");
   level endon("game_ended");
   sentry_spinup();
-  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
+  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
   var_1 = level.sentrysettings[self.sentrytype].burstmin;
   var_2 = level.sentrysettings[self.sentrytype].burstmax;
   var_3 = level.sentrysettings[self.sentrytype].pausemin;
@@ -1242,7 +1242,7 @@ turret_shotmonitor(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   var_0 endon("player_dismount");
-  var_1 = weaponfiretime(level.sentrysettings[var_0.sentrytype].var_39B);
+  var_1 = weaponfiretime(level.sentrysettings[var_0.sentrytype].weaponinfo);
   for(;;) {
     var_0 waittill("turret_fire");
     var_0.heatlevel = var_0.heatlevel + var_1;
@@ -1252,7 +1252,7 @@ turret_shotmonitor(var_0) {
 
 sentry_heatmonitor() {
   self endon("death");
-  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
+  var_0 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
   var_1 = 0;
   var_2 = 0;
   var_3 = level.sentrysettings[self.sentrytype].overheattime;
@@ -1410,23 +1410,23 @@ sam_acquiretarget() {
         }
       }
 
-      foreach(var_0C in level.littlebirds) {
-        if(isDefined(var_0C.team) && var_0C.team == self.team) {
+      foreach(var_12 in level.littlebirds) {
+        if(isDefined(var_12.team) && var_12.team == self.team) {
           continue;
         }
 
-        if(sighttracepassed(var_0, var_0C.origin, 0, self)) {
-          return var_0C;
+        if(sighttracepassed(var_0, var_12.origin, 0, self)) {
+          return var_12;
         }
       }
 
-      foreach(var_0F in level.helis) {
-        if(isDefined(var_0F.team) && var_0F.team == self.team) {
+      foreach(var_15 in level.helis) {
+        if(isDefined(var_15.team) && var_15.team == self.team) {
           continue;
         }
 
-        if(sighttracepassed(var_0, var_0F.origin, 0, self)) {
-          return var_0F;
+        if(sighttracepassed(var_0, var_15.origin, 0, self)) {
+          return var_15;
         }
       }
 
@@ -1449,7 +1449,7 @@ sam_acquiretarget() {
           continue;
         }
 
-        if(isDefined(var_9.triggerportableradarping) && isDefined(self.triggerportableradarping) && var_9.triggerportableradarping == self.triggerportableradarping) {
+        if(isDefined(var_9.owner) && isDefined(self.owner) && var_9.owner == self.owner) {
           continue;
         }
 
@@ -1458,23 +1458,23 @@ sam_acquiretarget() {
         }
       }
 
-      foreach(var_0C in level.littlebirds) {
-        if(isDefined(var_0C.triggerportableradarping) && isDefined(self.triggerportableradarping) && var_0C.triggerportableradarping == self.triggerportableradarping) {
+      foreach(var_12 in level.littlebirds) {
+        if(isDefined(var_12.owner) && isDefined(self.owner) && var_12.owner == self.owner) {
           continue;
         }
 
-        if(sighttracepassed(var_0, var_0C.origin, 0, self)) {
-          return var_0C;
+        if(sighttracepassed(var_0, var_12.origin, 0, self)) {
+          return var_12;
         }
       }
 
-      foreach(var_0F in level.helis) {
-        if(isDefined(var_0F.triggerportableradarping) && isDefined(self.triggerportableradarping) && var_0F.triggerportableradarping == self.triggerportableradarping) {
+      foreach(var_15 in level.helis) {
+        if(isDefined(var_15.owner) && isDefined(self.owner) && var_15.owner == self.owner) {
           continue;
         }
 
-        if(sighttracepassed(var_0, var_0F.origin, 0, self)) {
-          return var_0F;
+        if(sighttracepassed(var_0, var_15.origin, 0, self)) {
+          return var_15;
         }
       }
 
@@ -1483,7 +1483,7 @@ sam_acquiretarget() {
           continue;
         }
 
-        if(isDefined(var_9.triggerportableradarping) && isDefined(self.triggerportableradarping) && var_9.triggerportableradarping == self.triggerportableradarping) {
+        if(isDefined(var_9.owner) && isDefined(self.owner) && var_9.owner == self.owner) {
           continue;
         }
 
@@ -1497,7 +1497,7 @@ sam_acquiretarget() {
     return undefined;
   }
 
-  if(!sighttracepassed(var_0F, self.samtargetent.origin, 0, self)) {
+  if(!sighttracepassed(var_15, self.samtargetent.origin, 0, self)) {
     self cleartargetentity();
     return undefined;
   }
@@ -1553,13 +1553,13 @@ sam_fireontarget() {
       }
 
       self shootturret();
-      var_3 = scripts\mp\utility::_magicbullet("sam_projectile_mp", var_0[var_2], self.samtargetent.origin, self.triggerportableradarping);
+      var_3 = scripts\mp\utility::_magicbullet("sam_projectile_mp", var_0[var_2], self.samtargetent.origin, self.owner);
       var_3 missile_settargetent(self.samtargetent);
       var_3 missile_setflightmodedirect();
       var_3.samturret = self;
       var_3.sammissilegroup = var_1;
       self.sammissilegroups[var_1][var_2] = var_3;
-      level notify("sam_missile_fired", self.triggerportableradarping, var_3, self.samtargetent);
+      level notify("sam_missile_fired", self.owner, var_3, self.samtargetent);
       if(var_2 == 3) {
         break;
       }
@@ -1567,7 +1567,7 @@ sam_fireontarget() {
       wait(0.25);
     }
 
-    level notify("sam_fired", self.triggerportableradarping, self.sammissilegroups[var_1], self.samtargetent);
+    level notify("sam_fired", self.owner, self.sammissilegroups[var_1], self.samtargetent);
     wait(3);
   }
 }
@@ -1692,12 +1692,12 @@ scrambletarget() {
 
 setscrambled() {
   var_0 = self.scrambletargetent;
-  var_0 notify("scramble_fired", self.triggerportableradarping);
+  var_0 notify("scramble_fired", self.owner);
   var_0 endon("scramble_fired");
   var_0 endon("death");
   var_0 thread scripts\mp\killstreaks\_helicopter::heli_targeting();
   var_0.scrambled = 1;
-  var_0.secondowner = self.triggerportableradarping;
+  var_0.secondowner = self.owner;
   var_0 notify("findNewTarget");
   wait(30);
   if(isDefined(var_0)) {
@@ -1768,7 +1768,7 @@ sentryshocktargets() {
   self.airlookatent = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
   self.airlookatent linkto(self, "tag_flash");
   for(;;) {
-    var_0 = scripts\engine\utility::waittill_any_timeout_1(1, "turret_on_target");
+    var_0 = scripts\engine\utility::waittill_any_timeout(1, "turret_on_target");
     if(var_0 == "timeout") {
       if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo, "passive_sam_turret")) {
         self.sentryshocksamtarget = thread searchforshocksentryairtarget();
@@ -1792,14 +1792,14 @@ sentryshocktargets() {
 searchforshocksentryairtarget() {
   if(isDefined(level.uavmodels)) {
     if(level.teambased) {
-      foreach(var_1 in level.uavmodels[scripts\mp\utility::getotherteam(self.triggerportableradarping.team)]) {
+      foreach(var_1 in level.uavmodels[scripts\mp\utility::getotherteam(self.owner.team)]) {
         if(targetvisibleinfront(var_1)) {
           return var_1;
         }
       }
     } else {
       foreach(var_1 in level.uavmodels) {
-        if(var_1.triggerportableradarping == self.triggerportableradarping) {
+        if(var_1.owner == self.owner) {
           continue;
         }
 
@@ -1816,11 +1816,11 @@ searchforshocksentryairtarget() {
         continue;
       }
 
-      if(level.teambased && var_6.team == self.triggerportableradarping.team) {
+      if(level.teambased && var_6.team == self.owner.team) {
         continue;
       }
 
-      if(!level.teambased && var_6.triggerportableradarping == self.triggerportableradarping) {
+      if(!level.teambased && var_6.owner == self.owner) {
         continue;
       }
 
@@ -1836,11 +1836,11 @@ searchforshocksentryairtarget() {
         continue;
       }
 
-      if(level.teambased && var_9.team == self.triggerportableradarping.team) {
+      if(level.teambased && var_9.team == self.owner.team) {
         continue;
       }
 
-      if(!level.teambased && var_9.triggerportableradarping == self.triggerportableradarping) {
+      if(!level.teambased && var_9.owner == self.owner) {
         continue;
       }
 
@@ -1851,45 +1851,45 @@ searchforshocksentryairtarget() {
   }
 
   if(isDefined(level.var_DA61)) {
-    foreach(var_0C in level.var_DA61) {
-      if(var_0C.streakname != "thor") {
+    foreach(var_12 in level.var_DA61) {
+      if(var_12.streakname != "thor") {
         continue;
       }
 
-      if(isDefined(var_0C.team)) {
-        if(level.teambased && var_0C.team == self.triggerportableradarping.team) {
+      if(isDefined(var_12.team)) {
+        if(level.teambased && var_12.team == self.owner.team) {
           continue;
         }
       }
 
-      if(!level.teambased && var_0C.triggerportableradarping == self.triggerportableradarping) {
+      if(!level.teambased && var_12.owner == self.owner) {
         continue;
       }
 
-      if(targetvisibleinfront(var_0C)) {
-        return var_0C;
+      if(targetvisibleinfront(var_12)) {
+        return var_12;
       }
     }
   }
 
   if(isDefined(level.var_105EA)) {
-    foreach(var_0C in level.var_105EA) {
-      if(var_0C.streakname != "minijackal") {
+    foreach(var_12 in level.var_105EA) {
+      if(var_12.streakname != "minijackal") {
         continue;
       }
 
-      if(isDefined(var_0C.team)) {
-        if(level.teambased && var_0C.team == self.triggerportableradarping.team) {
+      if(isDefined(var_12.team)) {
+        if(level.teambased && var_12.team == self.owner.team) {
           continue;
         }
       }
 
-      if(!level.teambased && var_0C.triggerportableradarping == self.triggerportableradarping) {
+      if(!level.teambased && var_12.owner == self.owner) {
         continue;
       }
 
-      if(targetvisibleinfront(var_0C)) {
-        return var_0C;
+      if(targetvisibleinfront(var_12)) {
+        return var_12;
       }
     }
   }
@@ -1905,7 +1905,7 @@ targetvisibleinfront(var_0) {
   var_3 = var_0.origin;
   var_4 = vectornormalize(var_3 - var_2);
   var_5 = anglesToForward(self.angles);
-  var_6 = [self, self.triggerportableradarping, var_0];
+  var_6 = [self, self.owner, var_0];
   var_7 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
   if(scripts\common\trace::ray_trace_passed(var_2, var_3, var_6, var_7) && vectordot(var_5, var_4) > 0.25 && distance2dsquared(var_2, var_3) > 10000) {
     var_1 = 1;
@@ -1933,13 +1933,13 @@ shootshocksentrysamtarget(var_0, var_1) {
   var_3 = 1;
   while(isDefined(var_0) && targetvisibleinfront(var_0)) {
     var_4 = self gettagorigin("tag_flash");
-    var_5 = scripts\mp\utility::_magicbullet("sentry_shock_missile_mp", var_4, var_0.origin, self.triggerportableradarping);
+    var_5 = scripts\mp\utility::_magicbullet("sentry_shock_missile_mp", var_4, var_0.origin, self.owner);
     var_5 missile_settargetent(var_0);
     var_5 missile_setflightmodedirect();
     var_5.killcament = self.killcament;
     var_5.streakinfo = self.streakinfo;
     self setscriptablepartstate("muzzle", "fire" + var_3, 0);
-    level notify("laserGuidedMissiles_incoming", self.triggerportableradarping, var_5, var_0);
+    level notify("laserGuidedMissiles_incoming", self.owner, var_5, var_0);
     var_3++;
     if(var_3 > 2) {
       var_3 = 1;
@@ -2014,7 +2014,7 @@ shocktarget(var_0) {
   self notify("start_firing");
   self setscriptablepartstate("coil", "active");
   level thread scripts\mp\battlechatter_mp::saytoself(var_0, "plr_killstreak_target");
-  var_1 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
+  var_1 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
   while(isDefined(var_0) && scripts\mp\utility::isreallyalive(var_0) && isDefined(self getturrettarget(1)) && self getturrettarget(1) == var_0 && !scripts\mp\utility::func_C7A0(self gettagorigin("tag_flash"), var_0 getEye())) {
     if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo, "passive_mini_explosives")) {
       thread missileburstfire(var_0);
@@ -2044,11 +2044,11 @@ missileburstfire(var_0) {
       return;
     }
 
-    if(!isDefined(self.triggerportableradarping)) {
+    if(!isDefined(self.owner)) {
       return;
     }
 
-    var_3 = scripts\mp\utility::_magicbullet("sentry_shock_grenade_mp", self gettagorigin("tag_flash"), var_0.origin, self.triggerportableradarping);
+    var_3 = scripts\mp\utility::_magicbullet("sentry_shock_grenade_mp", self gettagorigin("tag_flash"), var_0.origin, self.owner);
     if(scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_0)) {
       var_3 missile_settargetent(var_0, gettargetoffset(var_0));
       var_0 thread watchtarget(var_3);
@@ -2110,7 +2110,7 @@ marktargetlaser(var_0) {
   self endon("death");
   self laseron();
   self.laser_on = 1;
-  scripts\engine\utility::waittill_any_3("done_firing", "carried");
+  scripts\engine\utility::waittill_any("done_firing", "carried");
   self laseroff();
   self.laser_on = 0;
 }
@@ -2120,22 +2120,22 @@ watchshockdamage(var_0) {
   self endon("done_firing");
   var_1 = undefined;
   for(;;) {
-    self waittill("victim_damaged", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_0A, var_0B);
+    self waittill("victim_damaged", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     if(var_2 == var_0) {
-      var_0C = 100;
-      var_0D = scripts\mp\utility::getplayersinradiusview(var_8, var_0C, var_2.team, self.triggerportableradarping);
+      var_12 = 100;
+      var_13 = scripts\mp\utility::getplayersinradiusview(var_8, var_12, var_2.team, self.owner);
       playFX(scripts\engine\utility::getfx("sentry_shock_explosion"), var_8);
-      if(var_0D.size > 0) {
-        foreach(var_0F in var_0D) {
-          if(var_0F.player != var_2) {
-            var_0F.player dodamage(5, var_8, self.triggerportableradarping, self, var_6, var_7);
+      if(var_13.size > 0) {
+        foreach(var_15 in var_13) {
+          if(var_15.player != var_2) {
+            var_15.player dodamage(5, var_8, self.owner, self, var_6, var_7);
             var_10 = undefined;
             var_11 = undefined;
-            if(var_0F.visiblelocations.size > 1) {
-              var_11 = randomint(var_0F.visiblelocations.size);
-              var_10 = var_0F.visiblelocations[var_11];
+            if(var_15.visiblelocations.size > 1) {
+              var_11 = randomint(var_15.visiblelocations.size);
+              var_10 = var_15.visiblelocations[var_11];
             } else {
-              var_10 = var_0F.visiblelocations[0];
+              var_10 = var_15.visiblelocations[0];
             }
 
             playfxbetweenpoints(scripts\engine\utility::getfx("sentry_shock_arc"), var_8, vectortoangles(var_10 - var_8), var_10);
@@ -2160,19 +2160,19 @@ allowweaponsforsentry(var_0) {
 placehinton() {
   var_0 = self.sentrytype;
   if(var_0 == "super_trophy") {
-    self.triggerportableradarping forceusehinton(&"LUA_MENU_MP_PLACE_SUPER_TROPHY");
+    self.owner forceusehinton(&"LUA_MENU_MP_PLACE_SUPER_TROPHY");
     return;
   }
 
-  self.triggerportableradarping forceusehinton(&"SENTRY_PLACE");
+  self.owner forceusehinton(&"SENTRY_PLACE");
 }
 
 cannotplacehinton() {
   var_0 = self.sentrytype;
   if(var_0 == "super_trophy") {
-    self.triggerportableradarping forceusehinton(&"LUA_MENU_MP_CANNOT_PLACE_SUPER_TROPHY");
+    self.owner forceusehinton(&"LUA_MENU_MP_CANNOT_PLACE_SUPER_TROPHY");
     return;
   }
 
-  self.triggerportableradarping forceusehinton(&"SENTRY_CANNOT_PLACE");
+  self.owner forceusehinton(&"SENTRY_CANNOT_PLACE");
 }
