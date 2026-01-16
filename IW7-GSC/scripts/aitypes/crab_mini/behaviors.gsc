@@ -1,5 +1,5 @@
 /***************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\crab_mini\behaviors.gsc
 ***************************************************/
 
@@ -9,7 +9,7 @@ initbehaviors(var_0) {
   self.lastenemyengagetime = 0;
   self.myenemy = undefined;
   scripts\asm\asm_bb::bb_requestmovetype("sprint");
-  return level.success;
+  return anim.success;
 }
 
 setupbehaviorstates() {
@@ -19,8 +19,9 @@ setupbehaviorstates() {
 }
 
 pickbetterenemy(var_0, var_1) {
-  var_2 = self getpersstat(var_0);
-  var_3 = self getpersstat(var_1);
+  var_2 = self cansee(var_0);
+  var_3 = self cansee(var_1);
+
   if(var_2 != var_3) {
     if(var_2) {
       return var_0;
@@ -31,6 +32,7 @@ pickbetterenemy(var_0, var_1) {
 
   var_4 = distancesquared(self.origin, var_0.origin);
   var_5 = distancesquared(self.origin, var_1.origin);
+
   if(var_4 < var_5) {
     return var_0;
   }
@@ -43,7 +45,7 @@ shouldignoreenemy(var_0) {
     return 1;
   }
 
-  if(var_0.ignoreme || isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping.ignoreme) {
+  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme) {
     return 1;
   }
 
@@ -62,15 +64,14 @@ updateenemy() {
   }
 
   var_0 = undefined;
+
   foreach(var_2 in level.players) {
     if(shouldignoreenemy(var_2)) {
       continue;
     }
-
-    if(scripts\engine\utility::istrue(var_2.isfasttravelling)) {
+    if(scripts\engine\utility::is_true(var_2.isfasttravelling)) {
       continue;
     }
-
     if(!isDefined(var_0)) {
       var_0 = var_2;
       continue;
@@ -92,7 +93,7 @@ updateenemy() {
 
 updateeveryframe(var_0) {
   updateenemy();
-  return level.failure;
+  return anim.failure;
 }
 
 stuck_begin(var_0) {
@@ -104,10 +105,10 @@ stuck_begin(var_0) {
 
 stuck_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 stuck_end(var_0) {
@@ -124,21 +125,23 @@ stuck_stopbeingstuck(var_0, var_1) {
 
 facepoint(var_0, var_1) {
   var_2 = scripts\engine\utility::getyawtospot(var_1);
+
   if(abs(var_2) < 22.5) {
     return;
   }
-
   self.desiredyaw = var_2;
 }
 
 stuck_decideturn(var_0, var_1) {
   var_2 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
+
   if(!isDefined(var_2)) {
     return 0;
   }
 
   var_3 = distancesquared(self.origin, var_2.origin);
   var_4 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
+
   if(var_3 < var_4.min_dist_to_enemy_to_allow_turn_sq) {
     return 0;
   }
@@ -147,11 +150,12 @@ stuck_decideturn(var_0, var_1) {
     return 0;
   }
 
-  if(!navisstraightlinereachable(self.origin, var_2.origin, self)) {
+  if(!func_2AC(self.origin, var_2.origin, self)) {
     return 0;
   }
 
   var_5 = scripts\engine\utility::getyawtospot(var_2.origin);
+
   if(abs(var_5) < 45) {
     return 0;
   }
@@ -173,11 +177,12 @@ melee_begin(var_0) {
 
 melee_tick(var_0) {
   self clearpath();
+
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 melee_end(var_0) {
@@ -201,11 +206,12 @@ movingmelee_begin(var_0) {
 
 movingmelee_tick(var_0) {
   self clearpath();
+
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 movingmelee_end(var_0) {
@@ -234,27 +240,32 @@ getpredictedenemypos(var_0, var_1) {
 
 trymeleeattacks(var_0) {
   var_1 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
+
   if(!isDefined(var_1)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_2 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
+
   if(abs(var_1.origin[2] - self.origin[2]) > var_2.melee_max_z_diff) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_3 = var_1.origin;
-  if(isDefined(self.vehicle_getspawnerarray)) {
+
+  if(isDefined(self.pathgoalpos)) {
     var_3 = getpredictedenemypos(var_1, var_2);
   }
 
   var_4 = distancesquared(var_3, self.origin);
+
   if(var_4 < var_2.stand_melee_dist_sq) {
     scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "stand_melee");
     return 1;
   }
 
   var_5 = distancesquared(self.origin, var_1.origin);
+
   if(var_5 > var_2.non_predicted_move_melee_dist_sq) {
     if(var_4 > var_2.move_melee_dist_sq) {
       return 0;
@@ -264,7 +275,8 @@ trymeleeattacks(var_0) {
   if(var_5 > var_2.check_reachable_dist_sq) {
     var_6 = self func_84AC();
     var_7 = getclosestpointonnavmesh(var_1.origin, self);
-    if(!navisstraightlinereachable(var_6, var_7, self)) {
+
+    if(!func_2AC(var_6, var_7, self)) {
       return 0;
     }
   }
@@ -275,19 +287,22 @@ trymeleeattacks(var_0) {
 
 trymeleeattacks_old(var_0, var_1) {
   var_2 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
+
   if(!isDefined(var_1)) {
     var_1 = distancesquared(self.origin, var_2.origin);
   }
 
   var_3 = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
+
   if(var_1 > var_3.move_melee_dist_sq) {
     return 0;
   }
 
-  var_4 = var_2.origin - self.origin * (1, 1, 0);
+  var_4 = (var_2.origin - self.origin) * (1, 1, 0);
   var_5 = anglesToForward(self.angles);
   var_6 = vectornormalize(var_4);
   var_7 = vectordot(var_5, var_6);
+
   if(var_7 < var_3.stand_melee_attack_dot) {
     return 0;
   }
@@ -303,17 +318,19 @@ trymeleeattacks_old(var_0, var_1) {
 
 decideaction(var_0) {
   var_1 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
+
   if(!isDefined(var_1)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_2 = gettime();
+
   if(trymeleeattacks(var_0)) {
     self.lastenemyengagetime = var_2;
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 followenemy_begin(var_0) {
@@ -322,17 +339,19 @@ followenemy_begin(var_0) {
 
 followenemy_tick(var_0) {
   var_1 = scripts\mp\agents\crab_mini\crab_mini_agent::getenemy();
+
   if(!isDefined(var_1)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_2 = getclosestpointonnavmesh(var_1.origin, self);
-  self ghostskulls_complete_status(var_2);
-  if(!self getpersstat(var_1)) {
-    return level.running;
+  self scragentsetgoalpos(var_2);
+
+  if(!self cansee(var_1)) {
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 followenemy_end(var_0) {

@@ -1,5 +1,5 @@
 /************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\elvira\behaviors.gsc
 ************************************************/
 
@@ -14,7 +14,7 @@ init(var_0) {
   self.myenemystarttime = 0;
   self.last_health = self.health;
   self.return_home_time = gettime() + var_1.lifespan;
-  return level.success;
+  return anim.success;
 }
 
 setupbtstates() {
@@ -32,7 +32,8 @@ setupbtstates() {
 }
 
 aimattarget() {
-  self.doentitiessharehierarchy = undefined;
+  self.looktarget = undefined;
+
   if(!isDefined(self.fncustomtargetingfunc) || !isDefined(self.nexttargetchangetime) || gettime() > self.nexttargetchangetime) {
     self.fncustomtargetingfunc = scripts\mp\agents\elvira\elvira_agent::picktargetingfunction();
     self.nexttargetchangetime = gettime() + randomintrange(1500, 2500);
@@ -40,30 +41,32 @@ aimattarget() {
 
   if(isDefined(self.fncustomtargetingfunc)) {
     var_0 = self[[self.fncustomtargetingfunc]]();
+
     if(!self canshoot(var_0)) {
       var_0 = scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos();
     }
-  } else {
+  } else
     var_0 = scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos();
-  }
 
-  self.setplayerignoreradiusdamage = var_0;
+  self.lookposition = var_0;
 }
 
 shootattarget() {
   var_0 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
   if(!isDefined(var_0)) {
     return 0;
   }
 
   var_1 = self.bt.shootparams;
   var_1.objective = "normal";
-  self.doentitiessharehierarchy = undefined;
-  var_1.pos = self.setplayerignoreradiusdamage;
+  self.looktarget = undefined;
+  var_1.pos = self.lookposition;
   var_1.ent = undefined;
   scripts\asm\asm_bb::bb_setshootparams(var_1, undefined);
+
   if(scripts\aitypes\combat::isaimedataimtarget()) {
-    if(!scripts\engine\utility::istrue(self.bt.m_bfiring)) {
+    if(!scripts\engine\utility::is_true(self.bt.m_bfiring)) {
       scripts\aitypes\combat::resetmisstime_code();
       scripts\aitypes\combat::chooseshootstyle(var_1);
       scripts\aitypes\combat::choosenumshotsandbursts(var_1);
@@ -71,9 +74,8 @@ shootattarget() {
 
     var_1.objective = "normal";
     self.bt.m_bfiring = 1;
-  } else {
+  } else
     self.bt.m_bfiring = 0;
-  }
 
   if(!isDefined(var_1.pos) && !isDefined(var_1.ent)) {
     return 0;
@@ -93,12 +95,13 @@ updateenemy() {
 }
 
 checkforearlyteleport(var_0) {
-  if(!isDefined(self.vehicle_getspawnerarray)) {
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
   }
 
   var_1 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
   var_2 = self pathdisttogoal();
+
   if(var_2 > var_1.max_teleport_lookahead_dist) {
     var_2 = var_1.max_teleport_lookahead_dist;
   }
@@ -108,20 +111,23 @@ checkforearlyteleport(var_0) {
   }
 
   var_3 = self func_84F9(var_2);
+
   if(!isDefined(var_3)) {
     return 0;
   }
 
   var_4 = var_3["node"];
   var_5 = var_3["position"];
-  var_6 = var_4.opcode::OP_ScriptMethodCallPointer;
+  var_6 = var_4.animscript;
+
   if(!isDefined(var_6)) {
     return 0;
   }
 
   var_7 = self.asmname;
-  var_8 = level.asm[var_7];
+  var_8 = anim.asm[var_7];
   var_9 = var_8.states[var_6];
+
   if(!isDefined(var_9)) {
     var_6 = "traverse_external";
   }
@@ -137,45 +143,47 @@ checkforearlyteleport(var_0) {
 
 updateeveryframe(var_0) {
   var_1 = updateenemy();
+
   if(isDefined(var_1)) {
     self.lastenemytime = gettime();
-    if(self getpersstat(var_1)) {
+
+    if(self cansee(var_1)) {
       self.lastenemysighttime = gettime();
-      self.setignoremegroup = var_1.origin;
+      self.lastenemysightpos = var_1.origin;
+
       if(!isDefined(self.enemyreacquiredtime)) {
         self.enemyreacquiredtime = self.lastenemysighttime;
       }
-    } else {
+    } else
       self.enemyreacquiredtime = undefined;
-    }
   } else {
     self.lastenemysighttime = 0;
-    self.setignoremegroup = undefined;
+    self.lastenemysightpos = undefined;
     self.enemyreacquiredtime = undefined;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 decidemovetype(var_0, var_1) {
   var_2 = gettime();
   var_3 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
+
   if(self.last_enemy_sight_time < 0 || var_2 - self.last_enemy_sight_time < var_3.maxtimetostrafewithoutlos) {
     scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
-    return;
-  }
+  } else {
+    if(var_1 < var_3.strafeifwithindist) {
+      scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
+      return;
+    }
 
-  if(var_1 < var_3.strafeifwithindist) {
+    if(!var_0) {
+      scripts\asm\asm_bb::bb_requestcombatmovetype_facemotion();
+      return;
+    }
+
     scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
-    return;
   }
-
-  if(!var_0) {
-    scripts\asm\asm_bb::bb_requestcombatmovetype_facemotion();
-    return;
-  }
-
-  scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
 }
 
 idle_begin(var_0) {
@@ -185,48 +193,51 @@ idle_begin(var_0) {
 
 idle_tick(var_0) {
   self clearpath();
+
   if(trycastspell(var_0)) {
-    return level.success;
+    return anim.success;
   }
 
   if(tryrevealanomaly(var_0)) {
-    return level.success;
+    return anim.success;
   }
 
   if(tryreturnhome(var_0)) {
-    return level.success;
+    return anim.success;
   }
 
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
   if(tryreviveplayer(var_0)) {
-    return level.success;
+    return anim.success;
   }
 
   if(tryreturntoclosestplayer(var_0)) {
-    return level.success;
+    return anim.success;
   }
 
   var_1 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
   if(!isDefined(var_1)) {
     var_2 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
+
     if(gettime() > var_2.idle_start_time + 250) {
-      if(self.bulletsinclip < weaponclipsize(self.var_394) * 0.75) {
+      if(self.bulletsinclip < weaponclipsize(self.weapon) * 0.75) {
         doreloadstate(var_0);
       }
     }
 
-    return level.running;
+    return anim.running;
   }
 
-  if(shouldtrymeleeattack() && trymeleeattacks(var_1)) {
-    return level.success;
+  if(shouldtrymeleeattack() && trymeleeattacks(var_0)) {
+    return anim.success;
   }
 
-  scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_1, "combat");
-  return level.running;
+  scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "combat");
+  return anim.running;
 }
 
 idle_end(var_0) {}
@@ -239,7 +250,7 @@ setgoaltoreviveplayer(var_0, var_1) {
   var_6 = vectortoangles(var_5);
   var_6 = (0, var_6[1], 0);
   var_7 = getclosestpointonnavmesh(var_4, self);
-  self ghostskulls_complete_status(var_7);
+  self scragentsetgoalpos(var_7);
 }
 
 reviveplayer_begin(var_0, var_1) {
@@ -254,21 +265,23 @@ reviveplayer_begin(var_0, var_1) {
 
 reviveplayer_tick(var_0) {
   var_1 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
   if(!isDefined(var_1) && gettime() - self.lastenemytime > 500) {
     checkforearlyteleport();
   }
 
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  if(!isDefined(self.reviveplayer) || !scripts\engine\utility::istrue(self.reviveplayer.inlaststand)) {
-    return level.success;
+  if(!isDefined(self.reviveplayer) || !scripts\engine\utility::is_true(self.reviveplayer.inlaststand)) {
+    return anim.success;
   }
 
   var_2 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
   setgoaltoreviveplayer(self.reviveplayer, var_2);
   var_3 = distance2dsquared(self.reviveplayer.origin, self.origin);
+
   if(var_3 < var_2.max_dist_to_revive_player_sq) {
     stopshootingattarget();
     scripts\asm\elvira\elvira_asm::setaction("revive_player");
@@ -276,9 +289,11 @@ reviveplayer_tick(var_0) {
     scripts\aitypes\dlc3\bt_state_api::btstate_transitionstate(var_0, "revive_player");
   } else {
     var_1 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
     if(isDefined(var_1)) {
       var_4 = 1;
-      var_5 = self getpersstat(var_1);
+      var_5 = self cansee(var_1);
+
       if(var_5) {
         var_4 = self canshoot(scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos());
       }
@@ -286,7 +301,7 @@ reviveplayer_tick(var_0) {
       if(var_4) {
         scripts\asm\asm_bb::bb_setisincombat(1);
         scripts\asm\asm_bb::bb_requestmovetype("combat");
-        self.bulletsinclip = weaponclipsize(self.var_394);
+        self.bulletsinclip = weaponclipsize(self.weapon);
         aimattarget();
         shootattarget();
       } else {
@@ -301,7 +316,7 @@ reviveplayer_tick(var_0) {
     }
   }
 
-  return level.running;
+  return anim.running;
 }
 
 reviveplayer_end(var_0, var_1) {
@@ -311,15 +326,15 @@ reviveplayer_end(var_0, var_1) {
   var_3 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
   self.disablearrivals = 0;
   self.forcenextrevivetime = undefined;
+
   if(isDefined(self.reviveplayer)) {
-    if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
+    if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
       self.nextrevivetime = gettime() + var_3.min_time_between_revivals_solo;
     } else {
       self.nextrevivetime = gettime() + var_3.min_time_between_revivals;
     }
-  } else {
+  } else
     self.nextrevivetime = gettime() + var_3.min_time_between_revivals;
-  }
 
   self.reviveplayer = undefined;
   scripts\aitypes\dlc3\bt_state_api::btstate_endstates(var_0);
@@ -332,13 +347,14 @@ reviveplayer_revivedone(var_0, var_1) {}
 findplayertorevive() {
   var_0 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
   var_1 = sortbydistance(level.players, self.origin);
+
   foreach(var_3 in var_1) {
     var_4 = distancesquared(self.origin, var_3.origin);
+
     if(var_4 > var_0.max_revive_search_dist_sq) {
       continue;
     }
-
-    if(scripts\engine\utility::istrue(var_3.inlaststand) && !scripts\engine\utility::istrue(var_3.is_being_revived) && !scripts\engine\utility::istrue(var_3.in_afterlife_arcade)) {
+    if(scripts\engine\utility::is_true(var_3.inlaststand) && !scripts\engine\utility::is_true(var_3.is_being_revived) && !scripts\engine\utility::is_true(var_3.in_afterlife_arcade)) {
       return var_3;
     }
   }
@@ -352,7 +368,7 @@ reviveplayer(var_0, var_1) {
 }
 
 tryreviveplayer(var_0) {
-  if(!scripts\engine\utility::istrue(1)) {
+  if(!scripts\engine\utility::is_true(1)) {
     return 0;
   }
 
@@ -363,6 +379,7 @@ tryreviveplayer(var_0) {
   }
 
   var_1 = findplayertorevive();
+
   if(!isDefined(var_1)) {
     return 0;
   }
@@ -381,11 +398,12 @@ melee_begin(var_0) {
 
 melee_tick(var_0) {
   self clearpath();
+
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 melee_end(var_0) {
@@ -406,19 +424,22 @@ rejoinplayer_begin(var_0) {
 
 rejoinplayer_tick(var_0) {
   var_1 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
   if(!isDefined(var_1) && gettime() - self.lastenemytime > 500) {
     checkforearlyteleport();
   }
 
   if(!isDefined(self.rejoinplayer)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_2 = gettime();
   var_3 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
+
   if(var_2 > var_3.nextclosestplayerchecktime) {
     var_3.nextclosestplayerchecktime = var_2 + 1000;
     var_4 = getclosestplayer();
+
     if(isDefined(var_4)) {
       if(var_4 != self.rejoinplayer) {
         self.rejoinplayer = var_4;
@@ -430,9 +451,11 @@ rejoinplayer_tick(var_0) {
   var_6 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
   var_7 = var_6.return_to_closest_player_dist_in_combat_sq;
   var_1 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
   if(isDefined(var_1)) {
     var_8 = 1;
-    var_9 = self getpersstat(var_1);
+    var_9 = self cansee(var_1);
+
     if(var_9) {
       var_8 = self canshoot(scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos());
     }
@@ -440,7 +463,7 @@ rejoinplayer_tick(var_0) {
     if(var_8) {
       scripts\asm\asm_bb::bb_setisincombat(1);
       scripts\asm\asm_bb::bb_requestmovetype("combat");
-      self.bulletsinclip = weaponclipsize(self.var_394);
+      self.bulletsinclip = weaponclipsize(self.weapon);
       aimattarget();
       shootattarget();
     } else {
@@ -457,12 +480,12 @@ rejoinplayer_tick(var_0) {
 
   if(var_5 < var_7) {
     self clearpath();
-    return level.success;
+    return anim.success;
   }
 
-  var_0A = getclosestpointonnavmesh(self.rejoinplayer.origin);
-  self ghostskulls_complete_status(var_0A);
-  return level.running;
+  var_10 = getclosestpointonnavmesh(self.rejoinplayer.origin);
+  self scragentsetgoalpos(var_10);
+  return anim.running;
 }
 
 rejoinplayer_end(var_0) {
@@ -480,6 +503,7 @@ returntoplayer(var_0, var_1) {
 
 getclosestplayer() {
   var_0 = sortbydistance(level.players, self.origin);
+
   if(var_0.size == 0) {
     return undefined;
   }
@@ -489,6 +513,7 @@ getclosestplayer() {
 
 tryreturntoclosestplayer(var_0) {
   var_1 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
+
   if(!isDefined(self.nextplayerleashchecktime)) {
     self.nextplayerleashchecktime = gettime() + var_1.check_for_closest_player_interval_ms;
   }
@@ -498,11 +523,13 @@ tryreturntoclosestplayer(var_0) {
   }
 
   var_2 = getclosestplayer();
+
   if(!isDefined(var_2)) {
     return 0;
   }
 
   var_3 = var_1.max_dist_from_closest_player_sq;
+
   if(isDefined(scripts\mp\agents\elvira\elvira_agent::getenemy())) {
     var_3 = var_1.max_dist_from_closest_player_in_combat_sq;
   }
@@ -548,25 +575,27 @@ acquire_begin(var_0, var_1) {
 
 acquire_tick(var_0) {
   var_1 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
   if(!isDefined(var_1)) {
     return 0;
   }
 
   var_2 = 1;
-  var_3 = self getpersstat(var_1);
+  var_3 = self cansee(var_1);
   var_4 = distance2d(self.origin, var_1.origin);
+
   if(var_3) {
     if(trymeleeattacks(var_0, var_4 * var_4)) {
       return 0;
     }
 
     var_2 = self canshoot(scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos());
-  } else {
+  } else
     var_2 = 0;
-  }
 
   var_5 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
   var_6 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
+
   if(var_2) {
     if(isDefined(var_5.targetacquiredtime)) {
       if(gettime() - var_5.targetacquiredtime > 500 || var_4 < var_6.desiredenemydistmin + 50) {
@@ -576,16 +605,15 @@ acquire_tick(var_0) {
         aimattarget();
         shootattarget();
       }
-    } else {
+    } else
       var_5.targetacquiredtime = gettime();
-    }
   } else {
     stopshootingattarget();
     var_5.targetacquiredtime = undefined;
   }
 
   var_7 = getclosestpointonnavmesh(var_1.origin);
-  self ghostskulls_complete_status(var_7);
+  self scragentsetgoalpos(var_7);
   return 1;
 }
 
@@ -601,8 +629,10 @@ backpedal_begin(var_0, var_1) {
 
 backpedal_tick(var_0) {
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
+
   if(gettime() > var_1.nextcalculatetime) {
     var_2 = self pathdisttogoal();
+
     if(var_2 <= 4) {
       return 0;
     }
@@ -610,9 +640,11 @@ backpedal_tick(var_0) {
 
   var_3 = scripts\mp\agents\elvira\elvira_agent::getenemy();
   var_4 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
+
   if(isDefined(var_3)) {
-    if(distance(self.origin, self.isnodeoccupied.origin) < var_4.backupdist * 1.2) {
+    if(distance(self.origin, self.enemy.origin) < var_4.backupdist * 1.2) {
       var_5 = getbackpedalspot();
+
       if(isDefined(var_5)) {
         var_1.backpedalspot = var_5;
         var_1.nextcalculatetime = gettime() + 50;
@@ -622,12 +654,13 @@ backpedal_tick(var_0) {
 
   aimattarget();
   shootattarget();
+
   if(!scripts\aitypes\combat::hasammoinclip()) {
     doreloadstate(var_0);
     return 1;
   }
 
-  self ghostskulls_complete_status(var_1.backpedalspot);
+  self scragentsetgoalpos(var_1.backpedalspot);
   scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
   return 1;
 }
@@ -640,12 +673,12 @@ backpedal_end(var_0, var_1) {
 }
 
 getbackpedalspot() {
-  if(!isDefined(self.isnodeoccupied)) {
+  if(!isDefined(self.enemy)) {
     return undefined;
   }
 
   var_0 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
-  var_1 = vectornormalize(self.origin - self.isnodeoccupied.origin);
+  var_1 = vectornormalize(self.origin - self.enemy.origin);
   var_2 = var_0.backupdist;
   var_3 = self.origin + var_1 * var_2;
   var_3 = getclosestpointonnavmesh(var_3, self);
@@ -653,6 +686,7 @@ getbackpedalspot() {
   var_4 = (var_4[0], var_4[1], 0);
   var_5 = vectornormalize(var_4);
   var_6 = vectordot(var_5, var_1);
+
   if(var_6 > 0) {
     return var_3;
   }
@@ -662,6 +696,7 @@ getbackpedalspot() {
 
 dobackpedal(var_0) {
   var_1 = getbackpedalspot();
+
   if(!isDefined(var_1)) {
     return 0;
   }
@@ -683,31 +718,34 @@ combat_begin(var_0) {
 
 combat_tick(var_0) {
   self endon("newaction");
+
   if(tryreviveplayer(var_0)) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(trycastspell(var_0)) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(tryreturntoclosestplayer(var_0)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_1 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
   var_2 = scripts\mp\agents\elvira\elvira_agent::getenemy();
+
   if(!isDefined(var_2)) {
-    return level.success;
+    return anim.success;
   }
 
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
   var_3 = 1;
-  var_4 = self getpersstat(self.isnodeoccupied);
-  var_5 = distance2d(self.origin, self.isnodeoccupied.origin);
+  var_4 = self cansee(self.enemy);
+  var_5 = distance2d(self.origin, self.enemy.origin);
+
   if(var_4) {
     var_3 = self canshoot(scripts\mp\agents\elvira\elvira_agent::getdefaultenemychestpos());
   } else {
@@ -716,29 +754,30 @@ combat_tick(var_0) {
 
   if(!var_3) {
     scripts\aitypes\dlc3\bt_state_api::btstate_transitionstate(var_0, "acquire");
-    return level.running;
+    return anim.running;
   }
 
   if(trymeleeattacks(var_0, var_5 * var_5)) {
-    return level.failure;
+    return anim.failure;
   }
 
   if(!scripts\aitypes\combat::hasammoinclip()) {
     doreloadstate(var_0);
-    return level.running;
+    return anim.running;
   }
 
   self.last_enemy_sight_time = gettime();
-  self.last_enemy_seen = self.isnodeoccupied;
+  self.last_enemy_seen = self.enemy;
+
   if(var_5 > var_1.desiredenemydistmax) {
-    if(self.bulletsinclip < weaponclipsize(self.var_394) * 0.4) {
+    if(self.bulletsinclip < weaponclipsize(self.weapon) * 0.4) {
       doreloadstate(var_0);
-      return level.running;
+      return anim.running;
     }
 
     decidemovetype(1, var_5);
-    self ghostskulls_complete_status(self.isnodeoccupied.origin);
-    return level.running;
+    self scragentsetgoalpos(self.enemy.origin);
+    return anim.running;
   }
 
   if(var_5 < var_1.backawayenemydist) {
@@ -749,7 +788,7 @@ combat_tick(var_0) {
 
   aimattarget();
   shootattarget();
-  return level.running;
+  return anim.running;
 }
 
 combat_end(var_0) {
@@ -761,9 +800,9 @@ combat_end(var_0) {
 }
 
 revealanomaly_begin(var_0) {
-  self ghostskulls_complete_status(self.reveal_anomaly_origin);
-  self.og_goalradius = self.objective_playermask_showto;
-  self ghostskulls_total_waves(108);
+  self scragentsetgoalpos(self.reveal_anomaly_origin);
+  self.og_goalradius = self.goalradius;
+  self scragentsetgoalradius(108);
   self.reveal_dialogue_spoken = undefined;
   self.started_reveal_dialogue = undefined;
   thread elvira_reveal_vo();
@@ -773,6 +812,7 @@ revealanomaly_begin(var_0) {
 
 elvira_reveal_vo() {
   self.started_reveal_dialogue = 1;
+
   if(!scripts\cp\cp_vo::is_vo_system_busy()) {
     scripts\cp\cp_vo::set_vo_system_busy(1);
     scripts\engine\utility::play_sound_in_space("el_pap_energy_pap_restore", level.elvira.origin, 0, level.elvira);
@@ -786,34 +826,35 @@ elvira_reveal_vo() {
 
 revealanomaly_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
-  if(isDefined(self.reveal_anomaly_origin) && !scripts\engine\utility::istrue(var_1.breveal_started)) {
-    if(distance2dsquared(self.reveal_anomaly_origin, self.origin) <= 16384 && scripts\engine\utility::istrue(self.reveal_dialogue_spoken)) {
+
+  if(isDefined(self.reveal_anomaly_origin) && !scripts\engine\utility::is_true(var_1.breveal_started)) {
+    if(distance2dsquared(self.reveal_anomaly_origin, self.origin) <= 16384 && scripts\engine\utility::is_true(self.reveal_dialogue_spoken)) {
       stopshootingattarget();
       scripts\asm\elvira\elvira_asm::setaction("cast_reveal_spell");
       scripts\aitypes\dlc3\bt_state_api::asm_wait_state_setup(var_0, "cast_reveal_spell", "cast_reveal_spell", ::revealanomaly_revealdone, undefined, undefined, 8000);
       scripts\aitypes\dlc3\bt_state_api::btstate_transitionstate(var_0, "cast_reveal_spell");
       var_1.breveal_started = 1;
-      return level.running;
+      return anim.running;
     } else {
-      if(distance2dsquared(self.reveal_anomaly_origin, self.origin) <= 16384 && !scripts\engine\utility::istrue(self.started_reveal_dialogue)) {
-        self ghostskulls_complete_status(self.origin);
+      if(distance2dsquared(self.reveal_anomaly_origin, self.origin) <= 16384 && !scripts\engine\utility::is_true(self.started_reveal_dialogue)) {
+        self scragentsetgoalpos(self.origin);
       } else {
-        self ghostskulls_complete_status(self.reveal_anomaly_origin);
+        self scragentsetgoalpos(self.reveal_anomaly_origin);
       }
 
-      return level.running;
+      return anim.running;
     }
   }
 
-  return level.success;
+  return anim.success;
 }
 
 revealanomaly_end(var_0) {
-  self ghostskulls_total_waves(self.og_goalradius);
+  self scragentsetgoalradius(self.og_goalradius);
   self.og_goalradius = undefined;
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
   var_1.breveal_started = undefined;
@@ -822,17 +863,19 @@ revealanomaly_end(var_0) {
 }
 
 tryrevealanomaly(var_0) {
-  if(scripts\engine\utility::istrue(level.anomaly_revealed)) {
+  if(scripts\engine\utility::is_true(level.anomaly_revealed)) {
     return 0;
   }
 
-  if(scripts\engine\utility::istrue(self.started_reveal_dialogue)) {
+  if(scripts\engine\utility::is_true(self.started_reveal_dialogue)) {
     return 0;
   }
 
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
-  if(isDefined(level.secretpapstructs) && level.secretpapstructs.size > 0 && !scripts\engine\utility::istrue(var_1.breveal_started)) {
+
+  if(isDefined(level.secretpapstructs) && level.secretpapstructs.size > 0 && !scripts\engine\utility::is_true(var_1.breveal_started)) {
     var_2 = sortbydistance(level.secretpapstructs, self.origin);
+
     if(distance2dsquared(self.origin, var_2[0].origin) < 65536) {
       self.reveal_anomaly_origin = var_2[0].origin;
       scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "reveal_anomaly");
@@ -840,6 +883,7 @@ tryrevealanomaly(var_0) {
     } else {
       var_3 = scripts\cp\utility::get_array_of_valid_players(1, self.origin);
       var_4 = scripts\engine\utility::getclosest(self.origin, var_3);
+
       if(isDefined(var_4)) {
         if(distancesquared(var_4.origin, var_2[0].origin) < 65536) {
           self.reveal_anomaly_origin = var_2[0].origin;
@@ -866,31 +910,27 @@ revealanomaly_revealdone(var_0, var_1) {
 elvirarevealdialogue() {
   if(scripts\cp\cp_music_and_dialog::can_play_dialogue_system()) {
     var_0 = scripts\engine\utility::random(level.players);
+
     if(isDefined(var_0.vo_prefix)) {
       switch (var_0.vo_prefix) {
         case "p1_":
           level thread scripts\cp\cp_vo::try_to_play_vo("sally_pap_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
           break;
-
         case "p2_":
           level thread scripts\cp\cp_vo::try_to_play_vo("pdex_pap_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
           break;
-
         case "p3_":
           level thread scripts\cp\cp_vo::try_to_play_vo("andre_pap_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
           break;
-
         case "p4_":
           level thread scripts\cp\cp_vo::try_to_play_vo("aj_pap_1", "rave_dialogue_vo", "highest", 666, 0, 0, 0, 100);
           break;
-
         default:
           break;
       }
     }
-  } else {
+  } else
     scripts\cp\cp_vo::try_to_play_vo_on_all_players("pap_quest_success", 0);
-  }
 
   foreach(var_2 in level.players) {
     var_2 thread scripts\cp\cp_vo::add_to_nag_vo("nag_find_pap", "town_comment_vo", 120, 120, 4, 1);
@@ -899,7 +939,8 @@ elvirarevealdialogue() {
 
 tryreturnhome(var_0) {
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
-  if(scripts\engine\utility::istrue(var_1.breturn_started)) {
+
+  if(scripts\engine\utility::is_true(var_1.breturn_started)) {
     return 0;
   }
 
@@ -915,21 +956,22 @@ returnhome_begin(var_0) {}
 
 returnhome_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
-  if(!scripts\engine\utility::istrue(var_1.breturn_started)) {
+
+  if(!scripts\engine\utility::is_true(var_1.breturn_started)) {
     stopshootingattarget();
     scripts\asm\elvira\elvira_asm::setaction("cast_return_spell");
     scripts\aitypes\dlc3\bt_state_api::asm_wait_state_setup(var_0, "cast_return_spell", "cast_return_spell", ::returnhome_done, undefined, undefined, 8000);
     scripts\aitypes\dlc3\bt_state_api::btstate_transitionstate(var_0, "cast_return_spell");
     var_1.breturn_started = 1;
     level.elvira_returned_to_couch = 1;
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 returnhome_end(var_0) {
@@ -947,7 +989,7 @@ returnhome_done(var_0, var_1) {
 return_elvira_to_couch() {
   playFX(level._effect["elvira_stand_smoke"], self.origin);
   playsoundatpos(self.origin, "town_elvira_vanish");
-  wait(0.1);
+  wait 0.1;
   self.nocorpse = 1;
   self.noragdoll = 1;
   var_0 = self.origin;
@@ -956,20 +998,22 @@ return_elvira_to_couch() {
   level.elvira_ai = undefined;
   level.elvira_available_again = gettime() + 300000;
   var_1 = scripts\engine\utility::random(["ammo_max", "instakill_30", "cash_2", "instakill_30", "cash_2", "instakill_30", "cash_2"]);
-  wait(2);
+  wait 2;
   scripts\cp\zombies\zombies_spawning::decrease_reserved_spawn_slots(1);
   level scripts\cp\loot::drop_loot(var_0, undefined, var_1);
-  wait(10);
+  wait 10;
+
   if(scripts\engine\utility::flag("spellbook_placed") && !scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("boss_fight_active")) {
     level thread elvira_spellbook_pages();
   }
 
-  wait(290);
+  wait 290;
   scripts\engine\utility::flag_clear("elvira_summoned");
   playFX(level._effect["elvira_couch_smoke"], level.elvira.origin);
   playsoundatpos(level.elvira.origin, "town_elvira_appear");
   level.elvira show();
   level thread scripts\cp\maps\cp_town\cp_town_elvira::elvira_idle_loop();
+
   foreach(var_3 in level.players) {
     if(isDefined(var_3.last_interaction_point) && isDefined(var_3.last_interaction_point.script_noteworthy == "elvira_talk")) {
       var_3 notify("stop_interaction_logic");
@@ -980,9 +1024,10 @@ return_elvira_to_couch() {
 }
 
 elvira_spellbook_pages() {
-  if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
+  if(!scripts\engine\utility::is_true(level.pause_nag_vo) && !scripts\engine\utility::is_true(level.vo_system_busy)) {
     scripts\cp\cp_vo::set_vo_system_busy(1);
-    if(!scripts\engine\utility::istrue(level.has_nagged_for_pages)) {
+
+    if(!scripts\engine\utility::is_true(level.has_nagged_for_pages)) {
       scripts\engine\utility::play_sound_in_space("el_nag_spellbook_pages", level.elvira.origin, 0, level.elvira);
       var_0 = scripts\cp\cp_vo::get_sound_length("el_nag_spellbook_pages");
       wait(var_0);
@@ -1003,20 +1048,21 @@ castspell_begin(var_0) {}
 
 castspell_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
-  if(!scripts\engine\utility::istrue(var_1.spellcast_started)) {
+
+  if(!scripts\engine\utility::is_true(var_1.spellcast_started)) {
     stopshootingattarget();
     scripts\asm\elvira\elvira_asm::setaction("cast_spell");
     scripts\aitypes\dlc3\bt_state_api::asm_wait_state_setup(var_0, "cast_spell", "cast_spell", ::castspell_castdone, undefined, undefined, 8000);
     scripts\aitypes\dlc3\bt_state_api::btstate_transitionstate(var_0, "cast_spell");
     var_1.spellcast_started = 1;
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 castspell_end(var_0) {
@@ -1033,22 +1079,22 @@ trycastspell(var_0) {
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
   var_2 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
   var_3 = 0;
+
   if(!isDefined(self.next_spellcast_time)) {
     self.next_spellcast_time = gettime() + var_2.init_spellcast_delay;
     return 0;
-  } else if(gettime() < self.next_spellcast_time) {
+  } else if(gettime() < self.next_spellcast_time)
     return 0;
-  }
 
-  if(isDefined(self.isnodeoccupied) && distancesquared(self.origin, self.isnodeoccupied.origin) < var_2.max_dist_for_spell_cast_sq) {
+  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < var_2.max_dist_for_spell_cast_sq) {
     var_4 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
     var_5 = 0;
+
     foreach(var_7 in var_4) {
       if(!sighttracepassed(self.origin + (0, 0, 40), var_7.origin + (0, 0, 40), 0, self)) {
         continue;
       }
-
-      if(distancesquared(var_7.origin, self.isnodeoccupied.origin) < var_2.max_enemy_spell_radius_sq) {
+      if(distancesquared(var_7.origin, self.enemy.origin) < var_2.max_enemy_spell_radius_sq) {
         var_5++;
       }
     }
@@ -1076,6 +1122,7 @@ shouldtrymeleeattack() {
 trymeleeattacks(var_0, var_1) {
   var_2 = scripts\mp\agents\elvira\elvira_agent::getenemy();
   var_3 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
+
   if(abs(var_2.origin[2] - self.origin[2]) > var_3.melee_max_z_diff) {
     return 0;
   }
@@ -1088,9 +1135,8 @@ trymeleeattacks(var_0, var_1) {
     if(var_1 > self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh) {
       return 0;
     }
-  } else if(var_1 > self.meleeradiusbasesq) {
+  } else if(var_1 > self.meleeradiusbasesq)
     return 0;
-  }
 
   scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "melee_attack");
   return 1;
@@ -1098,5 +1144,5 @@ trymeleeattacks(var_0, var_1) {
 
 decideaction(var_0) {
   scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, "idle");
-  return level.success;
+  return anim.success;
 }

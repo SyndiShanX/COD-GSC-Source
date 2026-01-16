@@ -1,5 +1,5 @@
 /*****************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\alien_rhino\behaviors.gsc
 *****************************************************/
 
@@ -9,7 +9,7 @@ initbehaviors(var_0) {
   self.lastenemyengagetime = 0;
   self.myenemy = undefined;
   scripts\asm\asm_bb::bb_requestmovetype("run");
-  return level.success;
+  return anim.success;
 }
 
 setupbehaviorstates() {
@@ -22,7 +22,7 @@ setupbehaviorstates() {
 
 updateeveryframe(var_0) {
   scripts\aitypes\dlc4\behavior_utils::updateenemy();
-  return level.failure;
+  return anim.failure;
 }
 
 charge_begin(var_0) {
@@ -37,20 +37,21 @@ charge_begin(var_0) {
 
 charge_tick(var_0) {
   if(!isDefined(self.curmeleetarget) || scripts\aitypes\dlc4\behavior_utils::shouldignoreenemy(self.curmeleetarget)) {
-    return level.failure;
+    return anim.failure;
   }
 
-  if(scripts\engine\utility::istrue(self.bchargeaborted)) {
-    return level.failure;
+  if(scripts\engine\utility::is_true(self.bchargeaborted)) {
+    return anim.failure;
   }
 
   var_1 = getclosestpointonnavmesh(self.curmeleetarget.origin);
-  self ghostskulls_complete_status(var_1);
+  self scragentsetgoalpos(var_1);
+
   if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 charge_end(var_0) {
@@ -84,7 +85,7 @@ charge_enddone(var_0, var_1) {
 }
 
 trycharge(var_0, var_1, var_2) {
-  if(!scripts\engine\utility::istrue(var_2)) {
+  if(!scripts\engine\utility::is_true(var_2)) {
     if(isDefined(self.nextchargeattacktesttime) && gettime() < self.nextchargeattacktesttime) {
       return 0;
     }
@@ -92,6 +93,7 @@ trycharge(var_0, var_1, var_2) {
 
   var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_4 = scripts\asm\dlc4\dlc4_asm::getenemy();
+
   if(!isDefined(var_4)) {
     return 0;
   }
@@ -116,11 +118,12 @@ trycharge(var_0, var_1, var_2) {
   var_7 = (var_7[0], var_7[1], 0);
   var_8 = vectornormalize((var_8[0], var_8[1], 0));
   var_9 = vectordot(var_7, var_8);
+
   if(var_9 < 0.707) {
     return 0;
   }
 
-  if(!navisstraightlinereachable(self.origin, var_6, self)) {
+  if(!func_2AC(self.origin, var_6, self)) {
     self.nextchargeattacktesttime = gettime() + 500;
     return 0;
   }
@@ -136,12 +139,14 @@ taunt(var_0) {
 
 trytaunt(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
+
   if(!isDefined(var_1)) {
     return 0;
   }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_3 = gettime();
+
   if(!isDefined(self.nexttaunttime)) {
     self.nexttaunttime = var_3 + var_2.initial_taunt_wait_time_ms;
     return 0;
@@ -152,6 +157,7 @@ trytaunt(var_0) {
   }
 
   var_4 = distancesquared(self.origin, var_1.origin);
+
   if(var_4 < var_2.taunt_min_dist_to_enemy_sq) {
     self.nexttaunttime = var_3 + 1000;
     return 0;
@@ -164,6 +170,7 @@ trytaunt(var_0) {
 
   self.nexttaunttime = var_3 + randomintrange(var_2.min_time_between_taunts_ms, var_2.max_time_between_taunts_ms);
   var_5 = randomint(var_2.taunt_chance);
+
   if(var_5 < var_2.taunt_chance) {
     taunt(var_0);
     return 1;
@@ -174,46 +181,49 @@ trytaunt(var_0) {
 
 decideaction(var_0) {
   if(isDefined(self.desiredaction)) {
-    return level.success;
+    return anim.success;
   }
 
   if(isDefined(self.nextaction)) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, self.nextaction);
     self.nextaction = undefined;
-    return level.success;
+    return anim.success;
   }
 
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
+
   if(!isDefined(var_1)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_2 = gettime();
-  if(self getpersstat(var_1)) {
+
+  if(self cansee(var_1)) {
     if(scripts\aitypes\dlc4\melee::trymeleeattacks(var_0)) {
       self.lastenemyengagetime = var_2;
-      return level.success;
+      return anim.success;
     }
 
     if(trycharge(var_0)) {
-      return level.success;
+      return anim.success;
     }
 
     if(trytaunt(var_0)) {
-      return level.success;
+      return anim.success;
     }
   } else {
     var_3 = scripts\asm\dlc4\dlc4_asm::gettunedata();
     var_4 = distancesquared(var_1.origin, self.origin);
+
     if(var_4 <= var_3.stand_melee_dist_sq) {
       if(scripts\aitypes\dlc4\melee::trymeleeattacks(var_0)) {
         self.lastenemyengagetime = var_2;
-        return level.success;
+        return anim.success;
       }
     }
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 followenemy_begin(var_0) {
@@ -222,27 +232,29 @@ followenemy_begin(var_0) {
 
 followenemy_tick(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
+
   if(!isDefined(var_1)) {
-    return level.failure;
+    return anim.failure;
   }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   var_3 = getclosestpointonnavmesh(var_1.origin, self);
   var_4 = distancesquared(var_3, self.origin);
+
   if(var_4 > var_2.stand_melee_dist_sq) {
-    self ghostskulls_complete_status(var_3);
-    if(!self getpersstat(var_1)) {
-      if(!isDefined(self.vehicle_getspawnerarray)) {
+    self scragentsetgoalpos(var_3);
+
+    if(!self cansee(var_1)) {
+      if(!isDefined(self.pathgoalpos)) {
         scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
       }
 
-      return level.running;
+      return anim.running;
     }
-  } else {
+  } else
     scripts\aitypes\dlc4\behavior_utils::facepoint(var_1.origin);
-  }
 
-  return level.success;
+  return anim.success;
 }
 
 followenemy_end(var_0) {

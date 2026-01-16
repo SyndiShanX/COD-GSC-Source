@@ -1,11 +1,12 @@
 /***************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4\behavior_utils.gsc
 ***************************************************/
 
 pickbetterenemy(var_0, var_1) {
-  var_2 = self getpersstat(var_0);
-  var_3 = self getpersstat(var_1);
+  var_2 = self cansee(var_0);
+  var_3 = self cansee(var_1);
+
   if(var_2 != var_3) {
     if(var_2) {
       return var_0;
@@ -16,6 +17,7 @@ pickbetterenemy(var_0, var_1) {
 
   var_4 = distancesquared(self.origin, var_0.origin);
   var_5 = distancesquared(self.origin, var_1.origin);
+
   if(var_4 < var_5) {
     return var_0;
   }
@@ -28,7 +30,7 @@ shouldignoreenemy(var_0) {
     return 1;
   }
 
-  if(var_0.ignoreme || isDefined(var_0.triggerportableradarping) && var_0.triggerportableradarping.ignoreme) {
+  if(var_0.ignoreme || isDefined(var_0.owner) && var_0.owner.ignoreme) {
     return 1;
   }
 
@@ -47,15 +49,14 @@ updateenemy() {
   }
 
   var_0 = undefined;
+
   foreach(var_2 in level.players) {
     if(shouldignoreenemy(var_2)) {
       continue;
     }
-
-    if(scripts\engine\utility::istrue(var_2.isfasttravelling)) {
+    if(scripts\engine\utility::is_true(var_2.isfasttravelling)) {
       continue;
     }
-
     if(!isDefined(var_0)) {
       var_0 = var_2;
       continue;
@@ -84,11 +85,12 @@ getpredictedenemypos(var_0, var_1) {
 
 facepoint(var_0) {
   var_1 = scripts\engine\utility::getyawtospot(var_0);
+
   if(abs(var_1) < 8) {
     var_2 = (self.angles[0], self.angles[1] + var_1, self.angles[2]);
-    self orientmode("face angle abs", var_2);
+    self scragentsetorientmode("face angle abs", var_2);
     return;
   }
 
-  self.desiredyaw = var_2;
+  self.desiredyaw = var_1;
 }

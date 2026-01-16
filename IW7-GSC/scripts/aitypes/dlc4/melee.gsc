@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/***********************************************
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4\melee.gsc
-*********************************************/
+***********************************************/
 
 setupstandmeleebtaction(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
@@ -47,11 +47,12 @@ melee_begin(var_0) {
 
 melee_tick(var_0) {
   self clearpath();
+
   if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 melee_end(var_0) {
@@ -73,11 +74,12 @@ movingmelee_begin(var_0) {
 
 movingmelee_tick(var_0) {
   self clearpath();
+
   if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 movingmelee_end(var_0) {
@@ -94,11 +96,13 @@ movingmelee_attackdone(var_0, var_1) {
 
 trymeleeattacks(var_0) {
   var_1 = scripts\asm\dlc4\dlc4_asm::getenemy();
+
   if(!isDefined(var_1)) {
     return 0;
   }
 
   var_2 = scripts\asm\dlc4\dlc4_asm::gettunedata();
+
   if(isDefined(self.var_A9B8) && gettime() - self.var_A9B8 < var_2.min_time_between_melee_attacks_ms) {
     return 0;
   }
@@ -108,11 +112,13 @@ trymeleeattacks(var_0) {
   }
 
   var_3 = var_1.origin;
-  if(isDefined(self.vehicle_getspawnerarray)) {
+
+  if(isDefined(self.pathgoalpos)) {
     var_3 = scripts\aitypes\dlc4\behavior_utils::getpredictedenemypos(var_1, var_2.avg_time_to_impact);
   }
 
   var_4 = distancesquared(var_3, self.origin);
+
   if(var_4 < var_2.stand_melee_dist_sq) {
     scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(var_0, "stand_melee");
     return 1;
@@ -120,6 +126,7 @@ trymeleeattacks(var_0) {
 
   var_5 = randomint(var_2.movingattackdisttoattacksq.size);
   var_6 = distancesquared(self.origin, var_1.origin);
+
   if(var_6 > var_2.non_predicted_move_melee_dist_sq) {
     if(var_4 > var_2.movingattackdisttoattacksq[var_5]) {
       return 0;
@@ -129,7 +136,8 @@ trymeleeattacks(var_0) {
   if(var_6 > var_2.check_reachable_dist_sq) {
     var_7 = self func_84AC();
     var_8 = getclosestpointonnavmesh(var_1.origin, self);
-    if(!navisstraightlinereachable(var_7, var_8, self)) {
+
+    if(!func_2AC(var_7, var_8, self)) {
       return 0;
     }
   }

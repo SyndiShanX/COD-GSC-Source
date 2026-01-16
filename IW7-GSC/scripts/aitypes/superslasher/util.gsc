@@ -1,5 +1,5 @@
 /*************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\superslasher\util.gsc
 *************************************************/
 
@@ -10,6 +10,7 @@ isonroof() {
 forcestagger(var_0) {
   if(!isDefined(self._blackboard.bstaggerrequested)) {
     self._blackboard.bstaggerrequested = 1;
+
     if(scripts\aitypes\superslasher\behaviors::superslasher_isonground()) {
       thread queueinterruptible("ground_stagger");
     } else if(isonroof()) {
@@ -36,8 +37,9 @@ queueinterruptible(var_0) {
   self notify("queue_interruptible");
   self endon("death");
   self endon("queue_interruptible");
+
   while(isDefined(self._blackboard.buninterruptibleanim)) {
-    wait(0.05);
+    wait 0.05;
   }
 
   scripts\asm\asm::asm_setstate(var_0);

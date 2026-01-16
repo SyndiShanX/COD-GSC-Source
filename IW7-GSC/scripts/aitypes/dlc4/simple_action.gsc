@@ -1,5 +1,5 @@
 /**************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4\simple_action.gsc
 **************************************************/
 
@@ -30,10 +30,10 @@ simpleaction_begin(var_0) {
 
 simpleaction_tick(var_0) {
   if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 simpleaction_end(var_0) {

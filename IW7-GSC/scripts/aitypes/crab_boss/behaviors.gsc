@@ -1,5 +1,5 @@
 /***************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\crab_boss\behaviors.gsc
 ***************************************************/
 
@@ -8,7 +8,7 @@ initbehaviors(var_0) {
   self.desiredaction = undefined;
   self.lastenemyengagetime = 0;
   self.myenemy = undefined;
-  return level.success;
+  return anim.success;
 }
 
 setupbehaviorstates() {
@@ -25,8 +25,8 @@ setupbehaviorstates() {
 
 updateeveryframe(var_0) {
   self clearpath();
-  self ghostskulls_total_waves(9999999);
-  return level.failure;
+  self scragentsetgoalradius(9999999);
+  return anim.failure;
 }
 
 simpleaction_begin(var_0) {
@@ -40,10 +40,10 @@ simpleaction_begin(var_0) {
 
 simpleaction_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 simpleaction_end(var_0) {
@@ -66,6 +66,7 @@ dosimpleaction(var_0, var_1) {
 
 facepoint(var_0, var_1) {
   var_2 = scripts\engine\utility::getyawtospot(var_1);
+
   if(abs(var_2) < 16) {
     return 0;
   }
@@ -96,16 +97,17 @@ planscaledrouteto(var_0) {
   var_7 = length2d(var_2) + length2d(var_3);
   var_8 = var_6 - var_7;
   var_9 = var_8 / var_5;
-  var_0A = ceil(var_9);
-  if(var_0A - var_9 < 0.5) {
-    var_9 = var_0A;
+  var_10 = ceil(var_9);
+
+  if(var_10 - var_9 < 0.5) {
+    var_9 = var_10;
   } else {
     var_9 = floor(var_9);
   }
 
-  var_0B = var_5 * var_9;
-  var_0C = var_7 + var_0B;
-  self.moveloopscale = var_6 / var_0C;
+  var_11 = var_5 * var_9;
+  var_12 = var_7 + var_11;
+  self.moveloopscale = var_6 / var_12;
   self.currentmovedirindex = var_1;
   self.movedircount = var_9;
 }
@@ -121,6 +123,7 @@ getyawfrompointtospot(var_0, var_1) {
 getdesiredmovedirindex(var_0, var_1) {
   var_2 = getyawfrompointtospot(var_0, var_1);
   var_3 = abs(var_2);
+
   if(var_3 <= 22.5) {
     return 8;
   }
@@ -163,10 +166,10 @@ move_begin(var_0) {
 
 move_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 move_end(var_0) {
@@ -189,10 +192,10 @@ bomb_begin(var_0) {
 
 bomb_tick(var_0) {
   if(self.numofspawnrequested > 0) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 bomb_end(var_0) {
@@ -207,10 +210,10 @@ spawn_begin(var_0) {
 
 spawn_tick(var_0) {
   if(self.numofspawnrequested > 0) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 spawn_end(var_0) {
@@ -225,10 +228,10 @@ submerge_spawn_begin(var_0) {
 
 submerge_spawn_tick(var_0) {
   if(self.numofspawnrequested > 0) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 submerge_spawn_end(var_0) {
@@ -243,10 +246,10 @@ submerge_bomb_begin(var_0) {
 
 submerge_bomb_tick(var_0) {
   if(self.numofbombrequested > 0) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 submerge_bomb_end(var_0) {
@@ -263,10 +266,10 @@ heal_begin(var_0) {
 
 heal_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 heal_end(var_0) {
@@ -281,10 +284,10 @@ roar_begin(var_0) {
 
 roar_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
-  return level.success;
+  return anim.success;
 }
 
 roar_end(var_0) {
@@ -292,23 +295,23 @@ roar_end(var_0) {
 }
 
 beam_begin(var_0) {
-  self.setplayerignoreradiusdamage = self.beamattacktarget.origin;
+  self.lookposition = self.beamattacktarget.origin;
   scripts\aitypes\dlc3\bt_state_api::wait_state_setup(var_0, 750, ::beam_waitdone);
   scripts\aitypes\dlc3\bt_state_api::btstate_transitionstate(var_0, "wait");
 }
 
 beam_tick(var_0) {
   if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(var_0)) {
-    return level.running;
+    return anim.running;
   }
 
   scripts\asm\crab_boss\crab_boss_asm::clearaction();
-  return level.success;
+  return anim.success;
 }
 
 beam_end(var_0) {
   scripts\asm\crab_boss\crab_boss_asm::clearaction();
-  self.setplayerignoreradiusdamage = undefined;
+  self.lookposition = undefined;
   self notify("beam_done");
   self.beamfollowtargetstartpos = undefined;
   self.beamfollowtarget = undefined;
@@ -397,6 +400,7 @@ getspawnposarray(var_0) {
   var_1 = [];
   var_2 = scripts\engine\utility::getstructarray("death_wall_spawner", "targetname");
   var_2 = scripts\engine\utility::array_randomize(var_2);
+
   for(var_3 = 0; var_3 < var_0; var_3++) {
     var_4 = spawnStruct();
     var_5 = var_2[var_3 % var_2.size];
@@ -416,12 +420,12 @@ doheal(var_0) {
 oncrabbrutesummon(var_0) {
   self.spawnposarray = var_0;
   self.numofspawnrequested = self.spawnposarray.size;
+
   if(scripts\asm\asm::asm_isinstate("submerge_loop")) {
     self.nextaction = "submerge_spawn";
-    return;
+  } else {
+    self.nextaction = "spawn";
   }
-
-  self.nextaction = "spawn";
 }
 
 dosubmergespawn() {
@@ -442,6 +446,7 @@ dosubmergebomb() {
 getsubmergebombspawnindex() {
   var_0 = 4;
   var_1 = var_0;
+
   if(isDefined(level.crab_boss_num_submerge_spawn)) {
     var_1 = level.crab_boss_num_submerge_spawn;
   }
@@ -450,6 +455,7 @@ getsubmergebombspawnindex() {
   var_3 = max(0, var_1 - var_2);
   var_4 = scripts\engine\utility::array_randomize([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
   var_5 = [];
+
   for(var_6 = 0; var_6 < var_3; var_6++) {
     var_5[var_6] = var_4[var_6];
   }
@@ -478,14 +484,15 @@ getdeathrayspawnpos(var_0) {
   var_6 = max(0, var_2 - var_5);
   var_6 = min(var_6, var_3);
   var_7 = vectornormalize(var_0.origin - level.crab_boss.origin);
+
   for(var_8 = 0; var_8 < var_6; var_8++) {
     var_9 = randomfloatrange(var_1 * -1, var_1);
-    var_0A = randomfloatrange(var_1 * -1, var_1);
-    var_0B = vectortoangles(var_7);
-    var_0C = spawnStruct();
-    var_0C.origin = (var_0.origin[0] + var_9, var_0.origin[1] + var_0A, var_0.origin[2]);
-    var_0C.angles = var_0B;
-    var_4[var_4.size] = var_0C;
+    var_10 = randomfloatrange(var_1 * -1, var_1);
+    var_11 = vectortoangles(var_7);
+    var_12 = spawnStruct();
+    var_12.origin = (var_0.origin[0] + var_9, var_0.origin[1] + var_10, var_0.origin[2]);
+    var_12.angles = var_11;
+    var_4[var_4.size] = var_12;
   }
 
   return var_4;
@@ -505,34 +512,34 @@ gettoxicspawnpos(var_0) {
   var_4 = var_2 + level.players.size;
   var_5 = [];
   var_6 = [];
+
   foreach(var_8 in level.players) {
     if(scripts\cp\cp_laststand::player_in_laststand(var_8)) {
       continue;
     }
-
     var_6[var_6.size] = var_8;
   }
 
   if(var_6.size == 0) {
-    var_0A = (2826, 1244, -91);
-    var_0B = spawnStruct();
-    var_0B.origin = var_0A;
-    var_0B.angles = vectortoangles(vectornormalize(var_0A - var_0.origin));
-    var_5[var_5.size] = var_0B;
+    var_10 = (2826, 1244, -91);
+    var_11 = spawnStruct();
+    var_11.origin = var_10;
+    var_11.angles = vectortoangles(vectornormalize(var_10 - var_0.origin));
+    var_5[var_5.size] = var_11;
   } else {
-    for(var_0C = 1; var_0C <= var_4; var_0C++) {
+    for(var_12 = 1; var_12 <= var_4; var_12++) {
       var_8 = scripts\engine\utility::random(var_6);
-      var_0D = vectornormalize(var_8.origin - var_0.origin);
-      var_0E = scripts\engine\utility::drop_to_ground(var_8.origin + var_0D * -1 * var_1, 50, -2000);
-      var_0F = randomfloatrange(var_3 * -1, var_3);
-      var_10 = randomfloatrange(var_3 * -1, var_3);
-      var_0E = var_0E + (var_0F, var_10, 0);
-      var_0E = getclosestpointonnavmesh(var_0E);
-      var_11 = vectortoangles(var_0D);
-      var_0B = spawnStruct();
-      var_0B.origin = var_0E;
-      var_0B.angles = var_11;
-      var_5[var_5.size] = var_0B;
+      var_13 = vectornormalize(var_8.origin - var_0.origin);
+      var_14 = scripts\engine\utility::drop_to_ground(var_8.origin + var_13 * -1 * var_1, 50, -2000);
+      var_15 = randomfloatrange(var_3 * -1, var_3);
+      var_16 = randomfloatrange(var_3 * -1, var_3);
+      var_14 = var_14 + (var_15, var_16, 0);
+      var_14 = getclosestpointonnavmesh(var_14);
+      var_17 = vectortoangles(var_13);
+      var_11 = spawnStruct();
+      var_11.origin = var_14;
+      var_11.angles = var_17;
+      var_5[var_5.size] = var_11;
     }
   }
 
@@ -556,16 +563,15 @@ dopain(var_0) {
 }
 
 interruptcurrentstate() {
-  if(!scripts\engine\utility::istrue(self.binterruptable)) {
+  if(!scripts\engine\utility::is_true(self.binterruptable)) {
     return;
   }
-
   var_0 = scripts\asm\asm::asm_getcurrentstate("crab_boss");
+
   switch (var_0) {
     case "beam":
       dobeaminterrupted();
       break;
-
     case "smash":
       dosmashinterrupted();
       break;
@@ -574,7 +580,7 @@ interruptcurrentstate() {
 
 decideaction(var_0) {
   if(isDefined(self.desiredaction)) {
-    return level.success;
+    return anim.success;
   }
 
   if(!isDefined(self.nextaction) && isDefined(self.desiredbossmovepos)) {
@@ -584,8 +590,8 @@ decideaction(var_0) {
   if(isDefined(self.nextaction)) {
     scripts\aitypes\dlc3\bt_action_api::setdesiredaction(var_0, self.nextaction);
     self.nextaction = undefined;
-    return level.success;
+    return anim.success;
   }
 
-  return level.failure;
+  return anim.failure;
 }

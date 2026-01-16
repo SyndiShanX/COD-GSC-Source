@@ -1,5 +1,5 @@
 /*************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4\bt_state_api.gsc
 *************************************************/
 
@@ -13,6 +13,7 @@ btstate_setupstate(var_0, var_1, var_2, var_3) {
   var_4.fnbegin = var_1;
   var_4.fntick = var_2;
   var_4.fnend = var_3;
+
   if(!isDefined(self.bt_states)) {
     self.bt_states = [];
   }
@@ -23,6 +24,7 @@ btstate_setupstate(var_0, var_1, var_2, var_3) {
 
 btstate_getcurrentstatename(var_0) {
   var_1 = btstate_getinstancedata(var_0);
+
   if(!isDefined(var_1)) {
     return undefined;
   }
@@ -36,6 +38,7 @@ btstate_getcurrentstatename(var_0) {
 
 btstate_tickstates(var_0) {
   var_1 = btstate_getinstancedata(var_0);
+
   if(!isDefined(var_1.currentstate)) {
     return 0;
   }
@@ -43,11 +46,12 @@ btstate_tickstates(var_0) {
   if(isDefined(var_1.currentstate.fntick)) {
     var_2 = var_1.currentstate.name;
     var_3 = self[[var_1.currentstate.fntick]](var_0);
+
     if(isDefined(var_1.currentstate) && var_1.currentstate.name != var_2) {
       return btstate_tickstates(var_0);
     }
 
-    if(!scripts\engine\utility::istrue(var_3)) {
+    if(!scripts\engine\utility::is_true(var_3)) {
       btstate_endcurrentstate(var_0);
     }
 
@@ -60,6 +64,7 @@ btstate_tickstates(var_0) {
 btstate_endstates(var_0) {
   if(isDefined(self.bt_states)) {
     var_1 = btstate_getinstancedata(var_0);
+
     if(isDefined(var_1.currentstate) && isDefined(var_1.currentstate.fnend)) {
       [
         [var_1.currentstate.fnend]
@@ -75,6 +80,7 @@ btstate_destroystates() {
 
 btstate_endcurrentstate(var_0) {
   var_1 = btstate_getinstancedata(var_0);
+
   if(isDefined(var_1.currentstate) && isDefined(var_1.currentstate.fnend)) {
     self[[var_1.currentstate.fnend]](var_0, undefined);
   }
@@ -85,8 +91,10 @@ btstate_endcurrentstate(var_0) {
 btstate_transitionstate(var_0, var_1) {
   var_2 = btstate_getinstancedata(var_0);
   var_3 = undefined;
+
   if(isDefined(var_2.currentstate)) {
     var_3 = var_2.currentstate.name;
+
     if(isDefined(var_2.currentstate.fnend)) {
       [
         [var_2.currentstate.fnend]
@@ -96,6 +104,7 @@ btstate_transitionstate(var_0, var_1) {
 
   var_4 = self.bt_states[var_1];
   var_2.currentstate = var_4;
+
   if(isDefined(var_4.fnbegin)) {
     self[[var_4.fnbegin]](var_0, var_3);
   }
@@ -104,7 +113,7 @@ btstate_transitionstate(var_0, var_1) {
 chase_target_state_setup(var_0, var_1, var_2, var_3, var_4) {
   btstate_setupstate("chase", ::chase_target_state_begin, ::chase_target_state_tick, ::chase_target_state_end);
   var_5 = btstate_getinstancedata(var_0);
-  var_5.objective_playermask_showto = var_1;
+  var_5.goalradius = var_1;
   var_5.target = var_2;
   var_5.fncallback = var_3;
   var_5.maxchasetime = var_4;
@@ -113,14 +122,15 @@ chase_target_state_setup(var_0, var_1, var_2, var_3, var_4) {
 chase_target_state_begin(var_0, var_1) {
   var_2 = btstate_getinstancedata(var_0);
   var_2.starttime = gettime();
-  self ghosts_attack_logic(var_2.target);
-  self ghostskulls_total_waves(var_2.objective_playermask_showto * 0.9);
+  self scragentsetgoalentity(var_2.target);
+  self scragentsetgoalradius(var_2.goalradius * 0.9);
 }
 
 chase_target_state_done(var_0, var_1) {
   var_2 = btstate_getinstancedata(var_0);
   var_3 = var_2.fncallback;
   btstate_endcurrentstate(var_0);
+
   if(isDefined(var_3)) {
     [[var_3]](var_0, var_1);
   }
@@ -128,6 +138,7 @@ chase_target_state_done(var_0, var_1) {
 
 chase_target_state_tick(var_0) {
   var_1 = btstate_getinstancedata(var_0);
+
   if(!isalive(var_1.target)) {
     chase_target_state_done(var_0, "aborted");
     return 0;
@@ -141,7 +152,8 @@ chase_target_state_tick(var_0) {
   }
 
   var_2 = distance2dsquared(self.origin, var_1.target.origin);
-  if(var_2 > squared(var_1.objective_playermask_showto)) {
+
+  if(var_2 > squared(var_1.goalradius)) {
     return 1;
   }
 
@@ -155,7 +167,7 @@ chase_target_state_tick(var_0) {
 
 chase_target_state_end(var_0, var_1) {
   var_2 = btstate_getinstancedata(var_0);
-  var_2.objective_playermask_showto = undefined;
+  var_2.goalradius = undefined;
   var_2.target = undefined;
   var_2.fncallback = undefined;
 }
@@ -171,12 +183,14 @@ wait_state_begin(var_0, var_1) {}
 
 wait_state_tick(var_0) {
   var_1 = btstate_getinstancedata(var_0);
+
   if(gettime() < var_1.waittimeouttimems) {
     return 1;
   }
 
   if(isDefined(var_1.waittimecallbackfn)) {
     var_2 = [[var_1.waittimecallbackfn]](var_0);
+
     if(isDefined(var_2)) {
       return var_2;
     }
@@ -197,6 +211,7 @@ asm_wait_state_setup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.endevent = var_4;
   var_7.asmstate = var_2;
   var_7.fncallback = var_3;
+
   if(isDefined(var_6)) {
     var_7.timeouttime = gettime() + var_6;
   } else {
@@ -216,12 +231,14 @@ asm_wait_state_begin(var_0, var_1) {
 asm_wait_state_tick(var_0) {
   var_1 = btstate_getinstancedata(var_0);
   var_2 = scripts\asm\asm::asm_isinstate(var_1.asmstate);
+
   if(var_2 && !var_1.bisinasmstate) {
     var_1.bisinasmstate = 1;
   }
 
   var_3 = 0;
   var_4 = undefined;
+
   if(!var_2 && var_1.bisinasmstate) {
     var_3 = 1;
     var_4 = "aborted";
@@ -245,6 +262,7 @@ asm_wait_state_tick(var_0) {
   if(var_3) {
     var_5 = var_1.fncallback;
     btstate_endcurrentstate(var_0);
+
     if(isDefined(var_5)) {
       [
         [var_5]

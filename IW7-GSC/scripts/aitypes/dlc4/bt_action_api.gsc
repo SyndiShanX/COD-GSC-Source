@@ -1,5 +1,5 @@
 /**************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled by Mjkzy and Edited by SyndiShanX
  * Script: scripts\aitypes\dlc4\bt_action_api.gsc
 **************************************************/
 
@@ -8,6 +8,7 @@ setupbtaction(var_0, var_1, var_2, var_3) {
   var_4.fnbegin = var_1;
   var_4.fntick = var_2;
   var_4.fnend = var_3;
+
   if(!isDefined(self.actions)) {
     self.actions = [];
   }
@@ -22,6 +23,7 @@ setdesiredbtaction(var_0, var_1) {
 
   var_2 = getcurrentdesiredbtaction(var_0);
   self.desiredaction = var_1;
+
   if(isDefined(var_2) && var_2 != var_1) {
     self notify("newaction");
   }
@@ -42,6 +44,7 @@ doaction_begin(var_0) {
   self.bt.instancedata[var_0].currentaction = self.desiredaction;
   var_1 = self.actions[self.desiredaction].fnbegin;
   self.desiredaction = undefined;
+
   if(isDefined(var_1)) {
     [[var_1]](var_0);
   }
@@ -50,29 +53,32 @@ doaction_begin(var_0) {
 doaction_tick(var_0) {
   var_1 = getcurrentdesiredbtaction(var_0);
   var_2 = self.actions[var_1].fntick;
+
   if(isDefined(var_2)) {
     var_3 = [[var_2]](var_0);
+
     if(!isDefined(self.desiredaction)) {
       if(isDefined(var_3)) {
         return var_3;
       }
 
-      return level.failure;
+      return anim.failure;
     }
   }
 
   if(isDefined(self.desiredaction)) {
     doaction_end(var_0);
     doaction_begin(var_0);
-    return level.running;
+    return anim.running;
   }
 
-  return level.failure;
+  return anim.failure;
 }
 
 doaction_end(var_0) {
   var_1 = getcurrentdesiredbtaction(var_0);
   var_2 = self.actions[var_1].fnend;
+
   if(isDefined(var_2)) {
     [[var_2]](var_0);
   }
