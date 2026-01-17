@@ -390,8 +390,7 @@ hud_monitorplayerownership() {
           }
         } else if(isDefined(var_7.bot_fireteam_follower)) {
           var_8 = 1;
-        }
-        else {
+        } else {
           self.ownershipstring[var_1].color = (1, 1, 0);
         }
       } else {

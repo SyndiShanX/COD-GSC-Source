@@ -233,8 +233,7 @@ func_A1D5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
               }
             } else if(var_15 < self.audio.var_D889) {
               self.audio.var_20EF = 1;
-            }
-            else {
+            } else {
               self.audio.var_20EF = 0;
             }
           } else if(var_15 > self.audio.var_D889) {

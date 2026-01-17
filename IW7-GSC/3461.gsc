@@ -1628,8 +1628,7 @@ func_BA1C(var_0, var_1) {
       }
     } else if(var_5 < level.var_109C4["near"].var_B491) {
       func_12F22("near", var_5);
-    }
-    else if(var_5 < level.var_109C4["medium"].var_B491) {
+    } else if(var_5 < level.var_109C4["medium"].var_B491) {
       func_12F22("medium", var_5);
     } else {
       func_12F22("far", var_5);
@@ -2399,8 +2398,7 @@ juggernautcratethink(var_0) {
         }
       } else if(self.cratetype == "airdrop_juggernaut_maniac") {
         self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut_maniac", undefined, var_1);
-      }
-      else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
+      } else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
         self.owner scripts\mp\hud_message::showsplash("giveaway_" + self.cratetype, undefined, var_1);
       } else {
         self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut", undefined, var_1);

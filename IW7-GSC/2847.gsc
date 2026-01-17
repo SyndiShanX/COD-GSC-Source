@@ -766,8 +766,9 @@ func_A854(var_0, var_1) {
   var_2 = [var_0];
 
   if(isDefined(var_1)) {
-    if(var_1.size > 1) {} else
+    if(var_1.size > 1) {} else {
       var_1 = var_1[0];
+    }
 
     var_2 = scripts\engine\utility::array_add(var_2, var_1);
   }

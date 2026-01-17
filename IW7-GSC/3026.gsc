@@ -256,8 +256,7 @@ func_11ADE() {
       }
     } else if(var_2 == "fly" && var_6 == "fly") {
       var_8 = -4000;
-    }
-    else {
+    } else {
       var_8 = 0;
     }
 

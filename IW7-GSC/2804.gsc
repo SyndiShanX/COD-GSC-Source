@@ -1231,8 +1231,7 @@ watchobjuse(var_0, var_1) {
     }
   } else if(!isDefined(self.carryobject)) {
     self waittill("obj_picked_up");
-  }
-  else {
+  } else {
     wait 0.05;
   }
 

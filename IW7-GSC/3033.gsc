@@ -312,8 +312,7 @@ func_D185() {
       }
     } else if(self.var_72A8 == "fly" && var_6 != self.var_72A8) {
       var_3 = 1;
-    }
-    else if(self.var_72A8 == "hover" && var_6 != self.var_72A8) {
+    } else if(self.var_72A8 == "hover" && var_6 != self.var_72A8) {
       var_4 = 1;
     } else if(self.var_72A8 == "land" && var_6 != self.var_72A8) {
       var_5 = 1;

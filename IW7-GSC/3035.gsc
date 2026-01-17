@@ -2691,8 +2691,9 @@ func_3AE6(var_0) {
       }
     }
 
-    if(var_7 == 0) {} else
+    if(var_7 == 0) {} else {
       var_1 = 1 / var_7;
+    }
 
     if(var_7 < var_6) {
       var_11 = 1;

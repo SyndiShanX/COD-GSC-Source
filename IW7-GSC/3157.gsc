@@ -356,8 +356,7 @@ choosestrongdamagedeath(var_0, var_1, var_2) {
     }
   } else if(self.damageyaw < 0) {
     var_3 = "right";
-  }
-  else {
+  } else {
     var_3 = "left";
   }
 

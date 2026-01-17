@@ -439,8 +439,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
         self botsetscriptgoal(self.cur_defend_point_override, 0, var_4, var_27);
       } else if(!isDefined(self.cur_defend_angle_override)) {
         self botsetscriptgoalnode(self.cur_defend_node, var_4);
-      }
-      else {
+      } else {
         self botsetscriptgoalnode(self.cur_defend_node, var_4, self.cur_defend_angle_override[1]);
       }
 
@@ -1266,8 +1265,7 @@ find_defend_node_capture() {
     self.cur_defend_node = var_1;
   } else if(isDefined(var_0)) {
     bot_handle_no_valid_defense_node(var_0, undefined);
-  }
-  else {
+  } else {
     bot_handle_no_valid_defense_node(undefined, scripts\mp\bots\bots_util::defend_valid_center());
   }
 }
@@ -1288,8 +1286,7 @@ find_defend_node_capture_zone() {
     self.cur_defend_node = var_1;
   } else if(isDefined(var_0)) {
     bot_handle_no_valid_defense_node(var_0, undefined);
-  }
-  else {
+  } else {
     bot_handle_no_valid_defense_node(undefined, scripts\mp\bots\bots_util::defend_valid_center());
   }
 }

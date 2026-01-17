@@ -659,7 +659,7 @@ getlootvariant(var_0) {
       var_2 = var_1[0];
     }
 
-    var_4 = "mp\loot\weapon\" + var_3 + ".csv ";
+    var_4 = "mp\loot\weapon\" + var_3 + ".csv";
     var_5 = tablelookup(var_4, 0, int(var_2), 1);
     var_6 = tablelookup("mp\loot\iw7_weapon_loot_master.csv", 1, var_5, 1);
     if(var_6 == "") {
@@ -696,7 +696,7 @@ modifyweapon(var_0, var_1, var_2) {
   }
 
   var_7 = var_6 != "";
-  var_8 = "mp\loot\weapon\" + var_0 + ".csv ";
+  var_8 = "mp\loot\weapon\" + var_0 + ".csv";
   if(var_1 > 0) {
     var_9 = scripts\mp\utility::getweaponattachmentarrayfromstats(var_0);
     if(var_9.size > 0) {

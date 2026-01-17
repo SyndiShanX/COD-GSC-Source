@@ -1242,8 +1242,7 @@ stancerecoilupdate(var_0) {
     return;
   } else if(var_2 > 0) {
     setrecoilscale(0, var_2);
-  }
-  else {
+  } else {
     setrecoilscale();
   }
 }

@@ -2805,8 +2805,7 @@ func_1369(var_0, var_1, var_2, var_3, var_4) {
       }
     } else if(isDefined(var_4)) {
       level.player scripts\engine\utility::delaythread(var_3, ::func_D090, var_2, var_4);
-    }
-    else {
+    } else {
       level.player scripts\engine\utility::delaythread(var_3, ::func_D090, var_2);
     }
   }
@@ -6065,8 +6064,7 @@ func_11624(var_0) {
     self setplayerangles(var_0.angles);
   } else if(isai(self)) {
     self func_80F1(var_0.origin, var_0.angles);
-  }
-  else {
+  } else {
     self.origin = var_0.origin;
     self.angles = var_0.angles;
   }
@@ -6082,8 +6080,7 @@ func_11645(var_0, var_1) {
     self setplayerangles(var_3);
   } else if(isai(self)) {
     self func_80F1(var_2, var_3);
-  }
-  else {
+  } else {
     self.origin = var_2;
     self.angles = var_3;
   }
@@ -8263,8 +8260,7 @@ func_722C(var_0, var_1) {
     var_2 = vectornormalize(var_4.origin - var_0.origin);
   } else if(isDefined(var_0.angles)) {
     var_2 = anglesToForward(var_0.angles);
-  }
-  else {
+  } else {
     var_2 = anglesToForward(self.angles);
   }
 
@@ -9288,8 +9284,7 @@ func_9C11() {
     }
   } else if(!isDefined(self.var_2023)) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }

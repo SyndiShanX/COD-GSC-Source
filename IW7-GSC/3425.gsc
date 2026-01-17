@@ -1312,8 +1312,7 @@ func_10927() {
       }
     } else if(should_spawn_clown() && var_5 < var_6) {
       var_10 = get_spawner_and_spawn_goons(var_9);
-    }
-    else {
+    } else {
       if(var_5) {
         var_5--;
       }
@@ -1729,8 +1728,7 @@ spawn_wave_enemy(var_0, var_1, var_2, var_3) {
     level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_6, "spawn", 1);
   } else if(level.agent_definition[var_0]["species"] == "c6") {
     var_6 = func_33B1(var_0, var_4, var_5, "axis", self);
-  }
-  else if(var_0 == "zombie_brute") {
+  } else if(var_0 == "zombie_brute") {
     var_6 = func_13F13("zombie_brute", "axis", var_4, var_5);
 
     if(isDefined(var_6)) {

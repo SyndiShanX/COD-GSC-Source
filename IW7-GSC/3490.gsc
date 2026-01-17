@@ -17,8 +17,9 @@ init() {
   helipilot_setairstartnodes();
   level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
 
-  if(!isDefined(level.heli_pilot_mesh)) {} else
+  if(!isDefined(level.heli_pilot_mesh)) {} else {
     level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility\game::gethelipilotmeshoffset();
+  }
 
   var_0 = spawnStruct();
   var_0.scorepopup = "destroyed_helo_pilot";
@@ -70,8 +71,7 @@ func_68C1(var_0) {
     }
   } else if(isDefined(level.heli_pilot[var_0])) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

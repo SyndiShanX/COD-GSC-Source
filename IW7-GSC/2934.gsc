@@ -301,8 +301,7 @@ func_1992(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_11.var_69E9 = "jackal_missile_explosion_plr";
   } else if(isDefined(self.var_EF5F)) {
     var_11.var_AA99 = self.var_EF5F;
-  }
-  else {
+  } else {
     var_11.var_AA99 = "jackal_missile_launch_space_npc";
   }
 
@@ -662,8 +661,7 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       }
     } else if(isDefined(self.var_438D)) {
       var_61 = [self, self.var_438D];
-    }
-    else {
+    } else {
       var_61 = [self];
     }
 

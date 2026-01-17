@@ -655,8 +655,7 @@ func_12E3A() {
     return;
   } else if(isalive(self._blackboard.var_11577)) {
     var_1 = self._blackboard.var_11577;
-  }
-  else if(isDefined(self._blackboard.var_90EE)) {
+  } else if(isDefined(self._blackboard.var_90EE)) {
     var_1 = self._blackboard.var_90EE;
   } else if(isDefined(self._blackboard.var_7002)) {
     var_1 = self._blackboard.var_7002;

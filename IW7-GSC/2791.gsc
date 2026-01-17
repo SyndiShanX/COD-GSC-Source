@@ -52,8 +52,7 @@ func_D9AB() {
       }
     } else if(var_5 == var_6) {
       var_11 = "tied";
-    }
-    else if(var_5 > var_6) {
+    } else if(var_5 > var_6) {
       var_11 = "allies";
     } else {
       var_11 = "axis";

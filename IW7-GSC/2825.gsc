@@ -463,8 +463,7 @@ func_13C06(var_0, var_1) {
     var_6 = 2.8;
   } else if(var_0 == "iw7_devastator") {
     var_6 = 0.5;
-  }
-  else if(var_0 == "iw7_m8") {
+  } else if(var_0 == "iw7_m8") {
     var_6 = 0.2;
   } else if(var_0 == "iw7_kbs") {
     var_6 = 4.8;
@@ -476,8 +475,7 @@ func_13C06(var_0, var_1) {
     var_6 = -1;
   } else if(var_0 == "iw7_ripper") {
     var_6 = -1;
-  }
-  else if(var_0 == "iw7_ump45") {
+  } else if(var_0 == "iw7_ump45") {
     if(var_7) {
       var_2 = "silenced_smg";
     }

@@ -116,8 +116,7 @@ func_3D48(var_0) {
     self clearpath();
   } else if(distancesquared(self.var_F181.origin, self.origin) <= 4096) {
     self clearpath();
-  }
-  else {
+  } else {
     self scragentsetgoalentity(self.var_F181);
   }
 

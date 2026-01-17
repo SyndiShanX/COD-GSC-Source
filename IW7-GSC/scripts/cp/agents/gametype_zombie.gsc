@@ -55,8 +55,7 @@ main() {
   level.game_mode_statstable = "cp\zombies\mode_string_tables\zombies_statstable.csv";
   level.game_mode_attachment_map = "cp\zombies\zombie_attachmentmap.csv";
   var_0 = getdvar("ui_mapname");
-  level.power_up_table = "cp\zombies\" + var_0 + "
-  _loot.csv ";
+  level.power_up_table = "cp\zombies\" + var_0 + "_loot.csv";
   scripts\mp\passives::init();
   scripts\cp\cp_weapon::weaponsinit();
   scripts\cp\utility::healthregeninit(0);

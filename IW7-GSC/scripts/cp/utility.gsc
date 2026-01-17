@@ -4059,7 +4059,7 @@ buildweaponassetname(var_0, var_1) {
 }
 
 getweaponassetfromrootweapon(var_0, var_1) {
-  var_2 = "mp\loot\weapon\" + var_0 + ".csv ";
+  var_2 = "mp\loot\weapon\" + var_0 + ".csv";
   var_3 = tablelookup(var_2, 0, var_1, 20);
   return var_3;
 }

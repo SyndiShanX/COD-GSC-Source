@@ -837,8 +837,7 @@ set_interaction_point(var_0, var_1) {
     self.interaction_trigger.origin = var_0.origin;
   } else if(func_9A26(var_0)) {
     self.interaction_trigger.origin = (var_0.origin[0], var_0.origin[1], var_2[2] - 15);
-  }
-  else if(func_9A15(var_0) && var_0.script_noteworthy == "atm_withdrawal") {
+  } else if(func_9A15(var_0) && var_0.script_noteworthy == "atm_withdrawal") {
     self.interaction_trigger sethintstringparams(level.atm_amount_deposited);
   } else if(interaction_is_fortune_teller(var_0)) {
     if(self.card_refills == 1) {

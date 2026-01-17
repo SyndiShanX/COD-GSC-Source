@@ -51,8 +51,7 @@ exceededmaxremoteuavs(var_0) {
     }
   } else if(isDefined(level.remote_uav[var_0])) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -572,8 +571,7 @@ func_DFAA(var_0) {
       var_8 = func_DFAB(var_0, var_9, var_5);
     } else if(level.teambased) {
       var_8 = func_DFAB(var_0, level.uavmodels[level.otherteam[self.team]], var_5);
-    }
-    else {
+    } else {
       var_8 = func_DFAB(var_0, level.uavmodels, var_5);
     }
 
@@ -755,8 +753,7 @@ remoteuav_markplayer(var_0) {
     var_0 thread scripts\mp\rank::scoreeventpopup("marked_by_remote_uav");
   } else if(isDefined(var_0.uavtype)) {
     var_0.var_2B0C = var_0.birthtime;
-  }
-  else if(isDefined(var_0.owner) && isalive(var_0.owner)) {
+  } else if(isDefined(var_0.owner) && isalive(var_0.owner)) {
     var_0.owner thread scripts\mp\rank::scoreeventpopup("turret_marked_by_remote_uav");
   }
 

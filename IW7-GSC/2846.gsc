@@ -1668,8 +1668,7 @@ func_1159(var_0, var_1) {
     }
   } else if(level.console || level.player global_fx()) {
     scripts\sp\utility::func_56BA("peek_hint_shove");
-  }
-  else {
+  } else {
     scripts\sp\utility::func_56BA("peek_hint_shove_pc");
   }
 }

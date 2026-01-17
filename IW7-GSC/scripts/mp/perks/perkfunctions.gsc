@@ -118,8 +118,7 @@ updatesharpfocus() {
     }
   } else if(weaponclass(var_0) == "sniper") {
     var_1 = 0.85;
-  }
-  else {
+  } else {
     var_1 = 0.25;
   }
 
@@ -1869,7 +1868,7 @@ setlifepackvisualforplayer(var_0) {
     thread watchlifepackoutlinestate(var_0);
   } else {
     self hidefromplayer(var_0);
-	}
+  }
 }
 
 setlifepackoutlinestate(var_0) {

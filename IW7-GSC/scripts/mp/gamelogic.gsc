@@ -33,8 +33,7 @@ func_C530(var_0) {
     var_3 = "allies";
   } else if(level.multiteambased && issubstr(var_0, "team_")) {
     var_3 = var_0;
-  }
-  else {
+  } else {
     var_3 = "tie";
   }
 
@@ -153,8 +152,7 @@ func_E75E(var_0, var_1) {
         }
       } else if(var_8) {
         thread endgame("allies", game["end_reason"]["score_limit_reached"]);
-      }
-      else if(var_9) {
+      } else if(var_9) {
         thread endgame("axis", game["end_reason"]["score_limit_reached"]);
       }
     }
@@ -171,8 +169,7 @@ default_ontimelimit() {
       }
     } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
       var_0 = "axis";
-    }
-    else if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
+    } else if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
       var_0 = "allies";
     }
 
@@ -2989,8 +2986,7 @@ func_6320(var_0, var_1, var_2) {
         }
       } else if(getteamscore("allies") == getteamscore("axis")) {
         var_4 logplayerendmatchdatamatchresult(var_4.clientid, "draw");
-      }
-      else {
+      } else {
         var_4 logplayerendmatchdatamatchresult(var_4.clientid, "none");
       }
 

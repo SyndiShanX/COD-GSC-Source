@@ -1150,7 +1150,7 @@ func_89CC(var_0, var_1, var_2) {
     var_0 scripts\mp\missions::func_D991("ch_darkops_nuke");
   } else if(var_0.pers["passive_nuke_key"] == 24) {
     var_0 thread scripts\mp\hud_message::showsplash("nuke_kill_single");
-	} else if(var_0.pers["passive_nuke_key"] == 2) {
+  } else if(var_0.pers["passive_nuke_key"] == 2) {
     var_0 thread func_C1C8();
   } else if(var_0.pers["passive_nuke_key"] >= 20) {
     var_0 thread func_C1C8();
@@ -1920,8 +1920,7 @@ func_89DB(var_0, var_1) {
     var_0.pers["passive_refresh_key"] = 0;
   } else if(var_0.pers["passive_refresh_key"] == 4) {
     var_0 thread scripts\mp\hud_message::showsplash("refresh_kill_single");
-  }
-  else if(var_0.pers["passive_refresh_key"] == 3) {
+  } else if(var_0.pers["passive_refresh_key"] == 3) {
     var_0 thread func_DE77();
   }
 }

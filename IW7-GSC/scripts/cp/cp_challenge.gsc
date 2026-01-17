@@ -19,8 +19,7 @@ func_C9B9() {
 func_956D() {
   scripts\engine\utility::flag_init("pause_challenges");
   var_0 = getdvar("ui_mapname");
-  level.zombie_challenge_table = "cp\zombies\" + var_0 + "
-  _challenges.csv ";
+  level.zombie_challenge_table = "cp\zombies\" + var_0 + "_challenges.csv";
   if(!tableexists(level.zombie_challenge_table)) {
     level.zombie_challenge_table = undefined;
   }

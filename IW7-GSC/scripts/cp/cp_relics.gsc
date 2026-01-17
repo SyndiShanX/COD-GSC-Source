@@ -2049,7 +2049,7 @@ func_7D6C(var_0, var_1) {
     return var_3;
   }
 
-  var_4 = "mp\loot\weapon\" + var_1 + ".csv ";
+  var_4 = "mp\loot\weapon\" + var_1 + ".csv";
   var_5 = tablelookuprownum(var_4, 0, var_2);
   for(var_6 = 0; var_6 < 3; var_6++) {
     var_7 = tablelookupbyrow(var_4, var_5, 21 + var_6);

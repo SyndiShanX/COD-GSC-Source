@@ -48,8 +48,7 @@ dropintolaststand(var_0, var_1) {
     }
   } else if(debugafterlifearcadeenabled()) {
     waitinspectator(var_0, var_1);
-  }
-  else if(maydolaststand(var_1, var_0)) {
+  } else if(maydolaststand(var_1, var_0)) {
     var_3 = waitinlaststand(var_0, var_1);
 
     if(!var_3) {

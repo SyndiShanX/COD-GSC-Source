@@ -118,8 +118,9 @@ init() {
   if(!isDefined(level.heli_pilot_mesh)) {
     level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
 
-    if(!isDefined(level.heli_pilot_mesh)) {} else
+    if(!isDefined(level.heli_pilot_mesh)) {} else {
       level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility\game::gethelipilotmeshoffset();
+    }
   }
 
   scripts\mp\agents\agents::wait_till_agent_funcs_defined();

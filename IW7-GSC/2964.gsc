@@ -373,8 +373,7 @@ func_8752(var_0, var_1, var_2, var_3) {
     }
   } else if(var_11.var_26A3.size) {
     var_7 = scripts\engine\utility::getclosest(var_0.origin, var_11.var_26A3);
-  }
-  else {
+  } else {
     var_7 = undefined;
   }
 

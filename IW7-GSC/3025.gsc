@@ -1479,8 +1479,7 @@ func_64DB(var_0, var_1) {
     }
   } else if(var_0) {
     var_6 = 0.0;
-  }
-  else {
+  } else {
     var_6 = -0.02;
   }
 

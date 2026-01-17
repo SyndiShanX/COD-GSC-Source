@@ -54,13 +54,13 @@ getlootinfoforweapon(var_0) {
 }
 
 getweaponassetfromrootweapon(var_0, var_1) {
-  var_2 = "mp\loot\weapon\" + var_0 + ".csv ";
+  var_2 = "mp\loot\weapon\" + var_0 + ".csv";
   var_3 = tablelookup(var_2, 0, var_1, 3);
   return var_3;
 }
 
 lookupvariantref(var_0, var_1) {
-  var_2 = "mp\loot\weapon\" + var_0 + ".csv ";
+  var_2 = "mp\loot\weapon\" + var_0 + ".csv";
   var_3 = tablelookup(var_2, 0, var_1, 1);
   return var_3;
 }

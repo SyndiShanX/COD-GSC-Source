@@ -5,8 +5,7 @@
 
 init() {
   level.calloutglobals = spawnStruct();
-  level.calloutglobals.callouttable = "mp\map_callouts\" + level.mapname + "
-  _callouts.csv ";
+  level.calloutglobals.callouttable = "mp\map_callouts\" + level.mapname + "_callouts.csv";
   createcalloutareaidmap();
   level.calloutglobals.areatriggers = getEntArray("callout_area", "targetname");
   foreach(var_1 in level.calloutglobals.areatriggers) {

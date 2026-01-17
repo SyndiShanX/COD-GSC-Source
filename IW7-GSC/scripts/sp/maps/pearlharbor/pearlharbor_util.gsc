@@ -18,8 +18,9 @@ func_36FF(var_0, var_1) {
 func_BC53(var_0) {
   var_1 = getent(var_0, "targetname");
 
-  if(isDefined(var_1)) {} else
+  if(isDefined(var_1)) {} else {
     var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  }
 
   level.player setorigin(var_1.origin);
 

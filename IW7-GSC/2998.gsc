@@ -137,8 +137,7 @@ func_39E8(var_0) {
     }
   } else if(self.var_6A8D == "un") {
     var_1 = ["cannon_large_un"];
-  }
-  else if(issubstr(self.classname, "missileboat")) {
+  } else if(issubstr(self.classname, "missileboat")) {
     if(!issubstr(self.classname, "plane")) {
       var_1 = ["cannon_missile_ca_hardpoint", "cannon_small_ca"];
     }
@@ -1053,8 +1052,7 @@ func_6D4D(var_0, var_1, var_2, var_3) {
     playFXOnTag(scripts\engine\utility::getfx(var_5.var_BDFF), self, var_2);
   } else if(scripts\sp\utility::hastag(self.model, "TAG_FLASH")) {
     playFXOnTag(scripts\engine\utility::getfx(var_5.var_BDFF), self, "TAG_FLASH");
-  }
-  else {
+  } else {
     playFX(scripts\engine\utility::getfx(var_5.var_BDFF), var_0, var_1);
   }
 
@@ -2929,8 +2927,7 @@ func_39B7(var_0, var_1, var_2) {
         }
       } else if(isDefined(var_6.var_10943)) {
         self[[var_6.var_10943]](var_0, var_6, var_3, var_7);
-      }
-      else {
+      } else {
         var_13 = 0;
 
         foreach(var_15 in self.turrets[var_0]) {
@@ -3078,8 +3075,7 @@ func_39B8(var_0, var_1, var_2, var_3, var_4) {
         }
       } else if(isDefined(var_8.var_10943)) {
         self[[var_8.var_10943]](var_0, var_8, var_5, var_9);
-      }
-      else {
+      } else {
         var_15 = 0;
 
         foreach(var_17 in self.var_8B4F[var_0]) {

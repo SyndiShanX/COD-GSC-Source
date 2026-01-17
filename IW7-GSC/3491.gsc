@@ -467,8 +467,7 @@ func_8DD1() {
     var_8 = var_8 + (0, 0, 1500);
   } else if(var_1.origin[2] > self.origin[2]) {
     var_8 = var_1.origin;
-  }
-  else {
+  } else {
     var_8 = var_1.origin * (1, 1, 0);
     var_8 = var_8 + (0, 0, self.origin[2]);
   }

@@ -9,9 +9,7 @@ initcpvosystem() {
   level.var_134BF = [];
   level.var_134C0 = [];
   level.vo_dialogue_prefix = [];
-  level.var_13519 = "cp\" + getdvar("
-  ui_mapname ") + "
-  _vo_table.csv ";
+  level.var_13519 = "cp\" + getdvar("ui_mapname") + "_vo_table.csv";
   level thread func_C904();
   level thread func_BE3E();
 }

@@ -196,8 +196,7 @@ func_50EF() {
     self setscriptablepartstate("left_eye", "active");
   } else if(scripts\engine\utility::is_true(self.is_turned)) {
     self setscriptablepartstate("eyes", "turned_eyes");
-  }
-  else if(scripts\engine\utility::is_true(self.is_cop)) {
+  } else if(scripts\engine\utility::is_true(self.is_cop)) {
     self getrandomhovernodesaroundtargetpos(1, 0.1);
     self setscriptablepartstate("eyes", "cop_eyes");
   } else {
@@ -708,8 +707,7 @@ func_7E78(var_0, var_1, var_2) {
     return var_4;
   } else if(isDefined(var_4)) {
     return var_4;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -978,8 +976,7 @@ func_6A58() {
     self setscriptablepartstate("left_eye", "active");
   } else if(scripts\engine\utility::is_true(self.is_turned)) {
     self setscriptablepartstate("eyes", "turned_eyes");
-  }
-  else if(scripts\engine\utility::is_true(self.is_cop)) {
+  } else if(scripts\engine\utility::is_true(self.is_cop)) {
     self setscriptablepartstate("eyes", "cop_eyes");
   } else {
     self setscriptablepartstate("eyes", "yellow_eyes");

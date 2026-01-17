@@ -138,8 +138,7 @@ cac_getgesture() {
     }
   } else if(level.rankedmatch) {
     var_0 = self getrankedplayerdata("rankedloadouts", "squadMembers", "gesture");
-  }
-  else {
+  } else {
     var_0 = self getrankedplayerdata("privateloadouts", "squadMembers", "gesture");
   }
 

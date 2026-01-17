@@ -2397,8 +2397,7 @@ play_sound_in_space_with_angles(var_0, var_1, var_2, var_3, var_4) {
     var_5 waittill("sounddone");
   } else if(isDefined(var_3) && var_3) {
     var_5 playsoundasmaster(var_0);
-  }
-  else {
+  } else {
     var_5 playSound(var_0);
   }
 

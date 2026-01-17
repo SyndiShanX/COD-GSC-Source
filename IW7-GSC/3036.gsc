@@ -171,8 +171,9 @@ func_B158(var_0, var_1) {
   var_3 = scripts\sp\math::func_C097(5000, 12000, var_2);
   var_4 = scripts\sp\math::func_6A8E(0, 0.5, var_3);
 
-  if(isDefined(var_1) && var_1) {} else
+  if(isDefined(var_1) && var_1) {} else {
     wait(var_4);
+  }
 
   if(isDefined(var_0) && isvalidmissile(self) && isDefined(self)) {
     self missile_settargetent(var_0);

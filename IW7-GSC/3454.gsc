@@ -56,8 +56,7 @@ onuse(var_0, var_1) {
     return 0;
   } else if(scripts\mp\utility\game::isusingremote() || scripts\mp\utility\game::iskillstreakdenied()) {
     return 0;
-  }
-  else if(getcsplinecount() < 2) {
+  } else if(getcsplinecount() < 2) {
     return 0;
   } else {
     thread dostrike(var_0, "a10_strafe");

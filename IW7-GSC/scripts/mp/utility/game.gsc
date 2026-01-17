@@ -1010,8 +1010,7 @@ attachmentmap_tounique(var_0, var_1) {
       return level.attachmentmap_basetounique[var_6][var_8];
     } else if(isDefined(level.attachmentmap_basetounique[var_3]) && isDefined(level.attachmentmap_basetounique[var_3][var_0])) {
       return level.attachmentmap_basetounique[var_3][var_0];
-    }
-    else if(isDefined(level.attachmentmap_basetounique[var_6]) && isDefined(level.attachmentmap_basetounique[var_6][var_0])) {
+    } else if(isDefined(level.attachmentmap_basetounique[var_6]) && isDefined(level.attachmentmap_basetounique[var_6][var_0])) {
       return level.attachmentmap_basetounique[var_6][var_0];
     } else if(var_4.size > 3) {
       var_9 = var_4[0] + "_" + var_4[1] + "_" + var_4[2];
@@ -4075,7 +4074,7 @@ buildweaponassetname(var_0, var_1) {
 }
 
 getweaponassetfromrootweapon(var_0, var_1) {
-  var_2 = "mp\loot\weapon\" + var_0 + ".csv ";
+  var_2 = "mp\loot\weapon\" + var_0 + ".csv";
   var_3 = tablelookup(var_2, 0, var_1, 20);
   return var_3;
 }
@@ -4154,8 +4153,7 @@ getweaponrootname(var_0) {
     }
   } else if(weapon_is_dlc2_melee(var_0)) {
     return var_0;
-  }
-  else if(var_1[0] == "iw6" || var_1[0] == "iw7") {
+  } else if(var_1[0] == "iw6" || var_1[0] == "iw7") {
     var_0 = var_1[0] + "_" + var_1[1];
   } else if(var_1[0] == "alt") {
     var_0 = var_1[1] + "_" + var_1[2];
@@ -4351,8 +4349,7 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4) {
     }
   } else if(!scripts\cp\cp_weapon::isvalidzombieweapon(var_10 + "_zm")) {
     var_10 = var_0 + "_zm";
-  }
-  else {
+  } else {
     var_10 = buildweaponnamecamo(var_10, var_2);
     var_10 = buildweaponnamereticle(var_10, var_3);
     var_10 = var_10 + "_zm";

@@ -492,8 +492,7 @@ processassist_regularmp(var_0, var_1, var_2) {
     giveplayerscore("assist", var_9);
   } else if(isDefined(var_5) && scripts\mp\utility\game::func_2287(var_5, scripts\mp\utility\game::getuniqueid())) {
     thread scripts\mp\utility\game::givestreakpointswithtext("assistPing", var_1, undefined);
-  }
-  else {
+  } else {
     if(var_2) {
       var_7 = var_9 + var_9;
     }

@@ -1124,8 +1124,7 @@ playerhealthregen() {
       var_3 = 0;
     } else if(var_2) {
       var_4 = self.gs.invultime_postshield;
-    }
-    else {
+    } else {
       var_4 = self.gs.invultime_preshield;
     }
 
@@ -1206,8 +1205,7 @@ grenadeawareness() {
       }
     } else if(randomint(100) < 33) {
       self.grenadeawareness = 0;
-    }
-    else {
+    } else {
       self.grenadeawareness = 0.2;
     }
 

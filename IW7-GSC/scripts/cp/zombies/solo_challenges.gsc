@@ -10,8 +10,7 @@ init_solo_challenges() {
 
 func_956D() {
   var_0 = getdvar("ui_mapname");
-  level.zombie_challenge_table = "cp\zombies\" + var_0 + "
-  _challenges.csv ";
+  level.zombie_challenge_table = "cp\zombies\" + var_0 + "_challenges.csv";
   if(!tableexists(level.zombie_challenge_table)) {
     level.zombie_challenge_table = undefined;
   }

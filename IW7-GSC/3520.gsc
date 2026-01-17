@@ -470,8 +470,7 @@ func_105DE(var_0, var_1, var_2) {
     }
   } else if(var_2 >= 990.0 && var_1 < 990.0) {
     func_105CD(var_0);
-  }
-  else if(var_2 >= 495.0 && var_1 < 495.0) {
+  } else if(var_2 >= 495.0 && var_1 < 495.0) {
     func_105CD(var_0);
     var_0.var_FE12 = scripts\engine\utility::getfx("cockpit_smoke");
     playfxontagforclients(var_0.var_FE12, var_0, "j_stickleft", var_0.owner);

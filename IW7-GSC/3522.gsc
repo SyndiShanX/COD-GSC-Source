@@ -355,8 +355,7 @@ func_114D9() {
       return;
     } else if(self.health < var_1 / 4 && var_4 == 0) {
       var_4 = 1;
-    }
-    else if(self.health < var_1 / 2 && var_3 == 0) {
+    } else if(self.health < var_1 / 2 && var_3 == 0) {
       var_3 = 1;
     } else if(self.health < var_1 / 1.5 && var_2 == 0) {
       var_2 = 1;
@@ -437,8 +436,7 @@ relative_ads_anims(var_0) {
     }
   } else if(var_3 < -0.9) {
     return "rear";
-  }
-  else {
+  } else {
     return "rear_side";
   }
 

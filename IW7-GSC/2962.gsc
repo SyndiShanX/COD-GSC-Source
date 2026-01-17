@@ -137,8 +137,7 @@ func_12DB(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
     } else if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy")) {
       return var_2;
-    }
-    else {
+    } else {
       return var_1;
     }
   } else {
